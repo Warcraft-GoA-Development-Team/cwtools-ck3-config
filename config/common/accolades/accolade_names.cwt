@@ -1,0 +1,29 @@
+types = {
+    type[accolade_name] = {
+        path = "game/common/accolade_names"
+    }
+}
+
+accolade_name = {
+
+    ### the base loc key that will be used when generating this name. the key can have any format but each replacement option needs to be numbered and formatted as $OPTION_X$
+    key = localisation
+
+    ### the number of expected options, if this mismatches with the below number of scripted options the system will error
+    num_options = int
+
+    ### the replacement options that will be used IN ORDER to replace the $OPTION_X$ fields in the loc key
+    ## cardinality = 1..inf
+    ## replace_scope = { root = character owner = character accolade_type = accolade }
+    option = single_alias_right[complex_desc]
+
+    ### trigger to make sure we don't pick a key that is specific for ex. a region
+    ## replace_scope = { root = character owner = character accolade_type = accolade }
+    potential = single_alias_right[trigger_clause]
+
+    ### scripted value that will be used as weight when randomly picking between potential names
+    ## replace_scope = { root = character owner = character accolade_type = accolade }
+    ## cardinality = 0..1
+    weight = single_alias_right[weight_block]
+
+}

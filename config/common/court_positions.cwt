@@ -13,23 +13,31 @@ types = {
 }
 
 court_position = {
-    ### The primary skill used to define aptitude for the position.
-    skill = enum[attributes]
+ 
+
     ### The number of positions available within a court.
+    ## cardinality = 0..1
     max_available_positions = int
     ### The subcategroy of the position.
     category = enum[court_position_category]
     ### The minimum rank for which this position is available for their court.
     ## cardinality = 0..1
-    minimum_rank = enum[title_tiers]
+    minimum_rank = enum[title_tier]
 
+    ### Whether this court position related to travel. If so we show travel speed and safety, and lets you sort by those in the appointment window. Defaults to no
+    ## cardinality = 0..1
+    is_travel_related = bool
     ### The opinion modifier the employee gets towards the liege while they hold this postion.
     opinion = {
         value = int_value_field
         ## cardinality = 0..1
-        scope:liege = character
+        scope:liege = int_value_field
         ## cardinality = 0..1
-        scope:employee = character
+        scope:employee = single_alias_right[int_conditional_formula]
+        ## cardinality = 0..1
+        scope:liege = int_value_field
+        ## cardinality = 0..1
+        scope:employee = single_alias_right[int_conditional_formula]
     }
 
     ### How high the aptitude has to be to reach the 5 different modifier levels
@@ -40,23 +48,28 @@ court_position = {
     }
 
     ### How good is this character in this position? root scope is the holder of the court position
-    aptitude = single_alias_right[score_formula]
+    aptitude = single_alias_right[int_conditional_formula]
 
     ## cardinality = 0..1
     ### Is this position even visible for usage? Root scope is liege character
+    ## replace_scope = { root = character }
     is_shown = single_alias_right[trigger_clause]
     ## cardinality = 0..1
     ### Is this a valid position for this character to employ? Root scope is the liege character.
+    ## replace_scope = { root = character }
     valid_position = single_alias_right[trigger_clause]
     ## cardinality = 0..1
     ### Is this character even shown for the position? Root scope is liege character
+    ## replace_scope = { liege = character employee = character }
     is_shown_character = single_alias_right[trigger_clause]
     ### Is this a valid character for a position? Also checks the scripted rule "is_eligible_for_court_positions" in code.
+    ## replace_scope = { liege = character employee = character }
     valid_character = single_alias_right[trigger_clause]
     
     ### How much it costs to revoke this position.
     revoke_cost = single_alias_right[cost]
     ### How much it costs monthly to maintain this poisition.
+    ## replace_scope = { liege = character }
     salary = single_alias_right[cost]
 
     ## cardinality = 0..1
@@ -96,14 +109,18 @@ court_position = {
     }
 
     ### Effect that happens when the position is appointed.
+    ## replace_scope = { liege = character employee = character }
     on_court_position_received = single_alias_right[effect_clause]
 
     ### Effect that happens when the position is revoked.
+    ## replace_scope = { liege = character employee = character }
     on_court_position_revoked = single_alias_right[effect_clause]
 
     ### Effect that happens when the position is invalidated.
+    ## replace_scope = { liege = character employee = character }
     on_court_position_invalidated = single_alias_right[effect_clause]
 
     ### Scripted value to determine whether an AI will hire/fire a position or not. Hires over 0, fires under -50. Look in _court_positions.info for more extensive documentation!
-    candidate_score = single_alias_right[score_formula]
+    ## replace_scope = { liege = character employee = character firing_court_position = bool percent_of_monthly_income = number percent_of_positive_monthly_prestige_balance = number percent_of_positive_monthly_piety_balance = number percent_of_monthly_gold_income_all_positions = number percent_of_positive_monthly_prestige_balance_all_positions = number percent_of_positive_monthly_piety_balance_all_positions = number }
+    candidate_score = single_alias_right[int_conditional_formula]
 }

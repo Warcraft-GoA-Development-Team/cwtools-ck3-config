@@ -1,0 +1,7 @@
+types = {
+    type[struggle_catalyst] = {
+        path = "game/common/struggle/catalysts"
+    }
+}
+
+struggle_catalyst = {}

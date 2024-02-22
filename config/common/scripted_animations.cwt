@@ -1,0 +1,33 @@
+types = {
+    type[scripted_animation] = {
+        path = "game/common/scripted_animations"
+    }
+}
+
+
+scripted_animation = {
+
+	### List of triggerable animations with their condition and animation string.
+    ##cardinality = 0..inf
+	triggered_animation = {
+		trigger = single_alias_right[trigger_clause]
+
+		# both syntaxes are supported
+        ## cardinality = 0..1
+		animation = {
+            ## cardinality = 1..inf
+            scalar
+        }
+        ## cardinality = 0..1
+		animation = scalar
+
+		### Instead of defining 'animation', you can refer to another scripted animation
+		scripted_animation = <scripted_animation>
+	}
+
+	### Default animation to display when none of the triggered animations have triggered
+	animation = scalar
+
+	### Instead of defining 'animation', you can refer to another scripted animation
+	scripted_animation = <scripted_animation>
+}

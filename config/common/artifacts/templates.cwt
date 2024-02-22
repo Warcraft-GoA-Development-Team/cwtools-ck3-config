@@ -1,0 +1,48 @@
+types = {
+    type[template] = {
+        path = "common/artifacts/templates"
+    }
+}
+
+template = {
+
+	### can this character equip this artifact?
+    ## replace_scope = { root = character artifact = artifact }
+    ## cardinality = 0..1
+	can_equip = single_alias_right[trigger_clause]
+
+	### can this character benefit from the full modifiers of the artifact?
+    ## replace_scope = { root = character artifact = artifact }
+    ## cardinality = 0..1
+	can_benefit = single_alias_right[trigger_clause]
+	
+	### can this character reforge this artifact (turn this artifact into another)
+    ## replace_scope = { root = character artifact = artifact }
+    ## cardinality = 0..1
+	can_reforge = single_alias_right[trigger_clause]
+
+	### can this character repair this artifact (restore its durability)
+	## replace_scope = { root = character artifact = artifact }
+    ## cardinality = 0..1
+    can_repair = single_alias_right[trigger_clause]
+
+	### if a given character does not pass the "can_benefit" trigger then this modifier will be applied instead.
+	## replace_scope = { root = character artifact = artifact }
+    ## cardinality = 0..1
+    fallback = {
+        ## cardinality = 0..1
+		alias_name[modifier] = float_value_field
+        ## cardinality = 0..1
+        alias_name[modifier] = int_value_field
+	}
+
+	### Adds the final value to the AI equipping score, note the can_benefit takes precedence over the score when AI equipping
+	### artifact_ai_will_equip_score in game/common/scripted_values/00_artifact_values.txt also effect the final score
+    ## replace_scope = { root = character artifact = artifact }
+    ## cardinality = 0..1
+	ai_score = single_alias_right[int_conditional_formula]
+
+	### Artifacts with this templates show as unique, default = no
+    ## cardinality = 0..1
+	unique = bool
+}

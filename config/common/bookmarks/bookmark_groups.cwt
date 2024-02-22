@@ -9,8 +9,8 @@ types = {
             ## required
             Name = "$"
 
-            ## required
-            Description = "$_desc"
+            # required
+            # Description = "$_desc"
         }
     }
 }

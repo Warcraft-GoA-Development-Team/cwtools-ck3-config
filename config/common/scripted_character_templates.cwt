@@ -1,0 +1,54 @@
+#NOTE: All these are undocumented
+
+types = {
+    type[scripted_character_template] = {
+        path = "game/common/scripted_character_templates"
+    }
+}
+
+## replace_scope = { root = character }
+scripted_character_template = {
+    
+    age = {<int_value_field> <int_value_field> }
+
+    ##cardinality = 0..1
+    gender = enum[genders]
+    ##cardinality = 0..1
+    gender_female_chance = int_value_field
+
+    ##cardinality = 0..inf
+    random_traits_list = {
+        count = int
+        ##cardinality = 0..inf
+        <trait> = single_alias_right[chance_block]
+        ##cardinality = 0..inf
+        <trait> = {}
+    }
+
+    ##cardinality = 0..inf
+    trait = <trait>
+
+    ##cardinality = 0..1
+    faith = <faith>
+    ##cardinality = 0..1
+    culture = <culture>
+
+    ##cardinality = 0..1
+    random_traits = bool
+
+    ##cardinality = 0..1
+    learning = {<int_value_field> <int_value_field>}
+    ##cardinality = 0..1
+    intrigue = {<int_value_field> <int_value_field>}
+    ##cardinality = 0..1
+    stewardship = {<int_value_field> <int_value_field>}
+    ##cardinality = 0..1
+    diplomacy = {<int_value_field> <int_value_field>}
+    ##cardinality = 0..1
+    martial = {<int_value_field> <int_value_field>}
+    ##cardinality = 0..1
+    prowess = {<int_value_field> <int_value_field>}
+
+    after_creation = single_alias_right[effect_clause]
+
+}

@@ -143,4 +143,13 @@ values = {
         employee
         inspiration
     }
+
+    value[accolade_tier] = {
+        common
+        skilled
+        exceptional
+        eminent
+    }
+
+
 }

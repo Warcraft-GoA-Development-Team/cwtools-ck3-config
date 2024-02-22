@@ -63,7 +63,7 @@ opinion_modifier = {
     ### Justification for execution
     execute_reason = bool
 	## cardinality = 0..1
-    ### Justification for title revokation
+    ### Justification for title revocation
     revoke_title_reason = bool
 	## cardinality = 0..1
     ### Justification for divorce

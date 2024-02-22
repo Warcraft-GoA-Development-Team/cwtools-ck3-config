@@ -12,7 +12,7 @@ focus = {
     education = bool
     ## cardinality = 0..1
     ### The skill which is important for the education focus.
-    skill = enum[attributes]
+    skill = enum[attribute]
     ## cardinality = 0..1
     ### What lifestyle the focus belongs to. Adding this will make it a lifestyle focus.
     lifestyle = <lifestyle>

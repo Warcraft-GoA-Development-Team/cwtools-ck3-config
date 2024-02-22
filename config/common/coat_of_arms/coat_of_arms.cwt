@@ -1,6 +1,3 @@
-# This file is very rough and not tested at all.
-# Created as a barebones implementation while working on religions.
-
 types = {
     type[coat_of_arms] = {
         # The double coat of arms is not a type

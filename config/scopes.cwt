@@ -92,4 +92,26 @@ scopes = {
 	"Court Amenity Category" = {
 		aliases = { court_amenity_category "court amenity category" }
 	}
+	Accolade = {
+		aliases = { accolade }
+	}
+	"Travel Plan" = {
+		aliases = { "travel plan" travel_plan }
+		data_type_name = "TravelPlan"
+	}
+	"Character Memory" = {
+		aliases = { memory "character memory" character_memory }
+		data_type_name = "CharacterMemory"
+	}
+	"Culture Pillar" = {
+		aliases = { culture_pillar "culture pillar" }
+		data_type_name = "CulturePillar"
+	}
+	"Culture Tradition" = {
+		aliases = { culture_tradition "culture tradition" }
+		data_type_name = "CultureTradition"
+	}
+	Artifacts = {
+		aliases = { artifact }
+	}
 }

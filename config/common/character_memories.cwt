@@ -1,0 +1,50 @@
+types = {
+    type[memory] = {
+        path = "common/character_memory_types"
+    }
+}
+
+enums = {
+    complex_enum[memory_category] = {
+        categories = {
+            enum_name
+        }
+    }
+}
+
+memory = {
+	
+    ### Categories, arbitrary strings, used to provide groupings of related types
+    categories = {
+        ## cardinality = 1..inf
+        scalar 
+    }
+
+    ## cardinality = 0..1
+    icon = localisation
+
+	### Dynamic description for this memory
+    ## replace_scope = { root = memory owner = character }
+	description = single_alias_right[complex_desc]
+
+	### Description for a second person perspective
+    ## replace_scope = { root = memory owner = character }
+	second_perspective_description = single_alias_right[complex_desc]
+
+	### Description for a third person perspective
+    ## replace_scope = { root = memory owner = character }
+	third_perspective_description = single_alias_right[complex_desc]
+
+	### Expected participants when creating a memory of this type
+	### Note: Memories also support variables, but you should much prefer using participant characters over saving character variables as participants are faster to use and make sure the referenced participating character will not be pruned from save games. Use variables for other references like titles or provinces etc.
+	## cardinality = 0..1
+    participants = {
+        ## cardinality = 1..inf
+		scalar
+	}
+
+	### Default duration for memory, script value
+    ## cardinality = 0..1
+	duration = single_alias_right[duration_block]
+}
+

@@ -1,0 +1,5 @@
+types = {
+    type[feature_group] = {
+        path = "common/artifacts/feature_group"
+    }
+}

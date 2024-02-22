@@ -1,0 +1,141 @@
+types = {
+    type[accolade] = {
+        path = "game/common/accolade_types"
+
+    }
+}
+
+enums = {
+    enum[accolade_tier] = {
+        common
+        skilled
+        exceptional
+        eminent
+    }
+
+    complex_enum[accolade_category] = {
+        path = "game/common/accolade_types"
+        name = {
+            accolade_categories = {
+                enum_name
+            }
+        }
+        #start_from_root = yes
+
+    }
+
+}
+
+accolade = {
+
+    ### localization key for the adjective used when displaying this type
+    ## cardinality = 1..1
+    adjective = localisation
+
+    ### localization key for the noun used when displaying this type. NOTE: adjective/noun are only used as fallbacks when dynamic naming fails
+    ## cardinality = 1..1
+    noun = localisation
+
+    ###a character trigger that determines if a character can be used to create an accolade with this type or if they can be the successor
+    ## cardinality = 0..1
+    ## replace_scope = { root = character accolade_type = accolade owner = character }
+    potential = single_alias_right[trigger_clause]
+
+    ### character trigger that determines if a character can be used to create an accolade with this type or if they can be the successor
+    ## cardinality = 0..1
+    tier = enum[accolade_tier]
+
+    ### a scripted integer with a character scope that determines the score of an accolade type for purpose of choosing it when generating an accolade and for when the AI decides which types to pick
+    ## cardinality = 0..1
+    ## replace_scope = { root = character accolade_type = accolade owner = character }
+    weight = single_alias_right[score_formula]
+
+    ### dynamic flags ( strings ) that can be used to determine what "category" of accolade this is using these as keywords. Could for example be "spear", "horse", "mountains" which would denote a mounted hill cavalry type of accolade
+    ## cardinality = 0..1
+    accolade_categories = {
+        ## cardinality = 1..inf
+        enum[accolade_category]
+    }
+
+    ### ranks that are unlocked as accolades using this type accrues glory. Each rank has an initial glory requirement followed by what it unlocks when that requirement is reached ( it can be 0 ). Each accolade type can have any number of ranks ( but should probably be balanced )
+    ## cardinality = 1..1
+    ranks = {
+        ## cardinality = 1..inf
+        int = single_alias_right[accolade_rank]
+    }
+
+    ## cardinality = 0..inf
+    ## replace_scope = { root = character accolade_type = accolade owner = character }
+    option = single_alias_right[complex_desc]
+
+}
+
+single_alias[accolade_rank] = {
+
+    ### character modifier applied to the liege that has this accolade activated
+    ## cardinality = 0..1
+    liege_modifier = {
+ 
+        
+        ## cardinality = 0..inf
+        alias_name[modifier] = alias_match_left[modifier]
+    }
+
+    ### character modifier applied to the knight personally ( should be limited to prestige and other character mods )
+    ## cardinality = 0..1
+    knight_modifier = {
+ 
+        ## cardinality = 0..inf
+        alias_name[modifier] = alias_match_left[modifier]
+    }
+    
+    ### character modifier applied to whatever army the knight is a part of ( should be army modifiers such as advantage etc. )
+    ## cardinality = 0..1
+    knight_army_modifier = {
+ 
+        ## cardinality = 0..inf
+        alias_name[modifier] = alias_match_left[modifier]
+    }
+
+    ### MAA type that is unlocked for the liege with this accolade activated
+    ## cardinality = 0..1
+    men_at_arms = {
+
+        ## cardinality = 1..inf
+        <maa_type>
+    }
+
+    ## cardinality = 0..1
+	### character modifier applied to whatever army the knight is a part of ( should be army modifiers such as advantage etc. )
+	terrain_bonus = {
+        ## cardinality = 1..inf
+		<terrain> = {
+            ## cardinality = 1..inf
+            alias_name[maa_modifier] = alias_match_left[maa_modifier]
+        }
+	}
+
+    ## cardinality = 0..1
+	### character modifier applied to whatever army the knight is a part of ( should be army modifiers such as advantage etc. )
+    winter_bonus = {
+        ## cardinality = 0..1
+    	### Normal winter modifications for knight
+        normal_winter = {
+            ## cardinality = 1..inf
+            alias_name[maa_modifier] = alias_match_left[maa_modifier]
+        }
+        ## cardinality = 0..1
+    	### Harsh winter modifications for knight
+        harsh_winter = {
+            ## cardinality = 1..inf
+            alias_name[maa_modifier] = alias_match_left[maa_modifier]
+        }
+    }
+
+    ### dynamic parameters ( strings ) used to check for specific non-modifier unlocks, intended to be used like cultural_parameters
+    ## cardinality = 0..1
+    accolade_parameters = {
+        ## cardinality = 1..inf
+        value_set[accolade_parameter]
+    }
+}

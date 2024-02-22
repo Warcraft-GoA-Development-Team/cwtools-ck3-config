@@ -1,0 +1,35 @@
+types = {
+    type[creation_name] = {
+        path = "game/common/culture/creation_names"
+    }
+    localisation = {
+        name = "$_name"
+        collective_noun = "$_collective_noun"
+        prefix = "$_trigger"
+    }
+}
+
+creation_name = {
+
+    ### Optional. Defaults to <key>_name
+    ## cardinality = 0..1
+    name = single_alias_right[complex_desc]
+
+    ### Optional. Defaults to <key>_collective_noun
+    ## cardinality = 0..1
+    collective_noun = single_alias_right[complex_desc]
+
+    ### Optional. Defaults to <key>_trigger
+    ## cardinality = 0..1
+    prefix = single_alias_right[complex_desc]
+
+    ### root: Character creating the culture
+    ### scope:culture: Their culture
+	### scope:other_culture: Only available for hybridization. The other culture involved
+    ## replace_scope = { root = character culture = culture other_culture = culture}
+    trigger = single_alias_right[trigger_clause]
+
+    ### Is this for hybridization? Defaults to no
+    ## cardinality = 0..1
+    hybrid = bool
+}

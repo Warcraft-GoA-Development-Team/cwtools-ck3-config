@@ -10,22 +10,22 @@ single_alias[effect_clause] = {
 
 single_alias[cost] = {
     ## cardinality = 0..1
-    gold = single_alias_right[score_formula]
+    gold = single_alias_right[int_conditional_formula]
     ## cardinality = 0..1
     gold = int_value_field
 
     ## cardinality = 0..1
-    piety = single_alias_right[score_formula]
+    piety = single_alias_right[int_conditional_formula]
     ## cardinality = 0..1
     piety = int_value_field
 
     ## cardinality = 0..1
-    prestige = single_alias_right[score_formula]
+    prestige = single_alias_right[int_conditional_formula]
     ## cardinality = 0..1
     prestige = int_value_field
 
     ## cardinality = 0..1
-    renown = single_alias_right[score_formula]
+    renown = single_alias_right[int_conditional_formula]
     ## cardinality = 0..1
     renown = int_value_field
 
@@ -172,6 +172,25 @@ single_alias[province_modifier] = {
 single_alias[county_modifier] = {
     ## push_scope = title
     alias_name[modifier] = alias_match_left[modifier]
+}
+
+single_alias[quick_trigger_block] = {
+    ## cardinality = 0..1
+	adult = bool 				# The target needs to be adult
+	## cardinality = 0..1
+    attracted_to_owner = bool	# The target needs to be attracted to owner
+	## cardinality = 0..1
+    owner_attracted = bool		# Owner needs to be attracted to the target
+	## cardinality = 0..1
+    prison = bool 				# Target must be in prison
+}
+
+single_alias[duration_block] = {
+    ##cardinality = 0..1
+    enum[duration] = int_value_field
+    ##cardinality = 0..1
+    enum[duration] = single_alias_right[int_conditional_formula]
+
 }
 
 ## scope = character

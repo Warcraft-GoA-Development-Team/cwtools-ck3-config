@@ -1,0 +1,11 @@
+types = {
+    type[inventory_slot] = {
+        path = "common/artifacts/slots"
+    }
+}
+
+inventory_slot = {
+    type = localisation
+    category = scalar
+    icon = scalar
+}

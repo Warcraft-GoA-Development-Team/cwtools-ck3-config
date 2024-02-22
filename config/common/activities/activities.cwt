@@ -1,0 +1,687 @@
+types = {
+    type[activity] = {
+        path = "common/activities/activity_types"
+
+    }
+    type[activity_option] = {
+        path = "common/activities/activity_types"
+        unique = yes
+        skip_root_key = { options any }
+    }
+    type[activity_option_category] = {
+        path = "common/activities/activity_types"
+        unique = yes
+        skip_root_key = options
+    }
+    type[activity_phase] = {
+        path = "common/activities/activity_types"
+        skip_root_key = phases
+    }
+    type[special_guest] = {
+        path = "common/activities/activity_types"
+        skip_root_key = special_guests
+    }
+}
+
+enums = {
+    enum[province_filter] = {
+        capital
+        domain
+        realm
+        top_realm
+        holy_sites
+        all
+    }
+
+    enum[location_source] = {
+        pickable
+        first_picked_phase
+        last_picked_phase
+        scripted
+    }
+
+    enum[planner_type] = {
+        province
+        holder
+    }
+    complex_enum[guest_subset] = {
+        name = {
+            guest_subsets = {
+                enum_name
+            }
+        }
+    }
+}
+
+# Character state
+#- Travel: The character is travelling to the location of the next phase
+#- Passive: The character has arrived at the location of the next phase and is waiting for it to begin
+#- Active: The character is at the location of the next phase and the phase has started
+
+activity = {
+	### Should the player see this activity type
+    ## replace_scope = { root = character}
+	is_shown = single_alias_right[trigger_clause]
+
+	### Can this activity be picked if visible, shows whether you meet or fail each trigger
+    ## replace_scope = { root = character}
+	## cardinality = 0..1
+	can_start = single_alias_right[trigger_clause]
+	
+	### Can this activity be picked if visible, only shows failing triggers
+    ## replace_scope = { root = character}
+	can_start_showing_failures_only = single_alias_right[trigger_clause]
+
+	### Do we prevent the player to start planning an activity when additional requirements (i.e. not costs or cooldown) have not been met. Defaults to no.
+	## cardinality = 0..1
+    can_always_plan = bool
+
+	cooldown = {
+		enum[duration] = int_value_field
+	}
+	
+	### Is this activity valid to continue
+    ## replace_scope = { root = activity activity = activity host = character}
+	is_valid = single_alias_right[trigger_clause]
+
+	### Ran if the activity fails the is valid checks
+	## replace_scope = { root = activity activity = activity host = character}
+	on_invalidated = single_alias_right[effect_clause]
+
+	### Ran if the host of the activity dies
+	## replace_scope = { root = activity activity = activity host = character}
+	on_host_death = single_alias_right[effect_clause]
+
+	### What list of provinces should phase's be evaluated as a place to potentially be located in. Defaults to capital only
+	province_filter = enum[province_filter]
+
+	### As above but for the AI, you can probably be more restrictive on them especially just picking capital/domain instead of elsewhere. Defaults to same as the base filter
+	ai_province_filter = enum[province_filter]
+
+	### Is the province valid to pick for this activity at all
+	# root = the province
+	# scope:host = host of the activity
+	# scope:special_option = flag of the selected special option, not set if activity has no special option category
+    ## replace_scope = { root = province host = character special_option = flag }
+	is_location_valid = single_alias_right[trigger_clause]
+
+	### Script value to score how "good" the activity location is to host in
+	## replace_scope = { root = province host = character }
+	province_score = single_alias_right[int_conditional_formula]
+
+	### Optional, defaults to unlimited, if set we only show the top X scored provinces as map icons
+	max_province_icons = int
+
+	### Activity options scripted per activity type
+	options = {
+
+		### Multiple categories allowed per activity, must be unique named categories
+        ## cardinality = 1..inf
+		<activity_option_category> = {
+
+			### Multiple options allowed per category, must be unique named
+            ## cardinality = 1..inf
+			<activity_option> = {
+				### Is this option shown in the category
+				## replace_scope = { root = character special_option = flag }
+				## cardinality = 0..1
+				is_shown = single_alias_right[trigger_clause]
+
+				### Is this option valid to pick in the category
+				## replace_scope = { root = character special_option = flag }
+				## cardinality = 0..1
+				is_valid = single_alias_right[trigger_clause]
+
+				### Effects run when the activity is created
+				## replace_scope = { root = activity activity = activity host = character}
+				## cardinality = 0..1
+				on_start = single_alias_right[effect_clause]
+
+				### Should this option be the default option, the first that is true will be picked, if not specified then it will not be used as a default
+				# For simple constant defaults use default = yes to always have it as the default
+				## cardinality = 0..1
+				default = single_alias_right[trigger_clause]
+
+				### Should this option be the default option, the first that is true will be picked, if not specified then it will not be used as a default
+				# For simple constant defaults use default = yes to always have it as the default
+				## cardinality = 0..1
+				default = bool
+
+				### List of intents that are blocked for the host if this option is picked. This is required because when planning an activity some intents are blocked by certain options, but the activity does not yet exist properly for the intent's definition itself to check the activity's current options
+				## cardinality = 0..1
+				blocked_intents = {
+                    ## cardinality = 1..inf
+					<activity_intent>
+				}
+
+				### How likely is the AI to pick this option if valid? Options will be selected using weighted random.
+				## replace_scope = { root = character special_option = flag }
+				ai_will_do = single_alias_right[int_conditional_formula]
+
+				### Cost for this option being enabled
+				## replace_scope = { root = character }
+				cost = single_alias_right[cost]
+
+				### Select which court characters are added to the travel entourage when this option is added. (this will be run for both the host and the invited guests). Weighted list is evaluated until all values are negative, or `max` is reached.
+				## cardinality = 0..1
+				travel_entourage_selection = {
+					### List is all court characters.
+                    ## replace_scope = { root = character host = character owner = character special_option = flag }
+					weight = int_value_field
+
+					### Up to how many characters to select for a player
+					max = int
+					
+					### Up to how many characters to select for an AI
+					ai_max = int
+
+					### What order, relative to the invite rule orders, should entourage members be invited in
+					invite_rule_order = int
+				}
+			}
+        }
+
+	}
+
+	### When special option category is specified, the player will have to pick from this category before selecting a location. Each option in this category requires an illustration in the ACTIVITY_OPTION_TEXTURE_PATH folder and a flat icon in the ACTIVTY_OPTION_ICON_PATH folder
+	special_option_category = <activity_option_category>
+
+	### Active phases of of an activity, each activity has at least one active phase, each must be uniquely named
+	phases = {
+        ## cardinality = 1..inf
+		scalar = {
+			### If this phase is predefined: always present and not removable (if it is not predefined, it is a pickable phase) Defaults to 'no'
+			## cardinality = 0..1
+			is_predefined = bool
+
+			### Default to 1, how many times this phase can be picked as a unique phase, within one province. Only relevant if `is_predefined = no`
+			## cardinality = 0..1
+			number_of_picks = int_value_field
+
+			# In what order should this phase occur in the entire activity. Phases with the same order will be in the order when they were added (you should have unique order nr for your phases, if you have more than one phase)
+			## cardinality = 0..1
+			order = int
+
+			### How the phase will determine which location to use. Possible values: pickable = Player/host picks which location (default); first_picked_phase = Select whichever location was picked first by a player; last_picked_phase = Select whichever location was picked last by a player; scripted = Let scripted effect pick the location (use 'select_scripted_location')
+			## cardinality = 0..1
+			location_source = pickable
+
+			### Optional: Which location this phase should use, without user input. If defined, will set this phase to always have this location. (player cannot change). Requires setting 'location_source = scripted'. Pick the location by doing 'save_scope_as = province' in the effect.
+            ## replace_scope = { root = character special_option = flag }
+			## cardinality = 0..1
+			select_scripted_location = single_alias_right[effect_clause]
+
+			### How likely is the AI to pick this phase if valid? Options will be selected using weighted random. If a phase can be selected multiple times, it will have the same weight on every pass. This will only be used for activities that have multiple phases to choose from that do not have a predetermined order. 
+            ## replace_scope = { root = character province = province special_option = flag }
+			## cardinality = 0..1
+			ai_will_do = single_alias_right[int_conditional_formula]
+
+			### Is this phase valid to pick for the activity
+			## replace_scope = { root = character special_option = flag }
+			## cardinality = 0..1
+			is_shown = single_alias_right[trigger_clause]
+
+			### Is this phase valid to pick for the activity
+			## replace_scope = { root = character province = province special_option = flag }
+			## cardinality = 0..1
+			can_pick = single_alias_right[trigger_clause]
+
+			### Is this phase valid to execute for this ongoing activity
+			## replace_scope = { root = character host = character province = province }
+			## cardinality = 0..1
+			is_valid = single_alias_right[trigger_clause]
+
+			### Run when this phase is set as the current but not active phase
+            ## replace_scope = { root = character activity = activity host = character }
+			## cardinality = 0..1
+			on_enter_phase = single_alias_right[effect_clause]
+
+			### Run when this phase is set as to be active
+			## replace_scope = { root = character activity = activity host = character }
+			## cardinality = 0..1
+			on_phase_active = single_alias_right[effect_clause]
+
+			### Run when this phase ends
+			## replace_scope = { root = character activity = activity host = character }
+			## cardinality = 0..1
+			on_end = single_alias_right[effect_clause]
+
+			### Run when when the active phase's monthly pulses with this phase
+			## replace_scope = { root = character activity = activity host = character }
+			## cardinality = 0..1
+			on_monthly_pulse = single_alias_right[effect_clause]
+
+			### Run when when the active phase's weekly pulses with this phase. Use if extra time dilation is necessary. 
+			## replace_scope = { root = character activity = activity host = character }
+			## cardinality = 0..1
+			on_weekly_pulse = single_alias_right[effect_clause]
+
+			### Run if this phase is invalidated by its is_valid trigger 
+            ## replace_scope = { root = character activity = activity host = character province = province }
+			## cardinality = 0..1
+			on_invalidated = single_alias_right[effect_clause]
+
+			### Cost for this phase being planned
+            ## replace_scope = { root = character province = province previous_province = province special_option = flag }
+			## cardinality = 0..1
+			cost = single_alias_right[cost]
+		}
+	}
+
+	### How many phases can be picked by the player in this activity, defaults to 0. (All phases with 'is_predefined = yes' are not counted towards this number). Requires the DLC feature to be able to create an activity that has multiple phases
+	## replace_scope = { root = character }
+	## cardinality = 0..1
+	num_pickable_phases = int_value_field
+
+	### How many phases can be picked in this activity per province location. Defaults to `num_pickable_phases`
+	## replace_scope = { root = character }
+	## cardinality = 0..1
+	max_pickable_phases_per_province = int_value_field
+
+	### How many days this activity will wait before starting the active part of its first phase on top of the estimated travel arrival date of the Host. Defaults to 0
+	## replace_scope = { root = character }
+	## cardinality = 0..1
+	wait_time_before_start = {
+        enum[duration] = int_value_field
+    }
+
+	### How many days this activity will delay the start date, to allow invited guests to arrive.  Looks at rough estimated invited guests estimated travel time, and the default activity start date (host arrival + wait_time_before_start). This is added during planning of the activity. (Does not apply to required special guests, we delay as much as needed for them). Defaults to 0 days, so either define this and/or `wait_time_before_start` to give people time to arrive to your party.
+	## replace_scope = { root = character }
+	## cardinality = 0..1
+	max_guest_arrival_delay_time = {
+        enum[duration] = int_value_field
+    }
+
+	### How much can a player (not AI) deviate from the default path via extra waypoints. Expressed as multiplier of the total time duration of the default path. (path without waypoints) eg: 2.0 = you can add waypoints resulting in a path with a duration up to twice as long as the default path. Default is defined in MAX_ROUTE_DEVIATION_MULTIPLIER_DEFAULT
+	max_route_deviation_mult = float
+
+	### Cooldown between this activity being hosted again root = character trying to host this activity
+    ## replace_scope = { root = character }
+	## cardinality = 0..1
+	locale_cooldown = single_alias_right[duration_block]
+
+	### Is this activity a grand activity or not, defaults to no
+	is_grand_activity = bool
+
+	### Do all phases in this activity take place in the same province, defaults to yes
+	is_single_location = bool
+
+	### The planner type - how the activity planner shows things. Available types: province - (Default) show the province name (province name) holder - show holder information (opinion, character pin)
+	## cardinality = 0..1
+	planner_type = enum[planner_type]
+
+	### How likely is the AI to elect to host this activity if valid? This value must also exceed define ACTIVITY_SCORE_THRESHOLD to be eligible. Once all activity types has been evaluated for hosting, the highest scoring activity will be selected as the hosting candidate. This value will then be used as a percent chance to be hosted, such that 0 will never be hosted and 100 will always be hosted. 
+	## replace_scope = { root = character }
+	ai_will_do = single_alias_right[int_conditional_formula]
+
+	### How often will the AI check if it can host this particular activity in months? 
+	ai_check_interval = int
+	
+	### How does the AI rate this province for the activity? All candidates are selected using weighted random based on these values.Root = province being evaluated
+    ## replace_scope = { root = province host = character special_option = flag score = int }
+	ai_will_select_province = single_alias_right[int_conditional_formula]
+
+	### How many provinces does the AI attempt to select? This is only used for multi-location activities.
+	## replace_scope = { root = character }
+	## cardinality = 0..1
+	ai_select_num_provinces = int_value_field
+
+	### Cost for this activity being planned at all root = character trying to host this activity. The following scopes are only passed in when available (not when calculating min-cost for example)
+    # scope:special_option = flag of the selected special option, not set if activity has no special option category
+	# scope:province = in a single location activity the selected location
+	# list provinces = in a multi location activity list of all selected locations
+    ## replace_scope = { root = character province = province special_option = flag list_provinces = list }
+	cost = single_alias_right[cost]
+
+	### Predicted average cost for this activity if you plan one Used to show a rough minimum or expected cost at all to plan this
+    ## replace_scope = { root = character }
+	ui_predicted_cost = single_alias_right[cost]
+
+	### How many guests can attend this activity, be very careful if you raise this value too high it will cause performance impacts due to too many people travelling to activities and too many possible intent targets
+	max_guests = int
+
+	### Is it allowed to start the activity with no guest invitations? This also implies whether or not an activity will allow having zero attending guests. Default is no
+	allow_zero_guest_invites = bool
+
+	### What guest invite rules this activity shows
+	## cardinality = 0..1
+	guest_invite_rules = {
+		### All rules to pick from. Left value is priority with which to invite them, lower his higher prio, priority must be >= 1
+		rules = {
+            ## cardinality = 1..inf
+			int = <guest_invite_rule>
+		}
+
+		### Same as rules but these rules are enabled by default for the player. They will be appended to the main rules and insert their priority, so they should not be in the above list
+		defaults = {
+            ## cardinality = 1..inf
+			int = <guest_invite_rule>
+		}
+	}
+
+	### Can this character be a guest at this specific activity type, checked in addition to the base can_be_activity_guest scripted rule, so don't need to check what that also checks for basic requirements
+	## replace_scope = { root = character host = character special_option = flag }
+	can_be_activity_guest = single_alias_right[trigger_clause]
+
+	### List of subsets to define for the guests attending the activity. These will create subsets of guests that can be referenced per activity phase on the defined key. 
+	## cardinality = 0..1
+	guest_subsets = {
+        ## cardinality = 1..inf
+		value_set[guest_subset]
+	}
+
+	### Special guests that can be appointed from the invite list and then specifically referenced in script. An activity will wait for them to arrive before it begins, if a required guest declines or dies then the activity invalidates, if they are not required then it just continues without them
+	## cardinality = 0..1
+	special_guests = {
+		### Special guest names are localized via their <key>. The localization key for the name shown to the host is "<key>_for_host".
+        ## cardinality = 1..inf
+		scalar = {
+			### Is this special guest slot shown / available
+			## replace_scope = { root = character special_option = flag }
+			is_shown = single_alias_right[trigger_clause]
+
+			### Is this guest required to be set at the start of the activity? Defaults to no. (example of required guest: bride in a wedding). If they decline, the activity invalidates automatically. (death does not invalidate, handle that in Activity `is_valid`)
+			## cardinality = 0..1
+			is_required = bool
+
+			### Select a specific character to be filled as the special guest, if not set then they can be manually selected from any guest. Pick them by doing save_scope_as = character
+            ## replace_scope = { root = character special_option = flag scope:special_guests = character <special_guest_key> = character}
+			select_character = single_alias_right[effect_clause]
+
+			### Is a character valid as this special guest role, if you have already filtered them out in the build_characters you don't need to double up checks here as well for example.
+            ## replace_scope = { root = character host = character special_option = flag scope:special_guests = character <special_guest_key> = character}
+			## cardinality = 0..1
+			can_pick = single_alias_right[trigger_clause]
+
+			### How likely is the AI to pick a character for this special guest slot if they are valid? Characters will be selected using weighted random.
+			## replace_scope = { root = character }
+			ai_will_do = single_alias_right[int_conditional_formula]
+
+			### Effect run when the special guest gets sent the invitation (before accepting the invitation). This effect is also shown in the interface.
+			## replace_scope = { root = character host = character special_option = flag scope:special_guests = character <special_guest_key> = character}
+			## cardinality = 0..1
+			on_invite = single_alias_right[effect_clause]
+		}
+	}
+
+	### List of locale slots that can be found for the activity. 
+	## cardinality = 0..1
+    locales = {
+
+		### Single slot with locales
+        ## cardinality = 1..inf
+		<activity_locale> = {
+
+			### Is this slot available? If not defined it will default to true. Use to add optional locale slots. 
+            ## replace_scope = { root = activity activity = activity host = character}
+			is_available = single_alias_right[trigger_clause]
+		
+			### Brief: locales ( database key array ) What locales shall be available in this activity type between active phases?
+			locales = {
+                ## cardinality = 1..inf
+				<activity_locale>
+			}
+		}
+	}
+	### How many days are all locales invalid to enter, after entering one
+    ## replace_scope = { root = activity activity = activity host = character}
+	## cardinality = 0..1
+	locale_cooldown = {
+        enum[duration] = int_value_field
+    }
+
+	### When should a player auto-visit a locale? Set whenever a locale is visited, or when a player arrives at the activity location. If not defined, a player does not auto-visit locales.
+    ## replace_scope = { root = activity activity = activity host = character}
+	## cardinality = 0..1
+	auto_select_locale_cooldown = {
+        enum[duration] = int_value_field
+    }
+
+	### From what time are locales visitable before the start of the activity phases. (setting it to 14 days will open the locales 14 days before the first phase' active state starts) Not defining it will open the locales from the creation of the activity.
+    ## replace_scope = { activity = activity host = character}
+	## cardinality = 0..1
+	early_locale_opening_duration = {
+        enum[duration] = int_value_field
+    }
+
+	### Anyone can choose to attend this activity if they meet its requirements. When planning an open invite activity only your court will specifically be invited
+	## cardinality = 0..1
+	open_invite = bool
+
+	### List of valid intents for the host (default should be in the `intents` list too)
+	host_intents = {
+		intents = { 
+            ## cardinality = 1..inf
+            <activity_intent>
+         }
+		### Default intent needs to be always valid
+		default = <activity_intent>
+		### Optional list of intents to try to default to for the player
+		## cardinality = 0..1
+		player_defaults = {
+            ## cardinality = 1..inf
+            <activity_intent>
+        }
+	}
+
+	### List of valid intents for the guests (default should be in the `intents` list too)
+	guest_intents = {
+		intents = {
+            ## cardinality = 1..inf
+            <activity_intent>
+        }
+		### Default intent needs to be always valid
+		default = <activity_intent>
+		### Optional list of intents to try to default to for the player
+		## cardinality = 0..1
+		player_defaults = {
+            ## cardinality = 1..inf
+            <activity_intent>
+        }
+	}
+
+	### Chance for a guest to accept an invitation to join this activity
+    ## replace_scope = { root = character host = character minimal_travel_time = int activity_start_diff_days = int <special_guest_key> = character <option_category_key = flag special_guests = character }
+	## cardinality = 0..1
+	guest_join_chance = single_alias_right[weight_block]
+
+	### Effects run when a character enters a travel state
+	## replace_scope = { root = character activity = activity host = character }
+	## cardinality = 0..1
+	on_enter_travel_state = single_alias_right[effect_clause]
+
+	### Effects run when a character enters a passive state after travel
+	## replace_scope = { root = character activity = activity host = character }
+	## cardinality = 0..1
+	on_enter_passive_state = single_alias_right[effect_clause]
+
+	### Effects run when entering an active phase of the activity
+	## replace_scope = { root = character activity = activity host = character }
+	## cardinality = 0..1
+	on_enter_active_state = single_alias_right[effect_clause]
+
+	### Effects run when a character leaves the travel state
+	## replace_scope = { root = character activity = activity host = character }
+	## cardinality = 0..1
+	on_leave_travel_state = single_alias_right[effect_clause]
+
+	### Effects run when a character leaves the passive state
+	## replace_scope = { root = character activity = activity host = character }
+	## cardinality = 0..1
+	on_leave_passive_state = single_alias_right[effect_clause]
+
+	### Effects run when a character leaves the active state
+	## replace_scope = { root = character activity = activity host = character }
+	## cardinality = 0..1
+	on_leave_active_state = single_alias_right[effect_clause]
+
+	### Effects run during the activity event pulse for characters in the travel state
+	## replace_scope = { root = character activity = activity host = character }
+	## cardinality = 0..1
+	on_travel_state_pulse = single_alias_right[effect_clause]
+
+	### Effects run during the activity event pulse for characters in the passive state
+	## replace_scope = { root = character activity = activity host = character }
+	## cardinality = 0..1
+	on_passive_state_pulse = single_alias_right[effect_clause]
+
+	### Effects run during the activity event pulse for characters in the active state
+	## replace_scope = { root = character activity = activity host = character }
+	## cardinality = 0..1
+	on_active_state_pulse = single_alias_right[effect_clause]
+
+	### Effects run when the activity is created
+	## replace_scope = { root = character activity = activity host = character }
+	## cardinality = 0..1
+	on_start = single_alias_right[effect_clause]
+
+	### Effects run when the activity completes after its last phase
+	## replace_scope = { root = character activity = activity host = character }
+	## cardinality = 0..1
+	on_complete = single_alias_right[effect_clause]
+
+	### Plugin widgets to be added to the activity window if this type is viewed
+	## cardinality = 0..1
+	activity_window_widgets = {
+		### Name = name of the plug in and its file path in gui/activity_window_widgets; Container = the widget in the main activity window to position this under
+		scalar = localisation
+	}
+
+	### Plugin widgets to be added to the activity planner window if this type is viewed
+	## cardinality = 0..1
+	activity_planner_widgets = {
+		### Name = name of the plug in widget and its file path in gui/activity_window_widgets/name.txt Container = the widget in the main activity window to position this under
+		scalar = localisation
+	}
+
+	# The background for the activity is defined in event_backgrounds and looks up an entry with the same key as the activity
+
+	### Map entity for the activity, multiple can be read in, first one is picked from order they are read in
+	## cardinality = 0..inf
+	map_entity = {
+		## replace_scope = { root = activity activity = activity host = character}
+		trigger = single_alias_right[trigger_clause]
+		reference = localisation
+	}
+
+    ### Short hand for a single constant entity name
+	## cardinality = 0..inf
+	map_entity = localisation
+
+	### Background for the activity, multiple can be read in, first one is picked from order they are read in
+	## cardinality = 1..inf
+	background = {
+		# root = the activity
+		# scope:activity = the activity
+		# scope:host = host of the activity
+		trigger = single_alias_right[trigger_clause]
+		texture = localisation
+		environment = localisation
+		## cardinality = 0..1
+		ambience = localisation
+		## cardinality = 0..1
+		music = localisation
+	}
+
+	### Locale Background for the activity. Used exclusively by activities that use the locale window. Multiple can be read in, first one is picked from order they are read in.
+	## cardinality = 0..1
+	locale_background = {
+		## replace_scope = { root = activity activity = activity host = character}
+		trigger = single_alias_right[trigger_clause]
+		texture = localisation
+		environment = localisation
+		## cardinality = 0..1
+		ambience = localisation
+		## cardinality = 0..1
+		music = localisation
+	}
+
+	### Can read in multiple, they will be displayed left to right based on this order
+	window_characters = {
+        # Will be localized as activity_window_character_key
+		## cardinality = 1..inf
+		scalar = { 
+
+			### Name of the camera to use for this portrait
+			## cardinality = 0..1
+			camera = scalar
+			
+			# root = the activity
+			# scope:activity = the activity
+			# scope:host = host of the activity
+			# scope:player = the player character viewing the window
+			### Pick the desired character by scoping to them and doing add_to_list = characters. A random valid character will be picked to display, if the character is already displayed they will be skipped
+			## replace_scope = { root = activity activity = activity host = character player = character}
+			## cardinality = 0..1
+			effect = single_alias_right[effect_clause]
+
+			### scripted animation block for animation selection based on triggers
+			# root = the activity
+			# scope:activity = the activity
+			# scope:host = host of the activity
+			# scope:player = the player character viewing the window
+			# scope:character = the character who is going to receive triggered animation
+			## replace_scope = { root = activity activity = activity host = character player = character}
+			## cardinality = 0..1
+			scripted_animation = single_alias_right[scripted_animation]
+
+			## cardinality = 0..1
+            alias_name[animation] = alias_match_left[animation]
+		}
+	}
+
+	### Select which court characters are added to the travel entourage of an invited / hosting character, if that character would travel. Weighted list is evaluated until all values are negative, or `max` is reached.
+	travel_entourage_selection = {
+		### List is all court characters.
+		# root = character in the travel plan owners' court
+		# scope:host = character hosting the activity
+		# scope:owner = character owning the travel plan (host or guest)
+		# scope:special_option = flag of the selected special option, not set if activity has no special option category
+		## replace_scope = { root = character host = character owner = character special_option = flag}
+		weight = single_alias_right[int_conditional_formula]
+
+		### Up to how many characters to select for a player
+		## cardinality = 0..1
+		max = int
+		
+		### Up to how many characters to select for an AI
+		## cardinality = 0..1
+		ai_max = int
+
+		### What order, relative to the invite rule orders, should entourage members be invited in
+		## cardinality = 0..1
+		invite_rule_order = int
+	}
+	
+	### Description for hosting the activity, defaults to "<key>_province_desc"
+	# root = the province
+	# scope:host = character trying to host this activity
+	# scope:special_option = flag of the selected special option, not set if activity has no special option category
+	## replace_scope = { root = province host = character special_option = flag}
+	## cardinality = 0..1
+	province_description = single_alias_right[complex_desc]
+
+	### Description for hosting the activity, defaults to "<key>_host_desc"
+	# root = character trying to host this activity
+	## replace_scope = { root = character}
+	## cardinality = 0..1
+	host_description = single_alias_right[complex_desc]
+
+	### Description for concluding the activity, defaults to "<key>_conclusion_desc"
+	# root = character in the conclusion screen
+	# scope:activity = the activity
+	# scope:host = host of the activity
+	## replace_scope = { root = character activity = activity host = character }
+	## cardinality = 0..1
+	conclusion_description = single_alias_right[complex_desc]
+
+	### (Undocumented, see examples)
+	## cardinality = 0..1
+	pulse_actions = {
+		entries = {
+			## cardinality = 0..inf
+			scalar
+		}
+		chance_of_no_event = int
+	}
+}

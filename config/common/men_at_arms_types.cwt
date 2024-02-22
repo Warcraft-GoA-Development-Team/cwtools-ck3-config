@@ -108,7 +108,7 @@ maa_type = {
 	## push_scope = character
     ## cardinality = 0..inf
 	###  Script value in character scope. Used in addition to a quality calculation (based on TOUGHNESS_SCORE_MULT, etc.) to figure out what the AI should buy/disband.
-	ai_quality = int_value_field
+	ai_quality = single_alias_right[int_conditional_formula]
 }
 
 alias[modifier:value[unit_type]_max_size_add] = int_value_field

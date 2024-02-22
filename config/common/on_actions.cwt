@@ -5,12 +5,14 @@ types = {
 }
 
 on_action = {
+	### An on_action can run effects. It can access the same default or saved scopes as the script chain/code functionality it was fired from. Note that it happens concurrently to events triggered by the on_action, NOT before. Effects run here create a separate chain than events the on_action fires, so you can for example not manipulate values in the effect, and then reliably access those in an event that was fired at the same time. Scopes or local variables set in the effect here will not carry over to any event fired by the on_action.
 	## cardinality = 0..1
     effect = {
         ## cardinality = 0..inf
         alias_name[effect] = alias_match_left[effect]
     }
 	## cardinality = 0..1
+	### An on_action can fire other on_actions, following the same rules as with events
 	on_actions = {
 		## cardinality = 0..inf
 		<on_action>
@@ -25,13 +27,23 @@ on_action = {
             }
         }
 	}
+	### Same as with events. On_actions are also factored by their weight_multipliers, which defaults to 1
 	## cardinality = 0..1
 	random_on_action = {
 		## cardinality = 0..inf
 		int = <on_action>
 	}
+	### A single event will be picked to fire
 	## cardinality = 0..1
 	random_events = {
+		### A percentage chance determining whether the events involved will be evaluated at all
+		## cardinality = 0..1
+		chance_to_happen = int_value_field
+
+		### An entry that can be formatted as a script value (and therefore have conditional entries). Separated from "chance_to_happen" for performance reasons. Will only be evaluated if chance_to_happen is true.
+		## cardinality = 0..1
+		chance_of_no_event = single_alias_right[int_conditional_formula]
+
 		## cardinality = 0..inf
 		int = <event>
 		## cardinality = 0..inf
@@ -42,17 +54,23 @@ on_action = {
 		## cardinality = 0..inf
 		<event>
 	}
+	### Events listed in "events" brackets will always fire as long as their trigger evaluates
 	## cardinality = 0..1
 	first_valid = {
 		## cardinality = 0..inf
 		<event>
 	}
+	### On_actions can have triggers. If an on_action fires and its trigger returns false, nothing happens
 	## cardinality = 0..1
 	trigger = {
 		## cardinality = 0..inf
         alias_name[trigger] = alias_match_left[trigger]
 	}
+	### Used to manipulate the weight of this on_action if it is a candidate in a random_on_actions list (see below)
+	## cardinality = 0..1
+	weight_multiplier = single_alias_right[int_conditional_formula]
 
+	### on_actions can define a fallback on_action. If no events/on_actions are run by the on_action, the fallback gets called instead. Avoid creating infinite fallback loops, or the game may be prevented from advancing time!
     ## cardinality = 0..1
     fallback = <on_action>
 }

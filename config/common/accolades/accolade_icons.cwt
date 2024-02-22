@@ -1,0 +1,15 @@
+types = {
+    type[accolade_icons] = {
+        path = "game/common/accolade_icons"
+    }
+}
+
+accolade_icon = {
+
+    ### The .dds file used for the icon.
+    texture = scalar
+
+    ### Determines if an icon can be used for the given accolade type
+    potential = single_alias_right[trigger_clause]
+
+}

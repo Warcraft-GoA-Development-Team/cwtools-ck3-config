@@ -1,0 +1,38 @@
+types = {
+    type[artifact_visual] = {
+        path = "common/artifacts/visuals"
+    }
+}
+
+# Determines the visuals of an artifact and ties together 2d and 3d visuals
+# Picks a random valid one based on the triggers, passes in the scopes from the creation/reforge like the text does
+
+artifact_visual = {
+	icon = localisation
+	asset = localisation
+
+	### optional field with no gameplay effect. Only needed for automatic test artifact generation
+    ## cardinality = 0..1
+	default_type = scalar
+    ## cardinality = 0..1
+    pedestal = localisation
+    ## cardinality = 0..inf
+    icon = localisation
+    ## cardinality = 0..inf
+	icon = {
+
+
+        ## replace_scope = { root = character artifact = artifact }
+		trigger = single_alias_right[trigger_clause]
+
+		reference = localisation
+	}
+    ## cardinality = 0..inf
+    asset = localisation
+    ## cardinality = 0..inf
+	asset = {
+        ## replace_scope = { root = character artifact = artifact }
+		trigger = single_alias_right[trigger_clause]
+		reference = localisation
+	}
+}

@@ -1,0 +1,63 @@
+types = {
+    type[blueprint] = {
+        path = "game/common/artifacts/blueprints"
+    }
+}
+
+enums = {
+	enum[artifact_rarity] = {
+		common
+		masterwork
+		famed
+		illustrious
+	}
+}
+
+blueprint = {
+
+    ### artifact type, determines slot and category ( inventory/court )
+	in_type = scalar
+    ### artifact visual type, determines 3d assets, icons etc.
+	in_visuals = scalar 
+
+	### these out_ types determine the artifacts looks and usage post-reforge
+	out_type = scalar
+    ### these out_ types determine the artifacts looks and usage post-reforge
+	out_visuals = scalar
+
+	### an array of modifier types that will not be allowed to persist on the artifact post-reforge
+	## cardinality = 0..1
+	disallowed_modifiers = {
+        ## cardinality = 1..inf
+		alias_name[modifier]
+	}
+
+	### A nested array of static modifiers that will be used instead of any modifier containing the above disallowed modifiers post-reforge. The system will pick a number of random modifiers ( no duplicates ) from the corresponding rarity list
+    ## cardinality = 0..1
+	replacement_modifiers = {
+        ## cardinality = 0..1
+		common = {
+            ## cardinality = 1..inf
+			alias_name[modifier]
+		}
+        ## cardinality = 0..1
+		masterwork = {
+            ## cardinality = 1..inf
+			alias_name[modifier]
+		}
+        ## cardinality = 0..1
+		famed = {
+            ## cardinality = 1..inf
+			alias_name[modifier]
+		}
+        ## cardinality = 0..1
+		illustrious = {
+            ## cardinality = 1..inf
+			alias_name[modifier]
+		}
+	}
+
+	### changes the template of the artifact to the specified scripted template. Templates are specified in artifacts/templates/
+	## cardinality = 0..1
+	template = scalar
+}

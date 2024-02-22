@@ -1,0 +1,104 @@
+types = {
+    type[tax_obligation] = {
+        
+        path = "game/common/tax_slots/obligations"
+        
+    }
+    type[tax_slot] = {
+        
+        path = "game/common/tax_slots/types"
+        
+    }
+}
+
+enums = {
+    complex_enum[tax_flag] = {
+        flag = enum_name
+
+    }
+}
+
+tax_obligation = {
+    ## cardinality = 0..1
+    ## replace_scope = { tax_slot = tax_slot liege = character tax_collector = character}
+    is_shown = single_alias_right[trigger_clause]
+
+    ## cardinality = 0..1
+    ## replace_scope = { tax_slot = tax_slot liege = character tax_collector = character}
+    is_valid = single_alias_right[trigger_clause]
+
+    ## cardinality = 0..1
+    ## replace_scope = { tax_slot = tax_slot liege = character vassal = character tax_collector = character}
+    is_vassal_valid = single_alias_right[trigger_clause]
+
+    ## cardinality = 0..1
+    vassal_opinion = int_value_field
+    ## cardinality = 0..1
+    tax_factor = value_field
+    ## cardinality = 0..1
+    levies_factor = value_field
+
+    ## cardinality = 0..1
+    vassal_modifier = {
+        ## cardinality = 1..inf
+        alias_name[modifier] = alias_match_left[modifier]
+    }
+
+    ## cardinality = 1..inf
+    flag = enum[tax_flag]
+}
+
+tax_slot_type_key = {
+	### vassals of this type can be assign to this governance
+	government = <government>
+
+	### These are the different obligations a governance can apply to the assigned vassals
+    ## cardinality = 0..1
+	vassal_contracts = {
+        ## cardinality = 1..inf
+		<vassal_contract>
+	}
+
+	### How many vassals can be assigned to this tax slot
+    ## replace_scope = { root = tax_slot liege = character tax_collector = character}
+    ## cardinality = 0..1
+	tax_slot_vassal_limit = single_alias_right[int_conditional_formula]
+
+	### Evaluates if the scope:tax_collector is valid for being a tax collector
+	## replace_scope = { root = character liege = character }
+    ## cardinality = 0..1
+    is_valid_tax_collector = single_alias_right[trigger_clause]
+
+	### Break points for the aptitude levels
+    ## cardinality = 0..1
+	aptitude_level_breakpoints = {
+        ## cardinality = 1..inf
+        <int>
+	}
+
+	### scripted fixedpoint value
+    ## replace_scope = { root = character }
+    ## cardinality = 0..1
+	tax_collector_aptitude = single_alias_right[int_conditional_formula]
+
+
+	### effect trigger when tax collector is hired
+    ## replace_scope = { liege = character tax_slot = tax_slot vassal = character }
+    ## cardinality = 0..1
+	on_tax_collector_hired = single_alias_right[effect_clause]
+
+	### effect trigger when tax collector is fired
+    ## replace_scope = { liege = character tax_slot = tax_slot tax_collector = character }
+    ## cardinality = 0..1
+	on_tax_collector_fired = single_alias_right[effect_clause]
+
+	### effect trigger when vassal is assigned to a tax slot
+    ## replace_scope = { liege = character tax_slot = tax_slot vassal = character }
+    ## cardinality = 0..1
+	on_vassal_assigned = single_alias_right[effect_clause]
+
+	### effect trigger when vassal is removed from a tax slot
+    ## replace_scope = { liege = character tax_slot = tax_slot vassal = character }
+    ## cardinality = 0..1 
+	on_vassal_removed = single_alias_right[effect_clause]
+}

@@ -1,0 +1,35 @@
+types = {
+    type[event_transition] = {
+        path = "common/event_transitions"
+    }
+}
+
+event_transition = {
+	### A background that can be shown when the event pops up. In case that there are multiples the first one that fits the trigger will be the one selected.
+    ## cardinality = 1..inf
+	transition = {		
+
+		### Receives the event scope to check if it's valid.
+		## cardinality = 0..1
+        trigger = single_alias_right[trigger_clause]
+
+		### Path to the texture
+		## cardinality = 0..1
+        reference = filepath
+
+		### Is the reference a video?
+		## cardinality = 0..1
+        video = bool
+
+		### Reference to the ambience sound effect as defined in game/sound/GUIDs.txt
+        ## cardinality = 0..1
+		ambience = filepath
+
+		### Video mask to use in doing an alpha multiply on the fade video or image.
+		## cardinality = 0..1
+        video_mask = filepath
+
+		### How long will this transition show? Must be larger than 0.
+		duration = float
+	}
+}

@@ -18,6 +18,7 @@ types = {
 }
 
 legacy = {
+    is_shown = single_alias_right[trigger_clause]
 }
 
 dynasty_perk = {
@@ -44,11 +45,12 @@ dynasty_perk = {
     ## cardinality = 0..1
     ## push_scope = character
     ### Script value for weight for selection by the AI. Defaults to 1000.
-    ai_chance = int_value_field
-    ## cardinality = 0..1
-    ## push_scope = character
-    ### Dynasty prestige cost for selecting the perk.
-    cost = int_value_field
+    ai_chance = single_alias_right[int_conditional_formula]
+    # ## cardinality = 0..1
+    # ## push_scope = character
+    # ### Dynasty prestige cost for selecting the perk.
+    # # Appears to be depeciated
+    #cost = int_value_field
 
     ## cardinality = 0..1
     ### If you do this, traits will be selectable when unlocking this perk. The selected trait will be saved as a variable in the dynasty, like this: var:<perk_key>_<trait_key>. E.G., var:blood_4_beauty_good_1. The number on the right is the AI chance; at least one trait needs to have a non-zero chance.

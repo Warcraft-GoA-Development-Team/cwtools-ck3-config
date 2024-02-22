@@ -59,7 +59,7 @@ law_group = {
         # TODO: List special flags found in _laws.info.
         ## cardinality = 0..inf
         ### Can be checked in script with has_realm_law_flag = some_arbitrary_flag.
-        flag = scalar
+        flag = value_set[law_flag]
         
         ## cardinality = 0..1
         ## push_scope = character
@@ -117,7 +117,7 @@ law_group = {
         ## cardinality = 0..1
         ## push_scope = character
         ### Script value in ruler scope. If above 0, the AI will enact this law if able. Law enactment is checked in the RARE_TASK_TICK. If multiple laws are possible, the AI will enact the one with the highest score.
-        ai_will_do = int_value_field
+        ai_will_do = single_alias_right[int_conditional_formula]
     }
 }
 

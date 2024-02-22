@@ -707,4 +707,64 @@ links = {
         input_scopes = inspiration
         output_scope = character
     }
+    activity_type = {
+        desc = " Unknown, add something in code registration"
+        input_scopes = activity
+        output_scope = activity_type
+    }
+    current_location = {
+        desc = " Get the current province of the travel plan."
+        input_scopes = travel_plan
+        output_scopes = province
+    }
+    departure_location = {
+        desc = " Get the province from which this travel plan started."
+        input_scopes = travel_plan
+        output_scopes = province
+    }
+    final_destination_province = {
+        desc = " Get the final (last) destination province of the travel plan."
+        input_scopes = travel_plan
+        output_scopes = province
+    }
+    next_destination_province = {
+        desc = " Get the next destination province of the travel plan. If you are at a destination province, it will be the one after that one."
+        input_scopes = travel_plan
+        output_scopes = province
+    }
+    next_location = {
+        desc = " Get the next province the travel plan is going to."
+        input_scopes = travel_plan
+        output_scopes = province
+    }
+    travel_leader = {
+        desc = " Get the next province the travel plan is going to."
+        input_scopes = travel_plan
+        output_scopes = character
+    }
+    travel_plan_activity = {
+        desc = " Activity associated with the scoped travel plan. (may be empty)"
+        input_scopes = travel_plan
+        output_scopes = activity
+    }
+    travel_plan_owner = {
+        desc = " Get the owner of the scoped travel plan"
+        input_scopes = travel_plan
+        output_scopes = character
+    }
+    current_travel_plan = {
+        desc = " Get the character's current travel plan"
+        input_scopes = character
+        output_scopes = travel_plan
+    }
+    activity_location = {
+        desc = " Get current location of the scoped activity"
+        input_scopes = activity
+        output_scopes = province
+    }
+    activity_host = {
+        desc = " Get host character of the scoped activity"
+        input_scopes = activity
+        output_scopes = character
+    }
 }

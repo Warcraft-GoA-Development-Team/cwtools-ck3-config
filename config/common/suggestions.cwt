@@ -1,0 +1,32 @@
+types = {
+    type[suggestion] = {
+        path = "game/common/suggestions"
+        localisation = {
+            name = "$"
+            label = "$_label"
+            desc = "$_desc"
+            click = "$_click"
+            combined_label = "$_combined_label"
+            combined_group_label = "$_combined_group_label"
+            combined_group_name = "$_combined_group_name"
+            combined_group_description = "$_combined_group_description"
+        }
+    }
+}
+
+suggestion = {
+
+    ### Effect that checks if the action can be shown. Only interface effects are allowed. Should probably run try_create_important_action.
+    ## replace_scope = { root = character }
+    check_create_suggestion = single_alias_right[effect_clause]
+
+    ### Effect excutes when the player clicks on the action. Only interface effects are allowed. Scope contains all targets saved in check_create_suggestion when try_create_important_action was executed, as well as all special actor, recipient etc targets specified in try_create_important_action.
+    ## replace_scope = { root = character }
+    effect = single_alias_right[effect_clause]
+
+    ### MTTH to check how good the suggestion is based in different criterias. Score determines the target of a multi-target suggestion.
+    score = single_alias_right[int_conditional_formula]
+
+    ### MTTH used to sort the importance of suggestions to the current character. The highest value will be the first suggestion to be attempted for creation. If a suggestion type has less than 0 weight then it will not be considered for creation.
+    weight = single_alias_right[int_conditional_formula]
+}

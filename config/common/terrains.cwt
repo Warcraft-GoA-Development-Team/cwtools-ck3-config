@@ -2,48 +2,80 @@
 types = {
     type[terrain] = {
         path = "game/common/terrain_types"
+        modifiers = {
+            "$_attrition_mult" = value_field
+            "$_cancel_negative_supply" = bool
+            "$_advantage" = int_value_field
+            "$_development_growth" = value_field
+            "$_development_growth_factor" = value_field
+            "$_construction_gold_cost" = value_field
+            "$_holding_construction_gold_cost" = value_field
+            "$_construction_piety_cost" = value_field
+            "$_holding_construction_piety_cost" = value_field
+            "$_construction_prestige_cost" = value_field
+            "$_holding_construction_prestige_cost" = value_field
+            "$_supply_limit" = int_value_field
+            "$_supply_limit_mult" = value_field
+            "$_tax_mult" = value_field
+            "$_levy_size" = value_field
+            #undocumented
+            "$_min_combat_roll" = int_value_field
+            "$_max_combat_roll" = int_value_field
+
+        }
     }
 }
 
-alias[modifier:<terrain>_advantage] = int_value_field
-alias[modifier:<terrain>_attrition_mult] = value_field
-alias[modifier:<terrain>_cancel_negative_supply] = bool
-alias[modifier:<terrain>_min_combat_roll] = int_value_field
-alias[modifier:<terrain>_max_combat_roll] = int_value_field
+#alias[modifier:<terrain>_advantage] = int_value_field
+#alias[modifier:<terrain>_attrition_mult] = value_field
+#alias[modifier:<terrain>_cancel_negative_supply] = bool
+#alias[modifier:<terrain>_min_combat_roll] = int_value_field
+#alias[modifier:<terrain>_max_combat_roll] = int_value_field
 
 terrain = {
     ### HSV color as a series of floats.
     color = single_alias_right[hsv_color]
     ### RGB color as a series of ints
     color = single_alias_right[rgb_color]
-    # May not be optional, since all vanilla terrains use it.
+    ### Modifier applied to the province. See note on allowed modifiers below/ Modifiers referenced by a terrain object can be only generic (hardcoded) modifiers, or modifiers generated from the following databases: schemes, holdings, lifestyles, regions
     ## cardinality = 0..1
     province_modifier = {
         alias_name[modifier] = alias_match_left[modifier]
     }
     ## cardinality = 0..1
+    ### Modifiers for the attackers in a combat. See note on allowed modifiers below. Modifiers referenced by a terrain object can be only generic (hardcoded) modifiers, or modifiers generated from the following databases: schemes, holdings, lifestyles, regions
     attacker_modifier = {
         alias_name[modifier] = alias_match_left[modifier]
     }
     ## cardinality = 0..1
+    ### Modifiers for the attackers in a combat. See note on allowed modifiers below. Modifiers referenced by a terrain object can be only generic (hardcoded) modifiers, or modifiers generated from the following databases: schemes, holdings, lifestyles, regions
     defender_modifier = {
         alias_name[modifier] = alias_match_left[modifier]
     }
     ## cardinality = 0..1
+    ### Combat effect for the attackers. Look for common/combat_effects/_combat_effects.info for more information on how script this one.
     defender_combat_effects = <combat_effect>
     ## cardinality = 0..1
+    ### Combat effect for the defender. Look for common/combat_effects/_combat_effects.info for more information on how script this one.
     defender_combat_effects = single_alias_right[combat_effect]
     ## cardinality = 0..1
+    ### Combat effect for the attackers. Look for common/combat_effects/_combat_effects.info for more information on how script this one.
     attacker_combat_effects = <combat_effect>
     ## cardinality = 0..1
+    ### Combat effect for the attackers. Look for common/combat_effects/_combat_effects.info for more information on how script this one.
     attacker_combat_effects = single_alias_right[combat_effect]
     ## cardinality = 0..1
+    ### Speed on this type of terrain
     movement_speed = float
     ## cardinality = 0..1
+    ### Multiplier onthe combat width
     combat_width = float
+    ### Used to check the audio to play
     audio_parameter = float
     ## cardinality = 0..1
     is_desert = bool
     ## cardinality = 0..1
     is_jungle = bool
+    ## cardinality = 0..1
+    travel_danger = value_field
 }

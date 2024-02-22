@@ -2,35 +2,296 @@ types = {
     type[casus_belli_type] = {
         path = "game/common/casus_belli_types"
     }
+    type[casus_belli_group] = {
+        path = "game/common/casus_belli_groups"
+    }
 }
 
+enums = {
+    enum[target_title] = {
+        none
+        neighbor_land
+        neighbor_water
+        neighbor_land_or_water
+		independence_domain
+        de_jure
+		de_jure_claim
+        claim
+        all
+    }
+	enum[on_primacy_combatant_death] = {
+		invalidate
+		inherit
+		inherit_faction
+	}
+	enum[transfer_behavior] = {
+		invalidate
+		transfer
+	}
+}
+
+## push_scope = casus_belli
 casus_belli_type = {
+    ### Which CB group it belongs to. The group itself can define extra restrictions
+	group = <casus_belli_group> 
+    ### What icon to use. Optional; defaults to the CB key
     ## cardinality = 0..1
-    on_declaration = single_alias_right[effect_clause]
+	icon = scalar											
+	
+    ### How much ticking War Score should be delayed before increasing for the Attacker
+	## cardinality = 0..1
+	attacker_ticking_warscore_delay = single_alias_right[duration_block]
+    ### How much ticking War Score should be delayed before increasing for the Defender
+	## cardinality = 0..1
+	defender_ticking_warscore_delay = single_alias_right[duration_block]
+	### How much ticking warscore increases every day for the attacker
     ## cardinality = 0..1
+	attacker_ticking_warscore = value_field
+    ### How much ticking warscore increases every day for the Defender			
+	## cardinality = 0..1
+	defender_ticking_warscore = value_field
+    ### How much the Attacker need to occupy of a wargoal to gain ticking War Score. 0.0 means "at least one occupation"
+	## cardinality = 0..1			
+	attacker_wargoal_percentage = value_field
+    ### How much the Defender need to occupy of a wargoal to gain ticking War Score. 0.0 means "at least one occupation"
+	## cardinality = 0..1
+	defender_wargoal_percentage = value_field
+    ### War Score from occupation by the Attacker is modified by this value
+	## cardinality = 0..1
+	attacker_score_from_occupation_scale = int_value_field
+    ### War Score from occupation by the defender is modified by this value	
+	## cardinality = 0..1
+	defender_score_from_occupation_scale = int_value_field
+    ### War Score from battles won by the Attacker is modified by this value	
+	## cardinality = 0..1
+	attacker_score_from_battles_scale = int_value_field
+    ### War Score from battles won by the Defender is modified by this value			
+	## cardinality = 0..1
+	defender_score_from_battles_scale = int_value_field
+    ### How much War Score the Attacker can gain from battles in total				
+	## cardinality = 0..1
+	max_attacker_score_from_battles = int_value_field
+    ### How much War Score the Defender can gain from battles in total
+	## cardinality = 0..1
+	max_defender_score_from_battles = int_value_field
+    ### How much War Score the Attacker can gain from occupation in total				
+	## cardinality = 0..1
+	max_attacker_score_from_occupation = int_value_field
+    ### How much War Score the Defender can gain from occupation in total				
+	## cardinality = 0..1
+	max_defender_score_from_occupation = int_value_field
+    ### Full occupation by the defender won't automatically give 100% warscore		
+	## cardinality = 0..1
+	full_occupation_by_defender_gives_victory = bool
+    ### Full occupation by the attacker won't automatically give 100% warscore
+	## cardinality = 0..1
+	full_occupation_by_attacker_gives_victory = bool
+    ### If set to no, being landless and having no armies doesn't automatically give the other side 100% warscore
+	## cardinality = 0..1 		
+	landless_attacker_needs_armies = bool 
+    ### Controls if hostages can be used in peace negotiations. Defaults to yes			
+	## cardinality = 0..1
+	allow_hostages = bool								
+
+    ### What to multiply occupation participation scoring by. Defaults to 1
+	## cardinality = 0..1
+	occupation_participation_mult = value_field
+    ### What to multiply siege participation scoring by. Defaults to 1		
+	## cardinality = 0..1
+	siege_participation_mult = value_field
+    ### What to multiply battle participation scoring by. Defaults to 1					
+	## cardinality = 0..1
+	battle_participation_mult = value_field					
+
+    ### How much it costs to declare the war. Add a CB_BASE_COST desc key to the value if you have no conditions.
+	## cardinality = 0..1
+	cost = single_alias_right[cost]
+
+    ### No warscore from attacker capital
+	## cardinality = 0..1
+	attacker_capital_gives_war_score = bool
+	## cardinality = 0..1
+    ### No warscore from defender capital			
+	defender_capital_gives_war_score = bool
+	## cardinality = 0..1
+    ### No warscore when the attackers imprisons people			
+	imprisonment_by_attacker_give_war_score = bool
+	## cardinality = 0..1 
+    ### No warscore when the defenders imprisons people	
+	imprisonment_by_defender_give_war_score = bool
+	## cardinality = 0..1 
+	should_show_war_goal_subview = bool
+
+	## cardinality = 0..1
+	on_declaration = single_alias_right[effect_clause]
+	## cardinality = 0..1
 	on_victory = single_alias_right[effect_clause]
-    ## cardinality = 0..1
+	## cardinality = 0..1
 	on_white_peace = single_alias_right[effect_clause]
-    ## cardinality = 0..1
+	## cardinality = 0..1
 	on_defeat = single_alias_right[effect_clause]
-    ## cardinality = 0..1
+	
+	## cardinality = 0..1
 	on_invalidated = single_alias_right[effect_clause]
 
-    should_invalidate = single_alias_right[trigger_clause]
-    ## cardinality = 0..1
-    mutually_exclusive_titles = single_alias_right[trigger_clause]
-    ## cardinality = 0..1
-    allowed_for_character = single_alias_right[trigger_clause]
-    ## cardinality = 0..1
-    allowed_for_character_display_regardless = single_alias_right[trigger_clause]
-    ## cardinality = 0..1
-    allowed_against_character = single_alias_right[trigger_clause]
-    ## cardinality = 0..1
-    allowed_against_character_display_regardless = single_alias_right[trigger_clause]
-    ## cardinality = 0..1
-    valid_to_start = single_alias_right[trigger_clause]
-    ## cardinality = 0..1
-    valid_to_start_display_regardless = single_alias_right[trigger_clause]
-    ## cardinality = 0..1
-    is_allowed_claim_title = single_alias_right[trigger_clause]
+	## cardinality = 0..1
+	on_victory_desc = single_alias_right[complex_desc]
+	## cardinality = 0..1
+	on_defeat_desc = single_alias_right[complex_desc]
+	## cardinality = 0..1
+	on_white_peace_desc = single_alias_right[complex_desc]
+
+	### Undocumented
+	## cardinality = 0..1
+	on_invalidated_desc = single_alias_right[complex_desc]
+	## cardinality = 0..1
+	should_invalidate = single_alias_right[trigger_clause]
+    ### If this evaluates to true, only one title can be targeted
+	## cardinality = 0..1
+	mutually_exclusive_titles = single_alias_right[trigger_clause]
+    ### If set, then we show all the instances of this CB (E.G., Holy War for X, Holy War for Y, Holy War for Z) as a single entry that lets you select between the different targets
+	## cardinality = 0..1
+	combine_into_one = bool
+
+
+    ## replace_scope = {root = character attacker = character }
+	## cardinality = 0..1
+	allowed_for_character = single_alias_right[trigger_clause]
+    ### Failing this one won't prevent displaying the CB
+    ## replace_scope = {root = character attacker = character }
+	## cardinality = 0..1
+	allowed_for_character_display_regardless = single_alias_right[trigger_clause]
+    ## replace_scope = {root = character attacker = character defender = character }
+	## cardinality = 0..1
+	allowed_against_character = single_alias_right[trigger_clause]
+    ### Failing this one won't prevent displaying the CB
+    ## replace_scope = {root = character attacker = character defender = character }
+	## cardinality = 0..1
+	allowed_against_character_display_regardless = single_alias_right[trigger_clause]
+
+	# scope:attacker, scope:defender, and scope:target (if there's a target title). root is the attacker
+    ## replace_scope = {root = character attacker = character defender = character target = landed_title }
+	## cardinality = 0..1
+	valid_to_start = single_alias_right[trigger_clause]
+    ## replace_scope = {root = character attacker = character defender = character target = landed_title }
+    ### Failing this one won't prevent displaying the CB
+	## cardinality = 0..1
+	valid_to_start_display_regardless = single_alias_right[trigger_clause]
+
+	# scope:attacker, scope:defender, and scope:claimant. root is the title
+    ## replace_scope = {root = landed_title attacker = character defender = character claimant = character }
+	## cardinality = 0..1
+	is_allowed_claim_title = single_alias_right[trigger_clause]
+
+    ### Determines what titles this CB can be used against. "none" if it targets a realm rather than a title
+	## cardinality = 0..1
+	target_titles = enum[target_title]
+    ### If set, the CB can only be used against this tier of title
+	## cardinality = 0..1
+	target_title_tier = enum[title_tier]
+	### If set, then the CB can target anyone who holds dejure land within a valid title, rather than just anyone who holds a valid title
+	## cardinality = 0..1
+	target_de_jure_regions_above = bool 
+	### If set, everything dejure under the target title is considered part of the wargoal for ticking score. If not set, then everything defacto under the target title that isn't dejure under another title the defender personally holds is considered part of the wargoal
+	## cardinality = 0..1
+	use_de_jure_wargoal_only = bool
+
+	## cardinality = 0..1
+	war_name = localisation
+	## cardinality = 0..1
+	my_war_name = localisation 
+	## cardinality = 0..1
+	war_name_base = localisation
+	## cardinality = 0..1
+	my_war_name_base = localisation
+
+	## cardinality = 0..1
+	cb_name_no_target = localisation
+
+	## cardinality = 0..1
+	truce_days = int_value_field
+	### This kind of effect is skipped in the effects desc. Can be defined multiple times. E.G., ignore_effect = change_title_holder
+	## cardinality = 0..inf
+	ignore_effect = alias_name[effect]
+
+
+	## cardinality = 0..1
+	on_primary_attacker_death = enum[on_primacy_combatant_death]
+	## cardinality = 0..1
+	on_primary_defender_death = enum[on_primacy_combatant_death]
+	## cardinality = 0..1
+	transfer_behavior = enum[transfer_behavior]
+
+	### If set to "no", we don't check if the replacement is valid before doing it
+	## cardinality = 0..1
+	check_attacker_inheritance_validity = bool
+	### If set to "no", we don't check if the replacement is valid before doing it
+	## cardinality = 0..1
+	check_defender_inheritance_validity = bool
+	### Should allies in war inherit being in the war?
+	## cardinality = 0..1
+	attacker_allies_inherit = bool
+	### Should allies in war inherit being in the war?
+	## cardinality = 0..1
+	defender_allies_inherit = bool
+
+	### Determines the order it shows up in the list of CBs. The higher it is, the higher it shows up. Ties are broken by definition order
+	## cardinality = 0..1
+	interface_priority = int_value_field
+
+	### If the title is further away than this, the AI will never consider it
+	## cardinality = 0..1
+	max_ai_diplo_distance_to_title = int_value_field 
+
+	### If set, the AI will only check this CB against its liege
+	## cardinality = 0..1
+	ai_only_against_liege = bool
+	### If set, the AI will only check this CB against its land and sea neighbors
+	## cardinality = 0..1
+	ai_only_against_neighbors = bool 
+	### If used, the AI will use the scripted title target if it suceeds, otherwise neighbor_land_or_water
+	## push_scope = character
+	## cardinality = 0..1
+	ai_can_target_all_titles = single_alias_right[trigger_clause]
+	### If set, the AI will ignore this CB entirely
+	## cardinality = 0..1
+	ai = bool
+
+	### If set to "no", white peaces can't happen; only victory, defeat, or invalidation
+	## cardinality = 0..1
+	white_peace_possible = bool 
+	### If set to "yes", then we check land held by all defenders within the wargoal
+	## cardinality = 0..1
+	check_all_defenders_for_ticking_war_score = bool
+	### If set to "yes" we check the whole realm instead of the wargoal
+	## cardinality = 0..1
+	ticking_war_score_targets_entire_realm = bool
+
+	### If set, we show a warning saying that others of the attacker's faith might join. Has no gameplay effect
+	## cardinality = 0..1
+	gui_attacker_faith_might_join = bool
+	### If set, we show a warning saying that others of the defender's faith might join. Has no gameplay effect
+	## cardinality = 0..1
+	gui_defender_faith_might_join = bool
+	### If set, the game will add defenders of the same faith if they fulfill the can_defensively_join_holy_war script rule, and holy_war_defensive_join_value is greater than zero for them
+	## cardinality = 0..1
+	defender_faith_can_join = bool
+	### Is this a Great Holy War?
+	## cardinality = 0..1
+	is_great_holy_war = bool
+	### Bypass checks that if you're not in a realm, you can only target the top liege. Only used by scripted wars, like Peasant Revolts; will not work in the UI
+	## cardinality = 0..1
+	target_top_liege_if_outside_realm = bool 
+
+	### If set, we don't show check this CB when checking if you've got a CB available (E.G., using the trigger has_any_cb_on)
+	## cardinality = 0..1
+	should_check_for_interface_availability = bool 
+
+	### Script value, standard war scopes. Added to the hard-coded scoring from titles, if there are any
+	## cardinality = 0..1
+	ai_score = single_alias_right[int_conditional_formula]
+
+	### Script value, standard war scopes. Multiplied with the scoring from titles
+	## cardinality = 0..1
+	ai_score_mult = single_alias_right[int_conditional_formula]
 }

@@ -1,0 +1,9 @@
+types = {
+    type[define_category] = {
+        path = "common/defines"
+    }
+}
+
+define_category = {
+    value_set[define_name] = scalar
+}

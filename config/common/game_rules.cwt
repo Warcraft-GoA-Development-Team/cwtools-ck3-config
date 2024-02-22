@@ -3,9 +3,59 @@ types = {
         path = "game/common/game_rules"
     }
 
-    ## type_key_filter <> is_available_on_create
-    type[game_rule] = {
-        path = "game/common/rules"
-        skip_root_key = any
+    # type_key_filter <> is_available_on_create
+    #type[game_rule] = {
+    #    path = "game/common/game_rules"
+    #    skip_root_key = any
+    #}
+}
+
+enums = {
+    enum[game_rule_category] = {
+        difficulty
+        ai
+        titles
+        tweaks
+        multiplayer
+        health
+        historicity
+        game_modes
+        culture
+        faith
+        flavor
     }
+}
+
+game_rule = {
+
+    ###  What categories this game rule belongs too
+    ## cardinality = 1..1
+    categories = {
+        <enum[game_rule_category]>
+    }
+
+    ## cardinality = 1..inf
+    value_set[rule_setting_name] = {
+        
+        ### Apply a modifier to characters matching a specific category. Valid are player, ai, and all. E.G., player:very_easy
+        ## cardinality = 0..inf
+        apply_modifier = scalar
+
+        ### Override these defines while active. Formatted as the normal define files
+        ## cardinality = 0..1
+        defines = {
+
+            ## cardinality = 1..inf
+            <define_category> = {
+
+                 ## cardinality = 1..inf
+                <define_name> = scalar
+            }
+
+            ### Has some specific effect.
+            ## cardinality = 1..inf
+            flag = value_set[game_rule_flag]
+        }
+    }
+
 }

@@ -1,5 +1,148 @@
 types = {
     type[government] = {
         path = "game/common/governments"
+        localisation = {
+            name = "$"
+            adjective = "$_adjective"
+            realm = "$_realm"
+            desc = "$_desc"
+        }
     }
+}
+
+government = {
+	## cardinality = 0..1
+    create_cadet_branches = bool
+	## cardinality = 0..1
+    religious = bool
+    ##rulers of this government type generate a dynasty; default: no
+	## cardinality = 0..1
+    rulers_should_have_dynasty = bool
+	### The council is available for this ruler; default: yes
+    ## cardinality = 0..1
+    council = bool					
+
+	### At least one government should be scripted as fallback, fallback governments will be selected in order of priority (1 is selected over 2), used when lacking other selection and when populationg the map with holdings but no county holder exists.
+    ## cardinality = 0..1
+    fallback = int_value_field				
+
+    ### patronyms will display for characters if either their Culture or Government has this. Default is no.
+    ## cardinality = 0..1
+	always_use_patronym = bool
+
+    ### Trigger in character scope; checked when landed to see if it is an appropriate government. If failed, won't get this government (fallback will be used even if this fails if no other government is valid)
+    ## replace_scope = { root = character }
+	can_get_government = single_alias_right[trigger_clause]
+
+	primary_holding = <holding>
+    ### Holdings that can be held directly by rulers of this government type. The primary holding is always valid.
+	## cardinality = 0..1
+    valid_holdings = { 
+        ## cardinality = 1..inf
+        <holding>
+    }
+    ### Which holdings must be present in a county before more of an existing type or others can be built
+	## cardinality = 0..1
+    required_county_holdings = {
+        ## cardinality = 1..inf
+        <holding>
+    }	
+	### A list of cultures for which this government type is valid and preferred. If both primary_cultures and primary_heritages are empty, there are no cultural restrictions or preferences.
+	## cardinality = 0..1
+    primary_cultures = {
+        ## cardinality = 1..inf
+        <culture>
+     }
+    ### A list of heritages for which this government type is valid and preferred. If both primary_cultures and primary_heritages are empty, there are no cultural restrictions or preferences.		
+	## cardinality = 0..1
+    primary_heritages = {
+        ## cardinality = 1..inf 
+        <pillar.heritage>
+    }			
+	### A list of religions for which this government type is preferred
+	## cardinality = 0..1
+    preferred_religions = {
+        ## cardinality = 1..inf
+        <religion>
+    }		
+    ### Should spouses be generated in courts of this government? yes by default
+    ## cardinality = 0..1
+	court_generate_spouses = bool
+    ### Should commanders be generated in courts of this government? Can use a multiplier to the default number. yes = 1, no = 0
+	## cardinality = 0..1
+    court_generate_commanders = bool
+
+    ### Should commanders be generated in courts of this government? Can use a multiplier to the default number. yes = 1, no = 0
+	## cardinality = 0..1
+    court_generate_commanders = float
+
+    ### Should this government allow having a royal court if of the correct tier from NRoyalCourt::MIN_ROYAL_COURT_TIER, default = no
+	## cardinality = 0..1
+    royal_court = bool
+    ### Army owners of different govenment type have this multiplier applied to the supply limit
+    ## cardinality = 0..1
+	supply_limit_mult_for_others = value_field
+    ### Are the counties with owners with this government type affected by development. default: yes
+    ## cardinality = 0..1
+	affected_by_development = bool
+    ### Is this govenmnet type using prestige to buy and reinforce MaA Regiments? ( mainteance still costs gold ). default: no
+	## cardinality = 0..1
+    regiments_prestige_as_gold = bool 	
+
+    ### an override for the opinion bonus that prestige levels gain, number of values should match the define in NCharacterOpinion::PRESTIGIOUS
+    ## cardinality = 0..1
+	prestige_opinion_override = {
+        ## cardinality = 1..inf
+        int
+    } 
+	
+	### Vassal obligations - how much does the vassal give to their liege. The vassal's government type determines which contract type is used.
+	### Note that the values can be changed with the vassal_tax_contribution_add and vassal_levy_contribution_add modifiers.
+    ## cardinality = 0..1
+	vassal_contract = {
+		<vassal_contract>
+	}
+
+    ### the house unity is configured in common/house_unities and shows if a government can have house unity
+    ## cardinality = 0..1
+	house_unity = <house_unity>		 
+
+	### Disable some AI features for this government type (all are enabled by default). Note that some features might be disabled for other reasons (e.g. if not independent, if below a certain tier).
+	ai = {
+		## cardinality = 0..1
+        use_lifestyle = bool
+        ### Imprison & release from prison
+		## cardinality = 0..1
+        imprison = bool
+		## cardinality = 0..1
+        start_murders = bool
+        ### Actively arrange marriages. Can still receive marriage requests if disabled.
+		## cardinality = 0..1
+        arrange_marriage = bool
+        ### Use longterm goals (build holdings, perform major decisions, ...)
+		## cardinality = 0..1
+        use_goals = bool
+        ### Use minor decisions		
+		## cardinality = 0..1
+        use_decisions = bool
+        ### Will evaluate using scripted guis
+		## cardinality = 0..1
+        use_scripted_guis = bool
+        ## cardinality = 0..1
+		perform_religious_reformation = bool
+	}
+
+    ### Modifier applied to the ruler character with this government type
+	## cardinality = 0..1
+    character_modifier = {
+        ## cardinality = 1..inf
+        alias_name[modifier] = alias_match_left[modifier]				
+	}
+
+    ### color for map mode
+    ## cardinality = 1..1
+	color = alias_match_right[color]
+
+    ## cardinality = 0..1
+    flag = value_set[government_flag]
 }

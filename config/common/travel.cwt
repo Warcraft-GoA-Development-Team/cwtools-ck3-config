@@ -1,0 +1,79 @@
+types = {
+    type[point_of_interest] = {
+        path = "game/common/travel/point_of_interest_types"
+    }
+    type[travel_option] = {
+        path = "game/common/travel/travel_options"
+    }
+}
+
+point_of_interest = {
+
+	### Effect that gets triggered when a character visits a POI for the first time
+    ## replace_scope = { root = character province = province }
+	on_visit = single_alias_right[effect_clause]
+
+	### Optional, effect which is run monthly period to find which provinces have this type of point of interest. If provinces are also added/removed via effects (`add_travel_point_of_interest`, `remove_travel_point_of_interest`), they need to be valid/invalid in this effect too. Use add_to_list = provinces to return which provinces are valid
+    ## cardinality = 0..1
+    ## replace_scope = {root = province}
+	build_province_list = single_alias_right[effect_clause]
+}
+
+# Travel Option
+travel_option = {
+	### Trigger which has to be true to be shown while planning travel. Scope is the travel owner.
+    ## push_scope = character
+	is_shown = single_alias_right[trigger_clause]
+
+	### Trigger which has to be true to be able to be picked while planning travel. Scope is the travel owner.
+    ## push_scope = character
+    
+	is_valid = single_alias_right[trigger_clause]
+
+	### Scripted cost which will be applied to the travel owner once the travel start, if the option is picked. Scope is the travel owner character. We have chosen to remove the gold cost and have the player choose what options they want to apply for a limited number of slots. Still maintaining it for special options.
+    ## push_scope = character
+	cost = single_alias_right[cost]
+
+	### Travel modifier which gets applied to the travels safety/speed if the option is picked.
+	travel_modifier = {
+		travel_speed = int
+		travel_safety = int
+	}
+
+	### Character modifier that gets applied to the travel owner character
+    ## cardinality = 0..1
+	owner_modifier = {
+        alias_name[modifier] = alias_match_left[modifier]
+    }
+
+	### Effect that gets triggered once the travel starts, or once the option is gained mid-travel.
+    ## replace_scope = { root = character travel_speed = int travel_safety = int}
+    ## cardinality = 0..1
+	on_applied_effect = single_alias_right[effect_clause]
+
+	### Effect that gets triggered once the travel ends.
+    ## replace_scope = { root = character travel_speed = int travel_safety = int }
+    ## cardinality = 0..1
+	on_travel_end_effect = single_alias_right[effect_clause]
+
+	### Brief: ai_will_do (scripted value int32)
+	### How likely is the AI to pick this option if valid? Options will be selected using weighted random. Options will be re-evaluated after each option is added.
+    ## replace_scope = { root = travel_plan highest_danger_value = int }
+	ai_will_do = single_alias_right[int_conditional_formula]
+
+	### Select which court characters are added to the travel entourage when this option is added. Weighted list is evaluated until all values are negative, or `max` is reached.
+    
+	travel_entourage_selection = {
+		# List is all court characters.
+		# root = character in the travel plan owners' court
+		# scope:owner = character owning the travel plan
+        ## replace_scope = { root = character owner = character}
+		weight = single_alias_right[int_conditional_formula]
+
+		### Up to how many characters to select for a player
+		max = int
+		
+		### Up to how many characters to select for an AI
+		ai_max = int
+	}
+}

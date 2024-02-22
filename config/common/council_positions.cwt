@@ -6,7 +6,7 @@ types = {
 
 council_position = {
     ## cardinality = 0..1
-    skill = enum[attributes]
+    skill = enum[attribute]
     
     ## cardinality = 0..1
     ### What name to use. Be aware that when a position is unfilled, name_of_the_position is used instead.
@@ -14,6 +14,7 @@ council_position = {
     ## cardinality = 0..1
     ## push_scope = character
     ### What name to use. SCOPE is the character, event target 'councillor_liege' is the council owner. If no character is provided, we fall back to the key of the position rather than going through triggered loc.
+    ## replace_scope = { councillor_liege = character }
     name = single_alias_right[complex_desc]
 
     ## cardinality = 0..1
@@ -22,6 +23,7 @@ council_position = {
     ## cardinality = 0..1
     ## push_scope = character
     ### What tooltip to display. SCOPE is the character, event target 'councillor_liege' is the council owner.
+     ## replace_scope = { councillor_liege = character }
     tooltip = single_alias_right[complex_desc]
 
     ## push_scope = character
@@ -126,4 +128,14 @@ council_position = {
     ## cardinality = 0..1
     ### Which portrait animation should councillors of this type use in the council window
 	portrait_animation = <portrait_animation>
+
+    ### Council data used in the Barbershop's Council preset. Defines the council character's position and if it should be rendererd in front of other characters.
+    ## cardinality = 0..1
+    barbershop_data = {
+        position = {
+            float
+            float
+        }
+        click_to_front = bool
+    }
 }

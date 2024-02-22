@@ -1,0 +1,203 @@
+#In this folder, law groups and laws can be defined.
+
+#== Inheritance ==
+#Any heir that goes up one or more tier due to inheritance gets the laws of the dead ruler.
+#Note that currently the law conditions are not checked in any way for law inheritance.
+
+#== Structure ==
+#All script has the ruler as ROOT.
+
+types = {
+    type[law_group] = {
+        path = "common/laws"
+    }
+    type[law] = {
+        path = "common/laws"
+        skip_root_key = yes
+    }
+}
+
+enums = {
+    enum[order_of_succession] = {
+        inheritance
+        election
+        theocratic
+        company
+    }
+    enum[title_division] = {
+        partition
+        single_heir
+    }
+    enum[traversal_order] = {
+        children
+        dynasty_house
+        dynasty
+    }
+    enum[succession_rank] = {
+        oldest
+        youngest
+    }
+    enum[gender_law] = {
+        male_only
+        male_preference
+        equal
+        female_preference
+        female_only
+    }
+    enum[faith_law] = {
+        same_faith
+        same_religion
+        same_family
+    }
+    complex_enum[law_group_flag] = {
+        path = "common/laws"
+        name = {
+            flag = enum_name
+        }
+    }
+    complex_enum[law_flag] = {
+        path = "common/laws"
+        name = {
+            <law> = {
+                flag = enum_name
+            }
+            
+        }
+    }
+    
+}
+
+law_group = {
+    ### Optional. New rulers will by default use this law, as long as its "should_start_with" trigger returns true or is not defined
+	##cardinality = 0..1
+    default = <law>
+    ### If set, each subsequent law in the group will provide all effects of the previous law
+	##cardinality = 0..1
+    cumulative = bool
+	
+    ### See below for flags treated specially. Also can check it in the data/GUI system with LawGroup.HasFlag('some_arbitrary_flag')
+	##cardinality = 0..inf
+    flag = enum[law_group_flag]
+	
+	<law> = {
+        ### Requirements for keeping the law in the ruler's scope. If this invalidates, the law will be replaced with the default law (see own section) within a month. Also checked after changing faith since doctrinal changes are likely to invalidate laws. Always true if not specified.
+        ## replace_scope = { root = character }
+        ## cardinality = 0..1
+        can_keep = single_alias_right[effect_clause]
+        ### Requirements for adopting the law in the ruler's scope. If this is true, the character is allowed to adopt the law and the law will show as available (but it can be currantly disabled if can_pass is false). Always true if not specified.
+        ## replace_scope = { root = character }
+		##cardinality = 0..1
+        can_have = single_alias_right[effect_clause]
+        ### Requirements for adopting the law in the ruler's scope. For more temporary conditions, e.g. being at war ("I can have the law, but can't pass it right now"). Always true if not specified.
+		## replace_scope = { root = character }
+        ## cardinality = 0..1
+        can_pass = single_alias_right[effect_clause]
+        ### If these conditions are true, this is a valid law to start with. Note that it always includes the can_keep check.
+		## replace_scope = { root = character }
+        ## cardinality = 0..1
+        should_start_with = single_alias_right[effect_clause]
+		### Requirements for titles being able to have this law, in the title's scope. Always false if not specified
+		## replace_scope = { root = character }
+        ## cardinality = 0..1
+        can_title_have = single_alias_right[effect_clause]
+        ### Should the law be shown in the UI for titles?
+		## replace_scope = { root = character }
+        ## cardinality = 0..1
+        should_show_for_title = single_alias_right[effect_clause]
+
+        ### Cost of enacting this law
+		## replace_scope = { root = character }
+        ## cardinality = 0..1
+        pass_cost = single_alias_right[cost]
+
+        ### Cost of revoking or clearing this law
+		## replace_scope = { root = character }
+        ## cardinality = 0..1
+        revoke_cost = single_alias_right[cost]  
+
+        ### Modifier applied to the ruler when this law is active
+		## cardinality = 0..1
+        modifier = {
+
+            alias_name[modifier] = alias_match_left[modifier]
+		}
+        ###See below for flags treated specially. Also can be checked in script with has_realm_law_flag = some_arbitrary_flag
+		## cardinality = 0..inf
+        flag = enum[law_flag]
+
+        ### Checks and adds flag only if the trigger's condition is met. Both trigger and flag *must* be specified within this block
+		## cardinality = 0..inf
+        triggered_flag = {
+            ### Some trigger (has character scope)
+			## replace_scope = { root = character }
+            trigger = single_alias_right[trigger_clause] 
+            ### See below for flags treated specially. Also can be checked in script with has_realm_law_flag = some_arbitrary_flag
+			flag = scalar
+		}
+
+        ### Effect run on ruler when the law is added. Does *NOT* get run when default laws are initialized, nor when inheriting a law from someone else. If this is done on a title, the title is accessible as scope:title
+        ## replace_scope = { root = character title = landed_title }
+		## cardinality = 0..1
+        on_pass = single_alias_right[effect_clause]
+        ### Effect run on ruler when the law is removed. Does *NOT* get run when law is removed due to inheriting a law from someone else. If this is done on a title, the title is accessible as scope:title
+        ## replace_scope = { root = character title = landed_title }
+		## cardinality = 0..1
+        on_revoke = single_alias_right[effect_clause]
+
+		### Succession rules. Any new law with a rule set will override the previous law's rule.
+		### Overriding is in law definition order
+		## cardinality = 0..1
+        succession = {
+			## cardinality = 0..1
+            order_of_succession = enum[order_of_succession]
+
+			### For inheritance:
+            ## cardinality = 0..1
+			title_division = enum[title_division]
+            ## cardinality = 0..1	
+            ### only "traversal_order = children" supports partition
+			traversal_order = enum[traversal_order]
+			### undocumented
+            ## cardinality = 0..1
+            rank = enum[succession_rank]
+
+			### For theocratic & company: entry in common/pool_character_selectors, used when choosing a character from the pool or generating a new one
+            ## cardinality = 0..1
+			pool_character_config = <pool_character_selector>
+
+			### For election: entry in common/succession_election
+            ## cardinality = 0..1
+			election_type = <succession_election>
+
+			### gender law
+            ## cardinality = 0..1
+			gender_law = enum[gender_law]
+            ### Faith restrictions on who can inherit. If no one fulfilling this is found, the restriction is ignored (but titles with the flag destroy_if_invalid_heir = yes will be destroyed)
+            ## cardinality = 0..1
+			faith = enum[faith_law]
+            ### If set, then under partition all titles you can create of your primary tier will be created for free, resulting in a more split-up realm
+            ## cardinality = 0..1
+			create_primary_tier_titles = bool 
+            ### The primary heir will get at least this portion of titles, which means if there's a lot of heirs the primary still gets a lot of land
+            ##cardinality = 0..1
+			primary_heir_minimum_share = float	
+		}
+
+        ### Script value in ruler scope. If above 0, the AI will enact this law if able. Law enactment is checked in the RARE_TASK_TICK. If multiple laws are possible, the AI will enact the one with the highest score
+        ## replace_scope = { root = character }
+        ## cardinality = 0..1
+		ai_will_do = single_alias_right[int_conditional_formula]			
+	}
+}
+
+
+
+#Law Groups:
+#flag = realm_law - Will show up in My Realm window
+
+#Laws:
+#flag = titles_cannot_leave_realm_on_succession - Disables titles leaving realm when received on succession by someone outside the realm - the respective heirs will be disqualified from succession
+#flag = men_can_have_multiple_spouses - Allows multiple spouses (if also allowed by faith)
+#flag = men_can_have_consorts - Allows consorts (if also allowed by faith)
+#flag = women_can_have_multiple_spouses - Allows multiple spouses (if also allowed by faith)
+#flag = women_can_have_consorts - Allows consorts (if also allowed by faith)

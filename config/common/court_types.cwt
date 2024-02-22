@@ -1,0 +1,94 @@
+types = {
+    type[court_type] = {
+        path = "common/court_types"
+    }
+}
+
+court_type = {
+
+	### Which court type is the default when initializing new courts. Only one Court Type may have this turned to yes.
+    ## cardinality = 0..1
+	default = bool
+	
+	### Path to texture to use as background texture in the interface when referring to this court type.
+    ## cardinality = 0..1
+	background = localisation
+
+	### The trigger deciding whether or not to show this court type in the selection list.
+    ## replace_scope = { root = character }
+    ## cardinality = 0..1
+	is_shown = single_alias_right[trigger_clause]
+
+	### The trigger deciding whether or not the court type is selectable in the court type list, if it's showing.
+	## replace_scope = { root = character }
+    ## cardinality = 0..1
+	is_valid = single_alias_right[trigger_clause]						
+
+	### The bonuses associated with one level of court grandeur. These levels are cumulative as the court level increases. Define each level separately.
+    ## cardinality = 0..inf
+	level_perk = {
+
+		### At which level of grandeur this bonus should come into effect.
+		## cardinality = 0..1
+        court_grandeur = int		
+		
+		### Modifier applied to the owner of the court when amenities are at this setting.
+        ## cardinality = 0..1
+		owner_modifier = {
+            alias_name[modifier] = alias_match_left[modifier]
+
+        }
+		
+		### Modifier applied to the courtiers and guests when court amenities are at this setting. 
+        ## cardinality = 0..1
+		courtier_guest_modifier = {
+            alias_name[modifier] = alias_match_left[modifier]
+        }
+
+		### Localization to show in addition to the owners modifier description. Prepends a EFFECT_LIST_BULLET to the entry. If multiple entries are defined in the loc key, individual newlines and EFFECT_LIST_BULLET must be specified within.
+        ## cardinality = 0..1
+		owner_modifier_description = localisation 
+
+		### Localization to show in addition to the courtier/guest modifier description. Prepends a EFFECT_LIST_BULLET to the entry. If multiple entries are defined in the loc key, individual newlines and EFFECT_LIST_BULLET must be specified within.
+        ## cardinality = 0..1
+		courtier_guest_modifier_description = localisation
+	}
+
+	### Bonuses applied to courtiers that spend time in the court for a period of time. Define each level separately.
+    ## cardinality = 0..inf
+	time_perk = {
+
+		### Number of months spent in this court required to gain the bonus.
+		required_months_in_court = int_value_field
+		
+		### Modifier applied to the owner of the court when amenities are at this setting
+        ## cardinality = 0..1
+		owner_modifier = {
+            alias_name[modifier] = alias_match_left[modifier]
+        }
+		
+		### Modifier applied to the courtiers and guests when court amenities are at this setting
+         ## cardinality = 0..1
+		courtier_guest_modifier = {
+            alias_name[modifier] = alias_match_left[modifier]
+        }
+		
+		### Brief: owner_modifier_description ( localization key )
+		### Localization to show in addition to the owners modifier description. Prepends a EFFECT_LIST_BULLET to the entry. If multiple entries are defined in the loc key, individual newlines and EFFECT_LIST_BULLET must be specified within.
+        ## cardinality = 0..1
+		owner_modifier_description = localisation 
+
+		### Localization to show in addition to the courtier/guest modifier description. Prepends a EFFECT_LIST_BULLET to the entry. If multiple entries are defined in the loc key, individual newlines and EFFECT_LIST_BULLET must be specified within.
+        ## cardinality = 0..1
+		courtier_guest_modifier_description = localisation 
+	}
+
+	### How much it costs to change to this court type.
+    ## cardinality = 0..1
+	cost = single_alias_right[cost]
+
+	### Script value in ruler scope. If above 0, the AI will try to set the court type to this if able. Court types are decided in the RARE_TASK_TICK. If multiple court types are possible, the AI will enact the one with the highest score, with a bias towards the currently active one of CURRENT_COURT_TYPE_SETTING_ADDED_WEIGHT to prevent switching back and forth to closely scored options
+    ## replace = { root = character }
+	ai_will_do = single_alias_right[int_conditional_formula]				
+}
+

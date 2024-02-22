@@ -11,7 +11,7 @@ types = {
 
     type[doctrine_parameter] = {
         path = "game/common/religion/doctrines"
-        skip_root_key = parameter
+        skip_root_key = { any parameters }
     }
 }
 

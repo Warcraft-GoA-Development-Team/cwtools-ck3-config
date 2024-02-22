@@ -1,0 +1,14 @@
+types = {
+    type[feature] = {
+        path = "common/artifacts/features"
+    }
+}
+
+feature = {
+    group = <feature_group>
+    trigger = single_alias_right[trigger_clause]
+    ## cardinality = 0..1
+    weight = single_alias_right[int_conditional_formula]
+    ## cardinality = 0..1
+    weight = int_value_field
+}

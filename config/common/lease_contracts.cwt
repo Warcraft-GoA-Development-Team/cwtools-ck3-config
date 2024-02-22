@@ -1,0 +1,109 @@
+types = {
+    type[lease_contract] = {
+        path = "game/common/lease_contracts"
+    }
+}
+
+enums = {
+    enum[hook_strength_lease] = {
+        none
+        any
+        strong
+    }
+    enum[lease_target] = {
+        ruler
+        lessee
+    }
+}
+
+lease_contract = {
+	### Definition for automatic lease hierarchy. Required for some built-in lease contracts, not supported for the others.
+    ## cardinality = 1..1
+	hierarchy = {
+        ### Does this ruler use the lease? root: character; default always = yes
+        ## replace_scope = { root = character }
+        ## cardinality = 0..1
+		ruler_valid = single_alias_right[trigger_clause]
+        ### The character leasing the titles from the ruler. root: character. Must be unique for a given ruler, and their liege must be the ruler
+		lessee = value_set[event_target]
+
+		### Is this ruler valid as a liege or vassal to the scope:target? If not, this ruler is skipped in the lease hierarchy and starts their own hierarchy.
+		### root and scope:target are characters; default always = yes
+        ## cardinality = 0..1
+        ## replace_scope = { root = character target = character }
+		liege_or_vassal_valid = single_alias_right[trigger_clause]
+
+        ### Is this barony title automatically leased out? root: title default always = yes
+        ## cardinality = 0..1
+        ## replace_scope = { root = landed_title }
+		barony_valid = single_alias_right[trigger_clause]		
+	}
+
+    ### Undocumented
+    ## cardinality = 0..1
+    government = <government>
+
+	### List of holding types that will not generate a wrong holding type penalty for the lessee
+    ## cardinality = 1..1
+	valid_holdings = {
+        ## cardinality = 1..inf
+        <holding>
+    }
+
+	### Used in the UI to show why the ruler receives benefits from the leased titles. Make sure it corresponds to the values used below.
+	### Don't set if you don't use the same opinion value between levies and taxes or the conditions are different, so that the tooltip is not shown.
+	ruler_share_min_opinion_from_lessee = int_value_field
+
+	### Used in the UI to show if a ruler should recieve the benefits by having a hook even if they do not meet the opinion value. Make sure it gets used to apply based on the values below.
+	hook_strength_max_opinion = enum[hook_strength_lease]
+
+	### How income from leased holdings is split. By default everything goes to the lessee.
+    ## cardinality = 1..1
+	tax = {
+        ### Share that goes to the lease liege (if exists). Requires hirarchy definition. Default: 0
+        ##cardinality = 1..1
+		lease_liege = int_value_field		
+
+		### Anything not going to the liege can be split between ruler and lessee. By default everything goes to the lessee.
+        ## cardinality = 0..1
+		rest = {
+            ### Used in the UI to show maximum possible split share that goes to the to the ruler
+			max = int_value_field
+            ### Share that goes to the left hand side target. MTTH. Result should be between 0 and 100.
+			weight = single_alias_right[int_conditional_formula]
+            ### Who gets the ratio calculated in weight
+			beneficiary = enum[lease_target] 	
+            ### What is left goes to the right hand side target
+			rest = enum[lease_target]		
+		}
+
+		### Alternative syntax giving the rest to one character only:
+        ## cardinality = 0..1
+		rest = enum[lease_target]
+	}
+
+	### How levies from leased holdings are assigned. By default everything goes to the lessee.
+	### Note: Levies can only go to one character on each level. This means levies cannot be assigned in part to the ruler and in part to the lessee because they are considered to be on the same level. So you can use only 0 or 100 when splitting between ruler and lessee.
+	levy = {
+        ### Share that goes to the lease liege (if exists). Requires hirarchy definition. Default: 0
+        ##cardinality = 1..1
+		lease_liege = int_value_field		
+
+		### Anything not going to the liege can be split between ruler and lessee. By default everything goes to the lessee.
+        ## cardinality = 0..1
+		rest = {
+            ### Used in the UI to show maximum possible split share that goes to the to the ruler
+			max = int_value_field
+            ### Share that goes to the left hand side target. MTTH. Result should be between 0 and 100.
+			weight = single_alias_right[int_conditional_formula]
+            ### Who gets the ratio calculated in weight
+			beneficiary = enum[lease_target] 	
+            ### What is left goes to the right hand side target
+			rest = enum[lease_target]		
+		}
+
+		### Alternative syntax giving the rest to one character only:
+        ## cardinality = 0..1
+		rest = enum[lease_target]
+	}
+}

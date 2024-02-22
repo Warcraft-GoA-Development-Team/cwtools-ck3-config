@@ -1,0 +1,5 @@
+types = {
+    type[dlc] = {
+        path = "game/dlc_metadata"
+    }
+}

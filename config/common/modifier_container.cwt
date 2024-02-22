@@ -2,11 +2,82 @@ types = {
     type[modifier_container] = {
         path = "game/common/modifiers"
     }
+    type[modifier_definition_format] = {
+        path = "game/common/modifier_definition_formats"
+    }
+    type[modifier_icon] = {
+        path = "game/common/modifer_icons"
+    }
+}
+
+enums = {
+    enum[goodorbad] = {
+        good
+        neutral
+        bad
+    }
+}
+
+modifier_definition_format = {
+    ### Defaults to 2
+	## cardinality = 0..1
+    decimals = int_value_field
+    ### Defaults to bad
+	## cardinality = 0..1
+    color = enum[goodorbad]
+    ### Defaults to none
+	## cardinality = 0..1
+	prefix = localisation
+    ### Defaults to none
+    ## cardinality = 0..1
+	suffix = localisation 
+	
+    ### List of more specific options
+    ## cardinality = 0..1
+	format = { 
+        ### Should this be formatted as a % by scaling it up
+		## cardinality = 0..1
+        percent = bool 
+        ### Should this be formatted as a % and the actual value itself is already scaled up
+		## cardinality = 0..1
+        already_percent = bool
+		### Should this modifier not be displayed
+        ## cardinality = 0..1
+        hidden = bool
+        ### Should the +/- difference sign be hidden
+		## cardinality = 0..1
+        no_difference_sign = bool
+	}
+
+    ### Only show if the user has this DLC feature
+	## cardinality = 0..1
+    dlc_feature = scalar 
+}
+
+modifier_icon = {
+	positive = localisation
+    negative = localisation
+	default = bool
 }
 
 modifier_container = {
-    alias_name[modifier] = alias_match_left[modifier]
-    #TODO icon
-    ## cardinality = 0..1
+	##cardinality = 0..1
     icon = scalar
+	
+    ##cardinality = 1..inf
+    single_alias_name[modifier] = single_alias_match_left[modifier]
+
+
+	### Modifier can have scale that'll be calculated once when effect assigns a modifier, and later remains unchanged for the entire modifier duration
+	## cardinality = 0..1
+    scale = {
+
+		### Scripted value - can be named value or direct math here
+		### Root scope is the object that's going to get the modifier
+		### Scripted value top level description will be added to modifier description
+		value = single_alias_right[int_conditional_formula]
+
+		### Loc key that's used for base level entry, to show alongside with the scaled value
+		desc = localisation
+	}
 }

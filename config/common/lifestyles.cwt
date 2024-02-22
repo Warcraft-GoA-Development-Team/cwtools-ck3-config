@@ -27,7 +27,7 @@ types = {
 
 lifestyle = {
     ## cardinality = 0..1
-    ## push_scope = character
+    ## replace_scope = { root = character }
     ### Trigger for being highlighted.
     is_highlighted = single_alias_right[trigger_clause]
 
@@ -98,7 +98,7 @@ lifestyle_perk = {
     ## cardinality = 0..1
     ## push_scope = character
     ### Script value for weight for auto-selection. Scope is the character. If omitted, default weight is 1000.
-    auto_selection_weight = int_value_field
+    auto_selection_weight = single_alias_right[int_conditional_formula]
 }
 
 single_alias[position] = {

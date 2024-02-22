@@ -1,0 +1,51 @@
+types = {
+    type[inspiration] = {
+        path = "common/inspirations"
+    }
+}
+
+inspiration = {
+	gold = single_alias_right[int_conditional_formula]
+    ### must be clamped 0-100
+	progress = single_alias_right[int_conditional_formula]
+
+	# All have the following scopes
+	# Root = inspiration
+	# scope:inspiration = inspiration
+	# scope:inspiration_owner = inspiration owner
+	# scope:inspiration_sponsor = inspiration sponsor
+
+    ##replace_scope = {root = inspiration inspiration = inspiration inspiration_owner = character inspiration_sponsor = character }
+	on_creation = single_alias_right[effect_clause]
+
+    ##replace_scope = {root = inspiration inspiration = inspiration inspiration_owner = character inspiration_sponsor = character }
+	on_complete = single_alias_right[effect_clause]
+
+    ##replace_scope = {root = inspiration inspiration = inspiration inspiration_owner = character inspiration_sponsor = character }
+	on_monthly = single_alias_right[effect_clause]
+
+    ##replace_scope = {root = inspiration inspiration = inspiration inspiration_owner = character inspiration_sponsor = character }
+	on_sponsor = single_alias_right[effect_clause]
+
+    ##replace_scope = {root = inspiration inspiration = inspiration inspiration_owner = character inspiration_sponsor = character }
+	on_owner_death = single_alias_right[effect_clause]
+
+	### Is the inspiration valid, good for handling edge cases like the owner becoming incapable etc. if not handled through normal script updates
+    ##replace_scope = {root = inspiration inspiration = inspiration inspiration_owner = character inspiration_sponsor = character }
+	is_valid = single_alias_right[trigger_clause]
+
+    ##replace_scope = {root = inspiration inspiration = inspiration inspiration_owner = character inspiration_sponsor = character }
+	on_invalidated = single_alias_right[effect_clause]
+
+	### Is the sponsor valid for this inspiration, good for handling edge cases like the owner getting kidnapped or leaving court etc. if not handled through normal script updates
+	### Is checked both daily and immediately prior to sponsoring the inspiration
+    ##replace_scope = {root = inspiration inspiration = inspiration inspiration_owner = character inspiration_sponsor = character }
+	is_sponsor_valid = single_alias_right[trigger_clause]
+
+    ##replace_scope = {root = inspiration inspiration = inspiration inspiration_owner = character inspiration_sponsor = character }
+	on_sponsor_invalidated = single_alias_right[effect_clause]
+
+	## Would scope:character be a valid sponsor for this inspiration, checked as part of the can_sponsor_inspiration_trigger
+    ##replace_scope = {root = inspiration character = character }
+	can_sponsor = single_alias_right[trigger_clause]
+}

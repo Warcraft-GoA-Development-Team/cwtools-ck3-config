@@ -16,7 +16,7 @@ flavorization = {
     special = enum[flavorization_special]
     ## cardinality = 0..1
     ### The scope must have this tier to get this flavozization. Too many non-tiered flavorizations is bad for performance though.
-    tier = enum[title_tiers]
+    tier = enum[title_tier]
     ## cardinality = 0..1
     ### How important is the flavorization. Defaults to 1.
     priority = int

@@ -4,6 +4,17 @@ enums = {
         female
         all
     }
+    enum[trait_category] = {
+        personality
+        education
+        childhood
+        commander
+        winter_commander
+        lifestyle
+        court_type
+        fame
+        health
+    }
 }
 
 types = {
@@ -285,4 +296,33 @@ trait = {
         ### Only applied if the trait holder is female. Mutually exclusive with male_only
         female_only = bool
     }
+
+    ##################
+    ######Tracks.#######
+    ##################
+    
+    # TODO: Support localization, subtype for tracked traits
+
+    ## cardinality = 0..1
+    tracks = {
+        ## cardinality = 1..inf
+        value_set[trait_track] = {
+            ## cardinality = 1..inf
+            int = {
+                alias_name[modifier] = alias_match_left[modifier]
+            }
+        }
+    }
+
+    ## cardinality = 0..1
+    track = {
+        ## cardinality = 1..inf
+        int = {
+            alias_name[modifier] = alias_match_left[modifier]
+        }
+            
+    }
+
+
+
 }

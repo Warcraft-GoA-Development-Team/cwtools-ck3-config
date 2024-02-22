@@ -18,9 +18,11 @@ innovation = {
     region = <region>
     ## cardinality = 0..1
     ### Trigger to check if it can be unlocked by the culture. In contrast to can_progress it will be hidden otherwise. Scope: culture Default: always = yes
+    ## replace_scope = { root = culture }
     potential = single_alias_right[trigger_clause]
     ## cardinality = 0..1
     ### To check if it can start being exposed. Scope: culture Default: always = yes
+    ## replace_scope = { root = culture }
     can_progress = single_alias_right[trigger_clause]
 
     ## cardinality = 0..inf
@@ -82,5 +84,11 @@ enums = {
         culture_group_military
         culture_group_civic
         culture_group_regional
+    }
+    complex_enum[innovation_flag] = {
+        path = "game/common/cultures/innovations"
+        name = {
+            flag = enum_name
+        }
     }
 }

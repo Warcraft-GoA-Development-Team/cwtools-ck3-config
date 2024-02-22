@@ -1,0 +1,56 @@
+types = {
+    type[customizable_localization] = {
+        path = "common/customizable_localization"
+    }
+}
+
+enums = {
+    enum[cl_type] = {
+        artifact
+        character
+        landed_title
+        province
+        activity
+        secret
+        scheme
+        combat
+        combat_side
+        title_and_vassal_change
+        faith
+        dynasty
+        all
+    }
+}
+
+customizable_localization = {
+	type = enum[cl_type]
+
+    ## cardinality = 0..1
+    parent = localisation
+    
+    ## cardinality = 0..1
+    suffix = localisation
+
+    ## cardinality = 1..inf
+	text = {
+		### Run before the trigger is evaluated, can save scopes which you then check for in the trigger directly. These scopes can be referenced in the loc key. Only interface effects are valid so the game state can not be modified.
+        ## cardinality = 0..1
+		setup_scope = single_alias_right[effect_clause]
+
+		### What triggers should be true for this to be a valid text entry. Interface triggers are valid such as checking if a window is open
+        ## cardinality = 0..1
+		trigger = single_alias_right[trigger_clause]
+
+		### The localization key, has the scopes from setup_scope accessible
+		## cardinality = 1..1
+        localization_key = localisation
+
+		# Optional; will cause this one to be picked if no entry is valid
+		## cardinality = 0..1
+        fallback = bool
+	}
+
+    ## cardinality = 1..0
+    ### Optional, will randomize instead of picking first valid
+	random_valid = bool 
+}

@@ -1,0 +1,18 @@
+types = {
+    type[guest_invite_rule] = {
+        path = "common/activities/guest_invite_rules"
+        localisation = {
+            name = $
+            desc = $_desc
+        }
+    }
+}
+
+
+# Scriptable list of guests for a given category
+guest_invite_rule = {
+	### use add_to_list = characters to save all characters who are valid for this guest invite list
+	## replace_scope = { character = root }
+    effect = single_alias_right[effect_clause]
+}
+

@@ -36,9 +36,11 @@ aesthetic = {
         enum[unit_gfx]
     }
 
-    ## cardinality = 0..1
+    
     ### Check to see whether or not to offer the aesthetic.
-	### root is the diverging character's culture, scope:character is the character
-	### scope:trait is a list of all the selected culture traits, like in the culture trait script
+	### root is the diverging character's culture, scope:character is the character.
+	### scope:trait is a list of all the selected culture traits, like in the culture trait script.
+    ## replace_scope = { root = culture character = character trait = culture_pillar }
+    ## cardinality = 0..1
     is_shown = single_alias_right[trigger_clause]
 }

@@ -1,0 +1,26 @@
+types = {
+    type[artifact_type] = {
+        path = "common/artifacts/types"
+    }
+}
+
+artifact_type = {
+    ## cardinality = 1..1
+	slot = <inventory_slot>
+	### A feature from each of these groups will be assigned automatically on creation
+	## cardinality = 1..1
+    required_features =
+    {
+        ## cardinality = 1..inf
+        <feature_group>
+    }
+	### These feature groups can be added after creation in script
+    ## cardinality = 0..1
+	optional_features = {
+        ## cardinality = 1..inf
+        <feature_group>
+    }
+	### optional field with no gameplay effect. Only needed for automatic test artifact generation
+	## cardinality = 0..1
+    default_visuals = <arifact_visual>
+}

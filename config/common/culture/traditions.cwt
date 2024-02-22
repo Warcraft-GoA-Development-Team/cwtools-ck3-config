@@ -6,33 +6,33 @@ types = {
 
 ## cardinality 0..inf
 tradition = {
-    ## cardinality 1..1
+    ## cardinality = 1..1
     category = enum[tradition_category]
 
-    # cardinality 1..1
+    # cardinality = 1..1
     layers = single_alias_right[tradition_image_layers]
 
-    ## cardinality 0..1
+    ## cardinality = 0..1
     parameters = single_alias_right[tradition_parameters]
 
-    ## cardinality 0..1
+    ## cardinality = 0..1
     character_modifier = single_alias_right[character_modifier]
 
-    ## cardinality 0..1
+    ## cardinality = 0..1
     county_modifier = single_alias_right[county_modifier]
 
-    ## cardinality 0..1
+    ## cardinality = 0..1
     province_modifier = single_alias_right[province_modifier]
 
-    ## cardinality 0..1
+    ## cardinality = 0..1
     doctrine_character_modifier = single_alias_right[character_modifier]
 
-    ## cardinality 0..1
+    ## cardinality = 0..1
     can_pick = single_alias_right[trigger_clause]
-    ## cardinality 0..1
+    ## cardinality = 0..1
     can_pick_for_hybridization = single_alias_right[trigger_clause]
 
-    ## cardinality 1..1
+    ## cardinality = 1..1
     cost = single_alias_right[cost]
 
     ## cardinality = 0..1

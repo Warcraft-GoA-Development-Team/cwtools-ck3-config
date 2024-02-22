@@ -4,6 +4,8 @@ types = {
     }
 }
 
+portrait_animation = single_alias_right[animation]
+
 # Remove placeholder until we do properly
 #portrait_animation = {
 #    male = scalar
