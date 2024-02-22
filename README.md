@@ -1,3 +1,13 @@
+NationalityNZ's Note:
+
+This is an attempt at an update of the cwtools ck3 config, as its own branch because I don't know what I'm doing.
+
+There are many known errors and just things I simply don't know how to fix due to inexperience.
+
+Feel free to make use of any changes made.
+
+Original note below:
+
 cwtools-ck3-config
 .cwt config files for Crusader Kings III
 
