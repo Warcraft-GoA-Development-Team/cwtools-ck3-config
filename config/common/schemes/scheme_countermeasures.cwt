@@ -1,0 +1,44 @@
+types = {
+    type[scheme_countermeasure] = {
+        path = "game/common/schemes/scheme_countermeasures"
+    }
+}
+
+scheme_countermeasure = {
+
+
+    ### Requirements that must be fulfilled by a ruler for them to be able to even see this countermeasure. root: ruler
+    ## cardinality = 0..1
+    ## push_scope = character
+    is_shown = single_alias_right[trigger_clause]
+
+    ### Requirements that must be filled by a ruler for them to be able to select this countermeasure. Missing requirements are displayed in a tooltip.
+    ## cardinality = 0..1
+    ## push_scope = character
+    is_valid_showing_failures_only = single_alias_right[trigger_clause]
+
+    ### Effects applied when countermeasure is activated. root: ruler
+    ## cardinality = 0..1
+    ## push_scope = character
+    on_activate = single_alias_right[effect_clause]
+
+    ### Modifiers applied to the ruler that activated the countermeasure, but not any of their courtiers or guests. (mainly intended as a 'cost' and only applied to the court ruler)
+    ## cardinality = 0..1
+    ## push_scope = character
+    activation_cost = single_alias_right[cost]
+
+    ### Modifiers applied to the ruler that activated the countermeasure, but not any of their courtiers or guests. (mainly intended as a 'cost' and only applied to the court ruler)
+    ## cardinality = 0..1
+    owner_modifier = {
+        alias_name[modifier] = alias_match_left[modifier]
+    }
+
+    ### AIs countermeasure preference. An AI characters will now and then reevaluate what countermeasure to use, and pick the one with the highest calculated value.
+    ai_will_do = int_value_field
+
+    ### Arbitrary parameters that can be checked with the trigger 'has_scheme_countermeasure_parameter'. Note: the only available trigger checks for existence, so it does not matter if the value is set to 'yes' or 'no'.
+    ## cardinality = 0..1
+    parameters = {
+        value_set[scheme_countermeasure_parameter] = bool
+    }
+}

@@ -34,6 +34,23 @@ alias[effect:remove_dynasty_perk] = <dynasty_perk>
 alias[effect:set_dynasty_name] = localisation
 
 ###################################
+# TASK CONTRACT SCOPE
+###################################
+
+# todo: see valid targets for contract
+### complete_task_contract = task_contract_reward 
+## scope = task_contract
+alias[effect:complete_task_contract] = scalar
+
+### Invalidate contract
+## scope = task_contract
+alias[effect:complete_task_contract] = yes
+
+### set_task_task_contract_target = CHARACTER_SCOPE
+## scope = task_contract
+alias[effect:set_task_contract_target] = scope[character]
+
+###################################
 # ACTIVITY SCOPE
 ###################################
 
@@ -182,7 +199,7 @@ alias[effect:set_culture_name] = {
 
 ### Adds the current pillar specified in the RHS to the scope culture, replacing the pillar in the matching slot.set_culture_pillar = ethos_warmonger
 ## scope = culture
-alias[effect:set_culture_pillar] = <culture.pillar>
+alias[effect:set_culture_pillar] = <pillar>
 
 ### Set the heritage from the RHS on the scope culture.set_heritage_from = culture:norwegian
 ## scope = culture
@@ -247,7 +264,7 @@ alias[effect:remove_house_modifier] = <modifier_container>
 ## scope = dynasty_house
 alias[effect:remove_house_unity_modifier] = <modifier_container>
 
-### Set house head for the house. Usage:set_house_head = <character>
+### Set house head for the house. Also transfers noble family title.
 ## scope = dynasty_house
 alias[effect:set_house_head] = scope[character]
 
@@ -314,6 +331,10 @@ alias[effect:remove_commander] = bool
 ### Teleports the army to the given location. Cannot be done while in combat. Will cause combat to happen with this army as the attacker if there's hostiles in the target
 ## scope = army
 alias[effect:set_army_location] = scope[province]
+
+### Reduce current army size by the giver percentage. Value on the right side determines what portions of soldiers shall perish
+## scope = army
+alias[effect:set_army_location] = float_value_field
 
 ###################################
 # TRAVEL PLAN SCOPE
@@ -572,6 +593,22 @@ alias[effect:unpledge_attacker] = scope[character]
 alias[effect:unpledge_defender] = scope[character]
 
 ###################################
+# EPIDEMIC SCOPE
+###################################
+
+enums = {
+    enum[outbreak_intensity] = {
+        major
+        minor
+        apocalyptic
+    }
+}
+
+###  Sets the epidemic outbreak intensity to the new value.
+## scope = ghw
+alias[effect:set_epidemic_outbreak_intensity] = enum[outbreak_intensity]
+
+###################################
 # MULTI SCOPE
 ###################################
 
@@ -818,7 +855,7 @@ alias[effect:add_title_law] = <law.title_specific>
 ## scope = landed_title
 alias[effect:add_title_law_effects] = <law.title_specific>
 
-### Adds the event target to a variable list add_to_variable_list = { name = X target = Y } Where X is the name of the variable Where Y is an event target
+### Adds the event target to a variable list add_to_variable_list = { name = X target = Y days/week/months/years = z } Where X is the name of the variable Where Y is an event target An optional days where Z is the number of days or script value
 alias[effect:add_to_global_variable_list] = {
     name = value_set[global_variable_list]
 
@@ -826,12 +863,20 @@ alias[effect:add_to_global_variable_list] = {
     target = value_field
     ## cardinality = 0..1
     target = scope_field
+    ## cardinality = 0..1
+    enum[duration] = int_value_field
 }
 
 ### Adds the current scope to an arbitrarily-named list (or creates the list if not already present) to be referenced later in the (unbroken) event chain add_to_list = <string> NOTE, if adding a permanent target to a temporary list, the whole list becomes permanent
 alias[effect:add_to_list] = value_set[list]
 
-### Adds the event target to a variable list add_to_variable_list = { name = X target = Y } Where X is the name of the variable Where Y is an event target
+### Adds the current scope to an arbitrarily-named list (or creates the list if not already present) to be referenced later in the (unbroken) event chain add_to_list = <string> NOTE, if adding a permanent target to a temporary list, the whole list becomes permanent
+alias[effect:add_to_list] = {
+    name = value_set[list]
+    value = value_field
+}
+
+### Adds the event target to a variable list for the given duration add_to_variable_list = { name = X target = Y days/weeks/months/years = Z } Where X is the name of the variable Where Y is an event target. An optional days where Z is the number of days or script value
 alias[effect:add_to_local_variable_list] = {
     name = value_set[local_variable_list]
 
@@ -839,12 +884,16 @@ alias[effect:add_to_local_variable_list] = {
     target = value_field
     ## cardinality = 0..1
     target = scope_field
+
+    ## cardinality = 0..1
+    enum[duration] = int_value_field
+
 }
 
 ### Adds the current scope to an arbitrarily-named list (or creates the list if not already present) to be referenced later in the same effect add_to_temporary_list = <string> NOTE, if adding a temporary target to a permanent list, the list will stay permanent  This is used to build lists in triggers. If used within an any-trigger, placement within the trigger is quite important. The game will iterate through every instance of the any-trigger until it finds a single instance that fulfills the requirements, and then it will stop. In order to add every instance of a scope that fulfills certain conditions, use "count = all" while also placing this "effect" at the very end of the any-trigger (so that every condition is evaluated for every iteration).
 alias[effect:add_to_temporary_list] = value_set[temporary_list]
 
-### Adds the event target to a variable list add_to_variable_list = { name = X target = Y } Where X is the name of the variable Where Y is an event target
+### Adds the event target to a variable list for the given duration add_to_variable_list = { name = X target = Y days/weeks/months/years = Z } Where X is the name of the variable Where Y is an event target. An optional days where Z is the number of days or script value
 alias[effect:add_to_variable_list] = {
     name = value_set[variable_list]
 
@@ -852,6 +901,9 @@ alias[effect:add_to_variable_list] = {
     target = value_field
     ## cardinality = 0..1
     target = scope_field
+
+    ## cardinality = 0..1
+    enum[duration] = int_value_field
 }
 
 ### Conditionally cause an assert during run time assert_if = { limit = { X } text = Y }, where X is a trigger and Y is an optional string
@@ -953,6 +1005,17 @@ alias[effect:create_accolade] = {
     name = localisation
 }
 
+### Create a title for a landless adventurer. usage:create_adventurer_title = \" name = key/dynamic description holder = <character> (intended holder of the new title) save_scope_as = <name> prefix = key/dynamic description (optional; name used if not specified)adjective = key/dynamic description (optional; name used if not specified)}
+alias[effect:create_adventurer_title] = {
+    name = single_alias_right[complex_desc]
+    holder = scope[character]
+    save_scope_as = value_set[scope]
+    ## cardinality = 0..1
+    prefix = localisation
+    ## cardinality = 0..1
+    adjective = localisation
+}
+
 ### Betroth the scope character to the target character, create_betrothal = target (at least one of the characters need to not be adult)
 ## scope = character
 alias[effect:create_betrothal] = scope[character]
@@ -961,7 +1024,7 @@ alias[effect:create_betrothal] = scope[character]
 ## scope = character
 alias[effect:create_betrothal_matrilineal] = scope[character]
 
-### Creates a character save_event_target_as = flag - save the character as an event target save_temporary_event_target_as = flag - save the character as a temporary event target name =  age =  gender = male/female/character scope gender_female_chance = script_value  - Range (0..100)opposite_gender = character scope trait = add this trait random_traits_list = { count = { 1 5 } traitID = { some triggers } traitID = { some triggers } } - A number of traits specified by count (1 if not specified) will be picked from the traits that have their triggers met. Scopes are the same as where create_character is used. More than one grouping like this can be defined  random_traits = yes/no health =  fertility =  mother =  father =  real_father = (should only be set if the real father is not the same as father=) employer = will end up in this court, will become a pool character unless specified or father/mother is landed location = pool province; mutually exclusive with employer template_character =  faith, culture and dynasty are set from 1. template_character 2. father 3. mother 4. employer (not employer for dynasty) unless specified directly faith = faith tag OR a faith scope random_faith = { catholic = { some triggers } cathar = { some triggers }. Random one where the triggers are met will be picked. Scopes are the same as where create_character is used  random_faith_in_religion = religion tag OR a faith scope (there's no religion scope) culture = culture name OR a culture scope random_culture = { norse = { some triggers } norwegian = { some triggers }. Random one where the triggers are met will be picked. Scopes are the same as where create_character is used  random_culture_in_group = culture group name OR a culture scope (there's no group scope) dynasty_house = dynasty house name OR a dynasty house scope dynasty = generate/none - What to do if dynasty_house is not specified, rather than falling back to template character etc. martial/diplomacy/intrigue...  =  will get random unles
+### Creates a character save_event_target_as = flag - save the character as an event target save_temporary_event_target_as = flag - save the character as a temporary event target name =  age =  gender = male/female/character scope gender_female_chance = script_value  - Range (0..100)opposite_gender = character scope trait = add this trait random_traits_list = { count = { 1 5 } traitID = { some triggers } traitID = { some triggers } } - A number of traits specified by count (1 if not specified) will be picked from the traits that have their triggers met. Scopes are the same as where create_character is used. More than one grouping like this can be defined  random_traits = yes/no health =  fertility =  mother =  father =  real_father = (should only be set if the real father is not the same as father=) employer = will end up in this court, will become a pool character unless specified or father/mother is landed location = pool province; mutually exclusive with employer template_character =  faith, culture and dynasty are set from 1. template_character 2. father 3. mother 4. employer (not employer for dynasty) unless specified directly faith = faith tag OR a faith scope random_faith = { catholic = { some triggers } cathar = { some triggers }. Random one where the triggers are met will be picked. Scopes are the same as where create_character is used  random_faith_in_religion = religion tag OR a faith scope (there's no religion scope) culture = culture name OR a culture scope random_culture = { norse = { some triggers } norwegian = { some triggers }. Random one where the triggers are met will be picked. Scopes are the same as where create_character is used  random_culture_in_group = culture group name OR a culture scope (there's no group scope) dynasty_house = dynasty house name OR a dynasty house scope dynasty = generate/none - What to do if dynasty_house is not specified, rather than falling back to template character etc. ethnicity = culture/mother/father/parents/<ethnicity> - How to select ethnicity, culture by default. ethnicities = { <key> = { some_triggers } } - Pick randomly from these ethnicities instead. martial/diplomacy/intrigue...  =  will get random unles
 alias[effect:create_character] = {
     ## cardinality = 0..1
     save_scope_as = value_set[event_target]
@@ -1052,11 +1115,31 @@ alias[effect:create_character] = {
     ## cardinality = 0..1
     dynasty = enum[dynasty_inheritance]
     ## cardinality = 0..1
+    ethnicity = enum[ethnicity_picker]
+    ## cardinality = 0..1
+    ethnicity = <ethnicity>
+    ## cardinality = 0..1
+    ethnicities = {
+        ## cardinality = 1..inf
+        <ethnicity> = single_alias_right[trigger_clause]
+    }
+
+    ## cardinality = 0..1
     enum[event_option_skills] = int_value_field
     ## cardinality = 0..1
     ## push_scope = character
     after_creation = {
         alias_name[effect] = alias_match_left[effect]
+    }
+}
+
+enums = {
+    enum[ethnicity_picker] = {
+        culture
+        mother
+        father
+        parents
+
     }
 }
 
@@ -1105,7 +1188,10 @@ alias[effect:custom_description_no_bullet] = {
 alias[effect:custom_label] = localisation
 
 ### just a tooltip, the scope as subject (for grouping, localization)
-alias[effect:custom_tooltip] = localisation
+alias[effect:custom_tooltip] = {
+    text = localisation
+    alias_name[effect] = alias_match_left[effect]
+}
 
 ### Log a string to the debug log when this effect executes, debug_log = message, the message can be a localization string with ROOT, SCOPE and PREV available
 alias[effect:debug_log] = localisation
@@ -1247,7 +1333,7 @@ alias[effect:open_view] = {
     player = scope[character]
 }
 
-### Tries to open the defined view with scope data. Take care to set player if effect is executed not through UI but through synchronized code. Else all the window will open for all players. open_view_data = { view = <view name> view_message = <view specific instruction> # optional player = scope:character # optional, else shows for all players who execute the effect } simplified: open_view_data = <view name> for example: scope:faith = { open_view_data = faith_conversion }
+# Tries to open the defined view with scope data. Take care to set player if effect is executed not through UI but through synchronized code. Else all the window will open for all players. open_view_data = { view = <view name> view_message = <view specific instruction> # optional player = scope:character # optional, else shows for all players who execute the effect } simplified: open_view_data = <view name> for example: scope:faith = { open_view_data = faith_conversion }
 alias[effect:open_view_data] = replace_me # TODO: Figure out views.
 
 ### Pans the camera to the specified province pan_camera_to_province = scope:army.location
@@ -1393,6 +1479,18 @@ alias[effect:save_temporary_scope_value_as] = {
     value = value_field
 }
 
+### send_long_tutorial_finished_telemetry - Sends a tutorial_finished telemetry event with LongVersion = true
+alias[effect:send_long_tutorial_finished_telemetry] = true
+
+### send_short_tutorial_finished_telemetry - Sends a tutorial_finished telemetry event with LongVersion = false
+alias[effect:send_long_tutorial_started_telemetry] = true
+
+### send_short_tutorial_finished_telemetry - Sends a tutorial_finished telemetry event with LongVersion = false
+alias[effect:send_short_tutorial_finished_telemetry] = false
+
+### send_short_tutorial_started_telemetry - Sends a tutorial_started telemetry event with LongVersion = false
+alias[effect:send_short_tutorial_started_telemetry] = false
+
 ### Sets focus progress
 alias[effect:set_focus_progress] = replace_me # TODO: Check. Never used in vanilla.
 
@@ -1464,7 +1562,7 @@ alias[effect:set_variable] = {
 ### Sets a variable set_variable = { name = X value = Y days = Z } Where X is the name of the variable used to then access it Where Y is any event target, bool, value, script value or flag (flag:W) An optional days where Z is the number of days or script value This variable will be accessible with <type_>var:X. With type being in a scope object or in a top scope
 alias[effect:set_variable] = value_set[variable]
 
-### = { attacker = scope:attacker   defender = scope:defender   claimant = scope:claimant    change = scope:change victory = yes/no   take_occupied = yes/no } , this effect will add a scope:cb_prestige_factor with a value based on what's being taken civil_war = yes # Will vassalize people based on their capital location rather than being fully contained. Won't steal land from people not vassalized
+### setup_claim_cb - This effect will add a scope:cb_prestige_factor with a value based on what's being taken. Won't steal land from people not vassalized. setup_claim_cb = {	attacker = scope:attacker	defender = scope:defender	claimant = scope:claimant	change = scope:change	victory = yes/no	take_occupied = yes/no	# Will vassalize people based on their capital location rather than being fully contained.	civil_war = yes}
 alias[effect:setup_claim_cb] = {
     titles = value[list]
     attacker = scope[character]
@@ -1480,7 +1578,7 @@ alias[effect:setup_claim_cb] = {
     civil_war = bool
 }
 
-### = { attacker = scope:attacker  defender = scope:defender  change = scope:change victory = yes/no title = some title - Optional; will make it target a specific dejure title rather than *everything* that is dejure the attacker's }, this effect will add a scope:cb_prestige_factor with a value based on what's being taken
+### setup_de_jure_cb - This effect will add a scope:cb_prestige_factor with a value based on what's being taken setup_de_jure_cb = {	attacker = scope:attacker	defender = scope:defender	change = scope:change	victory = yes/no	# Optional; will make it target a specific dejure title rather than *everything* that is dejure the attacker's	title = scope:title}
 alias[effect:setup_de_jure_cb] = {
     ## cardinality = 0..1
     title = scope[landed_title]
@@ -1492,7 +1590,7 @@ alias[effect:setup_de_jure_cb] = {
     victory = bool
 }
 
-### = { attacker = scope:attacker   defender = scope:defender    change = scope:change victory = yes/no   take_occupied = yes/no } , this effect will add a scope:cb_prestige_factor with a value based on what's being taken
+### setup_invasion_cb - This effect will add a scope:cb_prestige_factor with a value based on what's being taken setup_invasion_cb = {	attacker = scope:attacker	defender = scope:defender	change = scope:change	victory = yes/no	take_occupied = yes/no}
 alias[effect:setup_invasion_cb] = {
     titles = value[list]
     attacker = scope[character]
@@ -1517,6 +1615,12 @@ alias[effect:start_struggle] = {
 
 ### Starts the tutorial lesson with the given key. Does nothing if the tutorial is not running, the lesson is completed (or already running), or the lesson cannot be triggered (e.g. trigger fails)
 alias[effect:start_tutorial_lesson] = replace_me # TODO: Define tutorials.
+
+### Log key value pairs to a given category via the elastic logging statistics. stats_log = { category = string <string> = <loc_key> } The loc keys will have ROOT, SCOPE, THIS, and PREV available
+alias[effect:stats_log] = {
+    category = localisation
+    scalar = localisation
+}
 
 ### Switch on a trigger for the evaluation of another trigger with an optional fallback trigger. switch = { 	trigger = simple_assign_trigger 	case_1 = { <effects> } 	case_2 = { <effects> } 	case_n = { <effects> } 	fallback = { <effects> }
 alias[effect:switch] = {
@@ -1598,6 +1702,10 @@ alias[effect:while] = {
 ## scope = province
 alias[effect:add_building] = <building>
 
+### Adds the target legend as spread to the scoped province.
+## scope = province
+alias[effect:add_legend_spread] = scope[legend]
+
 ### Add a modifier to a province add_province_modifier = name add_province_modifier = { modifier = name days/weeks/months/years = int }
 ## scope = province
 alias[effect:add_province_modifier] = single_alias_right[added_modifier]
@@ -1624,6 +1732,14 @@ alias[effect:begin_create_holding] = {
     }
 }
 
+### Creates a new epidemic in the scoped province. create_epidemic_outbreak = {	type = smallpox	intensity = major	save_scope_as = new_epidemic # optional}
+## scope = province
+alias[effect:begin_create_holding] = {
+    type = <epidemic_type>
+    intensity = enum[outbreak_intensity]
+    save_scope_as = value_set[temporary_scope]
+}
+
 ### Start construction of the specified holding type. By default player won't get anything if manually cancels the construction. scope:my_province = {	begin_create_holding = castle_holding } Optionally refund cost can be set to some value. scope:my_province = {	begin_create_holding = {		type = castle_holding		refund_cost = {			gold = 100		}	}}
 ## scope = province
 alias[effect:begin_create_holding] = <holding>
@@ -1648,9 +1764,13 @@ alias[effect:remove_all_province_modifier_instances] = <modifier_container>
 ## scope = province
 alias[effect:remove_building] = <building>
 
-### Remove building from the province<province> = { remove_building = <building_name> }
+### Removes the holding in scoped province, cannot remove capital holdings
 ## scope = province
-alias[effect:remove_building] = <remove_holding>
+alias[effect:remove_holding] = bool
+
+### Removes the target legend as spread to the scoped province.remove_legend_spread = legend
+## scope = province
+alias[effect:remove_legend_spread] = scope[legend]
 
 ### Remove a modifier from a province remove_province_modifier = name
 ## scope = province
@@ -1717,8 +1837,120 @@ alias[effect:deactivate_accolade] = bool
 alias[effect:remove_acclaimed_knight] = bool
 
 ###################################
+# LEGEND SCOPE
+###################################
+
+### Add a modifier to a legend whose effects should be applied to the county add_legend_county_modifier = name add_legend_county_modifier = { modifier = name days/weeks/months/years = int } You can also add an optional 'desc' field. This is a dynamic description that'll be used for your timed modifier
+## scope = legend
+alias[effect:add_legend_county_modifier] = <modifier_container>
+
+### Add a modifier to a legend whose effects should be applied to the county add_legend_province_modifier = name add_legend_province_modifier = { modifier = name days/weeks/months/years = int } You can also add an optional 'desc' field. This is a dynamic description that'll be used for your timed modifier
+## scope = legend
+alias[effect:add_legend_owner_modifier] = <modifier_container>
+
+### Add a modifier to a legend whose effects should be applied to the county add_legend_province_modifier = name add_legend_province_modifier = { modifier = name days/weeks/months/years = int } You can also add an optional 'desc' field. This is a dynamic description that'll be used for your timed modifier
+## scope = legend
+alias[effect:add_legend_owner_modifier] = {
+    modifier = <modifier_container>
+    enum[duration] = int_value_field
+    ## cardinality = 0..1
+    desc = single_alias_right[complex_desc]
+}
+
+### Add a modifier to a legend whose effects should be applied to the owner add_legend_province_modifier = name add_legend_province_modifier = { modifier = name days/weeks/months/years = int } You can also add an optional 'desc' field. This is a dynamic description that'll be used for your timed modifier
+## scope = legend
+alias[effect:add_legend_owner_modifier] = <modifier_container>
+
+### Add a modifier to a legend whose effects should be applied to the owner add_legend_province_modifier = name add_legend_province_modifier = { modifier = name days/weeks/months/years = int } You can also add an optional 'desc' field. This is a dynamic description that'll be used for your timed modifier
+## scope = legend
+alias[effect:add_legend_owner_modifier] = {
+    modifier = <modifier_container>
+    enum[duration] = int_value_field
+    ## cardinality = 0..1
+    desc = single_alias_right[complex_desc]
+}
+
+### Add a modifier to a legend whose effects should be applied to the provinces add_legend_province_modifier = name add_legend_province_modifier = { modifier = name days/weeks/months/years = int } You can also add an optional 'desc' field. This is a dynamic description that'll be used for your timed modifier
+## scope = legend
+alias[effect:add_legend_province_modifier] = <modifier_container>
+
+### Add a modifier to a legend whose effects should be applied to the provinces add_legend_province_modifier = name add_legend_province_modifier = { modifier = name days/weeks/months/years = int } You can also add an optional 'desc' field. This is a dynamic description that'll be used for your timed modifier
+## scope = legend
+alias[effect:add_legend_province_modifier] = {
+    modifier = <modifier_container>
+    enum[duration] = int_value_field
+    ## cardinality = 0..1
+    desc = single_alias_right[complex_desc]
+}
+
+### Clears the localization key for the named chapter of the scoped legend. clear_legend_chapter = opening
+## scope = legend
+alias[effect:clear_legend_chapter] = localisation
+
+### Remove all instances of a modifier from affecting the counties in a legend remove_all_legend_county_modifier_instances = name
+## scope = legend
+alias[effect:remove_all_legend_county_modifier_instances] = <modifier_container>
+
+### Remove all instances of a modifier from affecting the counties in a legend remove_all_legend_county_modifier_instances = name
+## scope = legend
+alias[effect:remove_all_legend_owner_modifier_instances] = <modifier_container>
+
+### Remove all instances of a modifier from affecting the provinces in a legend remove_all_legend_province_modifier_instances = name
+## scope = legend
+alias[effect:remove_all_legend_province_modifier_instances] = <modifier_container>
+
+###  Remove a modifier from affecting the counties in a legend remove_legend_county_modifier = name
+## scope = legend
+alias[effect:remove_legend_county_modifier] = <modifier_container>
+
+### Remove a modifier from affecting the owner of a legend remove_legend_owner_modifier = name
+## scope = legend
+alias[effect:remove_legend_owner_modifier] = <modifier_container>
+
+### Remove a modifier from affecting the provinces in a legend remove_legend_province_modifier = name
+## scope = legend
+alias[effect:remove_legend_province_modifier] = <modifier_container>
+
+### Sets the localization key for the named chapter of the scoped legend to the new value.
+## scope = legend
+alias[effect:set_legend_chapter] = {
+    # TODO
+    name = scalar
+    localization_key = localisation
+}
+
+### Sets the object at the named property of the scoped legend to the new value. set_legend_property = { name = animal_type target = var:hunt_type }
+## scope = legend
+alias[effect:set_legend_property] = {
+    # TODO
+    name = scalar
+    target = value_field
+}
+
+enums = {
+    enum[legend_quality] = {
+        famed
+        illustrious
+        mythical
+    }
+}
+
+### Sets the legend quality to the new value. set_legend_quality = famed
+## scope = legend
+alias[effect:set_legend_quality] = enum[legend_quality]
+
+
+###################################
 # SCHEME SCOPE
 ###################################
+
+### Add an agent slot of the specific type to the scoped scheme
+## scope = scheme
+alias[effect:add_agent_slot] = <agent_slot>
+
+### Add an agent slot of the specific type to the scoped scheme
+## scope = scheme
+alias[effect:add_scheme_breach] = int_value_field
 
 ### adds the specified scheme modifier, add_scheme_modifier = { type = X days = Y } (days are optional, the modifier will expire in Y days if specified)
 ## scope = scheme
@@ -1734,6 +1966,10 @@ alias[effect:add_scheme_progress] = value_field
 
 ### Ends a specific scheme and removes it without any other effect
 ## scope = scheme
+alias[effect:change_opportunities] = int_value_field
+
+### change_opportunities - Change schemes available opportunities with the given amount.
+## scope = scheme
 alias[effect:end_scheme] = yes
 
 ### Exposes the scheme to the defender
@@ -1744,9 +1980,21 @@ alias[effect:expose_scheme] = yes
 ## scope = scheme
 alias[effect:expose_scheme_agent] = scope[character]
 
+### Ends a specific scheme and removes it. Also runs on_invalidate effects for the scheme and possible contract.
+## scope = scheme
+alias[effect:invalidate_scheme] = scope[scheme]
+
+### remove_agent_slot - Remove the target agent slot from the scoped scheme
+## scope = scheme
+alias[effect:remove_agent_slot] = scope[agent_slot]
+
 ### removes the specified scheme modifier
 ## scope = scheme
 alias[effect:remove_scheme_modifier] = <modifier_container>
+
+### reset_scheme_progress - Resets the scheme's accumulated success chance growth, opportunities, and current phase progress.
+## scope = scheme
+alias[effect:reset_scheme_progress] = bool
 
 ### scheme_freeze_days = X freezes the scheme for X days (0 unfreezes the scheme)
 ## scope = scheme
@@ -1780,6 +2028,10 @@ alias[effect:accept_activity_invite] = scope[activity]
 ## scope = character
 alias[effect:accept_activity_invite_without_travel] = scope[activity]
 
+### accept_task_contract - accept_task_contract = TASK_CONTRACT_SCOPE 
+## scope = character
+alias[effect:accept_activity_invite] = scope[task_contract]
+
 ### add_amenity_level = { type = food value = 2 } Increases the amenity type by the given value for the scoped character
 ## scope = character
 alias[effect:add_amenity_level] = {
@@ -1803,9 +2055,20 @@ alias[effect:add_character_flag] = value_set[character_flag]
 ## scope = character
 alias[effect:add_character_modifier] = single_alias_right[added_modifier]
 
+### Add the target character to the scoped character's list of contacts add_contact = CHARACTER_SCOPE
+## scope = character
+alias[effect:add_contact] = scope[character]
+
 ### Add the target character to the scope character's court
 ## scope = character
 alias[effect:add_courtier] = scope[character]
+
+### add_dead_character_flag = {	flag = <name> - name of the flag	years/weeks/days = { <min_number> <max_number> } - years/weeks/days this flag is supposed to last } Adds a flag to a dead character. A duration is required.
+## scope = character
+alias[effect:add_dead_character_flag] = {
+    flag = value_set[character_flag]
+    enum[duration] = { int int }
+}
 
 ### Adds lifestyle per points to the given character
 ## scope = character
@@ -1862,6 +2125,10 @@ alias[effect:add_learning_lifestyle_perk_points] = int_value_field
 ### Adds lifestyle XP to the given character
 ## scope = character
 alias[effect:add_learning_lifestyle_xp] = int_value_field
+
+### Add or remove legitimacy to the scoped living playable character
+## scope = character
+alias[effect:add_legitimacy] = int_value_field
 
 ### Add gold to 'long term' AI budget category, respecting maximums, overflow goes into Short Term budget. (gold will be created out of nowhere)
 ## scope = character
@@ -1992,9 +2259,9 @@ alias[effect:add_to_activity] = scope[activity]
 ## scope = character
 alias[effect:add_to_activity_without_travel] = scope[activity]
 
-### Adds a character as an agent to the scheme
+### add_to_agent_slot - Adds a character to a specific agent slot
 ## scope = character
-alias[effect:add_to_scheme] = scope[scheme]
+alias[effect:add_to_agent_slot] = scope[agent_slot]
 
 ### Adds a trait to a character (the trait will not be added and no tooltip will be shown if the character isn't eligible for the trait, i.e. when already having the trait, having an opposing trait, not fulfilling the trait's is_potential trigger or being outside of the trait's range)
 ## scope = character
@@ -2072,6 +2339,25 @@ alias[effect:add_war_chest_gold] = int_value_field
 ### Set scoped character as parent ot the targetscope:new_parent = { adopt = scope:offspring }
 ## scope = character
 alias[effect:adopt] = scope[character]
+
+### ai_attempt_to_host_activity - Force the AI to re-evaluate the given activity type and see if they want to host it. This overrides the ai_check_interval and activity cooldown.
+## scope = character
+alias[effect:ai_attempt_to_host_activity] = <activity>
+
+### ai_start_best_war  = {	# Optional list of CBs that the war must have	cb = { <valid_casus_belli_type1> <valid_casus_belli_type2> }   # If the cb target data from the AI should be recalculated. Otherwise uses current calculated data. (only use if needed!)   recalculate_cb_targets = no   # Filter possible wars, called with scopes:   # root - Current AI character   # scope:target_character - CB Target Character   # scope:target_title - CB (first) Target Title   # scope:target_titles - Target Titles list   # scope:claimant - Character that is Claimant for CB (if present)   # scope:casus_belli_type - CB type   # scope:has_hostage - Boolean if target_character has a hostage for current AI character   # scope:score - AI score for CB	is_valid = { ... }    # Effect called when war was successfully started (scopes are similar to is_valid)	on_success = { ... }     # Effect called when no war was found or successfully started	on_failure = { ... } }
+## scope = character
+alias[effect:ai_start_best_war] = {
+    ##cardinality = 0..1
+    cb = {
+        ##cardinality = 1..inf
+        <casus_belli>
+    }
+    recalculate_cb_targets = bool
+    ##replace_scope = { root = character target_character = character target_title = landed_title target_titles = list claimant = character casus_belli_type = casus_belli has_hostage = bool score = int}
+    is_valid = single_alias_right[trigger_clause]
+    ##replace_scope = { root = character target_character = character target_title = landed_title target_titles = list claimant = character casus_belli_type = casus_belli has_hostage = bool score = int}
+    on_success = single_alias_right[effect_clause]
+}
 
 ### Allows (previously broken) alliance with the target character
 ## scope = character
@@ -2170,6 +2456,22 @@ alias[effect:change_first_name] = {
 ## scope = character
 alias[effect:change_government] = <government>
 
+### changes influence of a character
+## scope = character
+alias[effect:change_influence] = int_value_field
+
+### changes influence experience of a character
+## scope = character
+alias[effect:change_influence_experience] = int_value_field
+
+### changes the influence level of a character
+## scope = character
+alias[effect:change_influence_level] = int_value_field
+
+### changes influence (without experience) of a character
+## scope = character
+alias[effect:change_influence_no_experience] = int_value_field
+
 ### = { liege = 'Character that should become the new liege' change = 'previously created title_and_vassal_change', adds a liege change
 ## scope = character
 alias[effect:change_liege] = {
@@ -2197,6 +2499,10 @@ alias[effect:change_trait_rank] = {
     ## cardinality = 0..1
     max = int
 }
+
+### Remove any currently set designated heir of a character.
+## scope = character
+alias[effect:clear_designated_heir] = yes
 
 ### Clears forced voting clear_forced_vote = yes
 ## scope = character
@@ -2292,7 +2598,13 @@ alias[effect:create_character_memory] = {
     duration = single_alias_right[duration_block]
 }
 
-### Creates a new divergent culture from the scope character's culture. The new culture will keep all pillars and traditions of the parent culture   it is up to the user to add or remove pillars and traditions as appropriate.The new divergent culture is saved as scope:new_culture. 
+## push_scope = character_memory
+alias[effect:scope:new_memory] = single_alias_right[effect_clause]
+
+## push_scope = character_memory
+alias[trigger:scope:new_memory] = single_alias_right[trigger_clause]
+
+### Creates a new divergent culture from the scope character's culture. The new culture will keep all pillars and traditions of the parent culture � it is up to the user to add or remove pillars and traditions as appropriate.The new divergent culture is saved as scope:new_culture. create_divergent_culture = yes
 ## scope = character
 alias[effect:create_divergent_culture] = bool
 
@@ -2330,6 +2642,49 @@ alias[effect:create_inspiration] = {
     gold = int_value_field
 }
 
+### Creates a new legend owned by the scoped character. create_legend = {	type = heroic	quality = famed	chronicle = chronicle_type	properties = {		<key> = scope		<key> = scope		(Where each <key> must match to the property of that chronicle type)		( and the resulting scope object must be of the type of that property	)	}	protagonist = character # optional, defaults to scoped character	save_scope_as = new_legend # optional}
+## scope = character
+alias[effect:create_legend] = {
+    type = <legend_type>
+    quality = enum[legend_quality]
+    chronicle = <chronicle>
+    properties = {
+        ## cardinality = 0..inf
+        scalar = scope_field
+    }
+    ## cardinality = 0..1
+    protagonist = scope[character]
+    ## cardinality = 0..1
+    save_scope_as = value_set[event_target]
+}
+
+### Creates a new legend ssed owned by the scoped character. create_legend_seed = {	type = heroic	quality = famed	chronicle = chronicle_type	properties = {		<key> = scope		<key> = scope		(Where each <key> must match to the property of that chronicle type and the resulting scope object must be of the type of that property	)	} }
+## scope = character
+alias[effect:create_legend_seed] = {
+    type = <legend_type>
+    quality = enum[legend_quality]
+    chronicle = <chronicle>
+    properties = {
+        ## cardinality = 0..inf
+        scalar = scope_field
+    }
+}
+
+### Create MaA regiment for a ruler. If title is set, MaA will be created as title troops. scope:ruler = {	create_maa_regiment = light_footmen	create_maa_regiment = {		type = light_footmen          # mutually exclusive with type_of		type_of = scope:maa_regiment  # mutually exclusive with type. Take MaA type from the scoped regiment		check_can_recruit = no		title = scope:title		size = 5	}}
+## scope = character
+alias[effect:create_maa_regiment] = <maa_type>
+
+alias[effect:create_maa_regiment] = {
+    ## cardinality = 0..1
+    type = <maa_type>
+    ## cardinality = 0..1
+    type_of = scope[maa_regiment]
+    check_can_recruit = bool
+    title = scope[landed_title]
+    size = int_value_field
+}
+
+
 ### Either create = story_cycle or create_story = { type = story_type save_scope_as/save_temporary_scope_as = scope_name # optional way to get a reference to the new story }. Creates and initializes a story cycle with the current character as owner
 ## scope = character
 alias[effect:create_story] = <story_cycle>
@@ -2344,6 +2699,23 @@ alias[effect:create_story] = {
     ## cardinality = 0..1
     save_temporary_scope_as = value_set[temporary_scope]
 }
+
+### create_task_contract = {  #Mandatory parameters   task_contract_type = TYPE_NAME  task_task_contract_tier = VALUE  location = PROVINCE_SCOPE  #Optional parameters  task_contract_employer = CHARACTER_SCOPE  destination = PROVINCE_SCOPE  target = CHARACTER_SCOPE  save_scope_as = new_task_contract # optional } 
+## scope = character
+alias[effect:create_task_contract] = {
+    task_contract_type = <contract>
+    task_contract_tier = int_value_field
+    location = scope[province]
+    ## cardinality = 0..1
+    task_contract_employer = scope[character]
+    ## cardinality = 0..1
+    destination = scope[province]
+    ## cardinality = 0..1
+    target = scope[character]
+    ## cardinality = 0..1
+    save_scope_as = value_set[event_target]
+}
+
 
 ### kills a character, death = { killer = X death_reason = Y artifact = Z }, where X is a character and Y is one of the death reason keys. Optionally artifact Z will be used as the killing artifact instead of the defaulted one from the killer's slot for that death reason's definition. Or death = natural which will pick a natural death reason to kill the character from.
 ## scope = character
@@ -2409,8 +2781,8 @@ alias[effect:forbid_from_scheme] = scope[scheme]
 
 ### Adds a character as an agent to the scheme and forces them to stay{    scheme = target_Scheme    days/months/years = duration}
 ## scope = character
-alias[effect:force_add_to_scheme] = {
-    scheme = scope[scheme]
+alias[effect:force_add_to_agent_slot] = {
+    agent_slot = scope[agent_slot]
     enum[duration] = int
 }
 
@@ -2437,6 +2809,13 @@ alias[effect:get_title] = <title>
 ## scope = character
 alias[effect:give_nickname] = <nickname>
 
+### Give a noble family title to the <root> character.
+## scope = character
+alias[effect:give_noble_family_title] = {
+    name = single_alias_right[complex_desc]
+    save_scope_as = value_set[event_target]
+}
+
 ### Imprisons the target character as this character's prisoner, imprison = { target = X reason = Y type = Z }, where X is a character, Y is a flag, Z is a static modifier
 ## scope = character
 alias[effect:imprison] = {
@@ -2445,6 +2824,10 @@ alias[effect:imprison] = {
     ## cardinality = 0..1
     reason = scalar # TODO: Can't find in vanilla files.
 }
+
+### Infect the scoped character with the target epidemic.
+## scope = character
+alias[effect:infect_with_epidemic] = scope[epidemic]
 
 ### Immediately check if diarch should be invalidated. If needed, current scoped diarch is removed and replaced with the next one from the line of succession
 ## scope = character
@@ -2630,6 +3013,15 @@ alias[effect:play_music_cue] = scalar # TODO: Music folder.
 ## scope = character
 alias[effect:play_sound_effect] = scalar # TODO: Music folder.
 
+### Populate area around location with task contracts up to specified amount
+## scope = character
+alias[effect:populate_task_contracts_for_area] = {
+    location = scope:province
+    amount = int_value_field
+    group = { scalar } # TODO = replace with contract groups 
+}
+
+
 ### Refunds all perks of the character. Example: refund_all_perks = yes
 ## scope = character
 alias[effect:refund_all_perks] = yes
@@ -2796,6 +3188,16 @@ alias[effect:reverse_add_opinion] = {
 ## scope = character
 alias[effect:revoke_court_position] = <court_position>
 
+### court position type - court position type to revoke from scoped character's court recipient = character - optional - target current holder of position to revoke holder = character - optional - same as recipient
+## scope = character
+alias[effect:revoke_court_position] = {
+    court_position = <court_position>
+    ## cardinality = 0..1
+    recipient = scope[character]
+    ## cardinality = 0..1
+    holder = scope[character]
+}
+
 ### Recalculates the modifier of the scoped character
 ## scope = character
 alias[effect:scriptedtests_recalculate_character_modifier] = yes
@@ -2827,6 +3229,30 @@ alias[effect:send_interface_message] = {
     goto = scope[character]
     ## cardinality = 0..1
     goto = scope[landed_title]
+
+    ## cardinality = 0..inf
+    alias_name[effect] = alias_match_left[effect]
+}
+
+## scope = character
+alias[effect:send_interface_popup] = {
+    ## cardinality = 0..1
+    ### Default `send_interface_toast`.
+    type = <message>
+    ## cardinality = 0..1
+    title = localisation
+    ## cardinality = 0..1
+	desc = localisation
+    ## cardinality = 0..1
+    tooltip = localisation
+    ## cardinality = 0..1
+    left_icon = scope[character]
+    ## cardinality = 0..1
+    left_icon = scope[landed_title]
+    ## cardinality = 0..1
+    right_icon = scope[character]
+    ## cardinality = 0..1
+    right_icon = scope[landed_title]
 
     ## cardinality = 0..inf
     alias_name[effect] = alias_match_left[effect]
@@ -2927,6 +3353,14 @@ alias[effect:set_culture_same_as] = scope[character]
 ## scope = character
 alias[effect:set_current_court_grandeur] = int_value_field
 
+### set_dead_character_variable = {	name = <name> - name of the variable	value = <value> - any event target, bool, value, script value or flag	years/weeks/days = { <min_number> <max_number> } - years/weeks/days this flag is supposed to last} Adds a variable to a dead character. A duration is required.
+## scope = character
+alias[effect:set_dead_character_variable] = {
+    name = value_set[variable]
+    value = value_field
+    enum[duration] = { int int }
+}
+
 ### sets the death reason and the killer of a dead character, set_death_reason = { killer = X death_reason = Y }, both parameters are optional
 ## scope = character
 alias[effect:set_death_reason] = {
@@ -2963,6 +3397,10 @@ alias[effect:set_diarchy_type] = <diarchy>
 ### Add the scope character to the target character's court
 ## scope = character
 alias[effect:set_employer] = scope[character]
+
+### Set the ethnicity for this character, if it is of a different portrait group and they have DNA it will be randomized
+## scope = character
+alias[effect:set_ethnicity] = <ethnicity>
 
 ### sets the father of a character
 ## scope = character
@@ -3027,6 +3465,10 @@ alias[effect:set_num_pregnancy_children] = int
 ## scope = character
 alias[effect:set_override_designated_winner] = bool
 
+### Sets the owner of the target legend to the scoped character.set_owned_legend = legend
+## scope = character
+alias[effect:set_owned_legend] = scope[legend]
+
 ### The scope character's player will now play as the target character. Scope must be player-controlled. Target cannot be player-controlled. Example: make_unprunable = yes
 ## scope = character
 alias[effect:set_player_character] = scope[character]
@@ -3042,6 +3484,10 @@ alias[effect:set_primary_spouse] = scope[character]
 ### Sets the primary title for a character set_primary_title_to = <title>
 ## scope = character
 alias[effect:set_primary_title_to] = scope[landed_title] # TODO: Doesn't seem to work with `title:something`.
+
+### Adds the scoped character as a promoter of the target legend. set_promoted_legend = legend
+## scope = character
+alias[effect:set_promoted_legend] = scope[legend]
 
 ### Changes the real father of the character scope
 ## scope = character
@@ -3136,7 +3582,18 @@ alias[effect:start_diarchy] = <diarchy>
 ## scope = character
 alias[effect:start_scheme] = {
     type = <scheme>
-    target = scope[character]
+    ## cardinality = 0..1
+    contract = <contract>
+    ## cardinality = 0..1
+    target_character = scope[character]
+    ## cardinality = 0..1
+    target_title = scope[landed_title]
+    ## cardinality = 0..1
+    target_culture = scope[culture]
+    ## cardinality = 0..1
+    target_faith = scope[faith]
+    ## cardinality = 0..1
+    targets_nothing = bool
 }
 
 enums = {
@@ -3148,12 +3605,14 @@ enums = {
     }
 }
 
-### Start a travel plan. Saving this as a scope will not work for player characters if they have to use the planner. start_travel_plan = {     destination = PROVINCE (repeatable)    travel_leader = CHARACTER (optional)    companion = CHARACTER (optional & repeatable)    players_use_planner = YES/NO (default yes)    return_trip = YES/NO (default yes, adds a destination at the end of the travel plan to return to the starting location)    on_arrival_event = EVENT (triggered on non-home destinations determined by on_arrival_destinations. Root is travel plan owner.)    on_arrival_on_action = ON_ACTION (triggered on non-home destinations determined by on_arrival_destinations. Root is travel plan owner.)    on_start_event = EVENT (triggered when the travel starts. Root is travel plan owner.)    on_start_on_action = ON_ACTION (triggered when the travel starts. Root is travel plan owner.)    on_travel_planner_cancel_event = EVENT (triggered if a player exits the travel planner instead of starting a travel. Root is travel plan owner.)    on_travel_planner_cancel_on_action = ON_ACTION (triggered if a player exits the travel planner instead of starting a travel. Root is travel plan owner.)    on_arrival_destinations = all/first/last/all_but_last (which destinations the on_arrival should trigger on, defaults to all_but_last) }
+### Start a travel plan. Saving this as a scope will not work for player characters if they have to use the planner. start_travel_plan = {     destination = PROVINCE (repeatable)    travel_leader = CHARACTER (optional)    companion = CHARACTER (optional & repeatable) travel_with_domicile = YES/NO (default no)    players_use_planner = YES/NO (default yes)    return_trip = YES/NO (default yes, adds a destination at the end of the travel plan to return to the starting location)    on_arrival_event = EVENT (triggered on non-home destinations determined by on_arrival_destinations. Root is travel plan owner.)    on_arrival_on_action = ON_ACTION (triggered on non-home destinations determined by on_arrival_destinations. Root is travel plan owner.)    on_start_event = EVENT (triggered when the travel starts. Root is travel plan owner.)    on_start_on_action = ON_ACTION (triggered when the travel starts. Root is travel plan owner.)    on_travel_planner_cancel_event = EVENT (triggered if a player exits the travel planner instead of starting a travel. Root is travel plan owner.)    on_travel_planner_cancel_on_action = ON_ACTION (triggered if a player exits the travel planner instead of starting a travel. Root is travel plan owner.)    on_arrival_destinations = all/first/last/all_but_last (which destinations the on_arrival should trigger on, defaults to all_but_last) }
 ## scope = character
 alias[effect:start_travel_plan] = {
     destination = scope[province]
     travel_leader = scope[character]
     companion = scope[character]
+    ##cardinality = 0..1
+    travel_with_domicile = bool
     players_use_planner = bool
     return_trip = bool
     on_arrival_event = <event>
@@ -3176,6 +3635,10 @@ alias[effect:start_war] = {
     ## cardinality = 0..inf
     target_title = scope[landed_title]
 }
+
+### Remove the scoped character as the owner/promoter of their current promoted legend if they have one. stop_promoting_legend = yes
+## scope = character
+alias[effect:stop_promoting_legend] = bool
 
 # TODO - check
 ### Makes a piece of localized text with the given key be stored on the character even after death, you should use this sparingly to avoid save bloat and use 'remove_localized_text' if you no longer need itsaves. store_localized_text_in_death = key
@@ -3228,12 +3691,50 @@ alias[effect:vassal_contract_set_obligation_level] = replace_me # TODO: Implemen
 alias[effect:visit_court_of] = scope[character]
 
 ###################################
+# REGIMENT SCOPE
+###################################
+
+###Change size of MaA regiment by the specified value. Extra troops are deleted, by default new troops will have to reinforce, unless reinforce = yes is used
+## scope = regiment
+alias[effect:change_maa_regiment_size] = {
+    size = int_value_field
+    ## cardinality = 0..1
+    reinforce = yes
+}
+
+###Change size of MaA regiment by the specified value. Extra troops are deleted, by default new troops will have to reinforce, unless reinforce = yes is used
+## scope = regiment
+alias[effect:change_maa_regiment_size] = int_value_field
+
+
+###Change current troops count of MaA regiment. It can't exceed max troops count
+## scope = regiment
+alias[effect:change_maa_troops_count] = int_value_field
+
+### Destroy MaA regiment. Doesn't work on regiments that belong to mercenary companies and holy orders
+## scope = regiment
+alias[effect:destroy_maa_regiment] = yes
+
+### Transfet title MaA regiment to another title
+## scope = regiment
+alias[effect:transfer_title_maa] = scope[landed_title]
+
+###################################
 # LANDED_TITLE SCOPE
 ###################################
 
 ### Add a modifier to a county add_county_modifier = name add_county_modifier = { modifier = name days/weeks/months/years = int }
 ## scope = landed_title
 alias[effect:add_county_modifier] = single_alias_right[added_modifier]
+
+###  Increase appointment score of a character for a title change_appointment_investment = {	target = scope:target_character	investor = scope:investor_character # Optional, the character who made this investment	value = <script_value>}
+## scope = landed_title
+alias[effect:change_appointment_investment] = {
+    target = scope[character]
+    ## cardinality = 0..1
+    investor = scope[character]
+    value = int_value_field
+}
 
 ### Changes the county control of a title. If the title has higher tier than county, the effect will propagate down to all counties below it.
 ## scope = landed_title
@@ -3283,6 +3784,14 @@ alias[effect:remove_all_county_modifier_instances] = <modifier_container>
 ### Remove a modifier from a county remove_county_modifier = name
 ## scope = landed_title
 alias[effect:remove_county_modifier] = <modifier_container>
+
+### Scoped county is no longer important for anyone
+## scope = landed_title
+alias[effect:remove_important_location] = yes
+
+### Scoped county is no longer important for the target title
+## scope = landed_title
+alias[effect:remove_title_from_important_location] = scope[landed_title]
 
 ### Sets the name and adjective of the scoped title back to being based on its key. Won't cause the prefix to change reset_title_name = yes
 ## scope = landed_title
@@ -3344,6 +3853,24 @@ alias[effect:set_destroy_if_invalid_heir] = yes
 ## scope = landed_title
 alias[effect:set_destroy_on_succession] = yes
 
+### Scoped county is set as important for the target title scope:county = 	set_important_location = {		title = scope:higher_tier_title		enter_realm_event = event_name		enter_realm_on_action = onaction_name		leave_realm_event = event_name		leave_realm_on_action = onaction_name	}} Events and onactions are fired with this scope:root - title top liege scope:county - important location scope:title - higher tier title that is interested in the county In enter realm: scope:changed_top_liege - former top liege of the important location In leave realm: scope:changed_top_liege - new top liege of the important location
+## scope = landed_title
+alias[effect:set_important_location] = {
+    title = scope[landed_title]
+    ## replace_scope = { root = landed_title county = province title = landed_title changed_top_liege = character }
+    ## cardinality = 0..1
+    enter_realm_event = <scripted_effect>
+    ## replace_scope = { root = landed_title county = province title = landed_title changed_top_liege = character }
+    ## cardinality = 0..1
+    enter_realm_on_action = <on_action>
+    ## replace_scope = { root = landed_title county = province title = landed_title changed_top_liege = character }
+    ## cardinality = 0..1
+    leave_realm_event = <scripted_effect>
+    ## replace_scope = { root = landed_title county = province title = landed_title changed_top_liege = character }
+    ## cardinality = 0..1
+    leave_realm_on_action = <on_action>
+}
+
 ### Sets if the title is landless (can be held by rulers with no land) set_landless_title = yes
 ## scope = landed_title
 alias[effect:set_landless_title] = yes
@@ -3351,6 +3878,14 @@ alias[effect:set_landless_title] = yes
 ### Sets if the title should disallow automatic claims (meaning claims will only be added by script, and by pressed claims being inherited). set_no_automatic_claims = yes
 ## scope = landed_title
 alias[effect:set_no_automatic_claims] = yes
+
+### Change if the scoped title is for a noble family, allowing landless playable. Title must be at least a duchy set_no_automatic_claims = yes
+## scope = landed_title
+alias[effect:set_noble_family_title] = <dynasty_house>
+
+### Set the State Faith of a Title whose holder has the state_faith government rule
+## scope = landed_title
+alias[effect:set_state_faith] = scope[faith]
 
 ### sets the name (localization key) of the scoped title. The adjective will be constructed by adding '_adj' to the localisation key. Won't cause the prefix to change set_title_name = TEST_NAME_PLEASE_IGNORE
 ## scope = landed_title
@@ -3374,6 +3909,10 @@ alias[effect:title_join_faction] = replace_me # TODO: Define factions.
 ### the title in the scope leaves the assigned faction
 ## scope = landed_title
 alias[effect:title_leave_faction] = scope[faction]
+
+### Transfers control of the scoped title's owned MaA to the target title
+## scope = landed_title
+alias[effect:transfer_owned_maa_control] = scope[landed_title]
 
 ### update_dynamic_coa = yes Updates the dynamic coat of arms definition of a given title picking a new one and overwriting the existing set coat of arms with it if picked
 ## scope = landed_title
@@ -3449,6 +3988,37 @@ alias[effect:invest_gold] = int_value_field
 ### Sets the special title for the scope faction
 ## scope = inspiration
 alias[effect:set_special_title] = scope[landed_title]
+
+###################################
+# DOMICILE SCOPE
+###################################
+
+### Add building to scoped domicile, ignores cost and construction time
+## scope = domicile
+# TODO Domicile buildings
+alias[effect:add_domicile_building] = scalar
+
+### Adds (or removes) provisions to a scoped domicile
+## scope = domicile
+alias[effect:change_provisions] = int_value_field
+
+### Construct building to scoped domicile, ignores cost but uses construction time
+## scope = domicile
+alias[effect:construct_domicile_building] = scalar
+
+### Moves domicile to target location
+## scope = domicile
+alias[effect:move_domicile] = scope[province]
+
+### Remove building from scoped domicile
+## scope = domicile
+alias[effect:remove_domicile_building] = scalar
+
+### Changes domicile owner to target character
+## scope = domicile
+alias[effect:set_domicile_owner] = scope[character]
+
+
 
 # -UNSORTED
 

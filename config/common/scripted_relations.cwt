@@ -41,9 +41,9 @@ scripted_relation = {
     ## cardinality = 0..1
     ### A modifier applied to all characters with the relation. (This means that applying it two a two-sided relation will give both characters the modifier.)
     modifier = single_alias_right[character_modifier]
-    ## cardinality = 0..16
-    ### Relations support up to 16 simple flags. They have to be defined as a numerical entry in the relation itself. Note that these are effectively simple bool checks, and cannot be timed.
-    int = value_set[relation_flag]
+    # cardinality = 0..16
+    # Relations support up to 16 simple flags. They have to be defined as a numerical entry in the relation itself. Note that these are effectively simple bool checks, and cannot be timed.
+    #int = value_set[relation_flag]
     ## cardinality = 0..1
     ### Will get a number of random skills when the relation is applied. "Random" based on owner id, target id and relation entry index so two people adding each other in the same relation will produce the same pattern of random skills.
     random_skills = {
@@ -52,5 +52,11 @@ scripted_relation = {
         ## push_scope = character
         ### Trigger to apply skills.
         trigger = single_alias_right[trigger_clause]
+    }
+    ### Relations support up to 16 simple flags. They have to be defined as a numerical entry in the relation itself. Note that these are effectively simple bool checks, and cannot be timed.
+    ## cardinality = 0..1
+    flags = {
+        ## cardinality = 0..16
+        value_set[relation_flag]
     }
 }

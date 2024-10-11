@@ -14,11 +14,11 @@ religion_family = {
     is_pagan = bool
 
     ### All religions in this family default to this 3D model (currently used for temple assets). Order of precedence is the lowest level scripted in: faith > religion > family.
-    graphical_faith = single_alias_right[complex_desc]
+    graphical_faith = localisation
     ### All religions in this family default to this set of piety icons. Order of precedence is the lowest level scripted in: faith > religion > family.
-    piety_icon_group = single_alias_right[complex_desc]
+    piety_icon_group = localisation
     ### All religions in this family default to this doctrine background icon. Order of precedence is the lowest level scripted in: faith > religion > family.
-    doctrine_background_icon = single_alias_right[complex_desc]
+    doctrine_background_icon = icon
     ### INTERFACE ONLY: Use this doctrine when displaying hostility information for the whole religious family (if not scripted, then show no information)
     hostility_doctrine = <doctrine>
 }

@@ -1,0 +1,159 @@
+types = {
+    type[domicile_type] = {
+        path = "game/common/domiciles/types"
+    }
+}
+
+enums = {
+    enum[rename_windows] = {
+        primary_title
+        house
+        none
+    }
+    enum[map_pin_anchor] = {
+        up
+        right
+    }
+}
+
+single_alias[domicile_modifier] = {
+    name = scalar
+    modifier = {
+        alias_name[modifier] = alias_match_left[modifier]
+    }
+    ## cardinality = 0..1
+    scale = single_alias_right[int_conditional_formula]
+}
+
+domicile_type = {
+	### Is this domicile type allowed for character root = character
+    ## push_scope = character
+	allowed_for_character = single_alias_right[trigger_clause]
+
+	### Shortcut to rename the domicile window. Rename windows are: 'primary_title' or 'house'. Default type is 'none'
+    ## cardinality = 0..1
+	rename_window = enum[rename_windows]
+
+	### Texture used in the realm tab access
+	illustration = icon
+
+	### Flat icon texture representing the domicile type in various places
+	icon = icon
+
+	### Texture for map pin
+	map_pin_texture = icon
+
+	### Where to anchor the domicile map pin in relation to it's province Anchor types are: 'up' or 'right'. Default type is 'right'
+    ## cardinality = 0..1
+	map_pin_anchor = enum[map_pin_anchor]
+
+	### Will this domicile show up in the game lobby
+	map_pin_lobby = bool
+
+	### Does this domicile manage the provisions resource. Domiciles that use provisions travel to a new location, otherwise it's moved instantly
+    ## cardinality = 0..1
+	provisions = bool
+
+	### After moving the domicile, how many days before you can move again? days/weeks/months/years = X
+    ## cardinality = 0..1
+	move_cooldown = single_alias_right[duration_block]
+
+	### How much does it cost to move the domicile? Ex: { gold = 500, prestige = 100 }
+    ## cardinality = 0..1
+	move_cost = single_alias_right[int_conditional_formula]
+
+	### Modifier applied to the domicile owner when disliked by the majority of their court. Can take a "scale" parameter to scale by (a script value; see _script_values.info)
+    ## cardinality = 0..1
+	domicile_temperament_low_modifier = single_alias_right[domicile_modifier]
+
+	### Modifier applied to the domicile owner when liked by the majority of their court. Can take a "scale" parameter to scale by (a script value; see _script_values.info)
+    ## cardinality = 0..1
+	domicile_temperament_high_modifier = single_alias_right[domicile_modifier]
+
+	### How many unlocked external building slots domicile starts out with
+	## cardinality = 0..1
+    base_external_slots = int[0..inf]
+
+	### List all available main and external slots, they will be unlocked in order of appearance here. Note: Internal slots are handled separately by the buildings themselves. Layering of slots (in front/behind) matches order of definition
+	domicile_building_slots = {
+		main_slot = single_alias_right[domicile_building_slot]
+        ## cardinality = 0..inf
+		scalar = single_alias_right[domicile_building_slot]
+	}
+
+	### What background assets does the domicile use, will pick first valid match
+    ## cardinality = 1..inf
+	domicile_asset = {
+		### Trigger for scoped domicile when to pick this asset over another, remove trigger part to always pick this asset
+        ## cardinality = 0..1
+		trigger = single_alias_right[trigger_clause]
+
+		### Path to background texture shown in the domicile window
+		background = icon
+
+		### Path to foreground texture shown in the front of domicile window
+		foreground = icon
+
+		### Path to ambience sound
+		ambience = filepath
+	}
+    
+	### Map entity for the domicile, multiple can be read in, first one is picked from order they are read in.If the location of the domicile has no holding, it takes the place of the holding (on the 'Buildings' locator). Else they will be placed on the 'Activity' locator, but only if there is nothing there at that time.
+    ## cardinality = 0..inf
+	map_entity = {
+		### root = the domicile scope:owner = domicile owner
+        ## replace_scope = { root = domicile owner = character }
+		trigger = single_alias_right[trigger_clause]
+        ### Entity name
+		reference = localisation
+	}
+    ### Short hand for a single constant entity name
+    ## cardinality = 0..1
+	map_entity = localisation
+}
+
+
+single_alias[domicile_building_slot] = {
+    ### Set what domicile building may be constructed here based on their slot type Types are: 'main' or 'external'. The 'internal' slot type is handled within the buildings themselves Main buildings without a previous building will attempt to be constructed automatically in found main slots. Default type is 'external'
+    slot_type = enum[domicile_slot_type]
+
+    ### Building position in the domicile window, supports both % and direct values
+    position = value_field
+
+    ### Size of buildings placed in this slot, supports both % and direct values
+    size = value_field
+
+    ### Define assets used when slot is empty, will pick first valid match
+    ## cardinality = 1..inf
+    empty_slot_asset = {
+        ### Trigger for scoped domicile when to pick this asset over another, remove trigger part to always pick this asset
+        ## cardinality = 0..1
+        trigger = single_alias_right[trigger_clause]
+
+        ### Building icon used in UI
+        icon = icon
+
+        ### Path to texture shown in the domicile window
+        texture = icon
+
+        ### Mask used with texture
+        intersectionmask_texture = filepath
+    }
+
+    ### Define assets used when building is under construction in this slot, will pick first valid match
+    ## cardinality = 1..inf
+    construction_slot_asset = {
+        ### Trigger for scoped domicile when to pick this asset over another, remove trigger part to always pick this asset
+        ## cardinality = 0..1
+        trigger = single_alias_right[trigger_clause]
+
+        ### Building icon used in UI
+        icon = icon
+
+        ### Path to texture shown in the domicile window
+        texture = icon
+
+        ### Mask used with texture
+        intersectionmask_texture = filepath
+    }
+}

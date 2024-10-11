@@ -1,0 +1,111 @@
+types = {
+    type[task_contract] = {
+        path = "game/common/task_contracts"
+    }
+}
+
+enums = {
+    complex_enum[task_contract_group] = {
+        path = "game/common/task_contracts"
+        name = {
+            group = enum_name
+        }
+    }
+
+}
+
+task_contract = {
+	### for grouping together contract types, e.g. mercenary, potentially determines map icon
+	
+    group = enum[task_contract_group]
+
+	### Icon used in the UI
+    icon = icon
+
+	### Description or 'back-story' of the task contract, defaults to "<key>_desc". root = task_contract_type
+	## cardinality = 0..1
+	desc = localisation
+
+	### Description for request telling 'what to do' in order to complete the contract, defaults to "<key>_request". root = task_contract_type
+	## cardinality = 0..1
+	task_contract_request = localisation
+
+	### Contract owner should travel to contract location to accept and stay there for the duration of the contract
+	travel = bool
+
+	### Contract is of a criminal nature
+	## cardinality = 0..1
+	is_criminal = bool
+
+	### Range setting. yes - uses diplomatic range to contract employer. no - uses ADVENTURER_DISTANCE_RESTRICTION define as radius
+	## cardinality = 0..1
+	use_diplomatic_range = bool
+
+	### Can contract appear? (if triggers are true) root - contract owner scope:employer - contract employer, can be empty
+	## replace_scope = { root = character employer = character }
+	## cardinality = 0..1
+	valid_to_create = single_alias_right[trigger_clause]
+
+	### Can contract be accepted? (if triggers are true) root - contract owner scope:employer - contract employer, can be empty
+	## replace_scope = { root = task_contract employer = character }
+	## cardinality = 0..1
+	valid_to_accept = single_alias_right[trigger_clause]
+
+	### Should contract invalidate? (if triggers are false) root - existing contract
+	## replace_scope = { root = task_contract }
+	## cardinality = 0..1
+	valid_to_continue = single_alias_right[trigger_clause]
+
+	### Should not taken contract invalidate? (if triggers are false) root - existing contract
+	## replace_scope = { root = task_contract }
+	## cardinality = 0..1
+	valid_to_keep = single_alias_right[trigger_clause]
+
+	### On-Action Effects Effects called when contract is created (create_task_contract effect)
+	## cardinality = 0..1
+	on_create = single_alias_right[effect_clause]
+
+	### Effects called when contract is accepted (accept_task_contract effect)
+	## cardinality = 0..1
+	on_accepted = single_alias_right[effect_clause]
+
+	### Effects called when contract is completed successfully, along with rewards (complete_task_contract effect)
+	## cardinality = 0..1
+	on_completed = single_alias_right[effect_clause]
+
+	### Effects called when contract is invalidated (valid_to_continue is false, or invalidate_task_contract effect)
+	## cardinality = 0..1
+	on_invalidated = single_alias_right[effect_clause]
+	
+	### Default = no, showing completed contract toast animation
+	## cardinality = 0..1
+	should_show_toast_on_complete = bool 
+
+	### Contract Reward Effects
+	task_contract_reward = {
+		### reward name
+		## cardinality = 1..inf
+        scalar = {
+			### Default = no, showing completed contract reward effect desription
+			## cardinality = 0..1
+			should_print_on_complete = bool
+
+
+			effect = single_alias_right[effect_clause]
+
+			### Should this possible reward be shown in the UI. It will still be displayed in the effect on completion if that's what owner gets
+			## cardinality = 0..1
+			visible = bool
+
+			### Is this reward positive 'Upon Success' or negative 'Upon Failure'. default is yes
+			## cardinality = 0..1
+			positive = bool
+		}
+	}
+
+	### scripted value how likely this contract type is to be picked when populating for area root - contract owner scope:employer - contract employer, can be empty
+	## replace_scope = { root = character employer = character }
+	## cardinality = 0..1
+	weight = single_alias_right[int_conditional_formula]
+
+}

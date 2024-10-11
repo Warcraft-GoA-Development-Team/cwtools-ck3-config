@@ -35,6 +35,9 @@ trait = {
     ## cardinality = 0..inf
     desc = single_alias_right[complex_desc]
 
+    ## cardinality = 1..1
+    category = enum[trait_category]
+
     ###########################
     ######Generic Effects######
     ###########################

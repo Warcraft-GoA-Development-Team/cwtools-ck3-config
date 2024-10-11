@@ -1,0 +1,282 @@
+types = {
+    type[scheme] = {
+        path = "game/common/schemes/scheme_types"
+        localisation = {
+            ## primary
+            name = "$"
+            action = "$_action"
+        }
+        modifiers = {
+            "max_$_schemes_add" = int_value_field
+            "$_speed_add" = value_field
+            "$_speed_mult" = int_value_field
+            "$_resistance_add" = value_field
+            "$_resistance_mult" = int_value_field
+        }
+    }
+}
+
+enums = {
+    enum[scheme_category] = {
+        personal
+        contract
+        hostile
+    }
+    enum[scheme_target_type] = {
+        character
+        title
+        culture
+        faith
+        nothing
+    }
+
+}
+
+scheme = {
+    ### Skill to base the scheme on.
+    skill = enum[attribute]
+
+    category = enum[scheme_category]
+
+    target_type = enum[scheme_target_type]
+
+    desc = localisation
+
+    icon = scalar
+
+    illustration = filepath
+
+    # deprecated
+    ## cardinality = 0..1
+    ### Defaults to `no`. Hostile schemes are affected my hostile scheme modifiers, other schemes are personal and thus affected by personal scheme modifiers.
+    #hostile = bool
+
+    ### Can be started or not.
+    allow = single_alias_right[trigger_clause]
+
+    ### What conditions have to be fulfilled for the scheme to keep going; if invalid it will end. Checked daily.
+    valid = single_alias_right[trigger_clause]
+
+    ## cardinality = 0..1
+    ### How much does the AI have to want to join in order to actually join
+    agent_join_threshold = int
+
+    ## cardinality = 0..1
+    ### If the AI falls below this, it will automatically leave the scheme
+    agent_leave_threshold = int
+
+    ## cardinality = 0..1
+    ### if set to no, this makes resistance be 0
+    uses_resistance = bool
+
+    ## cardinality = 0..1
+    ### if set to no, the target's modifiers/skill/spymaster/tier won't be taken into account when calculating phase speed.
+    uses_resistance = bool
+
+    ## cardinality = 0..1
+    ### If a scheme is defined as basic, it won't have success chance growth every phase, won't use agents, and won't use opportunities.
+    is_basic = bool
+
+    ## cardinality = 0..1
+    ### trigger to check if an agent is valid to be part of the scheme (some basic checks already apply, use sparingly as this is checked frequently)
+    valid_agent = single_alias_right[trigger_clause]
+
+    #removed
+    # cardinality = 0..1
+    # If set to no, it is not possible to add agents to this scheme in any way. The member list and invite button will also get hidden
+    #uses_agents = bool
+
+
+    ### List of groups of characters to be considered for agent slots. Available lists are in the "ai_targets" section of character_interaction.info
+    agent_groups_owner_perspective = {
+        ## cardinality = 1..inf
+        enum[ai_targets]
+    }
+
+    
+    ### List of groups of characters to be considered for agent slots. Same groups as agent_groups_owner_perspective, but will fetch characters based around the target character
+	agent_groups_target_character_perspective = {
+        ## cardinality = 1..inf
+        enum[ai_targets]
+    } 
+
+    ### Number in the 0-100 range indicating how likely this is to go well. Displayed to the player as an approximation: abysmal/low/medium/high/excellent. Level thresholds are defined in DEFAULT_ODDS_PREDICTION_LEVEL_BREAKPOINTS.
+    odds_prediction = int_value_field
+
+    ## cardinality = 0..1
+    ### How much does the AI want to join
+    agent_join_chance = single_alias_right[chance_block]
+
+    ## cardinality = 0..1
+    ### The base chance uses the scheme as root - scope:target whatever is targeted (currently a character or a title) - scope:target_title is a title when targeting a title (otherwise it does not exist)
+    ## replace_scope = { target = character target = landed_title target_title = landed_title }
+    agent_success_chance = single_alias_right[chance_block]
+
+    ## cardinality = 0..1
+    ### the base chance uses the scheme as root
+    base_success_chance = single_alias_right[chance_block]
+
+
+    # All fields here only use integers in vanilla files, but perhaps values could be used?
+    # Badly documented as `maximum_success_chance`.
+    ## cardinality = 0..1
+    ### Defaults to `100`. (?)
+    maximum_success = int[0..100]
+
+    ## cardinality = 0..1
+    ### Defaults to `100`. (?)
+    base_maximum_success_chance = int[0..100]
+
+    ## cardinality = 0..1
+    ### Defaults to `0`. (?)
+    minimum_success = int[0..100]
+
+    ## cardinality = 0..1
+    ### Defaults to `100`. (?)
+    maximum_secrecy = int[0..100]
+    
+    ## cardinality = 0..1
+    ### Defaults to `0`. (?)
+    minimum_secrecy = int[0..100]
+
+    ## cardinality = 0..1
+    ### Defaults to `100`. (?)
+    maximum_progress_chance = int[0..100]
+
+    ## cardinality = 0..1
+    ### Defaults to `5`. (?)
+    minimum_progress_chance = int[0..100]
+
+    ## cardinality = 0..1
+    ### The number of secrecy breaches that can occur before the scheme forcibly ends.
+    maximum_breaches = int[0..100]
+
+    ## cardinality = 0..1
+    pulse_actions = {
+        ### list of scheme pulse actions (separated by a space) 
+        entries = {
+            ## cardinality = 1..inf
+            <pulse_action>
+        }
+        chance_of_no_event = int[0..100]
+    }
+
+    ### After the scheme ends, how many days minimum before the same type of scheme can be used by the owner on the target
+    ## cardinality = 0..1
+    cooldown = {
+        enum[duration] = int
+    }
+
+    ## cardinality = 0..1
+    ### If the Scheme is secret, the secrecy mechanics are used (otherwise always 100% secrecy)
+    is_secret = bool
+
+    ## cardinality = 0..1
+    ### trigger that can be used for schemes that sometimes should be secret and sometimes not (seduction depending on targets) if this returns false secrecy is set to 100%
+    use_secrecy = single_alias_right[trigger_clause]
+
+    ## cardinality = 0..1
+    ### The base chance used for the monthly scheme expose check secrecy is based on: base_secrecy + success_chance + scheme_modifiers and clamped to 0-100
+    base_secrecy = int
+
+    ### What should happen when the scheme phase completes (ie when progress has reached it's maximum)
+    ## cardinality = 0..1
+    on_phase_completed = single_alias_right[effect_clause]
+
+    ### What happens when the scheme is clicked in the bottom hud
+    ## cardinality = 0..1
+    on_hud_click = single_alias_right[effect_clause]
+
+    # no longer documented. Removed?
+    # What happens when scheme reaches full progress.
+    # What should happen when the scheme is ready (ie when progress has reached it's maximum)
+    #on_ready = single_alias_right[effect_clause]
+
+    ### Undocumented
+    ## cardinality = 0..1
+    on_start = single_alias_right[effect_clause]
+
+    # Potentially optional? All vanilla schemes have this.
+    ### What happens every month the scheme is active.
+    on_monthly = single_alias_right[effect_clause]
+
+    ### What should happen twice a year while the scheme exists
+    on_semiyearly = single_alias_right[effect_clause]
+
+    ### What happens when scheme is invalidated (based on `valid` trigger).
+    on_invalidated = single_alias_right[effect_clause]
+
+    # effect executed for every agent that joins. If not empty, it replacec default feed notifications about joining agents
+    # cardinality = 0..1
+    #on_agent_leave = single_alias_right[effect_clause]
+
+    # effect executed for every agent that leaves the scheme. If not empty, it replace default feed notifications about leaving agents. Doesn't get triggered for invalidated scheme
+    # cardinality = 0..1
+	#on_agent_join = single_alias_right[effect_clause]
+
+    # Travel freeze/cancel defaults to no.
+    ### If the scheme should freeze automatically when the schemer starts traveling
+    ## cardinality = 0..1
+	freeze_scheme_when_traveling = bool 
+    ### If the scheme should freeze automatically when the scheme target starts traveling
+	## cardinality = 0..1
+    freeze_scheme_when_traveling_target = bool 
+    ### If the scheme should be cancelled automatically when the schemer starts traveling
+	## cardinality = 0..1
+    cancel_scheme_when_traveling = bool 
+    ### If the scheme should be cancelled automatically when the scheme target starts traveling
+	## cardinality = 0..1
+    cancel_scheme_when_traveling_target = bool 
+
+    # Potentially optional?
+    ### How much scheme speed does the owner get per point of the relevant skill
+    speed_per_skill_point = float
+    ### How much scheme speed does the owner get per point of the relevant skill the target has
+    speed_per_target_skill_point = float
+    ### How much success chance growth does the owner get per point of the relevant skill
+    success_chance_growth_per_skill_point = float
+    
+    ### Each skill points add this much power (speed) to the scheme.
+    power_per_skill_point = float
+
+    ### Undocumented
+    spymaster_speed_per_skill_point = float
+    ### Undocumented
+	target_spymaster_speed_per_skill_point = float
+	### Undocumented
+    tier_speed = float
+    ### Undocumented
+    base_progress_goal = float
+    ### Undocumented
+    base_maximum_success_chance = float
+    ### Undocumented
+    phases_per_agent_charge = float
+
+    # Potentially optional?
+    # Each skill point of the target adds this much resistance.
+    #resistance_per_skill_point = float
+
+    # cardinality = 0..1
+    #power_per_agent_skill_point = float
+
+    # Vanilla murder scheme does not have the following two, so optional.
+    # cardinality = 0..1
+    # Defaults to `1`. Schemes not using this should set to `0`.
+    #spymaster_power_per_skill_point = float
+
+    # cardinality = 0..1
+    #spymaster_resistance_per_skill_point = float
+
+    # Never used in vanilla.
+    # cardinality = 0..1
+    # Defaults to `1`.
+    #tier_resistance = int
+
+    # Not documented in .info, present in vanilla files.
+    ### What the game tells the player happens when successful.
+    success_desc = localisation
+
+    ## cardinality = 0..1
+    ### What the game tells the player happens when discovered.
+    discovery_desc = localisation
+}

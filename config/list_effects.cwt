@@ -241,6 +241,16 @@ alias[effect:every_secret_participant] = single_alias_right[every_effect]
 alias[effect:every_faith] = single_alias_right[every_effect]
 
 ####################################
+# REGIMENT SCOPE
+####################################
+
+### Iterate through all MaA regiments in the army.  every_army_maa_regiment = { limit = { <triggers> } <effects> }
+## scope = army
+## push_scope = regiment
+alias[effect:every_army_maa_regiment] = single_alias_right[every_effect]
+
+
+####################################
 # TRAVEL_PLAN SCOPE
 ####################################
 
@@ -389,6 +399,10 @@ alias[effect:every_artifact] = single_alias_right[every_effect]
 ## push_scope = landed_title
 alias[effect:every_barony] = single_alias_right[every_effect]
 
+### Iterate through every casus_belli_type in the database every_casus_belli_type = { limit = { <triggers> } <effects> }
+## push_scope = casus_belli_type
+alias[effect:every_casus_belli_type] = single_alias_right[every_effect]
+
 ### Iterate through all characters with a royal court
 ## push_scope = character
 alias[effect:every_character_with_royal_court] = single_alias_right[every_effect]
@@ -430,6 +444,10 @@ alias[effect:every_decision] = single_alias_right[every_effect]
 ### Undocumented
 alias[effect:every_doctrine] = single_alias_right[every_effect]
 
+### Iterate through all domiciles every_domicile = { limit = { <triggers> } <effects> }
+## push_scope = domicile
+alias[effect:every_domicile] = single_alias_right[every_effect]
+
 ### Iterate through all duchies in the game
 ## push_scope = landed_title
 alias[effect:every_duchy] = single_alias_right[every_effect]
@@ -444,7 +462,8 @@ alias[effect:every_government_type] = single_alias_right[every_effect]
 ### Undocumented
 alias[effect:every_holding_type] = single_alias_right[every_effect]
 
-
+### Iterate through all counties that are important for at least some title. every_important_location = { limit = { <triggers> } <effects> }
+alias[effect:every_important_location] = single_alias_right[every_effect]
 
 ### Iterate through all items in global list. list = name or variable = name
 alias[effect:every_in_global_list] = {
@@ -509,9 +528,21 @@ alias[effect:every_inspiration] = single_alias_right[every_effect]
 ## push_scope = character
 alias[effect:every_inspired_character] = single_alias_right[every_effect]
 
+### Iterate through all titles that are interested in any county every_interested_title = { limit = { <triggers> } <effects> }
+## push_scope = landed_title
+alias[effect:every_interested_title] = single_alias_right[every_effect]
+
 ### Iterate through all kingdoms in the game
 ## push_scope = landed_title
 alias[effect:every_kingdom] = single_alias_right[every_effect]
+
+### Gets all legends in the world that have not been completed. every_legend = { limit = { <triggers> } <effects> }
+## push_scope = legend
+alias[effect:every_legend] = single_alias_right[every_effect]
+
+### Iterate through every legend_type in the database. every_legend_type = { limit = { <triggers> } <effects> }
+## push_scope = legend_type
+alias[effect:every_legend_type] = single_alias_right[every_effect]
 
 ### Iterate through all living characters
 ## push_scope = character
@@ -549,11 +580,19 @@ alias[effect:every_ruler] = single_alias_right[every_effect]
 ## push_scope = province
 alias[effect:every_special_building_province] = single_alias_right[every_effect]
 
-### Undocumented
+### Gets all available and accepted task contracts. every_task_contract = { limit = { <triggers> } <effects> }
+## push_scope = task_contract
+alias[effect:every_task_contract] = single_alias_right[every_effect]
+
+### Iterate through every task_contract_type in the database every_task_contract_type = { limit = { <triggers> } <effects> }
+## push_scope = task_contract_type
+alias[effect:every_task_contract_type] = single_alias_right[every_effect]
+
+###  Iterate through every trait in the database. every_trait = { limit = { <triggers> } <effects> }
 ## push_scope = trait
 alias[effect:every_trait] = single_alias_right[every_effect]
 
-### Iterate through all traits in a given category
+### Iterate through all traits in a given category. any_trait_in_category = { category = fame/health/etc } every_trait_in_category = { limit = { <triggers> } <effects> }
 ## push_scope = trait
 alias[effect:every_trait_in_category] = {
     category = enum[trait_category]
@@ -568,7 +607,7 @@ alias[effect:every_trait_in_category] = {
     alias_name[effect] = alias_match_left[effect]
 }
 
-### Undocumented
+### Iterate through every vassal_contract in the database. every_vassal_contract = { limit = { <triggers> } <effects> }
 alias[effect:every_vassal_contract] = single_alias_right[every_effect]
 
 ####################################
@@ -589,6 +628,21 @@ alias[effect:every_character_in_location] = single_alias_right[every_effect]
 ## scope = province
 ## push_scope = province
 alias[effect:every_neighboring_province] = single_alias_right[every_effect]
+
+### Iterate through all domiciles of scoped province. every_province_domicile = { limit = { <triggers> }
+## scope = province
+## push_scope = domicile
+alias[effect:every_province_domicile] = single_alias_right[every_effect]
+
+### Gets epidemics affecting the scoped province. every_province_epidemic = { limit = { <triggers> } 
+## scope = province
+## push_scope = epidemic
+alias[effect:every_province_epidemic] = single_alias_right[every_effect]
+
+### Gets legends affecting the scoped province every_province_legend = { limit = { <triggers> } <effects> }
+## scope = province
+## push_scope = legend
+alias[effect:every_province_legend] = single_alias_right[every_effect]
 
 ####################################
 # WAR SCOPE
@@ -619,13 +673,32 @@ alias[effect:every_war_participant] = single_alias_right[every_effect]
 alias[effect:every_leased_title] = single_alias_right[every_effect]
 
 ####################################
+# LEGEND SCOPE
+####################################
+
+### Gets all promoters of the scoped legend. every_legend_promoter = { limit = { <triggers> } <effects> }
+## scope = legend
+## push_scope = character
+alias[effect:every_legend_promoter] = single_alias_right[every_effect]
+
+### Gets all provinces the scoped legend has spread into. every_spread_province = { limit = { <triggers> } <effects> }
+## scope = legend
+## push_scope = province
+alias[effect:every_spread_province] = single_alias_right[every_effect]
+
+####################################
 # SCHEME SCOPE
 ####################################
 
-### Iterate through all agents in the scheme every_scheme_agent = { limit = { <triggers> } <effects> }
+### Iterate through all characters in agent slots in the scheme. every_scheme_agent_character = { limit = { <triggers> } <effects> }
 ## scope = scheme
 ## push_scope = character
-alias[effect:every_scheme_agent] = single_alias_right[every_effect]
+alias[effect:every_scheme_agent_character] = single_alias_right[every_effect]
+
+### Iterate through all agent slots in the scheme. every_scheme_agent_slot = { limit = { <triggers> } <effects> }
+## scope = scheme
+## push_scope = agent_slot
+alias[effect:every_scheme_agent_slot] = single_alias_right[every_effect]
 
 ####################################
 # CHARACTER SCOPE
@@ -671,10 +744,25 @@ alias[effect:every_ancestor] = single_alias_right[every_effect]
 ## push_scope = army
 alias[effect:every_army] = single_alias_right[every_effect]
 
+### Iterate through all task contracts of location of root province every_available_task_contract = { limit = { <triggers> } <effects> }
+## scope = character
+## push_scope = task_contract
+alias[effect:every_available_task_contract] = single_alias_right[every_effect]
+
+### Gets all accepted task contracts of the root character every_character_active_contract = { limit = { <triggers> } <effects> }
+## scope = character
+## push_scope = task_contract
+alias[effect:every_character_active_contract] = single_alias_right[every_effect]
+
 ### Iterate through all artifacts in a given characters inventory
 ## scope = character
 ## push_scope = artifact
 alias[effect:every_character_artifact] = single_alias_right[every_effect]
+
+### Gets epidemics affecting the scoped character every_character_epidemic = { limit = { <triggers> } <effects> }
+## scope = character
+## push_scope = epidemic
+alias[effect:every_character_epidemic] = single_alias_right[every_effect]
 
 ### Iterate through all struggles that character is involved in. Optional: Narrow down the involvement status *_chracter_struggle = { involvement = involved | interloper }
 ## scope = character
@@ -692,6 +780,11 @@ alias[effect:every_character_struggle] = {
     }
     alias_name[effect] = alias_match_left[effect]
 }
+
+### Gets all task contracts of the scoped character every_character_task_contract = { limit = { <triggers> } <effects> }
+## scope = character
+## push_scope = task_contract
+alias[effect:every_character_task_contract] = single_alias_right[every_effect]
 
 ### Scopes from a character to a neighboring barony (incl. across water, looking trough the de Jure lieges) every_character_to_title_neighboring_and_across_water_barony = { limit = { <triggers> } <effects> }
 ## scope = character
@@ -803,6 +896,11 @@ alias[effect:every_concubine] = single_alias_right[every_effect]
 ## push_scope = character
 alias[effect:every_consort] = single_alias_right[every_effect]
 
+### Iterate through all contact characters of the root character every_contact = { limit = { <triggers> } <effects> }
+## scope = character
+## push_scope = character
+alias[effect:every_contact] = single_alias_right[every_effect]
+
 ### Iterate through all councillors every_councillor = { limit = { <triggers> } <effects> }
 ## scope = character
 ## push_scope = character
@@ -898,10 +996,10 @@ alias[effect:every_general_councillor] = single_alias_right[every_effect]
 ## push_scope = character
 alias[effect:every_heir] = single_alias_right[every_effect]
 
-### Iterate through all titles the scoped character is heir to every_heir_to_title = { limit = { <triggers> } <effects> }
+### Iterate through all titles the scoped character is heir to every_heir_title = { limit = { <triggers> } <effects> }
 ## scope = character
 ## push_scope = landed_title
-alias[effect:every_heir_to_title] = single_alias_right[every_effect]
+alias[effect:every_heir_title] = single_alias_right[every_effect]
 
 ### Iterate through all held landed titles every_held_title = { limit = { <triggers> } <effects> }
 ## scope = character
@@ -958,6 +1056,11 @@ alias[effect:every_learning_councillor] = single_alias_right[every_effect]
 ## push_scope = character
 alias[effect:every_liege_or_above] = single_alias_right[every_effect]
 
+### Iterate through all MaA regiments every_maa_regiment = { limit = { <triggers> } <effects> }
+## scope = character
+## push_scope = regiment
+alias[effect:every_maa_regiment] = single_alias_right[every_effect]
+
 ### Iterate through all martial-based councillors every_martial_councillor = { limit = { <triggers> } <effects> }
 ## scope = character
 ## push_scope = character
@@ -997,6 +1100,11 @@ alias[effect:every_neighboring_top_liege_realm] = single_alias_right[every_effec
 ## scope = character
 ## push_scope = character
 alias[effect:every_neighboring_top_liege_realm_owner] = single_alias_right[every_effect]
+
+### Iterate through all noble family titles in the realm of scoped character every_noble_family = { limit = { <triggers> } <effects> }
+## scope = character
+## push_scope = landed_title
+alias[effect:every_noble_family] = single_alias_right[every_effect]
 
 ### Iterate through all the spouse candidates of the opposite sex of a character. WARNING: THIS IS VERY SLOW DO NOT DO IT OFTEN.
 ## scope = character
@@ -1043,6 +1151,11 @@ alias[effect:every_played_character] = single_alias_right[every_effect]
 ## push_scope = character
 alias[effect:every_player_heir] = single_alias_right[every_effect]
 
+### Get all legends in a player character library. every_player_legend_library = { limit = { <triggers> } <effects> }
+## scope = character
+## push_scope = legend
+alias[effect:every_player_legend_library] = single_alias_right[every_effect]
+
 ### Iterate through all guests visiting the court from the pool (in contrast to foreign_court_guest they don't have a liege) every_pool_guest = { limit = { <triggers> } <effects> }
 ## scope = character
 ## push_scope = character
@@ -1052,6 +1165,11 @@ alias[effect:every_pool_guest] = single_alias_right[every_effect]
 ## scope = character
 ## push_scope = character
 alias[effect:every_potential_marriage_option] = single_alias_right[every_effect]
+
+### Iterate through all directly owned provinces. every_powerful_family = { limit = { <triggers> } <effects> } NOTE: Documented incorrected - the effect iterates through houses and not provinces
+## scope = character
+## push_scope = dynasty_house
+alias[effect:every_powerful_family] = single_alias_right[every_effect]
 
 ### Iterate through the all powerful vassals of a character
 ## scope = character
@@ -1083,6 +1201,11 @@ alias[effect:every_prowess_councillor] = single_alias_right[every_effect]
 ## push_scope = character
 alias[effect:every_raid_target] = single_alias_right[every_effect]
 
+### Iterate through all counties that are on the edge of your realm bordering a different neighboring realm. every_realm_border_county = { limit = { <triggers> } <effects> }
+## scope = character
+## push_scope = landed_title
+alias[effect:every_realm_border_county] = single_alias_right[every_effect]
+
 ### Iterate through all counties in the realm. Based on top liege  every_realm_county = { limit = { <triggers> } <effects> }
 ## scope = character
 ## push_scope = landed_title
@@ -1111,7 +1234,18 @@ alias[effect:every_realm_province] = single_alias_right[every_effect]
 ### Iterate through scripted relations of a given type every_relation = { limit = { <triggers> } <effects> }
 ## scope = character
 ## push_scope = character
-alias[effect:every_relation] = single_alias_right[every_effect]
+alias[effect:every_relation] = {
+    type = <scripted_relation>
+    ## cardinality = 0..1
+    limit = {
+        alias_name[trigger] = alias_match_left[trigger]
+    }
+    ## cardinality = 0..inf
+    alternative_limit = {
+        alias_name[trigger] = alias_match_left[trigger]
+    }
+    alias_name[effect] = alias_match_left[effect]
+}
 
 ### Iterate through all the spouse candidates of the same sex of a character. WARNING: THIS IS VERY SLOW DO NOT DO IT OFTEN.
 ## scope = character
@@ -1182,6 +1316,16 @@ alias[effect:every_sub_realm_kingdom] = single_alias_right[every_effect]
 ## push_scope = landed_title
 alias[effect:every_sub_realm_title] = single_alias_right[every_effect]
 
+### Iterate through all candidates supported by the scoped investor character for any title. It may contain people outside of investor's top realm or no longer valid for appointment. every_succession_appointment_invested_candidate = { limit = { <triggers> } <effects> }
+## scope = character
+## push_scope = character
+alias[effect:every_succession_appointment_invested_candidate] = single_alias_right[every_effect]
+
+### Iterate through all titles that has candidates supported by the scoped investor. It may contain titles outside of investor's top realm, and so invalid for appointment,and candidates may be already dead. every_succession_appointment_invested_title = { limit = { <triggers> } <effects> }
+## scope = character
+## push_scope = landed_title
+alias[effect:every_succession_appointment_invested_title] = single_alias_right[every_effect]
+
 ### Iterate through all factions targeting the scope character every_targeting_faction = { limit = { <triggers> } <effects> }
 ## scope = character
 ## push_scope = faction
@@ -1211,6 +1355,11 @@ alias[effect:every_tax_collector_vassal] = single_alias_right[every_effect]
 ## scope = character
 ## push_scope = tax_slot
 alias[effect:every_tax_slot] = single_alias_right[every_effect]
+
+### Iterate through all counties that are on the edge of your realm bordering a different neighboring top realm. every_top_realm_border_county = { limit = { <triggers> } <effects> }
+## scope = character
+## push_scope = landed_title
+alias[effect:every_top_realm_border_county] = single_alias_right[every_effect]
 
 ### Iterate though all characters that should travel with the scoped one (when moving between courts for instance); includes the scoped character every_traveling_family_member = { limit = { <triggers> } <effects> }
 alias[effect:every_traveling_family_member] = single_alias_right[every_effect]
@@ -1288,6 +1437,11 @@ alias[effect:every_connected_county] = single_alias_right[every_effect]
 ## push_scope = faith
 alias[effect:every_controlled_faith] = single_alias_right[every_effect]
 
+### Iterate through controlled title regiments. every_controlled_title_maa_regiment = { limit = { <triggers> } <effects> }
+## scope = landed_title
+## push_scope = regiment
+alias[effect:every_controlled_title_maa_regiment] = single_alias_right[every_effect]
+
 ### Iterate through all provinces in a county every_county_province = { limit = { <triggers> } <effects> }
 ## scope = landed_title
 ## push_scope = province
@@ -1338,6 +1492,11 @@ alias[effect:every_election_candidate] = single_alias_right[every_effect]
 ## push_scope = character
 alias[effect:every_elector] = single_alias_right[every_effect]
 
+### Iterate through all counties that are important for the scoped title.every_important_location_for_title = { limit = { <triggers> } <effects> }
+## scope = landed_title
+## push_scope = landed_title
+alias[effect:every_important_location_for_title] = single_alias_right[every_effect]
+
 ### Iterate through the title itself, all de facto vassals, and below. The continue trigger specifies whether to recursively iterate through the vassal's vassal This is unrelated to the limit; if the limit is met it is added to the list, but its vassals will get checked even if the limit isn't met as long as the 'continue' trigger is ..._de_jure_vassal_and_below = { continue = { conditions } } every_in_de_facto_hierarchy = { limit = { <triggers> } <effects> }
 ## scope = landed_title
 ## push_scope = landed_title
@@ -1379,6 +1538,11 @@ alias[effect:every_in_de_jure_hierarchy] = {
 ## push_scope = landed_title
 alias[effect:every_neighboring_county] = single_alias_right[every_effect]
 
+### Iterate through owned title MaA regiments every_owned_title_maa_regiment = { limit = { <triggers> } <effects> }
+## scope = landed_title
+## push_scope = regiment
+alias[effect:every_owned_title_maa_regiment] = single_alias_right[every_effect]
+
 ### Iterate through all past owners of a title from earliest to latest
 ## scope = landed_title
 ## push_scope = character
@@ -1388,6 +1552,11 @@ alias[effect:every_past_holder] = single_alias_right[every_effect]
 ## scope = landed_title
 ## push_scope = character
 alias[effect:every_past_holder_reversed] = single_alias_right[every_effect]
+
+### Iterate through all investors of target candidate within the scoped title. Optionally specify a value to filter by investment amount scope:landed_title = {	any/every/ordered/random_succession_appointment_investors = {		candidate = cope:character		value > {			# Optional compare value to			value = 100		# only have characters that			add = 10		# have invested this much.		}	}}
+## scope = landed_title
+## push_scope = character
+alias[effect:every_succession_appointment_investors] = single_alias_right[every_effect]
 
 ### Iterate through this title and all its dejure liege titles every_this_title_or_de_jure_above = { limit = { <triggers> } <effects> }
 ## scope = landed_title
@@ -1399,10 +1568,20 @@ alias[effect:every_this_title_or_de_jure_above] = single_alias_right[every_effec
 ## push_scope = character
 alias[effect:every_title_heir] = single_alias_right[every_effect]
 
+### Iterate through titles that consider scoped county an important location.every_title_interested_in_location = { limit = { <triggers> } <effects> }
+## scope = landed_title
+## push_scope = landed_title
+alias[effect:every_title_interested_in_location] = single_alias_right[every_effect]
+
 ### Iterate through all factions joined the scope landed title every_title_joined_faction = { limit = { <triggers> } <effects> }
 ## scope = landed_title
 ## push_scope = faction
 alias[effect:every_title_joined_faction] = single_alias_right[every_effect]
+
+### Iterate through title all MaA regiments every_title_maa_regiment = { limit = { <triggers> } <effects> }
+## scope = landed_title
+## push_scope = regiment
+alias[effect:every_title_maa_regiment] = single_alias_right[every_effect]
 
 ### Scopes from a title to a neighboring barony (incl. across water, looking trough the de Jure lieges) every_title_to_title_neighboring_and_across_water_barony = { limit = { <triggers> } <effects> }
 ## scope = landed_title
@@ -1739,6 +1918,15 @@ alias[effect:random_secret_participant] = single_alias_right[random_effect]
 alias[effect:random_faith] = single_alias_right[random_effect]
 
 ####################################
+# REGIMENT SCOPE
+####################################
+
+### Iterate through all MaA regiments in the army.  random_army_maa_regiment = { limit = { <triggers> } <effects> }
+## scope = army
+## push_scope = regiment
+alias[effect:random_army_maa_regiment] = single_alias_right[random_effect]
+
+####################################
 # TRAVEL_PLAN SCOPE
 ####################################
 
@@ -1887,6 +2075,10 @@ alias[effect:random_artifact] = single_alias_right[random_effect]
 ## push_scope = landed_title
 alias[effect:random_barony] = single_alias_right[random_effect]
 
+### Iterate through every casus_belli_type in the database every_casus_belli_type = { limit = { <triggers> } <effects> }
+## push_scope = casus_belli_type
+alias[effect:random_casus_belli_type] = single_alias_right[random_effect]
+
 ### Iterate through all characters with a royal court
 ## push_scope = character
 alias[effect:random_character_with_royal_court] = single_alias_right[random_effect]
@@ -1927,6 +2119,9 @@ alias[effect:random_decision] = single_alias_right[random_effect]
 
 ### Undocumented
 alias[effect:random_doctrine] = single_alias_right[random_effect]
+
+### Iterate through all domiciles random_domicile = { limit = { <triggers> } (optional) weight = { mtth } <effects> }
+alias[effect:random_domicile] = single_alias_right[random_effect]
 
 ### Iterate through all duchies in the game
 ## push_scope = landed_title
@@ -2122,10 +2317,15 @@ alias[effect:random_leased_title] = single_alias_right[random_effect]
 # SCHEME SCOPE
 ####################################
 
-### Iterate through all agents in the scheme random_scheme_agent = { limit = { <triggers> } <effects> }
+### Iterate through all characters in agent slots in the scheme.random_scheme_agent_character = { limit = { <triggers> } (optional) weight = { mtth } <effects> }
 ## scope = scheme
 ## push_scope = character
-alias[effect:random_scheme_agent] = single_alias_right[random_effect]
+alias[effect:random_scheme_agent_character] = single_alias_right[random_effect]
+
+### Iterate through all characters in agent slots in the scheme.random_scheme_agent_slot = { limit = { <triggers> } (optional) weight = { mtth } <effects> }
+## scope = scheme
+## push_scope = agent_slot
+alias[effect:random_scheme_agent_slot] = single_alias_right[random_effect]
 
 ####################################
 # CHARACTER SCOPE
@@ -2395,10 +2595,10 @@ alias[effect:random_general_councillor] = single_alias_right[random_effect]
 ## push_scope = character
 alias[effect:random_heir] = single_alias_right[random_effect]
 
-### Iterate through all titles the scoped character is heir to random_heir_to_title = { limit = { <triggers> } <effects> }
+### Iterate through all titles the scoped character is heir to random_heir_title = { limit = { <triggers> } <effects> }
 ## scope = character
 ## push_scope = landed_title
-alias[effect:random_heir_to_title] = single_alias_right[random_effect]
+alias[effect:random_heir_title] = single_alias_right[random_effect]
 
 ### Iterate through all held landed titles random_held_title = { limit = { <triggers> } <effects> }
 ## scope = character
@@ -2608,7 +2808,20 @@ alias[effect:random_realm_province] = single_alias_right[random_effect]
 ### Iterate through scripted relations of a given type random_relation = { limit = { <triggers> } <effects> }
 ## scope = character
 ## push_scope = character
-alias[effect:random_relation] = single_alias_right[random_effect]
+alias[effect:random_relation] = {
+    type = <scripted_relation>
+    ## cardinality = 0..1
+    limit = {
+        alias_name[trigger] = alias_match_left[trigger]
+    }
+    ## cardinality = 0..inf
+    alternative_limit = {
+        alias_name[trigger] = alias_match_left[trigger]
+    }
+    ## cardinality = 0..1
+    weight = single_alias_right[weight_block]
+    alias_name[effect] = alias_match_left[effect]
+}
 
 ### Iterate through all the spouse candidates of the same sex of a character. WARNING: THIS IS VERY SLOW DO NOT DO IT OFTEN.
 ## scope = character
@@ -3274,6 +3487,11 @@ alias[effect:ordered_secret_participant] = single_alias_right[ordered_effect]
 ## push_scope = faith
 alias[effect:ordered_faith] = single_alias_right[ordered_effect]
 
+### Iterate through all MaA regiments in the army.  ordered_army_maa_regiment = {limit = { <triggers> } order_by = script_value position = int min = int max = script_value check_range_bounds = no # If you don't want an error logged if the list is smaller than the min/max <effects> }
+## scope = army
+## push_scope = regiment
+alias[effect:ordered_army_maa_regiment] = single_alias_right[ordered_effect]
+
 ####################################
 # TRAVEL_PLAN SCOPE
 ####################################
@@ -3423,9 +3641,17 @@ alias[effect:ordered_artifact] = single_alias_right[ordered_effect]
 ## push_scope = landed_title
 alias[effect:ordered_barony] = single_alias_right[ordered_effect]
 
+### Iterate through every casus_belli_type in the database ordered_casus_belli_type = { limit = { <triggers> } <effects> }
+## push_scope = casus_belli_type
+alias[effect:ordered_casus_belli_type] = single_alias_right[ordered_effect]
+
 ### Iterate through all characters with a royal court
 ## push_scope = character
 alias[effect:ordered_character_with_royal_court] = single_alias_right[ordered_effect]
+
+### Gets all legends in the world that have been completed ordered_completed_legend = {    limit = { <triggers> }    order_by = script_value    position = int    min = int    max = script_value    check_range_bounds = no # If you don't want an error logged if the list is smaller than the min/max    <effects> }
+## push_scope = legend
+alias[effect:ordered_completed_legend] = single_alias_right[ordered_effect]
 
 ### Iterate through all counties in the game
 ## push_scope = landed_title
@@ -3469,6 +3695,10 @@ alias[effect:ordered_decision] = single_alias_right[ordered_effect]
 ### Undocumented
 alias[effect:ordered_doctrine] = single_alias_right[ordered_effect]
 
+### Iterate through all domiciles Iterate through all domiciles ordered_domicile = {    limit = { <triggers> }    order_by = script_value    position = int    min = int    max = script_value    check_range_bounds = no # If you don't want an error logged if the list is smaller than the min/max    <effects> }
+## push_scope = domicile
+alias[effect:ordered_domicile] = single_alias_right[ordered_effect]
+
 ### Iterate through all duchies in the game
 ## push_scope = landed_title
 alias[effect:ordered_duchy] = single_alias_right[ordered_effect]
@@ -3483,7 +3713,8 @@ alias[effect:ordered_government_type] = single_alias_right[ordered_effect]
 ### Undocumented
 alias[effect:ordered_holding_type] = single_alias_right[ordered_effect]
 
-
+### Iterate through all counties that are important for at least some title ordered_important_location = {    limit = { <triggers> }    order_by = script_value    position = int    min = int    max = script_value    check_range_bounds = no # If you don't want an error logged if the list is smaller than the min/max    <effects> }
+alias[effect:ordered_important_location] = single_alias_right[ordered_effect]
 
 ### Iterate through all items in global list. list = name or variable = name
 alias[effect:ordered_in_global_list] = {
@@ -3563,9 +3794,21 @@ alias[effect:ordered_inspiration] = single_alias_right[ordered_effect]
 ## push_scope = character
 alias[effect:ordered_inspired_character] = single_alias_right[ordered_effect]
 
+### Iterate through all titles that are interested in any county ordered_interested_title = {    limit = { <triggers> }    order_by = script_value    position = int    min = int    max = script_value    check_range_bounds = no # If you don't want an error logged if the list is smaller than the min/max    <effects> }
+## push_scope = landed_title
+alias[effect:ordered_interested_title] = single_alias_right[ordered_effect]
+
 ### Iterate through all kingdoms in the game
 ## push_scope = landed_title
 alias[effect:ordered_kingdom] = single_alias_right[ordered_effect]
+
+### Gets all legends in the world that have not been completed. ordered_legend = {    limit = { <triggers> }    order_by = script_value    position = int    min = int    max = script_value    check_range_bounds = no # If you don't want an error logged if the list is smaller than the min/max    <effects> }
+## push_scope = legend
+alias[effect:ordered_legend] = single_alias_right[ordered_effect]
+
+### Iterate through every legend_type in the database. ordered_legend_type = {    limit = { <triggers> }    order_by = script_value    position = int    min = int    max = script_value    check_range_bounds = no # If you don't want an error logged if the list is smaller than the min/max    <effects> }
+## push_scope = legend_type
+alias[effect:ordered_legend_type] = single_alias_right[ordered_effect]
 
 ### Iterate through all living characters
 ## push_scope = character
@@ -3598,6 +3841,18 @@ alias[effect:ordered_religion_global] = single_alias_right[ordered_effect]
 ### Rulers list with a COUNT tier o above
 ## push_scope = character
 alias[effect:ordered_ruler] = single_alias_right[ordered_effect]
+
+###  Iterate through all provinces with a special building slot (built or un-built)
+## push_scope = province
+alias[effect:ordered_special_building_province] = single_alias_right[ordered_effect]
+
+### Gets all available and accepted task contracts. ordered_task_contract = {    limit = { <triggers> }    order_by = script_value    position = int    min = int    max = script_value    check_range_bounds = no # If you don't want an error logged if the list is smaller than the min/max    <effects> }
+## push_scope = task_contract
+alias[effect:ordered_task_contract] = single_alias_right[ordered_effect]
+
+### Gets all available and accepted task contracts. ordered_task_contract_type = {    limit = { <triggers> }    order_by = script_value    position = int    min = int    max = script_value    check_range_bounds = no # If you don't want an error logged if the list is smaller than the min/max    <effects> }
+## push_scope = task_contract_type
+alias[effect:ordered_task_contract_type] = single_alias_right[ordered_effect]
 
 ###  Iterate through all provinces with a special building slot (built or un-built)
 ## push_scope = province
@@ -3651,6 +3906,21 @@ alias[effect:ordered_character_in_location] = single_alias_right[ordered_effect]
 ## push_scope = province
 alias[effect:ordered_neighboring_province] = single_alias_right[ordered_effect]
 
+### Iterate through all domiciles of scoped province. ordered_province_domicile = {    limit = { <triggers> }    order_by = script_value    position = int    min = int    max = script_value    check_range_bounds = no # If you don't want an error logged if the list is smaller than the min/max    <effects> }
+## scope = province
+## push_scope = domicile
+alias[effect:ordered_province_domicile] = single_alias_right[ordered_effect]
+
+### Gets epidemics affecting the scoped province. ordered_province_epidemic  = {    limit = { <triggers> }    order_by = script_value    position = int    min = int    max = script_value    check_range_bounds = no # If you don't want an error logged if the list is smaller than the min/max    <effects> }
+## scope = province
+## push_scope = epidemic
+alias[effect:ordered_province_epidemic] = single_alias_right[ordered_effect]
+
+### Gets legends affecting the scoped province. ordered_province_legend = {    limit = { <triggers> }    order_by = script_value    position = int    min = int    max = script_value    check_range_bounds = no # If you don't want an error logged if the list is smaller than the min/max    <effects> }
+## scope = province
+## push_scope = legend
+alias[effect:ordered_province_legend] = single_alias_right[ordered_effect]
+
 ####################################
 # WAR SCOPE
 ####################################
@@ -3680,13 +3950,32 @@ alias[effect:ordered_war_participant] = single_alias_right[ordered_effect]
 alias[effect:ordered_leased_title] = single_alias_right[ordered_effect]
 
 ####################################
+# LEGEND SCOPE
+####################################
+
+### Gets all promoters of the scoped legend
+## scope = legend
+## push_scope = character
+alias[effect:ordered_legend_promoter] = single_alias_right[ordered_effect]
+
+### Gets all provinces the scoped legend has spread into
+## scope = legend
+## push_scope = province
+alias[effect:ordered_spread_province] = single_alias_right[ordered_effect]
+
+####################################
 # SCHEME SCOPE
 ####################################
 
-### Iterate through all agents in the scheme ordered_scheme_agent = { limit = { <triggers> } <effects> }
+### Iterate through all characters in agent slots in the scheme.ordered_scheme_agent_character = {    limit = { <triggers> }    order_by = script_value    position = int    min = int    max = script_value    check_range_bounds = no # If you don't want an error logged if the list is smaller than the min/max    <effects> }
 ## scope = scheme
 ## push_scope = character
-alias[effect:ordered_scheme_agent] = single_alias_right[ordered_effect]
+alias[effect:ordered_scheme_agent_character] = single_alias_right[ordered_effect]
+
+### Iterate through all agent slots in the scheme. ordered_scheme_agent_slot = {    limit = { <triggers> }    order_by = script_value    position = int    min = int    max = script_value    check_range_bounds = no # If you don't want an error logged if the list is smaller than the min/max    <effects> }
+## scope = scheme
+## push_scope = agent_slot
+alias[effect:ordered_scheme_agent_slot] = single_alias_right[ordered_effect]
 
 ####################################
 # CHARACTER SCOPE
@@ -3732,10 +4021,25 @@ alias[effect:ordered_ancestor] = single_alias_right[ordered_effect]
 ## push_scope = army
 alias[effect:ordered_army] = single_alias_right[ordered_effect]
 
+### Iterate through all task contracts of location of root province.ordered_available_task_contract = {    limit = { <triggers> }    order_by = cript_value    position = int    min = int    max = script_value    check_range_bounds = no # If you don't want an error logged if the list is smaller than the min/max    <effects> }
+## scope = character
+## push_scope = task_contract
+alias[effect:ordered_available_task_contract] = single_alias_right[ordered_effect]
+
+### Gets all accepted task contracts of the root character.ordered_character_active_contract = {    limit = { <triggers> }    order_by = script_value    position = int    min = int    max = script_value    check_range_bounds = no # If you don't want an error logged if the list is smaller than the min/max    <effects> }
+## scope = character
+## push_scope = task_contract
+alias[effect:ordered_character_active_contract] = single_alias_right[ordered_effect]
+
 ### Iterate through all artifacts in a given characters inventory
 ## scope = character
 ## push_scope = artifact
 alias[effect:ordered_character_artifact] = single_alias_right[ordered_effect]
+
+### Gets epidemics affecting the scoped character
+## scope = character
+## push_scope = epidemic
+alias[effect:ordered_character_epidemic] = single_alias_right[ordered_effect]
 
 ### Iterate through all struggles that character is involved in. Optional: Narrow down the involvement status *_chracter_struggle = { involvement = involved | interloper }
 ## scope = character
@@ -3760,6 +4064,11 @@ alias[effect:ordered_character_struggle] = {
     check_range_bounds = no
     alias_name[effect] = alias_match_left[effect]
 }
+
+### Gets all task contracts of the scoped character ordered_character_task_contract = {    limit = { <triggers> }    order_by = script_value    position = int    min = int    max = script_value    check_range_bounds = no # If you don't want an error logged if the list is smaller than the min/max    <effects> }
+## scope = character
+## push_scope = task_contract
+alias[effect:ordered_character_task_contract] = single_alias_right[ordered_effect]
 
 ### Scopes from a character to a neighboring barony (incl. across water, looking trough the de Jure lieges) ordered_character_to_title_neighboring_and_across_water_barony = { limit = { <triggers> } <effects> }
 ## scope = character
@@ -3871,6 +4180,11 @@ alias[effect:ordered_concubine] = single_alias_right[ordered_effect]
 ## push_scope = character
 alias[effect:ordered_consort] = single_alias_right[ordered_effect]
 
+### Iterate through all contact characters of the root character. ordered_contact = {    limit = { <triggers> }    order_by = script_value    position = int    min = int    max = script_value    check_range_bounds = no # If you don't want an error logged if the list is smaller than the min/max    <effects> }
+## scope = character
+## push_scope = character
+alias[effect:ordered_contact] = single_alias_right[ordered_effect]
+
 ### Iterate through all councillors ordered_councillor = { limit = { <triggers> } <effects> }
 ## scope = character
 ## push_scope = character
@@ -3966,10 +4280,10 @@ alias[effect:ordered_general_councillor] = single_alias_right[ordered_effect]
 ## push_scope = character
 alias[effect:ordered_heir] = single_alias_right[ordered_effect]
 
-### Iterate through all titles the scoped character is heir to ordered_heir_to_title = { limit = { <triggers> } <effects> }
+### Iterate through all titles the scoped character is heir to ordered_heir_title = { limit = { <triggers> } <effects> }
 ## scope = character
 ## push_scope = landed_title
-alias[effect:ordered_heir_to_title] = single_alias_right[ordered_effect]
+alias[effect:ordered_heir_title] = single_alias_right[ordered_effect]
 
 ### Iterate through all held landed titles ordered_held_title = { limit = { <triggers> } <effects> }
 ## scope = character
@@ -4026,6 +4340,11 @@ alias[effect:ordered_learning_councillor] = single_alias_right[ordered_effect]
 ## push_scope = character
 alias[effect:ordered_liege_or_above] = single_alias_right[ordered_effect]
 
+### Iterate through all MaA regiments. ordered_maa_regiment = {    limit = { <triggers> }    order_by = script_value    position = int    min = int    max = script_value    check_range_bounds = no # If you don't want an error logged if the list is smaller than the min/max    <effects> }
+## scope = character
+## push_scope = regiment
+alias[effect:ordered_maa_regiment] = single_alias_right[ordered_effect]
+
 ### Iterate through all martial-based councillors ordered_martial_councillor = { limit = { <triggers> } <effects> }
 ## scope = character
 ## push_scope = character
@@ -4065,6 +4384,11 @@ alias[effect:ordered_neighboring_top_liege_realm] = single_alias_right[ordered_e
 ## scope = character
 ## push_scope = character
 alias[effect:ordered_neighboring_top_liege_realm_owner] = single_alias_right[ordered_effect]
+
+### Iterate through all noble family titles in the realm of scoped character.ordered_noble_family = {    limit = { <triggers> }    order_by = script_value    position = int    min = int    max = script_value    check_range_bounds = no # If you don't want an error logged if the list is smaller than the min/max    <effects> }
+## scope = character
+## push_scope = landed_title
+alias[effect:ordered_noble_family] = single_alias_right[ordered_effect]
 
 ### Iterate through all the spouse candidates of the opposite sex of a character. WARNING: THIS IS VERY SLOW DO NOT DO IT OFTEN.
 ## scope = character
@@ -4111,6 +4435,11 @@ alias[effect:ordered_played_character] = single_alias_right[ordered_effect]
 ## push_scope = character
 alias[effect:ordered_player_heir] = single_alias_right[ordered_effect]
 
+### Get all legends in a player character library. ordered_player_legend_library = {    limit = { <triggers> }    order_by = script_value    position = int    min = int    max = script_value    check_range_bounds = no # If you don't want an error logged if the list is smaller than the min/max    <effects> }
+## scope = character
+## push_scope = legend
+alias[effect:ordered_player_legend_library] = single_alias_right[ordered_effect]
+
 ### Iterate through all guests visiting the court from the pool (in contrast to foreign_court_guest they don't have a liege) ordered_pool_guest = { limit = { <triggers> } <effects> }
 ## scope = character
 ## push_scope = character
@@ -4120,6 +4449,11 @@ alias[effect:ordered_pool_guest] = single_alias_right[ordered_effect]
 ## scope = character
 ## push_scope = character
 alias[effect:ordered_potential_marriage_option] = single_alias_right[ordered_effect]
+
+### Iterate through all directly owned provinces. ordered_powerful_family = {    limit = { <triggers> }    order_by = script_value    position = int    min = int    max = script_value    check_range_bounds = no # If you don't want an error logged if the list is smaller than the min/max    <effects> }
+## scope = character
+## push_scope = dynasty_house
+alias[effect:ordered_powerful_family] = single_alias_right[ordered_effect]
 
 ### Iterate through the all powerful vassals of a character
 ## scope = character
@@ -4151,6 +4485,11 @@ alias[effect:ordered_prowess_councillor] = single_alias_right[ordered_effect]
 ## push_scope = character
 alias[effect:ordered_raid_target] = single_alias_right[ordered_effect]
 
+### Iterate through all counties that are on the edge of your realm bordering a different neighboring realm. ordered_realm_border_county = {    limit = { <triggers> }    order_by = script_value    position = int    min = int    max = script_value    check_range_bounds = no # If you don't want an error logged if the list is smaller than the min/max    <effects> }
+## scope = character
+## push_scope = landed_title
+alias[effect:ordered_realm_border_county] = single_alias_right[ordered_effect]
+
 ### Iterate through all counties in the realm. Based on top liege  ordered_realm_county = { limit = { <triggers> } <effects> }
 ## scope = character
 ## push_scope = landed_title
@@ -4179,7 +4518,25 @@ alias[effect:ordered_realm_province] = single_alias_right[ordered_effect]
 ### Iterate through scripted relations of a given type ordered_relation = { limit = { <triggers> } <effects> }
 ## scope = character
 ## push_scope = character
-alias[effect:ordered_relation] = single_alias_right[ordered_effect]
+alias[effect:ordered_relation] = {
+    type = <scripted_relation>
+    ## cardinality = 0..1
+    limit = {
+        alias_name[trigger] = alias_match_left[trigger]
+    }
+    ## cardinality = 0..1
+    # TODO: Work out what exactly this is restricted to
+    order_by = value_field
+    ## cardinality = 0..1
+    max = int_value_field
+    ## cardinality = 0..1
+    max = int_value_field
+    ## cardinality = 0..1
+    position = int
+    ## cardinality = 0..1
+    check_range_bounds = no
+    alias_name[effect] = alias_match_left[effect]
+}
 
 ### Iterate through all the spouse candidates of the same sex of a character. WARNING: THIS IS VERY SLOW DO NOT DO IT OFTEN.
 ## scope = character
@@ -4254,6 +4611,16 @@ alias[effect:ordered_sub_realm_title] = single_alias_right[ordered_effect]
 ## scope = character
 ## push_scope = faction
 alias[effect:ordered_targeting_faction] = single_alias_right[ordered_effect]
+
+### Iterate through all candidates supported by the scoped investor character for any title. It may contain people outside of investor's top realm or no longer valid for appointment ordered_succession_appointment_invested_candidate = { limit = { <triggers> } order_by = script_value  position = int  min = int   max = script_value  check_range_bounds = no # If you don't want an error logged if the list is smaller than the min/max <effects> }
+## scope = character
+## push_scope = character
+alias[effect:ordered_succession_appointment_invested_candidate] = single_alias_right[ordered_effect]
+
+### Iterate through all titles that has candidates supported by the scoped investor It may contain titles outside of investor's top realm, and so invalid for appointment,and candidates may be already dead ordered_succession_appointment_invested_title = {  limit = { <triggers> }  order_by = script_value position = int  min = int   max = script_value  check_range_bounds = no # If you don't want an error logged if the list is smaller than the min/max <effects> }
+## scope = character
+## push_scope = landed_title
+alias[effect:ordered_succession_appointment_invested_title] = single_alias_right[ordered_effect]
 
 ### Iterate through all schemes targeting the character ordered_targeting_scheme = { limit = { <triggers> } <effects> }
 ## scope = character
@@ -4568,3 +4935,336 @@ alias[effect:ordered_side_knight] = single_alias_right[ordered_effect]
 
 #- Unsorted
 
+### Gets all provinces infected by the scoped epidemic
+## scope = epidemic
+## push_scope = province
+alias[effect:every_infected_province] = single_alias_right[every_effect]
+
+### Gets all provinces infected by the scoped epidemic
+## scope = epidemic
+## push_scope = province
+alias[effect:ordered_infected_province] = single_alias_right[ordered_effect]
+
+### Gets all provinces infected by the scoped epidemic
+## scope = epidemic
+## push_scope = province
+alias[effect:random_infected_province] = single_alias_right[random_effect]
+
+
+### Gets all legends in the world that have been completed
+## push_scope = legend
+alias[effect:every_completed_legend] = single_alias_right[every_effect]
+
+### Gets all legends in the world that have been completed
+## push_scope = legend
+alias[effect:ordered_completed_legend] = single_alias_right[ordered_effect]
+
+### Gets all legends in the world that have been completed
+## push_scope = legend
+alias[effect:random_completed_legend] = single_alias_right[random_effect]
+
+
+
+### Gets all epidemics in the world
+## push_scope = epidemic
+alias[effect:every_epidemic] = single_alias_right[every_effect]
+
+### Gets all epidemics in the world
+## push_scope = epidemic
+alias[effect:ordered_epidemic] = single_alias_right[ordered_effect]
+
+### Gets all epidemics in the world
+## push_scope = epidemic
+alias[effect:random_epidemic] = single_alias_right[random_effect]
+
+
+### Iterate through every epidemic_type in the database
+## push_scope = epidemic_type
+alias[effect:every_epidemic_type] = single_alias_right[every_effect]
+
+### Iterate through every epidemic_type in the database
+## push_scope = epidemic_type
+alias[effect:ordered_epidemic_type] = single_alias_right[ordered_effect]
+
+### Iterate through every epidemic_type in the database
+## push_scope = epidemic_type
+alias[effect:random_epidemic_type] = single_alias_right[random_effect]
+
+
+
+### Iterate through every geographical_region in the database
+## push_scope = epidemic_type
+alias[effect:every_geographical_region] = single_alias_right[every_effect]
+
+### Iterate through every geographical_region in the database
+## push_scope = epidemic_type
+alias[effect:ordered_geographical_region] = single_alias_right[ordered_effect]
+
+### Iterate through every geographical_region in the database
+## push_scope = epidemic_type
+alias[effect:random_geographical_region] = single_alias_right[random_effect]
+
+
+### Gets all legends in the world that have not been completed
+## push_scope = legend
+alias[effect:every_legend] = single_alias_right[every_effect]
+
+### Gets all legends in the world that have not been completed
+## push_scope = legend
+alias[effect:ordered_legend] = single_alias_right[ordered_effect]
+
+### Gets all legends in the world that have not been completed
+## push_scope = legend
+alias[effect:random_legend] = single_alias_right[random_effect]
+
+
+### Iterate through every legend_type in the database
+## push_scope = legend
+alias[effect:every_legend_type] = single_alias_right[every_effect]
+
+### Iterate through every legend_type in the database
+## push_scope = legend
+alias[effect:ordered_legend_type] = single_alias_right[ordered_effect]
+
+### Iterate through every legend_type in the database
+## push_scope = legend
+alias[effect:random_legend_type] = single_alias_right[random_effect]
+
+
+### Gets epidemics affecting the scoped province
+## scope = province
+## push_scope = epidemic
+alias[effect:every_province_epidemic] = single_alias_right[every_effect]
+
+### Gets epidemics affecting the scoped province
+## scope = province
+## push_scope = epidemic
+alias[effect:ordered_province_epidemic] = single_alias_right[ordered_effect]
+
+### Gets epidemics affecting the scoped province
+## scope = province
+## push_scope = epidemic
+alias[effect:random_province_epidemic] = single_alias_right[random_effect]
+
+
+### Gets legends affecting the scoped province
+## scope = province
+## push_scope = legend
+alias[effect:every_province_legend] = single_alias_right[every_effect]
+
+### Gets legends affecting the scoped province
+## scope = province
+## push_scope = legend
+alias[effect:ordered_province_legend] = single_alias_right[ordered_effect]
+
+### Gets legends affecting the scoped province
+## scope = province
+## push_scope = legend
+alias[effect:random_province_legend] = single_alias_right[random_effect]
+
+
+### Gets all promoters of the scoped legend
+## scope = legend
+## push_scope = character
+alias[effect:every_legend_promoter] = single_alias_right[every_effect]
+
+
+
+### Gets all promoters of the scoped legend
+## scope = legend
+## push_scope = character
+alias[effect:random_legend_promoter] = single_alias_right[random_effect]
+
+
+### Gets all provinces the scoped legend has spread into
+## scope = legend
+## push_scope = province
+alias[effect:every_spread_province] = single_alias_right[every_effect]
+
+
+
+### Gets all provinces the scoped legend has spread into
+## scope = legend
+## push_scope = province
+alias[effect:random_spread_province] = single_alias_right[random_effect]
+
+
+
+### Iterate through all counties that are on the edge of your realm bordering a different neighboring realm.
+## scope = character
+## push_scope = landed_title
+alias[effect:every_realm_border_county] = single_alias_right[every_effect]
+
+### Iterate through all counties that are on the edge of your realm bordering a different neighboring realm.
+## scope = character
+## push_scope = landed_title
+alias[effect:ordered_realm_border_county] = single_alias_right[ordered_effect]
+
+### Iterate through all counties that are on the edge of your realm bordering a different neighboring realm.
+## scope = character
+## push_scope = landed_title
+alias[effect:random_realm_border_county] = single_alias_right[random_effect]
+
+
+
+### Iterate through all counties that are on the edge of your realm bordering a different neighboring top realm.
+## scope = character
+## push_scope = landed_title
+alias[effect:every_top_realm_border_county] = single_alias_right[every_effect]
+
+### Iterate through all counties that are on the edge of your realm bordering a different neighboring top realm.
+## scope = character
+## push_scope = landed_title
+alias[effect:ordered_top_realm_border_county] = single_alias_right[ordered_effect]
+
+### Iterate through all counties that are on the edge of your realm bordering a different neighboring top realm.
+## scope = character
+## push_scope = landed_title
+alias[effect:random_top_realm_border_county] = single_alias_right[random_effect]
+
+
+### Gets epidemics affecting the scoped character
+## scope = character
+## push_scope = epidemic
+alias[effect:every_character_epidemic] = single_alias_right[every_effect]
+
+
+
+### Gets epidemics affecting the scoped character
+## scope = character
+## push_scope = epidemic
+alias[effect:random_character_epidemic] = single_alias_right[random_effect]
+
+### Iterate through controlled title regiments ordered_controlled_title_maa_regiment = {    limit = { <triggers> }  order_by = script_value position = int  min = int   max = script_value  check_range_bounds = no # If you don't want an error logged if the list is smaller than the min/max <effects> }
+## scope = landed_title
+## push_scope = regiment
+alias[effect:ordered_top_realm_border_county] = single_alias_right[ordered_effect]
+
+### Iterate through all counties that are important for the scoped title ordered_important_location_for_title = {    limit = { <triggers> }  order_by = script_value position = int  min = int   max = script_value  check_range_bounds = no # If you don't want an error logged if the list is smaller than the min/max <effects> }
+## scope = landed_title
+## push_scope = landed_title
+alias[effect:ordered_important_location_for_title] = single_alias_right[ordered_effect]
+
+### Iterate through owned title MaA regiments ordered_owned_title_maa_regiment = {    limit = { <triggers> }  order_by = script_value position = int  min = int   max = script_value  check_range_bounds = no # If you don't want an error logged if the list is smaller than the min/max <effects> }
+## scope = landed_title
+## push_scope = regiment
+alias[effect:ordered_owned_title_maa_regiment] = single_alias_right[ordered_effect]
+
+### Iterate through all investors of target candidate within the scoped title. Optionally specify a value to filter by investment amount. scope:landed_title = {	any/every/ordered/random_succession_appointment_investors = {		candidate = scope:character		value > {			# Optional compare value to			value = 100		# only have characters that			add = 10		# have invested this much.		}	}}
+## scope = landed_title
+## push_scope = character
+alias[effect:ordered_owned_title_maa_regiment] = single_alias_right[ordered_effect]
+
+### Iterate through titles that consider scoped county an important location ordered_title_interested_in_location = {    limit = { <triggers> }  order_by = script_value position = int  min = int   max = script_value  check_range_bounds = no # If you don't want an error logged if the list is smaller than the min/max <effects> }
+## scope = landed_title
+## push_scope = landed_title
+alias[effect:ordered_title_interested_in_location] = single_alias_right[ordered_effect]
+
+
+### Iterate through title all MaA regiments ordered_title_maa_regiment = {    limit = { <triggers> }    order_by = script_value    position = int    min = int    max = script_value    check_range_bounds = no # If you don't want an error logged if the list is smaller than the min/max    <effects> }
+## scope = landed_title
+## push_scope = regiment
+alias[effect:ordered_title_maa_regiment] = single_alias_right[ordered_effect]
+
+
+### Iterate through every casus_belli_type in the database random_casus_belli_type = { limit = { <triggers> } (optional) weight = { mtth } <effects> }
+## push_scope = casus_belli_type
+alias[effect:random_casus_belli_type] = single_alias_right[random_effect]
+
+### Iterate through all domiciles random_domicile = { limit = { <triggers> } (optional) weight = { mtth } <effects> }
+## push_scope = domicile
+alias[effect:random_domicile] = single_alias_right[random_effect]
+
+### Iterate through all counties that are important for at least some title.random_important_location = { limit = { <triggers> } (optional) weight = { mtth } <effects> }
+## push_scope = landed_title
+alias[effect:random_important_location] = single_alias_right[random_effect]
+
+### IIterate through all titles that are interested in any county random_interested_title = { limit = { <triggers> } (optional) weight = { mtth } <effects> }
+## push_scope = landed_title
+alias[effect:random_interested_title] = single_alias_right[random_effect]
+
+### Iterate through all domiciles of scoped province. random_interested_title = { limit = { <triggers> } (optional) weight = { mtth } <effects> }
+## push_scope = domicile
+alias[effect:random_province_domicile] = single_alias_right[random_effect]
+
+### Iterate through all task contracts of location of root province random_available_task_contract = {    limit = { <triggers> }    order_by = script_value    position = int    min = int    max = script_value    check_range_bounds = no # If you don't want an error logged if the list is smaller than the min/max    <effects> }
+## scope = character
+## push_scope = task_contract
+alias[effect:random_available_task_contract] = single_alias_right[random_effect]
+
+### Gets all accepted task contracts of the root character random_character_active_contract = {    limit = { <triggers> }    order_by = script_value    position = int    min = int    max = script_value    check_range_bounds = no # If you don't want an error logged if the list is smaller than the min/max    <effects> }
+## scope = character
+## push_scope = task_contract
+alias[effect:random_character_active_contract] = single_alias_right[random_effect]
+
+### Gets all task contracts of the scoped character random_character_task_contract = {    limit = { <triggers> }    order_by = script_value    position = int    min = int    max = script_value    check_range_bounds = no # If you don't want an error logged if the list is smaller than the min/max    <effects> }
+## scope = character
+## push_scope = task_contract
+alias[effect:random_character_task_contract] = single_alias_right[random_effect]
+
+### Iterate through all contact characters of the root character. random_contact = { limit = { <triggers> } (optional) weight = { mtth } <effects> }
+## scope = character
+## push_scope = character
+alias[effect:random_contact] = single_alias_right[random_effect]
+
+### Iterate through all MaA regiments. random_maa_regiment = { limit = { <triggers> } (optional) weight = { mtth } <effects> }
+## scope = character
+## push_scope = regiment
+alias[effect:random_maa_regiment] = single_alias_right[random_effect]
+
+### Iterate through all noble family titles in the realm of scoped character.random_noble_family = { limit = { <triggers> } (optional) weight = { mtth } <effects> }
+## scope = character
+## push_scope = landed_title
+alias[effect:random_noble_family] = single_alias_right[random_effect]
+
+### Get all legends in a player character library. random_player_legend_library = { limit = { <triggers> } (optional) weight = { mtth } <effects> }
+## scope = character
+## push_scope = landed_title
+alias[effect:random_player_legend_library] = single_alias_right[random_effect]
+
+### Iterate through all directly owned provinces. random_powerful_family = { limit = { <triggers> } (optional) weight = { mtth } <effects> }
+## scope = character
+## push_scope = landed_title
+alias[effect:random_powerful_family] = single_alias_right[random_effect]
+
+### Iterate through all counties that are on the edge of your realm bordering a different neighboring realm. random_realm_border_county = { limit = { <triggers> } (optional) weight = { mtth } <effects> }
+## scope = character
+## push_scope = landed_title
+alias[effect:random_realm_border_county] = single_alias_right[random_effect]
+
+### Iterate through all candidates supported by the scoped investor character for any title. It may contain people outside of investor's top realm or no longer valid for appointment. random_succession_appointment_invested_candidate = { limit = { <triggers> } (optional) weight = { mtth } <effects> }
+## scope = character
+## push_scope = landed_title
+alias[effect:random_succession_appointment_invested_candidate] = single_alias_right[random_effect]
+
+### Iterate through all titles that has candidates supported by the scoped investor. It may contain titles outside of investor's top realm, and so invalid for appointment,and candidates may be already dead. random_succession_appointment_invested_title = { limit = { <triggers> } (optional) weight = { mtth } <effects> }
+## scope = character
+## push_scope = landed_title
+alias[effect:random_succession_appointment_invested_title] = single_alias_right[random_effect]
+
+### random_top_realm_border_county - Iterate through all counties that are on the edge of your realm bordering a different neighboring top realm. random_top_realm_border_county = { limit = { <triggers> } (optional) weight = { mtth } <effects> }
+## scope = character
+## push_scope = landed_title
+alias[effect:random_top_realm_border_county] = single_alias_right[random_effect]
+
+
+### rIterate through all counties that are important for the scoped title random_important_location_for_title = { limit = { <triggers> } (optional) weight = { mtth } <effects> }
+## scope = landed_title
+## push_scope = landed_title
+alias[effect:random_important_location_for_title] = single_alias_right[random_effect]
+
+
+###Iterate through all investors of target candidate within the scoped title. Optionally specify a value to filter by investment amount. scope:landed_title = {	any/every/ordered/random_succession_appointment_investors = {		candidate = scope:character		value > {			# Optional compare value to			value = 100		# only have characters that			add = 10		# have invested this much.		}	}} random_succession_appointment_investors = { limit = { <triggers> } (optional) weight = { mtth } <effects> }
+## scope = landed_title
+## push_scope = character
+alias[effect:random_succession_appointment_investors] = single_alias_right[random_effect]
+
+### Iterate through titles that consider scoped county an important location.random_title_interested_in_location = { limit = { <triggers> } (optional) weight = { mtth } <effects> }
+## scope = landed_title
+## push_scope = landed_title
+alias[effect:random_title_interested_in_location] = single_alias_right[random_effect]
+
+### Iterate through title all MaA regiments. random_title_maa_regiment = { limit = { <triggers> } (optional) weight = { mtth } <effects> }
+## scope = landed_title
+## push_scope = regiment
+alias[effect:random_title_maa_regiment] = single_alias_right[random_effect]

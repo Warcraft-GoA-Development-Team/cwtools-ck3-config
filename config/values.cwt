@@ -39,8 +39,12 @@ values = {
         friendly_battle_owner
         enemy_battle_owner
         province
+        provinces
         victory
         imprisoner
+        hostage
+        warden
+        home_court
         none
         target_titles
         secret_exposer
@@ -49,11 +53,13 @@ values = {
         hook
         claimant
         holder
+        holding
         county
         barony
         councillor
         councillor_liege
         liege
+        old_liege
         courtier
         host
         guest
@@ -78,12 +84,12 @@ values = {
         old_faith
         new_faith
         faith
+        age
         army_owner
         lessee
         ruler
         decision_type
         value
-        real_value
         great_holy_war
         name_character_target
         base
@@ -106,7 +112,10 @@ values = {
         concubine
         character
         court_physician
+        culture
         old_culture
+        other_culture
+        traits
         special
         dangerous
         secret_owner
@@ -125,6 +134,7 @@ values = {
         conquest_holy_war
         conquest_claim
         conquest_populist
+        appointment
         inheritance
         abdication
         destroyed
@@ -140,8 +150,142 @@ values = {
         faction_demand
         swear_fealty
         transfer_type
-        employee
+        female
+        ally
+        ruler_designer
+        current_weight
+        weight_for_portrait
+        prowess
+        founder
+        tradition
+        new_culture
+        old_owner
+        ai_honor
+        ai_greed
+        ai_rationality
+        ai_energy
+        ai_boldness
+        ai_zeal
+        ai_vengefulness
+        ai_compassion
+        ai_sociability
+        government
+        highest_held_title_tier
+        old_value
+        new_value
+        artifact
         inspiration
+        new_inspiration
+        inspiration_sponsor
+        inspiration_owner
+        will_override_government
+        employee
+        percent_of_monthly_gold_income
+        percent_of_positive_monthly_prestige_balance
+        percent_of_positive_monthly_piety_balance
+        percent_of_monthly_gold_income_all_positions
+        percent_of_positive_monthly_prestige_balance_all_positions
+        percent_of_positive_monthly_piety_balance_all_positions
+        firing_court_position
+        highest_available_aptitude
+        employee_aptitude
+        monthly_character_expenses
+        base_value
+        my_language_counties
+        their_language_counties
+        total_counties
+        checking_native_language
+        courts_with_language
+        replacing
+        old_primary
+        quality
+        wealth
+        mover
+        destination
+        struggle
+        new_memory
+        travel_plan
+        travel_plan_owner
+        danger_value
+        travel_speed
+        travel_safety
+        travel_time
+        speed_aptitude
+        safety_aptitude
+        grand_wedding_promise
+        special_option
+        highest_future_danger_value
+        new_owner
+        new_acclaimed_knight
+        old_acclaimed_knight
+        intermediary
+        previous_province
+        old_diarch
+        regular
+        depose
+        invalid
+        former_designated_diarch
+        score
+        travel_options
+        accolade_type
+        new_accolade_type
+        minimal_travel_time
+        estimated_arrival_diff_days
+        special_guests
+        year_of_birth
+        glory
+        positive
+        player
+        old_travel_leader
+        changed_obligations
+        new_successor
+        old_successor
+        tax_slot
+        dread
+        activity_intent
+        accolade
+        new_diarchy
+        old_dynasty
+        active_obligation
+        tax_collector
+        obligation
+        num_slots_with_obligation
+        is_current_obligation
+        num_vassal_slots
+        old_capital
+        dynasty
+        house
+        has_slot_with_obligation
+        firing
+        epidemic
+        epidemic_type
+        legend
+        num_legends
+        creator
+        protagonist
+        can_afford_current_level
+        agent_slot
+        contract_type
+        contract
+        employer
+        target_title
+        casus_belli_type
+        has_hostages
+        player_heir
+        interesting_destiny_character
+        hard_difficulty_destiny_character
+        favorite_destiny_character
+        previous_player_character
+        previous_player_heir
+        predecessor
+        heir
+        top_liege
+        changed_top_liege
+        stepped_down
+        appointment_succession
+        main_destiny_types
+        random_destiny_types
+        destiny_type_flag
     }
 
     value[accolade_tier] = {

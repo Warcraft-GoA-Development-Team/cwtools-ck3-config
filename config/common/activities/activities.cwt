@@ -3,16 +3,16 @@ types = {
         path = "common/activities/activity_types"
 
     }
-    type[activity_option] = {
-        path = "common/activities/activity_types"
-        unique = yes
-        skip_root_key = { options any }
-    }
-    type[activity_option_category] = {
-        path = "common/activities/activity_types"
-        unique = yes
-        skip_root_key = options
-    }
+    #type[activity_option] = {
+    #    path = "common/activities/activity_types"
+    #    unique = yes
+    #    skip_root_key = { options any }
+    #}
+    #type[activity_option_category] = {
+    #    path = "common/activities/activity_types"
+    #    unique = yes
+    #    skip_root_key = options
+    #}
     type[activity_phase] = {
         path = "common/activities/activity_types"
         skip_root_key = phases
@@ -76,9 +76,8 @@ activity = {
 	## cardinality = 0..1
     can_always_plan = bool
 
-	cooldown = {
-		enum[duration] = int_value_field
-	}
+	## cardinality = 0..1
+	cooldown = single_alias_right[duration_block]
 	
 	### Is this activity valid to continue
     ## replace_scope = { root = activity activity = activity host = character}
@@ -110,6 +109,7 @@ activity = {
 	province_score = single_alias_right[int_conditional_formula]
 
 	### Optional, defaults to unlimited, if set we only show the top X scored provinces as map icons
+	## cardinality = 0..1
 	max_province_icons = int
 
 	### Activity options scripted per activity type
@@ -117,11 +117,11 @@ activity = {
 
 		### Multiple categories allowed per activity, must be unique named categories
         ## cardinality = 1..inf
-		<activity_option_category> = {
+		value_set[activity_option_category] = {
 
 			### Multiple options allowed per category, must be unique named
             ## cardinality = 1..inf
-			<activity_option> = {
+			value_set[activity_option] = {
 				### Is this option shown in the category
 				## replace_scope = { root = character special_option = flag }
 				## cardinality = 0..1
@@ -167,7 +167,7 @@ activity = {
 				travel_entourage_selection = {
 					### List is all court characters.
                     ## replace_scope = { root = character host = character owner = character special_option = flag }
-					weight = int_value_field
+					weight = single_alias_right[int_conditional_formula]
 
 					### Up to how many characters to select for a player
 					max = int
@@ -184,7 +184,8 @@ activity = {
 	}
 
 	### When special option category is specified, the player will have to pick from this category before selecting a location. Each option in this category requires an illustration in the ACTIVITY_OPTION_TEXTURE_PATH folder and a flat icon in the ACTIVTY_OPTION_ICON_PATH folder
-	special_option_category = <activity_option_category>
+	## cardinality = 0..1
+	special_option_category = value[activity_option_category]
 
 	### Active phases of of an activity, each activity has at least one active phase, each must be uniquely named
 	phases = {
@@ -327,10 +328,7 @@ activity = {
 	ai_select_num_provinces = int_value_field
 
 	### Cost for this activity being planned at all root = character trying to host this activity. The following scopes are only passed in when available (not when calculating min-cost for example)
-    # scope:special_option = flag of the selected special option, not set if activity has no special option category
-	# scope:province = in a single location activity the selected location
-	# list provinces = in a multi location activity list of all selected locations
-    ## replace_scope = { root = character province = province special_option = flag list_provinces = list }
+    ## replace_scope = { root = character province = province special_option = flag list_provinces = value }
 	cost = single_alias_right[cost]
 
 	### Predicted average cost for this activity if you plan one Used to show a rough minimum or expected cost at all to plan this
@@ -426,23 +424,17 @@ activity = {
 	### How many days are all locales invalid to enter, after entering one
     ## replace_scope = { root = activity activity = activity host = character}
 	## cardinality = 0..1
-	locale_cooldown = {
-        enum[duration] = int_value_field
-    }
+	locale_cooldown = single_alias_right[duration_block]
 
 	### When should a player auto-visit a locale? Set whenever a locale is visited, or when a player arrives at the activity location. If not defined, a player does not auto-visit locales.
     ## replace_scope = { root = activity activity = activity host = character}
 	## cardinality = 0..1
-	auto_select_locale_cooldown = {
-        enum[duration] = int_value_field
-    }
+	auto_select_locale_cooldown = single_alias_right[duration_block]
 
 	### From what time are locales visitable before the start of the activity phases. (setting it to 14 days will open the locales 14 days before the first phase' active state starts) Not defining it will open the locales from the creation of the activity.
     ## replace_scope = { activity = activity host = character}
 	## cardinality = 0..1
-	early_locale_opening_duration = {
-        enum[duration] = int_value_field
-    }
+	early_locale_opening_duration = single_alias_right[duration_block]
 
 	### Anyone can choose to attend this activity if they meet its requirements. When planning an open invite activity only your court will specifically be invited
 	## cardinality = 0..1
@@ -571,9 +563,8 @@ activity = {
 	### Background for the activity, multiple can be read in, first one is picked from order they are read in
 	## cardinality = 1..inf
 	background = {
-		# root = the activity
-		# scope:activity = the activity
-		# scope:host = host of the activity
+		## cardinality = 0..1
+		## replace_scope = root = activity activity = activity host = character
 		trigger = single_alias_right[trigger_clause]
 		texture = localisation
 		environment = localisation

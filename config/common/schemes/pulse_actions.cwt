@@ -1,0 +1,27 @@
+types = {
+    type[pulse_action] = {
+        path = "game/common/schemes/pulse_actions"
+    }
+}
+
+pulse_action = {
+
+    ### Uses key name as default
+    icon = filepath
+
+    ###"LOC_KEY" # The (very tiny) text that will be shown in the scheme HUD widget after this pulse action fires.
+    ## cardinality = 0..1
+    hud_text = localisation
+
+    ### Can this action be picked on the pulse
+    ## replace_scope = { root = scheme activity = scheme owner = character }
+    is_valid = single_alias_right[trigger_clause]
+
+    ### Relative weight of this action being against all others
+    ## replace_scope = { root = scheme activity = scheme owner = character }
+    weight = int_value_field
+
+    ### Effect run when this action is picked
+    ## replace_scope = { root = scheme activity = scheme owner = character }
+    effect = single_alias_right[effect_clause]
+}

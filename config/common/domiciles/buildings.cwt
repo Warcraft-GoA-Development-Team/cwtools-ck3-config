@@ -1,0 +1,102 @@
+types = {
+    type[domicile_building] = {
+        path = "game/common/domiciles/buildings"
+        localisation = {
+            description = "$_domicile_building_desc"
+        }
+    }
+}
+
+enums = {
+    enum[domicile_slot_type] = {
+        main
+        external
+        internal
+    }
+}
+
+domicile_building = {
+    
+    ### Is the scoped owner able to construct this building?
+    ## push_scope = character
+    ## cardinality = 0..1
+    can_construct = single_alias_right[trigger_clause]
+
+    ### Effects fired when construction begins, is cancelled or finishes. Available scopes: root -- Domicile it is built in.	scope:owner -- Owner of the Domicile
+    ## replace_scope = {root = domicile owner = character }
+    ## cardinality = 0..1
+    on_start = single_alias_right[effect_clause]
+
+    ### Effects fired when construction begins, is cancelled or finishes. Available scopes: root -- Domicile it is built in.	scope:owner -- Owner of the Domicile
+    ## replace_scope = {root = domicile owner = character }
+    ## cardinality = 0..1
+    on_cancelled = single_alias_right[effect_clause]
+
+    ### Effects fired when construction begins, is cancelled or finishes. Available scopes: root -- Domicile it is built in.	scope:owner -- Owner of the Domicile
+    ## replace_scope = {root = domicile owner = character }
+    ## cardinality = 0..1
+    on_complete = single_alias_right[effect_clause]
+
+    ### How many days it takes to construct the building Note: Affected by modifiers 'build_speed' and 'domicile_build_speed'
+    construction_time = int[0..inf]
+
+    ### Arbitrary parameters that can be checked with the trigger 'has_domicile_parameter' Note: The above trigger just checks for existence, so it does not matter if the value is set to 'yes' or 'no'. Parameters are not inherited from previous_building and has to be  repeated to not get lost on upgrading.
+    ## cardinality = 0..1
+    parameters = {
+        ## cardinality = 1..inf
+        value_set[domicile_building_parameter] = bool
+    }
+
+    ### This building may only be constructed in selected slot type. Internal slots cannot be base buildings and requires a previous building. They may only be constructed within a main or external building. If slot type is 'main' and it doesn't have a previous building, it will automatically be constructed on start. Slot types are: 'main', 'external' or 'internal'. Default type is 'external'
+    ## cardinality = 0..1
+    slot_type = enum[domicile_slot_type]
+
+    ### 	Set the amount of unlocked internal building slots this building has.	Default is 0
+    ## cardinality = 0..1
+    internal_slots = int[0..inf]
+
+    ### Brief: allowed_domicile_types ( list of database key )	List the domicile types which can build this building. 	UNSET WILL NOT SHOW UP!	
+    ## cardinality = 1..1
+    allowed_domicile_types = {
+        <domicile_type>
+    }
+
+
+    ### Brief: previous_building ( database key )	If the 'previous_building'-statement is missing, this building 	will be treated as a base building meaning the first tier of a 	potentional chain of building upgrades.	To define an upgrade, type the key name of the building before it, marking this building as it's upgrade.	A building will get diverging upgrade paths if two upgrades has the same 'previous_building'-key
+    ## cardinality = 0..1
+    previous_building = <domicile_building>
+
+    ### Brief: cost ( scripted cost ) How much does this building cost? Ex: { gold = 500, prestige = 100 }
+    ## cardinality = 0..1
+    cost = single_alias_right[cost]
+
+    ### Brief: character_modifier ( modifiers ) Modifiers applied to the Domicile owner of this building. Ex: { county_opinion_add = 2, stress_loss_mult = 0.15 } Note: Please do not use holdings monthly_income, etc..! Instead use: domicile_monthly_gold_add or domicile_monthly_gold_mult (same for: _prestige / _piety / _influence )
+	## cardinality = 0..1
+    character_modifier = {
+        alias_name[modifier] = single_alias_match_left[modifier]
+    }
+
+    ### Brief: ai_value ( script value ) How desirable is the building for the AI. Evaluated alongside regular buildings. Available scopes: root -- Domicile it is built in scope:owner -- Owner of the Domicile
+    ai_value = single_alias_right[int_conditional_formula]
+
+    ### Brief: asset ( asset definition ) Which asset does the building use
+    ## cardinality = 1..inf
+    asset = {
+
+        ### Brief: trigger ( trigger ) Trigger for scoped domicile when to pick this asset over another, remove it to always pick this asset
+        trigger = single_alias_right[trigger_clause]
+
+        ### Brief: icon ( string path ) Building icon used in UI
+        icon = filepath
+
+        ### Brief: texture ( string path ) Path to texture shown in the domicile window
+        texture = filepath
+
+        ### Brief: intersectionmask_texture ( string path ) Mask used with texture
+        intersectionmask_texture = filepath
+
+        ### Brief: soundeffect ( string soundbank reference ) Associated sound effect. Supports soundparameters where they will be automatically appended based on building's current tier: soundparameter = { "Tier" = 1 }
+        soundeffect = filepath
+
+    }
+}

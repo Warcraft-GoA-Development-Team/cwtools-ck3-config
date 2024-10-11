@@ -4,7 +4,7 @@ types = {
     }
 }
 
-portrait_animation = single_alias_right[animation]
+portrait_animation = scalar
 
 # Remove placeholder until we do properly
 #portrait_animation = {

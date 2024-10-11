@@ -1,0 +1,158 @@
+types = {
+    type[epidemic] = {
+        path = "common/epidemics"
+    }
+}
+
+enums = {
+    enum[channel_shader] = {
+        red
+        green
+        blue
+        alpha
+    }
+}
+
+epidemic = {
+
+    ### What trait is tied to this disease
+	trait = <trait>
+
+    ### What color this epidemic has on the map: takes color names defined in the script colors file, RGB, HSV, HSV360 and HEX
+
+	color = single_alias_right[color]
+
+	### Name of the epidemic defaults to epidemic_key root = the epidemic being created
+    ## cardinality = 0..1
+	name = single_alias_right[complex_desc]
+
+	### Multiplier used against intensity level for how important an epidemic is. Used for picking which to show on the map
+    ## cardinality = 0..1
+	priority = value_field
+
+	### Data passed to the shader
+	shader_data = {
+        ### Strength of the disease, unsigned normalized float
+		strength = float[0.0..1.0]
+        ### Edge fade out, unsigned normalized float
+		edge_fade = float[0.0..1.0]
+        ### Multiplier for the tile wrapping
+		tile_multiplier = float[0.0..1.0]
+        ### Which tile texture in the shader to use
+		texture_index = int
+        ### Which color channel to use in the texture
+		channel = enum[channel_shader]
+	}
+
+	### Can a character be infected with this epidemic root = potential character to infect scope:epidemic = the epidemic
+        ## replace_scope = { root = character epidemic = epidemic }
+    ## cardinality = 0..1
+	can_infect_character = single_alias_right[trigger_clause]
+
+	### Monthly chance for an epidemic to infect a character in the province, ran once per character % from 0-100 inclusive. root = potential character to infect, scope:epidemic = the epidemic
+        ## replace_scope = { root = character epidemic = epidemic }
+        ## cardinality = 0..1
+	character_infection_chance = single_alias_right[int_conditional_formula]
+
+	### Effect run when a character is infected with this epidemic. root = character being infected	scope:epidemic = the epidemic
+        ## replace_scope = { root = character epidemic = epidemic }
+        ## cardinality = 0..1
+	on_character_infected = single_alias_right[effect_clause]
+
+	### Effect run when a province is infected with this epidemic. root = province being infected scope:epidemic = the epidemic
+        ## replace_scope = { root = province epidemic = epidemic }
+        ## cardinality = 0..1
+	on_province_infected = single_alias_right[effect_clause]
+
+	### Effect run when a province recovers from this epidemic root = province being infected scope:epidemic = the epidemic
+    ## replace_scope = { root = province epidemic = epidemic }
+    ## cardinality = 0..1
+    on_province_recovered = single_alias_right[effect_clause]
+
+	### Effect run when a province spawns an outbreak of this epidemic root = the epidemic
+    ## replace_scope = { root = epidemic }
+    ## cardinality = 0..1
+	on_start = single_alias_right[effect_clause]
+
+	### Effect run on rulers of the provinces affected by the epidemic on monthly tick. root = the ruler being affected scope:epidemic = the epidemic
+    ## replace_scope = { root = character epidemic = epidemic }
+    ## cardinality = 0..1
+	on_monthly = single_alias_right[effect_clause]
+
+	### Effect run when an epidemic of this type ends root = the epidemic
+    ## replace_scope = { root = epidemic }
+    ## cardinality = 0..1
+	on_end = single_alias_right[effect_clause]
+
+	### Every province has an infection level from 0-100, the highest level there they are above the threshold of will have its modifiers applied
+	infection_levels = {
+		### Left hand side value can reference a named script value that has a constant value ie: no formulas
+        ## cardinality = 1..inf
+		<value> = {
+			### Modifier applied to any province infected
+			province_modifier = {
+				alias[modifier] = alias_match_left[modifier]
+			}
+
+			### Modifier applied to the county if its county capital province is infected
+			county_modifier = {
+				alias[modifier] = alias_match_left[modifier]
+			}
+
+			### Modifier applied to every ruler that has this province as a part of their de facto realm hierarchy This means its effects will be stacked on a ruler for every infected province
+			realm_modifier = {
+				alias[modifier] = alias_match_left[modifier]
+			}
+		}
+	}
+
+	outbreak_intensities = {
+		### Intensity levels are minor, major and apocalytpic, each can be read in separately. Higher intensity levels are kept when neighboring epidemics merge.
+
+		minor = single_alias_right[outbreak_clause]
+
+        ### Intensity levels are minor, major and apocalytpic, each can be read in separately. Higher intensity levels are kept when neighboring epidemics merge.
+        major = single_alias_right[outbreak_clause]
+
+        ### Intensity levels are minor, major and apocalytpic, each can be read in separately. Higher intensity levels are kept when neighboring epidemics merge.
+        apocalytpic = single_alias_right[outbreak_clause]
+	}
+}
+
+
+single_alias[outbreak_clause] = {
+    {
+        ### Should an outbreak of this intensity be considered a global event that notifies the player regardless of their proximity to the outbreak. Defaults to no
+        global_notification = bool
+
+        ### Chance for an outbreak of this intensity to spawn on a province per year. % from 0-100 inclusive. root = potential province. scope:epidemic_type = this epidemic type
+        ## replace_scope = { root = province epidemic = epidemic}
+        outbreak_chance = single_alias_right[int_conditional_formula]
+
+        ### Chance for an epidemic of this intensity to spread to an adjacent province per month. % from 0-100 inclusive root = potential province scope:epidemic = the epidemic
+        ## replace_scope = { root = province epidemic = epidemic}
+        spread_chance = single_alias_right[int_conditional_formula]
+
+        ### Maximum number of provinces an epidemic of this intensity can infect
+        ## replace_scope = { root = epidemic }
+        max_provinces = <script_value>
+
+        ### How long an infection in a province lasts for once it hits max infection root = infected province scope:epidemic = the epidemic
+        ## replace_scope = { root = province epidemic = epidemic}
+        infection_duration = {
+            enum[duration] = single_alias_right[int_conditional_formula]
+        }
+
+        ### How many days it will take for a province to hit max infection root = infected province scope:epidemic = the epidemic
+        ## replace_scope = { root = province epidemic = epidemic}
+        infection_progress_duration = {
+            enum[duration] = single_alias_right[int_conditional_formula]
+        }
+
+        ### How many days it will take for a province to recover from max infection after infection_duration has elapsed root = infected province scope:epidemic = the epidemic
+        ## replace_scope = { root = province epidemic = epidemic }
+        infection_recovery_duration = {
+            enum[duration] = single_alias_right[int_conditional_formula]
+        }
+    }
+}

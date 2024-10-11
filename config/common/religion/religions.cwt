@@ -1,11 +1,26 @@
 types = {
     type[religion] = {
         path = "game/common/religion/religions"
+        localisation = {
+            name = "$_religion"
+            description = "$_religion_desc"
+            adjective = "$_religion_adj"
+            adherent = "$_religon_adherent"
+            adherent_plural = "$_religion_adherent_plural"
+        }
     }
     type[faith] = {
         path = "game/common/religion/religions"
         skip_root_key = { any faiths }
+        localisation = {
+            name = "$"
+            description = "$_desc"
+            adjective = "$_adj"
+            adherent = "$_adherent"
+            adherent_plural = "$_adherent_plural"
+        }
     }
+
 }
 
 #TODO: Actually match these with defined traits.
@@ -86,7 +101,7 @@ religion = {
 
     faiths = {
         ## cardinality = ~1..inf
-        <faith> = {
+        scalar = {
             ### HSV color as a series of floats.
             color = single_alias_right[hsv_color]
             ### RGB color as a series of ints
@@ -101,7 +116,9 @@ religion = {
             piety_icon_group = replace_me
             ## cardinality = 0..1
             doctrine_background_icon = filepath[gfx/interface/icons/faith_doctrines]
-            religious_head = replace_me
+            
+            ##cardinality = 0..1
+            religious_head = <landed_title>
         
             ## cardinality = 0..inf
             holy_site = <holy_site>
@@ -114,6 +131,7 @@ religion = {
             ## cardinality = 0..1
             reserved_female_names = single_alias_right[scalar_list]
         
+            ##cardinality = 0..1
             localization = single_alias_right[religion_localization]
         
             ## cardinality = 0..1
@@ -132,6 +150,7 @@ religion = {
     ### When creating a custom faith, these will be the available icons. Path is  "gfx/interface/icons/religion/%s.dds", where %s is the name. Also needs a text icon
     custom_faith_icons = single_alias_right[scalar_list]
 
+    
     localization = single_alias_right[religion_localization]
 
     #TODO: Implement coat of arms and regiments

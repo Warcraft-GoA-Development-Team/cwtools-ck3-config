@@ -111,7 +111,40 @@ scopes = {
 		aliases = { culture_tradition "culture tradition" }
 		data_type_name = "CultureTradition"
 	}
-	Artifacts = {
+	Artifact = {
 		aliases = { artifact }
+	}
+	"Epidemic Type" = {
+		aliases = { epidemic_type }
+	}
+	Epidemic = {
+		aliases = { epidemic }
+	}
+	"Legend Type" = {
+		aliases = { legend_type }
+	}
+	Legend = {
+		aliases = { legend }
+	}
+	Domicile = {
+		aliases = { domicile }
+	}
+	"Geographical Region" = {
+		aliases = { geographical_region "geographical region" }
+	}
+	"Agent Slot" = {
+		aliases = { agent_slot "agent slot" }
+	}
+	"Task Contract" = {
+		aliases = { task_contract "task contract" }
+	}
+	"Task Contract Type" = {
+		aliases = { task_contract_type "task contract type" }
+	}
+	Regiment = {
+		aliases = { regiment }
+	}
+	"Casus Belli Type" = {
+		aliases = { casus_belli_type "casus belli type" }
 	}
 }

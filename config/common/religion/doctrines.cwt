@@ -54,6 +54,7 @@ doctrine_group = {
         #     ## cardinality = 0..inf
         #     scalar = scalar
         # }
+        ## cardinality = 0..1
         parameters = single_alias_right[doctrine_param]
 
         ## cardinality = 0..1
@@ -80,6 +81,9 @@ doctrine_group = {
         ## cardinality = 0..1
         ### The traits that should be considered sins and virtues for this faith.
         traits = single_alias_right[sins_and_virtues]
+
+        ## cardinality = 0..1
+        clergy_modifier = single_alias_right[doctrine_character_modifier]
     }
 }
 

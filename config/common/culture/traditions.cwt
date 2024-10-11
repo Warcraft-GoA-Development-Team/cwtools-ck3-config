@@ -6,11 +6,25 @@ types = {
 
 ## cardinality 0..inf
 tradition = {
+    ### vanilla categories: combat, realm, ritual, societal, regional
     ## cardinality = 1..1
     category = enum[tradition_category]
 
+    ### ex. 0 = learning 1 = western 4 = fight.dds
     # cardinality = 1..1
-    layers = single_alias_right[tradition_image_layers]
+    layers = {
+        ## cardinality = 0..inf
+        <int> = scalar
+        ## cardinality = 0..1
+        0 = enum[trad_layer_background]
+        ## cardinality = 0..1
+        1 = enum[trad_layer_pattern]
+        ## cardinality = 0..1
+        4 = icon[gfx/interface/icons/culture_tradition/4-items]
+    }
+
+    ## cardinality = 0..1
+    is_shown = single_alias_right[trigger_clause]
 
     ## cardinality = 0..1
     parameters = single_alias_right[tradition_parameters]
@@ -25,10 +39,15 @@ tradition = {
     province_modifier = single_alias_right[province_modifier]
 
     ## cardinality = 0..1
-    doctrine_character_modifier = single_alias_right[character_modifier]
+    doctrine_character_modifier = {
+        doctrine = <doctrine>
+        alias_name[modifier] = alias_match_left[modifier]
+    }
 
+    ## replace_scope { root = culture }
     ## cardinality = 0..1
     can_pick = single_alias_right[trigger_clause]
+    ## replace_scope { root = culture }
     ## cardinality = 0..1
     can_pick_for_hybridization = single_alias_right[trigger_clause]
 
@@ -36,28 +55,19 @@ tradition = {
     cost = single_alias_right[cost]
 
     ## cardinality = 0..1
-    ai_will_do = int_value_field
+    ## replace_scope = { root = culture character = character}
+    ai_will_do = single_alias_right[int_conditional_formula]
 }
 
 single_alias[tradition_parameters] = {
     ## cardinality = 0..inf
-    enum[cultural_parameter] = scalar
+    value_set[cultural_parameter] = scalar
+    ## cardinality = 0..inf
+    value[cultural_parameter] = scalar
 }
 
-single_alias[tradition_image_layers] = {
-    ## cardinality = 0..inf
-    int = <string>
-}
 
 enums = {
-    complex_enum[cultural_parameter] = {
-		path = "game/common/culture/traditions"
-		name = {
-			parameters = {
-				enum_name = scalar
-			}
-		}
-	}
 
     enum[tradition_category] = {
         combat
@@ -65,5 +75,20 @@ enums = {
         ritual
         societal
         regional
+        diplo
+    }
+    enum[trad_layer_background] = {
+        learning
+        stewardship
+        martial
+        intrigue
+        prowess
+        diplomacy
+    }
+    enum[trad_layer_pattern] = {
+        western
+        mena
+        mediterranean
+        indian
     }
 }

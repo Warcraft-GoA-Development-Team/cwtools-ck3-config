@@ -1,3 +1,13 @@
+single_alias[any_trigger] = {
+    ## cardinality = 0..1
+    percent = value_float[0.0..1.0]
+    ## cardinality = 0..1
+    count = int_value_field
+    ## cardinality = 0..1
+    count = all
+    alias_name[trigger] = alias_match_left[trigger]
+}
+
 ###############################
 # DYNASTY SCOPE
 ###############################
@@ -530,6 +540,15 @@ alias[trigger:any_involved_ruler] = {
 }
 
 ###############################
+# EPIDEMIC SCOPE
+###############################
+
+### Iterate through all characters that are involved in a struggle.
+## scope = epidemic
+## push_scope = province
+alias[trigger:any_infected_province] = single_alias_right[any_trigger]
+
+###############################
 # GHW SCOPE
 ###############################
 
@@ -710,6 +729,10 @@ alias[trigger:any_character_with_royal_court] = {
     alias_name[trigger] = alias_match_left[trigger]
 }
 
+### Gets all legends in the world that have been completed
+## push_scope = legend
+alias[trigger:any_completed_legend] = single_alias_right[any_trigger]
+
 ### Iterate through all counties in the game any_county = { <count=num/all> / <percent=fixed_point> <triggers> }
 ## push_scope = landed_title
 alias[trigger:any_county] = {
@@ -819,10 +842,22 @@ alias[trigger:any_empire] = {
     alias_name[trigger] = alias_match_left[trigger]
 }
 
+### Gets all epidemics in the world
+## push_scope = epidemic
+alias[trigger:any_epidemic] = single_alias_right[any_trigger]
+
+### Iterate through every epidemic_type in the database
+## push_scope = epidemic_type
+alias[trigger:any_epidemic] = single_alias_right[any_trigger]
+
 ### true if any child is false (equivalent to NAND)
 alias[trigger:any_false] = {
     alias_name[trigger] = alias_match_left[trigger]
 }
+
+### Iterate through every geographical_region in the database
+## push_scope = geographical_region
+alias[trigger:any_geographical_region] = single_alias_right[any_trigger]
 
 ### Undocumented
 alias[trigger:any_government_type] = {
@@ -929,6 +964,14 @@ alias[trigger:any_kingdom] = {
     count = all
     alias_name[trigger] = alias_match_left[trigger]
 }
+
+### Gets all legends in the world that have not been completed
+## push_scope = legend
+alias[trigger:any_legend] = single_alias_right[any_trigger]
+
+### Iterate through every legend_type in the database
+## push_scope = legend_type
+alias[trigger:any_legend_type] = single_alias_right[any_trigger]
 
 ### Iterate through all living characters any_living_character = { <count=num/all> / <percent=fixed_point> <triggers> }
 ## push_scope = character
@@ -1115,6 +1158,16 @@ alias[trigger:any_neighboring_province] = {
     alias_name[trigger] = alias_match_left[trigger]
 }
 
+### Gets epidemics affecting the scoped province
+## scope = province
+## push_scope = epidemic
+alias[trigger:any_province_epidemic] = single_alias_right[any_trigger]
+
+### Gets legends affecting the scoped province
+## scope = province
+## push_scope = legend
+alias[trigger:any_province_legend] = single_alias_right[any_trigger]
+
 ###############################
 # WAR SCOPE
 ###############################
@@ -1176,21 +1229,32 @@ alias[trigger:any_leased_title] = {
 }
 
 ###############################
+# LEGEND SCOPE
+###############################
+
+### Gets all promoters of the scoped legend
+## scope = legend
+## push_scope = character
+alias[trigger:any_legend_promoter] = single_alias_right[any_trigger]
+
+### Gets all provinces the scoped legend has spread into
+## scope = legend
+## push_scope = province
+alias[trigger:any_spread_province] = single_alias_right[any_trigger]
+
+###############################
 # SCHEME SCOPE
 ###############################
 
-### Iterate through all agents in the scheme any_scheme_agent = { <count=num/all> / <percent=fixed_point> <triggers> }
+### Iterate through all agents in the scheme any_scheme_agent_character = { <count=num/all> / <percent=fixed_point> <triggers> }
 ## scope = scheme
 ## push_scope = character
-alias[trigger:any_scheme_agent] = {
-    ## cardinality = 0..1
-    percent = value_float[0.0..1.0]
-    ## cardinality = 0..1
-    count = int_value_field
-    ## cardinality = 0..1
-    count = all
-    alias_name[trigger] = alias_match_left[trigger]
-}
+alias[trigger:any_scheme_agent_character] = single_alias_right[any_trigger]
+
+### Iterate through all agent slots in the scheme. any_scheme_agent_slot = { <count=num/all> / <percent=fixed_point> <triggers> }
+## scope = scheme
+## push_scope = agent_slot
+alias[trigger:any_scheme_agent_slot] = single_alias_right[any_trigger]
 
 ###############################
 # CHARACTER SCOPE
@@ -1319,6 +1383,11 @@ enums = {
         interloper
     }
 }
+
+### Gets epidemics affecting the scoped character
+## scope = character
+## push_scope = epidemic
+alias[trigger:any_legend_promoter] = single_alias_right[any_trigger]
 
 # TODO Add optional parameter
 ### Iterate through all struggles that character is involved in. Optional: Narrow down the involvement status *_chracter_struggle = { involvement = involved | interloper } 
@@ -2311,6 +2380,11 @@ alias[trigger:any_raid_target] = {
     alias_name[trigger] = alias_match_left[trigger]
 }
 
+### Iterate through all counties that are on the edge of your realm bordering a different neighboring realm.
+## scope = character
+## push_scope = landed_title
+alias[trigger:any_realm_border_county] = single_alias_right[any_trigger]
+
 ### Iterate through all counties in the realm. Based on top liege  any_realm_county = { <count=num/all> / <percent=fixed_point> <triggers> }
 ## scope = character
 ## push_scope = landed_title
@@ -2393,7 +2467,7 @@ alias[trigger:any_same_sex_spouse_candidate] = {
 ## scope = character
 ## push_scope = character
 alias[trigger:any_relation] = {
-    type = <game_concept.relation>
+    type = <scripted_relation>
     ## cardinality = 0..1
     percent = value_float[0.0..1.0]
     ## cardinality = 0..1
@@ -2650,6 +2724,11 @@ alias[trigger:any_tax_slot] = {
     count = all
     alias_name[trigger] = alias_match_left[trigger]
 }
+
+### Iterate through all counties that are on the edge of your realm bordering a different neighboring top realm.
+## scope = character
+## push_scope = landed_title
+alias[trigger:any_top_realm_border_county] = single_alias_right[any_trigger]
 
 ### Iterate though all characters that should travel with the scoped one (when moving between courts for instance); includes the scoped character
 ## scope = character
@@ -3292,11 +3371,6 @@ alias[trigger:any_activity_declined] = {
     alias_name[trigger] = alias_match_left[trigger]
 }
 
-
-
-
-
-
 ### Iterate through all characters who have unanswered invites to a specific activity any_activity_invited = { <count=num/all> / <percent=fixed_point> <triggers> }
 alias[trigger:any_activity_invited] = {
     ## cardinality = 0..1
@@ -3308,9 +3382,108 @@ alias[trigger:any_activity_invited] = {
     alias_name[trigger] = alias_match_left[trigger]
 }
 
+### Iterate through all MaA regiments in the army scope:army = {	any_army_maa_regiment = {		include_hired = yes # should it include merc and holy order regiments (yes by default)	}}
+## scope = army
+## push_scope = regiment
+alias[trigger:any_army_maa_regiment] = {
+    ## cardinality = 0..1
+    include_hired = bool
+    ## cardinality = 0..1
+    percent = value_float[0.0..1.0]
+    ## cardinality = 0..1
+    count = int_value_field
+    ## cardinality = 0..1
+    count = all
+    alias_name[trigger] = alias_match_left[trigger]
+}
+
+### Iterate through every casus_belli_type in the database. any_casus_belli_type = { <count=num/all> / <percent=fixed_point> <triggers> }
+## push_scope = casus_belli_type
+alias[trigger:any_army_maa_regiment] = single_alias_right[any_trigger]
+
+### Iterate through all domiciles. any_domicile = { <count=num/all> / <percent=fixed_point> <triggers> }
+## push_scope = domicile
+alias[trigger:any_domicile] = single_alias_right[any_trigger]
+
+### Iterate through all counties that are important for at least some title.any_important_location = { <count=num/all> / <percent=fixed_point> <triggers> }
+## push_scope = landed_title
+alias[trigger:any_important_location] = single_alias_right[any_trigger]
+
+### Iterate through all domiciles of scoped province any_province_domicile = { <count=num/all> / <percent=fixed_point> <triggers> }
+## scope = province
+## push_scope = landed_title
+alias[trigger:any_province_domicile] = single_alias_right[any_trigger]
+
+### Iterate through all task contracts of location of root province.any_available_task_contract = { <count=num/all> / <percent=fixed_point> <triggers> }
+## scope = character
+## push_scope = task_contract
+alias[trigger:any_available_task_contract] = single_alias_right[any_trigger]
+
+### Gets all accepted task contracts of the root character.any_character_active_contract = { <count=num/all> / <percent=fixed_point> <triggers> }
+## scope = character
+## push_scope = task_contract
+alias[trigger:any_character_active_contract] = single_alias_right[any_trigger]
+
+### Gets all task contracts of the scoped character. any_character_task_contract = { <count=num/all> / <percent=fixed_point> <triggers> }
+## scope = character
+## push_scope = task_contract
+alias[trigger:any_character_task_contract] = single_alias_right[any_trigger]
+
+### Iterate through all contact characters of the root character. any_contact = { <count=num/all> / <percent=fixed_point> <triggers> }
+## scope = character
+## push_scope = character
+alias[trigger:any_contact] = single_alias_right[any_trigger]
 
 
+### Iterate through all MaA regiments. any_maa_regiment = { <count=num/all> / <percent=fixed_point> <triggers> }
+## scope = character
+## push_scope = regiment
+alias[trigger:any_maa_regiment] = single_alias_right[any_trigger]
 
+### Iterate through all noble family titles in the realm of scoped character. any_noble_family = { <count=num/all> / <percent=fixed_point> <triggers> }
+## scope = character
+## push_scope = landed_title
+alias[trigger:any_noble_family] = single_alias_right[any_trigger]
+
+### Iterate through all directly owned provinces. any_powerful_family = { <count=num/all> / <percent=fixed_point> <triggers> }
+## scope = character
+## push_scope = dynasty_house
+alias[trigger:any_powerful_family] = single_alias_right[any_trigger]
+
+### Iterate through all candidates supported by the scoped investor character for any title. It may contain people outside of investor's top realm or no longer valid for appointment. any_succession_appointment_invested_candidate = { <count=num/all> / <percent=fixed_point> <triggers> }
+## scope = character
+## push_scope = character
+alias[trigger:any_succession_appointment_invested_candidate] = single_alias_right[any_trigger]
+
+### Iterate through all titles that has candidates supported by the scoped investor. It may contain titles outside of investor's top realm, and so invalid for appointment,and candidates may be already dead. any_succession_appointment_invested_title = { <count=num/all> / <percent=fixed_point> <triggers> }
+## scope = character
+## push_scope = landed_title
+alias[trigger:any_succession_appointment_invested_title] = single_alias_right[any_trigger]
+
+### Iterate through controlled title regiments. any_controlled_title_maa_regiment = { <count=num/all> / <percent=fixed_point> <triggers> }
+## scope = landed_title
+## push_scope = regiment
+alias[trigger:any_controlled_title_maa_regiment] = single_alias_right[any_trigger]
+
+### Iterate through owned title MaA regiments. any_owned_title_maa_regiment = { <count=num/all> / <percent=fixed_point> <triggers> }
+## scope = landed_title
+## push_scope = regiment
+alias[trigger:any_owned_title_maa_regiment] = single_alias_right[any_trigger]
+
+### Iterate through all investors of target candidate within the scoped title. Optionally specify a value to filter by investment amount. scope:landed_title = {	any/every/ordered/random_succession_appointment_investors = {		candidate = cope:character		value > {			# Optional compare value to			value = 00		# only have characters that			add = 10		# have invested this much.		}	}} any_succession_appointment_investors = { <count=num/all> / <percent=fixed_point> <triggers> }
+## scope = landed_title
+## push_scope = character
+alias[trigger:any_succession_appointment_investors] = single_alias_right[any_trigger]
+
+### Iterate through titles that consider scoped county an important location any_title_interested_in_location = { <count=num/all> / <percent=fixed_point> <triggers> }
+## scope = landed_title
+## push_scope = landed_title
+alias[trigger:any_title_interested_in_location] = single_alias_right[any_trigger]
+
+### Iterate through title all MaA regiments. any_title_maa_regiment = { <count=num/all> / <percent=fixed_point> <triggers> }
+## scope = landed_title
+## push_scope = regiment
+alias[trigger:any_title_maa_regiment] = single_alias_right[any_trigger]
 
 # Scopes from a character to a neighboring barony (looking trough the de Jure lieges) any_character_to_title_neighboring_barony = { <count=num/all> / <percent=fixed_point> <triggers> }
 #alias[trigger:any_character_to_title_neighboring_barony] = {

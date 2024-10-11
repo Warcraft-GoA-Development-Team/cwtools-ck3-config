@@ -22,6 +22,7 @@ scripted_animation = {
 		animation = scalar
 
 		### Instead of defining 'animation', you can refer to another scripted animation
+		## cardinality = 0..1
 		scripted_animation = <scripted_animation>
 	}
 

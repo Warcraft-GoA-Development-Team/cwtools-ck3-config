@@ -15,9 +15,9 @@ enums = {
     }
 }
 
-animation = {
-    alias_name[body_type_animation] = alias_match_left[body_type_animation]
-}
+#animation = {
+#    alias_name[body_type_animation] = alias_match_left[body_type_animation]
+#}
 
 alias[body_type_animation:female] = enum[body_type]
 alias[body_type_animation:male] = enum[body_type]
@@ -59,20 +59,15 @@ single_alias[animation_description] = {
 
 }
 
-alias_name[animation:basic_animation] = {
-    animation = <animation>
+alias[animation:animation] = {
+    ## cardinality = 1..inf
+    <portrait_animation>
 }
 
-alias_name[animation:animation_scripted] = {
-    animation = <scripted_animation>
-}
+alias[animation:animation] = <portrait_animation>
 
-alias_name[animation:animation_list] = {
-    animation = {
-        ## cardinality = 1..inf
-        <animation>
-    }
-}
+alias[animation:scripted_animation] = <scripted_animation>
+
 
 single_alias[animation_clause] = {
     alias_name[animation] = alias_match_left[animation]
@@ -84,7 +79,7 @@ single_alias[scripted_animation] = {
         ## cardinality = 1..1
         trigger = single_alias_right[trigger_clause]
         ## cardinality = 1..1
-        alias_name[animation] = alias_match_left[animation]   
+        alias_name[animation] = alias_match_left[animation]
     }
     ## cardinality = 1..1
     alias_name[animation] = alias_match_left[animation] 

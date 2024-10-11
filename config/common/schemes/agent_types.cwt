@@ -1,0 +1,32 @@
+types = {
+    type[agent_slot] = {
+        path = "game/common/schemes/agent_types"
+    }
+}
+
+enums = {
+    enum[contribution_type] = {
+        secrecy
+        speed
+        success_chance
+        success_chance_growth
+        success_chance_max
+    }
+}
+
+agent_slot = {
+    ### Trigger for whether a specific character is valid for this agent slot.
+    # also includes target scope, but this can be a variety of things.
+    ## replace_scope = { root = character owner = character }
+    valid_agent_for_slot = single_alias_right[trigger_clause]
+
+    ### What part of a scheme the agent should contribute to.
+    contribution_type = enum[contribution_type]
+
+    ### A scripted value. The resulting number is what the agent will contribute to whatever's defined as contribution_type.
+    ## replace_scope = { root = character owner = character scheme = scheme }
+    # also includes target scope, but this can be a variety of things.
+    contribution = single_alias_right[int_conditional_formula]
+
+
+}
