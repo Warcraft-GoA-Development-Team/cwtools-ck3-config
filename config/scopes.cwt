@@ -147,4 +147,7 @@ scopes = {
 	"Casus Belli Type" = {
 		aliases = { casus_belli_type "casus belli type" }
 	}
+	Trait = {
+		aliases = { trait }
+	}
 }
