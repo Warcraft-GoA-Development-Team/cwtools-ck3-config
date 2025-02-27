@@ -64,7 +64,7 @@ modifier_container = {
 	##cardinality = 0..1
     icon = scalar
 	
-    ##cardinality = 1..inf
+    ##cardinality = 0..inf
     single_alias_name[modifier] = single_alias_match_left[modifier]
 
 

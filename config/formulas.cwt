@@ -113,7 +113,7 @@ single_alias[int_conditional_formula] = {
     ## cardinality = 0..inf
     alias_name[arithmetic_operation] = int_value_field
     ## cardinality = 0..inf
-    alias_name[arithmetic_operation] = alias_match_left[score_operation
+    alias_name[arithmetic_operation] = alias_match_left[score_operation]
 }
 
 single_alias[float_conditional_formula] = {

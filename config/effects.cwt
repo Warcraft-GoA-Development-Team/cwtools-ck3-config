@@ -1353,6 +1353,20 @@ alias[effect:random] = {
     alias_name[effect] = alias_match_left[effect]
 }
 
+###random_list - a random list effect random_list = { X1 = { trigger = { enables/disable this effect} modifier/compare_modifier/opinion_modifier = Y1 effect1 } X2 = { trigger = { enables/disable this effect} modifier/compare_modifier/opinion_modifier = Y2 effect2 } ... }Selects one effect from the list and fires it. The effects are weighted by numbers X1, X2... (the higher the number, the higher the chance of the effect being picked). The chances can be modified by optional value modifier lists Y1, Y2... (AKA MTTH)
+alias[effect:random_list] = {
+    ## cardinality = 1..inf
+    int = {
+        ## cardinality = 0..1
+        trigger = alias_match_left[trigger]
+
+        ## cardinality = 0..inf
+        alias_name[weight] = alias_match_left[weight]
+
+        alias_name[effect] = alias_match_left[effect]
+    }
+}
+
 ### Removes the current scope from a named list remove_from_list = <string>
 alias[effect:remove_from_list] = value[list]
 
@@ -2053,7 +2067,15 @@ alias[effect:add_character_flag] = value_set[character_flag]
 
 ### Add a modifier to a character add_character_modifier = name add_character_modifier = { modifier = name days/weeks/months/years = int }
 ## scope = character
-alias[effect:add_character_modifier] = single_alias_right[added_modifier]
+alias[effect:add_character_modifier] = {
+    modifier = <modifier_container>
+    ## cardinality = 0..1
+    enum[duration] = int
+}
+
+### Add a modifier to a character add_character_modifier = name add_character_modifier = { modifier = name days/weeks/months/years = int }
+## scope = character
+alias[effect:add_character_modifier] = <modifier_container>
 
 ### Add the target character to the scoped character's list of contacts add_contact = CHARACTER_SCOPE
 ## scope = character
