@@ -51,7 +51,7 @@ pillar = {
 
 single_alias[pillar_parameters] = {
     ## cardinality = 0..inf
-    <string> = bool
+    scalar = bool
 }
 
 enums = {
