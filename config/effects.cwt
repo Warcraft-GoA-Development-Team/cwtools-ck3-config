@@ -2082,11 +2082,7 @@ alias[effect:add_character_flag] = value_set[character_flag]
 
 ### Add a modifier to a character add_character_modifier = name add_character_modifier = { modifier = name days/weeks/months/years = int }
 ## scope = character
-alias[effect:add_character_modifier] = {
-    modifier = <modifier_container>
-    ## cardinality = 0..1
-    enum[duration] = int
-}
+alias[effect:add_character_modifier] = single_alias_right[added_modifier]
 
 ### Add a modifier to a character add_character_modifier = name add_character_modifier = { modifier = name days/weeks/months/years = int }
 ## scope = character
