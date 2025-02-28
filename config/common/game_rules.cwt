@@ -1,13 +1,13 @@
 types = {
-    type[game_rule_category] = {
+    type[game_rule_type] = {
         path = "game/common/game_rules"
     }
 
-    # type_key_filter <> is_available_on_create
-    #type[game_rule] = {
-    #    path = "game/common/game_rules"
-    #    skip_root_key = any
-    #}
+    ## type_key_filter <> { is_available_on_create categories default }
+    type[game_rule] = {
+        path = "game/common/game_rules"
+        skip_root_key = any
+    }
 }
 
 enums = {
@@ -24,38 +24,46 @@ enums = {
         faith
         flavor
     }
+    enum[game_rule_flags] = {
+        no_end_date
+        no_diplomatic_range
+        restricted_diplomatic_range
+        blocks_achievements
+    }
 }
 
-game_rule = {
+game_rule_type = {
 
     ###  What categories this game rule belongs too
     ## cardinality = 1..1
     categories = {
-        <enum[game_rule_category]>
+        enum[game_rule_category]
+        scalar
     }
 
-    ## cardinality = 1..inf
-    value_set[rule_setting_name] = {
-        
-        ### Apply a modifier to characters matching a specific category. Valid are player, ai, and all. E.G., player:very_easy
-        ## cardinality = 0..inf
-        apply_modifier = scalar
+    ###  Which setting to default to
+    ## cardinality = 1..1
+    default = <game_rule>
+}
 
-        ### Override these defines while active. Formatted as the normal define files
-        ## cardinality = 0..1
-        defines = {
+game_rule = {
+    ### Apply a modifier to characters matching a specific category. Valid are player, ai, and all. E.G., player:very_easy
+    ## cardinality = 0..inf
+    apply_modifier = scalar
+
+    ### Override these defines while active. Formatted as the normal define files
+    ## cardinality = 0..1
+    defines = {
+
+        ## cardinality = 1..inf
+        <define_category> = {
 
             ## cardinality = 1..inf
-            <define_category> = {
-
-                 ## cardinality = 1..inf
-                <define_name> = scalar
-            }
-
-            ### Has some specific effect.
-            ## cardinality = 1..inf
-            flag = value_set[game_rule_flag]
+            <define_name> = scalar
         }
     }
 
+    ### Has some specific effect.
+    ## cardinality = 0..inf
+    flag = enum[game_rule_flags]
 }

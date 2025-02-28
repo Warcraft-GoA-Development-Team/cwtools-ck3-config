@@ -2,6 +2,7 @@ types = {
     type[court_amenity_category] = {
         path = "game/common/court_amenities"
     }
+	##type_key_filter <> { default }
     type[court_amenity_level] = {
         path = "game/common/court_amenities"
         skip_root_key = any
@@ -13,7 +14,7 @@ court_amenity_category = {
 
 	### Optional specification of what counts as the default setting. New rulers will by default start with court amenities at this setting for this category. If it is not set, it will pick the first defined setting below.
     ## cardinality = 0..1
-	default = localisation 	
+	default = <court_amenity_level>
 	
 	### Defines a court amenity setting within this category. The order individual settings are defined in here determines the order they are displayed in in the UI. I.e. settings defined first are displayed to the left, and those defined last are displayed to the right.
     ## cardinality = 1..inf
