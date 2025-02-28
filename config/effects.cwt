@@ -1193,6 +1193,9 @@ alias[effect:custom_tooltip] = {
     alias_name[effect] = alias_match_left[effect]
 }
 
+### just a tooltip, the scope as subject (for grouping, localization)
+alias[effect:custom_tooltip] = localisation
+
 ### Log a string to the debug log when this effect executes, debug_log = message, the message can be a localization string with ROOT, SCOPE and PREV available
 alias[effect:debug_log] = localisation
 
@@ -1656,7 +1659,7 @@ alias[effect:trigger_event] = {
     enum[duration] = int
     ## cardinality = 0..1
     enum[duration] = {
-        ## cardinality = 1..inf
+        ## cardinality = 2..2
         int
     }
 }
@@ -1668,7 +1671,7 @@ alias[effect:trigger_event] = {
     enum[duration] = int
     ## cardinality = 0..1
     enum[duration] = {
-        ## cardinality = 1..inf
+        ## cardinality = 2..2
         int
     }
 }
