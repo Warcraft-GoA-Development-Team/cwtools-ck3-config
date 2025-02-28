@@ -2304,9 +2304,17 @@ alias[effect:add_to_agent_slot] = scope[agent_slot]
 ## scope = character
 alias[effect:add_trait] = <trait>
 
+### Adds a trait to a character (the trait will not be added and no tooltip will be shown if the character isn't eligible for the trait, i.e. when already having the trait, having an opposing trait, not fulfilling the trait's is_potential trigger or being outside of the trait's range)
+## scope = character
+alias[effect:add_trait] = scope[trait]
+
 ### Adds a trait to a character (if the add_trait effect would not add the trait - i.e. when already having the trait, having an opposing trait, not fulfilling the trait's is_potential trigger or being outside of the trait's range - a tooltip will be shown but the trait will not be added)
 ## scope = character
 alias[effect:add_trait_force_tooltip] = <trait>
+
+### Adds a trait to a character (if the add_trait effect would not add the trait - i.e. when already having the trait, having an opposing trait, not fulfilling the trait's is_potential trigger or being outside of the trait's range - a tooltip will be shown but the trait will not be added)
+## scope = character
+alias[effect:add_trait] = scope[trait]
 
 ### Adds XP to the trait level track for the scoped character. Track name is required if the trait has multiple tracks, otherwise should not be provided. add_trait_xp = { trait = <trait_key> track = <track_key> value = <script_value> }
 ## scope = character
@@ -3184,9 +3192,17 @@ alias[effect:remove_short_term_gold] = int_value_field
 ## scope = character
 alias[effect:remove_trait] = <trait>
 
+### Removes a trait from a character. Tooltip will not been shown if the character doesn't has the trait.
+## scope = character
+alias[effect:remove_trait] = scope[trait]
+
 ### Removes a trait from a character. Tooltip will be shown even if the character doesn't has the trait.
 ## scope = character
 alias[effect:remove_trait_force_tooltip] = <trait>
+
+### Removes a trait from a character. Tooltip will be shown even if the character doesn't has the trait.
+## scope = character
+alias[effect:remove_trait_force_tooltip] = scope[trait]
 
 ### removes gold from a character (AI's short term budget)
 ## scope = character

@@ -834,9 +834,17 @@ alias[trigger:religion_tag] = <religion>
 ## scope = faith
 alias[trigger:trait_is_sin] = <trait>
 
+### Does the scoped faith consider the given trait a sin? trait_is_sin = lustful
+## scope = faith
+alias[trigger:trait_is_sin] = scope[trait]
+
 ### Does the scoped faith consider the given trait a virtue? trait_is_virtue = lustful
 ## scope = faith
 alias[trigger:trait_is_virtue] = <trait>
+
+### Does the scoped faith consider the given trait a virtue? trait_is_virtue = lustful
+## scope = faith
+alias[trigger:trait_is_virtue] = scope[trait]
 
 #####################################################
 # STRUGGLE SCOPE
@@ -3619,6 +3627,10 @@ alias[trigger:has_trait] = value[trait_group]
 ## scope = character
 alias[trigger:has_trait] = <trait>
 
+### Does the character have this trait?  Can also specify a trait group, in which case the trigger will return true if the scope character has any trait from that trait group.
+## scope = character
+alias[trigger:has_trait] = scope[trait]
+
 ### Compare the trait rank of a character to a value or other character. Note that not having the trait and having rank 0 counts as the same thing. rank < X on its own will therefore always return true for a character that does not have the trait. has_trait_rank = { trait = TRAIT_GROUP rank <=> number (can be script value) character <=> character target }. need only one of rank or character
 ## scope = character
 alias[trigger:has_trait_rank] = {
@@ -5304,6 +5316,7 @@ alias[trigger:years_in_diarchy] == int_value_field
 ### Checks if the character would get an alliance with the target character through such a marriage.
 ## scope = character
 alias[trigger:yields_alliance] = scope[character]
+
 
 
 
