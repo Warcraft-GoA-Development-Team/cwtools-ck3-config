@@ -1642,11 +1642,23 @@ alias[effect:stats_log] = {
 ### Switch on a trigger for the evaluation of another trigger with an optional fallback trigger. switch = { 	trigger = simple_assign_trigger 	case_1 = { <effects> } 	case_2 = { <effects> } 	case_n = { <effects> } 	fallback = { <effects> }
 alias[effect:switch] = {
     trigger = alias_keys_field[trigger]
+
     ## cardinality = 0..inf
-	scalar = {
-		## cardinality = 0..inf
-		alias_name[effect] = alias_match_left[effect]
-	}
+    scope = {
+        alias_name[effect] = alias_match_left[effect]
+    }
+    ## cardinality = 0..inf
+    int = {
+        alias_name[effect] = alias_match_left[effect]
+    }
+    ## cardinality = 0..inf
+    scalar = {
+        alias_name[effect] = alias_match_left[effect]
+    }
+    ## cardinality = 0..1
+    fallback = {
+        alias_name[effect] = alias_match_left[effect]
+    }
 }
 
 ### triggers an event or on_action trigger_event = { id = X days/months/years = Y } (for events) or trigger_event = { on_action = X days/months/years = Y } (for on_actions) Days/months/years are optional and equal to 0 if not specified. If specified, Y can be a value or an inclusive interval "{ A B }" from which the duration will be picked randomly.

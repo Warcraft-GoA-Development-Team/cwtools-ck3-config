@@ -1360,15 +1360,18 @@ alias[trigger:should_show_nudity] = bool
 
 ### Switch on a trigger for the evaluation of another trigger with an optional fallback trigger. switch = { 	trigger = simple_assign_trigger 	case_1 = { <triggers> } 	case_2 = { <triggers> } 	case_n = { <triggers> } 	fallback = { <triggers> }
 alias[trigger:switch] = {
-    ## cardinality = 0..1
-    trigger = bool
+    trigger = alias_keys_field[trigger]
 
     ## cardinality = 0..inf
     scope = {
         alias_name[trigger] = alias_match_left[trigger]
     }
     ## cardinality = 0..inf
-    <int> = {
+    int = {
+        alias_name[trigger] = alias_match_left[trigger]
+    }
+    ## cardinality = 0..inf
+    scalar = {
         alias_name[trigger] = alias_match_left[trigger]
     }
     ## cardinality = 0..1

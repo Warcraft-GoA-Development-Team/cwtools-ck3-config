@@ -893,6 +893,18 @@ alias[trigger:any_in_global_list] = {
     alias_name[trigger] = alias_match_left[trigger]
 }
 
+### Iterate through all items in global list. list = name or variable = name any_in_global_list = { <count=num/all> / <percent=fixed_point> <triggers> }
+alias[trigger:any_in_global_list] = {
+    variable = value[global_variable]
+    ## cardinality = 0..1
+    percent = value_float[0.0..1.0]
+    ## cardinality = 0..1
+    count = int_value_field
+    ## cardinality = 0..1
+    count = all
+    alias_name[trigger] = alias_match_left[trigger]
+}
+
 ### Iterate through all items in list. list = name or variable = name any_in_list = { <count=num/all> / <percent=fixed_point> <triggers> }
 alias[trigger:any_in_list] = {
     list = value[list]
@@ -905,9 +917,33 @@ alias[trigger:any_in_list] = {
     alias_name[trigger] = alias_match_left[trigger]
 }
 
+### Iterate through all items in list. list = name or variable = name any_in_list = { <count=num/all> / <percent=fixed_point> <triggers> }
+alias[trigger:any_in_list] = {
+    variable = value[variable]
+    ## cardinality = 0..1
+    percent = value_float[0.0..1.0]
+    ## cardinality = 0..1
+    count = int_value_field
+    ## cardinality = 0..1
+    count = all
+    alias_name[trigger] = alias_match_left[trigger]
+}
+
 ### Iterate through all items in local list. list = name or variable = name any_in_local_list = { <count=num/all> / <percent=fixed_point> <triggers> }
 alias[trigger:any_in_local_list] = {
     list = value[list]
+    ## cardinality = 0..1
+    percent = value_float[0.0..1.0]
+    ## cardinality = 0..1
+    count = int_value_field
+    ## cardinality = 0..1
+    count = all
+    alias_name[trigger] = alias_match_left[trigger]
+}
+
+### Iterate through all items in local list. list = name or variable = name any_in_local_list = { <count=num/all> / <percent=fixed_point> <triggers> }
+alias[trigger:any_in_local_list] = {
+    variable = value[local_variable]
     ## cardinality = 0..1
     percent = value_float[0.0..1.0]
     ## cardinality = 0..1
@@ -2948,7 +2984,7 @@ alias[trigger:any_county_struggle] = {
 
 ### Iterate through all counties within this dejure title
 ## scope = landed_title
-## push_scope = character
+## push_scope = landed_title
 alias[trigger:any_de_jure_county] = {
     ## cardinality = 0..1
     percent = value_float[0.0..1.0]
