@@ -36,7 +36,7 @@ alias[weight:compatibility_modifier] = {
 
 single_alias[weight_block] = {
     ## cardinality = 0..1
-    base = float
+    base = value_field
 
     ## cardinality = 0..inf
     ### Appears in the tooltip only if the conditions are fulfilled.
@@ -68,7 +68,12 @@ single_alias[weight_chance_modifier] = {
     ## cardinality = 0..1
     add = single_alias_right[arithmetic_operation_conditional_add]
     ## cardinality = 0..1
-    add = int_value_field
+    add = value_field
+
+    ## cardinality = 0..1
+    factor = single_alias_right[arithmetic_operation_conditional_add]
+    ## cardinality = 0..1
+    factor = value_field
     
     ## cardinality = 0..1
     desc = single_alias_right[complex_desc]
@@ -147,6 +152,3 @@ single_alias[chance_block] = {
 
 # Temporary alias of an alias until a proper refactor
 single_alias[ai_chance_block] = single_alias_right[chance_block]
-
-# Temporary alias of an alias until a proper refactor
-single_alias[weight_block] = single_alias_right[chance_block]

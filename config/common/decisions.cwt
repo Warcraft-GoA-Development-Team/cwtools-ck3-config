@@ -82,8 +82,8 @@ decision = {
     # There might be a better way to this
     ## cardinality = 0..1
     ai_will_do = single_alias_right[weight_block]
-    ## cardinality = 0..1
-    ai_will_do = value_field[0..inf]
+    # ## cardinality = 0..1
+    # ai_will_do = value_field[0..inf]
     ## cardinality = 0..1
     ai_goal = bool
     ## cadinality = ~1..1

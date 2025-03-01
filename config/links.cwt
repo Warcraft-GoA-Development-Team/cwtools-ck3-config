@@ -581,14 +581,14 @@ links = {
         desc = "A comparison trigger that will return its value in the context it is used eg: root.gold"
         output_scope = value
     }
-    culture = {
+    culture_data = {
         from_data = yes
         type = scope
         data_source = <culture>
         prefix = culture:
         output_scope = culture
     }
-    culture_group = {
+    culture_group_data = {
         desc = "Unknown, add something in code registration"
         from_data = yes
         type = scope
@@ -615,7 +615,7 @@ links = {
         desc = "Global link to the dummy male character"
         output_scope = character
     }
-    dynasty = {
+    dynasty_data = {
         desc = "Link to dynasty scope of the given dynasty string"
         from_data = yes
         type = scope
@@ -623,7 +623,7 @@ links = {
         prefix = dynasty:
         output_scope = dynasty
     }
-    faith = {
+    faith_data = {
         desc = "Global link to faith scope of given faith string"
         from_data = yes
         type = scope
@@ -645,7 +645,7 @@ links = {
         data_source = value[global_variable]
         prefix = global_var:
     }
-    house = {
+    house_data = {
         desc = "Link to house scope of the given house string"
         output_scope = dynasty_house
         prefix = house:
@@ -668,7 +668,7 @@ links = {
         prefix = province:
         output_scope = province
     }
-    religion = {
+    religion_data = {
         desc = "Unknown, add something in code registration"
         from_data = yes
         type = scope
@@ -682,7 +682,7 @@ links = {
         data_source = value[event_target]
         prefix = scope:
     }
-    title = {
+    title_data = {
         desc = "Global link to title scope of given landed title template string"
         from_data = yes
         type = scope
@@ -735,7 +735,7 @@ links = {
         input_scopes = culture
         output_scopes = faith
     }
-    calc_culture_dominant_faith = {
+    calc_culture_dominant_religion = {
         desc = "Calculates what religion is the biggest in the culture based on # of counties. Be aware that this is an *expensive* calculation. In a tie, definition order breaks the tie"
         input_scopes = culture
         output_scopes = religion
@@ -945,7 +945,7 @@ links = {
         prefix = accolade_type:
         data_source = <accolade>
     }
-    activity_type = {
+    activity_type_data = {
         desc = "Get the activity_type with the specified key"
         output_scope = activity_type
         from_data = yes
@@ -992,7 +992,7 @@ links = {
         prefix = doctrine:
         output_scope = doctrine
     }
-    epidemic_type = {
+    epidemic_type_data = {
         desc = "Get the epidemic_type with the specified key"
         from_data = yes
         type = scope
@@ -1006,13 +1006,6 @@ links = {
         type = scope
         data_source = <event>
         prefix = event_id:
-        output_scope = flag
-    }
-    flag = {
-        desc = "Flag literals eg: flag:the_boss"
-        from_data = yes
-        data_source = value[flag]
-        prefix = flag:
         output_scope = flag
     }
     geographical_region = {
@@ -1036,7 +1029,7 @@ links = {
         prefix = holding:
         output_scope = holding
     }
-    legend_type = {
+    legend_type_data = {
         desc = "Get the legend_type with the specified key"
         from_data = yes
         data_source = <legend_type>
@@ -1295,11 +1288,6 @@ links = {
     }
     inspiration_owner = {
         desc = "Get the character who owns the inspiration"
-        input_scopes = inspiration
-        output_scope = character
-    }
-    inspiration_sponsor = {
-        desc = "Get the character who is sponsoring the inspiration, may not exist if there is no sponsor yet"
         input_scopes = inspiration
         output_scope = character
     }

@@ -1,8 +1,8 @@
 # TODO: organise this?
 
-alias[trigger:trigger] = {
-    alias_name[trigger] = alias_match_left[trigger]
-}
+# alias[trigger:trigger] = {
+#     alias_name[trigger] = alias_match_left[trigger]
+# }
 
 #################################################
 # DYNASTY SCOPE
@@ -4534,6 +4534,10 @@ alias[trigger:martial] == $define_reference
 ### does the character have the required martial skill level?
 ## scope = character
 alias[trigger:martial] == scope[value]
+
+### does the character have the required martial skill level?
+## scope = character
+alias[trigger:martial] == alias_match_left[arithmetic_operation]
 
 ### does the character have the required martial skill level difference against target? martial = { target = character value <= script_value abs = yes/no(optional, default no) }
 ## scope = character

@@ -4,9 +4,16 @@ types = {
     }
 }
 
+enums = {
+	enum[combat_phase_event_type] = {
+		commander
+		knight
+	}
+}
 
-combat_event_name = {
-	type = commander/knight # Is this run on the commander or on all the knights
+
+combat_phase_event = {
+	type = enum[combat_phase_event_type] # Is this run on the commander or on all the knights
 
 	# root is the character
 	# scope:combat_side is the side of combat the character is on
