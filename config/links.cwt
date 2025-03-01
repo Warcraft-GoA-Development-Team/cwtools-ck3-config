@@ -1,96 +1,96 @@
 links = {
     house_head = {
-        desc = " Get house head of the scoped character"
+        desc = "Get house head of the scoped character"
         input_scopes = dynasty_house
         output_scope = character
     }
     capital_vassal = {
-        desc = " Get capital vassal title of scoped title"
+        desc = "Get capital vassal title of scoped title"
         input_scopes = landed_title
         output_scope = landed_title
     }
     controlled_faith = {
-        desc = " Unknown, add something in code registration"
+        desc = "Unknown, add something in code registration"
         input_scopes = landed_title
         output_scope = faith
     }
     current_heir = {
-        desc = " Get current heir to scoped title"
+        desc = "Get current heir to scoped title"
         input_scopes = landed_title
         output_scope = character
     }
     de_facto_liege = {
-        desc = " Get de facto liege title of scoped title"
+        desc = "Get de facto liege title of scoped title"
         input_scopes = landed_title
         output_scope = landed_title
     }
     de_jure_liege = {
-        desc = " Get de jure liege title of scoped title"
+        desc = "Get de jure liege title of scoped title"
         input_scopes = landed_title
         output_scope = landed_title
     }
     holder = {
-        desc = " Get holder of scoped title"
+        desc = "Get holder of scoped title"
         input_scopes = landed_title
         output_scope = character
     }
     lessee = {
-        desc = " Get current lessee of scoped title"
+        desc = "Get current lessee of scoped title"
         input_scopes = landed_title
         output_scope = character
     }
     lessee_title = {
-        desc = " Get lessee title of scoped landed title"
+        desc = "Get lessee title of scoped landed title"
         input_scopes = landed_title
         output_scope = landed_title
     }
     previous_holder = {
-        desc = " Get previous holder of scoped landed title"
+        desc = "Get previous holder of scoped landed title"
         input_scopes = landed_title
         output_scope = character
     }
     title_capital_county = {
-        desc = " Get preferred capital county of scoped title"
+        desc = "Get preferred capital county of scoped title"
         input_scopes = landed_title
         output_scope = landed_title
     }
     title_province = {
-        desc = " Get province of scoped landed title"
+        desc = "Get province of scoped landed title"
         input_scopes = landed_title
         output_scope = province
     }
     culture_head = {
-        desc = " Get culture of scoped character, province or title"
+        desc = "Get culture of scoped character, province or title"
         input_scopes = culture
         output_scope = character
     }
     betrothed = {
-        desc = " Get the betrothed of the scoped character"
+        desc = "Get the betrothed of the scoped character"
         input_scopes = character
         output_scope = character
     }
     capital_barony = {
-        desc = " Get capital barony title ( realm capital ) of scoped character"
+        desc = "Get capital barony title ( realm capital ) of scoped character"
         input_scopes = character
         output_scope = landed_title
     }
     capital_county = {
-        desc = " Get de jure liege title of the capital county ( realm capital ) of the scoped character"
+        desc = "Get de jure liege title of the capital county ( realm capital ) of the scoped character"
         input_scopes = character
         output_scope = landed_title
     }
     capital_province = {
-        desc = " Get capital province of scoped character"
+        desc = "Get capital province of scoped character"
         input_scopes = character
         output_scope = province
     }
     commanding_army = {
-        desc = " Get commanding army of scoped character"
+        desc = "Get commanding army of scoped character"
         input_scopes = character
         output_scope = army
     }
     concubinist = {
-        desc = " Get concubinist of the scoped character"
+        desc = "Get concubinist of the scoped character"
         input_scopes = character
         output_scope = character
     }
@@ -99,21 +99,21 @@ links = {
         output_scope = council_task
     }
     councillor = {
-        desc = " Scope to the councillor in a council task"
+        desc = "Scope to the councillor in a council task"
         input_scopes = council_task
         output_scope = character
     }
     councillor_task_target = {
-        desc = " Scope to the active task target of the scoped councillor"
+        desc = "Scope to the active task target of the scoped councillor"
         input_scopes = character
     }
     court_owner = {
-        desc = " Get the court owner of the scoped character"
+        desc = "Get the court owner of the scoped character"
         input_scopes = character
         output_scope = character
     }
     council_position = {
-        desc = " Scope to the councillor of the given type, ex. scope:cp_steward"
+        desc = "Scope to the councillor of the given type, ex. scope:cp_steward"
         from_data = yes
         type = scope
         prefix = cp:
@@ -122,451 +122,451 @@ links = {
         output_scope = character
     }
     court_position = {
-        desc = " The character currently employed in a specific court position."
+        desc = "The character currently employed in a specific court position."
         input_scopes = character
         output_scopes = character
     }
     court_amenity_category = {
-        desc = " Unknown, add something in code registration"
+        desc = "Unknown, add something in code registration"
         data_source = <court_amenity_category>
         input_scopes = character
         output_scopes = court_amenity_category
     }
     designated_heir = {
-        desc = " Get designated heir of scoped character"
+        desc = "Get designated heir of scoped character"
         input_scopes = character
         output_scope = character
     }
     dynasty = {
-        desc = " Get dynasty of scoped character"
+        desc = "Get dynasty of scoped character"
         input_scopes = character
         output_scope = dynasty
     }
     employer = {
-        desc = " Get employer of scoped character"
+        desc = "Get employer of scoped character"
         input_scopes = character
         output_scope = character
     }
     employee = {
-        desc = " Unknown, add something in code registration"
+        desc = "Unknown, add something in code registration"
         input_scopes = character
         output_scope = character
     }
     father = {
-        desc = " Get father of the scoped character"
+        desc = "Get father of the scoped character"
         input_scopes = character
         output_scope = character
     }
     ghw_beneficiary = {
-        desc = " Get great holy war beneficiary of scoped character"
+        desc = "Get great holy war beneficiary of scoped character"
         input_scopes = character
         output_scope = character
     }
     host = {
-        desc = " Get current host of the scoped character"
+        desc = "Get current host of the scoped character"
         input_scopes = character
         output_scope = character
     }
     house = {
-        desc = " Get house of the scoped character"
+        desc = "Get house of the scoped character"
         input_scopes = character
         output_scope = dynasty_house
     }
     imprisoner = {
-        desc = " Get imprisoner of scoped character"
+        desc = "Get imprisoner of scoped character"
         input_scopes = character
         output_scope = character
     }
     joined_faction = {
-        desc = " Get joined faction of scoped character"
+        desc = "Get joined faction of scoped character"
         input_scopes = character
         output_scope = faction
     }
     killer = {
-        desc = " Get the scoped characters killer"
+        desc = "Get the scoped characters killer"
         input_scopes = character
         output_scope = character
     }
     knight_army = {
-        desc = " Get knight army of scoped character"
+        desc = "Get knight army of scoped character"
         input_scopes = character
         output_scope = army
     }
     liege = {
-        desc = " Get the liege of the scoped character"
+        desc = "Get the liege of the scoped character"
         input_scopes = character
         output_scope = character
     }
     liege_or_court_owner = {
-        desc = " Get the liege of the scoped character, if non then get court owner"
+        desc = "Get the liege of the scoped character, if non then get court owner"
         input_scopes = character
         output_scope = character
     }
     matchmaker = {
-        desc = " Get matchmaker of the scoped character"
+        desc = "Get matchmaker of the scoped character"
         input_scopes = character
         output_scope = character
     }
     mother = {
-        desc = " Get mother of the scoped character"
+        desc = "Get mother of the scoped character"
         input_scopes = character
         output_scope = character
     }
     player_heir = {
-        desc = " Get player heir of scoped character"
+        desc = "Get player heir of scoped character"
         input_scopes = character
         output_scope = character
     }
     pregnancy_assumed_father = {
-        desc = " Get the assumed father of the scoped characters unborn baby"
+        desc = "Get the assumed father of the scoped characters unborn baby"
         input_scopes = character
         output_scope = character
     }
     pregnancy_real_father = {
-        desc = " Get the real father of the scoped characters unborn baby"
+        desc = "Get the real father of the scoped characters unborn baby"
         input_scopes = character
         output_scope = character
     }
     primary_heir = {
-        desc = " Get primary heir of scoped character"
+        desc = "Get primary heir of scoped character"
         input_scopes = character
         output_scope = character
     }
     primary_partner = {
-        desc = " Get the primary partner ( consort ) of the scoped character"
+        desc = "Get the primary partner ( consort ) of the scoped character"
         input_scopes = character
         output_scope = character
     }
     primary_spouse = {
-        desc = " Get the primary spouse of the scoped character"
+        desc = "Get the primary spouse of the scoped character"
         input_scopes = character
         output_scope = character
     }
     primary_title = {
-        desc = " Get primary title of scoped character"
+        desc = "Get primary title of scoped character"
         input_scopes = character
         output_scope = landed_title
     }
     real_father = {
-        desc = " Get the real father of the scoped character"
+        desc = "Get the real father of the scoped character"
         input_scopes = character
         output_scope = character
     }
     realm_priest = {
-        desc = " Get realm priest of scoped character"
+        desc = "Get realm priest of scoped character"
         input_scopes = character
         output_scope = character
     }
     top_liege = {
-        desc = " Get the top liege of the scoped character"
+        desc = "Get the top liege of the scoped character"
         input_scopes = character
         output_scope = character
     }
     vassal_contract_obligation_level = {
-        desc = " The level of the provided contract type in the scoped objects current vassal contract"
+        desc = "The level of the provided contract type in the scoped objects current vassal contract"
         input_scopes = character
         output_scope = value
     }
     culture_group = {
-        desc = " Unknown, add something in code registration"
+        desc = "Unknown, add something in code registration"
         input_scopes = { character landed_title province culture }
         output_scope = culture_group
     }
     great_holy_war = {
-        desc = " Get great holy war of scoped faith"
+        desc = "Get great holy war of scoped faith"
         input_scopes = faith
         output_scope = great_holy_war
     }
     religious_head = {
-        desc = " Get religious head of scoped faith"
+        desc = "Get religious head of scoped faith"
         input_scopes = faith
         output_scope = character
     }
     religious_head_title = {
-        desc = " Get landed title belonging to the religious head of the scoped faith"
+        desc = "Get landed title belonging to the religious head of the scoped faith"
         input_scopes = faith
         output_scope = landed_title
     }
     secret_owner = {
-        desc = " Get owner of scoped secret"
+        desc = "Get owner of scoped secret"
         input_scopes = secret
         output_scope = character
     }
     secret_target = {
-        desc = " Get target character of scoped secret"
+        desc = "Get target character of scoped secret"
         input_scopes = secret
         output_scope = character
 
     }
     province_owner = {
-        desc = " Get province owner of scoped province"
+        desc = "Get province owner of scoped province"
         input_scopes = province
         output_scope = character
     }
     culture = {
-        desc = " Get culture of scoped character, province or title"
+        desc = "Get culture of scoped character, province or title"
         input_scopes = { character landed_title province }
         output_scope = culture
     }
     holy_order_patron = {
-        desc = " Get patron of scoped holy order"
+        desc = "Get patron of scoped holy order"
         input_scopes = holy_order
         output_scope = character
     }
     leader = {
-        desc = " Get leader of scoped holy order"
+        desc = "Get leader of scoped holy order"
         input_scopes = holy_order
         output_scope = character
     }
     title = {
-        desc = " Get landed title of scoped holy order"
+        desc = "Get landed title of scoped holy order"
         input_scopes = holy_order
         output_scope = landed_title
     }
     army_commander = {
-        desc = " Get commander of scoped army"
+        desc = "Get commander of scoped army"
         input_scopes = army
         output_scope = character
     }
     army_owner = {
-        desc = " Get owner of scoped army"
+        desc = "Get owner of scoped army"
         input_scopes = army
         output_scope = character
     }
     blue = {
-        desc = " The blue value of a color"
+        desc = "The blue value of a color"
         input_scopes = color
         output_scope = value
     }
     brightness = {
-        desc = " The brightness value of a color"
+        desc = "The brightness value of a color"
         input_scopes = color
         output_scope = value
     }
     green = {
-        desc = " The green value of a color"
+        desc = "The green value of a color"
         input_scopes = color
         output_scope = value
     }
     hue = {
-        desc = " The hue value of a color"
+        desc = "The hue value of a color"
         input_scopes = color
         output_scope = value
     }
     red = {
-        desc = " The red value of a color"
+        desc = "The red value of a color"
         input_scopes = color
         output_scope = value
     }
     saturation = {
-        desc = " The saturation value of a color"
+        desc = "The saturation value of a color"
         input_scopes = color
         output_scope = value
     }
     combat = {
-        desc = " Get combat of scoped combat side"
+        desc = "Get combat of scoped combat side"
         input_scopes = combat_side
         output_scope = combat
     }
     enemy_side = {
-        desc = " Get enemy ( opposite ) combat side of scoped side"
+        desc = "Get enemy ( opposite ) combat side of scoped side"
         input_scopes = combat_side
         output_scope = combat_side
     }
     side_commander = {
-        desc = " Get commander of scoped combat side"
+        desc = "Get commander of scoped combat side"
         input_scopes = combat_side
         output_scope = character
     }
     side_primary_participant = {
-        desc = " Get primary participant of scoped combat side"
+        desc = "Get primary participant of scoped combat side"
         input_scopes = combat_side
         output_scope = character
     }
     ghw_designated_winner = {
-        desc = " Get designated winner of scoped great holy war"
+        desc = "Get designated winner of scoped great holy war"
         input_scopes = great_holy_war
         output_scope = character
     }
     ghw_target_character = {
-        desc = " Get target character of scoped great holy war"
+        desc = "Get target character of scoped great holy war"
         input_scopes = great_holy_war
         output_scope = character
     }
     ghw_target_title = {
-        desc = " Get target landed title of scoped great holy war"
+        desc = "Get target landed title of scoped great holy war"
         input_scopes = great_holy_war
         output_scope = landed_title
     }
     ghw_title_recipient = {
-        desc = " Get the title recipient of scoped great holy war"
+        desc = "Get the title recipient of scoped great holy war"
         input_scopes = great_holy_war
         output_scope = character
     }
     ghw_war = {
-        desc = " Get the title recipient of scoped great holy war"
+        desc = "Get the title recipient of scoped great holy war"
         input_scopes = great_holy_war
         output_scope = war
     }
     ghw_war_declarer = {
-        desc = " Get declarer of scoped great holy war"
+        desc = "Get declarer of scoped great holy war"
         input_scopes = great_holy_war
         output_scope = character
     }
     dynast = {
-        desc = " Get dynasty head ( dynast ) of scoped character"
+        desc = "Get dynasty head ( dynast ) of scoped character"
         input_scopes = dynasty
         output_scope = character
     }
     scheme_defender = {
-        desc = " Get defender of scoped scheme"
+        desc = "Get defender of scoped scheme"
         input_scopes = scheme
         output_scope = character
     }
     scheme_owner = {
-        desc = " Get owner of scoped scheme"
+        desc = "Get owner of scoped scheme"
         input_scopes = scheme
         output_scope = character
     }
     claimant = {
-        desc = " Get claimant of scoped casus belli or war"
+        desc = "Get claimant of scoped casus belli or war"
         input_scopes = { war casus_belli }
         output_scope = character
     }
     primary_attacker = {
-        desc = " Get primary attacker of scoped casus belli or war"
+        desc = "Get primary attacker of scoped casus belli or war"
         input_scopes = { war casus_belli }
         output_scope = character
     }
     primary_defender = {
-        desc = " Get primary defender of scoped casus belli or war"
+        desc = "Get primary defender of scoped casus belli or war"
         input_scopes = { war casus_belli }
         output_scope = character
     }
     combat_attacker = {
-        desc = " Get attacker side of scoped combat"
+        desc = "Get attacker side of scoped combat"
         input_scopes = combat
         output_scope = combat_side
     }
     combat_defender = {
-        desc = " Get defender side of scoped combat"
+        desc = "Get defender side of scoped combat"
         input_scopes = combat
         output_scope = combat_side
     }
     combat_war = {
-        desc = " Get war of scoped combat"
+        desc = "Get war of scoped combat"
         input_scopes = combat
         output_scope = war
     }
     location = {
-        desc = " Get province of scoped army, character or combat"
+        desc = "Get province of scoped army, character or combat"
         input_scopes = { character combat army }
         output_scope = province
     }
     faith = {
-        desc = " Get faith of scoped character, province, title or great holy war"
+        desc = "Get faith of scoped character, province, title or great holy war"
         input_scopes = { character landed_title province great_holy_war }
         output_scope = faith
     }
     story_owner = {
-        desc = " Get owner of scoped story"
+        desc = "Get owner of scoped story"
         input_scopes = story_cycle
         output_scope = character
     }
     faction_leader = {
-        desc = " Get leader of scoped faction"
+        desc = "Get leader of scoped faction"
         input_scopes = faction
         output_scope = character
     }
     faction_target = {
-        desc = " Get target character of scoped faction"
+        desc = "Get target character of scoped faction"
         input_scopes = faction
         output_scope = character
     }
     faction_war = {
-        desc = " Get war of scoped faction"
+        desc = "Get war of scoped faction"
         input_scopes = faction
         output_scope = war
     }
     special_character = {
-        desc = " Get special character of scoped faction"
+        desc = "Get special character of scoped faction"
         input_scopes = faction
         output_scope = character
     }
     special_title = {
-        desc = " Get special landed title of scoped faction"
+        desc = "Get special landed title of scoped faction"
         input_scopes = faction
         output_scope = landed_title
     }
     religion = {
-        desc = " Get religion of scoped faith, character, province, title or great holy war"
+        desc = "Get religion of scoped faith, character, province, title or great holy war"
         input_scopes = { character landed_title province faith great_holy_war }
         output_scope = religion
     }
     casus_belli = {
-        desc = " Get casus belli of scoped war"
+        desc = "Get casus belli of scoped war"
         input_scopes = war
         output_scope = casus_belli
     }
     activity_owner = {
-        desc = " Unknown, add something in code registration"
+        desc = "Unknown, add something in code registration"
         input_scopes = activity
         output_scope = character
     }
     activity_province = {
-        desc = " Unknown, add something in code registration"
+        desc = "Unknown, add something in code registration"
         input_scopes = activity
         output_scope = province
     }
     war = {
-        desc = " Get war of scoped casus belli"
+        desc = "Get war of scoped casus belli"
         input_scopes = casus_belli
         output_scope = war
     }
     barony = {
-        desc = " Get de jure barony title of scoped title or province"
+        desc = "Get de jure barony title of scoped title or province"
         input_scopes = { landed_title province }
         output_scope = landed_title
     }
     barony_controller = {
-        desc = " Get barony controller of scoped province or barony title"
+        desc = "Get barony controller of scoped province or barony title"
         input_scopes = { landed_title province }
         output_scope = character
     }
     county = {
-        desc = " Get de jure county title of scoped title or province"
+        desc = "Get de jure county title of scoped title or province"
         input_scopes = { landed_title province }
         output_scope = landed_title
     }
     county_controller = {
-        desc = " Get county controller of scoped province or barony/county title"
+        desc = "Get county controller of scoped province or barony/county title"
         input_scopes = { landed_title province }
         output_scope = character
     }
     duchy = {
-        desc = " Get de jure duchy title of scoped title or province"
+        desc = "Get de jure duchy title of scoped title or province"
         input_scopes = { landed_title province }
         output_scope = landed_title
     }
     empire = {
-        desc = " Get de jure empire title of scoped title or province"
+        desc = "Get de jure empire title of scoped title or province"
         input_scopes = { landed_title province }
         output_scope = landed_title
     }
     kingdom = {
-        desc = " Get de jure kingdom title of scoped title or province"
+        desc = "Get de jure kingdom title of scoped title or province"
         input_scopes = { landed_title province }
         output_scope = landed_title
     }
     array_define = {
-        desc = " Reference the value of a numeric value in an array define: array_define:Namespace|Name|Index. Index is 0-based."
+        desc = "Reference the value of a numeric value in an array define: array_define:Namespace|Name|Index. Index is 0-based."
         from_data = yes
         data_source = <array_define>
         prefix = array_define:
         output_scope = value
     }
     character = {
-        desc = " Global link to historical ( scripted ) character scope of the given character string"
+        desc = "Global link to historical ( scripted ) character scope of the given character string"
         from_data = yes
         type = scope
         data_source = <character>
@@ -574,11 +574,11 @@ links = {
         output_scope = character
     }
     base_value = {
-        desc = " Unknown, add something in code registration"
+        desc = "Unknown, add something in code registration"
         output_scope = value
     }
     compare_value = {
-        desc = " A comparison trigger that will return its value in the context it is used eg: root.gold"
+        desc = "A comparison trigger that will return its value in the context it is used eg: root.gold"
         output_scope = value
     }
     culture = {
@@ -589,7 +589,7 @@ links = {
         output_scope = culture
     }
     culture_group = {
-        desc = " Unknown, add something in code registration"
+        desc = "Unknown, add something in code registration"
         from_data = yes
         type = scope
         data_source = <culture_group>
@@ -597,10 +597,10 @@ links = {
         output_scope = culture_group
     }
     custom = {
-        desc = " Adds custom text between scope changes"
+        desc = "Adds custom text between scope changes"
     }
     define = {
-        desc = " Reference the value of a numeric define: define:Namespace|Name"
+        desc = "Reference the value of a numeric define: define:Namespace|Name"
         from_data = yes
         type = scope
         data_source = <define>
@@ -608,15 +608,15 @@ links = {
         output_scope = value
     }
     dummy_female = {
-        desc = " Global link to the dummy female character"
+        desc = "Global link to the dummy female character"
         output_scope = character
     }
     dummy_male = {
-        desc = " Global link to the dummy male character"
+        desc = "Global link to the dummy male character"
         output_scope = character
     }
     dynasty = {
-        desc = " Link to dynasty scope of the given dynasty string"
+        desc = "Link to dynasty scope of the given dynasty string"
         from_data = yes
         type = scope
         data_source = <dynasty>
@@ -624,7 +624,7 @@ links = {
         output_scope = dynasty
     }
     faith = {
-        desc = " Global link to faith scope of given faith string"
+        desc = "Global link to faith scope of given faith string"
         from_data = yes
         type = scope
         data_source = <faith>
@@ -632,44 +632,44 @@ links = {
         output_scope = faith
     }
     flag = {
-        desc = " Flag literals eg: flag:the_boss"
+        desc = "Flag literals eg: flag:the_boss"
         from_data = yes
         data_source = value[flag]
         prefix = flag:
         output_scope = flag
     }
     global_var = {
-        desc = " Reference a previous set global variable via its name eg: global_var:important_thing"
+        desc = "Reference a previous set global variable via its name eg: global_var:important_thing"
         from_data = yes
         type = both
         data_source = value[global_variable]
         prefix = global_var:
     }
     house = {
-        desc = " Link to house scope of the given house string"
+        desc = "Link to house scope of the given house string"
         output_scope = dynasty_house
         prefix = house:
     }
     local_var = {
-        desc = " Reference a previous set local variable via its name eg: local_var:person_of_interest"
+        desc = "Reference a previous set local variable via its name eg: local_var:person_of_interest"
         from_data = yes
         type = both
         data_source = value[local_variable]
         prefix = local_var:
     }
     named_script_value = {
-        desc = " A script value that will calculate and returns its value in the context it is used"
+        desc = "A script value that will calculate and returns its value in the context it is used"
         output_scope = value
     }
     province = {
-        desc = " Directly scope to a specific province by its ID"
+        desc = "Directly scope to a specific province by its ID"
         from_data = yes
         data_source = <province>
         prefix = province:
         output_scope = province
     }
     religion = {
-        desc = " Unknown, add something in code registration"
+        desc = "Unknown, add something in code registration"
         from_data = yes
         type = scope
         data_source = <religion>
@@ -677,13 +677,13 @@ links = {
         output_scope = religion
     }
     scope = {
-        desc = " Reference a previously saved scope via its name eg: scope:target"
+        desc = "Reference a previously saved scope via its name eg: scope:target"
         from_data = yes
         data_source = value[event_target]
         prefix = scope:
     }
     title = {
-        desc = " Global link to title scope of given landed title template string"
+        desc = "Global link to title scope of given landed title template string"
         from_data = yes
         type = scope
         data_source = <landed_title>
@@ -691,19 +691,615 @@ links = {
         output_scope = landed_title
     }
     var = {
-        desc = " Reference a previous set variable via its name eg: var:mortal_enemy"
+        desc = "Reference a previous set variable via its name eg: var:mortal_enemy"
         from_data = yes
         type = both
         prefix = var:
         data_source = value[variable]
     }
     inspiration = {
-        desc = " Get the current inspiration of the scoped character, may not exist if they have no inspiration"
+        desc = "Get the current inspiration of the scoped character, may not exist if they have no inspiration"
         input_scopes = character
         output_scope = inspiration
     }
     inspiration_sponsor = {
-        desc = " Get the character who is sponsoring the inspiration, may not exist if there is no sponsor yet"
+        desc = "Get the character who is sponsoring the inspiration, may not exist if there is no sponsor yet"
+        input_scopes = inspiration
+        output_scope = character
+    }
+
+    dynasty_founder = {
+        desc = "Get the founder of the scoped dynasty"
+        input_scopes = dynasty
+        output_scope = character
+    }
+    activity_host = {
+        desc = "Get host character of the scoped activity"
+        input_scopes = activity
+        output_scopes = character
+    }
+    activity_location = {
+        desc = "Get current location of the scoped activity"
+        input_scopes = activity
+        output_scopes = province
+    }
+    activity_type = {
+        desc = "Get the type of a given activity"
+        input_scopes = activity
+        output_scope = activity_type
+        #from_data = yes
+        data_source = <activity>
+    }
+    calc_culture_dominant_faith = {
+        desc = "Calculates what faith is the biggest in the culture based on # of counties. Be aware that this is an *expensive* calculation. In a tie, definition order breaks the tie"
+        input_scopes = culture
+        output_scopes = faith
+    }
+    calc_culture_dominant_faith = {
+        desc = "Calculates what religion is the biggest in the culture based on # of counties. Be aware that this is an *expensive* calculation. In a tie, definition order breaks the tie"
+        input_scopes = culture
+        output_scopes = religion
+    }
+    memory_owner = {
+        desc = "Get the owner of a character memory"
+        input_scopes = character_memory
+        output_scope = character
+    }
+    memory_participant = {
+        desc = "Get the participant of a given tag from a memory"
+        input_scopes = character_memory
+        output_scope = character
+        from_data = yes
+    }
+    regiment_controller = {
+        desc = "Get the character who currently controls the regiment"
+        input_scope = regiment
+        output_scope = character
+    }
+    regiment_controlling_title = {
+        desc = "Get title regiment's owning title"
+        input_scope = regiment
+        output_scope = landed_title
+    }
+    regiment_owner = {
+        desc = "Get regiment's owner"
+        input_scope = regiment
+        output_scope = character
+    }
+    regiment_owning_title = {
+        desc = "Get title regiment's owning title"
+        input_scope = regiment
+        output_scope = landed_title
+    }
+    regiment_station = {
+        desc = "Get regiment's station province"
+        input_scope = regiment
+        output_scope = province
+    }
+    vassal_contract_type = {
+        desc = "Get the type of a given activity"
+        input_scopes = vassal_contract_obligation_level
+        output_scope = vassal_contract_type
+        data_source = <vassal_contract>
+    }
+    epidemic_trait = {
+        desc = "Gets the trait that this epidemic will spread"
+        input_scopes = epidemic_type
+        output_scope = trait
+    }
+    house_founder = {
+        desc = "Get house founder of the scoped house"
+        input_scopes = dynasty_house
+        output_scope = character
+    }
+    last_house_head = {
+        desc = "Get last house head of scoped house"
+        input_scopes = dynasty_house
+        output_scope = character
+    }
+    scheme = {
+        desc = "Get the scheme scheme associated with the task contract (if there is one)."
+        input_scopes = task_contract
+        output_scope = scheme
+    }
+    task_contract_destination = {
+        desc = "Get the task contract destination, null if unused."
+        input_scopes = task_contract
+        output_scope = province
+    }
+    task_contract_employer = {
+        desc = "Get the task contract employer."
+        input_scopes = task_contract
+        output_scope = character
+    }
+    task_contract_location = {
+        desc = "Get the task contract location."
+        input_scopes = task_contract
+        output_scope = province
+    }
+    task_contract_taker = {
+        desc = "Get the task contract taker, null until taken."
+        input_scopes = task_contract
+        output_scope = character
+    }
+    task_contract_target = {
+        desc = "Get the task contract target, null if unused."
+        input_scopes = task_contract
+        output_scope = character
+    }
+    involved_combat_side = {
+        desc = "Get combat side that army is involved in"
+        input_scopes = army
+        output_scope = combat_side
+    }
+    current_location = {
+        desc = "Get the current province of the travel plan."
+        input_scopes = travel_plan
+        output_scopes = province
+    }
+    departure_location = {
+        desc = "Get the province from which this travel plan started."
+        input_scopes = travel_plan
+        output_scopes = province
+    }
+    final_destination_province = {
+        desc = "Get the final (last) destination province of the travel plan."
+        input_scopes = travel_plan
+        output_scopes = province
+    }
+    next_destination_province = {
+        desc = "Get the next destination province of the travel plan. If you are at a destination province, it will be the one after that one."
+        input_scopes = travel_plan
+        output_scopes = province
+    }
+    next_location = {
+        desc = "Get the next province the travel plan is going to."
+        input_scopes = travel_plan
+        output_scopes = province
+    }
+    travel_leader = {
+        desc = "Get the next province the travel plan is going to."
+        input_scopes = travel_plan
+        output_scopes = character
+    }
+    travel_plan_activity = {
+        desc = "Activity associated with the scoped travel plan. (may be empty)"
+        input_scopes = travel_plan
+        output_scopes = activity
+    }
+    travel_plan_owner = {
+        desc = "Get the owner of the scoped travel plan"
+        input_scopes = travel_plan
+        output_scopes = character
+    }
+    founder = {
+        desc = "Get founder of scoped faith"
+        input_scopes = faith
+        output_scopes = character
+    }
+    slot_character = {
+        desc = "Get the character of scoped agent slot"
+        input_scopes = agent_slot
+        output_scope = province
+    }
+    epidemic_type = {
+        desc = "Get the type of this epidemic"
+        input_scopes = epidemic
+        output_scope = epidemic_type
+    }
+    outbreak_province = {
+        desc = "Get the province this epidemic outbreak started in"
+        input_scopes = epidemic
+        output_scope = province
+    }
+    tax_collector = {
+        desc = "Get the Tax Collector of this Tax Slot"
+        input_scopes = tax_slot
+        output_scope = religion
+    }
+    tax_slot_liege = {
+        desc = "Get the Liege of this Tax Slot"
+        input_scopes = tax_slot
+        output_scope = religion
+    }
+    artifact_age = {
+        desc = "Get age of scoped artifact"
+        input_scopes = artifact
+        output_scope = value
+    }
+    artifact_owner = {
+        desc = "Get owner of scoped artifact"
+        input_scopes = artifact
+        output_scope = character
+    }
+    creator = {
+        desc = "Get creator of scoped artifact"
+        input_scopes = artifact
+        output_scope = character
+    }
+    previous_owner = {
+        desc = "Get the previous owner of the scoped artifact"
+        input_scopes = artifact
+        output_scope = character
+    }
+    previous_owner_level_2 = {
+        desc = "Get the 2 previous owner of the scoped artifact"
+        input_scopes = artifact
+        output_scope = character
+    }
+    previous_owner_level_3 = {
+        desc = "Get the 3 previous owner of the scoped artifact"
+        input_scopes = artifact
+        output_scope = character
+    }
+    mercenary_company_leader = {
+        desc = "Get leader of scoped mercenary company"
+        input_scopes = mercenary_company
+        output_scope = character
+    }
+    accolade_type = {
+        desc = "Get the accolade_type with the specified key"
+        output_scope = accolade_type
+        from_data = yes
+        type = scope
+        prefix = accolade_type:
+        data_source = <accolade>
+    }
+    activity_type = {
+        desc = "Get the activity_type with the specified key"
+        output_scope = activity_type
+        from_data = yes
+        type = scope
+        prefix = activity_type:
+        data_source = <accolade>
+    }
+    casus_belli_type = {
+        desc = "Get the casus_belli_type with the specified key"
+        from_data = yes
+        data_source = <casus_belli>
+        prefix = casus_belli_type:
+        output_scope = casus_belli_type
+    }
+    culture_pillar = {
+        desc = "Get the culture_pillar with the specified key"
+        from_data = yes
+        type = scope
+        data_source = <pillar>
+        prefix = culture_pillar:
+        output_scope = culture_pillar
+    }
+    culture_tradition = {
+        desc = "Get the culture_tradition with the specified key"
+        from_data = yes
+        type = scope
+        data_source = <tradition>
+        prefix = culture_tradition:
+        output_scope = culture_tradition
+    }
+    decision = {
+        desc = "Get the decision with the specified key"
+        from_data = yes
+        type = scope
+        data_source = <decision>
+        prefix = decision:
+        output_scope = decision
+    }
+    doctrine = {
+        desc = "Get the doctrine with the specified key"
+        from_data = yes
+        type = scope
+        data_source = <doctrine>
+        prefix = doctrine:
+        output_scope = doctrine
+    }
+    epidemic_type = {
+        desc = "Get the epidemic_type with the specified key"
+        from_data = yes
+        type = scope
+        data_source = <epidemic_type>
+        prefix = epidemic_type:
+        output_scope = epidemic_type
+    }
+    event_id = {
+        desc = "Global link to event scope of the given event id"
+        from_data = yes
+        type = scope
+        data_source = <event>
+        prefix = event_id:
+        output_scope = flag
+    }
+    flag = {
+        desc = "Flag literals eg: flag:the_boss"
+        from_data = yes
+        data_source = value[flag]
+        prefix = flag:
+        output_scope = flag
+    }
+    geographical_region = {
+        desc = "Get the geographical_region with the specified key"
+        from_data = yes
+        data_source = <geographical_region>
+        prefix = geographical_region:
+        output_scope = geographical_region
+    }
+    government_type = {
+        desc = "Get the government_type with the specified key"
+        from_data = yes
+        data_source = <government>
+        prefix = government_type:
+        output_scope = government
+    }
+    holding_type = {
+        desc = "Get the government_type with the specified key"
+        from_data = yes
+        data_source = <holding_type>
+        prefix = holding:
+        output_scope = holding
+    }
+    legend_type = {
+        desc = "Get the legend_type with the specified key"
+        from_data = yes
+        data_source = <legend_type>
+        output_scope = legend_type
+        prefix = legend_type:
+    }
+    special_guest = {
+        desc = "Get the special guest of the given type key in the scoped activity"
+        from_data = yes
+        #type = scope
+        #prefix = religion:
+        input_scope = activity
+        output_scope = character
+    }
+    struggle = {
+        desc = "Global link to struggle of the given key"
+        from_data = yes
+        data_source = <struggle>
+        prefix = struggle:
+        #type = scope
+        #prefix = religion:
+        output_scope = struggle
+    }
+    task_contract_type = {
+        desc = "Get the task_contract_type with the specified key"
+        from_data = yes
+        data_source = <task_contract_type>
+        prefix = task_contract_type:
+        output_scope = task_contract_type
+    }
+    trait = {
+        desc = "Get the trait with the specified key"
+        from_data = yes
+        type = scope
+        data_source = <trait>
+        prefix = trait:
+        output_scope = trait
+    }
+    vassal_contract = {
+        desc = "Get the vassal_contract with the specified key"
+        from_data = yes
+        type = scope
+        prefix = vassal_contract:
+        data_source = <vassal_contract>
+    }
+    acclaimed_knight = {
+        desc = "Get the Acclaimed Knight of given Accolade"
+        input_scopes = accolade
+        output_scope = character
+    }
+    accolade_owner = {
+        desc = "Get the Owner of given Accolade"
+        input_scopes = accolade
+        output_scope = character
+    }
+    accolade_successor = {
+        desc = "Get the Successor of given Accolade"
+        input_scopes = accolade
+        output_scope = character
+    }
+    founder_culture = {
+        desc = "Get the founder Culture of given Accolade"
+        input_scopes = accolade
+        output_scope = culture
+    }
+    founder_dynasty = {
+        desc = "Get the founder Dynasty of given Accolade"
+        input_scopes = accolade
+        output_scope = dynasty
+    }
+    founder_house = {
+        desc = "Get the founder House of given Accolade"
+        input_scopes = accolade
+        output_scope = dynasty_house
+    }
+    primary_type = {
+        desc = "Get the primary Accolade Type of given Accolade"
+        input_scopes = accolade
+        output_scope = accolade_type
+    }
+    secondary_type = {
+        desc = "Get the secondary Accolade Type of given Accolade"
+        input_scopes = accolade
+        output_scope = accolade_type
+    }
+    current_or_last_legend_owner = {
+        desc = "Get the current or last owner of this legend"
+        input_scopes = legend
+        output_scope = character
+    }
+    legend_owner = {
+        desc = "Get the owner of this legend"
+        input_scopes = legend
+        output_scope = character
+    }
+    legend_property = {
+        desc = "Get the scope of the property with the given name on the scoped legend"
+        input_scopes = legend
+    }
+    legend_protagonist = {
+        desc = "Get the protagonist character of this legend"
+        input_scopes = legend
+        output_scopes = character
+    }
+    legend_type = {
+        desc = "Get the type of this legend"
+        input_scopes = legend
+        output_scopes = legend_type
+    }
+    scheme_artifact = {
+        desc = "Get artifact of scoped scheme"
+        input_scopes = accolade
+        output_scope = accolade_type
+    }
+    scheme_target_character = {
+        desc = "Get target character of scoped scheme. Null if the target type is not a character."
+        input_scopes = scheme
+        output_scope = character
+    }
+    scheme_target_culture = {
+        desc = "Get target culture of scoped scheme. Null if the target type is not a culture."
+        input_scopes = scheme
+        output_scope = culture
+    }
+    scheme_target_faith = {
+        desc = "Get target faith of scoped scheme. Null if the target type is not a faith."
+        input_scopes = scheme
+        output_scope = faith
+    }
+    scheme_target_title = {
+        desc = "Get target title of scoped scheme. Null if the target type is not a title."
+        input_scopes = scheme
+        output_scope = landed_title
+    }
+    task_contract = {
+        desc = "Get the task contract associated to the scheme (if any)."
+        input_scopes = scheme
+        output_scope = task_contract
+    }
+    accolade = {
+        desc = "Get the Accolade of which this character is the Acclaimed Knight"
+        input_scopes = character
+        output_scope = accolade
+    }
+    aptitude = {
+        desc = "The aptitude of the provided court position type for the scoped character."
+        from_data = yes
+        input_scopes = character
+        output_scope = value
+    }
+    aptitude_score = {
+        desc = "Raw aptitude score of the provided court position type for the scoped character."
+        from_data = yes
+        input_scopes = character
+        output_scope = value
+    }
+    assigned_tax_slot = {
+        desc = "Get the Tax Slot of which this character is assigned to pay into"
+        input_scopes = character
+        output_scope = tax_slot
+    }
+    current_travel_plan = {
+        desc = "Get the character's current travel plan"
+        input_scopes = character
+        output_scopes = travel_plan
+    }
+    default_location = {
+        desc = "Get the province which the 'default' location a character should be at when not traveling. (considers imprisonment and other things.)"
+        input_scopes = character
+        output_scopes = province
+    }
+    designated_diarch = {
+        desc = "Get the designated diarch of a ruler"
+        input_scopes = character
+        output_scopes = character
+    }
+    diarch = {
+        desc = "Get the active diarch of a ruler"
+        input_scopes = character
+        output_scope = character
+    }
+    diarchy_successor = {
+        desc = "Get the next character in the diarchy line of successon"
+        input_scopes = character
+        output_scope = character
+    }
+    domicile = {
+        desc = "Get the domicile of the scoped character. Returns empty scope if no domicile."
+        input_scopes = character
+        output_scope = domicile
+    }
+    home_court = {
+        desc = "Get the home court owner of the scoped hostage. Returns empty scope if the character is not a hostage"
+        input_scopes = character
+        output_scope = character
+    }
+    intent_target = {
+        desc = "Get the intent target of scoped character"
+        input_scopes = character
+        output_scope = character
+    }
+    involved_activity = {
+        desc = "Get involved activity of scoped character"
+        input_scopes = character
+        output_scope = character
+    }
+    last_played_character = {
+        desc = "Get last played character of the currently scoped player character"
+        input_scopes = character
+        output_scope = character
+    }
+    promoted_legend = {
+        desc = "Get the promoted legend of this character"
+        input_scopes = character
+        output_scope = legend
+    }
+    real_mother = {
+        desc = "Get the real mother of the scoped character"
+        input_scopes = character
+        output_scope = character
+    }
+    secret_faith = {
+        desc = "Get secret faith of scoped character"
+        input_scopes = character
+        output_scope = faith
+    }
+    tax_slot = {
+        desc = "Get the Tax Slot of which this character is the Tax Collector"
+        input_scopes = character
+        output_scope = tax_slot
+    }
+    vassal_tax_collector = {
+        desc = "Get the Tax Collector of this Character"
+        input_scopes = character
+        output_scope = character
+    }
+    warden = {
+        desc = "Get the warden of the scoped hostage. Returns empty scope if the character is not a hostage"
+        input_scopes = character
+        output_scope = character
+    }
+    state_faith = {
+        desc = "Get the state faith of a scoped title"
+        input_scopes = landed_title
+        output_scope = faith
+    }
+    domicile_location = {
+        desc = "Get current location of the scoped domicile"
+        input_scopes = domicile
+        output_scope = province
+    }
+    owner = {
+        desc = "Get the owner of scoped domicile."
+        input_scopes = domicile
+        output_scope = character
+    }
+    inspiration_owner = {
+        desc = "Get the character who owns the inspiration"
+        input_scopes = inspiration
+        output_scope = character
+    }
+    inspiration_sponsor = {
+        desc = "Get the character who is sponsoring the inspiration, may not exist if there is no sponsor yet"
         input_scopes = inspiration
         output_scope = character
     }
