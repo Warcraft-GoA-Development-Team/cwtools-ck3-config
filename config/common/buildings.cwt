@@ -22,11 +22,6 @@ enums = {
         iberian_building_gfx
         iranian_building_gfx
     }
-    enum[graphical_region] = {
-        graphical_mena
-        graphical_mediterranean
-        graphical_india
-    }
     enum[asset_type] = {
         pdxmesh
         entity
@@ -50,7 +45,7 @@ enums = {
 
 }
 
-name_of_the_building = {
+building = {
 	
 	### How many levies does the building give
 	levy = int_value_field
@@ -78,11 +73,11 @@ name_of_the_building = {
         ## cardinality = 0..1
 		names = {
             ## cardinality = 1..inf
-            localisation
+            scalar
         }
 		### Path to illustration shown in the county view, texture can be accessed in GUI: "[Holding.GetIllustration]"
         ## cardinality = 0..1
-		illustration = localisation
+		illustration = filepath
 		### Associated sound effect and an optional parameter, can also be just soundeffect = "event:..." if no parameter is needed
 		## cardinality = 0..1
         soundeffect = {
@@ -103,7 +98,7 @@ name_of_the_building = {
 		## cardinality = 0..1
         graphical_regions = {
             ##cardinality = 1..inf
-            enum[graphical_region]
+            <geographical_region.graphical_region>
         }
 		### Governments that prefer this asset to be shown
 		## cardinality = 0..1

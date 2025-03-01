@@ -84,6 +84,7 @@ domicile_building = {
     asset = {
 
         ### Brief: trigger ( trigger ) Trigger for scoped domicile when to pick this asset over another, remove it to always pick this asset
+        ## cardinality = 0..1
         trigger = single_alias_right[trigger_clause]
 
         ### Brief: icon ( string path ) Building icon used in UI

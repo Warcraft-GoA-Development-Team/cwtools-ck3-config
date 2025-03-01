@@ -15,9 +15,15 @@ decision = {
 
     ## cardinality = 1..1
     ### set decision image
-    picture = scalar
+    picture = filepath
 
     ## cardinality = 1..1
+    ### set decision image
+    picture = {
+        reference = filepath
+    }
+
+    ## cardinality = 0..1
     ### set extra decision image, for use in example Struggle decission buttons.
     extra_picture = scalar
 
@@ -32,6 +38,9 @@ decision = {
     ## cardinality = 0..1
     ### override tooltip when selecting the decision from the decision list, default: "<key>_tooltip"; supports dynamic descriptions like in events (first_valid, ...); scope: character
     selection_tooltip = single_alias_right[complex_desc]
+    ### The order that the decision should show up in the decision view relative to other decisions, higher number is sorted first, tie breaking is on definition order if same sort order
+    ## cardinality = 0..1
+    sort_order = int_value_field
     ## cardinality = 0..1
     desc = localisation
     ## cardinality = 0..1
@@ -54,6 +63,9 @@ decision = {
     cost = single_alias_right[cost]
 
     ## cardinality = 0..1
+    cooldown = single_alias_right[duration_block]
+
+    ## cardinality = 0..1
     effect = single_alias_right[effect_clause]
 
     ## cardinality = 0..1
@@ -62,7 +74,7 @@ decision = {
     ###
     ### Usually these widgets require a custom controller. This should be documented in the widget's GUI file.
     ### The data context type available in the GUI depends on the controller type.
-    widget = single_alias_right[complex_gui]
+    widget = single_alias_right[decision_widget]
 
     ## cardinality = 0..1
     ### Trigger whether the AI should look at it or not

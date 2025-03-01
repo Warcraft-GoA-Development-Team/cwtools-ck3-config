@@ -11,23 +11,31 @@ single_alias[effect_clause] = {
 single_alias[cost] = {
     ## cardinality = 0..1
     gold = single_alias_right[int_conditional_formula]
-    # cardinality = 0..1
-    #gold = int_value_field
+    ## cardinality = 0..1
+    gold = <script_value>
+    ## cardinality = 0..1
+    gold = <static_value>
 
     ## cardinality = 0..1
     piety = single_alias_right[int_conditional_formula]
-    # cardinality = 0..1
-    #piety = int_value_field
+    ## cardinality = 0..1
+    piety = <script_value>
+    ## cardinality = 0..1
+    piety = <static_value>
 
     ## cardinality = 0..1
     prestige = single_alias_right[int_conditional_formula]
-    # cardinality = 0..1
-    #prestige = int_value_field
+    ## cardinality = 0..1
+    prestige = <script_value>
+    ## cardinality = 0..1
+    prestige = <static_value>
 
     ## cardinality = 0..1
     renown = single_alias_right[int_conditional_formula]
-    # cardinality = 0..1
-    #renown = int_value_field
+    ## cardinality = 0..1
+    renown = <script_value>
+    ## cardinality = 0..1
+    renown = <static_value>
 
     ## cardinality = 0..1
     round = bool
@@ -205,3 +213,38 @@ alias[modifier:no_water_crossing_penalty] = bool
 alias[modifier:hide_effects] = bool
 ## scope = character
 alias[modifier:stacking] = bool
+
+single_alias[decision_widget] = {
+    ### Name of the widget to use. Must be at the path <decision_view_widgets>/<widget_name>.gui
+    gui = scalar
+    ### Some widgets require a custom controller (see below). Default: default
+    controller = enum[decision_widget_controller]
+
+    ### Shows the option list from the very beginning of the decision window flow
+    show_from_start = bool
+
+    ## cardinality = 0..inf
+    item = {
+        ### is used in effect section
+        value = scalar
+        ### is entry shown
+        ## cardinality = 0..1
+        is_shown = alias_match_left[trigger]
+        ### is entry selectable
+        ## cardinality = 0..1
+        is_valid = alias_match_left[trigger]
+        ### tooltip info
+        current_description = localisation
+        ### what should be shown in the list
+        localization = localisation
+        ### is the default entry to pick
+        ## cardinality = 0..1
+        is_default = bool
+        ### path to the icon
+        icon = filepath
+        ### is icon flat black and needs a special widtet, or is it full color
+        ## cardinality = 0..1
+        flat = bool
+        ai_chance = single_alias_right[int_conditional_formula]
+    }
+}

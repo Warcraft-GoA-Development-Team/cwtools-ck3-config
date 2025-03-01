@@ -1,15 +1,22 @@
 types = {
     type[geographical_region] = {
         path = "game/map_data"
-        path_file = "geographical_region.txt"
-        subtype[graphical] = {
+        subtype[graphical_region] = {
             graphical = yes
         }
     }
 }
 
 ### Regions can be declared with one or more of the following fields:
-graphical_region = {
+geographical_region = {
+    ## cardinality = 0..1
+    graphical = bool
+    subtype[graphical_region] = {
+        color = {
+            ## cardinality = 3..4
+            float
+        }
+    }
     ### takes duchy title names declared in landed_titles.txt
     ## cardinality = 0..1
     duchies = {
@@ -36,4 +43,7 @@ graphical_region = {
         ## cardinality = 1..inf
         <geographical_region>
     }
+
+    ## cardinality = 0..1
+    generate_modifiers = bool
 }

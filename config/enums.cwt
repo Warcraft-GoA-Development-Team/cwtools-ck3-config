@@ -226,6 +226,12 @@ enums = {
         anglo_saxon_coa_gfx
         west_slavic_group_coa_gfx
     }
+    enum[decision_widget_controller] = {
+        default
+        create_holy_order
+        revoke_holy_order_lease
+        decision_option_list_controller
+    }
 }
 
 # Duration alias for LHS use:

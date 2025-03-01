@@ -1303,4 +1303,28 @@ links = {
         input_scopes = inspiration
         output_scope = character
     }
+    diplomacy = {
+        input_scopes = character
+        output_scope = value
+    }
+    martial = {
+        input_scopes = character
+        output_scope = value
+    }
+    stewardship = {
+        input_scopes = character
+        output_scope = value
+    }
+    intrigue = {
+        input_scopes = character
+        output_scope = value
+    }
+    learning = {
+        input_scopes = character
+        output_scope = value
+    }
+    max_military_strength = {
+        input_scopes = character
+        output_scope = value
+    }
 }
