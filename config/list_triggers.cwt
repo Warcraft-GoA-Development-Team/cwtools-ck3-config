@@ -1,5 +1,9 @@
 single_alias[any_trigger] = {
     ## cardinality = 0..1
+    continue = {
+        alias_name[trigger] = alias_match_left[trigger]
+    }
+    ## cardinality = 0..1
     percent = value_float[0.0..1.0]
     ## cardinality = 0..1
     count = int_value_field
@@ -15,15 +19,7 @@ single_alias[any_trigger] = {
 ### Iterate through all dynasty members any_dynasty_member = { <count=num/all> / <percent=fixed_point> <triggers> }
 ## push_scope = character
 ## scope = dynasty
-alias[trigger:any_dynasty_member] = {
-    ## cardinality = 0..1
-    percent = value_float[0.0..1.0]
-    ## cardinality = 0..1
-    count = int_value_field
-    ## cardinality = 0..1
-    count = all
-    alias_name[trigger] = alias_match_left[trigger]
-}
+alias[trigger:any_dynasty_member] = single_alias_right[any_trigger]
 
 ###############################
 # ACTIVITY SCOPE
@@ -34,11 +30,15 @@ alias[trigger:any_dynasty_member] = {
 ## push_scope = province
 alias[trigger:any_activity_phase_location] = {
     ## cardinality = 0..1
+    continue = {
+        alias_name[trigger] = alias_match_left[trigger]
+    }
+    ## cardinality = 0..1
     unique = bool
     ## cardinality = 0..1
     percent = value_float[0.0..1.0]
     ## cardinality = 0..1
-    count = int_value_field
+    count = alias_name[int_value]
     ## cardinality = 0..1
     count = all
     alias_name[trigger] = alias_match_left[trigger]
@@ -49,11 +49,15 @@ alias[trigger:any_activity_phase_location] = {
 ## push_scope = province
 alias[trigger:any_activity_phase_location_future] = {
     ## cardinality = 0..1
+    continue = {
+        alias_name[trigger] = alias_match_left[trigger]
+    }
+    ## cardinality = 0..1
     unique = bool
     ## cardinality = 0..1
     percent = value_float[0.0..1.0]
     ## cardinality = 0..1
-    count = int_value_field
+    count = alias_name[int_value]
     ## cardinality = 0..1
     count = all
     alias_name[trigger] = alias_match_left[trigger]
@@ -64,11 +68,15 @@ alias[trigger:any_activity_phase_location_future] = {
 ## push_scope = province
 alias[trigger:any_activity_phase_location_past] = {
     ## cardinality = 0..1
+    continue = {
+        alias_name[trigger] = alias_match_left[trigger]
+    }
+    ## cardinality = 0..1
     unique = bool
     ## cardinality = 0..1
     percent = value_float[0.0..1.0]
     ## cardinality = 0..1
-    count = int_value_field
+    count = alias_name[int_value]
     ## cardinality = 0..1
     count = all
     alias_name[trigger] = alias_match_left[trigger]
@@ -79,9 +87,13 @@ alias[trigger:any_activity_phase_location_past] = {
 ## push_scope = character
 alias[trigger:any_attending_character] = {
     ## cardinality = 0..1
+    continue = {
+        alias_name[trigger] = alias_match_left[trigger]
+    }
+    ## cardinality = 0..1
     percent = value_float[0.0..1.0]
     ## cardinality = 0..1
-    count = int_value_field
+    count = alias_name[int_value]
     ## cardinality = 0..1
     count = all
     ## cardinality = 0..1
@@ -97,13 +109,17 @@ alias[trigger:any_attending_character] = {
 ## scope = activity
 ## push_scope = character
 alias[trigger:any_guest_subset] = {
+    ## cardinality = 0..1
+    continue = {
+        alias_name[trigger] = alias_match_left[trigger]
+    }
     name = enum[guest_subset]
     ## cardinality = 0..1
     phase = <activity_phase>
     ## cardinality = 0..1
     percent = value_float[0.0..1.0]
     ## cardinality = 0..1
-    count = int_value_field
+    count = alias_name[int_value]
     ## cardinality = 0..1
     count = all
     alias_name[trigger] = alias_match_left[trigger]
@@ -112,42 +128,17 @@ alias[trigger:any_guest_subset] = {
 ### Iterates through characteres within the specified subset of the current phase.
 ## scope = activity
 ## push_scope = character
-alias[trigger:any_guest_subset_current_phase] = {
-    name = enum[guest_subset]
-    ## cardinality = 0..1
-    percent = value_float[0.0..1.0]
-    ## cardinality = 0..1
-    count = int_value_field
-    ## cardinality = 0..1
-    count = all
-    alias_name[trigger] = alias_match_left[trigger]
-}
+alias[trigger:any_guest_subset_current_phase] = single_alias_right[any_trigger]
 
 ### Iterate through all characters invited to an activity. Once they accept/decline, they are removed from this list.
 ## scope = activity
 ## push_scope = character
-alias[trigger:any_invited_character] = {
-    ## cardinality = 0..1
-    percent = value_float[0.0..1.0]
-    ## cardinality = 0..1
-    count = int_value_field
-    ## cardinality = 0..1
-    count = all
-    alias_name[trigger] = alias_match_left[trigger]
-}
+alias[trigger:any_invited_character] = single_alias_right[any_trigger]
 
 ### Iterate through all characters invited to an activity. Once they accept/decline, they are removed from this list.
 ## scope = activity
 ## push_scope = character
-alias[trigger:any_special_guest] = {
-    ## cardinality = 0..1
-    percent = value_float[0.0..1.0]
-    ## cardinality = 0..1
-    count = int_value_field
-    ## cardinality = 0..1
-    count = all
-    alias_name[trigger] = alias_match_left[trigger]
-}
+alias[trigger:any_special_guest] = single_alias_right[any_trigger]
 
 ###############################
 # CULTURE SCOPE
@@ -157,95 +148,39 @@ alias[trigger:any_special_guest] = {
 ### Iterate through all counties of the culture
 ## scope = culture
 ## push_scope = landed_title
-alias[trigger:any_culture_county] = {
-    ## cardinality = 0..1
-    percent = value_float[0.0..1.0]
-    ## cardinality = 0..1
-    count = int_value_field
-    ## cardinality = 0..1
-    count = all
-    alias_name[trigger] = alias_match_left[trigger]
-}
+alias[trigger:any_culture_county] = single_alias_right[any_trigger]
 
 
 
 ### Iterate through all duchies of the culture (duchies with at least one county of the culture
 ## scope = culture
 ## push_scope = landed_title
-alias[trigger:any_culture_duchy] = {
-    ## cardinality = 0..1
-    percent = value_float[0.0..1.0]
-    ## cardinality = 0..1
-    count = int_value_field
-    ## cardinality = 0..1
-    count = all
-    alias_name[trigger] = alias_match_left[trigger]
-}
+alias[trigger:any_culture_duchy] = single_alias_right[any_trigger]
 
 ### Iterate through all empires of the culture (empires with at least one county of the culture
 ## scope = culture
 ## push_scope = landed_title
-alias[trigger:any_culture_empire] = {
-    ## cardinality = 0..1
-    percent = value_float[0.0..1.0]
-    ## cardinality = 0..1
-    count = int_value_field
-    ## cardinality = 0..1
-    count = all
-    alias_name[trigger] = alias_match_left[trigger]
-}
+alias[trigger:any_culture_empire] = single_alias_right[any_trigger]
 
 ### Iterate through all kingdoms of the culture (kingdoms with at least one county of the culture
 ## scope = culture
 ## push_scope = landed_title
-alias[trigger:any_culture_kingdom] = {
-    ## cardinality = 0..1
-    percent = value_float[0.0..1.0]
-    ## cardinality = 0..1
-    count = int_value_field
-    ## cardinality = 0..1
-    count = all
-    alias_name[trigger] = alias_match_left[trigger]
-}
+alias[trigger:any_culture_kingdom] = single_alias_right[any_trigger]
 
 ### Iterate through all parent cultures
 ## scope = culture
 ## push_scope = culture
-alias[trigger:any_parent_culture] = {
-    ## cardinality = 0..1
-    percent = value_float[0.0..1.0]
-    ## cardinality = 0..1
-    count = int_value_field
-    ## cardinality = 0..1
-    count = all
-    alias_name[trigger] = alias_match_left[trigger]
-}
+alias[trigger:any_parent_culture] = single_alias_right[any_trigger]
 
 ### Iterate through all parent cultures or above
 ## scope = culture
 ## push_scope = culture
-alias[trigger:any_parent_culture_or_above] = {
-    ## cardinality = 0..1
-    percent = value_float[0.0..1.0]
-    ## cardinality = 0..1
-    count = int_value_field
-    ## cardinality = 0..1
-    count = all
-    alias_name[trigger] = alias_match_left[trigger]
-}
+alias[trigger:any_parent_culture_or_above] = single_alias_right[any_trigger]
 
 ### Iterate through all traditions of the given culture
 ## scope = culture
 ## push_scope = tradition
-alias[trigger:any_tradition] = {
-    ## cardinality = 0..1
-    percent = value_float[0.0..1.0]
-    ## cardinality = 0..1
-    count = int_value_field
-    ## cardinality = 0..1
-    count = all
-    alias_name[trigger] = alias_match_left[trigger]
-}
+alias[trigger:any_tradition] = single_alias_right[any_trigger]
 
 ###############################
 # MEMORY SCOPE
@@ -254,15 +189,7 @@ alias[trigger:any_tradition] = {
 ### Iterate through all participating character of a memory
 ## scope = memory
 ## push_scope = character
-alias[trigger:any_memory_participant] = {
-    ## cardinality = 0..1
-    percent = value_float[0.0..1.0]
-    ## cardinality = 0..1
-    count = int_value_field
-    ## cardinality = 0..1
-    count = all
-    alias_name[trigger] = alias_match_left[trigger]
-}
+alias[trigger:any_memory_participant] = single_alias_right[any_trigger]
 
 ###############################
 # TRAIT SCOPE
@@ -271,15 +198,7 @@ alias[trigger:any_memory_participant] = {
 ### Iterate through all counties of the culture
 ## scope = trait
 ## push_scope = trait
-alias[trigger:any_opposite_trait] = {
-    ## cardinality = 0..1
-    percent = value_float[0.0..1.0]
-    ## cardinality = 0..1
-    count = int_value_field
-    ## cardinality = 0..1
-    count = all
-    alias_name[trigger] = alias_match_left[trigger]
-}
+alias[trigger:any_opposite_trait] = single_alias_right[any_trigger]
 
 ###############################
 # DYNASTY HOUSE SCOPE
@@ -288,41 +207,17 @@ alias[trigger:any_opposite_trait] = {
 ### Iterate through all claimed artifacts of the scoped house any_house_claimed_artifact = { <count=num/all> / <percent=fixed_point> <triggers> }
 ## scope = dynasty_house
 ## push_scope = artifact
-alias[trigger:any_house_claimed_artifact] = {
-    ## cardinality = 0..1
-    percent = value_float[0.0..1.0]
-    ## cardinality = 0..1
-    count = int_value_field
-    ## cardinality = 0..1
-    count = all
-    alias_name[trigger] = alias_match_left[trigger]
-}
+alias[trigger:any_house_claimed_artifact] = single_alias_right[any_trigger]
 
 ### Iterate through all house members any_house_member = { <count=num/all> / <percent=fixed_point> <triggers> }
 ## scope = dynasty_house
 ## push_scope = character
-alias[trigger:any_house_member] = {
-    ## cardinality = 0..1
-    percent = value_float[0.0..1.0]
-    ## cardinality = 0..1
-    count = int_value_field
-    ## cardinality = 0..1
-    count = all
-    alias_name[trigger] = alias_match_left[trigger]
-}
+alias[trigger:any_house_member] = single_alias_right[any_trigger]
 
 ### Iterate through all valid house unity members any_house_unity_member = { <count=num/all> / <percent=fixed_point> <triggers> }
 ## scope = dynasty_house
 ## push_scope = character
-alias[trigger:any_house_unity_member] = {
-    ## cardinality = 0..1
-    percent = value_float[0.0..1.0]
-    ## cardinality = 0..1
-    count = int_value_field
-    ## cardinality = 0..1
-    count = all
-    alias_name[trigger] = alias_match_left[trigger]
-}
+alias[trigger:any_house_unity_member] = single_alias_right[any_trigger]
 
 ###############################
 # SECRET SCOPE
@@ -331,28 +226,12 @@ alias[trigger:any_house_unity_member] = {
 ### Iterate through all characters who know the secret any_secret_knower = { <count=num/all> / <percent=fixed_point> <triggers> }
 ## scope = secret
 ## push_scope = character
-alias[trigger:any_secret_knower] = {
-    ## cardinality = 0..1
-    percent = value_float[0.0..1.0]
-    ## cardinality = 0..1
-    count = int_value_field
-    ## cardinality = 0..1
-    count = all
-    alias_name[trigger] = alias_match_left[trigger]
-}
+alias[trigger:any_secret_knower] = single_alias_right[any_trigger]
 
 ### Iterate through participants in a secret any_secret_participant = { <count=num/all> / <percent=fixed_point> <triggers> }
 ## scope = secret
 ## push_scope = character
-alias[trigger:any_secret_participant] = {
-    ## cardinality = 0..1
-    percent = value_float[0.0..1.0]
-    ## cardinality = 0..1
-    count = int_value_field
-    ## cardinality = 0..1
-    count = all
-    alias_name[trigger] = alias_match_left[trigger]
-}
+alias[trigger:any_secret_participant] = single_alias_right[any_trigger]
 
 ###############################
 # RELIGION SCOPE
@@ -361,15 +240,7 @@ alias[trigger:any_secret_participant] = {
 ### Iterate through all faiths within a religion any_faith = { <count=num/all> / <percent=fixed_point> <triggers> }
 ## scope = religion
 ## push_scope = faith
-alias[trigger:any_faith] = {
-    ## cardinality = 0..1
-    percent = value_float[0.0..1.0]
-    ## cardinality = 0..1
-    count = int_value_field
-    ## cardinality = 0..1
-    count = all
-    alias_name[trigger] = alias_match_left[trigger]
-}
+alias[trigger:any_faith] = single_alias_right[any_trigger]
 
 ###############################
 # TRAVEL PLAN SCOPE
@@ -378,41 +249,17 @@ alias[trigger:any_faith] = {
 ### Iterate through all characters travelling along with the travel plan owner. Includes travel leader, but not the travel plan owner.
 ## scope = travel_plan
 ## push_scope = character
-alias[trigger:any_entourage_character] = {
-    ## cardinality = 0..1
-    percent = value_float[0.0..1.0]
-    ## cardinality = 0..1
-    count = int_value_field
-    ## cardinality = 0..1
-    count = all
-    alias_name[trigger] = alias_match_left[trigger]
-}
+alias[trigger:any_entourage_character] = single_alias_right[any_trigger]
 
 ### Iterate through all provinces this travel plan has in its route.
 ## scope = travel_plan
 ## push_scope = province
-alias[trigger:any_future_path_location] = {
-    ## cardinality = 0..1
-    percent = value_float[0.0..1.0]
-    ## cardinality = 0..1
-    count = int_value_field
-    ## cardinality = 0..1
-    count = all
-    alias_name[trigger] = alias_match_left[trigger]
-}
+alias[trigger:any_future_path_location] = single_alias_right[any_trigger]
 
 ### Iterate through all provinces this travel plan has arrived at so far.
 ## scope = travel_plan
 ## push_scope = province
-alias[trigger:any_visited_location] = {
-    ## cardinality = 0..1
-    percent = value_float[0.0..1.0]
-    ## cardinality = 0..1
-    count = int_value_field
-    ## cardinality = 0..1
-    count = all
-    alias_name[trigger] = alias_match_left[trigger]
-}
+alias[trigger:any_visited_location] = single_alias_right[any_trigger]
 
 ###############################
 # FAITH SCOPE
@@ -421,80 +268,32 @@ alias[trigger:any_visited_location] = {
 ### Iterate through all great holy wars this faith is defending against any_defensive_great_holy_wars = { <count=num/all> / <percent=fixed_point> <triggers> }
 ## scope = faith
 ## push_scope = ghw
-alias[trigger:any_defensive_great_holy_wars] = {
-    ## cardinality = 0..1
-    percent = value_float[0.0..1.0]
-    ## cardinality = 0..1
-    count = int_value_field
-    ## cardinality = 0..1
-    count = all
-    alias_name[trigger] = alias_match_left[trigger]
-}
+alias[trigger:any_defensive_great_holy_wars] = single_alias_right[any_trigger]
 
 ### Iterate through all great holy wars this faith is defending against any_defensive_great_holy_wars = { <count=num/all> / <percent=fixed_point> <triggers> }
 ## scope = faith
 ## push_scope = character
-alias[trigger:any_faith_character] = {
-    ## cardinality = 0..1
-    percent = value_float[0.0..1.0]
-    ## cardinality = 0..1
-    count = int_value_field
-    ## cardinality = 0..1
-    count = all
-    alias_name[trigger] = alias_match_left[trigger]
-}
+alias[trigger:any_faith_character] = single_alias_right[any_trigger]
 
 ### Iterate through all holy orders of the faith any_faith_holy_order = { <count=num/all> / <percent=fixed_point> <triggers> }
 ## scope = faith
 ## push_scope = holy_order
-alias[trigger:any_faith_holy_order] = {
-    ## cardinality = 0..1
-    percent = value_float[0.0..1.0]
-    ## cardinality = 0..1
-    count = int_value_field
-    ## cardinality = 0..1
-    count = all
-    alias_name[trigger] = alias_match_left[trigger]
-}
+alias[trigger:any_faith_holy_order] = single_alias_right[any_trigger]
 
 ### Iterate through playable rulers of the scoped faith
 ## scope = faith
 ## push_scope = character
-alias[trigger:any_faith_playable_ruler] = {
-    ## cardinality = 0..1
-    percent = value_float[0.0..1.0]
-    ## cardinality = 0..1
-    count = int_value_field
-    ## cardinality = 0..1
-    count = all
-    alias_name[trigger] = alias_match_left[trigger]
-}
+alias[trigger:any_faith_playable_ruler] = single_alias_right[any_trigger]
 
 ### Iterate through rulers of the scoped faith
 ## scope = faith
 ## push_scope = character
-alias[trigger:any_faith_ruler] = {
-    ## cardinality = 0..1
-    percent = value_float[0.0..1.0]
-    ## cardinality = 0..1
-    count = int_value_field
-    ## cardinality = 0..1
-    count = all
-    alias_name[trigger] = alias_match_left[trigger]
-}
+alias[trigger:any_faith_ruler] = single_alias_right[any_trigger]
 
 ### Iterate through all holy site provinces of a faith any_holy_site = { <count=num/all> / <percent=fixed_point> <triggers> }
 ## scope = faith
 ## push_scope = landed_title
-alias[trigger:any_holy_site] = {
-    ## cardinality = 0..1
-    percent = value_float[0.0..1.0]
-    ## cardinality = 0..1
-    count = int_value_field
-    ## cardinality = 0..1
-    count = all
-    alias_name[trigger] = alias_match_left[trigger]
-}
+alias[trigger:any_holy_site] = single_alias_right[any_trigger]
 
 ###############################
 # STRUGGLE SCOPE
@@ -503,41 +302,17 @@ alias[trigger:any_holy_site] = {
 ### Iterate through all characters that are interloper in a struggle.
 ## scope = struggle
 ## push_scope = character
-alias[trigger:any_interloper_ruler] = {
-    ## cardinality = 0..1
-    percent = value_float[0.0..1.0]
-    ## cardinality = 0..1
-    count = int_value_field
-    ## cardinality = 0..1
-    count = all
-    alias_name[trigger] = alias_match_left[trigger]
-}
+alias[trigger:any_interloper_ruler] = single_alias_right[any_trigger]
 
 ### Iterate through all counties that are involved in a struggle
 ## scope = struggle
 ## push_scope = landed_title
-alias[trigger:any_involved_county] = {
-    ## cardinality = 0..1
-    percent = value_float[0.0..1.0]
-    ## cardinality = 0..1
-    count = int_value_field
-    ## cardinality = 0..1
-    count = all
-    alias_name[trigger] = alias_match_left[trigger]
-}
+alias[trigger:any_involved_county] = single_alias_right[any_trigger]
 
 ### Iterate through all characters that are involved in a struggle.
 ## scope = struggle
 ## push_scope = character
-alias[trigger:any_involved_ruler] = {
-    ## cardinality = 0..1
-    percent = value_float[0.0..1.0]
-    ## cardinality = 0..1
-    count = int_value_field
-    ## cardinality = 0..1
-    count = all
-    alias_name[trigger] = alias_match_left[trigger]
-}
+alias[trigger:any_involved_ruler] = single_alias_right[any_trigger]
 
 ###############################
 # EPIDEMIC SCOPE
@@ -555,28 +330,12 @@ alias[trigger:any_infected_province] = single_alias_right[any_trigger]
 ### Iterate through all pledged attackers within a great holy war any_pledged_attacker = { <count=num/all> / <percent=fixed_point> <triggers> }
 ## scope = ghw
 ## push_scope = character
-alias[trigger:any_pledged_attacker] = {
-    ## cardinality = 0..1
-    percent = value_float[0.0..1.0]
-    ## cardinality = 0..1
-    count = int_value_field
-    ## cardinality = 0..1
-    count = all
-    alias_name[trigger] = alias_match_left[trigger]
-}
+alias[trigger:any_pledged_attacker] = single_alias_right[any_trigger]
 
 ### Iterate through all pledged defenders within a great holy war any_pledged_defender = { <count=num/all> / <percent=fixed_point> <triggers> }
 ## scope = ghw
 ## push_scope = character
-alias[trigger:any_pledged_defender] = {
-    ## cardinality = 0..1
-    percent = value_float[0.0..1.0]
-    ## cardinality = 0..1
-    count = int_value_field
-    ## cardinality = 0..1
-    count = all
-    alias_name[trigger] = alias_match_left[trigger]
-}
+alias[trigger:any_pledged_defender] = single_alias_right[any_trigger]
 
 ###############################
 # TAX SLOT SCOPE
@@ -585,15 +344,7 @@ alias[trigger:any_pledged_defender] = {
 ### Iterates through all Vassals assigned to the scoped Tax Slot
 ## scope = tax_slot
 ## push_scope = character
-alias[trigger:any_tax_slot_vassal] = {
-    ## cardinality = 0..1
-    percent = value_float[0.0..1.0]
-    ## cardinality = 0..1
-    count = int_value_field
-    ## cardinality = 0..1
-    count = all
-    alias_name[trigger] = alias_match_left[trigger]
-}
+alias[trigger:any_tax_slot_vassal] = single_alias_right[any_trigger]
 
 ###############################
 # CASUS BELLI SCOPE
@@ -602,15 +353,7 @@ alias[trigger:any_tax_slot_vassal] = {
 ### Iterate through all casus belli's target titles
 ## scope = casus_belli
 ## push_scope = landed_title
-alias[trigger:any_target_title] = {
-    ## cardinality = 0..1
-    percent = value_float[0.0..1.0]
-    ## cardinality = 0..1
-    count = int_value_field
-    ## cardinality = 0..1
-    count = all
-    alias_name[trigger] = alias_match_left[trigger]
-}
+alias[trigger:any_target_title] = single_alias_right[any_trigger]
 
 ###############################
 # ARTIFACT SCOPE
@@ -619,115 +362,43 @@ alias[trigger:any_target_title] = {
 ### Iterate through all characters with a claim on the scoped artifact
 ## scope = artifact
 ## push_scope = character
-alias[trigger:any_artifact_claimant] = {
-    ## cardinality = 0..1
-    percent = value_float[0.0..1.0]
-    ## cardinality = 0..1
-    count = int_value_field
-    ## cardinality = 0..1
-    count = all
-    alias_name[trigger] = alias_match_left[trigger]
-}
+alias[trigger:any_artifact_claimant] = single_alias_right[any_trigger]
 
 ### Iterate through all dynasty houses with a claim on the scoped artifact
 ## scope = artifact
 ## push_scope = dynasty_house
-alias[trigger:any_artifact_house_claimant] = {
-    ## cardinality = 0..1
-    percent = value_float[0.0..1.0]
-    ## cardinality = 0..1
-    count = int_value_field
-    ## cardinality = 0..1
-    count = all
-    alias_name[trigger] = alias_match_left[trigger]
-}
+alias[trigger:any_artifact_house_claimant] = single_alias_right[any_trigger]
 
 ### Iterate through all kills of a character (or an artifact)
 ## scope = { character artifact }
 ## push_scope = dynasty_house
-alias[trigger:any_killed_character] = {
-    ## cardinality = 0..1
-    percent = value_float[0.0..1.0]
-    ## cardinality = 0..1
-    count = int_value_field
-    ## cardinality = 0..1
-    count = all
-    alias_name[trigger] = alias_match_left[trigger]
-}
+alias[trigger:any_killed_character] = single_alias_right[any_trigger]
 
 ###############################
 # NONE SCOPE
 ###############################
 
 ### Undocumented
-alias[trigger:any_accolade_type] = {
-    ## cardinality = 0..1
-    percent = value_float[0.0..1.0]
-    ## cardinality = 0..1
-    count = int_value_field
-    ## cardinality = 0..1
-    count = all
-    alias_name[trigger] = alias_match_left[trigger]
-}
+alias[trigger:any_accolade_type] = single_alias_right[any_trigger]
 
 ### Iterate through all activities in the world
 ## push_scope = activity
-alias[trigger:any_activity] = {
-    ## cardinality = 0..1
-    percent = value_float[0.0..1.0]
-    ## cardinality = 0..1
-    count = int_value_field
-    ## cardinality = 0..1
-    count = all
-    alias_name[trigger] = alias_match_left[trigger]
-}
+alias[trigger:any_activity] = single_alias_right[any_trigger]
 
 ### Undocumented
-alias[trigger:any_activity_type] = {
-    ## cardinality = 0..1
-    percent = value_float[0.0..1.0]
-    ## cardinality = 0..1
-    count = int_value_field
-    ## cardinality = 0..1
-    count = all
-    alias_name[trigger] = alias_match_left[trigger]
-}
+alias[trigger:any_activity_type] = single_alias_right[any_trigger]
 
 ### Iterate through all existing artifacts
 ## push_scope = artifact
-alias[trigger:any_artifact] = {
-    ## cardinality = 0..1
-    percent = value_float[0.0..1.0]
-    ## cardinality = 0..1
-    count = int_value_field
-    ## cardinality = 0..1
-    count = all
-    alias_name[trigger] = alias_match_left[trigger]
-}
+alias[trigger:any_artifact] = single_alias_right[any_trigger]
 
 ### Iterate through all baronies in the game any_barony = { <count=num/all> / <percent=fixed_point> <triggers> }
 ## push_scope = landed_title
-alias[trigger:any_barony] = {
-    ## cardinality = 0..1
-    percent = value_float[0.0..1.0]
-    ## cardinality = 0..1
-    count = int_value_field
-    ## cardinality = 0..1
-    count = all
-    alias_name[trigger] = alias_match_left[trigger]
-}
+alias[trigger:any_barony] = single_alias_right[any_trigger]
 
 ### Iterate through all characters with a royal court any_character_with_royal_court = { <count=num/all> / <percent=fixed_point> <triggers> }
 ## push_scope = character
-alias[trigger:any_character_with_royal_court] = {
-    ## cardinality = 0..1
-    percent = value_float[0.0..1.0]
-    ## cardinality = 0..1
-    count = int_value_field
-    ## cardinality = 0..1
-    count = all
-    alias_name[trigger] = alias_match_left[trigger]
-}
+alias[trigger:any_character_with_royal_court] = single_alias_right[any_trigger]
 
 ### Gets all legends in the world that have been completed
 ## push_scope = legend
@@ -735,15 +406,7 @@ alias[trigger:any_completed_legend] = single_alias_right[any_trigger]
 
 ### Iterate through all counties in the game any_county = { <count=num/all> / <percent=fixed_point> <triggers> }
 ## push_scope = landed_title
-alias[trigger:any_county] = {
-    ## cardinality = 0..1
-    percent = value_float[0.0..1.0]
-    ## cardinality = 0..1
-    count = int_value_field
-    ## cardinality = 0..1
-    count = all
-    alias_name[trigger] = alias_match_left[trigger]
-}
+alias[trigger:any_county] = single_alias_right[any_trigger]
 
 ### Iterate through all counties in the region. Put 'region = region_name' inside it any_county_in_region = { <count=num/all> / <percent=fixed_point> <triggers> }
 ## push_scope = landed_title
@@ -752,7 +415,7 @@ alias[trigger:any_county_in_region] = {
     ## cardinality = 0..1
     percent = value_float[0.0..1.0]
     ## cardinality = 0..1
-    count = int_value_field
+    count = alias_name[int_value]
     ## cardinality = 0..1
     count = all
     alias_name[trigger] = alias_match_left[trigger]
@@ -760,87 +423,31 @@ alias[trigger:any_county_in_region] = {
 
 ### Iterate through all counties in the region. Put 'region = region_name' inside it any_county_in_region = { <count=num/all> / <percent=fixed_point> <triggers> }
 ## push_scope = culture
-alias[trigger:any_culture_global] = {
-    ## cardinality = 0..1
-    percent = value_float[0.0..1.0]
-    ## cardinality = 0..1
-    count = int_value_field
-    ## cardinality = 0..1
-    count = all
-    alias_name[trigger] = alias_match_left[trigger]
-}
+alias[trigger:any_culture_global] = single_alias_right[any_trigger]
 
 ### Undocumented
 ## push_scope = pillar
-alias[trigger:any_culture_pillar] = {
-    ## cardinality = 0..1
-    percent = value_float[0.0..1.0]
-    ## cardinality = 0..1
-    count = int_value_field
-    ## cardinality = 0..1
-    count = all
-    alias_name[trigger] = alias_match_left[trigger]
-}
+alias[trigger:any_culture_pillar] = single_alias_right[any_trigger]
 
 ### Undocumented
 ## push_scope = tradition
-alias[trigger:any_culture_tradition] = {
-    ## cardinality = 0..1
-    percent = value_float[0.0..1.0]
-    ## cardinality = 0..1
-    count = int_value_field
-    ## cardinality = 0..1
-    count = all
-    alias_name[trigger] = alias_match_left[trigger]
-}
+alias[trigger:any_culture_tradition] = single_alias_right[any_trigger]
 
 ### Undocumented
 ## push_scope = decision
-alias[trigger:any_decision] = {
-    ## cardinality = 0..1
-    percent = value_float[0.0..1.0]
-    ## cardinality = 0..1
-    count = int_value_field
-    ## cardinality = 0..1
-    count = all
-    alias_name[trigger] = alias_match_left[trigger]
-}
+alias[trigger:any_decision] = single_alias_right[any_trigger]
 
 ### Undocumented
 ## push_scope = doctrine
-alias[trigger:any_doctrine] = {
-    ## cardinality = 0..1
-    percent = value_float[0.0..1.0]
-    ## cardinality = 0..1
-    count = int_value_field
-    ## cardinality = 0..1
-    count = all
-    alias_name[trigger] = alias_match_left[trigger]
-}
+alias[trigger:any_doctrine] = single_alias_right[any_trigger]
 
 ### Iterate through all duchies in the game any_duchy = { <count=num/all> / <percent=fixed_point> <triggers> }
 ## push_scope = landed_title
-alias[trigger:any_duchy] = {
-    ## cardinality = 0..1
-    percent = value_float[0.0..1.0]
-    ## cardinality = 0..1
-    count = int_value_field
-    ## cardinality = 0..1
-    count = all
-    alias_name[trigger] = alias_match_left[trigger]
-}
+alias[trigger:any_duchy] = single_alias_right[any_trigger]
 
 ### Iterate through all empires in the game any_empire = { <count=num/all> / <percent=fixed_point> <triggers> }
 ## push_scope = landed_title
-alias[trigger:any_empire] = {
-    ## cardinality = 0..1
-    percent = value_float[0.0..1.0]
-    ## cardinality = 0..1
-    count = int_value_field
-    ## cardinality = 0..1
-    count = all
-    alias_name[trigger] = alias_match_left[trigger]
-}
+alias[trigger:any_empire] = single_alias_right[any_trigger]
 
 ### Gets all epidemics in the world
 ## push_scope = epidemic
@@ -860,26 +467,10 @@ alias[trigger:any_false] = {
 alias[trigger:any_geographical_region] = single_alias_right[any_trigger]
 
 ### Undocumented
-alias[trigger:any_government_type] = {
-    ## cardinality = 0..1
-    percent = value_float[0.0..1.0]
-    ## cardinality = 0..1
-    count = int_value_field
-    ## cardinality = 0..1
-    count = all
-    alias_name[trigger] = alias_match_left[trigger]
-}
+alias[trigger:any_government_type] = single_alias_right[any_trigger]
 
 ### Undocumented
-alias[trigger:any_holding_type] = {
-    ## cardinality = 0..1
-    percent = value_float[0.0..1.0]
-    ## cardinality = 0..1
-    count = int_value_field
-    ## cardinality = 0..1
-    count = all
-    alias_name[trigger] = alias_match_left[trigger]
-}
+alias[trigger:any_holding_type] = single_alias_right[any_trigger]
 
 ### Iterate through all items in global list. list = name or variable = name any_in_global_list = { <count=num/all> / <percent=fixed_point> <triggers> }
 alias[trigger:any_in_global_list] = {
@@ -887,7 +478,7 @@ alias[trigger:any_in_global_list] = {
     ## cardinality = 0..1
     percent = value_float[0.0..1.0]
     ## cardinality = 0..1
-    count = int_value_field
+    count = alias_name[int_value]
     ## cardinality = 0..1
     count = all
     alias_name[trigger] = alias_match_left[trigger]
@@ -899,7 +490,7 @@ alias[trigger:any_in_global_list] = {
     ## cardinality = 0..1
     percent = value_float[0.0..1.0]
     ## cardinality = 0..1
-    count = int_value_field
+    count = alias_name[int_value]
     ## cardinality = 0..1
     count = all
     alias_name[trigger] = alias_match_left[trigger]
@@ -911,7 +502,7 @@ alias[trigger:any_in_list] = {
     ## cardinality = 0..1
     percent = value_float[0.0..1.0]
     ## cardinality = 0..1
-    count = int_value_field
+    count = alias_name[int_value]
     ## cardinality = 0..1
     count = all
     alias_name[trigger] = alias_match_left[trigger]
@@ -923,7 +514,7 @@ alias[trigger:any_in_list] = {
     ## cardinality = 0..1
     percent = value_float[0.0..1.0]
     ## cardinality = 0..1
-    count = int_value_field
+    count = alias_name[int_value]
     ## cardinality = 0..1
     count = all
     alias_name[trigger] = alias_match_left[trigger]
@@ -935,7 +526,7 @@ alias[trigger:any_in_local_list] = {
     ## cardinality = 0..1
     percent = value_float[0.0..1.0]
     ## cardinality = 0..1
-    count = int_value_field
+    count = alias_name[int_value]
     ## cardinality = 0..1
     count = all
     alias_name[trigger] = alias_match_left[trigger]
@@ -947,7 +538,7 @@ alias[trigger:any_in_local_list] = {
     ## cardinality = 0..1
     percent = value_float[0.0..1.0]
     ## cardinality = 0..1
-    count = int_value_field
+    count = alias_name[int_value]
     ## cardinality = 0..1
     count = all
     alias_name[trigger] = alias_match_left[trigger]
@@ -955,51 +546,19 @@ alias[trigger:any_in_local_list] = {
 
 ### Independent rulers list with a COUNT tier o above any_independent_ruler = { <count=num/all> / <percent=fixed_point> <triggers> }
 ## push_scope = character
-alias[trigger:any_independent_ruler] = {
-    ## cardinality = 0..1
-    percent = value_float[0.0..1.0]
-    ## cardinality = 0..1
-    count = int_value_field
-    ## cardinality = 0..1
-    count = all
-    alias_name[trigger] = alias_match_left[trigger]
-}
+alias[trigger:any_independent_ruler] = single_alias_right[any_trigger]
 
 ### Iterate through all inspirations in the world
 ## push_scope = inspiration
-alias[trigger:any_inspiration] = {
-    ## cardinality = 0..1
-    percent = value_float[0.0..1.0]
-    ## cardinality = 0..1
-    count = int_value_field
-    ## cardinality = 0..1
-    count = all
-    alias_name[trigger] = alias_match_left[trigger]
-}
+alias[trigger:any_inspiration] = single_alias_right[any_trigger]
 
 ### Iterate through all characters with an inspirations in the world
 ## push_scope = character
-alias[trigger:any_inspired_character] = {
-    ## cardinality = 0..1
-    percent = value_float[0.0..1.0]
-    ## cardinality = 0..1
-    count = int_value_field
-    ## cardinality = 0..1
-    count = all
-    alias_name[trigger] = alias_match_left[trigger]
-}
+alias[trigger:any_inspired_character] = single_alias_right[any_trigger]
 
 ### Iterate through all kingdoms in the game any_kingdom = { <count=num/all> / <percent=fixed_point> <triggers> }
 ## push_scope = landed_title
-alias[trigger:any_kingdom] = {
-    ## cardinality = 0..1
-    percent = value_float[0.0..1.0]
-    ## cardinality = 0..1
-    count = int_value_field
-    ## cardinality = 0..1
-    count = all
-    alias_name[trigger] = alias_match_left[trigger]
-}
+alias[trigger:any_kingdom] = single_alias_right[any_trigger]
 
 ### Gets all legends in the world that have not been completed
 ## push_scope = legend
@@ -1011,145 +570,49 @@ alias[trigger:any_legend_type] = single_alias_right[any_trigger]
 
 ### Iterate through all living characters any_living_character = { <count=num/all> / <percent=fixed_point> <triggers> }
 ## push_scope = character
-alias[trigger:any_living_character] = {
-    ## cardinality = 0..1
-    percent = value_float[0.0..1.0]
-    ## cardinality = 0..1
-    count = int_value_field
-    ## cardinality = 0..1
-    count = all
-    alias_name[trigger] = alias_match_left[trigger]
-}
+alias[trigger:any_living_character] = single_alias_right[any_trigger]
 
 ### Iterate through all mercenary companies
 ## push_scope = mercenary_company
-alias[trigger:any_mercenary_company] = {
-    ## cardinality = 0..1
-    percent = value_float[0.0..1.0]
-    ## cardinality = 0..1
-    count = int_value_field
-    ## cardinality = 0..1
-    count = all
-    alias_name[trigger] = alias_match_left[trigger]
-}
+alias[trigger:any_mercenary_company] = single_alias_right[any_trigger]
 
 ### Iterate through all open invite activities in the world
 ## push_scope = activity
-alias[trigger:any_open_invite_activity] = {
-    ## cardinality = 0..1
-    percent = value_float[0.0..1.0]
-    ## cardinality = 0..1
-    count = int_value_field
-    ## cardinality = 0..1
-    count = all
-    alias_name[trigger] = alias_match_left[trigger]
-}
+alias[trigger:any_open_invite_activity] = single_alias_right[any_trigger]
 
 ### Iterate through all player characters any_player = { <count=num/all> / <percent=fixed_point> <triggers> }
 ## push_scope = character
-alias[trigger:any_player] = {
-    ## cardinality = 0..1
-    percent = value_float[0.0..1.0]
-    ## cardinality = 0..1
-    count = int_value_field
-    ## cardinality = 0..1
-    count = all
-    alias_name[trigger] = alias_match_left[trigger]
-}
+alias[trigger:any_player] = single_alias_right[any_trigger]
 
 ### Iterate through all characters in the pool of the given province any_pool_character = { <count=num/all> / <percent=fixed_point> <triggers> }
 ## push_scope = character
-alias[trigger:any_pool_character] = {
-    ## cardinality = 0..1
-    percent = value_float[0.0..1.0]
-    ## cardinality = 0..1
-    count = int_value_field
-    ## cardinality = 0..1
-    count = all
-    alias_name[trigger] = alias_match_left[trigger]
-}
+alias[trigger:any_pool_character] = single_alias_right[any_trigger]
 
 ### Iterate through all provinces (skips non-land and impassable provinces) any_province = { <count=num/all> / <percent=fixed_point> <triggers> }
 ## push_scope = province
-alias[trigger:any_province] = {
-    ## cardinality = 0..1
-    percent = value_float[0.0..1.0]
-    ## cardinality = 0..1
-    count = int_value_field
-    ## cardinality = 0..1
-    count = all
-    alias_name[trigger] = alias_match_left[trigger]
-}
+alias[trigger:any_province] = single_alias_right[any_trigger]
 
 ### Iterate through all religions in the game any_religion_global = { <count=num/all> / <percent=fixed_point> <triggers> }
 ## push_scope = religion
-alias[trigger:any_religion_global] = {
-    ## cardinality = 0..1
-    percent = value_float[0.0..1.0]
-    ## cardinality = 0..1
-    count = int_value_field
-    ## cardinality = 0..1
-    count = all
-    alias_name[trigger] = alias_match_left[trigger]
-}
+alias[trigger:any_religion_global] = single_alias_right[any_trigger]
 
 ### Rulers list with a COUNT tier o above any_ruler = { <count=num/all> / <percent=fixed_point> <triggers> }
 ## push_scope = character
-alias[trigger:any_ruler] = {
-    ## cardinality = 0..1
-    percent = value_float[0.0..1.0]
-    ## cardinality = 0..1
-    count = int_value_field
-    ## cardinality = 0..1
-    count = all
-    alias_name[trigger] = alias_match_left[trigger]
-}
+alias[trigger:any_ruler] = single_alias_right[any_trigger]
 
 ### Iterate through all provinces with a special building slot (built or un-built)
 ## push_scope = province
-alias[trigger:any_special_building_province] = {
-    ## cardinality = 0..1
-    percent = value_float[0.0..1.0]
-    ## cardinality = 0..1
-    count = int_value_field
-    ## cardinality = 0..1
-    count = all
-    alias_name[trigger] = alias_match_left[trigger]
-}
+alias[trigger:any_special_building_province] = single_alias_right[any_trigger]
 
 ### Undocumented
-alias[trigger:any_trait] = {
-    ## cardinality = 0..1
-    percent = value_float[0.0..1.0]
-    ## cardinality = 0..1
-    count = int_value_field
-    ## cardinality = 0..1
-    count = all
-    alias_name[trigger] = alias_match_left[trigger]
-}
+alias[trigger:any_trait] = single_alias_right[any_trigger]
 
 ### Iterate through all traits in a given category
 ## push_scope = trait
-alias[trigger:any_trait_in_category] = {
-    ## cardinality = 0..1
-    percent = value_float[0.0..1.0]
-    ## cardinality = 0..1
-    count = int_value_field
-    ## cardinality = 0..1
-    count = all
-    alias_name[trigger] = alias_match_left[trigger]
-}
+alias[trigger:any_trait_in_category] = single_alias_right[any_trigger]
 
 ### Undocumented
-alias[trigger:any_vassal_contract] = {
-    ## cardinality = 0..1
-    percent = value_float[0.0..1.0]
-    ## cardinality = 0..1
-    count = int_value_field
-    ## cardinality = 0..1
-    count = all
-    alias_name[trigger] = alias_match_left[trigger]
-}
+alias[trigger:any_vassal_contract] = single_alias_right[any_trigger]
 
 ###############################
 # PROVINCE SCOPE
@@ -1158,41 +621,17 @@ alias[trigger:any_vassal_contract] = {
 ### Iterate through all armies currently located in the scoped province
 ## scope = province
 ## push_scope = army
-alias[trigger:any_army_in_location] = {
-    ## cardinality = 0..1
-    percent = value_float[0.0..1.0]
-    ## cardinality = 0..1
-    count = int_value_field
-    ## cardinality = 0..1
-    count = all
-    alias_name[trigger] = alias_match_left[trigger]
-}
+alias[trigger:any_army_in_location] = single_alias_right[any_trigger]
 
 ### Iterate through all characters currently located in the scoped province
 ## scope = province
 ## push_scope = character
-alias[trigger:any_character_in_location] = {
-    ## cardinality = 0..1
-    percent = value_float[0.0..1.0]
-    ## cardinality = 0..1
-    count = int_value_field
-    ## cardinality = 0..1
-    count = all
-    alias_name[trigger] = alias_match_left[trigger]
-}
+alias[trigger:any_character_in_location] = single_alias_right[any_trigger]
 
 ### Iterate through all neighboring provinces of a province
 ## scope = province
 ## push_scope = province
-alias[trigger:any_neighboring_province] = {
-    ## cardinality = 0..1
-    percent = value_float[0.0..1.0]
-    ## cardinality = 0..1
-    count = int_value_field
-    ## cardinality = 0..1
-    count = all
-    alias_name[trigger] = alias_match_left[trigger]
-}
+alias[trigger:any_neighboring_province] = single_alias_right[any_trigger]
 
 ### Gets epidemics affecting the scoped province
 ## scope = province
@@ -1211,41 +650,17 @@ alias[trigger:any_province_legend] = single_alias_right[any_trigger]
 ### Iterate through all attackers in the war any_war_attacker = { <count=num/all> / <percent=fixed_point> <triggers> }
 ## scope = war
 ## push_scope = character
-alias[trigger:any_war_attacker] = {
-    ## cardinality = 0..1
-    percent = value_float[0.0..1.0]
-    ## cardinality = 0..1
-    count = int_value_field
-    ## cardinality = 0..1
-    count = all
-    alias_name[trigger] = alias_match_left[trigger]
-}
+alias[trigger:any_war_attacker] = single_alias_right[any_trigger]
 
 ### Iterate through all defenders in the war any_war_defender = { <count=num/all> / <percent=fixed_point> <triggers> }
 ## scope = war
 ## push_scope = character
-alias[trigger:any_war_defender] = {
-    ## cardinality = 0..1
-    percent = value_float[0.0..1.0]
-    ## cardinality = 0..1
-    count = int_value_field
-    ## cardinality = 0..1
-    count = all
-    alias_name[trigger] = alias_match_left[trigger]
-}
+alias[trigger:any_war_defender] = single_alias_right[any_trigger]
 
 ### Iterate through all participants in the war any_war_participant = { <count=num/all> / <percent=fixed_point> <triggers> }
 ## scope = war
 ## push_scope = character
-alias[trigger:any_war_participant] = {
-    ## cardinality = 0..1
-    percent = value_float[0.0..1.0]
-    ## cardinality = 0..1
-    count = int_value_field
-    ## cardinality = 0..1
-    count = all
-    alias_name[trigger] = alias_match_left[trigger]
-}
+alias[trigger:any_war_participant] = single_alias_right[any_trigger]
 
 ###############################
 # HOLY ORDER SCOPE
@@ -1254,15 +669,7 @@ alias[trigger:any_war_participant] = {
 ### Iterate through all titles leased to a holy order any_leased_title = { <count=num/all> / <percent=fixed_point> <triggers> }
 ## scope = holy_order
 ## push_scope = landed_title
-alias[trigger:any_leased_title] = {
-    ## cardinality = 0..1
-    percent = value_float[0.0..1.0]
-    ## cardinality = 0..1
-    count = int_value_field
-    ## cardinality = 0..1
-    count = all
-    alias_name[trigger] = alias_match_left[trigger]
-}
+alias[trigger:any_leased_title] = single_alias_right[any_trigger]
 
 ###############################
 # LEGEND SCOPE
@@ -1299,119 +706,47 @@ alias[trigger:any_scheme_agent_slot] = single_alias_right[any_trigger]
 ### Iterate through all acclaimed knights employed by a given character
 ## scope = character
 ## push_scope = character
-alias[trigger:any_acclaimed_knight] = {
-    ## cardinality = 0..1
-    percent = value_float[0.0..1.0]
-    ## cardinality = 0..1
-    count = int_value_field
-    ## cardinality = 0..1
-    count = all
-    alias_name[trigger] = alias_match_left[trigger]
-}
+alias[trigger:any_acclaimed_knight] = single_alias_right[any_trigger]
 
 ### Iterate through all ( active and inactive ) Accolades of a given liege character's Acclaimed Knights
 ## scope = character
 ## push_scope = accolade
-alias[trigger:any_accolade] = {
-    ## cardinality = 0..1
-    percent = value_float[0.0..1.0]
-    ## cardinality = 0..1
-    count = int_value_field
-    ## cardinality = 0..1
-    count = all
-    alias_name[trigger] = alias_match_left[trigger]
-}
+alias[trigger:any_accolade] = single_alias_right[any_trigger]
 
 ### Iterate through all active Accolades of a given liege character's Acclaimed Knights
 ## scope = character
 ## push_scope = accolade
-alias[trigger:any_accolade] = {
-    ## cardinality = 0..1
-    percent = value_float[0.0..1.0]
-    ## cardinality = 0..1
-    count = int_value_field
-    ## cardinality = 0..1
-    count = all
-    alias_name[trigger] = alias_match_left[trigger]
-}
+alias[trigger:any_accolade] = single_alias_right[any_trigger]
 
 ### Iterate through all titles that can be created by the character. (only for alerts) any_alert_creatable_title = { <count=num/all> / <percent=fixed_point> <triggers> }
 ## scope = character
 ## push_scope = landed_title
-alias[trigger:any_alert_creatable_title] = {
-    ## cardinality = 0..1
-    percent = value_float[0.0..1.0]
-    ## cardinality = 0..1
-    count = int_value_field
-    ## cardinality = 0..1
-    count = all
-    alias_name[trigger] = alias_match_left[trigger]
-}
+alias[trigger:any_alert_creatable_title] = single_alias_right[any_trigger]
 
 ### Iterate through all titles that can be usurped by the character. (only for alerts) any_alert_usurpable_title = { <count=num/all> / <percent=fixed_point> <triggers> }
 ## scope = character
 ## push_scope = landed_title
-alias[trigger:any_alert_usurpable_title] = {
-    ## cardinality = 0..1
-    percent = value_float[0.0..1.0]
-    ## cardinality = 0..1
-    count = int_value_field
-    ## cardinality = 0..1
-    count = all
-    alias_name[trigger] = alias_match_left[trigger]
-}
+alias[trigger:any_alert_usurpable_title] = single_alias_right[any_trigger]
 
 ### Iterate through all allies any_ally = { <count=num/all> / <percent=fixed_point> <triggers> }
 ## scope = character
 ## push_scope = character
-alias[trigger:any_ally] = {
-    ## cardinality = 0..1
-    percent = value_float[0.0..1.0]
-    ## cardinality = 0..1
-    count = int_value_field
-    ## cardinality = 0..1
-    count = all
-    alias_name[trigger] = alias_match_left[trigger]
-}
+alias[trigger:any_ally] = single_alias_right[any_trigger]
 
 ### Iterate through all the ancestors of the scope character up to 5 generations any_ancestor = { <count=num/all> / <percent=fixed_point> <triggers> }
 ## scope = character
 ## push_scope = character
-alias[trigger:any_ancestor] = {
-    ## cardinality = 0..1
-    percent = value_float[0.0..1.0]
-    ## cardinality = 0..1
-    count = int_value_field
-    ## cardinality = 0..1
-    count = all
-    alias_name[trigger] = alias_match_left[trigger]
-}
+alias[trigger:any_ancestor] = single_alias_right[any_trigger]
 
 ### Iterate through all armies any_army = { <count=num/all> / <percent=fixed_point> <triggers> }
 ## scope = character
 ## push_scope = army
-alias[trigger:any_army] = {
-    ## cardinality = 0..1
-    percent = value_float[0.0..1.0]
-    ## cardinality = 0..1
-    count = int_value_field
-    ## cardinality = 0..1
-    count = all
-    alias_name[trigger] = alias_match_left[trigger]
-}
+alias[trigger:any_army] = single_alias_right[any_trigger]
 
 ### Iterate through all artifacts in a given characters inventory
 ## scope = character
 ## push_scope = artifact
-alias[trigger:any_character_artifact] = {
-    ## cardinality = 0..1
-    percent = value_float[0.0..1.0]
-    ## cardinality = 0..1
-    count = int_value_field
-    ## cardinality = 0..1
-    count = all
-    alias_name[trigger] = alias_match_left[trigger]
-}
+alias[trigger:any_character_artifact] = single_alias_right[any_trigger]
 
 enums = {
     enum[involvement] = {
@@ -1435,7 +770,7 @@ alias[trigger:any_character_struggle] = {
     ## cardinality = 0..1
     percent = value_float[0.0..1.0]
     ## cardinality = 0..1
-    count = int_value_field
+    count = alias_name[int_value]
     ## cardinality = 0..1
     count = all
     alias_name[trigger] = alias_match_left[trigger]
@@ -1444,977 +779,377 @@ alias[trigger:any_character_struggle] = {
 ### Scopes from a character to a neighboring barony (incl. across water, looking trough the de Jure lieges) any_character_to_title_neighboring_and_across_water_barony = { <count=num/all> / <percent=fixed_point> <triggers> }
 ## scope = character
 ## push_scope = landed_title
-alias[trigger:any_character_to_title_neighboring_and_across_water_barony] = {
-    ## cardinality = 0..1
-    percent = value_float[0.0..1.0]
-    ## cardinality = 0..1
-    count = int_value_field
-    ## cardinality = 0..1
-    count = all
-    alias_name[trigger] = alias_match_left[trigger]
-}
+alias[trigger:any_character_to_title_neighboring_and_across_water_barony] = single_alias_right[any_trigger]
 
 ### Scopes from a character to a neighboring duchy (incl. across water, looking trough the de Jure lieges) any_character_to_title_neighboring_and_across_water_duchy = { <count=num/all> / <percent=fixed_point> <triggers> }
 ## scope = character
 ## push_scope = landed_title
-alias[trigger:any_character_to_title_neighboring_and_across_water_duchy] = {
-    ## cardinality = 0..1
-    percent = value_float[0.0..1.0]
-    ## cardinality = 0..1
-    count = int_value_field
-    ## cardinality = 0..1
-    count = all
-    alias_name[trigger] = alias_match_left[trigger]
-}
+alias[trigger:any_character_to_title_neighboring_and_across_water_duchy] = single_alias_right[any_trigger]
 
 ### Scopes from a character to a neighboring empire (incl. across water, looking trough the de Jure lieges) any_character_to_title_neighboring_and_across_water_empire = { <count=num/all> / <percent=fixed_point> <triggers> }
 ## scope = character
 ## push_scope = landed_title
-alias[trigger:any_character_to_title_neighboring_and_across_water_empire] = {
-    ## cardinality = 0..1
-    percent = value_float[0.0..1.0]
-    ## cardinality = 0..1
-    count = int_value_field
-    ## cardinality = 0..1
-    count = all
-    alias_name[trigger] = alias_match_left[trigger]
-}
+alias[trigger:any_character_to_title_neighboring_and_across_water_empire] = single_alias_right[any_trigger]
 
 ### Scopes from a character to a neighboring kingdom (incl. across water, looking trough the de Jure lieges) any_character_to_title_neighboring_and_across_water_kingdom = { <count=num/all> / <percent=fixed_point> <triggers> }
 ## scope = character
 ## push_scope = landed_title
-alias[trigger:any_character_to_title_neighboring_and_across_water_kingdom] = {
-    ## cardinality = 0..1
-    percent = value_float[0.0..1.0]
-    ## cardinality = 0..1
-    count = int_value_field
-    ## cardinality = 0..1
-    count = all
-    alias_name[trigger] = alias_match_left[trigger]
-}
+alias[trigger:any_character_to_title_neighboring_and_across_water_kingdom] = single_alias_right[any_trigger]
 
 
 ### Scopes from a character to a neighboring county (incl. across water, looking trough the de Jure lieges) any_character_to_title_neighboring_and_across_water_county = { <count=num/all> / <percent=fixed_point> <triggers> }
 ## scope = character
 ## push_scope = landed_title
-alias[trigger:any_character_to_title_neighboring_and_across_water_county] = {
-    ## cardinality = 0..1
-    percent = value_float[0.0..1.0]
-    ## cardinality = 0..1
-    count = int_value_field
-    ## cardinality = 0..1
-    count = all
-    alias_name[trigger] = alias_match_left[trigger]
-}
+alias[trigger:any_character_to_title_neighboring_and_across_water_county] = single_alias_right[any_trigger]
 
 ### Scopes from a character to a neighboring county (looking trough the de Jure lieges) any_character_to_title_neighboring_county = { <count=num/all> / <percent=fixed_point> <triggers> }
 ## scope = character
 ## push_scope = landed_title
-alias[trigger:any_character_to_title_neighboring_county] = {
-    ## cardinality = 0..1
-    percent = value_float[0.0..1.0]
-    ## cardinality = 0..1
-    count = int_value_field
-    ## cardinality = 0..1
-    count = all
-    alias_name[trigger] = alias_match_left[trigger]
-}
+alias[trigger:any_character_to_title_neighboring_county] = single_alias_right[any_trigger]
 
 ### Scopes from a character to a neighboring duchy (looking trough the de Jure lieges) any_character_to_title_neighboring_duchy = { <count=num/all> / <percent=fixed_point> <triggers> }
 ## scope = character
 ## push_scope = landed_title
-alias[trigger:any_character_to_title_neighboring_duchy] = {
-    ## cardinality = 0..1
-    percent = value_float[0.0..1.0]
-    ## cardinality = 0..1
-    count = int_value_field
-    ## cardinality = 0..1
-    count = all
-    alias_name[trigger] = alias_match_left[trigger]
-}
+alias[trigger:any_character_to_title_neighboring_duchy] = single_alias_right[any_trigger]
 
 ### Scopes from a character to a neighboring empire (looking trough the de Jure lieges) any_character_to_title_neighboring_empire = { <count=num/all> / <percent=fixed_point> <triggers> }
 ## scope = character
 ## push_scope = landed_title
-alias[trigger:any_character_to_title_neighboring_empire] = {
-    ## cardinality = 0..1
-    percent = value_float[0.0..1.0]
-    ## cardinality = 0..1
-    count = int_value_field
-    ## cardinality = 0..1
-    count = all
-    alias_name[trigger] = alias_match_left[trigger]
-}
+alias[trigger:any_character_to_title_neighboring_empire] = single_alias_right[any_trigger]
 
 ### Scopes from a character to a neighboring kingdom (looking trough the de Jure lieges) any_character_to_title_neighboring_kingdom = { <count=num/all> / <percent=fixed_point> <triggers> }
 ## scope = character
 ## push_scope = landed_title
-alias[trigger:any_character_to_title_neighboring_kingdom] = {
-    ## cardinality = 0..1
-    percent = value_float[0.0..1.0]
-    ## cardinality = 0..1
-    count = int_value_field
-    ## cardinality = 0..1
-    count = all
-    alias_name[trigger] = alias_match_left[trigger]
-}
+alias[trigger:any_character_to_title_neighboring_kingdom] = single_alias_right[any_trigger]
 
 ### Iterate through all traits a character has
 ## scope = character
 ## push_scope = trait
-alias[trigger:any_character_trait] = {
-    ## cardinality = 0..1
-    percent = value_float[0.0..1.0]
-    ## cardinality = 0..1
-    count = int_value_field
-    ## cardinality = 0..1
-    count = all
-    alias_name[trigger] = alias_match_left[trigger]
-}
+alias[trigger:any_character_trait] = single_alias_right[any_trigger]
 
 ### Wars of the scoped character any_character_war = { <count=num/all> / <percent=fixed_point> <triggers> }
 ## scope = character
 ## push_scope = character
-alias[trigger:any_character_war] = {
-    ## cardinality = 0..1
-    percent = value_float[0.0..1.0]
-    ## cardinality = 0..1
-    count = int_value_field
-    ## cardinality = 0..1
-    count = all
-    alias_name[trigger] = alias_match_left[trigger]
-}
+alias[trigger:any_character_war] = single_alias_right[any_trigger]
 
 ### Iterate through all children any_child = { <count=num/all> / <percent=fixed_point> <triggers> }
 ## scope = character
 ## push_scope = character
-alias[trigger:any_child] = {
-    ## cardinality = 0..1
-    percent = value_float[0.0..1.0]
-    ## cardinality = 0..1
-    count = int_value_field
-    ## cardinality = 0..1
-    count = all
-    alias_name[trigger] = alias_match_left[trigger]
-}
+alias[trigger:any_child] = single_alias_right[any_trigger]
 
 ### Iterate through the titles of all claims held by a character; parameters: explicit = yes/no/all pressed = yes/no/all any_claim = { <count=num/all> / <percent=fixed_point> <triggers> }
 ## scope = character
 ## push_scope = character
-alias[trigger:any_claim] = {
-    ## cardinality = 0..1
-    percent = value_float[0.0..1.0]
-    ## cardinality = 0..1
-    count = int_value_field
-    ## cardinality = 0..1
-    count = all
-    alias_name[trigger] = alias_match_left[trigger]
-}
+alias[trigger:any_claim] = single_alias_right[any_trigger]
 
 ### Iterate through all claimed artifacts of the scoped character
 ## scope = character
 ## push_scope = character
-alias[trigger:any_claimed_artifact] = {
-    ## cardinality = 0..1
-    percent = value_float[0.0..1.0]
-    ## cardinality = 0..1
-    count = int_value_field
-    ## cardinality = 0..1
-    count = all
-    alias_name[trigger] = alias_match_left[trigger]
-}
+alias[trigger:any_claimed_artifact] = single_alias_right[any_trigger]
 
 ### Iterate through all the close family [father, mother, siblings, children, grandparents] any_close_family_member = { <count=num/all> / <percent=fixed_point> <triggers> }
 ## scope = character
 ## push_scope = character
-alias[trigger:any_close_family_member] = {
-    ## cardinality = 0..1
-    percent = value_float[0.0..1.0]
-    ## cardinality = 0..1
-    count = int_value_field
-    ## cardinality = 0..1
-    count = all
-    alias_name[trigger] = alias_match_left[trigger]
-}
+alias[trigger:any_close_family_member] = single_alias_right[any_trigger]
 
 ### Iterate through all the close and extended relatives [father, mother, siblings, children, grandparents, uncles/aunts, nephew/niece, cousins] any_close_or_extended_family_member = { <count=num/all> / <percent=fixed_point> <triggers> }
 ## scope = character
 ## push_scope = character
-alias[trigger:any_close_or_extended_family_member] = {
-    ## cardinality = 0..1
-    percent = value_float[0.0..1.0]
-    ## cardinality = 0..1
-    count = int_value_field
-    ## cardinality = 0..1
-    count = all
-    alias_name[trigger] = alias_match_left[trigger]
-}
+alias[trigger:any_close_or_extended_family_member] = single_alias_right[any_trigger]
 
 ### Iterate through all concubines any_concubine = { <count=num/all> / <percent=fixed_point> <triggers> }
 ## scope = character
 ## push_scope = character
-alias[trigger:any_concubine] = {
-    ## cardinality = 0..1
-    percent = value_float[0.0..1.0]
-    ## cardinality = 0..1
-    count = int_value_field
-    ## cardinality = 0..1
-    count = all
-    alias_name[trigger] = alias_match_left[trigger]
-}
+alias[trigger:any_concubine] = single_alias_right[any_trigger]
 
 ### Iterate through all consorts (concubines and spouses) any_consort = { <count=num/all> / <percent=fixed_point> <triggers> }
 ## scope = character
 ## push_scope = character
-alias[trigger:any_consort] = {
-    ## cardinality = 0..1
-    percent = value_float[0.0..1.0]
-    ## cardinality = 0..1
-    count = int_value_field
-    ## cardinality = 0..1
-    count = all
-    alias_name[trigger] = alias_match_left[trigger]
-}
+alias[trigger:any_consort] = single_alias_right[any_trigger]
 
 ### Iterate through all councillors any_councillor = { <count=num/all> / <percent=fixed_point> <triggers> }
 ## scope = character
 ## push_scope = character
-alias[trigger:any_councillor] = {
-    ## cardinality = 0..1
-    percent = value_float[0.0..1.0]
-    ## cardinality = 0..1
-    count = int_value_field
-    ## cardinality = 0..1
-    count = all
-    alias_name[trigger] = alias_match_left[trigger]
-}
+alias[trigger:any_councillor] = single_alias_right[any_trigger]
 
 ### Iterate through all councillors any_councillor = { <count=num/all> / <percent=fixed_point> <triggers> }
 ## scope = character
 ## push_scope = character
-alias[trigger:any_court_position_employer] = {
-    ## cardinality = 0..1
-    percent = value_float[0.0..1.0]
-    ## cardinality = 0..1
-    count = int_value_field
-    ## cardinality = 0..1
-    count = all
-    alias_name[trigger] = alias_match_left[trigger]
-}
+alias[trigger:any_court_position_employer] = single_alias_right[any_trigger]
 
 ### Iterate through all councillors any_councillor = { <count=num/all> / <percent=fixed_point> <triggers> }
 ## scope = character
 ## push_scope = character
-alias[trigger:any_court_position_holder] = {
-    ## cardinality = 0..1
-    percent = value_float[0.0..1.0]
-    ## cardinality = 0..1
-    count = int_value_field
-    ## cardinality = 0..1
-    count = all
-    alias_name[trigger] = alias_match_left[trigger]
-}
+alias[trigger:any_court_position_holder] = single_alias_right[any_trigger]
 
 ### Iterate through all courtiers any_courtier = { <count=num/all> / <percent=fixed_point> <triggers> }
 ## scope = character
 ## push_scope = character
-alias[trigger:any_courtier] = {
-    ## cardinality = 0..1
-    percent = value_float[0.0..1.0]
-    ## cardinality = 0..1
-    count = int_value_field
-    ## cardinality = 0..1
-    count = all
-    alias_name[trigger] = alias_match_left[trigger]
-}
+alias[trigger:any_courtier] = single_alias_right[any_trigger]
 
 ### Iterate through all courtiers that are away any_courtier_away = { <count=num/all> / <percent=fixed_point> <triggers> }
 ## scope = character
 ## push_scope = character
-alias[trigger:any_courtier_away] = {
-    ## cardinality = 0..1
-    percent = value_float[0.0..1.0]
-    ## cardinality = 0..1
-    count = int_value_field
-    ## cardinality = 0..1
-    count = all
-    alias_name[trigger] = alias_match_left[trigger]
-}
+alias[trigger:any_courtier_away] = single_alias_right[any_trigger]
 
 ### Iterate through all courtiers and guests (pool and foreign court guests) any_courtier_or_guest = { <count=num/all> / <percent=fixed_point> <triggers> }
 ## scope = character
 ## push_scope = character
-alias[trigger:any_courtier_or_guest] = {
-    ## cardinality = 0..1
-    percent = value_float[0.0..1.0]
-    ## cardinality = 0..1
-    count = int_value_field
-    ## cardinality = 0..1
-    count = all
-    alias_name[trigger] = alias_match_left[trigger]
-}
+alias[trigger:any_courtier_or_guest] = single_alias_right[any_trigger]
 
 ### Iterate through all de jure claims for a character any_de_jure_claim = { <count=num/all> / <percent=fixed_point> <triggers> }
 ## scope = character
 ## push_scope = landed_title
-alias[trigger:any_de_jure_claim] = {
-    ## cardinality = 0..1
-    percent = value_float[0.0..1.0]
-    ## cardinality = 0..1
-    count = int_value_field
-    ## cardinality = 0..1
-    count = all
-    alias_name[trigger] = alias_match_left[trigger]
-}
+alias[trigger:any_de_jure_claim] = single_alias_right[any_trigger]
 
 ### Iterate through all character in the diarchy line of succession.If there's no active diarchy or active one doesn't have succession,it iterates over regency candidates
 ## scope = character
 ## push_scope = character
-alias[trigger:any_diarchy_succession_character] = {
-    ## cardinality = 0..1
-    percent = value_float[0.0..1.0]
-    ## cardinality = 0..1
-    count = int_value_field
-    ## cardinality = 0..1
-    count = all
-    alias_name[trigger] = alias_match_left[trigger]
-}
+alias[trigger:any_diarchy_succession_character] = single_alias_right[any_trigger]
 
 ### Iterate through all diplomacy-based councillors any_diplomacy_councillor = { <count=num/all> / <percent=fixed_point> <triggers> }
 ## scope = character
 ## push_scope = character
-alias[trigger:any_diplomacy_councillor] = {
-    ## cardinality = 0..1
-    percent = value_float[0.0..1.0]
-    ## cardinality = 0..1
-    count = int_value_field
-    ## cardinality = 0..1
-    count = all
-    alias_name[trigger] = alias_match_left[trigger]
-}
+alias[trigger:any_diplomacy_councillor] = single_alias_right[any_trigger]
 
 ### Iterate through all directly owned provinces any_directly_owned_province = { <count=num/all> / <percent=fixed_point> <triggers> }
 ## scope = character
 ## push_scope = province
-alias[trigger:any_directly_owned_province] = {
-    ## cardinality = 0..1
-    percent = value_float[0.0..1.0]
-    ## cardinality = 0..1
-    count = int_value_field
-    ## cardinality = 0..1
-    count = all
-    alias_name[trigger] = alias_match_left[trigger]
-}
+alias[trigger:any_directly_owned_province] = single_alias_right[any_trigger]
 
 ### Iterate through all titles the scoped character can vote on any_election_title = { <count=num/all> / <percent=fixed_point> <triggers> }\
 ## scope = character
 ## push_scope = landed_title
-alias[trigger:any_election_title] = {
-    ## cardinality = 0..1
-    percent = value_float[0.0..1.0]
-    ## cardinality = 0..1
-    count = int_value_field
-    ## cardinality = 0..1
-    count = all
-    alias_name[trigger] = alias_match_left[trigger]
-}
+alias[trigger:any_election_title] = single_alias_right[any_trigger]
 
 ### Iterate through all equipped artifacts in a given characters inventory
 ## scope = character
 ## push_scope = artifact
-alias[trigger:any_equipped_character_artifact] = {
-    ## cardinality = 0..1
-    percent = value_float[0.0..1.0]
-    ## cardinality = 0..1
-    count = int_value_field
-    ## cardinality = 0..1
-    count = all
-    alias_name[trigger] = alias_match_left[trigger]
-}
+alias[trigger:any_equipped_character_artifact] = single_alias_right[any_trigger]
 
 ### Iterate through all the extended family [uncles/aunts, nephew/niece, cousins] any_extended_family_member = { <count=num/all> / <percent=fixed_point> <triggers> }
 ## scope = character
 ## push_scope = character
-alias[trigger:any_extended_family_member] = {
-    ## cardinality = 0..1
-    percent = value_float[0.0..1.0]
-    ## cardinality = 0..1
-    count = int_value_field
-    ## cardinality = 0..1
-    count = all
-    alias_name[trigger] = alias_match_left[trigger]
-}
+alias[trigger:any_extended_family_member] = single_alias_right[any_trigger]
 
 ### Iterate through all guests visiting from another court (in contrast to pool_guest they have a liege) any_foreign_court_guest = { <count=num/all> / <percent=fixed_point> <triggers> }
 ## scope = character
 ## push_scope = character
-alias[trigger:any_foreign_court_guest] = {
-    ## cardinality = 0..1
-    percent = value_float[0.0..1.0]
-    ## cardinality = 0..1
-    count = int_value_field
-    ## cardinality = 0..1
-    count = all
-    alias_name[trigger] = alias_match_left[trigger]
-}
+alias[trigger:any_foreign_court_guest] = single_alias_right[any_trigger]
 
 ### Iterate through all former concubines. Not persisted past death any_former_concubine = { <count=num/all> / <percent=fixed_point> <triggers> }
 ## scope = character
 ## push_scope = character
-alias[trigger:any_former_concubine] = {
-    ## cardinality = 0..1
-    percent = value_float[0.0..1.0]
-    ## cardinality = 0..1
-    count = int_value_field
-    ## cardinality = 0..1
-    count = all
-    alias_name[trigger] = alias_match_left[trigger]
-}
+alias[trigger:any_former_concubine] = single_alias_right[any_trigger]
 
 ### Iterate through all former concubinists. Not persisted past death any_former_concubinist = { <count=num/all> / <percent=fixed_point> <triggers> }
 ## scope = character
 ## push_scope = character
-alias[trigger:any_former_concubinist] = {
-    ## cardinality = 0..1
-    percent = value_float[0.0..1.0]
-    ## cardinality = 0..1
-    count = int_value_field
-    ## cardinality = 0..1
-    count = all
-    alias_name[trigger] = alias_match_left[trigger]
-}
+alias[trigger:any_former_concubinist] = single_alias_right[any_trigger]
 
 ### Iterate through all former spouses any_former_spouse = { <count=num/all> / <percent=fixed_point> <triggers> }
 ## scope = character
 ## push_scope = character
-alias[trigger:any_former_spouse] = {
-    ## cardinality = 0..1
-    percent = value_float[0.0..1.0]
-    ## cardinality = 0..1
-    count = int_value_field
-    ## cardinality = 0..1
-    count = all
-    alias_name[trigger] = alias_match_left[trigger]
-}
+alias[trigger:any_former_spouse] = single_alias_right[any_trigger]
 
 ### Iterate through all councillors that are not related to a skill any_general_councillor = { <count=num/all> / <percent=fixed_point> <triggers> }
 ## scope = character
 ## push_scope = character
-alias[trigger:any_general_councillor] = {
-    ## cardinality = 0..1
-    percent = value_float[0.0..1.0]
-    ## cardinality = 0..1
-    count = int_value_field
-    ## cardinality = 0..1
-    count = all
-    alias_name[trigger] = alias_match_left[trigger]
-}
+alias[trigger:any_general_councillor] = single_alias_right[any_trigger]
 
 ### Heirs of the scoped character any_heir = { <count=num/all> / <percent=fixed_point> <triggers> }
 ## scope = character
 ## push_scope = character
-alias[trigger:any_heir] = {
-    ## cardinality = 0..1
-    percent = value_float[0.0..1.0]
-    ## cardinality = 0..1
-    count = int_value_field
-    ## cardinality = 0..1
-    count = all
-    alias_name[trigger] = alias_match_left[trigger]
-}
+alias[trigger:any_heir] = single_alias_right[any_trigger]
 
 ### Iterate through all landed titles character is heir to any_heir_title = { <count=num/all> / <percent=fixed_point> <triggers> }
 ## scope = character
 ## push_scope = landed_title
-alias[trigger:any_heir_title] = {
-    ## cardinality = 0..1
-    percent = value_float[0.0..1.0]
-    ## cardinality = 0..1
-    count = int_value_field
-    ## cardinality = 0..1
-    count = all
-    alias_name[trigger] = alias_match_left[trigger]
-}
+alias[trigger:any_heir_title] = single_alias_right[any_trigger]
 
 ### Iterate through all titles the scoped character is heir to any_heir_to_title = { <count=num/all> / <percent=fixed_point> <triggers> }
 ## scope = character
 ## push_scope = landed_title
-alias[trigger:any_heir_to_title] = {
-    ## cardinality = 0..1
-    percent = value_float[0.0..1.0]
-    ## cardinality = 0..1
-    count = int_value_field
-    ## cardinality = 0..1
-    count = all
-    alias_name[trigger] = alias_match_left[trigger]
-}
+alias[trigger:any_heir_to_title] = single_alias_right[any_trigger]
 
 ### Iterate through all held landed titles any_held_title = { <count=num/all> / <percent=fixed_point> <triggers> }
 ## scope = character
 ## push_scope = landed_title
-alias[trigger:any_held_title] = {
-    ## cardinality = 0..1
-    percent = value_float[0.0..1.0]
-    ## cardinality = 0..1
-    count = int_value_field
-    ## cardinality = 0..1
-    count = all
-    alias_name[trigger] = alias_match_left[trigger]
-}
+alias[trigger:any_held_title] = single_alias_right[any_trigger]
 ### Iterate through all hired mercenary companies any_hired_mercenary = { <count=num/all> / <percent=fixed_point> <triggers> }
 ## scope = character
 ## push_scope = mercenary_company
-alias[trigger:any_hired_mercenary] = {
-    ## cardinality = 0..1
-    percent = value_float[0.0..1.0]
-    ## cardinality = 0..1
-    count = int_value_field
-    ## cardinality = 0..1
-    count = all
-    alias_name[trigger] = alias_match_left[trigger]
-}
+alias[trigger:any_hired_mercenary] = single_alias_right[any_trigger]
 
 ### Iterate through all hostages currently abroad
 ## scope = character
 ## push_scope = character
-alias[trigger:any_home_court_hostage] = {
-    ## cardinality = 0..1
-    percent = value_float[0.0..1.0]
-    ## cardinality = 0..1
-    count = int_value_field
-    ## cardinality = 0..1
-    count = all
-    alias_name[trigger] = alias_match_left[trigger]
-}
+alias[trigger:any_home_court_hostage] = single_alias_right[any_trigger]
 
 ### Iterate through all characters this character has a hook on any_hooked_character = { <count=num/all> / <percent=fixed_point> <triggers> }
 ## scope = character
 ## push_scope = character
-alias[trigger:any_hooked_character] = {
-    ## cardinality = 0..1
-    percent = value_float[0.0..1.0]
-    ## cardinality = 0..1
-    count = int_value_field
-    ## cardinality = 0..1
-    count = all
-    alias_name[trigger] = alias_match_left[trigger]
-}
+alias[trigger:any_hooked_character] = single_alias_right[any_trigger]
 
 ### Iterate through anyone the character is hostile to due to their top-liege's realm having been raided any_hostile_raider = { <count=num/all> / <percent=fixed_point> <triggers> }
 ## scope = character
 ## push_scope = character
-alias[trigger:any_hostile_raider] = {
-    ## cardinality = 0..1
-    percent = value_float[0.0..1.0]
-    ## cardinality = 0..1
-    count = int_value_field
-    ## cardinality = 0..1
-    count = all
-    alias_name[trigger] = alias_match_left[trigger]
-}
+alias[trigger:any_hostile_raider] = single_alias_right[any_trigger]
 
 ### Iterate through all intrigue-based councillors any_intrigue_councillor = { <count=num/all> / <percent=fixed_point> <triggers> }
 ## scope = character
 ## push_scope = character
-alias[trigger:any_intrigue_councillor] = {
-    ## cardinality = 0..1
-    percent = value_float[0.0..1.0]
-    ## cardinality = 0..1
-    count = int_value_field
-    ## cardinality = 0..1
-    count = all
-    alias_name[trigger] = alias_match_left[trigger]
-}
+alias[trigger:any_intrigue_councillor] = single_alias_right[any_trigger]
 
 ### Iterate through all intrigue-based councillors any_intrigue_councillor = { <count=num/all> / <percent=fixed_point> <triggers> }
 ## scope = character
 ## push_scope = activity
-alias[trigger:any_invited_activity] = {
-    ## cardinality = 0..1
-    percent = value_float[0.0..1.0]
-    ## cardinality = 0..1
-    count = int_value_field
-    ## cardinality = 0..1
-    count = all
-    alias_name[trigger] = alias_match_left[trigger]
-}
+alias[trigger:any_invited_activity] = single_alias_right[any_trigger]
 
 ### Iterate through all knights any_knight = { <count=num/all> / <percent=fixed_point> <triggers> }
 ## scope = character
 ## push_scope = character
-alias[trigger:any_knight] = {
-    ## cardinality = 0..1
-    percent = value_float[0.0..1.0]
-    ## cardinality = 0..1
-    count = int_value_field
-    ## cardinality = 0..1
-    count = all
-    alias_name[trigger] = alias_match_left[trigger]
-}
+alias[trigger:any_knight] = single_alias_right[any_trigger]
 
 ### Iterate through all secrets known by the character any_known_secret = { <count=num/all> / <percent=fixed_point> <triggers> }
 ## scope = character
 ## push_scope = secret
-alias[trigger:any_known_secret] = {
-    ## cardinality = 0..1
-    percent = value_float[0.0..1.0]
-    ## cardinality = 0..1
-    count = int_value_field
-    ## cardinality = 0..1
-    count = all
-    alias_name[trigger] = alias_match_left[trigger]
-}
+alias[trigger:any_known_secret] = single_alias_right[any_trigger]
 
 ### Iterate through all learning-based councillors any_learning_councillor = { <count=num/all> / <percent=fixed_point> <triggers> }
 ## scope = character
 ## push_scope = character
-alias[trigger:any_learning_councillor] = {
-    ## cardinality = 0..1
-    percent = value_float[0.0..1.0]
-    ## cardinality = 0..1
-    count = int_value_field
-    ## cardinality = 0..1
-    count = all
-    alias_name[trigger] = alias_match_left[trigger]
-}
+alias[trigger:any_learning_councillor] = single_alias_right[any_trigger]
 
 ### Iterate through all lieges above a character (skipping the character themselves) any_liege_or_above = { <count=num/all> / <percent=fixed_point> <triggers> }
 ## scope = character
 ## push_scope = character
-alias[trigger:any_liege_or_above] = {
-    ## cardinality = 0..1
-    percent = value_float[0.0..1.0]
-    ## cardinality = 0..1
-    count = int_value_field
-    ## cardinality = 0..1
-    count = all
-    alias_name[trigger] = alias_match_left[trigger]
-}
+alias[trigger:any_liege_or_above] = single_alias_right[any_trigger]
 
 ### Iterate through all martial-based councillors any_martial_councillor = { <count=num/all> / <percent=fixed_point> <triggers> }
 ## scope = character
 ## push_scope = character
-alias[trigger:any_martial_councillor] = {
-    ## cardinality = 0..1
-    percent = value_float[0.0..1.0]
-    ## cardinality = 0..1
-    count = int_value_field
-    ## cardinality = 0..1
-    count = all
-    alias_name[trigger] = alias_match_left[trigger]
-}
+alias[trigger:any_martial_councillor] = single_alias_right[any_trigger]
 
 ### Iterate through all memories of a character any_memory = { <count=num/all> / <percent=fixed_point> <triggers> }
 ## scope = character
 ## push_scope = character_memory
-alias[trigger:any_memory] = {
-    ## cardinality = 0..1
-    percent = value_float[0.0..1.0]
-    ## cardinality = 0..1
-    count = int_value_field
-    ## cardinality = 0..1
-    count = all
-    alias_name[trigger] = alias_match_left[trigger]
-}
+alias[trigger:any_memory] = single_alias_right[any_trigger]
 
 ### A sub-realm or realm bordering the scope character's realm (including across water) and has the same rank as the scope character (look for lieges of he owner of the land if necessary) any_neighboring_and_across_water_realm_same_rank_owner = { <count=num/all> / <percent=fixed_point> <triggers> }
 ## scope = character
 ## push_scope = character
-alias[trigger:any_neighboring_and_across_water_realm_same_rank_owner] = {
-    ## cardinality = 0..1
-    percent = value_float[0.0..1.0]
-    ## cardinality = 0..1
-    count = int_value_field
-    ## cardinality = 0..1
-    count = all
-    alias_name[trigger] = alias_match_left[trigger]
-}
+alias[trigger:any_neighboring_and_across_water_realm_same_rank_owner] = single_alias_right[any_trigger]
 
 ### A realm with a different top liege neighboring the realm of the scope character's top liege (including across water); switches to the realm's top title any_neighboring_and_across_water_top_liege_realm = { <count=num/all> / <percent=fixed_point> <triggers> }
 ## scope = character
 ## push_scope = landed_title
-alias[trigger:any_neighboring_and_across_water_top_liege_realm] = {
-    ## cardinality = 0..1
-    percent = value_float[0.0..1.0]
-    ## cardinality = 0..1
-    count = int_value_field
-    ## cardinality = 0..1
-    count = all
-    alias_name[trigger] = alias_match_left[trigger]
-}
+alias[trigger:any_neighboring_and_across_water_top_liege_realm] = single_alias_right[any_trigger]
 
 ### A realm with a different top liege neighboring the realm of the scope character's top liege (including across water); switches to the holder of the realm any_neighboring_and_across_water_top_liege_realm_owner = { <count=num/all> / <percent=fixed_point> <triggers> }
 ## scope = character
 ## push_scope = character
-alias[trigger:any_neighboring_and_across_water_top_liege_realm_owner] = {
-    ## cardinality = 0..1
-    percent = value_float[0.0..1.0]
-    ## cardinality = 0..1
-    count = int_value_field
-    ## cardinality = 0..1
-    count = all
-    alias_name[trigger] = alias_match_left[trigger]
-}
+alias[trigger:any_neighboring_and_across_water_top_liege_realm_owner] = single_alias_right[any_trigger]
 
 ### A sub-realm or realm bordering the scope character's realm and has the same rank as the scope character (look for lieges of he owner of the land if necessary) any_neighboring_realm_same_rank_owner = { <count=num/all> / <percent=fixed_point> <triggers> }
 ## scope = character
 ## push_scope = character
-alias[trigger:any_neighboring_realm_same_rank_owner] = {
-    ## cardinality = 0..1
-    percent = value_float[0.0..1.0]
-    ## cardinality = 0..1
-    count = int_value_field
-    ## cardinality = 0..1
-    count = all
-    alias_name[trigger] = alias_match_left[trigger]
-}
+alias[trigger:any_neighboring_realm_same_rank_owner] = single_alias_right[any_trigger]
 
 ### A realm with a different top liege neighboring the realm of the scope character's top liege; switches to the realm's top title any_neighboring_top_liege_realm = { <count=num/all> / <percent=fixed_point> <triggers> }
 ## scope = character
 ## push_scope = landed_title
-alias[trigger:any_neighboring_top_liege_realm] = {
-    ## cardinality = 0..1
-    percent = value_float[0.0..1.0]
-    ## cardinality = 0..1
-    count = int_value_field
-    ## cardinality = 0..1
-    count = all
-    alias_name[trigger] = alias_match_left[trigger]
-}
+alias[trigger:any_neighboring_top_liege_realm] = single_alias_right[any_trigger]
 
 ### A realm with a different top liege neighboring the realm of the scope character's top liege; switches to the holder of the realm any_neighboring_top_liege_realm_owner = { <count=num/all> / <percent=fixed_point> <triggers> }
 ## scope = character
 ## push_scope = character
-alias[trigger:any_neighboring_top_liege_realm_owner] = {
-    ## cardinality = 0..1
-    percent = value_float[0.0..1.0]
-    ## cardinality = 0..1
-    count = int_value_field
-    ## cardinality = 0..1
-    count = all
-    alias_name[trigger] = alias_match_left[trigger]
-}
+alias[trigger:any_neighboring_top_liege_realm_owner] = single_alias_right[any_trigger]
 
 ### Iterate through all the spouse candidates of the opposite sex of a character. WARNING: THIS IS VERY SLOW DO NOT DO IT OFTEN.
 ## scope = character
 ## push_scope = character
-alias[trigger:any_opposite_sex_spouse_candidate] = {
-    ## cardinality = 0..1
-    percent = value_float[0.0..1.0]
-    ## cardinality = 0..1
-    count = int_value_field
-    ## cardinality = 0..1
-    count = all
-    alias_name[trigger] = alias_match_left[trigger]
-}
+alias[trigger:any_opposite_sex_spouse_candidate] = single_alias_right[any_trigger]
 
 ### Iterate through all owned stories for a character any_owned_story = { <count=num/all> / <percent=fixed_point> <triggers> }
 ## scope = character
 ## push_scope = story
-alias[trigger:any_owned_story] = {
-    ## cardinality = 0..1
-    percent = value_float[0.0..1.0]
-    ## cardinality = 0..1
-    count = int_value_field
-    ## cardinality = 0..1
-    count = all
-    alias_name[trigger] = alias_match_left[trigger]
-}
+alias[trigger:any_owned_story] = single_alias_right[any_trigger]
 
 ### Iterate through all (both) parents any_parent = { <count=num/all> / <percent=fixed_point> <triggers> }
 ## scope = character
 ## push_scope = character
-alias[trigger:any_parent] = {
-    ## cardinality = 0..1
-    percent = value_float[0.0..1.0]
-    ## cardinality = 0..1
-    count = int_value_field
-    ## cardinality = 0..1
-    count = all
-    alias_name[trigger] = alias_match_left[trigger]
-}
+alias[trigger:any_parent] = single_alias_right[any_trigger]
 
 ### Iterate through all holy orders that the scoped character is a patron of any_patroned_holy_order = { <count=num/all> / <percent=fixed_point> <triggers> }
 ## scope = character
 ## push_scope = holy_order
-alias[trigger:any_patroned_holy_order] = {
-    ## cardinality = 0..1
-    percent = value_float[0.0..1.0]
-    ## cardinality = 0..1
-    count = int_value_field
-    ## cardinality = 0..1
-    count = all
-    alias_name[trigger] = alias_match_left[trigger]
-}
+alias[trigger:any_patroned_holy_order] = single_alias_right[any_trigger]
 
 ### Iterate through all personally claimed artifacts of the scoped character
 ## scope = character
 ## push_scope = artifact
-alias[trigger:any_personal_claimed_artifact] = {
-    ## cardinality = 0..1
-    percent = value_float[0.0..1.0]
-    ## cardinality = 0..1
-    count = int_value_field
-    ## cardinality = 0..1
-    count = all
-    alias_name[trigger] = alias_match_left[trigger]
-}
+alias[trigger:any_personal_claimed_artifact] = single_alias_right[any_trigger]
 
 ### Iterate through characters this player has pinned any_pinned_character = { <count=num/all> / <percent=fixed_point> <triggers> }
 ## scope = character
 ## push_scope = character
-alias[trigger:any_pinned_character] = {
-    ## cardinality = 0..1
-    percent = value_float[0.0..1.0]
-    ## cardinality = 0..1
-    count = int_value_field
-    ## cardinality = 0..1
-    count = all
-    alias_name[trigger] = alias_match_left[trigger]
-}
+alias[trigger:any_pinned_character] = single_alias_right[any_trigger]
 
 ### Iterate through characters whose player has this character pinned any_pinning_character = { <count=num/all> / <percent=fixed_point> <triggers> }
 ## scope = character
 ## push_scope = character
-alias[trigger:any_pinning_character] = {
-    ## cardinality = 0..1
-    percent = value_float[0.0..1.0]
-    ## cardinality = 0..1
-    count = int_value_field
-    ## cardinality = 0..1
-    count = all
-    alias_name[trigger] = alias_match_left[trigger]
-}
+alias[trigger:any_pinning_character] = single_alias_right[any_trigger]
 
 ### Iterate through all characters the player playing this character has played. Matches the game over legacy, except for excluding the currently played character
 ## scope = character
 ## push_scope = character
-alias[trigger:any_played_character] = {
-    ## cardinality = 0..1
-    percent = value_float[0.0..1.0]
-    ## cardinality = 0..1
-    count = int_value_field
-    ## cardinality = 0..1
-    count = all
-    alias_name[trigger] = alias_match_left[trigger]
-}
+alias[trigger:any_played_character] = single_alias_right[any_trigger]
 
 ### Iterate through player heirs, capped at the first 10 any_player_heir = { <count=num/all> / <percent=fixed_point> <triggers> }
 ## scope = character
 ## push_scope = character
-alias[trigger:any_player_heir] = {
-    ## cardinality = 0..1
-    percent = value_float[0.0..1.0]
-    ## cardinality = 0..1
-    count = int_value_field
-    ## cardinality = 0..1
-    count = all
-    alias_name[trigger] = alias_match_left[trigger]
-}
+alias[trigger:any_player_heir] = single_alias_right[any_trigger]
 
 ### Iterate through all guests visiting the court from the pool (in contrast to foreign_court_guest they don't have a liege) any_pool_guest = { <count=num/all> / <percent=fixed_point> <triggers> }
 ## scope = character
 ## push_scope = character
-alias[trigger:any_pool_guest] = {
-    ## cardinality = 0..1
-    percent = value_float[0.0..1.0]
-    ## cardinality = 0..1
-    count = int_value_field
-    ## cardinality = 0..1
-    count = all
-    alias_name[trigger] = alias_match_left[trigger]
-}
+alias[trigger:any_pool_guest] = single_alias_right[any_trigger]
 
 ### Iterate through all potential selectable marriage or betrohed options any_potential_marriage_option = { <count=num/all> / <percent=fixed_point> <triggers> }
 ## scope = character
 ## push_scope = character
-alias[trigger:any_potential_marriage_option] = {
-    ## cardinality = 0..1
-    percent = value_float[0.0..1.0]
-    ## cardinality = 0..1
-    count = int_value_field
-    ## cardinality = 0..1
-    count = all
-    alias_name[trigger] = alias_match_left[trigger]
-}
+alias[trigger:any_potential_marriage_option] = single_alias_right[any_trigger]
 
 ### Iterate through the all powerful vassals of a character
 ## scope = character
 ## push_scope = character
-alias[trigger:any_powerful_vassal] = {
-    ## cardinality = 0..1
-    percent = value_float[0.0..1.0]
-    ## cardinality = 0..1
-    count = int_value_field
-    ## cardinality = 0..1
-    count = all
-    alias_name[trigger] = alias_match_left[trigger]
-}
+alias[trigger:any_powerful_vassal] = single_alias_right[any_trigger]
 
 ### Iterate through all landed titles character is pretender to any_pretender_title = { <count=num/all> / <percent=fixed_point> <triggers> }
 ## scope = character
 ## push_scope = landed_title
-alias[trigger:any_pretender_title] = {
-    ## cardinality = 0..1
-    percent = value_float[0.0..1.0]
-    ## cardinality = 0..1
-    count = int_value_field
-    ## cardinality = 0..1
-    count = all
-    alias_name[trigger] = alias_match_left[trigger]
-}
+alias[trigger:any_pretender_title] = single_alias_right[any_trigger]
 
 ### Iterate through all primary war enemies any_primary_war_enemy = { <count=num/all> / <percent=fixed_point> <triggers> }
 ## scope = character
 ## push_scope = character
-alias[trigger:any_primary_war_enemy] = {
-    ## cardinality = 0..1
-    percent = value_float[0.0..1.0]
-    ## cardinality = 0..1
-    count = int_value_field
-    ## cardinality = 0..1
-    count = all
-    alias_name[trigger] = alias_match_left[trigger]
-}
+alias[trigger:any_primary_war_enemy] = single_alias_right[any_trigger]
 
 ### Iterate through all prisoners any_prisoner = { <count=num/all> / <percent=fixed_point> <triggers> }
 ## scope = character
 ## push_scope = character
-alias[trigger:any_prisoner] = {
-    ## cardinality = 0..1
-    percent = value_float[0.0..1.0]
-    ## cardinality = 0..1
-    count = int_value_field
-    ## cardinality = 0..1
-    count = all
-    alias_name[trigger] = alias_match_left[trigger]
-}
+alias[trigger:any_prisoner] = single_alias_right[any_trigger]
 
 ### Iterate through all prowess-based councillors any_prowess_councillor = { <count=num/all> / <percent=fixed_point> <triggers> }
 ## scope = character
 ## push_scope = character
-alias[trigger:any_prowess_councillor] = {
-    ## cardinality = 0..1
-    percent = value_float[0.0..1.0]
-    ## cardinality = 0..1
-    count = int_value_field
-    ## cardinality = 0..1
-    count = all
-    alias_name[trigger] = alias_match_left[trigger]
-}
+alias[trigger:any_prowess_councillor] = single_alias_right[any_trigger]
 
 ### Iterate through anyone the character is hostile to due to having raided them. Only returns top lieges any_raid_target = { <count=num/all> / <percent=fixed_point> <triggers> }
 ## scope = character
 ## push_scope = character
-alias[trigger:any_raid_target] = {
-    ## cardinality = 0..1
-    percent = value_float[0.0..1.0]
-    ## cardinality = 0..1
-    count = int_value_field
-    ## cardinality = 0..1
-    count = all
-    alias_name[trigger] = alias_match_left[trigger]
-}
+alias[trigger:any_raid_target] = single_alias_right[any_trigger]
 
 ### Iterate through all counties that are on the edge of your realm bordering a different neighboring realm.
 ## scope = character
@@ -2424,80 +1159,32 @@ alias[trigger:any_realm_border_county] = single_alias_right[any_trigger]
 ### Iterate through all counties in the realm. Based on top liege  any_realm_county = { <count=num/all> / <percent=fixed_point> <triggers> }
 ## scope = character
 ## push_scope = landed_title
-alias[trigger:any_realm_county] = {
-    ## cardinality = 0..1
-    percent = value_float[0.0..1.0]
-    ## cardinality = 0..1
-    count = int_value_field
-    ## cardinality = 0..1
-    count = all
-    alias_name[trigger] = alias_match_left[trigger]
-}
+alias[trigger:any_realm_county] = single_alias_right[any_trigger]
 
 ### Iterate through all de jure duchies that have at least one county in the realm. Based on top liege  any_realm_de_jure_duchy = { <count=num/all> / <percent=fixed_point> <triggers> }
 ## scope = character
 ## push_scope = landed_title
-alias[trigger:any_realm_de_jure_duchy] = {
-    ## cardinality = 0..1
-    percent = value_float[0.0..1.0]
-    ## cardinality = 0..1
-    count = int_value_field
-    ## cardinality = 0..1
-    count = all
-    alias_name[trigger] = alias_match_left[trigger]
-}
+alias[trigger:any_realm_de_jure_duchy] = single_alias_right[any_trigger]
 
 ### Iterate through all de jure empire that have at least one county in the realm. Based on top liege  any_realm_de_jure_empire = { <count=num/all> / <percent=fixed_point> <triggers> }
 ## scope = character
 ## push_scope = landed_title
-alias[trigger:any_realm_de_jure_empire] = {
-    ## cardinality = 0..1
-    percent = value_float[0.0..1.0]
-    ## cardinality = 0..1
-    count = int_value_field
-    ## cardinality = 0..1
-    count = all
-    alias_name[trigger] = alias_match_left[trigger]
-}
+alias[trigger:any_realm_de_jure_empire] = single_alias_right[any_trigger]
 
 ### Iterate through all de jure kingdom that have at least one county in the realm. Based on top liege  any_realm_de_jure_kingdom = { <count=num/all> / <percent=fixed_point> <triggers> }
 ## scope = character
 ## push_scope = landed_title
-alias[trigger:any_realm_de_jure_kingdom] = {
-    ## cardinality = 0..1
-    percent = value_float[0.0..1.0]
-    ## cardinality = 0..1
-    count = int_value_field
-    ## cardinality = 0..1
-    count = all
-    alias_name[trigger] = alias_match_left[trigger]
-}
+alias[trigger:any_realm_de_jure_kingdom] = single_alias_right[any_trigger]
 
 ### Iterate through all realm provinces of a character any_realm_province = { <count=num/all> / <percent=fixed_point> <triggers> }
 ## scope = character
 ## push_scope = province
-alias[trigger:any_realm_province] = {
-    ## cardinality = 0..1
-    percent = value_float[0.0..1.0]
-    ## cardinality = 0..1
-    count = int_value_field
-    ## cardinality = 0..1
-    count = all
-    alias_name[trigger] = alias_match_left[trigger]
-}
+alias[trigger:any_realm_province] = single_alias_right[any_trigger]
 
 ### Iterate through all the spouse candidates of the same sex of a character. WARNING: THIS IS VERY SLOW DO NOT DO IT OFTEN.
 ## scope = character
 ## push_scope = character
-alias[trigger:any_same_sex_spouse_candidate] = {
-    ## cardinality = 0..1
-    percent = value_float[0.0..1.0]
-    ## cardinality = 0..1
-    count = int_value_field
-    ## cardinality = 0..1
-    count = all
-    alias_name[trigger] = alias_match_left[trigger]
-}
+alias[trigger:any_same_sex_spouse_candidate] = single_alias_right[any_trigger]
 
 ### Iterate through scripted relations of a given type any_relation = { <count=num/all> / <percent=fixed_point> <triggers> }
 ## scope = character
@@ -2507,7 +1194,7 @@ alias[trigger:any_relation] = {
     ## cardinality = 0..1
     percent = value_float[0.0..1.0]
     ## cardinality = 0..1
-    count = int_value_field
+    count = alias_name[int_value]
     ## cardinality = 0..1
     count = all
     alias_name[trigger] = alias_match_left[trigger]
@@ -2517,249 +1204,97 @@ alias[trigger:any_relation] = {
 ### Iterate through all schemes owned by the character any_scheme = { <count=num/all> / <percent=fixed_point> <triggers> }
 ## scope = character
 ## push_scope = scheme
-alias[trigger:any_scheme] = {
-    ## cardinality = 0..1
-    percent = value_float[0.0..1.0]
-    ## cardinality = 0..1
-    count = int_value_field
-    ## cardinality = 0..1
-    count = all
-    alias_name[trigger] = alias_match_left[trigger]
-}
+alias[trigger:any_scheme] = single_alias_right[any_trigger]
 
 ### Iterate through all secrets of the character any_secret = { <count=num/all> / <percent=fixed_point> <triggers> }
 ## scope = character
 ## push_scope = secret
-alias[trigger:any_secret] = {
-    ## cardinality = 0..1
-    percent = value_float[0.0..1.0]
-    ## cardinality = 0..1
-    count = int_value_field
-    ## cardinality = 0..1
-    count = all
-    alias_name[trigger] = alias_match_left[trigger]
-}
+alias[trigger:any_secret] = single_alias_right[any_trigger]
 
 ### Iterate through all siblings any_sibling = { <count=num/all> / <percent=fixed_point> <triggers> }
 ## scope = character
 ## push_scope = character
-alias[trigger:any_sibling] = {
-    ## cardinality = 0..1
-    percent = value_float[0.0..1.0]
-    ## cardinality = 0..1
-    count = int_value_field
-    ## cardinality = 0..1
-    count = all
-    alias_name[trigger] = alias_match_left[trigger]
-}
+alias[trigger:any_sibling] = single_alias_right[any_trigger]
 
 ### Iterate through all sponsored inspirations
 ## scope = character
 ## push_scope = inspiration
-alias[trigger:any_sponsored_inspiration] = {
-    ## cardinality = 0..1
-    percent = value_float[0.0..1.0]
-    ## cardinality = 0..1
-    count = int_value_field
-    ## cardinality = 0..1
-    count = all
-    alias_name[trigger] = alias_match_left[trigger]
-}
+alias[trigger:any_sponsored_inspiration] = single_alias_right[any_trigger]
 
 ### Iterate through all spouses any_spouse = { <count=num/all> / <percent=fixed_point> <triggers> }
 ## scope = character
 ## push_scope = character
-alias[trigger:any_spouse] = {
-    ## cardinality = 0..1
-    percent = value_float[0.0..1.0]
-    ## cardinality = 0..1
-    count = int_value_field
-    ## cardinality = 0..1
-    count = all
-    alias_name[trigger] = alias_match_left[trigger]
-}
+alias[trigger:any_spouse] = single_alias_right[any_trigger]
 
 ### Iterate through all the spouse candidates of a character. WARNING: THIS IS VERY SLOW DO NOT DO IT OFTEN.
 ## scope = character
 ## push_scope = character
-alias[trigger:any_spouse_candidate] = {
-    ## cardinality = 0..1
-    percent = value_float[0.0..1.0]
-    ## cardinality = 0..1
-    count = int_value_field
-    ## cardinality = 0..1
-    count = all
-    alias_name[trigger] = alias_match_left[trigger]
-}
+alias[trigger:any_spouse_candidate] = single_alias_right[any_trigger]
 
 ### Iterate through all stewardship-based councillors any_stewardship_councillor = { <count=num/all> / <percent=fixed_point> <triggers> }
 ## scope = character
 ## push_scope = character
-alias[trigger:any_stewardship_councillor] = {
-    ## cardinality = 0..1
-    percent = value_float[0.0..1.0]
-    ## cardinality = 0..1
-    count = int_value_field
-    ## cardinality = 0..1
-    count = all
-    alias_name[trigger] = alias_match_left[trigger]
-}
+alias[trigger:any_stewardship_councillor] = single_alias_right[any_trigger]
 
 ### Iterate through all baronies in sub-realm any_sub_realm_barony = { <count=num/all> / <percent=fixed_point> <triggers> }
 ## scope = character
 ## push_scope = landed_title
-alias[trigger:any_sub_realm_barony] = {
-    ## cardinality = 0..1
-    percent = value_float[0.0..1.0]
-    ## cardinality = 0..1
-    count = int_value_field
-    ## cardinality = 0..1
-    count = all
-    alias_name[trigger] = alias_match_left[trigger]
-}
+alias[trigger:any_sub_realm_barony] = single_alias_right[any_trigger]
 
 ## scope = character
 ## push_scope = landed_title
 ### Iterate through all counties in sub-realm any_sub_realm_county = { <count=num/all> / <percent=fixed_point> <triggers> }
-alias[trigger:any_sub_realm_county] = {
-    ## cardinality = 0..1
-    percent = value_float[0.0..1.0]
-    ## cardinality = 0..1
-    count = int_value_field
-    ## cardinality = 0..1
-    count = all
-    alias_name[trigger] = alias_match_left[trigger]
-}
+alias[trigger:any_sub_realm_county] = single_alias_right[any_trigger]
 
 ### Iterate through all duchies in sub-realm any_sub_realm_duchy = { <count=num/all> / <percent=fixed_point> <triggers> }
 ## scope = character
 ## push_scope = landed_title
-alias[trigger:any_sub_realm_duchy] = {
-    ## cardinality = 0..1
-    percent = value_float[0.0..1.0]
-    ## cardinality = 0..1
-    count = int_value_field
-    ## cardinality = 0..1
-    count = all
-    alias_name[trigger] = alias_match_left[trigger]
-}
+alias[trigger:any_sub_realm_duchy] = single_alias_right[any_trigger]
 
 ### Iterate through all empires in sub-realm any_sub_realm_empire = { <count=num/all> / <percent=fixed_point> <triggers> }
 ## scope = character
 ## push_scope = landed_title
-alias[trigger:any_sub_realm_empire] = {
-    ## cardinality = 0..1
-    percent = value_float[0.0..1.0]
-    ## cardinality = 0..1
-    count = int_value_field
-    ## cardinality = 0..1
-    count = all
-    alias_name[trigger] = alias_match_left[trigger]
-}
+alias[trigger:any_sub_realm_empire] = single_alias_right[any_trigger]
 
 ### Iterate through all kingdoms in sub-realm any_sub_realm_kingdom = { <count=num/all> / <percent=fixed_point> <triggers> }
 ## scope = character
 ## push_scope = landed_title
-alias[trigger:any_sub_realm_kingdom] = {
-    ## cardinality = 0..1
-    percent = value_float[0.0..1.0]
-    ## cardinality = 0..1
-    count = int_value_field
-    ## cardinality = 0..1
-    count = all
-    alias_name[trigger] = alias_match_left[trigger]
-}
+alias[trigger:any_sub_realm_kingdom] = single_alias_right[any_trigger]
 
 ### Iterate through all titles in sub-realm any_sub_realm_title = { <count=num/all> / <percent=fixed_point> <triggers> }
 ## scope = character
 ## push_scope = landed_title
-alias[trigger:any_sub_realm_title] = {
-    ## cardinality = 0..1
-    percent = value_float[0.0..1.0]
-    ## cardinality = 0..1
-    count = int_value_field
-    ## cardinality = 0..1
-    count = all
-    alias_name[trigger] = alias_match_left[trigger]
-}
+alias[trigger:any_sub_realm_title] = single_alias_right[any_trigger]
 
 ### Iterate through all factions targeting the scope character any_targeting_faction = { <count=num/all> / <percent=fixed_point> <triggers> }
 ## scope = character
 ## push_scope = faction
-alias[trigger:any_targeting_faction] = {
-    ## cardinality = 0..1
-    percent = value_float[0.0..1.0]
-    ## cardinality = 0..1
-    count = int_value_field
-    ## cardinality = 0..1
-    count = all
-    alias_name[trigger] = alias_match_left[trigger]
-}
+alias[trigger:any_targeting_faction] = single_alias_right[any_trigger]
 
 ### Iterate through all schemes targeting the character any_targeting_scheme = { <count=num/all> / <percent=fixed_point> <triggers> }
 ## scope = character
 ## push_scope = scheme
-alias[trigger:any_targeting_scheme] = {
-    ## cardinality = 0..1
-    percent = value_float[0.0..1.0]
-    ## cardinality = 0..1
-    count = int_value_field
-    ## cardinality = 0..1
-    count = all
-    alias_name[trigger] = alias_match_left[trigger]
-}
+alias[trigger:any_targeting_scheme] = single_alias_right[any_trigger]
 
 ### Iterate through all secrets that target the specified scope any_targeting_secret = { <count=num/all> / <percent=fixed_point> <triggers> }
 ## scope = character
 ## push_scope = secret
-alias[trigger:any_targeting_secret] = {
-    ## cardinality = 0..1
-    percent = value_float[0.0..1.0]
-    ## cardinality = 0..1
-    count = int_value_field
-    ## cardinality = 0..1
-    count = all
-    alias_name[trigger] = alias_match_left[trigger]
-}
+alias[trigger:any_targeting_secret] = single_alias_right[any_trigger]
 
 ### Iterates through all Tax Collectors employed by the scoped character
 ## scope = character
 ## push_scope = character
-alias[trigger:any_tax_collector] = {
-    ## cardinality = 0..1
-    percent = value_float[0.0..1.0]
-    ## cardinality = 0..1
-    count = int_value_field
-    ## cardinality = 0..1
-    count = all
-    alias_name[trigger] = alias_match_left[trigger]
-}
+alias[trigger:any_tax_collector] = single_alias_right[any_trigger]
 
 ### Iterates through all Vassals the scoped Character is the Tax Collector for
 ## scope = character
 ## push_scope = character
-alias[trigger:any_tax_collector_vassal] = {
-    ## cardinality = 0..1
-    percent = value_float[0.0..1.0]
-    ## cardinality = 0..1
-    count = int_value_field
-    ## cardinality = 0..1
-    count = all
-    alias_name[trigger] = alias_match_left[trigger]
-}
+alias[trigger:any_tax_collector_vassal] = single_alias_right[any_trigger]
 
 ### Iterates through all Tax Slots the scoped character has
 ## scope = character
 ## push_scope = character
-alias[trigger:any_tax_slot] = {
-    ## cardinality = 0..1
-    percent = value_float[0.0..1.0]
-    ## cardinality = 0..1
-    count = int_value_field
-    ## cardinality = 0..1
-    count = all
-    alias_name[trigger] = alias_match_left[trigger]
-}
+alias[trigger:any_tax_slot] = single_alias_right[any_trigger]
 
 ### Iterate through all counties that are on the edge of your realm bordering a different neighboring top realm.
 ## scope = character
@@ -2769,132 +1304,52 @@ alias[trigger:any_top_realm_border_county] = single_alias_right[any_trigger]
 ### Iterate though all characters that should travel with the scoped one (when moving between courts for instance); includes the scoped character
 ## scope = character
 ## push_scope = character
-alias[trigger:any_traveling_family_member] = {
-    ## cardinality = 0..1
-    percent = value_float[0.0..1.0]
-    ## cardinality = 0..1
-    count = int_value_field
-    ## cardinality = 0..1
-    count = all
-    alias_name[trigger] = alias_match_left[trigger]
-}
+alias[trigger:any_traveling_family_member] = single_alias_right[any_trigger]
 
 ### Iterate through all characters that have a truce on this character
 ## scope = character
 ## push_scope = character
-alias[trigger:any_truce_holder] = {
-    ## cardinality = 0..1
-    percent = value_float[0.0..1.0]
-    ## cardinality = 0..1
-    count = int_value_field
-    ## cardinality = 0..1
-    count = all
-    alias_name[trigger] = alias_match_left[trigger]
-}
+alias[trigger:any_truce_holder] = single_alias_right[any_trigger]
 
 ### Iterate through all characters this character has a truce on
 ## scope = character
 ## push_scope = character
-alias[trigger:any_truce_target] = {
-    ## cardinality = 0..1
-    percent = value_float[0.0..1.0]
-    ## cardinality = 0..1
-    count = int_value_field
-    ## cardinality = 0..1
-    count = all
-    alias_name[trigger] = alias_match_left[trigger]
-}
+alias[trigger:any_truce_target] = single_alias_right[any_trigger]
 
 ### Iterates through all unassigned taxpayers for scoped Character
 ## scope = character
 ## push_scope = character
-alias[trigger:any_unassigned_taxpayers] = {
-    ## cardinality = 0..1
-    percent = value_float[0.0..1.0]
-    ## cardinality = 0..1
-    count = int_value_field
-    ## cardinality = 0..1
-    count = all
-    alias_name[trigger] = alias_match_left[trigger]
-}
+alias[trigger:any_unassigned_taxpayers] = single_alias_right[any_trigger]
 
 ### Iterate through all unspent secrets known by the character any_unspent_known_secret = { <count=num/all> / <percent=fixed_point> <triggers> }
 ## scope = character
 ## push_scope = secret
-alias[trigger:any_unspent_known_secret] = {
-    ## cardinality = 0..1
-    percent = value_float[0.0..1.0]
-    ## cardinality = 0..1
-    count = int_value_field
-    ## cardinality = 0..1
-    count = all
-    alias_name[trigger] = alias_match_left[trigger]
-}
+alias[trigger:any_unspent_known_secret] = single_alias_right[any_trigger]
 
 ### Iterate through all DIRECT vassals any_vassal = { <count=num/all> / <percent=fixed_point> <triggers> }
 ## scope = character
 ## push_scope = character
-alias[trigger:any_vassal] = {
-    ## cardinality = 0..1
-    percent = value_float[0.0..1.0]
-    ## cardinality = 0..1
-    count = int_value_field
-    ## cardinality = 0..1
-    count = all
-    alias_name[trigger] = alias_match_left[trigger]
-}
+alias[trigger:any_vassal] = single_alias_right[any_trigger]
 
 ### Iterate through ALL vassals, not just direct vassals any_vassal_or_below = { <count=num/all> / <percent=fixed_point> <triggers> }
 ## scope = character
 ## push_scope = character
-alias[trigger:any_vassal_or_below] = {
-    ## cardinality = 0..1
-    percent = value_float[0.0..1.0]
-    ## cardinality = 0..1
-    count = int_value_field
-    ## cardinality = 0..1
-    count = all
-    alias_name[trigger] = alias_match_left[trigger]
-}
+alias[trigger:any_vassal_or_below] = single_alias_right[any_trigger]
 
 ### Iterate through all direct war allies any_war_ally = { <count=num/all> / <percent=fixed_point> <triggers> }
 ## scope = character
 ## push_scope = character
-alias[trigger:any_war_ally] = {
-    ## cardinality = 0..1
-    percent = value_float[0.0..1.0]
-    ## cardinality = 0..1
-    count = int_value_field
-    ## cardinality = 0..1
-    count = all
-    alias_name[trigger] = alias_match_left[trigger]
-}
+alias[trigger:any_war_ally] = single_alias_right[any_trigger]
 
 ### Iterate through all direct war enemies any_war_enemy = { <count=num/all> / <percent=fixed_point> <triggers> }
 ## scope = character
 ## push_scope = character
-alias[trigger:any_war_enemy] = {
-    ## cardinality = 0..1
-    percent = value_float[0.0..1.0]
-    ## cardinality = 0..1
-    count = int_value_field
-    ## cardinality = 0..1
-    count = all
-    alias_name[trigger] = alias_match_left[trigger]
-}
+alias[trigger:any_war_enemy] = single_alias_right[any_trigger]
 
 ### Iterate through all hostages having this warden
 ## scope = character
 ## push_scope = character
-alias[trigger:any_warden_hostage] = {
-    ## cardinality = 0..1
-    percent = value_float[0.0..1.0]
-    ## cardinality = 0..1
-    count = int_value_field
-    ## cardinality = 0..1
-    count = all
-    alias_name[trigger] = alias_match_left[trigger]
-}
+alias[trigger:any_warden_hostage] = single_alias_right[any_trigger]
 
 ###############################
 # COMBAT SCOPE
@@ -2903,15 +1358,7 @@ alias[trigger:any_warden_hostage] = {
 ### Iterate over both sides ( attacker and defender ) of the given combat
 ## scope = combat
 ## push_scope = combat_side
-alias[trigger:any_combat_side] = {
-    ## cardinality = 0..1
-    percent = value_float[0.0..1.0]
-    ## cardinality = 0..1
-    count = int_value_field
-    ## cardinality = 0..1
-    count = all
-    alias_name[trigger] = alias_match_left[trigger]
-}
+alias[trigger:any_combat_side] = single_alias_right[any_trigger]
 
 ###############################
 # LANDED TITLE SCOPE
@@ -2920,405 +1367,157 @@ alias[trigger:any_combat_side] = {
 ### Iterate through all claimants to title any_claimant = { <count=num/all> / <percent=fixed_point> <triggers> }
 ## scope = landed_title
 ## push_scope = character
-alias[trigger:any_claimant] = {
-    ## cardinality = 0..1
-    percent = value_float[0.0..1.0]
-    ## cardinality = 0..1
-    count = int_value_field
-    ## cardinality = 0..1
-    count = all
-    alias_name[trigger] = alias_match_left[trigger]
-}
+alias[trigger:any_claimant] = single_alias_right[any_trigger]
 
 ### Iterate through all counties connected to this one. Is based on top liege any/every/whatever_connectec_county = { 	max_naval_distance = 500 	allow_one_county_land_gap = yes any_connected_county = { <count=num/all> / <percent=fixed_point> <triggers> }
 ## scope = landed_title
 ## push_scope = landed_title
-alias[trigger:any_connected_county] = {
-    ## cardinality = 0..1
-    percent = value_float[0.0..1.0]
-    ## cardinality = 0..1
-    count = int_value_field
-    ## cardinality = 0..1
-    count = all
-    alias_name[trigger] = alias_match_left[trigger]
-}
+alias[trigger:any_connected_county] = single_alias_right[any_trigger]
 
 ### Iterate through all faiths headed by a title
 ## scope = landed_title
 ## push_scope = faith
-alias[trigger:any_controlled_faith] = {
-    ## cardinality = 0..1
-    percent = value_float[0.0..1.0]
-    ## cardinality = 0..1
-    count = int_value_field
-    ## cardinality = 0..1
-    count = all
-    alias_name[trigger] = alias_match_left[trigger]
-}
+alias[trigger:any_controlled_faith] = single_alias_right[any_trigger]
 
 ### Iterate through all provinces in a county any_county_province = { <count=num/all> / <percent=fixed_point> <triggers> }
 ## scope = landed_title
 ## push_scope = province
-alias[trigger:any_county_province] = {
-    ## cardinality = 0..1
-    percent = value_float[0.0..1.0]
-    ## cardinality = 0..1
-    count = int_value_field
-    ## cardinality = 0..1
-    count = all
-    alias_name[trigger] = alias_match_left[trigger]
-}
+alias[trigger:any_county_province] = single_alias_right[any_trigger]
 
 ### Iterate through all struggles that a county is involved in.
 ## scope = landed_title
 ## push_scope = struggle
-alias[trigger:any_county_struggle] = {
-    ## cardinality = 0..1
-    percent = value_float[0.0..1.0]
-    ## cardinality = 0..1
-    count = int_value_field
-    ## cardinality = 0..1
-    count = all
-    alias_name[trigger] = alias_match_left[trigger]
-}
+alias[trigger:any_county_struggle] = single_alias_right[any_trigger]
 
 ### Iterate through all counties within this dejure title
 ## scope = landed_title
 ## push_scope = landed_title
-alias[trigger:any_de_jure_county] = {
-    ## cardinality = 0..1
-    percent = value_float[0.0..1.0]
-    ## cardinality = 0..1
-    count = int_value_field
-    ## cardinality = 0..1
-    count = all
-    alias_name[trigger] = alias_match_left[trigger]
-}
+alias[trigger:any_de_jure_county] = single_alias_right[any_trigger]
 
 ### Iterate through all characters directly holding counties within this dejure title any_de_jure_county_holder = { <count=num/all> / <percent=fixed_point> <triggers> }
 ## scope = landed_title
 ## push_scope = character
-alias[trigger:any_de_jure_county_holder] = {
-    ## cardinality = 0..1
-    percent = value_float[0.0..1.0]
-    ## cardinality = 0..1
-    count = int_value_field
-    ## cardinality = 0..1
-    count = all
-    alias_name[trigger] = alias_match_left[trigger]
-}
+alias[trigger:any_de_jure_county_holder] = single_alias_right[any_trigger]
 
 ### Iterate through all top lieges of the counts within this dejure title any_de_jure_top_liege = { <count=num/all> / <percent=fixed_point> <triggers> }
 ## scope = landed_title
 ## push_scope = character
-alias[trigger:any_de_jure_top_liege] = {
-    ## cardinality = 0..1
-    percent = value_float[0.0..1.0]
-    ## cardinality = 0..1
-    count = int_value_field
-    ## cardinality = 0..1
-    count = all
-    alias_name[trigger] = alias_match_left[trigger]
-}
+alias[trigger:any_de_jure_top_liege] = single_alias_right[any_trigger]
 
 ### Iterate through all the vassal holders of the title
 ## scope = landed_title
 ## push_scope = character
-alias[trigger:any_dejure_vassal_title_holder] = {
-    ## cardinality = 0..1
-    percent = value_float[0.0..1.0]
-    ## cardinality = 0..1
-    count = int_value_field
-    ## cardinality = 0..1
-    count = all
-    alias_name[trigger] = alias_match_left[trigger]
-}
+alias[trigger:any_dejure_vassal_title_holder] = single_alias_right[any_trigger]
 
 ### Iterate through all de facto vassal titles
 ## scope = landed_title
 ## push_scope = character
-alias[trigger:any_direct_de_facto_vassal_title] = {
-    ## cardinality = 0..1
-    percent = value_float[0.0..1.0]
-    ## cardinality = 0..1
-    count = int_value_field
-    ## cardinality = 0..1
-    count = all
-    alias_name[trigger] = alias_match_left[trigger]
-}
+alias[trigger:any_direct_de_facto_vassal_title] = single_alias_right[any_trigger]
 
 ### Iterate through the all de jure vassals titles
 ## scope = landed_title
 ## push_scope = character
-alias[trigger:any_direct_de_jure_vassal_title] = {
-    ## cardinality = 0..1
-    percent = value_float[0.0..1.0]
-    ## cardinality = 0..1
-    count = int_value_field
-    ## cardinality = 0..1
-    count = all
-    alias_name[trigger] = alias_match_left[trigger]
-}
+alias[trigger:any_direct_de_jure_vassal_title] = single_alias_right[any_trigger]
 
 ### Iterate through all characters who are valid candidates in an election for a title
 ## scope = landed_title
 ## push_scope = character
-alias[trigger:any_election_candidate] = {
-    ## cardinality = 0..1
-    percent = value_float[0.0..1.0]
-    ## cardinality = 0..1
-    count = int_value_field
-    ## cardinality = 0..1
-    count = all
-    alias_name[trigger] = alias_match_left[trigger]
-}
+alias[trigger:any_election_candidate] = single_alias_right[any_trigger]
 
 ### Iterate through all characters who are valid electors in an election for a title
 ## scope = landed_title
 ## push_scope = character
-alias[trigger:any_elector] = {
-    ## cardinality = 0..1
-    percent = value_float[0.0..1.0]
-    ## cardinality = 0..1
-    count = int_value_field
-    ## cardinality = 0..1
-    count = all
-    alias_name[trigger] = alias_match_left[trigger]
-}
+alias[trigger:any_elector] = single_alias_right[any_trigger]
 
 ### Iterate through the title itself, all de facto vassals, and below. The continue trigger specifies whether to recursively iterate through the vassal's vassal This is unrelated to the limit; if the limit is met it is added to the list, but its vassals will get checked even if the limit isn't met as long as the 'continue' trigger is ..._de_jure_vassal_and_below = { continue = { conditions } } any_in_de_facto_hierarchy = { <count=num/all> / <percent=fixed_point> <triggers> }
 ## scope = landed_title
 ## push_scope = landed_title
-alias[trigger:any_in_de_facto_hierarchy] = {
-    ## cardinality = 0..1
-    percent = value_float[0.0..1.0]
-    ## cardinality = 0..1
-    count = int_value_field
-    ## cardinality = 0..1
-    count = all
-    alias_name[trigger] = alias_match_left[trigger]
-}
+alias[trigger:any_in_de_facto_hierarchy] = single_alias_right[any_trigger]
 
 ### Iterate through the title itself, all de jure vassals, and below. The continue trigger specifies whether to recursively iterate through the vassal's vassal This is unrelated to the limit; if the limit is met it is added to the list, but its vassals will get checked even if the limit isn't met as long as the 'continue' trigger is ..._de_jure_vassal_and_below = { continue = { conditions } } any_in_de_jure_hierarchy = { <count=num/all> / <percent=fixed_point> <triggers> }
 ## scope = landed_title
 ## push_scope = landed_title
-alias[trigger:any_in_de_jure_hierarchy] = {
-    ## cardinality = 0..1
-    percent = value_float[0.0..1.0]
-    ## cardinality = 0..1
-    count = int_value_field
-    ## cardinality = 0..1
-    count = all
-    alias_name[trigger] = alias_match_left[trigger]
-}
+alias[trigger:any_in_de_jure_hierarchy] = single_alias_right[any_trigger]
 
 ### Iterate through all neighboring counties. Can only be used in county scope any_neighboring_county = { <count=num/all> / <percent=fixed_point> <triggers> }
 ## scope = landed_title
 ## push_scope = landed_title
-alias[trigger:any_neighboring_county] = {
-    ## cardinality = 0..1
-    percent = value_float[0.0..1.0]
-    ## cardinality = 0..1
-    count = int_value_field
-    ## cardinality = 0..1
-    count = all
-    alias_name[trigger] = alias_match_left[trigger]
-}
+alias[trigger:any_neighboring_county] = single_alias_right[any_trigger]
 
 ### Iterate through all past owners of a title from earliest to latest
 ## scope = landed_title
 ## push_scope = character
-alias[trigger:any_past_holder] = {
-    ## cardinality = 0..1
-    percent = value_float[0.0..1.0]
-    ## cardinality = 0..1
-    count = int_value_field
-    ## cardinality = 0..1
-    count = all
-    alias_name[trigger] = alias_match_left[trigger]
-}
+alias[trigger:any_past_holder] = single_alias_right[any_trigger]
 
 ### Iterate through all past owners of a title from latest to earliest
 ## scope = landed_title
 ## push_scope = character
-alias[trigger:any_past_holder_reversed] = {
-    ## cardinality = 0..1
-    percent = value_float[0.0..1.0]
-    ## cardinality = 0..1
-    count = int_value_field
-    ## cardinality = 0..1
-    count = all
-    alias_name[trigger] = alias_match_left[trigger]
-}
+alias[trigger:any_past_holder_reversed] = single_alias_right[any_trigger]
 
 ### Iterate through this title and all its dejure liege titles any_this_title_or_de_jure_above = { <count=num/all> / <percent=fixed_point> <triggers> }
 ## scope = landed_title
 ## push_scope = landed_title
-alias[trigger:any_this_title_or_de_jure_above] = {
-    ## cardinality = 0..1
-    percent = value_float[0.0..1.0]
-    ## cardinality = 0..1
-    count = int_value_field
-    ## cardinality = 0..1
-    count = all
-    alias_name[trigger] = alias_match_left[trigger]
-}
+alias[trigger:any_this_title_or_de_jure_above] = single_alias_right[any_trigger]
 
 ### Line of succession for the scoped title any_title_heir = { <count=num/all> / <percent=fixed_point> <triggers> }
 ## scope = landed_title
 ## push_scope = character
-alias[trigger:any_title_heir] = {
-    ## cardinality = 0..1
-    percent = value_float[0.0..1.0]
-    ## cardinality = 0..1
-    count = int_value_field
-    ## cardinality = 0..1
-    count = all
-    alias_name[trigger] = alias_match_left[trigger]
-}
+alias[trigger:any_title_heir] = single_alias_right[any_trigger]
 
 ### Iterate through all factions joined the scope landed title any_title_joined_faction = { <count=num/all> / <percent=fixed_point> <triggers> }
 ## scope = landed_title
 ## push_scope = faction
-alias[trigger:any_title_joined_faction] = {
-    ## cardinality = 0..1
-    percent = value_float[0.0..1.0]
-    ## cardinality = 0..1
-    count = int_value_field
-    ## cardinality = 0..1
-    count = all
-    alias_name[trigger] = alias_match_left[trigger]
-}
+alias[trigger:any_title_joined_faction] = single_alias_right[any_trigger]
 
 ### Scopes from a title to a neighboring barony (incl. across water, looking trough the de Jure lieges) any_title_to_title_neighboring_and_across_water_barony = { <count=num/all> / <percent=fixed_point> <triggers> }
 ## scope = landed_title
 ## push_scope = landed_title
-alias[trigger:any_title_to_title_neighboring_and_across_water_barony] = {
-    ## cardinality = 0..1
-    percent = value_float[0.0..1.0]
-    ## cardinality = 0..1
-    count = int_value_field
-    ## cardinality = 0..1
-    count = all
-    alias_name[trigger] = alias_match_left[trigger]
-}
+alias[trigger:any_title_to_title_neighboring_and_across_water_barony] = single_alias_right[any_trigger]
 
 ### Scopes from a title to a neighboring county (incl. across water, looking trough the de Jure lieges) any_title_to_title_neighboring_and_across_water_county = { <count=num/all> / <percent=fixed_point> <triggers> }
 ## scope = landed_title
 ## push_scope = landed_title
-alias[trigger:any_title_to_title_neighboring_and_across_water_county] = {
-    ## cardinality = 0..1
-    percent = value_float[0.0..1.0]
-    ## cardinality = 0..1
-    count = int_value_field
-    ## cardinality = 0..1
-    count = all
-    alias_name[trigger] = alias_match_left[trigger]
-}
+alias[trigger:any_title_to_title_neighboring_and_across_water_county] = single_alias_right[any_trigger]
 
 ### Scopes from a title to a neighboring duchy (incl. across water, looking trough the de Jure lieges) any_title_to_title_neighboring_and_across_water_duchy = { <count=num/all> / <percent=fixed_point> <triggers> }
 ## scope = landed_title
 ## push_scope = landed_title
-alias[trigger:any_title_to_title_neighboring_and_across_water_duchy] = {
-    ## cardinality = 0..1
-    percent = value_float[0.0..1.0]
-    ## cardinality = 0..1
-    count = int_value_field
-    ## cardinality = 0..1
-    count = all
-    alias_name[trigger] = alias_match_left[trigger]
-}
+alias[trigger:any_title_to_title_neighboring_and_across_water_duchy] = single_alias_right[any_trigger]
 
 ### Scopes from a title to a neighboring empire (incl. across water, looking trough the de Jure lieges) any_title_to_title_neighboring_and_across_water_empire = { <count=num/all> / <percent=fixed_point> <triggers> }
 ## scope = landed_title
 ## push_scope = landed_title
-alias[trigger:any_title_to_title_neighboring_and_across_water_empire] = {
-    ## cardinality = 0..1
-    percent = value_float[0.0..1.0]
-    ## cardinality = 0..1
-    count = int_value_field
-    ## cardinality = 0..1
-    count = all
-    alias_name[trigger] = alias_match_left[trigger]
-}
+alias[trigger:any_title_to_title_neighboring_and_across_water_empire] = single_alias_right[any_trigger]
 
 ### Scopes from a title to a neighboring kingdom (incl. across water, looking trough the de Jure lieges) any_title_to_title_neighboring_and_across_water_kingdom = { <count=num/all> / <percent=fixed_point> <triggers> }
 ## scope = landed_title
 ## push_scope = landed_title
-alias[trigger:any_title_to_title_neighboring_and_across_water_kingdom] = {
-    ## cardinality = 0..1
-    percent = value_float[0.0..1.0]
-    ## cardinality = 0..1
-    count = int_value_field
-    ## cardinality = 0..1
-    count = all
-    alias_name[trigger] = alias_match_left[trigger]
-}
+alias[trigger:any_title_to_title_neighboring_and_across_water_kingdom] = single_alias_right[any_trigger]
 
 ### Scopes from a title to a neighboring barony (looking trough the de Jure lieges) any_title_to_title_neighboring_barony = { <count=num/all> / <percent=fixed_point> <triggers> }
 ## scope = landed_title
 ## push_scope = landed_title
-alias[trigger:any_title_to_title_neighboring_barony] = {
-    ## cardinality = 0..1
-    percent = value_float[0.0..1.0]
-    ## cardinality = 0..1
-    count = int_value_field
-    ## cardinality = 0..1
-    count = all
-    alias_name[trigger] = alias_match_left[trigger]
-}
+alias[trigger:any_title_to_title_neighboring_barony] = single_alias_right[any_trigger]
 
 ### Scopes from a title to a neighboring county (looking trough the de Jure lieges) any_title_to_title_neighboring_county = { <count=num/all> / <percent=fixed_point> <triggers> }
 ## scope = landed_title
 ## push_scope = landed_title
-alias[trigger:any_title_to_title_neighboring_county] = {
-    ## cardinality = 0..1
-    percent = value_float[0.0..1.0]
-    ## cardinality = 0..1
-    count = int_value_field
-    ## cardinality = 0..1
-    count = all
-    alias_name[trigger] = alias_match_left[trigger]
-}
+alias[trigger:any_title_to_title_neighboring_county] = single_alias_right[any_trigger]
 
 ### Scopes from a title to a neighboring duchy (looking trough the de Jure lieges) any_title_to_title_neighboring_duchy = { <count=num/all> / <percent=fixed_point> <triggers> }
 ## scope = landed_title
 ## push_scope = landed_title
-alias[trigger:any_title_to_title_neighboring_duchy] = {
-    ## cardinality = 0..1
-    percent = value_float[0.0..1.0]
-    ## cardinality = 0..1
-    count = int_value_field
-    ## cardinality = 0..1
-    count = all
-    alias_name[trigger] = alias_match_left[trigger]
-}
+alias[trigger:any_title_to_title_neighboring_duchy] = single_alias_right[any_trigger]
 
 ### Scopes from a title to a neighboring empire (looking trough the de Jure lieges) any_title_to_title_neighboring_empire = { <count=num/all> / <percent=fixed_point> <triggers> }
 ## scope = landed_title
 ## push_scope = landed_title
-alias[trigger:any_title_to_title_neighboring_empire] = {
-    ## cardinality = 0..1
-    percent = value_float[0.0..1.0]
-    ## cardinality = 0..1
-    count = int_value_field
-    ## cardinality = 0..1
-    count = all
-    alias_name[trigger] = alias_match_left[trigger]
-}
+alias[trigger:any_title_to_title_neighboring_empire] = single_alias_right[any_trigger]
 
 ### Scopes from a title to a neighboring kingdom (looking trough the de Jure lieges) any_title_to_title_neighboring_kingdom = { <count=num/all> / <percent=fixed_point> <triggers> }
 ## scope = landed_title
 ## push_scope = landed_title
-alias[trigger:any_title_to_title_neighboring_kingdom] = {
-    ## cardinality = 0..1
-    percent = value_float[0.0..1.0]
-    ## cardinality = 0..1
-    count = int_value_field
-    ## cardinality = 0..1
-    count = all
-    alias_name[trigger] = alias_match_left[trigger]
-}
+alias[trigger:any_title_to_title_neighboring_kingdom] = single_alias_right[any_trigger]
 
 ###############################
 # FACTION SCOPE
@@ -3329,28 +1528,12 @@ alias[trigger:any_title_to_title_neighboring_kingdom] = {
 ### Iterate through all faction county members any_faction_county_member = { <count=num/all> / <percent=fixed_point> <triggers> }
 ## scope = faction
 ## push_scope = landed_title
-alias[trigger:any_faction_county_member] = {
-    ## cardinality = 0..1
-    percent = value_float[0.0..1.0]
-    ## cardinality = 0..1
-    count = int_value_field
-    ## cardinality = 0..1
-    count = all
-    alias_name[trigger] = alias_match_left[trigger]
-}
+alias[trigger:any_faction_county_member] = single_alias_right[any_trigger]
 
 ### Iterate through all faction character members any_faction_member = { <count=num/all> / <percent=fixed_point> <triggers> }
 ## scope = faction
 ## push_scope = character
-alias[trigger:any_faction_member] = {
-    ## cardinality = 0..1
-    percent = value_float[0.0..1.0]
-    ## cardinality = 0..1
-    count = int_value_field
-    ## cardinality = 0..1
-    count = all
-    alias_name[trigger] = alias_match_left[trigger]
-}
+alias[trigger:any_faction_member] = single_alias_right[any_trigger]
 
 ###############################
 # COMBAT SIDE SCOPE
@@ -3359,64 +1542,24 @@ alias[trigger:any_faction_member] = {
 ### Iterate through all commanders (the commanders of every army on the side, not just the one leading the battle) any_side_commander = { <count=num/all> / <percent=fixed_point> <triggers> }
 ## scope = combat_side
 ## push_scope = character
-alias[trigger:any_side_commander] = {
-    ## cardinality = 0..1
-    percent = value_float[0.0..1.0]
-    ## cardinality = 0..1
-    count = int_value_field
-    ## cardinality = 0..1
-    count = all
-    alias_name[trigger] = alias_match_left[trigger]
-}
+alias[trigger:any_side_commander] = single_alias_right[any_trigger]
 
 ### Iterate through all knights any_side_knight = { <count=num/all> / <percent=fixed_point> <triggers> }
 ## scope = combat_side
 ## push_scope = character
-alias[trigger:any_side_knight] = {
-    ## cardinality = 0..1
-    percent = value_float[0.0..1.0]
-    ## cardinality = 0..1
-    count = int_value_field
-    ## cardinality = 0..1
-    count = all
-    alias_name[trigger] = alias_match_left[trigger]
-}
+alias[trigger:any_side_knight] = single_alias_right[any_trigger]
 
 
 # -UNSORTED
 
 ### Iterate through all participants in an activity any_participant = { <count=num/all> / <percent=fixed_point> <triggers> }
-alias[trigger:any_participant] = {
-    ## cardinality = 0..1
-    percent = value_float[0.0..1.0]
-    ## cardinality = 0..1
-    count = int_value_field
-    ## cardinality = 0..1
-    count = all
-    alias_name[trigger] = alias_match_left[trigger]
-}
+alias[trigger:any_participant] = single_alias_right[any_trigger]
 
 ### Iterate through all characters who declined an activity invite to a specific activity any_activity_declined = { <count=num/all> / <percent=fixed_point> <triggers> }
-alias[trigger:any_activity_declined] = {
-    ## cardinality = 0..1
-    percent = value_float[0.0..1.0]
-    ## cardinality = 0..1
-    count = int_value_field
-    ## cardinality = 0..1
-    count = all
-    alias_name[trigger] = alias_match_left[trigger]
-}
+alias[trigger:any_activity_declined] = single_alias_right[any_trigger]
 
 ### Iterate through all characters who have unanswered invites to a specific activity any_activity_invited = { <count=num/all> / <percent=fixed_point> <triggers> }
-alias[trigger:any_activity_invited] = {
-    ## cardinality = 0..1
-    percent = value_float[0.0..1.0]
-    ## cardinality = 0..1
-    count = int_value_field
-    ## cardinality = 0..1
-    count = all
-    alias_name[trigger] = alias_match_left[trigger]
-}
+alias[trigger:any_activity_invited] = single_alias_right[any_trigger]
 
 ### Iterate through all MaA regiments in the army scope:army = {	any_army_maa_regiment = {		include_hired = yes # should it include merc and holy order regiments (yes by default)	}}
 ## scope = army
@@ -3427,7 +1570,7 @@ alias[trigger:any_army_maa_regiment] = {
     ## cardinality = 0..1
     percent = value_float[0.0..1.0]
     ## cardinality = 0..1
-    count = int_value_field
+    count = alias_name[int_value]
     ## cardinality = 0..1
     count = all
     alias_name[trigger] = alias_match_left[trigger]

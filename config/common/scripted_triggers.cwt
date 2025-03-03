@@ -20,10 +20,10 @@ types = {
     type[scripted_trigger] = {
         path = "game/common/scripted_triggers"
     }
-    type[event_scripted_trigger] = {
-        path = "game/events"
-        type_key_prefix = scripted_trigger
-    }
+    # type[event_scripted_trigger] = {
+    #     path = "game/events"
+    #     type_key_prefix = scripted_trigger
+    # }
 
 }
 

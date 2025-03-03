@@ -1,13 +1,13 @@
-# Placeholder implementation.
-#types = {
-#	type[animation] = {
-#        path = "game/gfx/portraits/portrait_animations"
-#        unique = yes
-#	}
-#}
+types = {
+	type[animation] = {
+       path = "game/gfx/portraits/portrait_animations"
+       unique = yes
+	}
+}
 
 enums = {
     enum[body_type] = {
+        default
         male
         female
         girl
@@ -15,15 +15,17 @@ enums = {
     }
 }
 
-#animation = {
-#    alias_name[body_type_animation] = alias_match_left[body_type_animation]
-#}
+animation = {
+    enum[body_type] = alias_match_left[body_type_animation]
+}
 
+alias[body_type_animation:default] = enum[body_type]
 alias[body_type_animation:female] = enum[body_type]
 alias[body_type_animation:male] = enum[body_type]
 alias[body_type_animation:boy] = enum[body_type]
 alias[body_type_animation:girl] = enum[body_type]
 
+alias[body_type_animation:default] = single_alias_right[animation_description]
 alias[body_type_animation:female] = single_alias_right[animation_description]
 alias[body_type_animation:male] = single_alias_right[animation_description]
 alias[body_type_animation:boy] = single_alias_right[animation_description]
@@ -31,7 +33,6 @@ alias[body_type_animation:girl] = single_alias_right[animation_description]
 
 
 single_alias[animation_description] = {
-
     ## cardinality = 0..1
     default = { 
         head = scalar
@@ -49,22 +50,19 @@ single_alias[animation_description] = {
         ## cardinality = 0..1
         weight = single_alias_right[weight_block]
         ## cardinality = 0..1
-        portrait_modifier = { # Possibly a trigger block here
-            ## cardinality = 0..1
-            animations_props = scalar
-            ## cardinality = 0..1
-            animations = scalar
-        }
+        portrait_modifier = single_alias_right[portrait_modifier]
     }
+    ## cardinality = 0..1
+    portrait_modifier = single_alias_right[portrait_modifier]
 
 }
 
-alias[animation:animation] = {
-    ## cardinality = 1..inf
-    <portrait_animation>
-}
+# alias[animation:animation] = {
+#     ## cardinality = 1..inf
+#     <portrait_animation>
+# }
 
-alias[animation:animation] = <portrait_animation>
+#alias[animation:animation] = <portrait_animation>
 
 alias[animation:scripted_animation] = <scripted_animation>
 
@@ -83,4 +81,13 @@ single_alias[scripted_animation] = {
     }
     ## cardinality = 1..1
     alias_name[animation] = alias_match_left[animation] 
+}
+
+single_alias[portrait_modifier] =  {
+    ## cardinality = 0..1
+    trigger = single_alias_right[trigger_clause]
+    ## cardinality = 0..1
+    animations_props = scalar
+    ## cardinality = 0..inf
+    animations = scalar
 }

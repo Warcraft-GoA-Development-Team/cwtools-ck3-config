@@ -11,7 +11,7 @@ event_theme = {
         ## cardinality = 0..1
         ### Receives the event scope to check if it's valid.
         trigger = single_alias_right[trigger_clause]
-        reference = scalar
+        reference = filepath
     }
     ## cardinality = 1..inf
     ### A sound that can be played when the event pops up. In case that there are multiples the first one that fits the trigger will be the one selected.
@@ -28,6 +28,11 @@ event_theme = {
         ### Receives the event scope to check if it's valid.
         trigger = single_alias_right[trigger_clause]
         ### Key to event backgrounds database
-        event_background = scalar
+        reference = <event_background>
+    }
+    ## cardinality = 0..1
+    header_background = {
+        ### Key to event backgrounds database
+        reference = filepath
     }
 }

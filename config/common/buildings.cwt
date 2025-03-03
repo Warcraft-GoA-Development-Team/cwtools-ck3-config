@@ -48,16 +48,16 @@ enums = {
 building = {
 	
 	### How many levies does the building give
-	levy = int_value_field
+	levy = alias_name[int_value]
 	
 	### How much garrison does the building give
-	max_garrison = int_value_field
+	max_garrison = alias_name[int_value]
 
 	### How much garrison regains a percentage of its maximal garrison equal to the garrison reinforcement rate
 	garrison_reinforcement_factor = float_value_field
 	
 	### How long does it take to construct the building
-	construction_time = int_value_field
+	construction_time = alias_name[int_value]
 	
     ### Specifies whether this is a regular building, a special building, or a duchy capital building. Regular by default
 	type = enum[building_type]

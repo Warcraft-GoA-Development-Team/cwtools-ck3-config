@@ -4,10 +4,10 @@ types = {
     type[scripted_effect] = {
         path = "game/common/scripted_effects"
     }
-    type[event_scripted_effect] = {
-        path = "game/events"
-        type_key_prefix = scripted_effect
-    }
+    # type[event_scripted_effect] = {
+    #     path = "game/events"
+    #     type_key_prefix = scripted_effect
+    # }
 }
 
 scripted_effect = {

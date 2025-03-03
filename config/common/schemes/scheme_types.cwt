@@ -6,13 +6,6 @@ types = {
             name = "$"
             action = "$_action"
         }
-        modifiers = {
-            "max_$_schemes_add" = int_value_field
-            "$_speed_add" = value_field
-            "$_speed_mult" = int_value_field
-            "$_resistance_add" = value_field
-            "$_resistance_mult" = int_value_field
-        }
     }
 }
 

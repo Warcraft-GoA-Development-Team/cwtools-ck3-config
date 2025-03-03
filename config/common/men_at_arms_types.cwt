@@ -111,19 +111,6 @@ maa_type = {
 	ai_quality = single_alias_right[int_conditional_formula]
 }
 
-alias[modifier:value[unit_type]_max_size_add] = int_value_field
-alias[modifier:value[unit_type]_max_size_mult] = value_field
-alias[modifier:value[unit_type]_siege_value_add] = int_value_field
-alias[modifier:value[unit_type]_siege_value_mult] = value_field
-alias[modifier:value[unit_type]_damage_add] = int_value_field
-alias[modifier:value[unit_type]_damage_mult] = value_field
-alias[modifier:value[unit_type]_toughness_add] = int_value_field
-alias[modifier:value[unit_type]_toughness_mult] = value_field
-alias[modifier:value[unit_type]_pursuit_add] = int_value_field
-alias[modifier:value[unit_type]_pursuit_mult] = value_field
-alias[modifier:value[unit_type]_screen_add] = int_value_field
-alias[modifier:value[unit_type]_screen_mult] = value_field
-
 ###  Extra damage dealt in pursuit phase if on winning side.
 alias[maa_modifier:pursuit] = int_value_field
 ###  Extra damage mitigated in pursuit phase if on losing side.

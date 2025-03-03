@@ -1315,4 +1315,44 @@ links = {
         input_scopes = character
         output_scope = value
     }
+    current_military_strength = {
+        input_scopes = character
+        output_scope = value
+    }
+    tier = {
+        input_scopes = landed_title
+        output_scope = value
+    }
+    ai_honor = {
+        input_scopes = character
+        output_scope = value
+    }
+    ai_boldness = {
+        input_scopes = character
+        output_scope = value
+    }
+    ai_greed = {
+        input_scopes = character
+        output_scope = value
+    }
+    ai_vengefulness = {
+        input_scopes = character
+        output_scope = value
+    }
+    ai_rationality = {
+        input_scopes = character
+        output_scope = value
+    }
+    ai_compassion = {
+        input_scopes = character
+        output_scope = value
+    }
+    ai_zeal = {
+        input_scopes = character
+        output_scope = value
+    }
+    ai_energy = {
+        input_scopes = character
+        output_scope = value
+    }
 }

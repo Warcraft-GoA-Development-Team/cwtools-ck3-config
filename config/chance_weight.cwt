@@ -66,14 +66,14 @@ single_alias[weight_chance_modifier] = {
     alias_name[trigger] = alias_match_left[trigger]
     
     ## cardinality = 0..1
-    add = single_alias_right[arithmetic_operation_conditional_add]
+    add = single_alias_right[score_formula]
     ## cardinality = 0..1
-    add = value_field
+    add = alias_name[int_value]
 
     ## cardinality = 0..1
-    factor = single_alias_right[arithmetic_operation_conditional_add]
+    factor = single_alias_right[score_formula]
     ## cardinality = 0..1
-    factor = value_field
+    factor = alias_name[int_value]
     
     ## cardinality = 0..1
     desc = single_alias_right[complex_desc]

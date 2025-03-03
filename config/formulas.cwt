@@ -10,72 +10,38 @@ single_alias[formula] = {
     alias_name[arithmetic_operation] = alias_match_left[arithmetic_operation]
 }
 
-alias[arithmetic_operation:add] = value_field
-alias[arithmetic_operation:add] = <script_value>
-alias[arithmetic_operation:add] = <static_value>
-alias[arithmetic_operation:add] = $define_reference
-alias[arithmetic_operation:add] = scope[value]
-alias[arithmetic_operation:subtract] = value_field
-alias[arithmetic_operation:subtract] = <script_value>
-alias[arithmetic_operation:subtract] = <static_value>
-alias[arithmetic_operation:subtract] = $define_reference
-alias[arithmetic_operation:subtract] = scope[value]
-alias[arithmetic_operation:multiply] = value_field
-alias[arithmetic_operation:multiply] = <script_value>
-alias[arithmetic_operation:multiply] = <static_value>
-alias[arithmetic_operation:multiply] = $define_reference
-alias[arithmetic_operation:multiply] = scope[value]
-alias[arithmetic_operation:divide] = value_field
-alias[arithmetic_operation:divide] = <script_value>
-alias[arithmetic_operation:divide] = <static_value>
-alias[arithmetic_operation:divide] = $define_reference
-alias[arithmetic_operation:divide] = scope[value]
-alias[arithmetic_operation:value] = value_field
-alias[arithmetic_operation:value] = <script_value>
-alias[arithmetic_operation:value] = <static_value>
-alias[arithmetic_operation:value] = $define_reference
-alias[arithmetic_operation:value] = scope[value]
-alias[arithmetic_operation:max] = value_field
-alias[arithmetic_operation:max] = <script_value>
-alias[arithmetic_operation:max] = <static_value>
-alias[arithmetic_operation:max] = $define_reference
-alias[arithmetic_operation:max] = scope[value]
-alias[arithmetic_operation:min] = value_field
-alias[arithmetic_operation:min] = <script_value>
-alias[arithmetic_operation:min] = <static_value>
-alias[arithmetic_operation:min] = $define_reference
-alias[arithmetic_operation:min] = scope[value]
+alias[arithmetic_operation:add] = alias_name[int_value]
+alias[arithmetic_operation:subtract] = alias_name[int_value]
+alias[arithmetic_operation:multiply] = alias_name[int_value]
+alias[arithmetic_operation:divide] = alias_name[int_value]
+alias[arithmetic_operation:value] = alias_name[int_value]
+alias[arithmetic_operation:max] = alias_name[int_value]
+alias[arithmetic_operation:min] = alias_name[int_value]
 
 alias[arithmetic_operation:round] = yes
 alias[arithmetic_operation:ceiling] = yes
 alias[arithmetic_operation:floor] = yes
 
+alias[int_value:value_field] = value_field
+alias[int_value:<script_value>] = <script_value>
+alias[int_value:<static_value>] = <static_value>
+alias[int_value:$define_reference] = $define_reference
+alias[int_value:scope[value]] = scope[value]
+
 alias[arithmetic_operation:save_temporary_value_as] = value_set[variable]
 
 alias[arithmetic_operation:fixed_range] = {
-    min = value_field
+    min = alias_name[int_value]
     min = single_alias_right[formula]
-    min = <script_value>
-    min = <static_value>
-    min = $define_reference
-    max = value_field
+    max = alias_name[int_value]
     max = single_alias_right[formula]
-    max = <script_value>
-    max = <static_value>
-    max = $define_reference
 }
 
 alias[arithmetic_operation:integer_range] = {
-    min = value_field
+    min = alias_name[int_value]
     min = single_alias_right[formula]
-    min = <script_value>
-    min = <static_value>
-    min = $define_reference
-    max = value_field
+    max = alias_name[int_value]
     max = single_alias_right[formula]
-    max = <script_value>
-    max = <static_value>
-    max = $define_reference
 }
 
 ### Conditional Variable Addition
@@ -94,7 +60,7 @@ single_alias[arithmetic_operation_conditional_add] = {
 single_alias[score_formula] = {
     ## cardinality = 0..inf
     alias_name[score_operation] = alias_match_left[score_operation]
-    ## cardinality = 1..inf
+    ## cardinality = 0..inf
     alias_name[arithmetic_operation] = alias_match_left[arithmetic_operation]
     ## cardinality = 0..inf
     scope_field = single_alias_right[score_formula]
@@ -169,13 +135,9 @@ single_alias[int_conditional_formula] = {
     ## cardinality = 0..inf
     alias_name[score_operation] = alias_match_left[score_operation]
     ## cardinality = 0..inf
-    alias_name[arithmetic_operation] = int_value_field
+    alias_name[arithmetic_operation] = alias_name[int_value]
     ## cardinality = 0..inf
     alias_name[arithmetic_operation] = alias_match_left[score_operation]
-    ## cardinality = 0..1
-    alias_name[arithmetic_operation] = <script_value>
-    ## cardinality = 0..1
-    alias_name[arithmetic_operation] = <static_value>
 }
 
 single_alias[float_conditional_formula] = {

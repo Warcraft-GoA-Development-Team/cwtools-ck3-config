@@ -7,9 +7,9 @@ types = {
 			title = title
 		}
 
-        subtype[visible] = {
-            ## cardinality = 0..1
-            hidden = no
+        subtype[hidden] = {
+            ## cardinality = 1..1
+            hidden = yes
         }
         ## push_scope = character
         ## display_name = Character event
@@ -31,8 +31,10 @@ enums = {
     enum[event_types] = {
         character_event
         letter_event
+        activity_event
     }
     enum[event_scope_types] = {
+        none
         faith
     }
 }
@@ -40,6 +42,9 @@ enums = {
 event = {
     ## cardinality = 0..1
     type = enum[event_types]
+
+    ## cardinality = 0..1
+    content_source = <dlc>
 
     ## cardinality = 0..1
     scope = enum[event_scope_types]
@@ -56,14 +61,14 @@ event = {
         desc = single_alias_right[complex_desc]
     }
 
-    subtype[visible] = {
+    subtype[!hidden] = {
         title = localisation
         title = single_alias_right[complex_desc]
         picture = <event_picture>
         desc = localisation
         desc = single_alias_right[complex_desc]
     }
-    subtype[!visible] = {
+    subtype[hidden] = {
         # So that things don't yell at you if you make an event hidden for a lil while
         ## cardinality = 0..1
         title = localisation
@@ -162,7 +167,8 @@ event = {
     override_background = {
         ## cardinality = 0..1
         trigger = single_alias_right[trigger_clause]
-        event_background = <event_background>
+        ## cardinality = 0..1
+        reference = <event_background>
     }
     ## cardinality = 0..inf
     override_icon = {

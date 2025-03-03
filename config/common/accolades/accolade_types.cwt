@@ -84,7 +84,6 @@ single_alias[accolade_rank] = {
     ### character modifier applied to the knight personally ( should be limited to prestige and other character mods )
     ## cardinality = 0..1
     knight_modifier = {
- 
         ## cardinality = 0..inf
         alias_name[modifier] = alias_match_left[modifier]
     }
@@ -92,7 +91,6 @@ single_alias[accolade_rank] = {
     ### character modifier applied to whatever army the knight is a part of ( should be army modifiers such as advantage etc. )
     ## cardinality = 0..1
     knight_army_modifier = {
- 
         ## cardinality = 0..inf
         alias_name[modifier] = alias_match_left[modifier]
     }

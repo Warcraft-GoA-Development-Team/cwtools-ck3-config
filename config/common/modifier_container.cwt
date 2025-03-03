@@ -62,11 +62,10 @@ modifier_icon = {
 
 modifier_container = {
 	##cardinality = 0..1
-    icon = scalar
+    icon = filepath[game/gfx/interface/icons/modifiers/,.dds]
 	
     ##cardinality = 0..inf
-    single_alias_name[modifier] = single_alias_match_left[modifier]
-
+    alias_name[modifier] = alias_match_left[modifier]
 
 	### Modifier can have scale that'll be calculated once when effect assigns a modifier, and later remains unchanged for the entire modifier duration
 	## cardinality = 0..1

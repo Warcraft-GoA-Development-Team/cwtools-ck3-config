@@ -32,7 +32,7 @@ activity_locale = {
 	### How many days is the locale invalid to be 'entered', after it has been entered.
     ## push_scope = { root = character activity = activity host = character }
 	cooldown = {
-        enum[duration] = int_value_field
+        enum[duration] = alias_name[int_value]
     }
 
 	### Brief: visuals ( triggered reference block ) Visual widgets for the locale, multiple can be read in, first one is  picked from order they are read in. Reference is a file name (and top level widget name) in gui/activity_locale_widgets

@@ -2,27 +2,6 @@ types = {
     type[vassal_stance] = {
         path = "game/common/vassal_stances"
     }
-
-    modifiers = {
-        "$_opinion" = value_field
-        "$_same_faith_opinion" = value_field
-        "$_different_faith_opinion" = value_field
-        "$_same_culture_opinion" = value_field
-        "$_different_culture_opinion" = value_field
-        "$_tax_contribution_add" = value_field
-        "$_tax_contribution_mult" = value_field
-        "$_levy_contribution_add" = value_field
-        "$_key_levy_contribution_mult" = value_field
-        "$_key_ai_honor" = value_field
-        "$_ai_greed" = value_field
-        "$_ai_rationality" = value_field
-        "$_ai_energy" = value_field
-        "$_ai_boldness" = value_field
-        "$_ai_zeal" = value_field
-        "$_ai_vengefulness" = value_field
-        "$_ai_compassion" = value_field
-        "$_ai_sociability" = value_field
-    }
 }
 
 vassal_stance = {
@@ -31,7 +10,7 @@ vassal_stance = {
 	is_valid = single_alias_right[trigger_clause]
 
     ## replace_scope = { root = character liege = character }
-	score = single_alias_right[int_conditional_formula]
+	score = single_alias_right[score_formula]
 
     ## replace_scope = { root = character liege = character }
 	heir_score = single_alias_right[int_conditional_formula]

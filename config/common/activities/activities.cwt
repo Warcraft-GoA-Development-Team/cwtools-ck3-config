@@ -283,14 +283,14 @@ activity = {
 	## replace_scope = { root = character }
 	## cardinality = 0..1
 	wait_time_before_start = {
-        enum[duration] = int_value_field
+        enum[duration] = alias_name[int_value]
     }
 
 	### How many days this activity will delay the start date, to allow invited guests to arrive.  Looks at rough estimated invited guests estimated travel time, and the default activity start date (host arrival + wait_time_before_start). This is added during planning of the activity. (Does not apply to required special guests, we delay as much as needed for them). Defaults to 0 days, so either define this and/or `wait_time_before_start` to give people time to arrive to your party.
 	## replace_scope = { root = character }
 	## cardinality = 0..1
 	max_guest_arrival_delay_time = {
-        enum[duration] = int_value_field
+        enum[duration] = alias_name[int_value]
     }
 
 	### How much can a player (not AI) deviate from the default path via extra waypoints. Expressed as multiplier of the total time duration of the default path. (path without waypoints) eg: 2.0 = you can add waypoints resulting in a path with a duration up to twice as long as the default path. Default is defined in MAX_ROUTE_DEVIATION_MULTIPLIER_DEFAULT
