@@ -232,6 +232,10 @@ enums = {
         revoke_holy_order_lease
         decision_option_list_controller
     }
+    enum[full_or_empty] = {
+        full
+        empty
+    }
 }
 
 # Duration alias for LHS use:

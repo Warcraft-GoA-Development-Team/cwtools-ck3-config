@@ -756,4 +756,7 @@ modifiers = {
     value[trait_track]_xp_degradation_mult = character
     value[trait_track]_xp_loss_mult = character
     winter_movement_speed = character
+    knight_effectiveness_per_dread = character
+    additional_fort_level = { character province county }
+    defender_holding_advantage = { character province county }
 }

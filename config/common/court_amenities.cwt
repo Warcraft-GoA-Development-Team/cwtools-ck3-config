@@ -22,9 +22,7 @@ court_amenity_category = {
 
 		### Modifier applied to the owner of the court when amenities are at this setting.
         ## cardinality = 0..1
-		owner_modifier = {
-            alias_name[modifier] = alias_match_left[modifier]
-        }
+		owner_modifier = single_alias_right[character_modifier]
 
 		### Localization key reference to text that should display in combination with the modifier effect breakdown when the bonus is not just a modifier, but a constant effect. 
 		### Example entry in example_l_english.yml: 
@@ -34,9 +32,7 @@ court_amenity_category = {
 		
 		### Modifier applied to the courtiers and guests when court amenities are at this setting.
         ## cardinality = 0..1
-		courtier_guest_modifier = {
-            alias_name[modifier] = alias_match_left[modifier]
-        }
+		courtier_guest_modifier = single_alias_right[character_modifier]
 
 		### Localization key reference to text that should display in combination with the modifier effect breakdown when the bonus is not just a  modifier, but a constant effect.
 		### Example entry in example_l_english.yml: 

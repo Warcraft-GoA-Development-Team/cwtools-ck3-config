@@ -39,9 +39,6 @@ enums = {
         islamic_gfx
         zoroastrian_gfx
     }
-    complex_enum[building_flag] = {
-        flag = enum_name
-    }
 
 }
 
@@ -148,15 +145,10 @@ building = {
 	
 	### A modifier applied to the owner of the holding
     ## cardinality = 0..1
-	character_modifier = {
-        alias_name[modifier] = alias_match_left[modifier]
-    }
+	character_modifier = single_alias_right[character_modifier]
 	### Applied if the character's culture has the parameter
     ## cardinality = 0..1
-	character_culture_modifier = {
-        parameter = scalar
-		alias_name[modifier] = alias_match_left[modifier]
-	}
+	character_culture_modifier = single_alias_right[character_culture_modifier]
 
 	### A modifier applied if the holder's dynasty of the county has a specific perk
     ## cardinality = 0..1
@@ -166,24 +158,22 @@ building = {
 	
 	### A modifier applied to the province
     ## cardinality = 0..1
-	province_modifier = {
-        alias_name[modifier] = alias_match_left[modifier]
-	}
+	province_modifier = single_alias_right[province_modifier]
     ## cardinality = 0..1
-	province_culture_modifier = {
-        parameter = scalar
-		alias_name[modifier] = alias_match_left[modifier]
-	}
+	province_culture_modifier = single_alias_right[province_culture_modifier]
     ## cardinality = 0..1
 	province_terrain_modifier = {
 		## cardinality = 0..1
-        parameter = scalar
+        parameter = value[cultural_parameter]
 		## cardinality = 0..1
         terrain = <terrain>
         ## cardinality = 0..1
 		is_coastal = bool
         ## cardinality = 0..1
 		is_riverside = bool
+		## push_scope = province
+		## cardinality = 1..inf
+		alias_name[modifier] = alias_match_left[modifier]
 	}
 
 	### A modifier applied if the holder's dynasty of the county has a specific perk
@@ -195,9 +185,7 @@ building = {
 
 	### A modifier applied to the county
     ##cardinality = 0..1
-	county_modifier = {
-        alias_name[modifier] = alias_match_left[modifier]
-	}
+	county_modifier = single_alias_right[county_modifier]
     ##cardinality = 0..1
 	county_culture_modifier = {
 		parameter = scalar
@@ -237,7 +225,7 @@ building = {
 	
 	### Building flags
 	## cardinality = 0..inf
-    flag = scalar
+    flag = value_set[building_flag]
 
 	### Effects applied on building completion
 	### scopes: root refers to the buildings province

@@ -2,26 +2,22 @@
 
 types = {
     type[landed_title] = {
-        
-        subtype[empire_title] = {
-            path = "common/landed_titles"
-            starts_with = e_
+        path = "common/landed_titles"
+        ## starts_with = e_
+        subtype[empire] = {
         }
-        subtype[kingdom_title] = {
-            path = "common/landed_titles"
-            starts_with = k_
+        ## starts_with = k_
+        subtype[kingdom] = {
+            #skip_root_key = any
         }
-        subtype[duchy_title] = {
-            path = "common/landed_titles"
-            starts_with = d_
+        ## starts_with = d_
+        subtype[duchy] = {
         }
-        subtype[county_title] = {
-            path = "common/landed_titles"
-            starts_with = c_
+        ## starts_with = c_
+        subtype[county] = {
         }
-        subtype[barony_title] = {
-            path = "common/landed_titles"
-            starts_with = b_
+        ## starts_with = b_
+        subtype[barony] = {
         }
     }
 }
@@ -95,17 +91,11 @@ landed_title = {
 
 	###  List of names being assigned to male holers of this title. 
 	## cardinality = 0..1
-    male_names = {
-        ## cardinality = 1..inf
-        localisation
-    } 
+    male_names = single_alias_right[localisation_list]
 
 	### List of names being assigned to female holers of this title. 
 	## cardinality = 0..1
-    female_names = { 
-        ## cardinality = 1..inf
-        localisation
-    } 
+    female_names = single_alias_right[localisation_list]
 
 	### Scipted value determining how highly the AI values this title as a primary title. root: the character evaluating the title
 	## cardinality = 0..1
@@ -155,4 +145,36 @@ landed_title = {
 	### Is this entry a dynamic title template? Should not be used in database definitions. Default: no
     ## cardinality = 0..1
 	dyn = bool
+
+    subtype[empire] = {
+        ## cardinality = 0..1
+        <landed_title.kingdom> = { }
+        ## cardinality = 0..1
+        <landed_title.duchy> = { }
+        ## cardinality = 0..1
+        <landed_title.county> = { }
+        ## cardinality = 0..1
+        <landed_title.barony> = { }
+    }
+
+    subtype[kingdom] = {
+        ## cardinality = 0..1
+        <landed_title.duchy> = { }
+        ## cardinality = 0..1
+        <landed_title.county> = { }
+        ## cardinality = 0..1
+        <landed_title.barony> = { }
+    }
+
+    subtype[duchy] = {
+        ## cardinality = 0..1
+        <landed_title.county> = { }
+        ## cardinality = 0..1
+        <landed_title.barony> = { }
+    }
+
+    subtype[county] = {
+        ## cardinality = 0..1
+        <landed_title.barony> = { }
+    }
 }

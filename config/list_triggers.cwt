@@ -113,7 +113,7 @@ alias[trigger:any_guest_subset] = {
     continue = {
         alias_name[trigger] = alias_match_left[trigger]
     }
-    name = enum[guest_subset]
+    name = value[guest_subset]
     ## cardinality = 0..1
     phase = <activity_phase>
     ## cardinality = 0..1
@@ -880,7 +880,20 @@ alias[trigger:any_court_position_employer] = single_alias_right[any_trigger]
 ### Iterate through all councillors any_councillor = { <count=num/all> / <percent=fixed_point> <triggers> }
 ## scope = character
 ## push_scope = character
-alias[trigger:any_court_position_holder] = single_alias_right[any_trigger]
+alias[trigger:any_court_position_holder] = {
+    ## cardinality = 0..1
+    continue = {
+        alias_name[trigger] = alias_match_left[trigger]
+    }
+    ## cardinality = 0..1
+    percent = value_float[0.0..1.0]
+    ## cardinality = 0..1
+    count = int_value_field
+    ## cardinality = 0..1
+    count = all
+    alias_name[trigger] = alias_match_left[trigger]
+    type = <court_position>
+}
 
 ### Iterate through all courtiers any_courtier = { <count=num/all> / <percent=fixed_point> <triggers> }
 ## scope = character

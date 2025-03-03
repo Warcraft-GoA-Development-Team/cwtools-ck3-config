@@ -113,14 +113,10 @@ vassal_contract = {
 
             ### Modifiers applied to the liege in the contract
             ## cardinality = 0..1
-			liege_modifier = { 
-                alias_name[modifier] = alias_match_left[modifier]
-            }
+			liege_modifier = single_alias_right[character_modifier]
             ### Modifiers applied to the vassal in the contract
             ## cardinality = 0..1
-			vassal_modifier = { 
-                alias_name[modifier] = alias_match_left[modifier]
-            }
+			vassal_modifier = single_alias_right[character_modifier]
             ### Is this obligation level valid for a vassal
 
 			is_valid = single_alias_right[trigger_clause]

@@ -32,11 +32,11 @@ era = {
 
     ## cardinality = 0..1
     ### Modifier of this culture era applied to the culture itself.
-    culture_modifier = single_alias_right[modifier_list]
+    culture_modifier = single_alias_right[culture_modifier]
 
     ## cardinality = 0..1
     ### Modifiers of this culture era. This will be applied to the characters of that cuture.
-    modifier = single_alias_right[modifier_list]
+    modifier = single_alias_right[character_modifier]
 
     ## cardinality = 0..inf
     ### A custom effect description that will be added to the list of effects.

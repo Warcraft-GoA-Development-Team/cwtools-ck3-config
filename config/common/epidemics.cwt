@@ -90,14 +90,10 @@ epidemic = {
         ## cardinality = 1..inf
 		<value> = {
 			### Modifier applied to any province infected
-			province_modifier = {
-				alias[modifier] = alias_match_left[modifier]
-			}
+			province_modifier = single_alias_right[province_modifier]
 
 			### Modifier applied to the county if its county capital province is infected
-			county_modifier = {
-				alias[modifier] = alias_match_left[modifier]
-			}
+			county_modifier = single_alias_right[county_modifier]
 
 			### Modifier applied to every ruler that has this province as a part of their de facto realm hierarchy This means its effects will be stacked on a ruler for every infected province
 			realm_modifier = {

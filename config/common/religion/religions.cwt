@@ -56,24 +56,24 @@ single_alias[holy_order_names] = {
     }
 }
 
-enums = {
-    complex_enum[male_names] = {
-        path = "game/common/religion/religions"
-        name = {
-            reserved_male_names = {
-                enum_name
-            }
-        }
-    }
-    complex_enum[female_names] = {
-        path = "game/common/religion/religions"
-        name = {
-            reserved_female_names = {
-                enum_name
-            }
-        }
-    }
-}
+# enums = {
+#     complex_enum[male_names] = {
+#         path = "game/common/religion/religions"
+#         name = {
+#             reserved_male_names = {
+#                 enum_name
+#             }
+#         }
+#     }
+#     complex_enum[female_names] = {
+#         path = "game/common/religion/religions"
+#         name = {
+#             reserved_female_names = {
+#                 enum_name
+#             }
+#         }
+#     }
+# }
 
 #TODO: Script check to make sure gfx/ui stuff is present in either the family, religion, or faith.
 religion = {
@@ -101,15 +101,15 @@ religion = {
 
     faiths = {
         ## cardinality = ~1..inf
-        scalar = {
+        <faith> = {
             ### HSV color as a series of floats.
             color = single_alias_right[hsv_color]
             ### RGB color as a series of ints
             color = single_alias_right[rgb_color]
             ## cardinality = 0..1
-            icon = scalar
+            icon = filepath[game/gfx/interface/icons/faith/,.dds]
             ## cardinality = 0..1
-            reformed_icon = scalar
+            reformed_icon = filepath[game/gfx/interface/icons/faith/,.dds]
             ## cardinality = 0..1
             graphical_faith = enum[graphical_faith]
             ## cardinality = 0..1
@@ -127,9 +127,9 @@ religion = {
             doctrine = <doctrine>
         
             ## cardinality = 0..1
-            reserved_male_names = single_alias_right[scalar_list]
+            reserved_male_names = single_alias_right[localisation_list]
             ## cardinality = 0..1
-            reserved_female_names = single_alias_right[scalar_list]
+            reserved_female_names = single_alias_right[localisation_list]
         
             ##cardinality = 0..1
             localization = single_alias_right[religion_localization]

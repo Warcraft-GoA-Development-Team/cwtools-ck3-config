@@ -1958,9 +1958,9 @@ alias[effect:set_legend_chapter] = {
 ### Sets the object at the named property of the scoped legend to the new value. set_legend_property = { name = animal_type target = var:hunt_type }
 ## scope = legend
 alias[effect:set_legend_property] = {
-    # TODO
-    name = scalar
+    name = value[legend_property]
     target = value_field
+    target = scope_field
 }
 
 enums = {

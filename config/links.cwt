@@ -641,7 +641,7 @@ links = {
     global_var = {
         desc = "Reference a previous set global variable via its name eg: global_var:important_thing"
         from_data = yes
-        type = both
+        type = scope
         data_source = value[global_variable]
         prefix = global_var:
     }
@@ -653,7 +653,7 @@ links = {
     local_var = {
         desc = "Reference a previous set local variable via its name eg: local_var:person_of_interest"
         from_data = yes
-        type = both
+        type = scope
         data_source = value[local_variable]
         prefix = local_var:
     }
@@ -693,7 +693,7 @@ links = {
     var = {
         desc = "Reference a previous set variable via its name eg: var:mortal_enemy"
         from_data = yes
-        type = both
+        type = scope
         prefix = var:
         data_source = value[variable]
     }
@@ -1125,9 +1125,20 @@ links = {
         input_scopes = legend
         output_scope = character
     }
+    # TODO: Should only be used inside legends
     legend_property = {
         desc = "Get the scope of the property with the given name on the scoped legend"
         input_scopes = legend
+        from_data = yes
+        data_source = value[legend_property]
+        prefix = legend_property:
+    }
+    flag = {
+        desc = "Flag literals eg: flag:the_boss"
+        from_data = yes
+        data_source = value[flag]
+        prefix = flag:
+        output_scope = flag
     }
     legend_protagonist = {
         desc = "Get the protagonist character of this legend"
@@ -1311,6 +1322,10 @@ links = {
         input_scopes = character
         output_scope = value
     }
+    prowess = {
+        input_scopes = character
+        output_scope = value
+    }
     max_military_strength = {
         input_scopes = character
         output_scope = value
@@ -1352,6 +1367,10 @@ links = {
         output_scope = value
     }
     ai_energy = {
+        input_scopes = character
+        output_scope = value
+    }
+    court_grandeur_current = {
         input_scopes = character
         output_scope = value
     }

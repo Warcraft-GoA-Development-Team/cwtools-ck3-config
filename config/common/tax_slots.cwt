@@ -11,13 +11,6 @@ types = {
     }
 }
 
-enums = {
-    complex_enum[tax_flag] = {
-        flag = enum_name
-
-    }
-}
-
 tax_obligation = {
     ## cardinality = 0..1
     ## replace_scope = { tax_slot = tax_slot liege = character tax_collector = character}
@@ -45,7 +38,7 @@ tax_obligation = {
     }
 
     ## cardinality = 1..inf
-    flag = enum[tax_flag]
+    flag = value_set[tax_flag]
 }
 
 tax_slot_type_key = {

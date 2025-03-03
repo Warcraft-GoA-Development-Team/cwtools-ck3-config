@@ -4,23 +4,12 @@ types = {
     }
 }
 
-enums = {
-    complex_enum[task_contract_group] = {
-        path = "game/common/task_contracts"
-        name = {
-            group = enum_name
-        }
-    }
-
-}
-
 task_contract = {
 	### for grouping together contract types, e.g. mercenary, potentially determines map icon
-	
-    group = enum[task_contract_group]
+    group = value_set[task_contract_group]
 
 	### Icon used in the UI
-    icon = icon
+    icon = filepath
 
 	### Description or 'back-story' of the task contract, defaults to "<key>_desc". root = task_contract_type
 	## cardinality = 0..1

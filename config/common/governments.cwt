@@ -11,16 +11,7 @@ types = {
 }
 
 government = {
-	## cardinality = 0..1
-    create_cadet_branches = bool
-	## cardinality = 0..1
-    religious = bool
-    ##rulers of this government type generate a dynasty; default: no
-	## cardinality = 0..1
-    rulers_should_have_dynasty = bool
-	### The council is available for this ruler; default: yes
-    ## cardinality = 0..1
-    council = bool					
+    government_rules = single_alias_right[government_rules]
 
 	### At least one government should be scripted as fallback, fallback governments will be selected in order of priority (1 is selected over 2), used when lacking other selection and when populationg the map with holdings but no county holder exists.
     ## cardinality = 0..1
@@ -64,10 +55,7 @@ government = {
     preferred_religions = {
         ## cardinality = 1..inf
         <religion>
-    }		
-    ### Should spouses be generated in courts of this government? yes by default
-    ## cardinality = 0..1
-	court_generate_spouses = bool
+    }
     ### Should commanders be generated in courts of this government? Can use a multiplier to the default number. yes = 1, no = 0
 	## cardinality = 0..1
     court_generate_commanders = bool
@@ -76,18 +64,12 @@ government = {
 	## cardinality = 0..1
     court_generate_commanders = float
 
-    ### Should this government allow having a royal court if of the correct tier from NRoyalCourt::MIN_ROYAL_COURT_TIER, default = no
-	## cardinality = 0..1
-    royal_court = bool
     ### Army owners of different govenment type have this multiplier applied to the supply limit
     ## cardinality = 0..1
 	supply_limit_mult_for_others = value_field
     ### Are the counties with owners with this government type affected by development. default: yes
     ## cardinality = 0..1
 	affected_by_development = bool
-    ### Is this govenmnet type using prestige to buy and reinforce MaA Regiments? ( mainteance still costs gold ). default: no
-	## cardinality = 0..1
-    regiments_prestige_as_gold = bool 	
 
     ### an override for the opinion bonus that prestige levels gain, number of values should match the define in NCharacterOpinion::PRESTIGIOUS
     ## cardinality = 0..1
@@ -134,10 +116,7 @@ government = {
 
     ### Modifier applied to the ruler character with this government type
 	## cardinality = 0..1
-    character_modifier = {
-        ## cardinality = 1..inf
-        alias_name[modifier] = alias_match_left[modifier]				
-	}
+    character_modifier = single_alias_right[character_modifier]
 
     ### color for map mode
     ## cardinality = 1..1
@@ -145,4 +124,135 @@ government = {
 
     ## cardinality = 0..1
     flag = value_set[government_flag]
+}
+
+single_alias[government_rules] = {
+    ## cardinality = 0..inf
+    scalar = bool
+
+    ### brief: create_cadet_branches ( bool )
+    ### Should rulers be able to create cadet branches
+    ## cardinality = 0..1
+    create_cadet_branches = bool
+
+    ### brief: religious ( bool )
+    ### Should rulers be considered clergy
+    ## cardinality = 0..1
+    religious = bool
+
+    ### brief: court_generate_spouses ( bool )
+    ### Should new realm get suitable spouses as courtiers
+    ## cardinality = 0..1
+    court_generate_spouses = bool
+
+    ### brief: council ( bool )
+    ### The council is available for this ruler
+    ## cardinality = 0..1
+    council = bool
+
+    ### brief: rulers_should_have_dynasty ( bool )
+    ### Rulers of this government type generate a dynasty
+    ## cardinality = 0..1
+    rulers_should_have_dynasty = bool
+
+    ### brief: regiments_prestige_as_gold ( bool )
+    ### Is this govenmnet type using prestige to buy and reinforce
+    ### MaA Regiments? ( mainteance still costs gold ).
+    ## cardinality = 0..1
+    regiments_prestige_as_gold = bool
+
+    ### brief: dynasty_named_realms ( bool )
+    ### Allow using dynasty name as realm name
+    ## cardinality = 0..1
+    dynasty_named_realms = bool
+
+    ###  brief: royal_court ( bool )
+    ### Should this government allow having a royal court if of the
+    ### correct tier from NRoyalCourt::MIN_ROYAL_COURT_TIER
+    ## cardinality = 0..1
+    royal_court = bool
+
+    ### brief: legitimacy ( bool )
+    ### Rulers can have legitimacy if there's one valid for them
+    ## cardinality = 0..1
+    legitimacy = bool
+
+    ### brief: administrative ( bool )
+    ### Rule control several admin government mechanics:
+    ### -	Top liege can have landless vassal who are house heads of
+    ### 	noble families.
+    ### -	Allow hiring and usage of MaA that belong to a title
+    ###
+    ### Requires the dlc_flag admin_gov
+    ## cardinality = 0..1
+    administrative = bool
+
+    ### brief: landless_playable ( bool )
+    ### Allow rulers be playable even when they don't have any county
+    ### or barony.
+    ### Requires the dlc_flag landless_playable
+    ## cardinality = 0..1
+    landless_playable = bool
+
+    ### brief: use_as_base_on_landed ( bool )
+    ### Switch to this government type when obtaining your first title (becoming landed) if the old holder of the title
+    ### was this government type
+    ## cardinality = 0..1
+    use_as_base_on_landed = bool
+
+    ### brief: use_as_base_on_rank_up ( bool )
+    ### Switch to this government type when independent ruler gets higher tier top tier title from
+    ### independent ruler with this government type
+    ## cardinality = 0..1
+    use_as_base_on_rank_up = bool
+
+    ### brief: conditional_maa_refill ( bool )
+    ### Maa won't normally reinforce, unless they meet specific
+    ### condition in MaA type trigger. Make sure only a very small
+    ### number of rulers use this option, because it can negatively
+    ### affect performance. Rulers with this government flag also
+    ### do not pay upkeep for their MAAs.
+    ## cardinality = 0..1
+    conditional_maa_refill = bool
+
+    ### brief: mercenary ( bool )
+    ### Can unlanded rulers with this government type offer
+    ### themselves up as mercenaries for landed rulers that are at
+    ### war? The mercenary company government type is explicitly NOT
+    ### using this rule, as it has separate handling.
+    ###
+    ### Note: this is not the same as the government flag
+    ### government_is_mercenary, which is referring specifically to
+    ### the mercenary company government type.
+    ## cardinality = 0..1
+    mercenary = bool
+
+    ### brief: use_title_tier_modifiers ( bool )
+    ### Enable passive prestige gain from held titles and title tier modifiers
+    ### Default is yes.
+    ## cardinality = 0..1
+    use_title_tier_modifiers = bool
+
+    ### brief: inherit_from_dynastic_government ( bool )
+    ### All governments are split in 2 groups - strong dynastic and non-dynastic ones
+    ### Rulers from different dynastic governments can freely inherit from other dynastic governments
+    ### Rulers from non-dynastic governemnt can't inherit from a dynastic one
+    ### Many non-dynastic governments are unplayable, so it prevents game over
+    ### Other non-dynastic governments are considered more advanced, and this prevents inferior
+    ### dynastic governments from stealing land and non-dynastic vassals via inheritance
+    ### Default is yes.
+    ## cardinality = 0..1
+    inherit_from_dynastic_government = bool
+
+}
+
+enums = {
+    complex_enum[government_rule] = {
+        path = "game/common/governments"
+        name = {
+            government_rules = {
+                enum_name = bool
+            }
+        }
+    }
 }

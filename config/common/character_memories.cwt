@@ -4,20 +4,12 @@ types = {
     }
 }
 
-enums = {
-    complex_enum[memory_category] = {
-        categories = {
-            enum_name
-        }
-    }
-}
-
 memory = {
 	
     ### Categories, arbitrary strings, used to provide groupings of related types
     categories = {
         ## cardinality = 1..inf
-        scalar 
+        value_set[memory_category]
     }
 
     ## cardinality = 0..1

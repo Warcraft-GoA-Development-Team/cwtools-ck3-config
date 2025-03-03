@@ -143,11 +143,22 @@ single_alias[random_traits_list] = {
     }
 }
 
-single_alias[culture_modifier] = {
-    ## push_scope = culture
-    parameter = value_set[culture_flag]
+single_alias[character_culture_modifier] = {
+    parameter = value[cultural_parameter]
     ## push_scope = character
     ## cardinality = 1..inf
+    alias_name[modifier] = alias_match_left[modifier]
+}
+
+single_alias[province_culture_modifier] = {
+    parameter = value[cultural_parameter]
+    ## push_scope = province
+    ## cardinality = 1..inf
+    alias_name[modifier] = alias_match_left[modifier]
+}
+
+single_alias[culture_modifier] = {
+    ## push_scope = culture
     alias_name[modifier] = alias_match_left[modifier]
 }
 

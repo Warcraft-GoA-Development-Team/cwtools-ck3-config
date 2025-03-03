@@ -44,13 +44,6 @@ enums = {
         province
         holder
     }
-    complex_enum[guest_subset] = {
-        name = {
-            guest_subsets = {
-                enum_name
-            }
-        }
-    }
 }
 
 # Character state

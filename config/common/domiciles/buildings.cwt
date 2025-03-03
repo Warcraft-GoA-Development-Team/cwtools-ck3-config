@@ -72,9 +72,7 @@ domicile_building = {
 
     ### Brief: character_modifier ( modifiers ) Modifiers applied to the Domicile owner of this building. Ex: { county_opinion_add = 2, stress_loss_mult = 0.15 } Note: Please do not use holdings monthly_income, etc..! Instead use: domicile_monthly_gold_add or domicile_monthly_gold_mult (same for: _prestige / _piety / _influence )
 	## cardinality = 0..1
-    character_modifier = {
-        alias_name[modifier] = single_alias_match_left[modifier]
-    }
+    character_modifier = single_alias_right[character_modifier]
 
     ### Brief: ai_value ( script value ) How desirable is the building for the AI. Evaluated alongside regular buildings. Available scopes: root -- Domicile it is built in scope:owner -- Owner of the Domicile
     ai_value = single_alias_right[int_conditional_formula]

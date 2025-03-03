@@ -39,10 +39,7 @@ house_unity = {
         
         ### modifiers applied on all characters in a unity
         ## cardinality = 0..1
-        modifiers = {
-            ## cardinality = 1..inf
-            alias_name[modifier] = alias_match_left[modifier]
-        }
+        modifiers = single_alias_right[character_modifier]
 
         ### the effect is called when the stage starts
         ## replace_scope = { root = house_unity }

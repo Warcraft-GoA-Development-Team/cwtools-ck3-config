@@ -74,8 +74,9 @@ court_position = {
 
     ## cardinality = 0..1
     ### Non-scaling modifiers gained by the employer of the court position.
-    base_employer_modifier = single_alias_right[modifier_list]
+    base_employer_modifier = single_alias_right[character_modifier]
 
+    # TODO
     ## cardinality = 0..1
     ### Scaling modifiers gained by the employer of the court position as the employee's aptitude level increases. Can define 0-5 scaling modifiers. If less than 5 are defined, the highest will be picked as aptitude level increases.
     scaling_employer_modifiers = {
@@ -96,7 +97,7 @@ court_position = {
 
     ## cardinality = 0..1
     ### Modifiers gained by the holder of the court position.
-    modifier = single_alias_right[modifier_list]
+    modifier = single_alias_right[character_modifier]
     ## cardinality = 0..1
     ### Additional, verbose description of position's effect on the employee.
     custom_employee_modifier_description = localisation

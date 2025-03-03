@@ -238,9 +238,9 @@ alias[trigger:free_tradition_slot] == alias_name[int_value]
 ## scope = culture
 alias[trigger:has_all_innovations] == {
     ## cardinality = 0..1
-    with_flag = enum[innovation_flag]
+    with_flag = value[innovation_flag]
     ## cardinality = 0..1
-    without_flag = enum[innovation_flag]
+    without_flag = value[innovation_flag]
     ## cardinality = 0..1
     culture_era = <era>
 }
@@ -278,7 +278,7 @@ alias[trigger:has_innovation] = <innovation>
 
 ### Has the culture discovered an innovation with this flag? 
 ## scope = culture
-alias[trigger:has_innovation_flag] = enum[innovation_flag]
+alias[trigger:has_innovation_flag] = value[innovation_flag]
 
 ### Does the culture have this name list?
 ## scope = culture
@@ -337,7 +337,7 @@ alias[trigger:num_discovered_innovations_in_era] == {
 
 ### Does the character memory have this memory category?
 ## scope = memory
-alias[trigger:has_memory_category] = enum[memory_category]
+alias[trigger:has_memory_category] = value[memory_category]
 
 ### Does the character memory have this target character as a participant?
 ## scope = memory
@@ -980,8 +980,8 @@ alias[trigger:accolade_type_tier] = enum[accolade_tier]
 
 
 ### Does the scoped Accolade Type have the given category?
-## scope = accolade
-alias[trigger:type_has_accolade_category] = enum[accolade_category]
+## scope = accolade_type
+alias[trigger:type_has_accolade_category] = value[accolade_category]
 
 
 #####################################################
@@ -1267,13 +1267,13 @@ alias[trigger:is_target_in_global_variable_list] = {
 ### Checks if a target is in a variable list is_target_in_variable_list = { name = X target = Y } Where X is the name of the variable Where Y is an event target
 alias[trigger:is_target_in_local_variable_list] = {
     name = value[variable]
-    target = value[event_target]
+    target = scope_field
 }
 
 ### Checks if a target is in a variable list is_target_in_variable_list = { name = X target = Y } Where X is the name of the variable Where Y is an event target
 alias[trigger:is_target_in_variable_list] = {
     name = value[variable]
-    target = value[event_target]
+    target = scope_field
 }
 
 ### is the tooltip with the specified name open?  - An interface trigger, can only be used in specific places
@@ -1419,7 +1419,10 @@ alias[trigger:trigger_if] = {
 ### Checks the size of a variable list variable_list_size = { name = X target >= Y } Where X is the name of the variable Where Y is a script value or number
 alias[trigger:variable_list_size] = {
     name = value[variable]
+    ## cardinality = 0..1
     target == alias_name[int_value]
+    ## cardinality = 0..1
+    value == alias_name[int_value]
 }
 
 ### Was the target character the preferred heir of the scoped character
@@ -1514,11 +1517,19 @@ alias[trigger:has_building] = <building>
 
 ### does the scope province have a building with a certain flag? 	has_building_with_flag = { flag = temple count >= 2 } 	has_building_with_flag = temple # count >= 1
 ## scope = province
-alias[trigger:has_building_with_flag] = complex_enum[building_flag]
+alias[trigger:has_building_with_flag] = value[building_flag]
+
+### does the scope province have a building with a certain flag? 	has_building_with_flag = { flag = temple count >= 2 } 	has_building_with_flag = temple # count >= 1
+## scope = province
+alias[trigger:has_building_with_flag] = {
+    flag = value[building_flag]
+    ## cardinality = 0..1
+    count == alias_name[int_value]
+}
 
 ### does the scope province have a construction of a building with the specified flag? 	has_construction_with_flag = temple
 ## scope = province
-alias[trigger:has_construction_with_flag] = complex_enum[building_flag]
+alias[trigger:has_construction_with_flag] = value[building_flag]
 
 ### does the scope province have a free building slot? has_free_building_slot = yes
 ## scope = province
@@ -1714,7 +1725,7 @@ alias[trigger:accolade_rank] == alias_name[int_value]
 
 ### Does any of the Accolades types have the given category flag?
 ## scope = accolade
-alias[trigger:has_accolade_category] == <accolade_category>
+alias[trigger:has_accolade_category] == value[accolade_category]
 
 ### Does any of the Accolades unlocked ranks have the given parameter flag?
 ## scope = accolade
@@ -2617,11 +2628,11 @@ alias[trigger:ai_zeal] == alias_name[int_value]
 
 ### check if all the scoped characters court artifact slots are empty or full
 ## scope = character
-alias[trigger:all_court_artifact_slots] == bool
+alias[trigger:all_court_artifact_slots] == enum[full_or_empty]
 
 ### check if all the scoped characters inventory artifact slots are empty or full
 ## scope = character
-alias[trigger:all_inventory_artifact_slots] == bool
+alias[trigger:all_inventory_artifact_slots] == enum[full_or_empty]
 
 ### Can the scope owner have concubines?
 ## scope = character
@@ -3097,11 +3108,11 @@ alias[trigger:gold] == alias_name[int_value]
 # NOTE: only used once for create_cadet_branches
 ### checks if the government of the character allows something
 ## scope = character
-alias[trigger:government_allows] = value_field
+alias[trigger:government_allows] = enum[government_rule]
 
 ### checks if the government of the character disallows something
 ## scope = character
-alias[trigger:government_disallows] = value_field
+alias[trigger:government_disallows] = enum[government_rule]
 
 ### How many perks in the lifestyle does this dynasty have?
 alias[trigger:guile_legacy_track_perks] == alias_name[int_value]
@@ -4143,7 +4154,7 @@ alias[trigger:is_in_civil_war] = bool
 ### Is the scoped character in the specified guest subset in the activity they are involved in? 
 ## scope = character
 alias[trigger:is_in_guest_subset] = {
-    name = value_set[guest_subset]
+    name = value[guest_subset]
     ## cardinality = 0..1
     phase = <activity_phase>
 }
@@ -4921,7 +4932,10 @@ alias[trigger:perks_in_tree] == alias_name[int_value]
 alias[trigger:piety] == alias_name[int_value]
 
 ### does the character have the required piety level?
-alias[trigger:piety_level] = int_value_field
+alias[trigger:piety_level] = alias_name[int_value]
+
+### does the character have the required piety level?
+alias[trigger:parent_relatedness] == float
 
 ### what place in line of succession does the character hold?
 ## scope = character

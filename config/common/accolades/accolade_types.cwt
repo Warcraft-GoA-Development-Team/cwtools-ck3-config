@@ -13,17 +13,6 @@ enums = {
         eminent
     }
 
-    complex_enum[accolade_category] = {
-        path = "game/common/accolade_types"
-        name = {
-            accolade_categories = {
-                enum_name
-            }
-        }
-        #start_from_root = yes
-
-    }
-
 }
 
 accolade = {
@@ -54,7 +43,7 @@ accolade = {
     ## cardinality = 0..1
     accolade_categories = {
         ## cardinality = 1..inf
-        enum[accolade_category]
+        value_set[accolade_category]
     }
 
     ### ranks that are unlocked as accolades using this type accrues glory. Each rank has an initial glory requirement followed by what it unlocks when that requirement is reached ( it can be 0 ). Each accolade type can have any number of ranks ( but should probably be balanced )
@@ -74,20 +63,13 @@ single_alias[accolade_rank] = {
 
     ### character modifier applied to the liege that has this accolade activated
     ## cardinality = 0..1
-    liege_modifier = {
- 
-        
-        ## cardinality = 0..inf
-        alias_name[modifier] = alias_match_left[modifier]
-    }
+    liege_modifier = single_alias_right[character_modifier]
 
     ### character modifier applied to the knight personally ( should be limited to prestige and other character mods )
     ## cardinality = 0..1
-    knight_modifier = {
-        ## cardinality = 0..inf
-        alias_name[modifier] = alias_match_left[modifier]
-    }
-    
+    knight_modifier = single_alias_right[character_modifier]
+
+    # TODO
     ### character modifier applied to whatever army the knight is a part of ( should be army modifiers such as advantage etc. )
     ## cardinality = 0..1
     knight_army_modifier = {

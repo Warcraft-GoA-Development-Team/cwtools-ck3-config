@@ -29,9 +29,7 @@ scheme_countermeasure = {
 
     ### Modifiers applied to the ruler that activated the countermeasure, but not any of their courtiers or guests. (mainly intended as a 'cost' and only applied to the court ruler)
     ## cardinality = 0..1
-    owner_modifier = {
-        alias_name[modifier] = alias_match_left[modifier]
-    }
+    owner_modifier = single_alias_right[character_modifier]
 
     ### AIs countermeasure preference. An AI characters will now and then reevaluate what countermeasure to use, and pick the one with the highest calculated value.
     ai_will_do = int_value_field

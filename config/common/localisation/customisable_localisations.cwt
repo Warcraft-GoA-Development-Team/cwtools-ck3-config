@@ -88,5 +88,6 @@ enums = {
         title_and_vassal_change
         faith
         dynasty
+        legend
     }
 }

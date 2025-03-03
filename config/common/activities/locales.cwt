@@ -1,4 +1,4 @@
-type = {
+types = {
     type[activity_locale] = {
         path = "common/activities/activity_locales"
         localisation = {
@@ -27,7 +27,7 @@ activity_locale = {
 
 	### How likely is the AI to pick to visit this locale? Will be picked by weighted random.
     ## push_scope = { root = character activity = activity host = character }
-	ai_will_do = single_alias_right[score_conditional]
+	ai_will_do = single_alias_right[score_formula]
 
 	### How many days is the locale invalid to be 'entered', after it has been entered.
     ## push_scope = { root = character activity = activity host = character }
@@ -36,16 +36,16 @@ activity_locale = {
     }
 
 	### Brief: visuals ( triggered reference block ) Visual widgets for the locale, multiple can be read in, first one is  picked from order they are read in. Reference is a file name (and top level widget name) in gui/activity_locale_widgets
-	## cardinality = 0..1
+	## cardinality = 0..inf
 	visuals = {
 		# root = the activity
 		# scope:activity = the activity
 		# scope:host = host of the activity
         ## push_scope = { root = activity activity = activity host = character }
 		trigger = single_alias_right[trigger_clause]
-		reference = localisation
+		reference = filepath[game/gui/activity_locale_widgets/,.gui]
 	}
-	## cardinality = 0..1
-	visuals = localisation
+	## cardinality = 0..inf
+	visuals = filepath[game/gui/activity_locale_widgets/,.gui]
 }
 

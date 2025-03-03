@@ -113,26 +113,26 @@ enums = {
     enum[grammar_transform] = {
         french
     }
-    complex_enum[male_names] = {
-        path = "game/common/culture/name_lists"
-        name = {
-            scalar = {
-                male_names = {
-                    enum_name
-                    scalar = { enum_name }
-                }
-            }
-        }
-    }
-    complex_enum[female_names] = {
-        path = "game/common/culture/name_lists"
-        name = {
-            scalar = {
-                female_names = {
-                    enum_name
-                    scalar = { enum_name }
-                }
-            }
-        }
-    }
+    # complex_enum[male_names] = {
+    #     path = "game/common/culture/name_lists"
+    #     name = {
+    #         scalar = {
+    #             male_names = {
+    #                 enum_name
+    #                 scalar = { enum_name }
+    #             }
+    #         }
+    #     }
+    # }
+    # complex_enum[female_names] = {
+    #     path = "game/common/culture/name_lists"
+    #     name = {
+    #         scalar = {
+    #             female_names = {
+    #                 enum_name
+    #                 scalar = { enum_name }
+    #             }
+    #         }
+    #     }
+    # }
 }

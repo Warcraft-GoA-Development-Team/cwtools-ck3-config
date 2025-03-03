@@ -57,9 +57,15 @@ innovation = {
         alias_name[modifier] = alias_match_left[modifier]
     }
 
+    ## cardinality = 0..1
+    character_modifier = single_alias_right[character_modifier]
+
+    ## cardinality = 0..1
+    culture_modifier = single_alias_right[culture_modifier]
+
     ## cardinality = 0..inf
     ### Optional flag, relevant for the has_all_innovations trigger. Can list any number of flags for each innovation.
-    flag = scalar
+    flag = value_set[innovation_flag]
 }
 
 single_alias[maa_upgrade] = {
@@ -84,11 +90,5 @@ enums = {
         culture_group_military
         culture_group_civic
         culture_group_regional
-    }
-    complex_enum[innovation_flag] = {
-        path = "game/common/cultures/innovations"
-        name = {
-            flag = enum_name
-        }
     }
 }

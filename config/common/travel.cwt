@@ -42,9 +42,7 @@ travel_option = {
 
 	### Character modifier that gets applied to the travel owner character
     ## cardinality = 0..1
-	owner_modifier = {
-        alias_name[modifier] = alias_match_left[modifier]
-    }
+	owner_modifier = single_alias_right[character_modifier]
 
 	### Effect that gets triggered once the travel starts, or once the option is gained mid-travel.
     ## replace_scope = { root = character travel_speed = int travel_safety = int}

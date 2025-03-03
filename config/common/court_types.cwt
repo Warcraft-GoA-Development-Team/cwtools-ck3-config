@@ -34,16 +34,11 @@ court_type = {
 		
 		### Modifier applied to the owner of the court when amenities are at this setting.
         ## cardinality = 0..1
-		owner_modifier = {
-            alias_name[modifier] = alias_match_left[modifier]
-
-        }
+		owner_modifier = single_alias_right[character_modifier]
 		
 		### Modifier applied to the courtiers and guests when court amenities are at this setting. 
         ## cardinality = 0..1
-		courtier_guest_modifier = {
-            alias_name[modifier] = alias_match_left[modifier]
-        }
+		courtier_guest_modifier = single_alias_right[character_modifier]
 
 		### Localization to show in addition to the owners modifier description. Prepends a EFFECT_LIST_BULLET to the entry. If multiple entries are defined in the loc key, individual newlines and EFFECT_LIST_BULLET must be specified within.
         ## cardinality = 0..1
@@ -63,15 +58,11 @@ court_type = {
 		
 		### Modifier applied to the owner of the court when amenities are at this setting
         ## cardinality = 0..1
-		owner_modifier = {
-            alias_name[modifier] = alias_match_left[modifier]
-        }
+		owner_modifier = single_alias_right[character_modifier]
 		
 		### Modifier applied to the courtiers and guests when court amenities are at this setting
          ## cardinality = 0..1
-		courtier_guest_modifier = {
-            alias_name[modifier] = alias_match_left[modifier]
-        }
+		courtier_guest_modifier = single_alias_right[character_modifier]
 		
 		### Brief: owner_modifier_description ( localization key )
 		### Localization to show in addition to the owners modifier description. Prepends a EFFECT_LIST_BULLET to the entry. If multiple entries are defined in the loc key, individual newlines and EFFECT_LIST_BULLET must be specified within.

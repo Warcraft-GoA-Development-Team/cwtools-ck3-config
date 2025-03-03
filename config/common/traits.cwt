@@ -52,7 +52,7 @@ trait = {
     alias_name[modifier] = alias_match_left[modifier]
     ### Modifier that will be applied for characters with a culture with the specified parameter
     ## cardinality = 0..inf
-    culture_modifier = single_alias_right[culture_modifier]
+    culture_modifier = single_alias_right[character_culture_modifier]
 
     ## cardinality = 0..1
     add_commander_trait = bool
