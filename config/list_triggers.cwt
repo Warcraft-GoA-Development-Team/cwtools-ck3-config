@@ -115,7 +115,7 @@ alias[trigger:any_guest_subset] = {
     }
     name = value[guest_subset]
     ## cardinality = 0..1
-    phase = <activity_phase>
+    phase = value[activity_phase]
     ## cardinality = 0..1
     percent = value_float[0.0..1.0]
     ## cardinality = 0..1
@@ -586,7 +586,20 @@ alias[trigger:any_player] = single_alias_right[any_trigger]
 
 ### Iterate through all characters in the pool of the given province any_pool_character = { <count=num/all> / <percent=fixed_point> <triggers> }
 ## push_scope = character
-alias[trigger:any_pool_character] = single_alias_right[any_trigger]
+alias[trigger:any_pool_character] = {
+    ## cardinality = 0..1
+    continue = {
+        alias_name[trigger] = alias_match_left[trigger]
+    }
+    ## cardinality = 0..1
+    percent = value_float[0.0..1.0]
+    ## cardinality = 0..1
+    count = int_value_field
+    ## cardinality = 0..1
+    count = all
+    province = scope[province]
+    alias_name[trigger] = alias_match_left[trigger]
+}
 
 ### Iterate through all provinces (skips non-land and impassable provinces) any_province = { <count=num/all> / <percent=fixed_point> <triggers> }
 ## push_scope = province
@@ -1676,6 +1689,15 @@ alias[trigger:any_title_interested_in_location] = single_alias_right[any_trigger
 ## scope = landed_title
 ## push_scope = regiment
 alias[trigger:any_title_maa_regiment] = single_alias_right[any_trigger]
+
+### Iterate through all active Accolades of a given liege character's Acclaimed Knights
+## scope = character
+## push_scope = accolade
+alias[trigger:any_active_accolade] = single_alias_right[any_trigger]
+
+## scope = character
+## push_scope = landed_title
+alias[trigger:any_held_county] = single_alias_right[any_trigger]
 
 # Scopes from a character to a neighboring barony (looking trough the de Jure lieges) any_character_to_title_neighboring_barony = { <count=num/all> / <percent=fixed_point> <triggers> }
 #alias[trigger:any_character_to_title_neighboring_barony] = {

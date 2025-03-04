@@ -64,7 +64,8 @@ single_alias[animation_description] = {
 
 #alias[animation:animation] = <portrait_animation>
 
-alias[animation:scripted_animation] = <scripted_animation>
+alias[animation:<scripted_animation>] = <scripted_animation>
+alias[animation:<animation>] = <animation>
 
 
 single_alias[animation_clause] = {
@@ -72,15 +73,17 @@ single_alias[animation_clause] = {
 }
 
 single_alias[scripted_animation] = {
-    ## cardinality = 1..inf
+    ## cardinality = 0..inf
     triggered_animation = {
         ## cardinality = 1..1
         trigger = single_alias_right[trigger_clause]
         ## cardinality = 1..1
-        alias_name[animation] = alias_match_left[animation]
+        animation = alias_name[animation]
+        ## cardinality = 1..1
+        animation = { alias_name[animation] }
     }
-    ## cardinality = 1..1
-    alias_name[animation] = alias_match_left[animation] 
+    ## cardinality = 0..1
+    animation = alias_name[animation]
 }
 
 single_alias[portrait_modifier] =  {

@@ -23,7 +23,7 @@ aesthetic = {
     ### Buildings graphics
     building_gfx = { 
         ## cardinality = 1..inf
-        enum[building_gfx]
+        value[building_gfx]
     }
     ### Clothing graphics
     clothing_gfx = { 

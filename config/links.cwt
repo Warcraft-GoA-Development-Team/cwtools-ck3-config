@@ -1245,7 +1245,7 @@ links = {
     involved_activity = {
         desc = "Get involved activity of scoped character"
         input_scopes = character
-        output_scope = character
+        output_scope = activity
     }
     last_played_character = {
         desc = "Get last played character of the currently scoped player character"
@@ -1371,6 +1371,34 @@ links = {
         output_scope = value
     }
     court_grandeur_current = {
+        input_scopes = character
+        output_scope = value
+    }
+    ai_sociability = {
+        input_scopes = character
+        output_scope = value
+    }
+    war_chest_gold_maximum = {
+        input_scopes = character
+        output_scope = value
+    }
+    provisions = {
+        input_scopes = domicile
+        output_scope = value
+    }
+    development_level = {
+        input_scopes = landed_title
+        output_scope = value
+    }
+    county_control = {
+        input_scopes = landed_title
+        output_scope = value
+    }
+    current_year = {
+        input_scopes = none
+        output_scope = value
+    }
+    stress = {
         input_scopes = character
         output_scope = value
     }

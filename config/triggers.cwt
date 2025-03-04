@@ -126,38 +126,38 @@ alias[trigger:has_activity_type] = <activity>
 
 ### Does the scoped activity have the given phase active
 ## scope = activity
-alias[trigger:has_current_phase] = <activity_phase>
+alias[trigger:has_current_phase] = value[activity_phase]
 
 ### Check if a phase exists on this activity. You can search for just a type directly, or a complex trigger with  only `type`, `location` or both.
 ## scope = activity
-alias[trigger:has_phase] = <activity_phase>
+alias[trigger:has_phase] = value[activity_phase]
 
 ### Check if a phase exists on this activity. You can search for just a type directly, or a complex trigger with  only `type`, `location` or both.
 ## scope = activity
 alias[trigger:has_phase] = {
-    type = <activity_phase>
+    type = value[activity_phase]
     location = scope[province]
 }
 
 ### Check if a future phase exists on this activity. You can search for just a type directly, or a complex trigger with  only `type`, `location` or both.
 ## scope = activity
-alias[trigger:has_phase_future] = <activity_phase>
+alias[trigger:has_phase_future] = value[activity_phase]
 
 ### Check if a future phase exists on this activity. You can search for just a type directly, or a complex trigger with  only `type`, `location` or both.
 ## scope = activity
 alias[trigger:has_phase_future] = {
-    type = <activity_phase>
+    type = value[activity_phase]
     location = scope[province]
 }
 
 ### Check if a past phase exists on this activity. You can search for just a type directly, or a complex trigger with  only `type`, `location` or both.
 ## scope = activity
-alias[trigger:has_phase_past] = <activity_phase>
+alias[trigger:has_phase_past] = value[activity_phase]
 
 ### Check if a past phase exists on this activity. You can search for just a type directly, or a complex trigger with  only `type`, `location` or both.
 ## scope = activity
 alias[trigger:has_phase_past] = {
-    type = <activity_phase>
+    type = value[activity_phase]
     location = scope[province]
 }
 
@@ -247,7 +247,7 @@ alias[trigger:has_all_innovations] == {
 
 ### How many free tradition slot are in the scoped culture
 ## scope = culture
-alias[trigger:has_building_gfx] = enum[building_gfx]
+alias[trigger:has_building_gfx] = value[building_gfx]
 
 ### How many free tradition slot are in the scoped culture
 ## scope = culture
@@ -1261,7 +1261,7 @@ alias[trigger:is_set] = scope_field
 ### Checks if a target is in a variable list is_target_in_variable_list = { name = X target = Y } Where X is the name of the variable Where Y is an event target
 alias[trigger:is_target_in_global_variable_list] = {
     name = value[variable]
-    target = value[event_target]
+    target = scope_field
 }
 
 ### Checks if a target is in a variable list is_target_in_variable_list = { name = X target = Y } Where X is the name of the variable Where Y is an event target
@@ -3018,19 +3018,19 @@ alias[trigger:diplomacy_for_portrait] == value_float[0.0..1.0]
 
 ### How many perks from this lifestyle does the character have?
 ## scope = character
-alias[trigger:diplomacy_lifestyle_perks] == alias_name[int_value]
+alias[trigger:<lifestyle>_perks] == alias_name[int_value]
 
 ### How many perk points available does the character have?
 ## scope = character
-alias[trigger:diplomacy_lifestyle_perk_points] == alias_name[int_value]
+alias[trigger:<lifestyle>_perk_points] == alias_name[int_value]
 
 ### How many perk points available does the character have?
 ## scope = character
-alias[trigger:diplomacy_lifestyle_unlockable_perks] == alias_name[int_value]
+alias[trigger:<lifestyle>_unlockable_perks] == alias_name[int_value]
 
 ### How many perk points available does the character have?
 ## scope = character
-alias[trigger:diplomacy_lifestyle_xp] == alias_name[int_value]
+alias[trigger:<lifestyle>_xp] == alias_name[int_value]
 
 ### Does the AI liege in a vassal contract desire changing an obligation level
 ## scope = character
@@ -3774,18 +3774,6 @@ alias[trigger:intrigue_diff] == {
 ## scope = character
 alias[trigger:intrigue_for_portrait] == alias_name[int_value]
 
-### How many perks from this lifestyle does the character have?
-## scope = character
-alias[trigger:intrigue_lifestyle_perks] == alias_name[int_value]
-
-### How many perk points available does the character have?
-## scope = character
-alias[trigger:intrigue_lifestyle_perk_points] == alias_name[int_value]
-
-### How many perk points available does the character have?
-## scope = character
-alias[trigger:intrigue_lifestyle_xp] == alias_name[int_value]
-
 ### Is the scope character a leader of a faction?
 ## scope = character
 alias[trigger:is_a_faction_leader] = bool
@@ -4156,7 +4144,7 @@ alias[trigger:is_in_civil_war] = bool
 alias[trigger:is_in_guest_subset] = {
     name = value[guest_subset]
     ## cardinality = 0..1
-    phase = <activity_phase>
+    phase = value[activity_phase]
 }
 
 ### is the character in an ongoing (i.e. the war has started) great holy war?
@@ -4491,18 +4479,6 @@ alias[trigger:learning_diff] = {
 ## scope = character
 alias[trigger:learning_for_portrait] == alias_name[int_value]
 
-### How many perks from this lifestyle does the character have?
-## scope = character
-alias[trigger:learning_lifestyle_perk_points] == alias_name[int_value]
-
-### How many perks from this lifestyle does the character have?
-## scope = character
-alias[trigger:learning_lifestyle_perks] == alias_name[int_value]
-
-### How many perk points available does the character have?
-## scope = character
-alias[trigger:learning_lifestyle_xp] == alias_name[int_value]
-
 ### Gets the scoped character's current legitimacy
 ## scope = character
 alias[trigger:legitimacy] == alias_name[int_value]
@@ -4558,22 +4534,6 @@ alias[trigger:martial_diff] == {
 ### Martial skill scaled between 0.0 and 1.0 for portraits
 ## scope = character
 alias[trigger:martial_for_portrait] == value_float[0.0..1.0]
-
-### How many perk points available does the character have?
-## scope = character
-alias[trigger:martial_lifestyle_perk_points] == alias_name[int_value]
-
-### How many perks from this lifestyle does the character have?
-## scope = character
-alias[trigger:martial_lifestyle_perks] == alias_name[int_value]
-
-### How many perk points available does the character have?
-## scope = character
-alias[trigger:martial_lifestyle_unlockable_perks] == alias_name[int_value]
-
-### How many perk points available does the character have?
-## scope = character
-alias[trigger:martial_lifestyle_xp] == alias_name[int_value]
 
 ### Is this character's betrothal matrilinear? False if there's no betrothal.
 ## scope = character
@@ -4909,7 +4869,7 @@ alias[trigger:owns_story_of_type] = replace_me
 
 ### Is this character's betrothal patrilinear? False if there's no betrothal.
 ## scope = character
-alias[trigger:patrilinear_betrothal] = replace_me_bool
+alias[trigger:patrilinear_betrothal] = bool
 
 ### Is the marriage with the spouse patrilinear?
 ## scope = character
@@ -5098,22 +5058,6 @@ alias[trigger:stewardship_diff] == {
 ### Stewardship skill scaled between 0.0 and 1.0 for portraits
 ## scope = character
 alias[trigger:stewardship_for_portrait] == float_value[0.0..1.0]
-
-### How many perk points available does the character have?
-## scope = character
-alias[trigger:stewardship_lifestyle_perk_points] == alias_name[int_value]
-
-### How many perks from this lifestyle does the character have?
-## scope = character
-alias[trigger:stewardship_lifestyle_perks] == alias_name[int_value]
-
-### How many perk points available does the character have?
-## scope = character
-alias[trigger:stewardship_lifestyle_unlockable_perks] == alias_name[int_value]
-
-### How many perk points available does the character have?
-## scope = character
-alias[trigger:stewardship_lifestyle_xp] == alias_name[int_value]
 
 ### does the character have the required stress?
 ## scope = character
@@ -5342,6 +5286,10 @@ alias[trigger:years_in_diarchy] == alias_name[int_value]
 ### Checks if the character would get an alliance with the target character through such a marriage.
 ## scope = character
 alias[trigger:yields_alliance] = scope[character]
+
+### does the scope province have a particular building or its successor?
+## scope = character
+alias[trigger:has_building_or_higher] = <building>
 
 
 

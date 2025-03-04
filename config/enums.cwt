@@ -1,6 +1,7 @@
 enums = {
     enum[duration] = {
         days
+        weeks
         months
         years
     }
@@ -132,6 +133,12 @@ enums = {
         legends
         north_african_attire
         couture_of_the_capets
+        landless_playable
+        admin_gov
+        roads_to_power
+        court_room_view
+        wandering_nobles
+        west_slavic_attire
     }
 
 
@@ -160,18 +167,6 @@ enums = {
         western_clothing_gfx
         dde_hre_clothing_gfx
         fp1_norse_clothing_gfx
-    }
-    enum[building_gfx] = {
-        indian_building_gfx
-        mena_building_gfx
-        mediterranean_building_gfx
-        iberian_building_gfx
-        western_building_gfx
-        norse_building_gfx
-        steppe_building_gfx
-        african_building_gfx
-        arabic_group_building_gfx
-        berber_group_building_gfx
     }
     enum[coa_gfx] = {
         western_coa_gfx

@@ -58,6 +58,7 @@ alias[effect:set_task_contract_target] = scope[character]
 ## scope = activity
 alias[effect:add_activity_log_entry] = {
     key = localisation
+    ## cardinality = 0..1
     score = int_value_field
     ## cardinality = 0..1
     tags = {
@@ -73,6 +74,8 @@ alias[effect:add_activity_log_entry] = {
     location = scope[province]
     ## cardinality = 0..1
     artifact = scope[artifact]
+    ## cardinality = 0..1
+    alias_name[effect] = alias_match_left[effect]
 }
 
 ### add_to_current_phase_guest_subset = { name = <subset_key> target = scope:character } Adds the target character to the designated subset in the current phase.
@@ -88,7 +91,7 @@ alias[effect:add_to_guest_subset] = {
     name = value[guest_subset]
     target = scope[character]
     ## cardinality = 0..1
-    phase = <activity_phase>
+    phase = value[activity_phase]
 }
 
 ### Progress the current activity phase forward after X days.
@@ -108,7 +111,7 @@ alias[effect:remove_from_guest_subset] = {
     name = value[guest_subset]
     target = scope[character]
     ## cardinality = 0..1
-    phase = <activity_phase>
+    phase = value[activity_phase]
 }
 
 ### set_activity_host = character The host of the scoped activity is set to the target character
@@ -364,6 +367,11 @@ alias[effect:add_travel_plan_modifier] = {
     ## cardinality = 0..1
     desc = single_alias_right[complex_desc]
 }
+
+### Add a modifier to a travel plan add_travel_plan_modifier = name add_travel_plan_modifier = { modifier = name days/weeks/months/years = int } You can also add an optional 'desc' field. This is a dynamic description that'll be used for your timed modifier
+## scope = travel_plan
+## push_scope = travel_plan
+alias[effect:add_travel_plan_modifier] = <modifier_container>
 
 ### Adds a travel waypoint just ahead of the current travel location, and change the path accordingly.
 ## scope = travel_plan
@@ -949,7 +957,7 @@ alias[effect:change_title_holder_include_vassals] = single_alias_right[title_cha
 ### Changes the value or a numeric variable change_variable = { name = X operation = Y } Where X is the name of the numeric variable to modify Where the valid operations are add, subtract, multiply, divide and modulo Where Y is a fixed point value, script value or event target of a value type
 alias[effect:change_variable] = {
     name = value[variable]
-    alias_name[arithmetic_operation] = alias_match_left[arithmetic_operation]
+    alias_name[score_operation] = alias_match_left[score_operation]
 }
 
 ### Clamps a variable the specified max and min clamp_variable = { name = X max = Y min = Z } Where X is the name of the variable Where Y and Z are script values
@@ -1256,7 +1264,7 @@ alias[effect:duel] = {
         ## cardinality = 0..1
         desc = localisation
         ## cardinality = 0..1
-        trigger = alias_match_left[trigger]
+        trigger = single_alias_right[trigger_clause]
 
         ## cardinality = 0..inf
         alias_name[weight] = alias_match_left[weight]
@@ -1307,8 +1315,6 @@ alias[effect:if] = {
         alias_name[trigger] = alias_match_left[trigger]
     }
     alias_name[effect] = alias_match_left[effect]
-    ## cardinality = 0..1
-    alias_name[arithmetic_operation] = alias_match_left[effect]
 }
 
 ### Invalidate and destroy the target activity, running its on_invalidate effect. invalidate_activity = scope:activity
@@ -1355,6 +1361,7 @@ alias[effect:pan_camera_to_title] = scope[landed_title]
 ### a random effect, random = { chance = X modifier = Y effects... } where X is a chance of the enclosed effects being fired and can be modified by optional value modifier list (AKA MTTH) Y
 alias[effect:random] = {
     chance = int_value_field
+    chance = single_alias_right[score_formula]
 
     ## cardinality = 0..inf
     modifier = single_alias_right[weight_chance_modifier]
@@ -1368,7 +1375,7 @@ alias[effect:random_list] = {
     ## cardinality = 1..inf
     int = {
         ## cardinality = 0..1
-        trigger = alias_match_left[trigger]
+        trigger = single_alias_right[trigger_clause]
 
         ## cardinality = 0..inf
         alias_name[weight] = alias_match_left[weight]
@@ -1485,7 +1492,14 @@ alias[effect:save_scope_as] = value_set[event_target]
 ### Saves a numerical or bool value as an arbitrarily-named target to be referenced later in the (unbroken) event chain save_scope_value_as = { name = <string> value = x }
 alias[effect:save_scope_value_as] = {
     name = value_set[event_target]
-    value = value_field
+    ## cardinality = 0..1
+    value = alias_name[int_value]
+    ## cardinality = 0..1
+    value = scope_field
+    ## cardinality = 0..1
+    value = bool
+    ## cardinality = 0..1
+    value = single_alias_right[score_formula]
 }
 
 ### Saves the scoped character's opinion of the target character as an arbitrarily-named target to be referenced later in the in the same effect save_temporary_opinion_value_as = { name = <string> target = x 
@@ -1535,9 +1549,13 @@ alias[effect:set_global_variable] = {
     enum[duration] = int
 
     ## cardinality = 0..1
-    value = value_field
+    value = alias_name[int_value]
     ## cardinality = 0..1
     value = scope_field
+    ## cardinality = 0..1
+    value = bool
+    ## cardinality = 0..1
+    value = single_alias_right[score_formula]
 }
 
 ### Sets a variable set_variable = { name = X value = Y days = Z } Where X is the name of the variable used to then access it Where Y is any event target, bool, value, script value or flag (flag:W) An optional days where Z is the number of days or script value This variable will be accessible with <type_>var:X. With type being in a scope object or in a top scope
@@ -1551,9 +1569,13 @@ alias[effect:set_local_variable] = {
     enum[duration] = int
 
     ## cardinality = 0..1
-    value = value_field
+    value = alias_name[int_value]
     ## cardinality = 0..1
     value = scope_field
+    ## cardinality = 0..1
+    value = bool
+    ## cardinality = 0..1
+    value = single_alias_right[score_formula]
 }
 
 ### Sets a variable set_variable = { name = X value = Y days = Z } Where X is the name of the variable used to then access it Where Y is any event target, bool, value, script value or flag (flag:W) An optional days where Z is the number of days or script value This variable will be accessible with <type_>var:X. With type being in a scope object or in a top scope
@@ -1578,9 +1600,13 @@ alias[effect:set_variable] = {
     enum[duration] = int
 
     ## cardinality = 0..1
-    value = value_field
+    value = alias_name[int_value]
     ## cardinality = 0..1
     value = scope_field
+    ## cardinality = 0..1
+    value = bool
+    ## cardinality = 0..1
+    value = single_alias_right[score_formula]
 }
 
 ### Sets a variable set_variable = { name = X value = Y days = Z } Where X is the name of the variable used to then access it Where Y is any event target, bool, value, script value or flag (flag:W) An optional days where Z is the number of days or script value This variable will be accessible with <type_>var:X. With type being in a scope object or in a top scope
@@ -2112,11 +2138,11 @@ alias[effect:add_dead_character_flag] = {
 
 ### Adds lifestyle per points to the given character
 ## scope = character
-alias[effect:add_diplomacy_lifestyle_perk_points] = alias_name[int_value]
+alias[effect:add_<lifestyle>_perk_points] = alias_name[int_value]
 
 ### Adds lifestyle XP to the given character
 ## scope = character
-alias[effect:add_diplomacy_lifestyle_xp] = alias_name[int_value]
+alias[effect:add_<lifestyle>_xp] = alias_name[int_value]
 
 ### adds (or removes) dread to a character
 ## scope = character
@@ -2142,14 +2168,6 @@ alias[effect:add_hook_no_toast] = {
     enum[duration] = int
 }
 
-### Adds lifestyle per points to the given character
-## scope = character
-alias[effect:add_intrigue_lifestyle_perk_points] = alias_name[int_value]
-
-### Adds lifestyle XP to the given character
-## scope = character
-alias[effect:add_intrigue_lifestyle_xp] = alias_name[int_value]
-
 ### add_joined_faction_discontent = X adds (or subtracts) discontent to the factions the scope character is in
 ## scope = character
 alias[effect:add_joined_faction_discontent] = alias_name[int_value] # TODO: Test out if variables/values work?
@@ -2157,14 +2175,6 @@ alias[effect:add_joined_faction_discontent] = alias_name[int_value] # TODO: Test
 ### Adds the right hand side character as knowing of the killer of the scoped object dead_person = { add_knows_of_killer = root }
 ## scope = character
 alias[effect:add_knows_of_killer] = scope[character]
-
-### Adds lifestyle per points to the given character
-## scope = character
-alias[effect:add_learning_lifestyle_perk_points] = alias_name[int_value]
-
-### Adds lifestyle XP to the given character
-## scope = character
-alias[effect:add_learning_lifestyle_xp] = alias_name[int_value]
 
 ### Add or remove legitimacy to the scoped living playable character
 ## scope = character
@@ -2177,14 +2187,6 @@ alias[effect:add_legitimacy] = single_alias_right[score_formula]
 ### Add gold to 'long term' AI budget category, respecting maximums, overflow goes into Short Term budget. (gold will be created out of nowhere)
 ## scope = character
 alias[effect:add_long_term_gold] = alias_name[int_value]
-
-### Adds lifestyle per points to the given character
-## scope = character
-alias[effect:add_martial_lifestyle_perk_points] = alias_name[int_value]
-
-### Adds lifestyle XP to the given character
-## scope = character
-alias[effect:add_martial_lifestyle_xp] = alias_name[int_value]
 
 ### Adds a temporary opinion modifier, add_opinion = { modifier = X days/months/years = Y target = Z } X is a scripted modifier name. Y can be a value or a range "{ A B }" If no timeout are specified, the modifier's scripted default timeout will be used.
 ## scope = character
@@ -2205,11 +2207,11 @@ alias[effect:add_personal_artifact_claim] = scope[artifact]
 
 ### gives (or takes) piety to a character
 ## scope = character
-alias[effect:add_piety] = value_field
+alias[effect:add_piety] = alias_name[int_value]
 
 ### gives (or takes) piety experience to a character
 ## scope = character
-alias[effect:add_piety_experience] = value_field
+alias[effect:add_piety_experience] = alias_name[int_value]
 
 ### increases (or decreases) the piety level of a character
 ## scope = character
@@ -2282,14 +2284,6 @@ alias[effect:add_secret] = {
 ### Add gold to 'short term' AI budget category, respecting maximums, overflow goes into Short Term budget. (gold will be created out of nowhere)character, add_short_term_gold = X
 ## scope = character
 alias[effect:add_short_term_gold] = alias_name[int_value]
-
-### Adds lifestyle per points to the given character
-## scope = character
-alias[effect:add_stewardship_lifestyle_perk_points] = alias_name[int_value]
-
-### Adds lifestyle XP to the given character
-## scope = character
-alias[effect:add_stewardship_lifestyle_xp] = alias_name[int_value]
 
 ### increases (or decreases) stress of a character
 ## scope = character
@@ -3513,6 +3507,10 @@ alias[effect:set_location] = {
     stick_to_location = bool
 }
 
+### Moves the character to a specific location. stick_to_location can be used to prevent the safety checks that sometimes return characters to their default location automatically.Usage:   set_location = province set_location = { location = province   stick_to_location = yes/no }
+## scope = character
+alias[effect:set_location] = scope[province]
+
 ### Moves the character to its "default" location.This is usually the realm capital for landed characters, or court location for courtiers.   Usage: set_location_to_default = yes/no
 ## scope = character
 alias[effect:set_location_to_default] = bool
@@ -3718,9 +3716,9 @@ alias[effect:store_localized_text_in_death] = scalar
 ## scope = character
 alias[effect:stress_impact] = {
     ## cardinality = 0..1
-    base = value_field
+    base = alias_name[int_value]
     ## cardinality = 0..inf
-    <trait> = value_field
+    <trait> = alias_name[int_value]
 }
 
 ### Take target character as a hostagescope:warden = { take_hostage = scope:hostage }

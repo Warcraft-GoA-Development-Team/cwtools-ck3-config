@@ -42,6 +42,11 @@ activity_intent = {
     ## replace_scope = { root = character activity - activity}
 	ai_will_do = int_field_value
 
+	### Scripted value to determine if the AI will select this intent or not
+	### Selects the weighted random intent based on their score
+    ## replace_scope = { root = character activity - activity}
+	ai_will_do = single_alias_right[score_formula]
+
 	### What AI targets will be considered, can be scripted multiple times to combine lists, same as in character_interaction.info
 	### Already filters down if they are a participant in the activity, if they are not they are skipped and do not count against the max check
 	ai_targets = {
@@ -65,7 +70,7 @@ activity_intent = {
     ## replace_scope = { root = character target = character special_option = flag }
 	ai_target_score = int_value_field
 
-	icon = localisation # Will default to object key if not specified to override
+	icon = filepath[game/gfx/interface/icons/activity_intents/,.dds] # Will default to object key if not specified to override
 	
 	# root = character who has this intent
 	scripted_animation = single_alias_right[scripted_animation]

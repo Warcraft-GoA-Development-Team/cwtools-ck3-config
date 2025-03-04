@@ -70,14 +70,18 @@ alias[score_operation:add] = single_alias_right[score_arithmetic]
 alias[score_operation:subtract] = single_alias_right[score_arithmetic]
 alias[score_operation:multiply] = single_alias_right[score_arithmetic]
 alias[score_operation:divide] = single_alias_right[score_arithmetic]
-# alias[score_operation:value] = single_alias_right[score_arithmetic]
+alias[score_operation:value] = single_alias_right[score_arithmetic]
 # alias[score_operation:max] = single_alias_right[score_arithmetic]
 # alias[score_operation:min] = single_alias_right[score_arithmetic]
 single_alias[score_arithmetic] = {
     ## cardinality = 0..inf
     alias_name[arithmetic_operation] = alias_match_left[arithmetic_operation]
+    ## cardinality = 0..inf
+    alias_name[score_operation] = alias_match_left[score_operation]
     ## cardinality = 0..1
     desc = localisation
+    ## cardinality = 0..1
+    desc = scalar
     ## cardinality = 0..1
     format = localisation
 }
@@ -85,7 +89,7 @@ single_alias[score_arithmetic] = {
 
 alias[score_operation:if] = single_alias_right[score_conditional]
 alias[score_operation:else_if] = single_alias_right[score_conditional]
-alias[score_operation:else] = single_alias_right[score_else]
+alias[score_operation:else] = single_alias_right[score_arithmetic]
 single_alias[score_conditional] = {
     limit = {
         alias_name[trigger] = alias_match_left[trigger]
@@ -97,15 +101,7 @@ single_alias[score_conditional] = {
     ## cardinality = 0..1
     desc = localisation
     ## cardinality = 0..1
-    format = localisation
-}
-single_alias[score_else] = {
-    ## cardinality = 0..inf
-    alias_name[arithmetic_operation] = alias_match_left[arithmetic_operation]
-    ## cardinality = 0..inf
-    alias_name[score_operation] = alias_match_left[score_operation]
-    ## cardinality = 0..1
-    desc = localisation
+    desc = scalar
     ## cardinality = 0..1
     format = localisation
 }

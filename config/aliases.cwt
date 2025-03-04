@@ -63,6 +63,8 @@ single_alias[complex_desc] = {
     ## cardinality = 0..inf
     desc = localisation
     ## cardinality = 0..inf
+    desc = single_alias_right[complex_desc]
+    ## cardinality = 0..inf
     triggered_desc = single_alias_right[triggered_desc]
 
     ## cardinality = 0..inf
@@ -120,6 +122,8 @@ single_alias[added_modifier] = {
     modifier = <modifier_container>
     ## cardinality = 0..1
     enum[duration] = int
+    ## cardinality = 0..1
+    enum[duration] = alias_name[int_value]
 }
 
 single_alias[title_change] = {
