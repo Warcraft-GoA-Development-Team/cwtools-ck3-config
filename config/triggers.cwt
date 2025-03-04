@@ -3537,7 +3537,7 @@ alias[trigger:has_realm_law_flag] = value[law_flag]
 
 ### Check if has a relation flag in a particular relation with the target character.
 ## scope = character
-alias[effect:has_relation_flag] = single_alias_right[relation_flag_clause]
+alias[trigger:has_relation_flag] = single_alias_right[relation_flag_clause]
 
 ##### Custom effects (dynamic ones) ######
 ### Checks for a scripted relationship with a target character.

@@ -18,21 +18,13 @@ alias[trigger:scope_field] = bool
 alias[trigger:alias_name[int_value]] = { alias_name[trigger] = alias_match_left[trigger] }
 
 
-alias[trigger:NOT] = {
-	## cardinality = 1..inf
-	alias_name[trigger] = alias_match_left[trigger]
-}
-
+alias[trigger:NOT] = { alias_name[trigger] = alias_match_left[trigger] }
 alias[trigger:NOR] = { alias_name[trigger] = alias_match_left[trigger] }
 alias[trigger:NAND] = { alias_name[trigger] = alias_match_left[trigger] }
 alias[trigger:AND] = { alias_name[trigger] = alias_match_left[trigger] }
 alias[trigger:OR] = { alias_name[trigger] = alias_match_left[trigger] }
 
-alias[effect:NOT] = {
-	## cardinality = 1..inf
-	alias_name[effect] = alias_match_left[effect]
-}
-
+alias[effect:NOT] = { alias_name[effect] = alias_match_left[effect] }
 alias[effect:NOR] = { alias_name[effect] = alias_match_left[effect] }
 alias[effect:NAND] = { alias_name[effect] = alias_match_left[effect] }
 alias[effect:AND] = { alias_name[effect] = alias_match_left[effect] }

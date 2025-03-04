@@ -939,13 +939,13 @@ alias[effect:break_betrothal] = scope[character]
 ### Changes the value or a numeric variable change_variable = { name = X operation = Y } Where X is the name of the numeric variable to modify Where the valid operations are add, subtract, multiply, divide and modulo Where Y is a fixed point value, script value or event target of a value type
 alias[effect:change_global_variable] = {
     name = value[global_variable]
-    alias_name[arithmetic_operation] = alias_match_left[arithmetic_operation]
+    alias_name[score_operation] = alias_match_left[score_operation]
 }
 
 ### Changes the value or a numeric variable change_variable = { name = X operation = Y } Where X is the name of the numeric variable to modify Where the valid operations are add, subtract, multiply, divide and modulo Where Y is a fixed point value, script value or event target of a value type
 alias[effect:change_local_variable] = {
     name = value[local_variable]
-    alias_name[arithmetic_operation] = alias_match_left[arithmetic_operation]
+    alias_name[score_operation] = alias_match_left[score_operation]
 }
 
 ### = { holder = 'Character that should get the title' change = 'previously created title_and_vassal_change', adds a title change, will not transfer vassalstake_baronies = yes # Optional; if set, will cause baronies to be taken (rather than vassalized) as well if this title is a county
@@ -1277,8 +1277,6 @@ alias[effect:duel] = {
 alias[effect:else] = {
     ## cardinality = 1..inf
     alias_name[effect] = alias_match_left[effect]
-    ## cardinality = 0..1
-    alias_name[arithmetic_operation] = alias_match_left[effect]
 }
 
 ### Executes enclosed effects if limit criteria of preceding 'if' or 'else_if' is not met, and its own limit is met if = { limit = { <triggers> } <effects> } else_if = { limit = { <triggers> } <effects> }
@@ -1287,8 +1285,6 @@ alias[effect:else_if] = {
         alias_name[trigger] = alias_match_left[trigger]
     }
     alias_name[effect] = alias_match_left[effect]
-    ## cardinality = 0..1
-    alias_name[arithmetic_operation] = alias_match_left[effect]
 }
 
 ### end_inspiration_sponsorship = inspiration. Stops the sponsorship of the targeted inspiration
@@ -1675,9 +1671,10 @@ alias[effect:stats_log] = {
 ### Switch on a trigger for the evaluation of another trigger with an optional fallback trigger. switch = { 	trigger = simple_assign_trigger 	case_1 = { <effects> } 	case_2 = { <effects> } 	case_n = { <effects> } 	fallback = { <effects> }
 alias[effect:switch] = {
     trigger = alias_keys_field[trigger]
+    trigger = bool
 
     ## cardinality = 0..inf
-    scope = {
+    scope_field = {
         alias_name[effect] = alias_match_left[effect]
     }
     ## cardinality = 0..inf

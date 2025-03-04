@@ -245,6 +245,6 @@ single_alias[decision_widget] = {
         ### is icon flat black and needs a special widtet, or is it full color
         ## cardinality = 0..1
         flat = bool
-        ai_chance = single_alias_right[int_conditional_formula]
+        ai_chance = single_alias_right[score_formula]
     }
 }
