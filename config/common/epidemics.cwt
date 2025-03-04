@@ -20,7 +20,7 @@ epidemic = {
 
     ### What color this epidemic has on the map: takes color names defined in the script colors file, RGB, HSV, HSV360 and HEX
 
-	color = single_alias_right[color]
+	color = alias_match_left[colour]
 
 	### Name of the epidemic defaults to epidemic_key root = the epidemic being created
     ## cardinality = 0..1

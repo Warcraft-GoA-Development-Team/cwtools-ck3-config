@@ -755,4 +755,17 @@ modifiers = {
     knight_effectiveness_per_dread = character
     additional_fort_level = { character province county }
     defender_holding_advantage = { character province county }
+    enum[attribute]_scheme_phase_duration = character
+    court_grandeur_baseline_add = character
+    travel_danger = { character province county }
+    monthly_county_control_growth_factor = { character province county }
+    epidemic_resistance = { character province county }
+    monthly_county_control_growth_add = { character province county }
+    monthly_county_control_decline_factor = { character province county }
+    legitimacy_gain_mult = character
+    owned_legend_spread_mult = character
+    men_at_arms_recruitment_cost = character
+    monthly_influence = character
+    movement_speed_land_raiding = character
+    character_travel_speed_mult = character
 }

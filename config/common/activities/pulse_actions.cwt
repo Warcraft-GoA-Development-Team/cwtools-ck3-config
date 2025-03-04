@@ -1,0 +1,34 @@
+types = {
+    type[pulse_action] = {
+        path = "common/activities/pulse_actions"
+    }
+
+    type[pulse_action_icon_override] = {
+        path = "game/gfx/interface/icons/activity_pulse_actions"
+        path_file = "path_overrides.txt"
+    }
+}
+
+pulse_action = {
+    #### Uses key name as default
+    ## cardinality = 0..1
+    icon = filepath[game/gfx/interface/icons/activity_pulse_actions/,.dds]
+    ### # Uses key name as default
+    ## cardinality = 0..1
+    icon = <pulse_action_icon_override>
+
+    ### Can this action be picked on the pulse
+    ## replace_scope = { root = activity activity = activity host = character province = province }
+    is_valid = single_alias_right[trigger_clause]
+
+    ### Relative weight of this action being against all others
+    ## replace_scope = { root = activity activity = activity host = character province = province }
+    weight = single_alias_right[score_formula]
+
+    ### Effect run when this action is picked
+    ### If you save a scope as scope:first or scope:second then they can be displayed in the activity
+    ### window notification about this pulse action. Currently characters, titles, and artifacts are shown.
+    effect = single_alias_right[effect_clause]
+}
+
+pulse_action_icon_override = filepath

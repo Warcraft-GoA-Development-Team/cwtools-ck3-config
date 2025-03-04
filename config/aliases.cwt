@@ -12,22 +12,22 @@ single_alias[cost] = {
     ## cardinality = 0..1
     gold = single_alias_right[score_formula]
     ## cardinality = 0..1
-    gold = alias_name[int_value]
+    gold = alias_keys_field[int_value]
 
     ## cardinality = 0..1
     piety = single_alias_right[score_formula]
     ## cardinality = 0..1
-    piety = alias_name[int_value]
+    piety = alias_keys_field[int_value]
 
     ## cardinality = 0..1
     prestige = single_alias_right[score_formula]
     ## cardinality = 0..1
-    prestige = alias_name[int_value]
+    prestige = alias_keys_field[int_value]
 
     ## cardinality = 0..1
     renown = single_alias_right[score_formula]
     ## cardinality = 0..1
-    renown = alias_name[int_value]
+    renown = alias_keys_field[int_value]
 
     ## cardinality = 0..1
     round = bool
@@ -123,7 +123,7 @@ single_alias[added_modifier] = {
     ## cardinality = 0..1
     enum[duration] = int
     ## cardinality = 0..1
-    enum[duration] = alias_name[int_value]
+    enum[duration] = alias_keys_field[int_value]
 }
 
 single_alias[title_change] = {
@@ -189,11 +189,16 @@ single_alias[quick_trigger_block] = {
 
 single_alias[duration_block] = {
     ##cardinality = 0..1
-    enum[duration] = alias_name[int_value]
+    enum[duration] = alias_keys_field[int_value]
     ##cardinality = 0..1
     enum[duration] = single_alias_right[int_conditional_formula]
-
+    ##cardinality = 0..1
+    enum[duration] = { int int }
 }
+
+alias[duration:enum[duration]] = alias_keys_field[int_value]
+alias[duration:enum[duration]] = single_alias_right[int_conditional_formula]
+alias[duration:enum[duration]] = { int int }
 
 ## scope = character
 alias[modifier:ignore_negative_opinion_of_culture] = bool
@@ -248,3 +253,9 @@ single_alias[decision_widget] = {
         ai_chance = single_alias_right[score_formula]
     }
 }
+
+alias[scheming_against_target:type] = <scheme>
+alias[scheming_against_target:scheme_skill] = enum[attribute]
+
+alias[trigger_event:id] = <event>
+alias[trigger_event:on_action] = <on_action>

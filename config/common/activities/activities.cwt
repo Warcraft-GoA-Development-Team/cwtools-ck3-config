@@ -17,10 +17,6 @@ types = {
         path = "common/activities/activity_types"
         skip_root_key = phases
     }
-    type[special_guest] = {
-        path = "common/activities/activity_types"
-        skip_root_key = special_guests
-    }
 }
 
 enums = {
@@ -71,9 +67,6 @@ activity = {
 	### Do we prevent the player to start planning an activity when additional requirements (i.e. not costs or cooldown) have not been met. Defaults to no.
 	## cardinality = 0..1
     can_always_plan = bool
-
-	## cardinality = 0..1
-	cooldown = single_alias_right[duration_block]
 	
 	### Is this activity valid to continue
     ## replace_scope = { root = activity activity = activity host = character}
@@ -173,14 +166,14 @@ activity = {
 					weight = single_alias_right[score_formula]
 					### List is all court characters.
                     ## replace_scope = { root = character host = character owner = character special_option = flag }
-					weight = alias_name[int_value]
+					weight = alias_keys_field[int_value]
 
 					### Up to how many characters to select for a player
-					max = alias_name[int_value]
+					max = alias_keys_field[int_value]
 					
 					### Up to how many characters to select for an AI
 					## cardinality = 0..1
-					ai_max = alias_name[int_value]
+					ai_max = alias_keys_field[int_value]
 
 					### What order, relative to the invite rule orders, should entourage members be invited in
 					invite_rule_order = int
@@ -279,7 +272,7 @@ activity = {
 	### How many phases can be picked by the player in this activity, defaults to 0. (All phases with 'is_predefined = yes' are not counted towards this number). Requires the DLC feature to be able to create an activity that has multiple phases
 	## replace_scope = { root = character }
 	## cardinality = 0..1
-	num_pickable_phases = alias_name[int_value]
+	num_pickable_phases = alias_keys_field[int_value]
 
 	### How many phases can be picked in this activity per province location. Defaults to `num_pickable_phases`
 	## replace_scope = { root = character }
@@ -290,14 +283,14 @@ activity = {
 	## replace_scope = { root = character }
 	## cardinality = 0..1
 	wait_time_before_start = {
-        enum[duration] = alias_name[int_value]
+        enum[duration] = alias_keys_field[int_value]
     }
 
 	### How many days this activity will delay the start date, to allow invited guests to arrive.  Looks at rough estimated invited guests estimated travel time, and the default activity start date (host arrival + wait_time_before_start). This is added during planning of the activity. (Does not apply to required special guests, we delay as much as needed for them). Defaults to 0 days, so either define this and/or `wait_time_before_start` to give people time to arrive to your party.
 	## replace_scope = { root = character }
 	## cardinality = 0..1
 	max_guest_arrival_delay_time = {
-        enum[duration] = alias_name[int_value]
+        enum[duration] = alias_keys_field[int_value]
     }
 
 	### How much can a player (not AI) deviate from the default path via extra waypoints. Expressed as multiplier of the total time duration of the default path. (path without waypoints) eg: 2.0 = you can add waypoints resulting in a path with a duration up to twice as long as the default path. Default is defined in MAX_ROUTE_DEVIATION_MULTIPLIER_DEFAULT
@@ -307,7 +300,7 @@ activity = {
 	### Cooldown between this activity being hosted again root = character trying to host this activity
     ## replace_scope = { root = character }
 	## cardinality = 0..1
-	locale_cooldown = single_alias_right[duration_block]
+	cooldown = single_alias_right[duration_block]
 
 	### Is this activity a grand activity or not, defaults to no
 	## cardinality = 0..1
@@ -418,7 +411,7 @@ activity = {
 			### How likely is the AI to pick a character for this special guest slot if they are valid? Characters will be selected using weighted random.
 			## replace_scope = { root = character }
 			## cardinality = 0..1
-			ai_will_do = single_alias_right[int_conditional_formula]
+			ai_will_do = single_alias_right[score_formula]
 
 			### Effect run when the special guest gets sent the invitation (before accepting the invitation). This effect is also shown in the interface.
 			## replace_scope = { root = character host = character special_option = flag scope:special_guests = character <special_guest_key> = character}
@@ -648,6 +641,7 @@ activity = {
 	}
 
 	### Select which court characters are added to the travel entourage of an invited / hosting character, if that character would travel. Weighted list is evaluated until all values are negative, or `max` is reached.
+	## cardinality = 0..1
 	travel_entourage_selection = {
 		### List is all court characters.
 		# root = character in the travel plan owners' court
@@ -662,7 +656,7 @@ activity = {
 		# scope:owner = character owning the travel plan (host or guest)
 		# scope:special_option = flag of the selected special option, not set if activity has no special option category
 		## replace_scope = { root = character host = character owner = character special_option = flag}
-		weight = alias_name[int_value]
+		weight = alias_keys_field[int_value]
 
 		### Up to how many characters to select for a player
 		## cardinality = 0..1
@@ -681,13 +675,13 @@ activity = {
 	# root = the province
 	# scope:host = character trying to host this activity
 	# scope:special_option = flag of the selected special option, not set if activity has no special option category
-	## replace_scope = { root = province host = character special_option = flag}
+	## replace_scope = { root = province host = character special_option = flag }
 	## cardinality = 0..1
 	province_description = single_alias_right[complex_desc]
 
 	### Description for hosting the activity, defaults to "<key>_host_desc"
 	# root = character trying to host this activity
-	## replace_scope = { root = character}
+	## replace_scope = { root = character }
 	## cardinality = 0..1
 	host_description = single_alias_right[complex_desc]
 

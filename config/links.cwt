@@ -123,14 +123,18 @@ links = {
     }
     court_position = {
         desc = "The character currently employed in a specific court position."
+        from_data = yes
+        type = scope
+        prefix = court_position:
+        data_source = <court_position>
         input_scopes = character
-        output_scopes = character
+        output_scope = character
     }
     court_amenity_category = {
         desc = "Unknown, add something in code registration"
         data_source = <court_amenity_category>
         input_scopes = character
-        output_scopes = court_amenity_category
+        output_scope = court_amenity_category
     }
     designated_heir = {
         desc = "Get designated heir of scoped character"
@@ -596,9 +600,6 @@ links = {
         prefix = culture_group:
         output_scope = culture_group
     }
-    custom = {
-        desc = "Adds custom text between scope changes"
-    }
     define = {
         desc = "Reference the value of a numeric define: define:Namespace|Name"
         from_data = yes
@@ -716,12 +717,12 @@ links = {
     activity_host = {
         desc = "Get host character of the scoped activity"
         input_scopes = activity
-        output_scopes = character
+        output_scope = character
     }
     activity_location = {
         desc = "Get current location of the scoped activity"
         input_scopes = activity
-        output_scopes = province
+        output_scope = province
     }
     activity_type = {
         desc = "Get the type of a given activity"
@@ -733,12 +734,12 @@ links = {
     calc_culture_dominant_faith = {
         desc = "Calculates what faith is the biggest in the culture based on # of counties. Be aware that this is an *expensive* calculation. In a tie, definition order breaks the tie"
         input_scopes = culture
-        output_scopes = faith
+        output_scope = faith
     }
     calc_culture_dominant_religion = {
         desc = "Calculates what religion is the biggest in the culture based on # of counties. Be aware that this is an *expensive* calculation. In a tie, definition order breaks the tie"
         input_scopes = culture
-        output_scopes = religion
+        output_scope = religion
     }
     memory_owner = {
         desc = "Get the owner of a character memory"
@@ -835,47 +836,47 @@ links = {
     current_location = {
         desc = "Get the current province of the travel plan."
         input_scopes = travel_plan
-        output_scopes = province
+        output_scope = province
     }
     departure_location = {
         desc = "Get the province from which this travel plan started."
         input_scopes = travel_plan
-        output_scopes = province
+        output_scope = province
     }
     final_destination_province = {
         desc = "Get the final (last) destination province of the travel plan."
         input_scopes = travel_plan
-        output_scopes = province
+        output_scope = province
     }
     next_destination_province = {
         desc = "Get the next destination province of the travel plan. If you are at a destination province, it will be the one after that one."
         input_scopes = travel_plan
-        output_scopes = province
+        output_scope = province
     }
     next_location = {
         desc = "Get the next province the travel plan is going to."
         input_scopes = travel_plan
-        output_scopes = province
+        output_scope = province
     }
     travel_leader = {
         desc = "Get the next province the travel plan is going to."
         input_scopes = travel_plan
-        output_scopes = character
+        output_scope = character
     }
     travel_plan_activity = {
         desc = "Activity associated with the scoped travel plan. (may be empty)"
         input_scopes = travel_plan
-        output_scopes = activity
+        output_scope = activity
     }
     travel_plan_owner = {
         desc = "Get the owner of the scoped travel plan"
         input_scopes = travel_plan
-        output_scopes = character
+        output_scope = character
     }
     founder = {
         desc = "Get founder of scoped faith"
         input_scopes = faith
-        output_scopes = character
+        output_scope = character
     }
     slot_character = {
         desc = "Get the character of scoped agent slot"
@@ -1039,9 +1040,10 @@ links = {
     special_guest = {
         desc = "Get the special guest of the given type key in the scoped activity"
         from_data = yes
-        #type = scope
-        #prefix = religion:
-        input_scope = activity
+        type = scope
+        prefix = special_guest:
+        data_source = value[special_guest]
+        input_scopes = activity
         output_scope = character
     }
     struggle = {
@@ -1143,12 +1145,12 @@ links = {
     legend_protagonist = {
         desc = "Get the protagonist character of this legend"
         input_scopes = legend
-        output_scopes = character
+        output_scope = character
     }
     legend_type = {
         desc = "Get the type of this legend"
         input_scopes = legend
-        output_scopes = legend_type
+        output_scope = legend_type
     }
     scheme_artifact = {
         desc = "Get artifact of scoped scheme"
@@ -1205,17 +1207,17 @@ links = {
     current_travel_plan = {
         desc = "Get the character's current travel plan"
         input_scopes = character
-        output_scopes = travel_plan
+        output_scope = travel_plan
     }
     default_location = {
         desc = "Get the province which the 'default' location a character should be at when not traveling. (considers imprisonment and other things.)"
         input_scopes = character
-        output_scopes = province
+        output_scope = province
     }
     designated_diarch = {
         desc = "Get the designated diarch of a ruler"
         input_scopes = character
-        output_scopes = character
+        output_scope = character
     }
     diarch = {
         desc = "Get the active diarch of a ruler"
@@ -1302,104 +1304,154 @@ links = {
         input_scopes = inspiration
         output_scope = character
     }
+
+    # Comparison Links
+
     diplomacy = {
+        type = value
         input_scopes = character
-        output_scope = value
+        output_scope = any
     }
     martial = {
+        type = value
         input_scopes = character
-        output_scope = value
+        output_scope = any
     }
     stewardship = {
+        type = value
         input_scopes = character
-        output_scope = value
+        output_scope = any
     }
     intrigue = {
+        type = value
         input_scopes = character
-        output_scope = value
+        output_scope = any
     }
     learning = {
+        type = value
         input_scopes = character
-        output_scope = value
+        output_scope = any
     }
     prowess = {
+        type = value
         input_scopes = character
-        output_scope = value
+        output_scope = any
     }
     max_military_strength = {
+        type = value
         input_scopes = character
-        output_scope = value
+        output_scope = any
     }
     current_military_strength = {
+        type = value
         input_scopes = character
-        output_scope = value
+        output_scope = any
     }
     tier = {
+        type = value
         input_scopes = landed_title
-        output_scope = value
+        output_scope = any
     }
     ai_honor = {
+        type = value
         input_scopes = character
-        output_scope = value
+        output_scope = any
     }
     ai_boldness = {
+        type = value
         input_scopes = character
-        output_scope = value
+        output_scope = any
     }
     ai_greed = {
+        type = value
         input_scopes = character
-        output_scope = value
+        output_scope = any
     }
     ai_vengefulness = {
+        type = value
         input_scopes = character
-        output_scope = value
+        output_scope = any
     }
     ai_rationality = {
+        type = value
         input_scopes = character
-        output_scope = value
+        output_scope = any
     }
     ai_compassion = {
+        type = value
         input_scopes = character
-        output_scope = value
+        output_scope = any
     }
     ai_zeal = {
+        type = value
         input_scopes = character
-        output_scope = value
+        output_scope = any
     }
     ai_energy = {
+        type = value
         input_scopes = character
-        output_scope = value
+        output_scope = any
     }
     court_grandeur_current = {
+        type = value
         input_scopes = character
-        output_scope = value
+        output_scope = any
     }
     ai_sociability = {
+        type = value
         input_scopes = character
-        output_scope = value
+        output_scope = any
     }
     war_chest_gold_maximum = {
+        type = value
         input_scopes = character
-        output_scope = value
+        output_scope = any
     }
     provisions = {
+        type = value
         input_scopes = domicile
-        output_scope = value
+        output_scope = any
     }
     development_level = {
+        type = value
         input_scopes = landed_title
-        output_scope = value
+        output_scope = any
     }
     county_control = {
+        type = value
         input_scopes = landed_title
-        output_scope = value
+        output_scope = any
     }
     current_year = {
+        type = value
         input_scopes = none
-        output_scope = value
+        output_scope = any
     }
     stress = {
+        type = value
         input_scopes = character
-        output_scope = value
+        output_scope = any
+    }
+    age = {
+        type = value
+        input_scopes = character
+        output_scope = any
+    }
+    piety_level = {
+        type = value
+        input_scopes = character
+        output_scope = any
+    }
+
+    ### How far away is the province/barony/county from the target? Measured in map pixels. Squared for performance reasons (square root is expensive). squared_distance = { target = some province/barony/county value > 10000 }
+    squared_distance = {
+        desc = "How far away is the province/barony/county from the target? Measured in map pixels. Squared for performance reasons (square root is expensive). squared_distance = { target = some province/barony/county value > 10000 }"
+        type = value
+        from_data = yes
+        from_argument = yes
+        prefix = squared_distance:
+        data_source = scope[landed_title]
+        input_scopes = { landed_title province }
+        output_scope = any
     }
 }

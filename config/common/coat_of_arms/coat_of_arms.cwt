@@ -7,15 +7,15 @@ types = {
 
 coat_of_arms = {
     pattern = filepath
-    color1 = Color
+    color1 = <color>
     ## cardinality = 0..1
-    color2 = Color
+    color2 = <color>
     ## cardinality = 1..inf
     colored_emblem = {
         texture = filepath
-        color1 = Color
+        color1 = <color>
         ## cardinality = 0..1
-        color2 = Color
+        color2 = <color>
         instance = {
             position = {
                 float

@@ -82,7 +82,7 @@ religion = {
     family = <religion_family>
     ## cardinality = 0..1
     ### All faiths in this religion default to this 3D model (currently used for temple assets). Order of precedence is the lowest level scripted in: faith > religion > family.
-    graphical_faith = filepath
+    graphical_faith = value_set[graphical_faith]
     # Unknown what this currently references, if anything.
     ### All faiths in this religion default to this set of piety icons. Order of precedence is the lowest level scripted in: faith > religion > family.
     ## cardinality = 0..1
@@ -102,16 +102,13 @@ religion = {
     faiths = {
         ## cardinality = ~1..inf
         <faith> = {
-            ### HSV color as a series of floats.
-            color = single_alias_right[hsv_color]
-            ### RGB color as a series of ints
-            color = single_alias_right[rgb_color]
+            color = alias_match_left[colour]
             ## cardinality = 0..1
             icon = filepath[game/gfx/interface/icons/faith/,.dds]
             ## cardinality = 0..1
             reformed_icon = filepath[game/gfx/interface/icons/faith/,.dds]
             ## cardinality = 0..1
-            graphical_faith = enum[graphical_faith]
+            graphical_faith = value_set[graphical_faith]
             ## cardinality = 0..1
             piety_icon_group = replace_me
             ## cardinality = 0..1

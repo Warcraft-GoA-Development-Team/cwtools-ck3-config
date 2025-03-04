@@ -14,18 +14,21 @@ activity_intent = {
 	# scope:magnificence = the magnificence level of the activity
 	# scope:special_option = the selected special option of the activity (if present)
 	## replace_scope = { root = character magnificence = int special_option = flag }
+	## cardinality = 0..1
     is_shown = single_alias_right[trigger_clause]
 	
 	# root = character picking this intent
 	# scope:magnificence = the magnificence level of the activity
 	# scope:special_option = the selected special option of the activity (if present)
 	## replace_scope = { root = character magnificence = int special_option = flag }
+	## cardinality = 0..1
     is_valid = single_alias_right[trigger_clause]
 
 	# root = character picking this intent
 	# scope:target = character that is the target
 	# scope:special_option = the selected special option of the activity (if present)
 	## replace_scope = { root = character magnificence = int special_option = flag }
+	## cardinality = 0..1
     is_target_valid = single_alias_right[trigger_clause]
 
 	# root = character who picked this intent
@@ -35,6 +38,7 @@ activity_intent = {
 	# root = character picking this intent
 	# scope:target = character that is the target
     ## replace_scope = { root = character target = character }
+	## cardinality = 0..1
 	on_target_invalidated = single_alias_right[effect_clause]
 
 	### Scripted value to determine if the AI will select this intent or not
@@ -49,28 +53,37 @@ activity_intent = {
 
 	### What AI targets will be considered, can be scripted multiple times to combine lists, same as in character_interaction.info
 	### Already filters down if they are a participant in the activity, if they are not they are skipped and do not count against the max check
+	## cardinality = 0..inf
 	ai_targets = {
 		### Which characters does the ai consider as recipient for the interaction, can be scripted multiple times to combine lists
+		## cardinality = 0..inf
         ai_recipients = enum[ai_targets]
 		### Maximum number of targets to consider, unset considers all of them, will consider random targets that it filters too
+		## cardinality = 0..1
         max = int
         ### A low chance, such as 0.25, randomly excludes that number of characters from being checked - this is useful for saving performance
+		## cardinality = 0..1
 		chance = float			
 	}
 
-	# Quick code efficient triggers to check for valid targets, same as in character_interaction.info
+	### Quick code efficient triggers to check for valid targets, same as in character_interaction.info
+	## cardinality = 0..1
 	ai_target_quick_trigger = single_alias_right[quick_trigger_block]
 
-	# Scripted value to determine what valid target should be picked for the intent
-	# Selects the weighted random target based on their score
-	#
-	# root = character picking this intent
-	# scope:target = character that is the target
-	# scope:special_option = the selected special option of the activity (if present)
+	### Scripted value to determine what valid target should be picked for the intent
+	### Selects the weighted random target based on their score
+	###
+	### root = character picking this intent
+	### scope:target = character that is the target
+	### scope:special_option = the selected special option of the activity (if present)
     ## replace_scope = { root = character target = character special_option = flag }
-	ai_target_score = int_value_field
+	## cardinality = 0..1
+	ai_target_score = single_alias_right[score_formula]
 
 	icon = filepath[game/gfx/interface/icons/activity_intents/,.dds] # Will default to object key if not specified to override
+
+	## cardinality = 0..1
+	auto_complete = bool
 	
 	# root = character who has this intent
 	scripted_animation = single_alias_right[scripted_animation]

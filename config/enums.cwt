@@ -20,14 +20,6 @@ enums = {
         male
         female
     }
-    enum[event_option_skills] = {
-        diplomacy
-        intrigue
-        learning
-        martial
-        prowess
-        stewardship
-    }
     enum[ai_value] = {
         very_low_positive_ai_value # 10
         low_positive_ai_value # 20

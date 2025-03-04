@@ -410,12 +410,12 @@ character_interaction = {
     ## replace_scope { ROOT = character }
     ai_potential = single_alias_right[trigger_clause]
     ### Will the intermediary ai approve for this interaction and forward it to the recipient
-    ai_intermediary_accept = single_alias_right[ai_chance_block]
+    ai_intermediary_accept = single_alias_right[chance_block]
     ### Will the ai accept a request for this interaction
     ## cardinality = 0..1
-    ai_accept = single_alias_right[ai_chance_block]
+    ai_accept = single_alias_right[chance_block]
     ### How interested is the ai in sending this interaction (tested after selecting 
     ## cardinality = 0..1
-    ai_will_do = single_alias_right[ai_chance_block]
+    ai_will_do = single_alias_right[chance_block]
     
 }

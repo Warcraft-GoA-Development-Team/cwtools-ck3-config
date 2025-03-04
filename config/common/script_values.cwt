@@ -11,6 +11,7 @@ types = {
     }
 }
 
+# TODO: Borked
 static_value = value_field
 
 script_value = {

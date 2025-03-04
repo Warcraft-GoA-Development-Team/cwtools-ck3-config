@@ -6,6 +6,14 @@ types = {
 
 inventory_slot = {
     type = localisation
-    category = scalar
-    icon = scalar
+    category = enum[inventory_slot_category]
+    ## cardinality = 0..1
+    icon = filepath[game/gfx/interface/icons/inventory/,.dds]
+}
+
+enums = {
+    enum[inventory_slot_category] = {
+        court
+        inventory
+    }
 }

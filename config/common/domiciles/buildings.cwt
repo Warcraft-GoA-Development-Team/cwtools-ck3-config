@@ -95,7 +95,7 @@ domicile_building = {
         intersectionmask_texture = filepath
 
         ### Brief: soundeffect ( string soundbank reference ) Associated sound effect. Supports soundparameters where they will be automatically appended based on building's current tier: soundparameter = { "Tier" = 1 }
-        soundeffect = filepath
+        soundeffect = scalar
 
     }
 }

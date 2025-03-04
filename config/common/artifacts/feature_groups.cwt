@@ -1,5 +1,7 @@
 types = {
     type[feature_group] = {
-        path = "common/artifacts/feature_group"
+        path = "game/common/artifacts/feature_groups"
     }
 }
+
+feature_group = {}

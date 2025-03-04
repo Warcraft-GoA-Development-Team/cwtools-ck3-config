@@ -8,31 +8,44 @@ types = {
 # Picks a random valid one based on the triggers, passes in the scopes from the creation/reforge like the text does
 
 artifact_visual = {
-	icon = localisation
-	asset = localisation
-
 	### optional field with no gameplay effect. Only needed for automatic test artifact generation
     ## cardinality = 0..1
 	default_type = scalar
     ## cardinality = 0..1
-    pedestal = localisation
+    pedestal = enum[pedestal_type]
+    ## cardinality = 0..1
+    support_type = enum[support_type]
     ## cardinality = 0..inf
-    icon = localisation
+    icon = filepath[game/gfx/interface/icons/artifact]
     ## cardinality = 0..inf
 	icon = {
-
-
         ## replace_scope = { root = character artifact = artifact }
 		trigger = single_alias_right[trigger_clause]
 
-		reference = localisation
+		reference = filepath[game/gfx/interface/icons/artifact]
 	}
     ## cardinality = 0..inf
-    asset = localisation
+    asset = <entity>
     ## cardinality = 0..inf
 	asset = {
         ## replace_scope = { root = character artifact = artifact }
+        ## cardinality = 0..inf
 		trigger = single_alias_right[trigger_clause]
-		reference = localisation
+		reference = <entity>
 	}
+}
+
+enums = {
+    enum[pedestal_type] = {
+        tall
+        short
+        tall_pillow
+        short_pillow
+        armorstand
+    }
+    enum[support_type] = {
+        tall
+        tall_pillow
+        lectern
+    }
 }

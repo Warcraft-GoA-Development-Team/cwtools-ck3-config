@@ -66,14 +66,14 @@ single_alias[weight_chance_modifier] = {
     alias_name[trigger] = alias_match_left[trigger]
     
     ## cardinality = 0..1
-    add = single_alias_right[score_formula]
+    add = single_alias_right[score_arithmetic]
     ## cardinality = 0..1
-    add = alias_name[int_value]
+    add = alias_keys_field[int_value]
 
     ## cardinality = 0..1
-    factor = single_alias_right[score_formula]
+    factor = single_alias_right[score_arithmetic]
     ## cardinality = 0..1
-    factor = alias_name[int_value]
+    factor = alias_keys_field[int_value]
     
     ## cardinality = 0..1
     desc = single_alias_right[complex_desc]
@@ -139,6 +139,8 @@ alias[weight:compare_modifier] = {
     ## cardinality = 0..1
     desc = localisation
 }
+
+alias[weight:<scripted_modifier>] = bool
 
 
 single_alias[chance_block] = {

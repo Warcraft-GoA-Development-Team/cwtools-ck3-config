@@ -41,7 +41,7 @@ pillar = {
     subtype[language] = {
         ## cardinality = 0..1
         ### Used in language pillars
-        color = Color
+        color = alias_match_left[colour]
     }
     
     ## cardinality = 0..1

@@ -7,10 +7,7 @@ types = {
 culture = {
     ### The color of the culture, used e.g. on the map.
     ## cardinality = 0..1
-    color = <color>
-    ### The color of the culture, used e.g. on the map.
-    ## cardinality = 0..1
-    color = single_alias_right[hsv_color]
+    color = alias_match_left[colour]
     
     ## cardinality = 0..1
     ### The date at which the culture was created.

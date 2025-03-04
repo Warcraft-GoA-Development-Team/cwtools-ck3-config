@@ -29,12 +29,7 @@ template = {
 	### if a given character does not pass the "can_benefit" trigger then this modifier will be applied instead.
 	## replace_scope = { root = character artifact = artifact }
     ## cardinality = 0..1
-    fallback = {
-        ## cardinality = 0..1
-		alias_name[modifier] = float_value_field
-        ## cardinality = 0..1
-        alias_name[modifier] = int_value_field
-	}
+    fallback = single_alias_right[character_modifier]
 
 	### Adds the final value to the AI equipping score, note the can_benefit takes precedence over the score when AI equipping
 	### artifact_ai_will_equip_score in game/common/scripted_values/00_artifact_values.txt also effect the final score

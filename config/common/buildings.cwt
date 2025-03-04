@@ -14,14 +14,6 @@ types = {
 }
 
 enums = {
-    enum[graphical_culture] = {
-        indian_building_gfx
-        mena_building_gfx
-        mediterranean_building_gfx
-        norse_building_gfx
-        iberian_building_gfx
-        iranian_building_gfx
-    }
     enum[asset_type] = {
         pdxmesh
         entity
@@ -31,41 +23,41 @@ enums = {
         special
         duchy_capital
     }
-    enum[graphical_faith] = {
-        pagan_gfx
-        dharmic_gfx
-        orthodox_gfx
-        catholic_gfx
-        islamic_gfx
-        zoroastrian_gfx
-    }
-
 }
 
 building = {
+	## cardinality = 0..1
+	type_icon = filepath[game/gfx/interface/icons/building_types]
 	
 	### How many levies does the building give
-	levy = alias_name[int_value]
+	## cardinality = 0..1
+	levy = alias_keys_field[int_value]
 	
 	### How much garrison does the building give
-	max_garrison = alias_name[int_value]
+	## cardinality = 0..1
+	max_garrison = alias_keys_field[int_value]
 
 	### How much garrison regains a percentage of its maximal garrison equal to the garrison reinforcement rate
-	garrison_reinforcement_factor = float_value_field
+	## cardinality = 0..1
+	garrison_reinforcement_factor = alias_keys_field[int_value]
 	
 	### How long does it take to construct the building
-	construction_time = alias_name[int_value]
+	construction_time = alias_keys_field[int_value]
 	
     ### Specifies whether this is a regular building, a special building, or a duchy capital building. Regular by default
+	## cardinality = 0..1
 	type = enum[building_type]
 	
 	### Which asset does the building use
+	## cardinality = 0..inf
 	asset = {
 		### 'pdxmesh' or 'entity', specifies wheter to use a mesh or an entity. Meshes are more performant and should be preferred.
 		type = enum[asset_type]
 		### The name of the mesh or the entity
         ## cardinality = 0..1
-		name = localisation
+		name = <pdxmesh>
+		## cardinality = 0..1
+		requires_dlc_flag = enum[dlc_feature]
 		### To randomize between multiple meshes/entities. Note that they must all be entities, or all be meshes:
         ## cardinality = 0..1
 		names = {
@@ -78,18 +70,18 @@ building = {
 		### Associated sound effect and an optional parameter, can also be just soundeffect = "event:..." if no parameter is needed
 		## cardinality = 0..1
         soundeffect = {
-            soundeffect = <soundeffect>
+            soundeffect = scalar
             ## cardinality = 0..1
             soundparameter = { scalar = value_field } 
         }
 		### Graphical cultures that prefer this asset to be shown
 		## cardinality = 0..1
-        graphical_cultures = { enum[graphical_culture] }
+        graphical_cultures = { value[building_gfx] }
 		### Graphical faiths that prefer this asset to be shown (priority is faith > religion > family, so Catholic graphical_faith overrides Abrahamic graphical_faith)
 		## cardinality = 0..1
         graphical_faiths = {
             ## cardinality = 1..inf
-            enum[graphical_faith]
+			value[graphical_faith]
         }
 		### Graphical regions in which this asset is preferred, this is the most important criterion when selecting the asset, with the exception of government
 		## cardinality = 0..1
@@ -129,8 +121,14 @@ building = {
     ### if set to yes, the building will show in the build menu even if disabled (will still use can_construct_potential). No by default
 	## cardinality = 0..1
     show_disabled = bool
+
+	## cardinality = 0..1
+	cost_gold = alias_keys_field[int_value]
+	## cardinality = 0..1
+	cost_prestige = alias_keys_field[int_value]
 	
 	### How much cost does the building cost
+	## cardinality = 0..1
 	cost = single_alias_right[cost]
 	
 	### The next building in chain unlocked by this building
@@ -142,12 +140,18 @@ building = {
     ## cardinality = 0..1
     ## replace_scope = { root = province }
 	effect_desc = single_alias_right[complex_desc]
+
+	### Custom description for effects indirectly provided by building.
+	### The scope root refers to the buildings province.
+    ## cardinality = 0..1
+    ## replace_scope = { root = province }
+	effect_desc = localisation
 	
 	### A modifier applied to the owner of the holding
     ## cardinality = 0..1
 	character_modifier = single_alias_right[character_modifier]
 	### Applied if the character's culture has the parameter
-    ## cardinality = 0..1
+    ## cardinality = 0..inf
 	character_culture_modifier = single_alias_right[character_culture_modifier]
 
 	### A modifier applied if the holder's dynasty of the county has a specific perk
@@ -159,9 +163,9 @@ building = {
 	### A modifier applied to the province
     ## cardinality = 0..1
 	province_modifier = single_alias_right[province_modifier]
-    ## cardinality = 0..1
+    ## cardinality = 0..inf
 	province_culture_modifier = single_alias_right[province_culture_modifier]
-    ## cardinality = 0..1
+    ## cardinality = 0..inf
 	province_terrain_modifier = {
 		## cardinality = 0..1
         parameter = value[cultural_parameter]
@@ -186,7 +190,7 @@ building = {
 	### A modifier applied to the county
     ##cardinality = 0..1
 	county_modifier = single_alias_right[county_modifier]
-    ##cardinality = 0..1
+    ##cardinality = 0..inf
 	county_culture_modifier = {
 		parameter = scalar
         alias_name[modifier] = alias_match_left[modifier]
@@ -233,7 +237,7 @@ building = {
     on_complete = single_alias_right[effect_clause]
 	
 	### How desirable is the building for the AI
-	ai_value = single_alias_right[int_conditional_formula]
+	ai_value = single_alias_right[chance_block]
 	
 	### If this is set to yes, the building will be used for figuring out which background asset (walls/no walls etc) should be shown
 	## cardinality = 0..1

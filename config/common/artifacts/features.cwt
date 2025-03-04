@@ -6,9 +6,10 @@ types = {
 
 feature = {
     group = <feature_group>
+    ## cardinality = 0..1
     trigger = single_alias_right[trigger_clause]
     ## cardinality = 0..1
-    weight = single_alias_right[int_conditional_formula]
+    weight = single_alias_right[score_formula]
     ## cardinality = 0..1
-    weight = int_value_field
+    weight = alias_keys_field[int_value]
 }

@@ -15,6 +15,8 @@ single_alias[every_effect_score_operation] = {
     alternative_limit = {
         alias_name[trigger] = alias_match_left[trigger]
     }
+    ## cardinality = 0..1
+    custom = localisation
     ## cardinality = 0..inf
     alias_name[arithmetic_operation] = alias_match_left[arithmetic_operation]
     ## cardinality = 0..inf
@@ -48,6 +50,8 @@ alias[score_operation:every_activity_phase_location] = {
     alternative_limit = {
         alias_name[trigger] = alias_match_left[trigger]
     }
+    ## cardinality = 0..1
+    custom = localisation
     ## cardinality = 0..inf
     alias_name[arithmetic_operation] = alias_match_left[arithmetic_operation]
     ## cardinality = 0..inf
@@ -68,6 +72,8 @@ alias[score_operation:every_activity_phase_location_future] = {
     alternative_limit = {
         alias_name[trigger] = alias_match_left[trigger]
     }
+    ## cardinality = 0..1
+    custom = localisation
     ## cardinality = 0..inf
     alias_name[arithmetic_operation] = alias_match_left[arithmetic_operation]
     ## cardinality = 0..inf
@@ -88,6 +94,8 @@ alias[score_operation:every_activity_phase_location_past] = {
     alternative_limit = {
         alias_name[trigger] = alias_match_left[trigger]
     }
+    ## cardinality = 0..1
+    custom = localisation
     ## cardinality = 0..inf
     alias_name[arithmetic_operation] = alias_match_left[arithmetic_operation]
     ## cardinality = 0..inf
@@ -108,6 +116,8 @@ alias[score_operation:every_attending_character] = {
     alternative_limit = {
         alias_name[trigger] = alias_match_left[trigger]
     }
+    ## cardinality = 0..1
+    custom = localisation
     ## cardinality = 0..inf
     alias_name[arithmetic_operation] = alias_match_left[arithmetic_operation]
     ## cardinality = 0..inf
@@ -127,6 +137,10 @@ alias[score_operation:every_guest_subset] = {
     alternative_limit = {
         alias_name[trigger] = alias_match_left[trigger]
     }
+    ## cardinality = 0..1
+    phase = value[activity_phase]
+    ## cardinality = 0..1
+    custom = localisation
     ## cardinality = 0..inf
     alias_name[arithmetic_operation] = alias_match_left[arithmetic_operation]
     ## cardinality = 0..inf
@@ -146,6 +160,8 @@ alias[score_operation:every_guest_subset_current_phase] = {
     alternative_limit = {
         alias_name[trigger] = alias_match_left[trigger]
     }
+    ## cardinality = 0..1
+    custom = localisation
     ## cardinality = 0..inf
     alias_name[arithmetic_operation] = alias_match_left[arithmetic_operation]
     ## cardinality = 0..inf
@@ -447,6 +463,8 @@ alias[score_operation:every_county_in_region] = {
     alternative_limit = {
         alias_name[trigger] = alias_match_left[trigger]
     }
+    ## cardinality = 0..1
+    custom = localisation
     ## cardinality = 0..inf
     alias_name[arithmetic_operation] = alias_match_left[arithmetic_operation]
     ## cardinality = 0..inf
@@ -504,6 +522,8 @@ alias[score_operation:every_in_global_list] = {
     alternative_limit = {
         alias_name[trigger] = alias_match_left[trigger]
     }
+    ## cardinality = 0..1
+    custom = localisation
     ## cardinality = 0..inf
     alias_name[arithmetic_operation] = alias_match_left[arithmetic_operation]
     ## cardinality = 0..inf
@@ -524,6 +544,8 @@ alias[score_operation:every_in_list] = {
     alternative_limit = {
         alias_name[trigger] = alias_match_left[trigger]
     }
+    ## cardinality = 0..1
+    custom = localisation
     ## cardinality = 0..inf
     alias_name[arithmetic_operation] = alias_match_left[arithmetic_operation]
     ## cardinality = 0..inf
@@ -544,6 +566,8 @@ alias[score_operation:every_in_local_list] = {
     alternative_limit = {
         alias_name[trigger] = alias_match_left[trigger]
     }
+    ## cardinality = 0..1
+    custom = localisation
     ## cardinality = 0..inf
     alias_name[arithmetic_operation] = alias_match_left[arithmetic_operation]
     ## cardinality = 0..inf
@@ -596,7 +620,23 @@ alias[score_operation:every_open_invite_activity] = single_alias_right[every_eff
 
 ### Iterate through all characters in the pool of the given province
 ## push_scope = character
-alias[score_operation:every_pool_character] = single_alias_right[every_effect_score_operation]
+alias[score_operation:every_pool_character] = {
+    ## cardinality = 0..1
+    limit = {
+        alias_name[trigger] = alias_match_left[trigger]
+    }
+    ## cardinality = 0..inf
+    alternative_limit = {
+        alias_name[trigger] = alias_match_left[trigger]
+    }
+    province = scope[province]
+    ## cardinality = 0..1
+    custom = localisation
+    ## cardinality = 0..inf
+    alias_name[arithmetic_operation] = alias_match_left[arithmetic_operation]
+    ## cardinality = 0..inf
+    alias_name[score_operation] = alias_match_left[score_operation]
+}
 
 ### Iterate through all provinces (skips non-land and impassable provinces)
 ## push_scope = province
@@ -638,6 +678,8 @@ alias[score_operation:every_trait_in_category] = {
     alternative_limit = {
         alias_name[trigger] = alias_match_left[trigger]
     }
+    ## cardinality = 0..1
+    custom = localisation
     ## cardinality = 0..inf
     alias_name[arithmetic_operation] = alias_match_left[arithmetic_operation]
     ## cardinality = 0..inf
@@ -815,6 +857,8 @@ alias[score_operation:every_character_struggle] = {
     alternative_limit = {
         alias_name[trigger] = alias_match_left[trigger]
     }
+    ## cardinality = 0..1
+    custom = localisation
     ## cardinality = 0..inf
     alias_name[arithmetic_operation] = alias_match_left[arithmetic_operation]
     ## cardinality = 0..inf
@@ -913,6 +957,8 @@ alias[score_operation:every_claim] = {
     alternative_limit = {
         alias_name[trigger] = alias_match_left[trigger]
     }
+    ## cardinality = 0..1
+    custom = localisation
     ## cardinality = 0..inf
     alias_name[arithmetic_operation] = alias_match_left[arithmetic_operation]
     ## cardinality = 0..inf
@@ -927,22 +973,7 @@ alias[score_operation:every_claimed_artifact] = single_alias_right[every_effect_
 ### Iterate through all the close family [father, mother, siblings, children, grandparents] every_close_family_member = { limit = { <triggers> } <effects> }
 ## scope = character
 ## push_scope = character
-alias[score_operation:every_close_family_member] = {
-    ## cardinality = 0..1
-    limit = {
-        alias_name[trigger] = alias_match_left[trigger]
-    }
-    ## cardinality = 0..inf
-    alternative_limit = {
-        alias_name[trigger] = alias_match_left[trigger]
-    }
-    ## cardinality = 0..inf
-    alias_name[arithmetic_operation] = alias_match_left[arithmetic_operation]
-    ## cardinality = 0..inf
-    alias_name[score_operation] = alias_match_left[score_operation]
-    ## cardinality = 0..1
-    custom = localisation
-}
+alias[score_operation:every_close_family_member] = single_alias_right[every_effect_score_operation]
 
 ### Iterate through all concubines every_concubine = { limit = { <triggers> } <effects> }
 ## scope = character
@@ -972,7 +1003,24 @@ alias[score_operation:every_court_position_employer] = single_alias_right[every_
 ### Iterates through all characters employed by the scoped character in the target court position.
 ## scope = character
 ## push_scope = character
-alias[score_operation:every_court_position_holder] = single_alias_right[every_effect_score_operation]
+alias[score_operation:every_court_position_holder] = {
+    ## cardinality = 0..1
+    limit = {
+        alias_name[trigger] = alias_match_left[trigger]
+    }
+    ## cardinality = 0..inf
+    alternative_limit = {
+        alias_name[trigger] = alias_match_left[trigger]
+    }
+    ## cardinality = 0..1
+    type = <court_position>
+    ## cardinality = 0..1
+    custom = localisation
+    ## cardinality = 0..inf
+    alias_name[arithmetic_operation] = alias_match_left[arithmetic_operation]
+    ## cardinality = 0..inf
+    alias_name[score_operation] = alias_match_left[score_operation]
+}
 
 ### Iterate through all courtiers every_courtier = { limit = { <triggers> } <effects> }
 ## scope = character
@@ -1302,6 +1350,8 @@ alias[score_operation:every_relation] = {
     alternative_limit = {
         alias_name[trigger] = alias_match_left[trigger]
     }
+    ## cardinality = 0..1
+    custom = localisation
     ## cardinality = 0..inf
     alias_name[arithmetic_operation] = alias_match_left[arithmetic_operation]
     ## cardinality = 0..inf
@@ -1574,6 +1624,8 @@ alias[score_operation:every_in_de_jure_hierarchy] = {
     alternative_limit = {
         alias_name[trigger] = alias_match_left[trigger]
     }
+    ## cardinality = 0..1
+    custom = localisation
     ## cardinality = 0..inf
     alias_name[arithmetic_operation] = alias_match_left[arithmetic_operation]
     ## cardinality = 0..inf
@@ -1725,6 +1777,8 @@ single_alias[random_effect_score_operation] = {
     }
     ## cardinality = 0..1
     weight = single_alias_right[weight_block]
+    ## cardinality = 0..1
+    custom = localisation
     ## cardinality = 0..inf
     alias_name[arithmetic_operation] = alias_match_left[arithmetic_operation]
     ## cardinality = 0..inf
@@ -1760,6 +1814,8 @@ alias[score_operation:random_activity_phase_location] = {
     }
     ## cardinality = 0..1
     weight = single_alias_right[weight_block]
+    ## cardinality = 0..1
+    custom = localisation
     ## cardinality = 0..inf
     alias_name[arithmetic_operation] = alias_match_left[arithmetic_operation]
     ## cardinality = 0..inf
@@ -1782,6 +1838,8 @@ alias[score_operation:random_activity_phase_location_future] = {
     }
     ## cardinality = 0..1
     weight = single_alias_right[weight_block]
+    ## cardinality = 0..1
+    custom = localisation
     ## cardinality = 0..inf
     alias_name[arithmetic_operation] = alias_match_left[arithmetic_operation]
     ## cardinality = 0..inf
@@ -1804,6 +1862,8 @@ alias[score_operation:random_activity_phase_location_past] = {
     }
     ## cardinality = 0..1
     weight = single_alias_right[weight_block]
+    ## cardinality = 0..1
+    custom = localisation
     ## cardinality = 0..inf
     alias_name[arithmetic_operation] = alias_match_left[arithmetic_operation]
     ## cardinality = 0..inf
@@ -1826,6 +1886,8 @@ alias[score_operation:random_attending_character] = {
     }
     ## cardinality = 0..1
     weight = single_alias_right[weight_block]
+    ## cardinality = 0..1
+    custom = localisation
     ## cardinality = 0..inf
     alias_name[arithmetic_operation] = alias_match_left[arithmetic_operation]
     ## cardinality = 0..inf
@@ -1847,6 +1909,10 @@ alias[score_operation:random_guest_subset] = {
     }
     ## cardinality = 0..1
     weight = single_alias_right[weight_block]
+    ## cardinality = 0..1
+    phase = value[activity_phase]
+    ## cardinality = 0..1
+    custom = localisation
     ## cardinality = 0..inf
     alias_name[arithmetic_operation] = alias_match_left[arithmetic_operation]
     ## cardinality = 0..inf
@@ -1868,6 +1934,8 @@ alias[score_operation:random_guest_subset_current_phase] = {
     }
     ## cardinality = 0..1
     weight = single_alias_right[weight_block]
+    ## cardinality = 0..1
+    custom = localisation
     ## cardinality = 0..inf
     alias_name[arithmetic_operation] = alias_match_left[arithmetic_operation]
     ## cardinality = 0..inf
@@ -2168,6 +2236,8 @@ alias[score_operation:random_county_in_region] = {
     }
     ## cardinality = 0..1
     weight = single_alias_right[weight_block]
+    ## cardinality = 0..1
+    custom = localisation
     ## cardinality = 0..inf
     alias_name[arithmetic_operation] = alias_match_left[arithmetic_operation]
     ## cardinality = 0..inf
@@ -2223,6 +2293,8 @@ alias[score_operation:random_in_global_list] = {
     }
     ## cardinality = 0..1
     weight = single_alias_right[weight_block]
+    ## cardinality = 0..1
+    custom = localisation
     ## cardinality = 0..inf
     alias_name[arithmetic_operation] = alias_match_left[arithmetic_operation]
     ## cardinality = 0..inf
@@ -2243,6 +2315,8 @@ alias[score_operation:random_in_list] = {
     }
     ## cardinality = 0..1
     weight = single_alias_right[weight_block]
+    ## cardinality = 0..1
+    custom = localisation
     ## cardinality = 0..inf
     alias_name[arithmetic_operation] = alias_match_left[arithmetic_operation]
     ## cardinality = 0..inf
@@ -2263,6 +2337,8 @@ alias[score_operation:random_in_local_list] = {
     }
     ## cardinality = 0..1
     weight = single_alias_right[weight_block]
+    ## cardinality = 0..1
+    custom = localisation
     ## cardinality = 0..inf
     alias_name[arithmetic_operation] = alias_match_left[arithmetic_operation]
     ## cardinality = 0..inf
@@ -2303,7 +2379,25 @@ alias[score_operation:random_open_invite_activity] = single_alias_right[random_e
 
 ### Iterate through all characters in the pool of the given province
 ## push_scope = character
-alias[score_operation:random_pool_character] = single_alias_right[random_effect_score_operation]
+alias[score_operation:random_pool_character] = {
+    ## cardinality = 0..1
+    limit = {
+        alias_name[trigger] = alias_match_left[trigger]
+    }
+    ## cardinality = 0..inf
+    alternative_limit = {
+        alias_name[trigger] = alias_match_left[trigger]
+    }
+    ## cardinality = 0..1
+    weight = single_alias_right[weight_block]
+    province = scope[province]
+    ## cardinality = 0..1
+    custom = localisation
+    ## cardinality = 0..inf
+    alias_name[arithmetic_operation] = alias_match_left[arithmetic_operation]
+    ## cardinality = 0..inf
+    alias_name[score_operation] = alias_match_left[score_operation]
+}
 
 ### Iterate through all provinces (skips non-land and impassable provinces)
 ## push_scope = province
@@ -2339,6 +2433,8 @@ alias[score_operation:random_trait_in_category] = {
     }
     ## cardinality = 0..1
     weight = single_alias_right[weight_block]
+    ## cardinality = 0..1
+    custom = localisation
     ## cardinality = 0..inf
     alias_name[arithmetic_operation] = alias_match_left[arithmetic_operation]
     ## cardinality = 0..inf
@@ -2474,6 +2570,8 @@ alias[score_operation:random_character_struggle] = {
     }
     ## cardinality = 0..1
     weight = single_alias_right[weight_block]
+    ## cardinality = 0..1
+    custom = localisation
     ## cardinality = 0..inf
     alias_name[arithmetic_operation] = alias_match_left[arithmetic_operation]
     ## cardinality = 0..inf
@@ -2562,6 +2660,8 @@ alias[score_operation:random_claim] = {
     }
     ## cardinality = 0..1
     weight = single_alias_right[weight_block]
+    ## cardinality = 0..1
+    custom = localisation
     ## cardinality = 0..inf
     alias_name[arithmetic_operation] = alias_match_left[arithmetic_operation]
     ## cardinality = 0..inf
@@ -2601,7 +2701,26 @@ alias[score_operation:random_court_position_employer] = single_alias_right[rando
 ### Iterates through all characters employed by the scoped character in the target court position.
 ## scope = character
 ## push_scope = character
-alias[score_operation:random_court_position_holder] = single_alias_right[random_effect_score_operation]
+alias[score_operation:random_court_position_holder] = {
+    ## cardinality = 0..1
+    limit = {
+        alias_name[trigger] = alias_match_left[trigger]
+    }
+    ## cardinality = 0..inf
+    alternative_limit = {
+        alias_name[trigger] = alias_match_left[trigger]
+    }
+    ## cardinality = 0..1
+    weight = single_alias_right[weight_block]
+    ## cardinality = 0..1
+    type = <court_position>
+    ## cardinality = 0..1
+    custom = localisation
+    ## cardinality = 0..inf
+    alias_name[arithmetic_operation] = alias_match_left[arithmetic_operation]
+    ## cardinality = 0..inf
+    alias_name[score_operation] = alias_match_left[score_operation]
+}
 
 ### Iterate through all courtiers random_courtier = { limit = { <triggers> } <effects> }
 ## scope = character
@@ -2908,6 +3027,8 @@ alias[score_operation:random_relation] = {
     }
     ## cardinality = 0..1
     weight = single_alias_right[weight_block]
+    ## cardinality = 0..1
+    custom = localisation
     ## cardinality = 0..inf
     alias_name[arithmetic_operation] = alias_match_left[arithmetic_operation]
     ## cardinality = 0..inf
@@ -3156,6 +3277,8 @@ alias[score_operation:random_in_de_facto_hierarchy] = {
     }
     ## cardinality = 0..1
     weight = single_alias_right[weight_block]
+    ## cardinality = 0..1
+    custom = localisation
     ## cardinality = 0..inf
     alias_name[arithmetic_operation] = alias_match_left[arithmetic_operation]
     ## cardinality = 0..inf
@@ -3179,6 +3302,8 @@ alias[score_operation:random_in_de_jure_hierarchy] = {
     }
     ## cardinality = 0..1
     weight = single_alias_right[weight_block]
+    ## cardinality = 0..1
+    custom = localisation
     ## cardinality = 0..inf
     alias_name[arithmetic_operation] = alias_match_left[arithmetic_operation]
     ## cardinality = 0..inf
@@ -3306,15 +3431,18 @@ single_alias[ordered_effect_score_operation] = {
     }
     ## cardinality = 0..1
     # TODO: Work out what exactly this is restricted to
-    order_by = alias_name[int_value]
+    order_by = alias_keys_field[int_value]
+    order_by = single_alias_right[score_formula]
     ## cardinality = 0..1
-    max = alias_name[int_value]
+    max = alias_keys_field[int_value]
     ## cardinality = 0..1
-    max = alias_name[int_value]
+    max = alias_keys_field[int_value]
     ## cardinality = 0..1
     position = int
     ## cardinality = 0..1
     check_range_bounds = no
+    ## cardinality = 0..1
+    custom = localisation
     ## cardinality = 0..inf
     alias_name[arithmetic_operation] = alias_match_left[arithmetic_operation]
     ## cardinality = 0..inf
@@ -3346,15 +3474,18 @@ alias[score_operation:ordered_activity_phase_location] = {
     }
     ## cardinality = 0..1
     # TODO: Work out what exactly this is restricted to
-    order_by = alias_name[int_value]
+    order_by = alias_keys_field[int_value]
+    order_by = single_alias_right[score_formula]
     ## cardinality = 0..1
-    max = alias_name[int_value]
+    max = alias_keys_field[int_value]
     ## cardinality = 0..1
-    max = alias_name[int_value]
+    max = alias_keys_field[int_value]
     ## cardinality = 0..1
     position = int
     ## cardinality = 0..1
     check_range_bounds = no
+    ## cardinality = 0..1
+    custom = localisation
     ## cardinality = 0..inf
     alias_name[arithmetic_operation] = alias_match_left[arithmetic_operation]
     ## cardinality = 0..inf
@@ -3373,15 +3504,18 @@ alias[score_operation:ordered_activity_phase_location_future] = {
     }
     ## cardinality = 0..1
     # TODO: Work out what exactly this is restricted to
-    order_by = alias_name[int_value]
+    order_by = alias_keys_field[int_value]
+    order_by = single_alias_right[score_formula]
     ## cardinality = 0..1
-    max = alias_name[int_value]
+    max = alias_keys_field[int_value]
     ## cardinality = 0..1
-    max = alias_name[int_value]
+    max = alias_keys_field[int_value]
     ## cardinality = 0..1
     position = int
     ## cardinality = 0..1
     check_range_bounds = no
+    ## cardinality = 0..1
+    custom = localisation
     ## cardinality = 0..inf
     alias_name[arithmetic_operation] = alias_match_left[arithmetic_operation]
     ## cardinality = 0..inf
@@ -3400,15 +3534,18 @@ alias[score_operation:ordered_activity_phase_location_past] = {
     }
     ## cardinality = 0..1
     # TODO: Work out what exactly this is restricted to
-    order_by = alias_name[int_value]
+    order_by = alias_keys_field[int_value]
+    order_by = single_alias_right[score_formula]
     ## cardinality = 0..1
-    max = alias_name[int_value]
+    max = alias_keys_field[int_value]
     ## cardinality = 0..1
-    max = alias_name[int_value]
+    max = alias_keys_field[int_value]
     ## cardinality = 0..1
     position = int
     ## cardinality = 0..1
     check_range_bounds = no
+    ## cardinality = 0..1
+    custom = localisation
     ## cardinality = 0..inf
     alias_name[arithmetic_operation] = alias_match_left[arithmetic_operation]
     ## cardinality = 0..inf
@@ -3427,15 +3564,18 @@ alias[score_operation:ordered_attending_character] = {
     }
     ## cardinality = 0..1
     # TODO: Work out what exactly this is restricted to
-    order_by = alias_name[int_value]
+    order_by = alias_keys_field[int_value]
+    order_by = single_alias_right[score_formula]
     ## cardinality = 0..1
-    max = alias_name[int_value]
+    max = alias_keys_field[int_value]
     ## cardinality = 0..1
-    max = alias_name[int_value]
+    max = alias_keys_field[int_value]
     ## cardinality = 0..1
     position = int
     ## cardinality = 0..1
     check_range_bounds = no
+    ## cardinality = 0..1
+    custom = localisation
     ## cardinality = 0..inf
     alias_name[arithmetic_operation] = alias_match_left[arithmetic_operation]
     ## cardinality = 0..inf
@@ -3453,15 +3593,20 @@ alias[score_operation:ordered_guest_subset] = {
     }
     ## cardinality = 0..1
     # TODO: Work out what exactly this is restricted to
-    order_by = alias_name[int_value]
+    order_by = alias_keys_field[int_value]
+    order_by = single_alias_right[score_formula]
     ## cardinality = 0..1
-    max = alias_name[int_value]
+    max = alias_keys_field[int_value]
     ## cardinality = 0..1
-    max = alias_name[int_value]
+    max = alias_keys_field[int_value]
     ## cardinality = 0..1
     position = int
     ## cardinality = 0..1
     check_range_bounds = no
+    ## cardinality = 0..1
+    phase = value[activity_phase]
+    ## cardinality = 0..1
+    custom = localisation
     ## cardinality = 0..inf
     alias_name[arithmetic_operation] = alias_match_left[arithmetic_operation]
     ## cardinality = 0..inf
@@ -3479,15 +3624,18 @@ alias[score_operation:ordered_guest_subset_current_phase] = {
     }
     ## cardinality = 0..1
     # TODO: Work out what exactly this is restricted to
-    order_by = alias_name[int_value]
+    order_by = alias_keys_field[int_value]
+    order_by = single_alias_right[score_formula]
     ## cardinality = 0..1
-    max = alias_name[int_value]
+    max = alias_keys_field[int_value]
     ## cardinality = 0..1
-    max = alias_name[int_value]
+    max = alias_keys_field[int_value]
     ## cardinality = 0..1
     position = int
     ## cardinality = 0..1
     check_range_bounds = no
+    ## cardinality = 0..1
+    custom = localisation
     ## cardinality = 0..inf
     alias_name[arithmetic_operation] = alias_match_left[arithmetic_operation]
     ## cardinality = 0..inf
@@ -3784,15 +3932,18 @@ alias[score_operation:ordered_county_in_region] = {
     }
     ## cardinality = 0..1
     # TODO: Work out what exactly this is restricted to
-    order_by = alias_name[int_value]
+    order_by = alias_keys_field[int_value]
+    order_by = single_alias_right[score_formula]
     ## cardinality = 0..1
-    max = alias_name[int_value]
+    max = alias_keys_field[int_value]
     ## cardinality = 0..1
-    max = alias_name[int_value]
+    max = alias_keys_field[int_value]
     ## cardinality = 0..1
     position = int
     ## cardinality = 0..1
     check_range_bounds = no
+    ## cardinality = 0..1
+    custom = localisation
     ## cardinality = 0..inf
     alias_name[arithmetic_operation] = alias_match_left[arithmetic_operation]
     ## cardinality = 0..inf
@@ -3846,15 +3997,18 @@ alias[score_operation:ordered_in_global_list] = {
     }
     ## cardinality = 0..1
     # TODO: Work out what exactly this is restricted to
-    order_by = alias_name[int_value]
+    order_by = alias_keys_field[int_value]
+    order_by = single_alias_right[score_formula]
     ## cardinality = 0..1
-    max = alias_name[int_value]
+    max = alias_keys_field[int_value]
     ## cardinality = 0..1
-    max = alias_name[int_value]
+    max = alias_keys_field[int_value]
     ## cardinality = 0..1
     position = int
     ## cardinality = 0..1
     check_range_bounds = no
+    ## cardinality = 0..1
+    custom = localisation
     ## cardinality = 0..inf
     alias_name[arithmetic_operation] = alias_match_left[arithmetic_operation]
     ## cardinality = 0..inf
@@ -3871,15 +4025,18 @@ alias[score_operation:ordered_in_list] = {
     }
     ## cardinality = 0..1
     # TODO: Work out what exactly this is restricted to
-    order_by = alias_name[int_value]
+    order_by = alias_keys_field[int_value]
+    order_by = single_alias_right[score_formula]
     ## cardinality = 0..1
-    max = alias_name[int_value]
+    max = alias_keys_field[int_value]
     ## cardinality = 0..1
-    max = alias_name[int_value]
+    max = alias_keys_field[int_value]
     ## cardinality = 0..1
     position = int
     ## cardinality = 0..1
     check_range_bounds = no
+    ## cardinality = 0..1
+    custom = localisation
     ## cardinality = 0..inf
     alias_name[arithmetic_operation] = alias_match_left[arithmetic_operation]
     ## cardinality = 0..inf
@@ -3896,15 +4053,18 @@ alias[score_operation:ordered_in_local_list] = {
     }
     ## cardinality = 0..1
     # TODO: Work out what exactly this is restricted to
-    order_by = alias_name[int_value]
+    order_by = alias_keys_field[int_value]
+    order_by = single_alias_right[score_formula]
     ## cardinality = 0..1
-    max = alias_name[int_value]
+    max = alias_keys_field[int_value]
     ## cardinality = 0..1
-    max = alias_name[int_value]
+    max = alias_keys_field[int_value]
     ## cardinality = 0..1
     position = int
     ## cardinality = 0..1
     check_range_bounds = no
+    ## cardinality = 0..1
+    custom = localisation
     ## cardinality = 0..inf
     alias_name[arithmetic_operation] = alias_match_left[arithmetic_operation]
     ## cardinality = 0..inf
@@ -3957,7 +4117,31 @@ alias[score_operation:ordered_open_invite_activity] = single_alias_right[ordered
 
 ### Iterate through all characters in the pool of the given province
 ## push_scope = character
-alias[score_operation:ordered_pool_character] = single_alias_right[ordered_effect_score_operation]
+alias[score_operation:ordered_pool_character] = {
+    ## cardinality = 0..1
+    limit = {
+        alias_name[trigger] = alias_match_left[trigger]
+    }
+    ## cardinality = 0..1
+    # TODO: Work out what exactly this is restricted to
+    order_by = alias_keys_field[int_value]
+    order_by = single_alias_right[score_formula]
+    ## cardinality = 0..1
+    max = alias_keys_field[int_value]
+    ## cardinality = 0..1
+    max = alias_keys_field[int_value]
+    ## cardinality = 0..1
+    position = int
+    ## cardinality = 0..1
+    check_range_bounds = no
+    province = scope[province]
+    ## cardinality = 0..1
+    custom = localisation
+    ## cardinality = 0..inf
+    alias_name[arithmetic_operation] = alias_match_left[arithmetic_operation]
+    ## cardinality = 0..inf
+    alias_name[score_operation] = alias_match_left[score_operation]
+}
 
 ### Iterate through all provinces (skips non-land and impassable provinces)
 ## push_scope = province
@@ -4001,15 +4185,18 @@ alias[score_operation:ordered_trait_in_category] = {
     }
     ## cardinality = 0..1
     # TODO: Work out what exactly this is restricted to
-    order_by = alias_name[int_value]
+    order_by = alias_keys_field[int_value]
+    order_by = single_alias_right[score_formula]
     ## cardinality = 0..1
-    max = alias_name[int_value]
+    max = alias_keys_field[int_value]
     ## cardinality = 0..1
-    max = alias_name[int_value]
+    max = alias_keys_field[int_value]
     ## cardinality = 0..1
     position = int
     ## cardinality = 0..1
     check_range_bounds = no
+    ## cardinality = 0..1
+    custom = localisation
     ## cardinality = 0..inf
     alias_name[arithmetic_operation] = alias_match_left[arithmetic_operation]
     ## cardinality = 0..inf
@@ -4185,15 +4372,18 @@ alias[score_operation:ordered_character_struggle] = {
     }
     ## cardinality = 0..1
     # TODO: Work out what exactly this is restricted to
-    order_by = alias_name[int_value]
+    order_by = alias_keys_field[int_value]
+    order_by = single_alias_right[score_formula]
     ## cardinality = 0..1
-    max = alias_name[int_value]
+    max = alias_keys_field[int_value]
     ## cardinality = 0..1
-    max = alias_name[int_value]
+    max = alias_keys_field[int_value]
     ## cardinality = 0..1
     position = int
     ## cardinality = 0..1
     check_range_bounds = no
+    ## cardinality = 0..1
+    custom = localisation
     ## cardinality = 0..inf
     alias_name[arithmetic_operation] = alias_match_left[arithmetic_operation]
     ## cardinality = 0..inf
@@ -4283,15 +4473,18 @@ alias[score_operation:ordered_claim] = {
     }
     ## cardinality = 0..1
     # TODO: Work out what exactly this is restricted to
-    order_by = alias_name[int_value]
+    order_by = alias_keys_field[int_value]
+    order_by = single_alias_right[score_formula]
     ## cardinality = 0..1
-    max = alias_name[int_value]
+    max = alias_keys_field[int_value]
     ## cardinality = 0..1
-    max = alias_name[int_value]
+    max = alias_keys_field[int_value]
     ## cardinality = 0..1
     position = int
     ## cardinality = 0..1
     check_range_bounds = no
+    ## cardinality = 0..1
+    custom = localisation
     ## cardinality = 0..inf
     alias_name[arithmetic_operation] = alias_match_left[arithmetic_operation]
     ## cardinality = 0..inf
@@ -4336,7 +4529,32 @@ alias[score_operation:ordered_court_position_employer] = single_alias_right[orde
 ### Iterates through all characters employed by the scoped character in the target court position.
 ## scope = character
 ## push_scope = character
-alias[score_operation:ordered_court_position_holder] = single_alias_right[ordered_effect_score_operation]
+alias[score_operation:ordered_court_position_holder] = {
+    ## cardinality = 0..1
+    limit = {
+        alias_name[trigger] = alias_match_left[trigger]
+    }
+    ## cardinality = 0..1
+    # TODO: Work out what exactly this is restricted to
+    order_by = alias_keys_field[int_value]
+    order_by = single_alias_right[score_formula]
+    ## cardinality = 0..1
+    max = alias_keys_field[int_value]
+    ## cardinality = 0..1
+    max = alias_keys_field[int_value]
+    ## cardinality = 0..1
+    position = int
+    ## cardinality = 0..1
+    check_range_bounds = no
+    ## cardinality = 0..1
+    type = <court_position>
+    ## cardinality = 0..1
+    custom = localisation
+    ## cardinality = 0..inf
+    alias_name[arithmetic_operation] = alias_match_left[arithmetic_operation]
+    ## cardinality = 0..inf
+    alias_name[score_operation] = alias_match_left[score_operation]
+}
 
 ### Iterate through all courtiers ordered_courtier = { limit = { <triggers> } <effects> }
 ## scope = character
@@ -4664,15 +4882,18 @@ alias[score_operation:ordered_relation] = {
     }
     ## cardinality = 0..1
     # TODO: Work out what exactly this is restricted to
-    order_by = alias_name[int_value]
+    order_by = alias_keys_field[int_value]
+    order_by = single_alias_right[score_formula]
     ## cardinality = 0..1
-    max = alias_name[int_value]
+    max = alias_keys_field[int_value]
     ## cardinality = 0..1
-    max = alias_name[int_value]
+    max = alias_keys_field[int_value]
     ## cardinality = 0..1
     position = int
     ## cardinality = 0..1
     check_range_bounds = no
+    ## cardinality = 0..1
+    custom = localisation
     ## cardinality = 0..inf
     alias_name[arithmetic_operation] = alias_match_left[arithmetic_operation]
     ## cardinality = 0..inf
@@ -4927,15 +5148,18 @@ alias[score_operation:ordered_in_de_facto_hierarchy] = {
     }
     ## cardinality = 0..1
     # TODO: Work out what exactly this is restricted to
-    order_by = alias_name[int_value]
+    order_by = alias_keys_field[int_value]
+    order_by = single_alias_right[score_formula]
     ## cardinality = 0..1
-    max = alias_name[int_value]
+    max = alias_keys_field[int_value]
     ## cardinality = 0..1
-    max = alias_name[int_value]
+    max = alias_keys_field[int_value]
     ## cardinality = 0..1
     position = int
     ## cardinality = 0..1
     check_range_bounds = no
+    ## cardinality = 0..1
+    custom = localisation
     ## cardinality = 0..inf
     alias_name[arithmetic_operation] = alias_match_left[arithmetic_operation]
     ## cardinality = 0..inf
@@ -4955,15 +5179,18 @@ alias[score_operation:ordered_in_de_jure_hierarchy] = {
     }
     ## cardinality = 0..1
     # TODO: Work out what exactly this is restricted to
-    order_by = alias_name[int_value]
+    order_by = alias_keys_field[int_value]
+    order_by = single_alias_right[score_formula]
     ## cardinality = 0..1
-    max = alias_name[int_value]
+    max = alias_keys_field[int_value]
     ## cardinality = 0..1
-    max = alias_name[int_value]
+    max = alias_keys_field[int_value]
     ## cardinality = 0..1
     position = int
     ## cardinality = 0..1
     check_range_bounds = no
+    ## cardinality = 0..1
+    custom = localisation
     ## cardinality = 0..inf
     alias_name[arithmetic_operation] = alias_match_left[arithmetic_operation]
     ## cardinality = 0..inf
@@ -5415,3 +5642,18 @@ alias[score_operation:random_title_interested_in_location] = single_alias_right[
 ## scope = landed_title
 ## push_scope = regiment
 alias[score_operation:random_title_maa_regiment] = single_alias_right[random_effect_score_operation]
+
+### Iterate through all the close and extended relatives [father, mother, siblings, children, grandparents, uncles/aunts, nephew/niece, cousins]
+## scope = character
+## push_scope = character
+alias[score_operation:every_close_or_extended_family_member] = single_alias_right[every_effect_score_operation]
+
+### Iterate through all the close and extended relatives [father, mother, siblings, children, grandparents, uncles/aunts, nephew/niece, cousins]
+## scope = character
+## push_scope = character
+alias[score_operation:random_close_or_extended_family_member] = single_alias_right[random_effect_score_operation]
+
+### Iterate through all the close and extended relatives [father, mother, siblings, children, grandparents, uncles/aunts, nephew/niece, cousins]
+## scope = character
+## push_scope = character
+alias[score_operation:ordered_close_or_extended_family_member] = single_alias_right[ordered_effect_score_operation]

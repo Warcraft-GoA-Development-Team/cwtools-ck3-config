@@ -33,10 +33,8 @@ types = {
 #alias[modifier:<terrain>_max_combat_roll] = int_value_field
 
 terrain = {
-    ### HSV color as a series of floats.
-    color = single_alias_right[hsv_color]
-    ### RGB color as a series of ints
-    color = single_alias_right[rgb_color]
+    color = alias_match_left[colour]
+    travel_danger_color = alias_match_left[colour]
     ### Modifier applied to the province. See note on allowed modifiers below/ Modifiers referenced by a terrain object can be only generic (hardcoded) modifiers, or modifiers generated from the following databases: schemes, holdings, lifestyles, regions
     ## cardinality = 0..1
     province_modifier = single_alias_right[province_modifier]

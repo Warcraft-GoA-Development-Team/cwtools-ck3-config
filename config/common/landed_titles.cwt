@@ -27,11 +27,7 @@ types = {
 landed_title = {
 
 	### Map color of the title.
-	color = {
-        int
-        int
-        int
-    }
+	color = alias_match_left[colour]
 
 	### Is this title landless? 
 	## cardinality = 0..1

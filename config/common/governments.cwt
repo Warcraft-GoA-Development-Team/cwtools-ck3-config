@@ -120,7 +120,7 @@ government = {
 
     ### color for map mode
     ## cardinality = 1..1
-	color = alias_match_right[color]
+	color = alias_match_left[colour]
 
     ## cardinality = 0..1
     flag = value_set[government_flag]
