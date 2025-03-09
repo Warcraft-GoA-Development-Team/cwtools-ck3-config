@@ -127,7 +127,7 @@ council_position = {
 
     ## cardinality = 0..1
     ### Which portrait animation should councillors of this type use in the council window
-	portrait_animation = <portrait_animation>
+	portrait_animation = alias_keys_field[animation]
 
     ### Council data used in the Barbershop's Council preset. Defines the council character's position and if it should be rendererd in front of other characters.
     ## cardinality = 0..1

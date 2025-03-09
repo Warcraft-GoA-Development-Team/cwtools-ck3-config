@@ -1303,6 +1303,9 @@ alias[effect:end_inspiration_sponsorship] = scope[inspiration]
 ### Log a string to the error log when this effect executes, error_log = message, the message can be a localization string with ROOT, SCOPE and PREV available
 alias[effect:error_log] = localisation
 
+### Log a string to the error log when this effect executes, error_log = message, the message can be a localization string with ROOT, SCOPE and PREV available
+alias[effect:error_log] = scalar
+
 ### Effect not shown in tooltips
 alias[effect:hidden_effect] = {
     ## cardinality = 1..inf

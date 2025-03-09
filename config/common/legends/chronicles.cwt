@@ -1,0 +1,64 @@
+types = {
+    type[chronicle] = {
+        path = "game/common/legends/chronicles"
+    }
+}
+
+chronicle = {
+    ### Dynamic description for the name of a legend with this chronicle
+    ### Defaults to legend_chronicle_<key> if not set
+    ### root = legend/seed owner
+    ### scope:<property> = scope object for that property
+    ## replace_scope = { root = character }  # TODO: scope:<property>
+    ## cardinality = 0..1
+    name = single_alias_right[complex_desc]
+
+    ### Dynamic description for the description of a legend with this chronicle
+    ### Defaults to legend_chronicle_<key>_desc if not set
+    ### root = legend/seed owner
+    ### scope:<property> = scope object for that property
+    ## replace_scope = { root = character }  # TODO: scope:<property>
+    ## cardinality = 0..1
+    description = single_alias_right[complex_desc]
+
+    ## cardinality = 0..1
+    properties = {
+        ### Multiple properties can be read in, the key is arbitrary, it is how it will be referred to later
+        ### The right hand side is the type of scope object that should be stored
+        value_set[chronicle_property] = enum[scope_type_token]
+    }
+
+    ### Every localization key for the chapters has the following scopes
+    ### root = the legend itself
+    ### scope:<property> = scope object for that property
+    chapters = {
+        value_set[chronicle_chapter] ### Name for this chapter, will not be filled
+        value_set[chronicle_chapter] = localisation ### Name for this chapter and its default localization key
+    }
+
+    ## cardinality = 0..1
+    impact = {
+        ### Modifier applied to any province with this legend
+        ## cardinality = 0..1
+        province_modifier = single_alias_right[province_modifier]
+
+        ### Modifier applied to the county if its county capital province has adopted this legend
+        ## cardinality = 0..1
+        county_modifier = ingle_alias_right[county_modifier]
+
+        ### Modifier applied to the owner of the legend
+        ## cardinality = 0..1
+        owner_modifier = single_alias_right[character_modifier]
+
+        ### Modifier applied to every promoter of the legend
+        ## cardinality = 0..1
+        promoter_modifier = single_alias_right[character_modifier]
+
+        ### Effect run when this legend is completed/ended by its owner
+        ## cardinality = 0..1
+        on_complete = single_alias_right[effect_clause]
+    }
+
+    ## cardinality = 0..1
+    portrait_animation = alias_keys_field[animation]
+}

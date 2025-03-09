@@ -1,0 +1,182 @@
+types = {
+    type[legend_type] = {
+        path = "game/common/legends/legend_types"
+    }
+}
+
+legend_type = {
+    color = alias_match_left[colour]
+
+    ### Effect run when a legend of this type is created
+    ### root = the legend
+    ## replace_scope = { root = legend }
+    ## cardinality = 0..1
+    on_start = single_alias_right[effect_clause]
+
+    ### Effect run when a province adopts this legend
+    ### root = province being added
+    ### scope:legend = the legend
+    ## replace_scope = { root = province legend = legend }
+    ## cardinality = 0..1
+    on_province_spread = single_alias_right[effect_clause]
+
+    ### Effect run when a province removes  this legend
+    ### root = province being removed
+    ### scope:legend = the legend
+    ## replace_scope = { root = province legend = legend }
+    ## cardinality = 0..1
+    on_province_recovered = single_alias_right[effect_clause]
+
+    ### Effect run when a legend of this type is destroyed
+    ### root = the legend
+    ## replace_scope = { root = legend }
+    ## cardinality = 0..1
+    on_end = single_alias_right[effect_clause]
+
+    ### Effect run on every promoter (including owner) once a year
+    ## cardinality = 0..1
+    on_yearly = single_alias_right[effect_clause]
+
+    ### Effect run on promoter, not owner, when they start promoting the legend
+    ### root = promoter to be
+    ### scope:legend = legend that is being promoted
+    ## replace_scope = { root = character legend = legend }
+    ## cardinality = 0..1
+    on_legend_start_promote = single_alias_right[effect_clause]
+
+    ### Effect run on promoter, not owner, when they stop promoting the legend
+    ### root = former promoter
+    ### scope:legend = legend that was being promoted
+    ## replace_scope = { root = character legend = legend }
+    ## cardinality = 0..1
+    on_legend_stop_promote = single_alias_right[effect_clause]
+
+    ### root = potential protagonist character
+    ### scope:creator = the character creating a legend of this type
+    ## replace_scope = { creator = character }
+    is_valid_protagonist = single_alias_right[trigger_clause]
+
+    ### root = potential protagonist character
+    ### scope:creator = the character creating a legend of this type
+    ## replace_scope = { root = character creator = character }
+    ai_protagonist_weight = single_alias_right[score_formula]
+
+    quality = {
+        ## cardinality = 0..3
+        enum[legend_quality] = {
+            ### Chance for an legend of this quality to spread to an adjacent province per month
+            ### % from 0-100 inclusive
+            ### root = potential province
+            ### scope:legend = the legend
+            ## replace_scope = { root = province legend = legend }
+            spread_chance = single_alias_right[score_formula]
+
+            ### Maximum number of provinces an legend of this quality can infect
+            ### Higher quality levels must have >= max provinces than the previous one and be > 0
+            max_provinces = alias_keys_field[int_value]
+
+            ### Monthly cost for owning a legend of this quality level
+            ### root = character owning
+            ## replace_scope = { root = character legend = legend }
+            owner_cost = single_alias_right[cost]
+
+            ### Monthly cost for promoting a legend of this quality level
+            ### root = character promoting
+            ### scope:legend = the legend
+            ## replace_scope = { root = character legend = legend }
+            promoter_cost = single_alias_right[cost]
+
+            ### Cost for creating a legend of this quality level
+            ### root = character creating
+            ## replace_scope = { root = character }
+            creation_cost = single_alias_right[cost]
+
+            ### Cost for upgrading a legend to this quality level
+            ### root = character upgrading
+            ## replace_scope = { root = character }
+            upgrade_cost = single_alias_right[cost]
+
+            ### If the legend stops being sponsored (if it becomes unowned or is completed), how long until provinces start getting removed from the legend
+            removal_duration = single_alias_right[duration_block]
+
+            impact = {
+                ### Modifier applied to any province with this legend if it's inside the realm of the owner or promoter
+                ## cardinality = 0..1
+                province_modifier = single_alias_right[province_modifier]
+
+                ### Modifier applied to the county if its county capital province has adopted this legend
+                ## cardinality = 0..1
+                county_modifier = single_alias_right[county_modifier]
+
+                ### Modifier applied to the owner of the legend
+                ## cardinality = 0..1
+                owner_modifier = single_alias_right[character_modifier]
+
+                ### Modifier applied to every promoter of the legend
+                ## cardinality = 0..1
+                promoter_modifier = single_alias_right[character_modifier]
+
+                ### Effect run when this legend is completed/ended by its owner
+                ### root = legend owner
+                ### scope:protagonist = the legend protagonist
+                ### scope:<property> = scope object for that property
+                ## replace_scope = { root = character protagonist = character }
+                ## cardinality = 0..1
+                on_complete = single_alias_right[effect_clause]
+            }
+
+            ### Ai chances
+            ai_chance = {
+                ### root = character with the legend seed
+                ## replace_scope = { root = character }
+                create = single_alias_right[score_formula]
+
+                ### root = character with the legend seed
+                ## replace_scope = { root = character }
+                create = alias_keys_field[int_value]
+
+                ### root = character who can promote
+                ### scope:legend = the legend to promote
+                ## replace_scope = { root = character legend = legend }
+                promote = single_alias_right[score_formula]
+
+                ### root = character who can promote
+                ### scope:legend = the legend to promote
+                ## replace_scope = { root = character legend = legend }
+                promote = alias_keys_field[int_value]
+
+                ### root = character who can take a legend
+                ### scope:legend = the legend to take ownership
+                ## replace_scope = { root = character legend = legend }
+                take_unowned = single_alias_right[score_formula]
+
+                ### root = character who can take a legend
+                ### scope:legend = the legend to take ownership
+                ## replace_scope = { root = character legend = legend }
+                take_unowned = alias_keys_field[int_value]
+
+                ### root = legend owner
+                ### scope:legend = the legend
+                ## replace_scope = { root = character legend = legend }
+                upgrade = single_alias_right[score_formula]
+
+                ### root = legend owner
+                ### scope:legend = the legend
+                ## replace_scope = { root = character legend = legend }
+                upgrade = alias_keys_field[int_value]
+
+                ### root = legend owner
+                ### scope:legend = the legend
+                ### scope:can_afford_current_level (yes/no) = if the owner can currently afford the current levels monthly costs
+                ## replace_scope = { root = character legend = legend can_afford_current_level = bool }
+                complete = single_alias_right[score_formula]
+
+                ### root = legend owner
+                ### scope:legend = the legend
+                ### scope:can_afford_current_level (yes/no) = if the owner can currently afford the current levels monthly costs
+                ## replace_scope = { root = character legend = legend can_afford_current_level = bool }
+                complete = alias_keys_field[int_value]
+            }
+        }
+    }
+}

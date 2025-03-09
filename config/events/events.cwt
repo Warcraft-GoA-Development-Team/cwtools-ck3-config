@@ -189,11 +189,11 @@ event = {
 single_alias[event_portrait] = {
     character = scope[character]
     ## cardinality = 0..1
-    animation = <portrait_animation>
+    animation = alias_keys_field[animation]
     ## cardinality = 0..inf
     triggered_animation = {
         trigger = single_alias_right[trigger_clause]
-        animation = <portrait_animation>
+        animation = alias_keys_field[animation]
     }
     animation = <animation>
     ## cardinality = 0..1

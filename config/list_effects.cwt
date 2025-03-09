@@ -2034,7 +2034,7 @@ alias[effect:random_faith_ruler] = single_alias_right[random_effect]
 
 ### Iterate through all holy site provinces of a faith random_holy_site = { limit = { <triggers> } <effects> }
 ## scope = faith
-## push_scope = holy_site
+## push_scope = landed_title
 alias[effect:random_holy_site] = single_alias_right[random_effect]
 
 ####################################

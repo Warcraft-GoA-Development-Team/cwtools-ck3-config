@@ -7,8 +7,11 @@ types = {
         subtype[special] = {
             type = special
         }
+        subtype[graphical] = {
+			is_graphical_background = yes
+        }
         subtype[regular] = {
-
+			type = regular
         }
     }
 }
@@ -26,231 +29,247 @@ enums = {
 }
 
 building = {
+	### If this is set to yes, the building will be used for figuring out which background asset (walls/no walls etc) should be shown
 	## cardinality = 0..1
-	type_icon = filepath[game/gfx/interface/icons/building_types]
-	
-	### How many levies does the building give
-	## cardinality = 0..1
-	levy = alias_keys_field[int_value]
-	
-	### How much garrison does the building give
-	## cardinality = 0..1
-	max_garrison = alias_keys_field[int_value]
+	is_graphical_background = bool
 
-	### How much garrison regains a percentage of its maximal garrison equal to the garrison reinforcement rate
-	## cardinality = 0..1
-	garrison_reinforcement_factor = alias_keys_field[int_value]
-	
-	### How long does it take to construct the building
-	construction_time = alias_keys_field[int_value]
-	
-    ### Specifies whether this is a regular building, a special building, or a duchy capital building. Regular by default
-	## cardinality = 0..1
-	type = enum[building_type]
-	
 	### Which asset does the building use
 	## cardinality = 0..inf
 	asset = {
 		### 'pdxmesh' or 'entity', specifies wheter to use a mesh or an entity. Meshes are more performant and should be preferred.
 		type = enum[asset_type]
 		### The name of the mesh or the entity
-        ## cardinality = 0..1
+		## cardinality = 0..1
 		name = <pdxmesh>
 		## cardinality = 0..1
 		requires_dlc_flag = enum[dlc_feature]
 		### To randomize between multiple meshes/entities. Note that they must all be entities, or all be meshes:
-        ## cardinality = 0..1
+		## cardinality = 0..1
 		names = {
-            ## cardinality = 1..inf
-            scalar
-        }
+			## cardinality = 1..inf
+			<pdxmesh>
+		}
 		### Path to illustration shown in the county view, texture can be accessed in GUI: "[Holding.GetIllustration]"
-        ## cardinality = 0..1
+		## cardinality = 0..1
 		illustration = filepath
 		### Associated sound effect and an optional parameter, can also be just soundeffect = "event:..." if no parameter is needed
 		## cardinality = 0..1
-        soundeffect = {
-            soundeffect = scalar
-            ## cardinality = 0..1
-            soundparameter = { scalar = value_field } 
-        }
+		soundeffect = {
+			soundeffect = scalar
+			## cardinality = 0..1
+			soundparameter = { scalar = value_field }
+		}
 		### Graphical cultures that prefer this asset to be shown
 		## cardinality = 0..1
-        graphical_cultures = { value[building_gfx] }
+		graphical_cultures = { value[building_gfx] }
 		### Graphical faiths that prefer this asset to be shown (priority is faith > religion > family, so Catholic graphical_faith overrides Abrahamic graphical_faith)
 		## cardinality = 0..1
-        graphical_faiths = {
-            ## cardinality = 1..inf
+		graphical_faiths = {
+			## cardinality = 1..inf
 			value[graphical_faith]
-        }
+		}
 		### Graphical regions in which this asset is preferred, this is the most important criterion when selecting the asset, with the exception of government
 		## cardinality = 0..1
-        graphical_regions = {
-            ##cardinality = 1..inf
-            <geographical_region.graphical_region>
-        }
+		graphical_regions = {
+			##cardinality = 1..inf
+			<geographical_region.graphical_region>
+		}
 		### Governments that prefer this asset to be shown
 		## cardinality = 0..1
-        governments = {
-            ## cardinality = 1..inf
-            <government> 
-        }
+		governments = {
+			## cardinality = 1..inf
+			<government>
+		}
 	}
-	
+
 	### Is the building enabled? Else won't give any effects to holder, and not be constructible (see can_construct* below).
 	### If is_graphical_background = yes, this controls whether the building can be shown in the province.
 	### scopes: root is the province; scope:holder is the holder of the province; county is the county title the province belongs to
-    ## cardinality = 0..1
+	## cardinality = 0..1
 	is_enabled = single_alias_right[trigger_clause]
-	
-	### Can the building be constructed.
-	### Use this instead of is_enabled if you want to allow rulers to "use" the building after getting the holding, but to disallow that they construct it.
-	### can_construct_potential controls whether the building appears in the build menu. For upgrades it is identical to can_construct_showing_failures_only.
-	### Note that is_enabled (see above) is added to can_construct_potential.
-	### Not used if is_graphical_background = yes
-	### scopes: root is the province; scope:holder is the holder of the province; county is the county title the province belongs to
-    ## cardinality = 0..1
-    ## replace_scope = { root = province holder = character county = landed_title }
-	can_construct_potential = single_alias_right[trigger_clause]
-    ## cardinality = 0..1
-    ## replace_scope = { root = province holder = character county = landed_title }
-	can_construct_showing_failures_only = single_alias_right[trigger_clause]
-    ## cardinality = 0..1
-    ## replace_scope = { root = province holder = character county = landed_title }
-	can_construct = single_alias_right[trigger_clause]
-    ### if set to yes, the building will show in the build menu even if disabled (will still use can_construct_potential). No by default
-	## cardinality = 0..1
-    show_disabled = bool
 
-	## cardinality = 0..1
-	cost_gold = alias_keys_field[int_value]
-	## cardinality = 0..1
-	cost_prestige = alias_keys_field[int_value]
-	
-	### How much cost does the building cost
-	## cardinality = 0..1
-	cost = single_alias_right[cost]
-	
-	### The next building in chain unlocked by this building
-	## cardinality = 0..1
-    next_building = <building>
-
-	### Custom description for effects indirectly provided by building.
-	### The scope root refers to the buildings province.
-    ## cardinality = 0..1
-    ## replace_scope = { root = province }
-	effect_desc = single_alias_right[complex_desc]
-
-	### Custom description for effects indirectly provided by building.
-	### The scope root refers to the buildings province.
-    ## cardinality = 0..1
-    ## replace_scope = { root = province }
-	effect_desc = localisation
-	
-	### A modifier applied to the owner of the holding
-    ## cardinality = 0..1
-	character_modifier = single_alias_right[character_modifier]
-	### Applied if the character's culture has the parameter
-    ## cardinality = 0..inf
-	character_culture_modifier = single_alias_right[character_culture_modifier]
-
-	### A modifier applied if the holder's dynasty of the county has a specific perk
-    ## cardinality = 0..1
-	characer_dynasty_modifier = {
-		alias_name[modifier] = alias_match_left[modifier]
-	}
-	
-	### A modifier applied to the province
-    ## cardinality = 0..1
-	province_modifier = single_alias_right[province_modifier]
-    ## cardinality = 0..inf
-	province_culture_modifier = single_alias_right[province_culture_modifier]
-    ## cardinality = 0..inf
-	province_terrain_modifier = {
+	subtype[!graphical] = {
 		## cardinality = 0..1
-        parameter = value[cultural_parameter]
+		type_icon = filepath[game/gfx/interface/icons/building_types]
+
+		### How many levies does the building give
 		## cardinality = 0..1
-        terrain = <terrain>
-        ## cardinality = 0..1
-		is_coastal = bool
-        ## cardinality = 0..1
-		is_riverside = bool
-		## push_scope = province
-		## cardinality = 1..inf
-		alias_name[modifier] = alias_match_left[modifier]
-	}
+		levy = alias_keys_field[int_value]
 
-	### A modifier applied if the holder's dynasty of the county has a specific perk
-    ##cardinality = 0..1
-	province_dynasty_modifier = {
-		county_holder_dynasty_perk = <dynasty_perk>
-		alias_name[modifier] = alias_match_left[modifier]
-	}
+		### How much garrison does the building give
+		## cardinality = 0..1
+		max_garrison = alias_keys_field[int_value]
 
-	### A modifier applied to the county
-    ##cardinality = 0..1
-	county_modifier = single_alias_right[county_modifier]
-    ##cardinality = 0..inf
-	county_culture_modifier = {
-		parameter = scalar
-        alias_name[modifier] = alias_match_left[modifier]
-	}
-	
-	### A modifier applied to every de jure county in the duchy (if the county has the same de facto liege as this building's county). Can only be used (and only works) for duchy capital buildings.
-    ##cardinality = 0..1
-	duchy_capital_county_modifier = {
-        alias_name[modifier] = alias_match_left[modifier]
-	}
-    ##cardinality = 0..1
-	duchy_capital_county_culture_modifier = {
-		parameter = scalar
-        alias_name[modifier] = alias_match_left[modifier]
-	}
+		### How much garrison regains a percentage of its maximal garrison equal to the garrison reinforcement rate
+		## cardinality = 0..1
+		garrison_reinforcement_factor = alias_keys_field[int_value]
 
-	### A special modifier applied to every holding of specified type in the county
-    ## cardinality = 0..1
-	county_holding_modifier = {
-		holding = <holding>
-		alias_name[modifier] = alias_match_left[modifier]
+		### Specifies whether this is a regular building, a special building, or a duchy capital building. Regular by default
+		## cardinality = 0..1
+		type = enum[building_type]
+
+		### Can the building be constructed.
+		### Use this instead of is_enabled if you want to allow rulers to "use" the building after getting the holding, but to disallow that they construct it.
+		### can_construct_potential controls whether the building appears in the build menu. For upgrades it is identical to can_construct_showing_failures_only.
+		### Note that is_enabled (see above) is added to can_construct_potential.
+		### Not used if is_graphical_background = yes
+		### scopes: root is the province; scope:holder is the holder of the province; county is the county title the province belongs to
+		## cardinality = 0..1
+		## replace_scope = { root = province holder = character county = landed_title }
+		can_construct_potential = single_alias_right[trigger_clause]
+		## cardinality = 0..1
+		## replace_scope = { root = province holder = character county = landed_title }
+		can_construct_showing_failures_only = single_alias_right[trigger_clause]
+		## cardinality = 0..1
+		## replace_scope = { root = province holder = character county = landed_title }
+		can_construct = single_alias_right[trigger_clause]
+		### if set to yes, the building will show in the build menu even if disabled (will still use can_construct_potential). No by default
+		## cardinality = 0..1
+		show_disabled = bool
+
+		## cardinality = 0..1
+		cost_gold = alias_keys_field[int_value]
+		## cardinality = 0..1
+		cost_prestige = alias_keys_field[int_value]
+		## cardinality = 0..1
+		cost_piety = alias_keys_field[int_value]
+
+		### How much cost does the building cost
+		## cardinality = 0..1
+		cost = single_alias_right[cost]
+
+		### The next building in chain unlocked by this building
+		## cardinality = 0..1
+		next_building = <building>
+
+		### Custom description for effects indirectly provided by building.
+		### The scope root refers to the buildings province.
+		## cardinality = 0..1
+		## replace_scope = { root = province }
+		effect_desc = single_alias_right[complex_desc]
+
+		### Custom description for effects indirectly provided by building.
+		### The scope root refers to the buildings province.
+		## cardinality = 0..1
+		## replace_scope = { root = province }
+		effect_desc = localisation
+
+		### A modifier applied to the owner of the holding
+		## cardinality = 0..1
+		character_modifier = single_alias_right[character_modifier]
+		### Applied if the character's culture has the parameter
+		## cardinality = 0..inf
+		character_culture_modifier = single_alias_right[character_culture_modifier]
+
+		### A modifier applied if the holder's dynasty of the county has a specific perk
+		## cardinality = 0..1
+		characer_dynasty_modifier = {
+			alias_name[modifier] = alias_match_left[modifier]
+		}
+
+		### A modifier applied to the province
+		## cardinality = 0..1
+		province_modifier = single_alias_right[province_modifier]
+		## cardinality = 0..inf
+		province_culture_modifier = single_alias_right[province_culture_modifier]
+		## cardinality = 0..inf
+		province_terrain_modifier = {
+			## cardinality = 0..1
+			parameter = value[cultural_parameter]
+			## cardinality = 0..1
+			terrain = <terrain>
+			## cardinality = 0..1
+			is_coastal = bool
+			## cardinality = 0..1
+			is_riverside = bool
+			## push_scope = province
+			## cardinality = 1..inf
+			alias_name[modifier] = alias_match_left[modifier]
+		}
+
+		### A modifier applied if the holder's dynasty of the county has a specific perk
+		##cardinality = 0..1
+		province_dynasty_modifier = {
+			county_holder_dynasty_perk = <dynasty_perk>
+			alias_name[modifier] = alias_match_left[modifier]
+		}
+
+		### A modifier applied to the county
+		##cardinality = 0..1
+		county_modifier = single_alias_right[county_modifier]
+		##cardinality = 0..inf
+		county_culture_modifier = {
+			parameter = value[cultural_parameter]
+			alias_name[modifier] = alias_match_left[modifier]
+		}
+
+		### A modifier applied to every de jure county in the duchy (if the county has the same de facto liege as this building's county). Can only be used (and only works) for duchy capital buildings.
+		##cardinality = 0..1
+		duchy_capital_county_modifier = {
+			alias_name[modifier] = alias_match_left[modifier]
+		}
+		##cardinality = 0..1
+		duchy_capital_county_culture_modifier = {
+			parameter = value[cultural_parameter]
+			alias_name[modifier] = alias_match_left[modifier]
+		}
+
+		### A special modifier applied to every holding of specified type in the county
+		## cardinality = 0..1
+		county_holding_modifier = {
+			holding = <holding>
+			alias_name[modifier] = alias_match_left[modifier]
+		}
+
+		### A modifier applied if the holder's dynasty of the county has a specific perk
+		## cardinality = 0..1
+		county_dynasty_modifier = {
+			county_holder_dynasty_perk = <dynasty_perk>
+			alias_name[modifier] = alias_match_left[modifier]
+		}
+
+		### A modifier applied to the county holder
+		## cardinality = 0..1
+		county_holder_character_modifier = {
+			alias_name[modifier] = alias_match_left[modifier]
+		}
+
+		### Building flags
+		## cardinality = 0..inf
+		flag = value_set[building_flag]
+
+		### Effects applied on building completion
+		### scopes: root refers to the buildings province
+		## cardinality = 0..1
+		on_complete = single_alias_right[effect_clause]
+
+		### Brief: on_start/on_cancelled/on_complete
+		### Effects that happen when construction of the building starts/cancels/finishes.
+		## cardinality = 0..1
+		## replace_scope = { root = province character = character }
+		on_start = single_alias_right[effect_clause]
+		### Effects that happen when construction of the building starts/cancels/finishes.
+		## cardinality = 0..1
+		## replace_scope = { root = province character = character }
+		on_cancelled = single_alias_right[effect_clause]
+
+		subtype[!special] = {
+			### How desirable is the building for the AI
+			ai_value = single_alias_right[chance_block]
+
+			### How long does it take to construct the building
+			construction_time = alias_keys_field[int_value]
+		}
+
+		subtype[special] = {
+			### How desirable is the building for the AI
+			## cardinality = 0..1
+			ai_value = single_alias_right[chance_block]
+
+			### How long does it take to construct the building
+			## cardinality = 0..1
+			construction_time = alias_keys_field[int_value]
+		}
 	}
-
-	### A modifier applied if the holder's dynasty of the county has a specific perk
-    ## cardinality = 0..1
-	county_dynasty_modifier = {
-		county_holder_dynasty_perk = <dynasty_perk>
-        alias_name[modifier] = alias_match_left[modifier]
-	}
-
-	### A modifier applied to the county holder
-	## cardinality = 0..1
-    county_holder_character_modifier = {
-        alias_name[modifier] = alias_match_left[modifier]
-	}
-	
-	### Building flags
-	## cardinality = 0..inf
-    flag = value_set[building_flag]
-
-	### Effects applied on building completion
-	### scopes: root refers to the buildings province
-	## cardinality = 0..1
-    on_complete = single_alias_right[effect_clause]
-	
-	### How desirable is the building for the AI
-	ai_value = single_alias_right[chance_block]
-	
-	### If this is set to yes, the building will be used for figuring out which background asset (walls/no walls etc) should be shown
-	## cardinality = 0..1
-    is_graphical_background = bool
-
-	### Brief: on_start/on_cancelled/on_complete
-	### Effects that happen when construction of the building starts/cancels/finishes.
-	## cardinality = 0..1
-    ## replace_scope = { root = province character = character }
-    on_start = single_alias_right[effect_clause]
-    ### Effects that happen when construction of the building starts/cancels/finishes.
-    ## cardinality = 0..1
-    ## replace_scope = { root = province character = character }
-	on_cancelled = single_alias_right[effect_clause]
 }
 

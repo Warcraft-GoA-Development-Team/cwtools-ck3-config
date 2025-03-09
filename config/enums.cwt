@@ -223,6 +223,56 @@ enums = {
         full
         empty
     }
+    enum[scope_type_token] = {
+        value
+        bool
+        flag
+        color
+        character
+        landed_title
+        activity
+        secret
+        province
+        scheme
+        combat
+        combat_side
+        title_and_vassal_change
+        faith
+        great_holy_war
+        religion
+        war
+        story_cycle
+        casus_belli
+        dynasty
+        dynasty_house
+        faction
+        culture
+        army
+        holy_order
+        council_task
+        mercenary_company
+        culture_group
+        inspiration
+        court_amenity_category
+        accolade
+        travel_plan
+        character_memory
+        culture_pillar
+        culture_tradition
+        artifact
+        epidemic_type
+        epidemic
+        legend_type
+        legend
+        domicile
+        geographical_region
+        agent_slot
+        task_contract
+        task_contract_type
+        regiment
+        casus_belli_type
+        trait
+    }
 }
 
 # Duration alias for LHS use:

@@ -78,12 +78,12 @@ single_alias[scripted_animation] = {
         ## cardinality = 1..1
         trigger = single_alias_right[trigger_clause]
         ## cardinality = 1..1
-        animation = alias_name[animation]
+        animation = alias_keys_field[animation]
         ## cardinality = 1..1
-        animation = { alias_name[animation] }
+        animation = { alias_keys_field[animation] }
     }
     ## cardinality = 0..1
-    animation = alias_name[animation]
+    animation = alias_keys_field[animation]
 }
 
 single_alias[portrait_modifier] =  {

@@ -768,4 +768,7 @@ modifiers = {
     monthly_influence = character
     movement_speed_land_raiding = character
     character_travel_speed_mult = character
+    political_scheme_phase_duration_add = character
+    enemy_hostile_scheme_phase_duration_add = character
+    owned_scheme_secrecy_add = character
 }
