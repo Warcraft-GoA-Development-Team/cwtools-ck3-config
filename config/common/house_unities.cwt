@@ -2,9 +2,11 @@ types = {
     type[house_unity] = {
         path = "common/house_unities"
     }
+    ## type_key_filter <> { default cumulative flag }
     type[house_unity_stage] = {
         path = "common/house_unities"
-        skip_root_key = yes
+        base_type = house_unity
+        skip_root_key = any
     }
     type[house_unity_parameter] = {
         path = "common/house_unities"
@@ -20,41 +22,40 @@ house_unity = {
     ### min value for the house unity type
     min_value = int_value_field
 
-    #cardinality = 1..inf
-    <house_unity_stage> = {
-        ### how many point the stage takes. Must be more that 0. Otherwise the stage will be ignored
-        ## cardinality = 0..1
-        points = int_value_field
-        
-        ### set icon name for the house unity stage template
-        ## cardinality = 0..1
-        icon = scalar
+}
 
-        ### parameters that affect all characters in a unity
-        ## cardinality = 0..1
-        parameters = {
-            ## cardinality = 1..inf
-            scalar
-        }
-        
-        ### modifiers applied on all characters in a unity
-        ## cardinality = 0..1
-        modifiers = single_alias_right[character_modifier]
+house_unity_stage = {
+    ### how many point the stage takes. Must be more that 0. Otherwise the stage will be ignored
+    ## cardinality = 0..1
+    points = int_value_field
 
-        ### the effect is called when the stage starts
-        ## replace_scope = { root = house_unity }
-        on_start = single_alias_right[effect_clause]
+    ### set icon name for the house unity stage template
+    ## cardinality = 0..1
+    icon = scalar
 
-        ### the effect is called when the stage ends
-        ## replace_scope = { root = house_unity }
-        on_end = single_alias_right[effect_clause]
-
-        ### list of decisions for the house unity stage. They will be shown in house unity tab
-        ## cardinality = 0..1
-        decisions = { 
-            ## cardinality = 1..inf
-            <decision>
-        }
+    ### parameters that affect all characters in a unity
+    ## cardinality = 0..1
+    parameters = {
+        ## cardinality = 1..inf
+        value_set[house_unity_parameter] = bool
     }
 
+    ### modifiers applied on all characters in a unity
+    ## cardinality = 0..1
+    modifiers = single_alias_right[character_modifier]
+
+    ### the effect is called when the stage starts
+    ## replace_scope = { root = house_unity }
+    on_start = single_alias_right[effect_clause]
+
+    ### the effect is called when the stage ends
+    ## replace_scope = { root = house_unity }
+    on_end = single_alias_right[effect_clause]
+
+    ### list of decisions for the house unity stage. They will be shown in house unity tab
+    ## cardinality = 0..1
+    decisions = {
+        ## cardinality = 1..inf
+        <decision>
+    }
 }

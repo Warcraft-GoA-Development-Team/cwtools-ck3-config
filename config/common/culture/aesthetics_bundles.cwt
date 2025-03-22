@@ -28,7 +28,7 @@ aesthetic = {
     ### Clothing graphics
     clothing_gfx = { 
         ## cardinality = 1..inf
-        enum[clothing_gfx]
+        value[clothing_gfx]
     }
     ### Unit Graphics
     unit_gfx = { 

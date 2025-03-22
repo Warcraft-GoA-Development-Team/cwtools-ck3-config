@@ -19,7 +19,7 @@ diarchy_mandate = {
 }
 
 
-diarchy_type = {
+diarchy = {
 	### trigger has to be true when diarchy starts
 	start = single_alias_right[trigger_clause]
 
@@ -41,42 +41,45 @@ diarchy_type = {
 	loyalty_score = single_alias_right[int_conditional_formula]
 
 	### diarchy type allows seletion of one active mandate out of several available ones
-    ## cardinality = 0...inf
+    ## cardinality = 0..inf
 	mandate = <diarchy_mandate>
 
 	### Diarchy can have multiple power levels that unlock diarch powers
-	## cardinality = 0...inf
+	## cardinality = 0..inf
     power_level = {
 
 		### Required scales of power swing value to activate the option
         swing = int_value_field
 
 		### Parameter name - dynamic token. Use together with triggers to check if active diarchy has certain parameter enabled. can have several parameters on the same power level
-		## cardinality = 0...inf
-        parameter = scalar
+		## cardinality = 0..inf
+        parameter = value_set[diarchy_parameter]
+
+		## cardinality = 0..inf
+        hidden_parameter = value_set[diarchy_parameter]
 	}
 
 	### scales of power swing trends towards this scripted value by DIARCHY_MONTHLY_POWER_CHANGE every month
-    ## cardinality = 0...1
+    ## cardinality = 0..1
 	swing_balance = single_alias_right[int_conditional_formula]
 
 	### character interaction is used to end this type of diarchy and accessible via diarchy window
-    ## cardinality = 0...1
+    ## cardinality = 0..1
 	end_interation = <character_interaction>
 
 	### Modifier applied to the liege of the character in this position. Can take a "scale" parameter to scale by (a script value; see _script_values.info)
-    ## cardinality = 0...1
+    ## cardinality = 0..1
 	liege_modifier = {
-        ## cardinality = 0...1
+        ## cardinality = 0..1
         scale = single_alias_right[int_conditional_formula]
         ## cardinality = 1..inf
         alias_name[modifier] = alias_match_left[modifier]
     }
 
 	### Modifier applied to the active diarch. Can take a "scale" parameter to scale by (a script value; see _script_values.info)
-    ## cardinality = 0...1
+    ## cardinality = 0..1
 	diarch_modifier = {
-        ## cardinality = 0...1
+        ## cardinality = 0..1
         scale = single_alias_right[int_conditional_formula]
         ## cardinality = 1..inf
         alias_name[modifier] = alias_match_left[modifier]

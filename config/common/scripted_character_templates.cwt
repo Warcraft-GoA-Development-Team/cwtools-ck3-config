@@ -8,22 +8,35 @@ types = {
 
 ## replace_scope = { root = character }
 scripted_character_template = {
-    
-    age = {<int_value_field> <int_value_field> }
+    ##cardinality = 0..1
+    name = localisation
+
+    ##cardinality = 0..1
+    age = {
+        ##cardinality = 0..2
+        int_value_field
+        ##cardinality = 0..2
+        alias_keys_field[int_value]
+    }
+    ##cardinality = 0..1
+    age = int_value_field
+    ##cardinality = 0..1
+    age = alias_keys_field[int_value]
 
     ##cardinality = 0..1
     gender = enum[genders]
     ##cardinality = 0..1
     gender_female_chance = int_value_field
+    ##cardinality = 0..1
+    gender_female_chance = alias_keys_field[int_value]
+
+    ##cardinality = 0..1
+    dynasty = <dynasty>
+    ##cardinality = 0..1
+    dynasty = none
 
     ##cardinality = 0..inf
-    random_traits_list = {
-        count = int
-        ##cardinality = 0..inf
-        <trait> = single_alias_right[chance_block]
-        ##cardinality = 0..inf
-        <trait> = {}
-    }
+    random_traits_list = single_alias_right[random_traits_list]
 
     ##cardinality = 0..inf
     trait = <trait>
@@ -32,22 +45,122 @@ scripted_character_template = {
     faith = <faith>
     ##cardinality = 0..1
     culture = <culture>
+    ##cardinality = 0..1
+    faith = scope[faith]
+    ##cardinality = 0..1
+    culture = scope[culture]
+    ## cardinality = 0..1
+    random_faith = {
+        ## cardinality = 0..inf
+        <faith> = {
+            ## cardinality = 0..1
+            trigger = {
+                ## cardinality = 1..inf
+                alias_name[trigger] = alias_match_left[trigger]
+            }
+            weight = single_alias_right[chance_block]
+        }
+        ## cardinality = 0..inf
+        scope[faith] = {
+            ## cardinality = 0..1
+            trigger = {
+                ## cardinality = 1..inf
+                alias_name[trigger] = alias_match_left[trigger]
+            }
+            weight = single_alias_right[chance_block]
+        }
+    }
+    ## cardinality = 0..1
+    random_culture = {
+        ## cardinality = 0..inf
+        <culture> = {
+            ## cardinality = 0..1
+            trigger = {
+                ## cardinality = 1..inf
+                alias_name[trigger] = alias_match_left[trigger]
+            }
+            weight = single_alias_right[chance_block]
+        }
+        ## cardinality = 0..inf
+        scope[culture] = {
+            ## cardinality = 0..1
+            trigger = {
+                ## cardinality = 1..inf
+                alias_name[trigger] = alias_match_left[trigger]
+            }
+            weight = single_alias_right[chance_block]
+        }
+    }
 
     ##cardinality = 0..1
     random_traits = bool
 
     ##cardinality = 0..1
-    learning = {<int_value_field> <int_value_field>}
+    learning = int_value_field
     ##cardinality = 0..1
-    intrigue = {<int_value_field> <int_value_field>}
+    learning = alias_keys_field[int_value]
     ##cardinality = 0..1
-    stewardship = {<int_value_field> <int_value_field>}
+    learning = {
+        ##cardinality = 0..2
+        int_value_field
+        ##cardinality = 0..2
+        alias_keys_field[int_value]
+    }
     ##cardinality = 0..1
-    diplomacy = {<int_value_field> <int_value_field>}
+    intrigue = int_value_field
     ##cardinality = 0..1
-    martial = {<int_value_field> <int_value_field>}
+    intrigue = alias_keys_field[int_value]
     ##cardinality = 0..1
-    prowess = {<int_value_field> <int_value_field>}
+    intrigue = {
+        ##cardinality = 0..2
+        int_value_field
+        ##cardinality = 0..2
+        alias_keys_field[int_value]
+    }
+    ##cardinality = 0..1
+    stewardship = int_value_field
+    ##cardinality = 0..1
+    stewardship = alias_keys_field[int_value]
+    ##cardinality = 0..1
+    stewardship = {
+        ##cardinality = 0..2
+        int_value_field
+        ##cardinality = 0..2
+        alias_keys_field[int_value]
+    }
+    ##cardinality = 0..1
+    diplomacy = int_value_field
+    ##cardinality = 0..1
+    diplomacy = alias_keys_field[int_value]
+    ##cardinality = 0..1
+    diplomacy = {
+        ##cardinality = 0..2
+        int_value_field
+        ##cardinality = 0..2
+        alias_keys_field[int_value]
+    }
+    ##cardinality = 0..1
+    martial = int_value_field
+    ##cardinality = 0..1
+    martial = alias_keys_field[int_value]
+    ##cardinality = 0..1
+    martial = {
+        ##cardinality = 0..2
+        int_value_field
+        ##cardinality = 0..2
+        alias_keys_field[int_value]
+    }
+    ##cardinality = 0..1
+    prowess = int_value_field
+    ##cardinality = 0..1
+    prowess = alias_keys_field[int_value]
+    ##cardinality = 0..1
+    prowess = {
+        ##cardinality = 0..2
+        int_value_field
+        ##cardinality = 0..2
+        alias_keys_field[int_value]
+    }
 
     after_creation = single_alias_right[effect_clause]
 

@@ -75,6 +75,10 @@ legend_type = {
             ### Higher quality levels must have >= max provinces than the previous one and be > 0
             max_provinces = alias_keys_field[int_value]
 
+            ### Maximum number of provinces an legend of this quality can infect
+            ### Higher quality levels must have >= max provinces than the previous one and be > 0
+            max_provinces = value_field
+
             ### Monthly cost for owning a legend of this quality level
             ### root = character owning
             ## replace_scope = { root = character legend = legend }
@@ -135,10 +139,19 @@ legend_type = {
                 ## replace_scope = { root = character }
                 create = alias_keys_field[int_value]
 
+                ### root = character with the legend seed
+                ## replace_scope = { root = character }
+                create = value_field
+
                 ### root = character who can promote
                 ### scope:legend = the legend to promote
                 ## replace_scope = { root = character legend = legend }
                 promote = single_alias_right[score_formula]
+
+                ### root = character who can promote
+                ### scope:legend = the legend to promote
+                ## replace_scope = { root = character legend = legend }
+                promote = value_field
 
                 ### root = character who can promote
                 ### scope:legend = the legend to promote
@@ -155,6 +168,11 @@ legend_type = {
                 ## replace_scope = { root = character legend = legend }
                 take_unowned = alias_keys_field[int_value]
 
+                ### root = character who can take a legend
+                ### scope:legend = the legend to take ownership
+                ## replace_scope = { root = character legend = legend }
+                take_unowned = value_field
+
                 ### root = legend owner
                 ### scope:legend = the legend
                 ## replace_scope = { root = character legend = legend }
@@ -167,6 +185,11 @@ legend_type = {
 
                 ### root = legend owner
                 ### scope:legend = the legend
+                ## replace_scope = { root = character legend = legend }
+                upgrade = value_field
+
+                ### root = legend owner
+                ### scope:legend = the legend
                 ### scope:can_afford_current_level (yes/no) = if the owner can currently afford the current levels monthly costs
                 ## replace_scope = { root = character legend = legend can_afford_current_level = bool }
                 complete = single_alias_right[score_formula]
@@ -176,6 +199,12 @@ legend_type = {
                 ### scope:can_afford_current_level (yes/no) = if the owner can currently afford the current levels monthly costs
                 ## replace_scope = { root = character legend = legend can_afford_current_level = bool }
                 complete = alias_keys_field[int_value]
+
+                ### root = legend owner
+                ### scope:legend = the legend
+                ### scope:can_afford_current_level (yes/no) = if the owner can currently afford the current levels monthly costs
+                ## replace_scope = { root = character legend = legend can_afford_current_level = bool }
+                complete = value_field
             }
         }
     }

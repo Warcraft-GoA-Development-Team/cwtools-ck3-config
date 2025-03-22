@@ -12,4 +12,6 @@ feature = {
     weight = single_alias_right[score_formula]
     ## cardinality = 0..1
     weight = alias_keys_field[int_value]
+    ## cardinality = 0..1
+    weight = value_field
 }

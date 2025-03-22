@@ -61,9 +61,13 @@ event = {
         desc = single_alias_right[complex_desc]
     }
 
+    ## cardinality = 0..1
+    cooldown = single_alias_right[duration_block]
+
     subtype[!hidden] = {
         title = localisation
         title = single_alias_right[complex_desc]
+        ## cardinality = 0..1
         picture = <event_picture>
         desc = localisation
         desc = single_alias_right[complex_desc]
@@ -88,6 +92,14 @@ event = {
 
     ## cardinality = 0..inf
     trigger = single_alias_right[trigger_clause]
+
+    ## cardinality = 0..1
+    window = scalar
+    ## cardinality = 0..1
+    widget = {
+        gui = scalar
+        container = scalar
+    }
 
     ## cardinality = 0..inf
     option = {
@@ -145,21 +157,31 @@ event = {
     ## cardinality = 0..1
     left_portrait = single_alias_right[event_portrait]
     ## cardinality = 0..1
-	right_portrait = scope[character]
+    right_portrait = scope[character]
     ## cardinality = 0..1
-	right_portrait = single_alias_right[event_portrait]
+    right_portrait = single_alias_right[event_portrait]
     ## cardinality = 0..1
-	lower_left_portrait = scope[character]
+    center_portrait = scope[character]
     ## cardinality = 0..1
-	lower_left_portrait = single_alias_right[event_portrait]
+    center_portrait = single_alias_right[event_portrait]
     ## cardinality = 0..1
-	lower_center_portrait = scope[character]
+    lower_left_portrait = scope[character]
     ## cardinality = 0..1
-	lower_center_portrait = single_alias_right[event_portrait]
+    lower_left_portrait = single_alias_right[event_portrait]
     ## cardinality = 0..1
-	lower_right_portrait = scope[character]
+    lower_center_portrait = scope[character]
     ## cardinality = 0..1
-	lower_right_portrait = single_alias_right[event_portrait]
+    lower_center_portrait = single_alias_right[event_portrait]
+    ## cardinality = 0..1
+    lower_right_portrait = scope[character]
+    ## cardinality = 0..1
+    lower_right_portrait = single_alias_right[event_portrait]
+
+    ## cardinality = 0..1
+    artifact = {
+        target = scope[artifact]
+        position = enum[event_portrait_position]
+    }
 
     ## cardinality = 0..1
     theme = <event_theme>
@@ -190,6 +212,11 @@ single_alias[event_portrait] = {
     character = scope[character]
     ## cardinality = 0..1
     animation = alias_keys_field[animation]
+    ## cardinality = 0..1
+    outfit_tags = {
+        ## cardinality = 0..1
+        value[outfit_tag]
+    }
     ## cardinality = 0..inf
     triggered_animation = {
         trigger = single_alias_right[trigger_clause]
@@ -200,3 +227,13 @@ single_alias[event_portrait] = {
     trigger = single_alias_right[trigger_clause]
 }
 
+enums = {
+    enum[event_portrait_position] = {
+        left_portrait
+        right_portrait
+        center_portrait
+        lower_left_portrait
+        lower_center_portrait
+        lower_right_portrait
+    }
+}

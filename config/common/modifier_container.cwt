@@ -74,7 +74,15 @@ modifier_container = {
 		### Scripted value - can be named value or direct math here
 		### Root scope is the object that's going to get the modifier
 		### Scripted value top level description will be added to modifier description
-		value = single_alias_right[int_conditional_formula]
+		value = single_alias_right[score_formula]
+        ### Scripted value - can be named value or direct math here
+        ### Root scope is the object that's going to get the modifier
+        ### Scripted value top level description will be added to modifier description
+		value = alias_keys_field[int_value]
+        ### Scripted value - can be named value or direct math here
+        ### Root scope is the object that's going to get the modifier
+        ### Scripted value top level description will be added to modifier description
+		value = value_field
 
 		### Loc key that's used for base level entry, to show alongside with the scaled value
 		desc = localisation

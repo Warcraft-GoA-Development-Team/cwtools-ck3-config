@@ -24,3 +24,7 @@ alias[weight:<scripted_modifier>] = {
     ## cardinality = 0..inf
     $parameter = $parameter_value
 }
+
+alias[weight:<scripted_modifier.ai_target_modifier>] = {
+    VALUE = int_value_field
+}

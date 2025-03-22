@@ -31,7 +31,8 @@ culture = {
     traditions = single_alias_right[tradition_list]
     
     # Does not seem to be used in base game.
-    dlc_fallback_pillar {
+    ## cardinality = 0..inf
+    dlc_fallback_pillar = {
         ## cardinality = 1..1
         ### Replace with this pillar if you lack the DLC feature
         fallback = <pillar>
@@ -70,7 +71,7 @@ culture = {
     ### Clothing graphics
     clothing_gfx = { 
         ## cardinality = 1..inf
-        enum[clothing_gfx]
+        value_set[clothing_gfx]
     }
     ### Unit Graphics
     unit_gfx = { 

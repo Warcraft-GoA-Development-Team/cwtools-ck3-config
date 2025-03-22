@@ -13,21 +13,29 @@ single_alias[cost] = {
     gold = single_alias_right[score_formula]
     ## cardinality = 0..1
     gold = alias_keys_field[int_value]
+    ## cardinality = 0..1
+    gold = value_field
 
     ## cardinality = 0..1
     piety = single_alias_right[score_formula]
     ## cardinality = 0..1
     piety = alias_keys_field[int_value]
+    ## cardinality = 0..1
+    piety = value_field
 
     ## cardinality = 0..1
     prestige = single_alias_right[score_formula]
     ## cardinality = 0..1
     prestige = alias_keys_field[int_value]
+    ## cardinality = 0..1
+    prestige = value_field
 
     ## cardinality = 0..1
     renown = single_alias_right[score_formula]
     ## cardinality = 0..1
     renown = alias_keys_field[int_value]
+    ## cardinality = 0..1
+    renown = value_field
 
     ## cardinality = 0..1
     round = bool
@@ -123,7 +131,7 @@ single_alias[title_list] = {
 single_alias[added_modifier] = {
     modifier = <modifier_container>
     ## cardinality = 0..1
-    enum[duration] = int
+    enum[duration] = int_value_field
     ## cardinality = 0..1
     enum[duration] = alias_keys_field[int_value]
 }
@@ -143,10 +151,12 @@ single_alias[random_traits_list] = {
     ## cardinality = 0..inf
     <trait> = {
         ## cardinality = 0..1
-        weight = alias_match_left[weight]
+        weight = single_alias_right[weight_block]
         ## cardinality = 0..inf
         alias_name[trigger] = alias_match_left[trigger]
     }
+    ##cardinality = 0..inf
+    <trait> = {}
 }
 
 single_alias[character_culture_modifier] = {
@@ -192,13 +202,16 @@ single_alias[quick_trigger_block] = {
 single_alias[duration_block] = {
     ##cardinality = 0..1
     enum[duration] = alias_keys_field[int_value]
+    ## cardinality = 0..1
+    enum[duration] = int_value_field
     ##cardinality = 0..1
-    enum[duration] = single_alias_right[int_conditional_formula]
+    enum[duration] = single_alias_right[score_formula]
     ##cardinality = 0..1
     enum[duration] = { int int }
 }
 
 alias[duration:enum[duration]] = alias_keys_field[int_value]
+alias[duration:enum[duration]] = int_value_field
 alias[duration:enum[duration]] = single_alias_right[int_conditional_formula]
 alias[duration:enum[duration]] = { int int }
 
@@ -253,6 +266,25 @@ single_alias[decision_widget] = {
         ## cardinality = 0..1
         flat = bool
         ai_chance = single_alias_right[score_formula]
+    }
+}
+
+# TODO: Properly implement
+single_alias[dna_modiifer] = {
+    ## cardinality = 0..inf
+    morph = {
+        ## cardinality = 1..inf
+        scalar = scalar
+    }
+    ## cardinality = 0..inf
+    color = {
+        ## cardinality = 1..inf
+        scalar = scalar
+    }
+    ## cardinality = 0..inf
+    accessory = {
+        ## cardinality = 1..inf
+        scalar = scalar
     }
 }
 

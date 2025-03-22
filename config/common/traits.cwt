@@ -125,25 +125,8 @@ trait = {
     ### Does this trait preclude inheritance [Default: no]
     blocks_from_claim_inheritance_from_dynasty = bool
 
-    # TODO: Implement dna_modifiers. Probably as an alias.
     ## cardinality = 0..1
-    dna_modifiers = {
-        ## cardinality = 0..inf
-        morph = {
-            ## cardinality = 1..inf
-            scalar = scalar
-        }
-        ## cardinality = 0..inf
-        color = {
-            ## cardinality = 1..inf
-            scalar = scalar
-        }
-        ## cardinality = 0..inf
-        accessory = {
-            ## cardinality = 1..inf
-            scalar = scalar
-        }
-    }
+    dna_modifiers = single_alias_right[dna_modiifer]
 
     ## cardinality = 0..1
     ### Apply this genetic trait to anyone who gains this trait

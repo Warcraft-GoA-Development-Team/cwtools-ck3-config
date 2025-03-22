@@ -96,13 +96,25 @@ building = {
 		## cardinality = 0..1
 		levy = alias_keys_field[int_value]
 
+		### How many levies does the building give
+		## cardinality = 0..1
+		levy = value_field
+
 		### How much garrison does the building give
 		## cardinality = 0..1
 		max_garrison = alias_keys_field[int_value]
 
+		### How much garrison does the building give
+		## cardinality = 0..1
+		max_garrison = value_field
+
 		### How much garrison regains a percentage of its maximal garrison equal to the garrison reinforcement rate
 		## cardinality = 0..1
 		garrison_reinforcement_factor = alias_keys_field[int_value]
+
+		### How much garrison regains a percentage of its maximal garrison equal to the garrison reinforcement rate
+		## cardinality = 0..1
+		garrison_reinforcement_factor = value_field
 
 		### Specifies whether this is a regular building, a special building, or a duchy capital building. Regular by default
 		## cardinality = 0..1
@@ -130,9 +142,15 @@ building = {
 		## cardinality = 0..1
 		cost_gold = alias_keys_field[int_value]
 		## cardinality = 0..1
+		cost_gold = value_field
+		## cardinality = 0..1
 		cost_prestige = alias_keys_field[int_value]
 		## cardinality = 0..1
+		cost_prestige = value_field
+		## cardinality = 0..1
 		cost_piety = alias_keys_field[int_value]
+		## cardinality = 0..1
+		cost_piety = value_field
 
 		### How much cost does the building cost
 		## cardinality = 0..1
@@ -259,6 +277,8 @@ building = {
 
 			### How long does it take to construct the building
 			construction_time = alias_keys_field[int_value]
+			### How long does it take to construct the building
+			construction_time = value_field
 		}
 
 		subtype[special] = {
@@ -269,6 +289,9 @@ building = {
 			### How long does it take to construct the building
 			## cardinality = 0..1
 			construction_time = alias_keys_field[int_value]
+			### How long does it take to construct the building
+			## cardinality = 0..1
+			construction_time = value_field
 		}
 	}
 }

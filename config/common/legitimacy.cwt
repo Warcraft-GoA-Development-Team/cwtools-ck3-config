@@ -1,0 +1,55 @@
+types = {
+    type[legitimacy_type] = {
+        path = "game/common/legitimacy"
+    }
+}
+
+legitimacy_type = {
+    ### Should this legitimacy type apply to this playable ruler, evaluated daily for the player, yearly for AI
+    ### First valid one is selected
+    ### root = ruler character
+    is_valid = single_alias_right[trigger_clause]
+
+    ### What level the AI expects of a liege with this legitimacy type
+    ### root = vassal
+    ### scope:liege = liege character
+    ai_expected_level = alias_keys_field[int_value]
+
+    ### What level the AI expects of a liege with this legitimacy type
+    ### root = vassal
+    ### scope:liege = liege character
+    ai_expected_level = value_field
+
+    ### Opinion change for a vassal of their liege for each level below the vassal's expected legitimacy the liege is
+    ### root = opinion holder, person who has an opinion of target
+    ### scope:target = opinion target, aka the liege
+    below_expectations_opinion = alias_keys_field[int_value]
+
+    ### Opinion change for a vassal of their liege for each level below the vassal's expected legitimacy the liege is
+    ### root = opinion holder, person who has an opinion of target
+    ### scope:target = opinion target, aka the liege
+    below_expectations_opinion = value_field
+
+    ### Maximum value of legitimacy of this type, should be larger than the last threshold
+    max = alias_keys_field[int_value]
+
+    ### Maximum value of legitimacy of this type, should be larger than the last threshold
+    max = value_field
+
+    ### Multiple levels can be read in, the last one a ruler is >= will be the applied level
+    ### First level must have a threshold of 0
+    ## cardinality = 0..inf
+    level = {
+        ### root = ruler character
+        threshold = alias_keys_field[int_value]
+        ### root = ruler character
+        threshold = value_field
+
+        modifier = single_alias_right[modifier_list]
+
+        ### Flags to be checked with has_legitimacy_flag
+        ### Multiple can be read in
+        ## cardinality = 0..inf
+        flag = value_set[legitimacy_flag]
+    }
+}

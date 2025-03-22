@@ -137,13 +137,21 @@ casus_belli_type = {
 	## cardinality = 0..1
 	on_victory_desc = single_alias_right[complex_desc]
 	## cardinality = 0..1
+	on_victory_desc = localisation
+	## cardinality = 0..1
 	on_defeat_desc = single_alias_right[complex_desc]
 	## cardinality = 0..1
+	on_defeat_desc = localisation
+	## cardinality = 0..1
 	on_white_peace_desc = single_alias_right[complex_desc]
+	## cardinality = 0..1
+	on_white_peace_desc = localisation
 
 	### Undocumented
 	## cardinality = 0..1
 	on_invalidated_desc = single_alias_right[complex_desc]
+	## cardinality = 0..1
+	on_invalidated_desc = localisation
 	## cardinality = 0..1
 	should_invalidate = single_alias_right[trigger_clause]
     ### If this evaluates to true, only one title can be targeted
@@ -156,13 +164,16 @@ casus_belli_type = {
 
     ## replace_scope = {root = character attacker = character }
 	## cardinality = 0..1
+	## push_scope = character
 	allowed_for_character = single_alias_right[trigger_clause]
     ### Failing this one won't prevent displaying the CB
     ## replace_scope = {root = character attacker = character }
 	## cardinality = 0..1
+	## push_scope = character
 	allowed_for_character_display_regardless = single_alias_right[trigger_clause]
     ## replace_scope = {root = character attacker = character defender = character }
 	## cardinality = 0..1
+	## push_scope = character
 	allowed_against_character = single_alias_right[trigger_clause]
     ### Failing this one won't prevent displaying the CB
     ## replace_scope = {root = character attacker = character defender = character }
@@ -179,8 +190,9 @@ casus_belli_type = {
 	valid_to_start_display_regardless = single_alias_right[trigger_clause]
 
 	# scope:attacker, scope:defender, and scope:claimant. root is the title
-    ## replace_scope = {root = landed_title attacker = character defender = character claimant = character }
+    ## replace_scope = { root = landed_title attacker = character defender = character claimant = character }
 	## cardinality = 0..1
+	## push_scope = landed_title
 	is_allowed_claim_title = single_alias_right[trigger_clause]
 
     ### Determines what titles this CB can be used against. "none" if it targets a realm rather than a title
@@ -204,6 +216,8 @@ casus_belli_type = {
 	war_name_base = localisation
 	## cardinality = 0..1
 	my_war_name_base = localisation
+	## cardinality = 0..1
+	cb_name = localisation
 
 	## cardinality = 0..1
 	cb_name_no_target = localisation
@@ -289,9 +303,19 @@ casus_belli_type = {
 
 	### Script value, standard war scopes. Added to the hard-coded scoring from titles, if there are any
 	## cardinality = 0..1
-	ai_score = single_alias_right[int_conditional_formula]
+	ai_score = single_alias_right[score_formula]
 
 	### Script value, standard war scopes. Multiplied with the scoring from titles
 	## cardinality = 0..1
-	ai_score_mult = single_alias_right[int_conditional_formula]
+	ai_score_mult = single_alias_right[score_formula]
+}
+
+casus_belli_group = {
+	## cardinality = 0..1
+	should_check_for_interface_availability = bool
+	### Only fired by event
+	## cardinality = 0..1
+	can_only_start_via_script = bool
+	## cardinality = 0..1
+	allowed_for_character = single_alias_right[trigger_clause]
 }

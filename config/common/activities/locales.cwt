@@ -33,6 +33,7 @@ activity_locale = {
     ## push_scope = { root = character activity = activity host = character }
 	cooldown = {
         enum[duration] = alias_keys_field[int_value]
+        enum[duration] = value_field
     }
 
 	### Brief: visuals ( triggered reference block ) Visual widgets for the locale, multiple can be read in, first one is  picked from order they are read in. Reference is a file name (and top level widget name) in gui/activity_locale_widgets

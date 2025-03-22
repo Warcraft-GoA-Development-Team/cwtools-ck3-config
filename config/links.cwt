@@ -1442,6 +1442,51 @@ links = {
         input_scopes = character
         output_scope = any
     }
+    tier = {
+        type = value
+        input_scopes = landed_title
+        output_scope = any
+    }
+    highest_held_title_tier = {
+        type = value
+        input_scopes = character
+        output_scope = any
+    }
+    scheme_success_chance = {
+        type = value
+        input_scopes = scheme
+        output_scope = any
+    }
+    scheme_secrecy = {
+        type = value
+        input_scopes = scheme
+        output_scope = any
+    }
+    prowess_for_combat_event_opponent = {
+        type = value
+        input_scopes = character
+        output_scope = any
+    }
+    diarchy_swing = {
+        type = value
+        input_scopes = character
+        output_scope = any
+    }
+    prestige_level = {
+        type = value
+        input_scopes = character
+        output_scope = any
+    }
+    influence = {
+        type = value
+        input_scopes = character
+        output_scope = any
+    }
+    title_held_years = {
+        type = value
+        input_scopes = landed_title
+        output_scope = any
+    }
 
     ### How far away is the province/barony/county from the target? Measured in map pixels. Squared for performance reasons (square root is expensive). squared_distance = { target = some province/barony/county value > 10000 }
     squared_distance = {

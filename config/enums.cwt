@@ -146,20 +146,6 @@ enums = {
         mena_unit_gfx
         western_unit_gfx
     }
-    enum[clothing_gfx] = {
-        mena_clothing_gfx
-        northern_clothing_gfx
-        indian_clothing_gfx
-        mongol_clothing_gfx
-        byzantine_clothing_gfx
-        african_clothing_gfx
-        iberian_christian_clothing_gfx
-        iberian_muslim_clothing_gfx
-        dde_abbasid_clothing_gfx
-        western_clothing_gfx
-        dde_hre_clothing_gfx
-        fp1_norse_clothing_gfx
-    }
     enum[coa_gfx] = {
         western_coa_gfx
         norwegian_coa_gfx

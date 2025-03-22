@@ -11,18 +11,26 @@ single_alias[formula] = {
 }
 
 alias[arithmetic_operation:add] = alias_keys_field[int_value]
+alias[arithmetic_operation:add] = value_field
 alias[arithmetic_operation:subtract] = alias_keys_field[int_value]
+alias[arithmetic_operation:subtract] = value_field
 alias[arithmetic_operation:multiply] = alias_keys_field[int_value]
+alias[arithmetic_operation:multiply] = value_field
 alias[arithmetic_operation:divide] = alias_keys_field[int_value]
+alias[arithmetic_operation:divide] = value_field
 alias[arithmetic_operation:value] = alias_keys_field[int_value]
+alias[arithmetic_operation:value] = value_field
 alias[arithmetic_operation:max] = alias_keys_field[int_value]
+alias[arithmetic_operation:max] = value_field
 alias[arithmetic_operation:min] = alias_keys_field[int_value]
+alias[arithmetic_operation:min] = value_field
 
 alias[arithmetic_operation:round] = yes
 alias[arithmetic_operation:ceiling] = yes
 alias[arithmetic_operation:floor] = yes
 
 alias[int_value:value_field] = value_field
+alias[int_value:value_field] = int_value_field
 alias[int_value:<script_value>] = <script_value>
 alias[int_value:<static_value>] = <static_value>
 alias[int_value:$define_reference] = $define_reference
@@ -32,15 +40,19 @@ alias[arithmetic_operation:save_temporary_value_as] = value_set[variable]
 
 alias[arithmetic_operation:fixed_range] = {
     min = alias_keys_field[int_value]
+    min = value_field
     min = single_alias_right[formula]
     max = alias_keys_field[int_value]
+    max = value_field
     max = single_alias_right[formula]
 }
 
 alias[arithmetic_operation:integer_range] = {
     min = alias_keys_field[int_value]
+    min = value_field
     min = single_alias_right[formula]
     max = alias_keys_field[int_value]
+    max = value_field
     max = single_alias_right[formula]
 }
 
@@ -141,7 +153,7 @@ single_alias[int_conditional_formula] = {
 }
 
 single_alias[float_conditional_formula] = {
-    value = float_value_field
+    value = value_field
     alias_name[score_operation] = alias_match_left[score_operation]
 
 

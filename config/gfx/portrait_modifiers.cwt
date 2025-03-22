@@ -1,0 +1,25 @@
+types = {
+    type[portrait_modifier] = {
+        path = "game/gfx/portraits/portrait_modifiers"
+    }
+}
+
+portrait_modifier = {
+    ## cardinality = 0..1
+    usage = enum[portrait_modiifer_usage]
+
+    ## cardinality = 1..inf
+    scalar = {
+        ## cardinality = 0..1
+        dna_modifiers = single_alias_right[dna_modiifer]
+
+        ## cardinality = 0..1
+        outfit_tags = { value_set[outfit_tag] }
+    }
+}
+
+enums = {
+    enum[portrait_modiifer_usage] = {
+        game
+    }
+}
