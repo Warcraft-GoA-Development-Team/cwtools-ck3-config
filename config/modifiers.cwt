@@ -5,6 +5,7 @@ modifiers = {
     intrigue = character
     learning = character
     prowess = character
+    prowess_no_portrait = character
     negate_diplomacy_penalty_add = character
     negate_martial_penalty_add = character
     negate_stewardship_penalty_add = character

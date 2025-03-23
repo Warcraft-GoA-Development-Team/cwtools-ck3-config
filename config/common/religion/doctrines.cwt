@@ -92,7 +92,10 @@ doctrine_group = {
 single_alias[doctrine_param] = {
     ## cardinality = 0..inf
     ### Can define user parameters that can be referenced in the faith scope. Localised to doctrine_parameter_ + name
-    scalar = scalar
+    scalar = value_field
+    ## cardinality = 0..inf
+    ### Can define user parameters that can be referenced in the faith scope. Localised to doctrine_parameter_ + name
+    scalar = bool
     # Unknown whether the int values here are int_value_fields yet
     ## cardinality = 0..1
     minimum_fervor = int # Is this is a value_field?
@@ -119,7 +122,7 @@ single_alias[doctrine_param] = {
     ## cardinality = 0..inf
     hostility_override_<doctrine> = int
     ## cardinality = 0..inf
-    opinion_of_<doctrine_param> = int
+    opinion_of_<doctrine_param> = int # TODO
     ## cardinality = 0..1
     piety_from_long_peace = float
     ## cardinality = 0..inf

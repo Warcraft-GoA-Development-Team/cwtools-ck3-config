@@ -14,20 +14,25 @@ tradition = {
     # cardinality = 1..1
     layers = {
         ## cardinality = 0..inf
-        <int> = scalar
+        int = scalar # TODO
         ## cardinality = 0..1
         0 = enum[trad_layer_background]
         ## cardinality = 0..1
         1 = enum[trad_layer_pattern]
         ## cardinality = 0..1
-        4 = icon[gfx/interface/icons/culture_tradition/4-items]
+        4 = filepath[game/gfx/interface/icons/culture_tradition/4-items/,]
     }
 
     ## cardinality = 0..1
     is_shown = single_alias_right[trigger_clause]
 
     ## cardinality = 0..1
-    parameters = single_alias_right[tradition_parameters]
+    parameters = {
+        ## cardinality = 0..inf
+        value_set[cultural_parameter] = bool
+        ## cardinality = 0..inf
+        value_set[cultural_parameter] = value_field
+    }
 
     ## cardinality = 0..1
     character_modifier = single_alias_right[character_modifier]
@@ -56,14 +61,7 @@ tradition = {
 
     ## cardinality = 0..1
     ## replace_scope = { root = culture character = character}
-    ai_will_do = single_alias_right[int_conditional_formula]
-}
-
-single_alias[tradition_parameters] = {
-    ## cardinality = 0..inf
-    value_set[cultural_parameter] = scalar
-    ## cardinality = 0..inf
-    value[cultural_parameter] = scalar
+    ai_will_do = single_alias_right[score_formula]
 }
 
 

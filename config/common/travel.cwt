@@ -57,7 +57,7 @@ travel_option = {
 	### Brief: ai_will_do (scripted value int32)
 	### How likely is the AI to pick this option if valid? Options will be selected using weighted random. Options will be re-evaluated after each option is added.
     ## replace_scope = { root = travel_plan highest_danger_value = int }
-	ai_will_do = single_alias_right[int_conditional_formula]
+	ai_will_do = single_alias_right[score_formula]
 
 	### Select which court characters are added to the travel entourage when this option is added. Weighted list is evaluated until all values are negative, or `max` is reached.
     
@@ -66,7 +66,7 @@ travel_option = {
 		# root = character in the travel plan owners' court
 		# scope:owner = character owning the travel plan
         ## replace_scope = { root = character owner = character}
-		weight = single_alias_right[int_conditional_formula]
+		weight = single_alias_right[score_formula]
 
 		### Up to how many characters to select for a player
 		max = int

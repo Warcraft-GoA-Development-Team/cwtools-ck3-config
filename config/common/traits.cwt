@@ -251,7 +251,7 @@ trait = {
         ## cardinality = 0..1
         ##push_scope = faith
         ### What boolean doctrine parameter to check for
-        parameter = scalar
+        parameter = enum[doctrine_param]
         #parameter = <parameter>
         
         ## cardinality = 1..1

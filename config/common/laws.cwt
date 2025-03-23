@@ -120,7 +120,7 @@ law_group = {
     ## cardinality = 0..1
     ## push_scope = character
     ### Script value in ruler scope. If above 0, the AI will enact this law if able. Law enactment is checked in the RARE_TASK_TICK. If multiple laws are possible, the AI will enact the one with the highest score.
-    ai_will_do = single_alias_right[int_conditional_formula]
+    ai_will_do = single_alias_right[score_formula]
 }
 
 enums = {

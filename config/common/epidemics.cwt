@@ -52,7 +52,7 @@ epidemic = {
 	### Monthly chance for an epidemic to infect a character in the province, ran once per character % from 0-100 inclusive. root = potential character to infect, scope:epidemic = the epidemic
         ## replace_scope = { root = character epidemic = epidemic }
         ## cardinality = 0..1
-	character_infection_chance = single_alias_right[int_conditional_formula]
+	character_infection_chance = single_alias_right[score_formula]
 
 	### Effect run when a character is infected with this epidemic. root = character being infected	scope:epidemic = the epidemic
         ## replace_scope = { root = character epidemic = epidemic }
@@ -123,11 +123,11 @@ single_alias[outbreak_clause] = {
 
         ### Chance for an outbreak of this intensity to spawn on a province per year. % from 0-100 inclusive. root = potential province. scope:epidemic_type = this epidemic type
         ## replace_scope = { root = province epidemic = epidemic}
-        outbreak_chance = single_alias_right[int_conditional_formula]
+        outbreak_chance = single_alias_right[score_formula]
 
         ### Chance for an epidemic of this intensity to spread to an adjacent province per month. % from 0-100 inclusive root = potential province scope:epidemic = the epidemic
         ## replace_scope = { root = province epidemic = epidemic}
-        spread_chance = single_alias_right[int_conditional_formula]
+        spread_chance = single_alias_right[score_formula]
 
         ### Maximum number of provinces an epidemic of this intensity can infect
         ## replace_scope = { root = epidemic }
@@ -136,19 +136,19 @@ single_alias[outbreak_clause] = {
         ### How long an infection in a province lasts for once it hits max infection root = infected province scope:epidemic = the epidemic
         ## replace_scope = { root = province epidemic = epidemic}
         infection_duration = {
-            enum[duration] = single_alias_right[int_conditional_formula]
+            enum[duration] = single_alias_right[score_formula]
         }
 
         ### How many days it will take for a province to hit max infection root = infected province scope:epidemic = the epidemic
         ## replace_scope = { root = province epidemic = epidemic}
         infection_progress_duration = {
-            enum[duration] = single_alias_right[int_conditional_formula]
+            enum[duration] = single_alias_right[score_formula]
         }
 
         ### How many days it will take for a province to recover from max infection after infection_duration has elapsed root = infected province scope:epidemic = the epidemic
         ## replace_scope = { root = province epidemic = epidemic }
         infection_recovery_duration = {
-            enum[duration] = single_alias_right[int_conditional_formula]
+            enum[duration] = single_alias_right[score_formula]
         }
     }
 }

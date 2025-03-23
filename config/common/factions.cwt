@@ -41,36 +41,36 @@ faction = {
     ## cardinality = 0..1
     ### MTTH that calculates the the score to join an active faction of this type. Uses the SCOPE_CHARACTER of the character that tries to join. SCOPE:faction target is the active faction. Note that the score is then modified by code to weigh in the effects of Boldness/Dread, Energy and Rationality. See NFaction AI defines.
     ## replace_scope = { character = character faction = faction }
-	ai_join_score = single_alias_right[int_conditional_formula] 
+	ai_join_score = single_alias_right[score_formula]
     ## cardinality = 0..1
     ### MTTH that calculates the the score to create an active faction of this type. Uses the SCOPE_CHARACTER of the character that tries to create it. SCOPE:target target is the targeted character. The claimant faction has two aditional scopes, SCOPE:claimant (who is the potential claimant) and SCOPE:title (the title to claim for). Note that the score is then modified by code to weigh in the effects of Boldness/Dread, Energy and Rationality. See NFaction AI defines.
     ## replace_scope = { character = character target = character claimant = character title = character }	
-	ai_create_score = single_alias_right[int_conditional_formula] 
+	ai_create_score = single_alias_right[score_formula]
     ## cardinality = 0..1
     ### MTTH that calculates the the score to join an active faction of this type. Uses the SCOPE_LANDED_TITLE of the title that tries to join. SCOPE:faction target is the active faction.
     ## replace_scope = { faction = faction }	
-	county_join_score =  single_alias_right[int_conditional_formula] 
+	county_join_score =  single_alias_right[score_formula]
     ## cardinality = 0..1
     ### MTTH that calculates the the score to create an active faction of this type. Uses the SCOPE_LANDED_TITLE of the title that tries to create it.
     ### SCOPE:target target is the targeted character. If the score is >= NDefines::NFaction::COUNTY_CREATE_MIN_SCORE and it gets a random chance 0-100 on a monthly update
     ## replace_scope = { root = landed_title target = character }	
-	county_create_score = single_alias_right[int_conditional_formula] 
+	county_create_score = single_alias_right[score_formula]
 	
     ## cardinality = 0..1
     ### Script value defining the absolute power of a single county member. The final power is calculated as ratio of this power and the target's military strength.
-	county_power = single_alias_right[int_conditional_formula] 
+	county_power = single_alias_right[score_formula]
     ## cardinality = 0..1
     ### MTTH that calculates the the score to trigger the demand effect of active faction of this type. Uses the FACTION scope. Checked once a month
 	## cardinality = 0..1
      ## replace_scope = { root = faction }
-    ai_demand_chance = single_alias_right[int_conditional_formula] 
+    ai_demand_chance = single_alias_right[score_formula]
     ### MTTH that calculates the discontent progress change of the active faction. Uses the FACTION scope.
 	## cardinality = 0..1
     ## replace_scope = { root = faction }
-    discontent_progress = single_alias_right[int_conditional_formula] 
+    discontent_progress = single_alias_right[score_formula]
     ### MTTH for power threshold at which the discontent starts ticking up. NFaction::DEFAULT_POWER_THRESHOLD define if not set
 	## cardinality = 0..1
-    power_threshold = single_alias_right[int_conditional_formula] 
+    power_threshold = single_alias_right[score_formula]
     ### Trigger to check if the faction is still valid. Uses the FACTION scope.
 	## cardinality = 0..1
     ## replace_scope = { root = faction }

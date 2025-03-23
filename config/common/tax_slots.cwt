@@ -55,7 +55,7 @@ tax_slot_type_key = {
 	### How many vassals can be assigned to this tax slot
     ## replace_scope = { root = tax_slot liege = character tax_collector = character}
     ## cardinality = 0..1
-	tax_slot_vassal_limit = single_alias_right[int_conditional_formula]
+	tax_slot_vassal_limit = single_alias_right[score_formula]
 
 	### Evaluates if the scope:tax_collector is valid for being a tax collector
 	## replace_scope = { root = character liege = character }
@@ -66,13 +66,13 @@ tax_slot_type_key = {
     ## cardinality = 0..1
 	aptitude_level_breakpoints = {
         ## cardinality = 1..inf
-        <int>
+        int
 	}
 
 	### scripted fixedpoint value
     ## replace_scope = { root = character }
     ## cardinality = 0..1
-	tax_collector_aptitude = single_alias_right[int_conditional_formula]
+	tax_collector_aptitude = single_alias_right[score_formula]
 
 
 	### effect trigger when tax collector is hired

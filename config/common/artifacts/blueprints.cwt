@@ -16,20 +16,20 @@ enums = {
 blueprint = {
 
     ### artifact type, determines slot and category ( inventory/court )
-	in_type = scalar
+	in_type = <artifact_type>
     ### artifact visual type, determines 3d assets, icons etc.
-	in_visuals = scalar 
+	in_visuals = <artifact_visual>
 
 	### these out_ types determine the artifacts looks and usage post-reforge
-	out_type = scalar
+	out_type = <artifact_type>
     ### these out_ types determine the artifacts looks and usage post-reforge
-	out_visuals = scalar
+	out_visuals = <artifact_visual>
 
 	### an array of modifier types that will not be allowed to persist on the artifact post-reforge
 	## cardinality = 0..1
 	disallowed_modifiers = {
         ## cardinality = 1..inf
-		alias_name[modifier]
+		alias_keys_field[modifier]
 	}
 
 	### A nested array of static modifiers that will be used instead of any modifier containing the above disallowed modifiers post-reforge. The system will pick a number of random modifiers ( no duplicates ) from the corresponding rarity list
@@ -38,26 +38,34 @@ blueprint = {
         ## cardinality = 0..1
 		common = {
             ## cardinality = 1..inf
-			alias_name[modifier]
+			alias_keys_field[modifier]
+            ## cardinality = 1..inf
+			<modifier_container>
 		}
         ## cardinality = 0..1
 		masterwork = {
             ## cardinality = 1..inf
-			alias_name[modifier]
+			alias_keys_field[modifier]
+			## cardinality = 1..inf
+			<modifier_container>
 		}
         ## cardinality = 0..1
 		famed = {
             ## cardinality = 1..inf
-			alias_name[modifier]
+			alias_keys_field[modifier]
+			## cardinality = 1..inf
+			<modifier_container>
 		}
         ## cardinality = 0..1
 		illustrious = {
             ## cardinality = 1..inf
-			alias_name[modifier]
+			alias_keys_field[modifier]
+			## cardinality = 1..inf
+			<modifier_container>
 		}
 	}
 
 	### changes the template of the artifact to the specified scripted template. Templates are specified in artifacts/templates/
 	## cardinality = 0..1
-	template = scalar
+	template = scalar # TODO
 }

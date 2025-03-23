@@ -988,7 +988,7 @@ alias[trigger:has_graphical_faith] = value[graphical_faith]
 
 ### Does the faith have the given icon has_icon = some_cool_custom_icon
 ## scope = faith
-alias[trigger:has_icon] = scalar
+alias[trigger:has_icon] = filepath[game/gfx/interface/icons/faith/,.dds]
 
 ### How many holy sites does the faith control? holy_sites_controlled > 1
 ## scope = faith
@@ -1457,9 +1457,6 @@ alias[trigger:has_reward_item] = bool
 ### Checks whether the current scope has the specified variable set has_variable = name
 alias[trigger:has_variable] = value[variable]
 
-### Checks whether the current scope has the specified variable set has_variable = name
-alias[trigger:has_variable] = scalar
-
 ### Checks whether the current scope has the specified variable list set has_variable_list = name
 alias[trigger:has_variable_list] = value[variable_list]
 
@@ -1587,7 +1584,7 @@ alias[trigger:save_temporary_scope_as] = value_set[temporary_scope]
 
 ### Saves a numerical or bool value as an arbitrarily-named temporary target to be referenced later in the same effect save_temporary_scope_value_as = { name = <string> value = x }
 alias[trigger:save_temporary_scope_value_as] = {
-    name = scalar
+    name = value_set[temporary_scope]
     value = value_field
 }
 
@@ -1680,7 +1677,7 @@ alias[trigger:was_preferred_heir] = scope[character]
 alias[trigger:weighted_calc_true_if] = {
     amount = int_value_field
     ## cardinality = 1..inf
-    <int> = {
+    int = {
         alias_name[trigger] = alias_match_left[trigger]
     }
 }

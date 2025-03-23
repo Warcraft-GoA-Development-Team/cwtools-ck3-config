@@ -1,4 +1,10 @@
 types = {
+	## type_key_filter = skeletal_animation_set
+	type[skeletal_animation_set] = {
+		path = "game/gfx"
+		name_field = "name"
+	}
+
 	## type_key_filter = pdxmesh
 	type[pdxmesh] = {
 		path = "game/gfx"
@@ -10,17 +16,28 @@ types = {
 		path = "game/gfx"
 		name_field = "name"
 	}
+}
 
-	## type_key_filter = model_animation
-	type[model_animation] = {
-		path = "game/gfx"
-		name_field = "name"
+skeletal_animation_set = {
+	# TODO
+	name = scalar
+
+	## cardinality = 0..inf
+	animation = {
+		id = scalar
+		type = <model_animation>
 	}
 }
 
 pdxmesh = {
 	name = scalar
-	file = filepath
+	file = filepath # TODO: Filepath with unkown path?
+
+	## cardinality = 0..1
+	import = {
+		type = skeletal_animation_set
+		name = <skeletal_animation_set>
+	}
 
 	## cardinality = 0..1
 	scale = float
@@ -50,6 +67,14 @@ pdxmesh = {
 
 		## cardinality = 0..1
 		shader = scalar
+
+		## cardinality = 0..1
+		shader_file = filepath
+
+		## cardinality = 0..1
+		additional_shader_defines = {
+			value_set[shader_define]
+		}
 	}
 
 	## cardinality = 0..1
@@ -73,7 +98,7 @@ entity = {
 
 	## cardinality = 0..inf
 	locator = {
-		name = scalar
+		name = value_set[locator]
 		position = {
 			## cardinality = 3..3
 			float
@@ -84,6 +109,8 @@ entity = {
 			## cardinality = 3..3
 			float
 		}
+
+		scale = float[0.0..inf]
 	}
 
 	## cardinality = 0..1
@@ -180,8 +207,9 @@ entity = {
 
 	## cardinality = 0..inf
 	attach = {
+		## cardinality = 0..1
 		name = scalar
-		scalar = <entity>
+		value[locator] = <entity>
 	}
 
 	## cardinality = 0..1
@@ -191,7 +219,33 @@ entity = {
 	}
 }
 
-model_animation = {
-	name = scalar
-	file = scalar
+enums = {
+	complex_enum[model_states] = {
+		path = "gfx"
+		start_from_root = yes
+		name = {
+			entity = {
+				state = {
+					name = enum_name
+				}
+			}
+		}
+	}
+
+	complex_enum[model_animations] = {
+		path = "gfx"
+		start_from_root = yes
+		name = {
+			pdxmesh = {
+				animation= {
+					id = enum_name
+				}
+			}
+			skeletal_animation_set = {
+				animation= {
+					id = enum_name
+				}
+			}
+		}
+	}
 }

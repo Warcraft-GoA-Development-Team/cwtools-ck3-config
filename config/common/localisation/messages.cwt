@@ -1,4 +1,11 @@
 types = {
+    type[message_filter] = {
+        path = "game/common/message_filter_types"
+
+        localisation = {
+            Name = "message_filter_$"
+        }
+    }
     type[message] = {
         path = "game/common/messages"
 
@@ -8,7 +15,39 @@ types = {
     }
 }
 
-my_message = {
+message_filter = {
+    ### Brief: display ( enum )
+    ###  Where to display the message
+    ### 	Default: feed
+    ## cardinality = 0..1
+    display = enum[message_displays]
+
+    ### Brief: always_show ( bool )
+    ###  Block player from hiding messages of this filter
+    ### 	Default: no
+    ## cardinality = 0..1
+    always_show = bool
+
+    ### Brief: auto_pause ( bool )
+    ###  If game should pause when messages of this filter appears
+    ### 	Default: no
+    ## cardinality = 0..1
+    auto_pause = bool
+
+    ### Brief: sort_order ( integer )
+    ###  The order that the filter should show up in the Message Settings relative to other filters, higher number is sorted first, tie breaking is on definition order if same sort order
+    ### 	Default: 0
+    ## cardinality = 0..1
+    sort_order = int
+
+    ### Brief: group ( key )
+    ###  Which foldable group in the message settings window to be part of
+    ### 	Default: misc
+    ## cardinality = 0..1
+    group = value_set[message_group] # TODO: Verify
+}
+
+message = {
     ## cardinality = 0..1
     ### Where to display the message; default: feed
     display = enum[message_displays]
@@ -26,16 +65,18 @@ my_message = {
     soundeffect = scalar
     ## cardinality = 0..1
     ### Icon textures found in gfx\interface\message_icons
-    icon = scalar
+    icon = filepath[game/gfx/interface/icons/message_feed/,.dds]
     ## cardinality = 0..1
     ### Affects the look of message items, neutral is default.
 	style = enum[message_styles]
+    message_filter_type = <message_filter>
 }
 
 enums = {
     enum[message_displays] = {
         feed
         toast
+        hidden
     }
     enum[message_styles] = {
         good

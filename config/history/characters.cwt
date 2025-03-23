@@ -195,6 +195,7 @@ alias[character_history_effect:name] = localisation
 ##### Custom effects (dynamic ones) ######
 ### Sets scripted relationship.
 alias[character_history_effect:set_relation_<scripted_relation>] = scope[character]
+
 ### Removes scripted relationship.
 alias[character_history_effect:remove_relation_<scripted_relation>] = scope[character]
 

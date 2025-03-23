@@ -80,6 +80,6 @@ court_type = {
 
 	### Script value in ruler scope. If above 0, the AI will try to set the court type to this if able. Court types are decided in the RARE_TASK_TICK. If multiple court types are possible, the AI will enact the one with the highest score, with a bias towards the currently active one of CURRENT_COURT_TYPE_SETTING_ADDED_WEIGHT to prevent switching back and forth to closely scored options
     ## replace = { root = character }
-	ai_will_do = single_alias_right[int_conditional_formula]				
+	ai_will_do = single_alias_right[score_formula]
 }
 

@@ -5,8 +5,6 @@ types = {
 }
 
 focus = {
-    ### Unique ID of the focus.
-    focus_id = int
     ## cardinality = 0..1
     ### Makes it an education focus.
     education = bool
@@ -24,7 +22,7 @@ focus = {
     desc = single_alias_right[complex_desc]
     ## cardinality = 0..1
     ### What key to use for the icon; if not defined, will use the key of the focus.
-    icon = scalar
+    icon = filepath[gfx/interface/icons/focuses/,.dds]
 
     ## cardinality = 0..1
     ## push_scope = character
@@ -39,6 +37,10 @@ focus = {
     ## push_scope = character
     ### Script value for selection weight. Scope is the character. If omitted, default weight is 1000.
     auto_selection_weight = int_value_field
+    ## cardinality = 0..1
+    ## push_scope = character
+    ### Script value for selection weight. Scope is the character. If omitted, default weight is 1000.
+    auto_selection_weight = single_alias_right[score_formula]
     ## cardinality = 0..1
     ### Modifiers applied to the charcter who picks the focus.
     modifier = single_alias_right[character_modifier]

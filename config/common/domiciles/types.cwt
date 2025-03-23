@@ -17,12 +17,12 @@ enums = {
 }
 
 single_alias[domicile_modifier] = {
-    name = scalar
+    name = scalar # TODO
     modifier = {
         alias_name[modifier] = alias_match_left[modifier]
     }
     ## cardinality = 0..1
-    scale = single_alias_right[int_conditional_formula]
+    scale = single_alias_right[score_formula]
 }
 
 domicile_type = {
@@ -60,7 +60,7 @@ domicile_type = {
 
 	### How much does it cost to move the domicile? Ex: { gold = 500, prestige = 100 }
     ## cardinality = 0..1
-	move_cost = single_alias_right[int_conditional_formula]
+	move_cost = single_alias_right[score_formula]
 
 	### Modifier applied to the domicile owner when disliked by the majority of their court. Can take a "scale" parameter to scale by (a script value; see _script_values.info)
     ## cardinality = 0..1

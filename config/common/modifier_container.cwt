@@ -51,7 +51,7 @@ modifier_definition_format = {
 
     ### Only show if the user has this DLC feature
 	## cardinality = 0..1
-    dlc_feature = scalar 
+    dlc_feature = enum[dlc_feature]
 }
 
 modifier_icon = {

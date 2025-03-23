@@ -42,7 +42,7 @@ on_action = {
 
 		### An entry that can be formatted as a script value (and therefore have conditional entries). Separated from "chance_to_happen" for performance reasons. Will only be evaluated if chance_to_happen is true.
 		## cardinality = 0..1
-		chance_of_no_event = single_alias_right[int_conditional_formula]
+		chance_of_no_event = single_alias_right[score_formula]
 
 		## cardinality = 0..inf
 		int = <event>
@@ -68,7 +68,7 @@ on_action = {
 	}
 	### Used to manipulate the weight of this on_action if it is a candidate in a random_on_actions list (see below)
 	## cardinality = 0..1
-	weight_multiplier = single_alias_right[int_conditional_formula]
+	weight_multiplier = single_alias_right[score_formula]
 
 	### on_actions can define a fallback on_action. If no events/on_actions are run by the on_action, the fallback gets called instead. Avoid creating infinite fallback loops, or the game may be prevented from advancing time!
     ## cardinality = 0..1

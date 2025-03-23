@@ -25,7 +25,7 @@ decision = {
 
     ## cardinality = 0..1
     ### set extra decision image, for use in example Struggle decission buttons.
-    extra_picture = scalar
+    extra_picture = filepath
 
     ## cardinality = 0..1
     ### Major decisions are highlighted in the list, and will be considered important by default.

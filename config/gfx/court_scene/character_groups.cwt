@@ -1,0 +1,42 @@
+types = { 
+    type[character_group] = { 
+        path = "game/gfx/court_scene/character_groups"
+    }
+}
+
+character_group = {
+    ### the type is used to get a position in group
+    ### possible values: random, ascending, descending
+    ### random is the default value
+    order_type = enum[character_group_order]
+
+    ### possible values: dynamic, static
+    ### if position type is dynamic then character position will be updated every time when royal court scene opens
+    ### static is the default value
+    position_type = enum[character_group_position]
+
+    ### if access_type is random then all events in the group will be able to start
+    ### if access_type is top then only the first is able to start
+    ### possible values: random, top
+    ### default value: random
+    access_type = enum[character_group_access]
+
+    ### value name from an event which is used to set order
+    value = value[event_target]
+}
+
+enums = {
+    enum[character_group_order] = {
+        random
+        ascending
+        descending
+    }
+    enum[character_group_position] = {
+        dynamic
+        static
+    }
+    enum[character_group_access] = {
+        random
+        top
+    }
+}

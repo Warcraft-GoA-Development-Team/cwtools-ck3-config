@@ -35,7 +35,7 @@ scheme = {
 
     desc = localisation
 
-    icon = scalar
+    icon = filepath[game/gfx/interface/icons/scheme_types/,.dds]
 
     illustration = filepath
 

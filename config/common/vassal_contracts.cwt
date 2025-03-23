@@ -4,7 +4,7 @@ types = {
     }
     type[vassal_obligation_level] = {
         path = "game/common/vassal_contracts"
-        skip_root_key = obligation_levels
+        skip_root_key = { any obligation_levels }
         localisation = {
             name = "$"
             short = "$_short"
@@ -32,99 +32,141 @@ vassal_contract = {
     ## cardinality = 0..1
     icon = scalar
 
+    ## cardinality = 0..1
+    is_shown = single_alias_right[trigger_clause]
+
     ### How are the obligations displayed in the negotiate contract UI, defualt is radiobutton
 	## cardinality = 0..1
     display_mode = enum[obligation_display]
 
 	# Or: Modifiable contract with multiple levels:
 	obligation_levels = {
-		# Scopes available:
-		# scope:liege the liege in the contract
-		# scope:vassal the vassal in the contract
-		# scope:opinion_of_liege set if uses_opinion_of_liege = yes
-		# scope:tax_slot the slot they are in/are being considered to be placed in
-		# scope:tax_collector the collector for the above/the potential new collector
 
-        ## replace_scope = { liege = character vassal = character opinion_of_liege = int tax_slot = tax_slot tax_collector = character }
-        ### choose a key for the level, it will be used for localization
-        ## cardinality = 1..inf
-		<vassal_obligation_level> = { 
 
-            ### mark a level as default (otherwise the first will be the default)
-            ## cardinality = 0..1
-            default = bool
-
-            ### What level can lead into this and that this can lead back to
-            ## cardinality = 0..1
-            parent = <vassal_obligation_level> 
-
-            ### Where should this obligation icon appear when modifying contracts, multiplied with the NVassalContract::OBLIGATION_OFFSET define
-            position = { <int> <int> } 
-
-            ### % of levies (0..1), default 0; can also use script math
-            ## cardinality = 0..1
-			levies = value_field
-            ### % of gold income (0..1), default 0; can also use script math
-            ## cardinality = 0..1
-			tax = value_field
-            ### optional min cap on tax, can alsu use script math as levies and tax
-            ## cardinality = 0..1
-			min_levies = value_field
-            ### optional min cap on levies, can alsu use script math as levies and tax
-            ## cardinality = 0..1
-			min_tax = value_field
-
-            ### optional dynamic description used for the breakdown of the tax & levies contribution
-            ## cardinality = 0..1
-			contribution_desc = single_alias_right[complex_desc]
-			
-            ### Optional postfix added to the tax contribution breakdown
-            ## cardinality = 0..1
-			tax_contribution_postfix = localisation
-            ### Optional postfix added to the levies contribution breakdown
-            ## cardinality = 0..1
-			levies_contribution_postfix = localisation
-			
-            ### Breakdown label for the unclamped tax/levies contribution
-            ## cardinality = 0..1
-			unclamped_contribution_label = localisation
-            ### Breakdown label for the minimum tax/levies contribution the value is clamped to
-            ## cardinality = 0..1
-			min_contribution_label = localisation
-
-            ### value for opinion of liege that's added to vassal's opinion of the liege if they have this contract
-            ## cardinality = 0..1
-			vassal_opinion = int_value_field
-
-            ### Arbitrary flag, can be checked in script to see if any obligation level in the current vassal contract has a flag
-            ## cardinality = 0..inf
-			flag = value_set[vassal_contract_flag] 
-
-            ### Positive means it is better for the vassal to have, 0 means neutral, negative is better for liege. When changing obligations the current score and new score are compared to see if it is in favour of the vassal or liege and by how much. Defaults to order the contracts are defined
-            ## cardinality = 0..1
-			score = single_alias_right[int_conditional_formula]
-
-            ### How much does the liege in the contract want this option
-            ## cardinality = 0..1
-			ai_liege_desire = int_value_field
-            ### How much does the vassal in the contract want this option
-            ## cardinality = 0..1
-			ai_vassal_desire = int_value_field 
-
-            ### Modifiers applied to the liege in the contract
-            ## cardinality = 0..1
-			liege_modifier = single_alias_right[character_modifier]
-            ### Modifiers applied to the vassal in the contract
-            ## cardinality = 0..1
-			vassal_modifier = single_alias_right[character_modifier]
-            ### Is this obligation level valid for a vassal
-
-			is_valid = single_alias_right[trigger_clause]
-
-			### Multiplier against the total tax/levies in a contract, be careful you do not get weird stacking beavhour if multiple are on at once
-			tax_factor = value_field
-            ### Multiplier against the total tax/levies in a contract, be careful you do not get weird stacking beavhour if multiple are on at once
-			levies_factor = value_field
-		}
 	}
+}
+
+## replace_scope = { liege = character vassal = character opinion_of_liege = int tax_slot = tax_slot tax_collector = character }
+###  Scopes available:
+###  scope:liege the liege in the contract
+###  scope:vassal the vassal in the contract
+###  scope:opinion_of_liege set if uses_opinion_of_liege = yes
+###  scope:tax_slot the slot they are in/are being considered to be placed in
+###  scope:tax_collector the collector for the above/the potential new collector
+### choose a key for the level, it will be used for localization
+## cardinality = 1..inf
+vassal_obligation_level = {
+
+    ### mark a level as default (otherwise the first will be the default)
+    ## cardinality = 0..1
+    default = bool
+
+    ### What level can lead into this and that this can lead back to
+    ## cardinality = 0..1
+    parent = <vassal_obligation_level>
+
+    ### Where should this obligation icon appear when modifying contracts, multiplied with the NVassalContract::OBLIGATION_OFFSET define
+    position = { int int }
+
+    ### % of levies (0..1), default 0; can also use script math
+    ## cardinality = 0..1
+    levies = value_field
+    ### % of levies (0..1), default 0; can also use script math
+    ## cardinality = 0..1
+    levies = single_alias_right[score_formula]
+
+    ### % of gold income (0..1), default 0; can also use script math
+    ## cardinality = 0..1
+    tax = value_field
+    ### % of gold income (0..1), default 0; can also use script math
+    ## cardinality = 0..1
+    tax = single_alias_right[score_formula]
+
+    ### optional min cap on tax, can alsu use script math as levies and tax
+    ## cardinality = 0..1
+    min_levies = value_field
+    ### optional min cap on tax, can alsu use script math as levies and tax
+    ## cardinality = 0..1
+    min_levies = single_alias_right[score_formula]
+
+    ### optional min cap on levies, can alsu use script math as levies and tax
+    ## cardinality = 0..1
+    min_tax = value_field
+    ### optional min cap on levies, can alsu use script math as levies and tax
+    ## cardinality = 0..1
+    min_tax = single_alias_right[score_formula]
+
+    ### optional dynamic description used for the breakdown of the tax & levies contribution
+    ## cardinality = 0..1
+    contribution_desc = single_alias_right[complex_desc]
+
+    ### Optional postfix added to the tax contribution breakdown
+    ## cardinality = 0..1
+    tax_contribution_postfix = localisation
+    ### Optional postfix added to the levies contribution breakdown
+    ## cardinality = 0..1
+    levies_contribution_postfix = localisation
+
+    ### Breakdown label for the unclamped tax/levies contribution
+    ## cardinality = 0..1
+    unclamped_contribution_label = localisation
+    ### Breakdown label for the minimum tax/levies contribution the value is clamped to
+    ## cardinality = 0..1
+    min_contribution_label = localisation
+
+    ### value for opinion of liege that's added to vassal's opinion of the liege if they have this contract
+    ## cardinality = 0..1
+    vassal_opinion = int_value_field
+
+    ### Arbitrary flag, can be checked in script to see if any obligation level in the current vassal contract has a flag
+    ## cardinality = 0..inf
+    flag = value_set[vassal_contract_flag]
+
+    ### Positive means it is better for the vassal to have, 0 means neutral, negative is better for liege. When changing obligations the current score and new score are compared to see if it is in favour of the vassal or liege and by how much. Defaults to order the contracts are defined
+    ## cardinality = 0..1
+    score = int_value_field
+    ### Positive means it is better for the vassal to have, 0 means neutral, negative is better for liege. When changing obligations the current score and new score are compared to see if it is in favour of the vassal or liege and by how much. Defaults to order the contracts are defined
+    ## cardinality = 0..1
+    score = single_alias_right[score_formula]
+
+    ### How much does the liege in the contract want this option
+    ## cardinality = 0..1
+    ai_liege_desire = int_value_field
+    ### How much does the liege in the contract want this option
+    ## cardinality = 0..1
+    ai_liege_desire = single_alias_right[score_formula]
+
+    ### How much does the vassal in the contract want this option
+    ## cardinality = 0..1
+    ai_vassal_desire = int_value_field
+    ### How much does the vassal in the contract want this option
+    ## cardinality = 0..1
+    ai_vassal_desire = single_alias_right[score_formula]
+
+    ### Modifiers applied to the liege in the contract
+    ## cardinality = 0..1
+    liege_modifier = single_alias_right[character_modifier]
+    ### Modifiers applied to the vassal in the contract
+    ## cardinality = 0..1
+    vassal_modifier = single_alias_right[character_modifier]
+    ### Is this obligation level valid for a vassal
+
+    ## cardinality = 0..1
+    is_valid = single_alias_right[trigger_clause]
+
+    ## cardinality = 0..1
+    is_shown = single_alias_right[trigger_clause]
+
+    ### Multiplier against the total tax/levies in a contract, be careful you do not get weird stacking beavhour if multiple are on at once
+    ## cardinality = 0..1
+    tax_factor = alias_keys_field[int_value]
+    ### Multiplier against the total tax/levies in a contract, be careful you do not get weird stacking beavhour if multiple are on at once
+    ## cardinality = 0..1
+    tax_factor = value_field
+    ### Multiplier against the total tax/levies in a contract, be careful you do not get weird stacking beavhour if multiple are on at once
+    ## cardinality = 0..1
+    levies_factor = alias_keys_field[int_value]
+    ### Multiplier against the total tax/levies in a contract, be careful you do not get weird stacking beavhour if multiple are on at once
+    ## cardinality = 0..1
+    levies_factor = value_field
 }

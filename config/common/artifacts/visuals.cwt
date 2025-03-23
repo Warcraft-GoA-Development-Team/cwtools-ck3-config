@@ -10,7 +10,7 @@ types = {
 artifact_visual = {
 	### optional field with no gameplay effect. Only needed for automatic test artifact generation
     ## cardinality = 0..1
-	default_type = scalar
+	default_type = <artifact_type>
     ## cardinality = 0..1
     pedestal = enum[pedestal_type]
     ## cardinality = 0..1

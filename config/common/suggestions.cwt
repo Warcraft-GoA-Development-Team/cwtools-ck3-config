@@ -25,8 +25,8 @@ suggestion = {
     effect = single_alias_right[effect_clause]
 
     ### MTTH to check how good the suggestion is based in different criterias. Score determines the target of a multi-target suggestion.
-    score = single_alias_right[int_conditional_formula]
+    score = single_alias_right[score_formula]
 
     ### MTTH used to sort the importance of suggestions to the current character. The highest value will be the first suggestion to be attempted for creation. If a suggestion type has less than 0 weight then it will not be considered for creation.
-    weight = single_alias_right[int_conditional_formula]
+    weight = single_alias_right[score_formula]
 }

@@ -9,7 +9,7 @@ maa_type = {
     type = value_set[unit_type]
     ## cardinality = 0..1
     ### Optional, use this name instead of the key when selecting icon graphics.
-    icon = scalar
+    icon = filepath[gfx/interface/icons/regimenttypes/,.dds]
 
     ## cardinality = 0..1
     ### If set, can't be recruited. For use by mercs/holy orders instead. Defaults to yes.
@@ -108,7 +108,7 @@ maa_type = {
 	## push_scope = character
     ## cardinality = 0..inf
 	###  Script value in character scope. Used in addition to a quality calculation (based on TOUGHNESS_SCORE_MULT, etc.) to figure out what the AI should buy/disband.
-	ai_quality = single_alias_right[int_conditional_formula]
+	ai_quality = single_alias_right[score_formula]
 }
 
 ###  Extra damage dealt in pursuit phase if on winning side.

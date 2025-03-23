@@ -16,7 +16,7 @@ religion_family = {
     ### All religions in this family default to this 3D model (currently used for temple assets). Order of precedence is the lowest level scripted in: faith > religion > family.
     graphical_faith = value_set[graphical_faith]
     ### All religions in this family default to this set of piety icons. Order of precedence is the lowest level scripted in: faith > religion > family.
-    piety_icon_group = localisation
+    piety_icon_group = value_set[piety_icon_group]
     ### All religions in this family default to this doctrine background icon. Order of precedence is the lowest level scripted in: faith > religion > family.
     doctrine_background_icon = icon
     ### INTERFACE ONLY: Use this doctrine when displaying hostility information for the whole religious family (if not scripted, then show no information)

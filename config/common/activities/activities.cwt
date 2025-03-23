@@ -639,7 +639,7 @@ activity = {
 
 			### Name of the camera to use for this portrait
 			## cardinality = 0..1
-			camera = scalar
+			camera = <portrait_camera>
 			
 			# root = the activity
 			# scope:activity = the activity
@@ -736,7 +736,7 @@ activity = {
 	pulse_actions = {
 		entries = {
 			## cardinality = 0..inf
-			scalar
+			<pulse_action>
 		}
 		chance_of_no_event = int
 	}

@@ -21,5 +21,6 @@ portrait_modifier = {
 enums = {
     enum[portrait_modiifer_usage] = {
         game
+        none
     }
 }

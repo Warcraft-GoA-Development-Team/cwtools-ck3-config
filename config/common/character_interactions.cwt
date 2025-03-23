@@ -70,7 +70,7 @@ character_interaction = {
     category = <character_interaction_category>
     ### What icon to use. If an icon is used for more than one interaction; please consider making it general (such as icon_culture for interactions relating to culture or icon_personal for personal schemes.). Otherwise defaults to none/the my_interaction key + related my_interaction.dds in gfx/interface/icons/character_interactions
     ## cardinality = 0..1
-    icon = scalar
+    icon = filepath[gfx/interface/icons/character_interactions/,.dds]
 
     ### Should the interaction be highlighted in the menu
     ## cardinality = 0..1
@@ -111,6 +111,9 @@ character_interaction = {
     ### Does this interaction check diplomatic range? Yes by default
     ## cardinality = 0..1
     use_diplomatic_range = bool
+    ### Does this interaction check diplomatic range? Yes by default
+    ## cardinality = 0..1
+    use_diplomatic_range = single_alias_right[trigger_clause]
     ### Interaction can be sent and the ai might reject
     ## cardinality = 0..1
     can_send_despite_rejection = bool
@@ -138,16 +141,16 @@ character_interaction = {
 
     ### Default is gfx/interface/icons/character_interactions/my_interaction_alert.dds
     ## cardinality = 0..1
-    alert_icon = scalar
+    alert_icon = filepath[gfx/interface/icons/character_interactions/,.dds]
     ### Default is gfx/interface/icons/character_interactions/my_interaction_small.dds
     ## cardinality = 0..1
-    icon_small = scalar
+    icon_small = filepath[gfx/interface/icons/character_interactions/,.dds]
     ### When to show an extra icon. Tooltip key is <key>_extra_icon
     ## cardinality = 0..1
     should_use_extra_icon = single_alias_right[trigger_clause]
     ### Icon to show when should_use_extra_icon is true
     ## cardinality = 0..1
-    extra_icon = scalar
+    extra_icon = filepath[gfx/interface/icons/character_interactions/,.dds]
 
     ### Possible types: title, none (default)
     ## cardinality = 0..1
@@ -275,7 +278,7 @@ character_interaction = {
         current_description = localisation
         ### If selected then scope:flag_name will be set to yes
         ## cardinality = 0..1
-        flag = scalar
+        flag = value_set[event_target]
         ### Loc_key for option label
         ## cardinality = 0..1
         localization = localisation

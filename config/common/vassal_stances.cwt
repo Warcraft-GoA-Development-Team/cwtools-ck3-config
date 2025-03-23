@@ -13,5 +13,5 @@ vassal_stance = {
 	score = single_alias_right[score_formula]
 
     ## replace_scope = { root = character liege = character }
-	heir_score = single_alias_right[int_conditional_formula]
+	heir_score = single_alias_right[score_formula]
 }

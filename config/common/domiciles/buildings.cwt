@@ -75,7 +75,7 @@ domicile_building = {
     character_modifier = single_alias_right[character_modifier]
 
     ### Brief: ai_value ( script value ) How desirable is the building for the AI. Evaluated alongside regular buildings. Available scopes: root -- Domicile it is built in scope:owner -- Owner of the Domicile
-    ai_value = single_alias_right[int_conditional_formula]
+    ai_value = single_alias_right[score_formula]
 
     ### Brief: asset ( asset definition ) Which asset does the building use
     ## cardinality = 1..inf

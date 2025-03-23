@@ -11,11 +11,11 @@ types = {
 diarchy_mandate = {
 	### Scripted value describing how good is diarch at handling this mandate type
     ## replace_scope = { root = character }
-	qualification_score = single_alias_right[int_conditional_formula]
+	qualification_score = single_alias_right[score_formula]
 
 	### Scripted value describing how likely is this mandate to be picked by liege
 	## replace_scope = { root = character }
-	ai_score = single_alias_right[int_conditional_formula]
+	ai_score = single_alias_right[score_formula]
 }
 
 
@@ -32,13 +32,13 @@ diarchy = {
 
 	### Scripted value describing how much current candidate is preferred
 	## replace_scope = { root = character }
-	candidate_score = single_alias_right[int_conditional_formula]
+	candidate_score = single_alias_right[score_formula]
 
 	### Scripted value describing how good is the diarch overall qualifications for individual mandates can be used here. Please avoid circular dependencies and don't use aptitude for mandate qualifications
-	aptitude_score = single_alias_right[int_conditional_formula]
+	aptitude_score = single_alias_right[score_formula]
 
 	### Sctipted value describing loyalty of the diarch
-	loyalty_score = single_alias_right[int_conditional_formula]
+	loyalty_score = single_alias_right[score_formula]
 
 	### diarchy type allows seletion of one active mandate out of several available ones
     ## cardinality = 0..inf
@@ -61,7 +61,7 @@ diarchy = {
 
 	### scales of power swing trends towards this scripted value by DIARCHY_MONTHLY_POWER_CHANGE every month
     ## cardinality = 0..1
-	swing_balance = single_alias_right[int_conditional_formula]
+	swing_balance = single_alias_right[score_formula]
 
 	### character interaction is used to end this type of diarchy and accessible via diarchy window
     ## cardinality = 0..1
@@ -71,7 +71,7 @@ diarchy = {
     ## cardinality = 0..1
 	liege_modifier = {
         ## cardinality = 0..1
-        scale = single_alias_right[int_conditional_formula]
+        scale = single_alias_right[score_formula]
         ## cardinality = 1..inf
         alias_name[modifier] = alias_match_left[modifier]
     }
@@ -80,7 +80,7 @@ diarchy = {
     ## cardinality = 0..1
 	diarch_modifier = {
         ## cardinality = 0..1
-        scale = single_alias_right[int_conditional_formula]
+        scale = single_alias_right[score_formula]
         ## cardinality = 1..inf
         alias_name[modifier] = alias_match_left[modifier]
     }

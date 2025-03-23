@@ -33,11 +33,11 @@ court_position = {
         ## cardinality = 0..1
         scope:liege = int_value_field
         ## cardinality = 0..1
-        scope:employee = single_alias_right[int_conditional_formula]
+        scope:employee = single_alias_right[score_formula]
         ## cardinality = 0..1
         scope:liege = int_value_field
         ## cardinality = 0..1
-        scope:employee = single_alias_right[int_conditional_formula]
+        scope:employee = single_alias_right[score_formula]
     }
 
     ### How high the aptitude has to be to reach the 5 different modifier levels
@@ -48,7 +48,7 @@ court_position = {
     }
 
     ### How good is this character in this position? root scope is the holder of the court position
-    aptitude = single_alias_right[int_conditional_formula]
+    aptitude = single_alias_right[score_formula]
 
     ## cardinality = 0..1
     ### Is this position even visible for usage? Root scope is liege character
@@ -123,5 +123,5 @@ court_position = {
 
     ### Scripted value to determine whether an AI will hire/fire a position or not. Hires over 0, fires under -50. Look in _court_positions.info for more extensive documentation!
     ## replace_scope = { liege = character employee = character firing_court_position = bool percent_of_monthly_income = number percent_of_positive_monthly_prestige_balance = number percent_of_positive_monthly_piety_balance = number percent_of_monthly_gold_income_all_positions = number percent_of_positive_monthly_prestige_balance_all_positions = number percent_of_positive_monthly_piety_balance_all_positions = number }
-    candidate_score = single_alias_right[int_conditional_formula]
+    candidate_score = single_alias_right[score_formula]
 }

@@ -45,7 +45,7 @@ dynasty_perk = {
     ## cardinality = 0..1
     ## push_scope = character
     ### Script value for weight for selection by the AI. Defaults to 1000.
-    ai_chance = single_alias_right[int_conditional_formula]
+    ai_chance = single_alias_right[score_formula]
     # ## cardinality = 0..1
     # ## push_scope = character
     # ### Dynasty prestige cost for selecting the perk.

@@ -36,10 +36,9 @@ lifestyle = {
     ### Amount of XP gained each month. Before modifiers.
     base_xp_gain = int
 
-    # TODO icon
     ## cardinality = 0..1
     ### What key to use for the icon; if not defined, will use the key of the lifestyle.
-    icon = scalar
+    icon = filepath[gfx/interface/icons/lifestyles/,.dds]
 
     # TODO: What these do
     ## cardinality = 0..1
@@ -55,7 +54,7 @@ lifestyle = {
 lifestyle_perk = {
     ## cardinality = 0..1
     ### What key to use for the icon; if not defined, will use the key of the perk.
-    icon = scalar
+    icon = filepath[game/gfx/interface/icons/lifestyles_perks/,.dds]
     ## cardinality = 0..1
     ### Dynamic description. If not set, generated loc key will be used. Character scope.
     name = localisation
@@ -64,9 +63,8 @@ lifestyle_perk = {
     ### Dynamic description. If not set, generated loc key will be used. Character scope.
     name = single_alias_right[complex_desc]
 
-    # TODO: Connect it.
     ### Key of the tree it belongs to. Only used for GUI layout.
-    tree = scalar
+    tree = value_set[perk_tree]
     ### Its positioning within the tree. Only used for GUI layout. Multiplied with PERK_X_OFFSET and PERK_Y_OFFSET.
     position = single_alias_right[position]
 
@@ -98,7 +96,7 @@ lifestyle_perk = {
     ## cardinality = 0..1
     ## push_scope = character
     ### Script value for weight for auto-selection. Scope is the character. If omitted, default weight is 1000.
-    auto_selection_weight = single_alias_right[int_conditional_formula]
+    auto_selection_weight = single_alias_right[score_formula]
 }
 
 single_alias[position] = {

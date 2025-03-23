@@ -35,7 +35,7 @@ template = {
 	### artifact_ai_will_equip_score in game/common/scripted_values/00_artifact_values.txt also effect the final score
     ## replace_scope = { root = character artifact = artifact }
     ## cardinality = 0..1
-	ai_score = single_alias_right[int_conditional_formula]
+	ai_score = single_alias_right[score_formula]
 
 	### Artifacts with this templates show as unique, default = no
     ## cardinality = 0..1

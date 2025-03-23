@@ -36,7 +36,7 @@ casus_belli_type = {
 	group = <casus_belli_group> 
     ### What icon to use. Optional; defaults to the CB key
     ## cardinality = 0..1
-	icon = scalar											
+	icon = filepath[game/gfx/interface/icons/casus_bellis/,.dds]
 	
     ### How much ticking War Score should be delayed before increasing for the Attacker
 	## cardinality = 0..1

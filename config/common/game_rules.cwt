@@ -30,6 +30,11 @@ enums = {
         restricted_diplomatic_range
         blocks_achievements
     }
+    enum[game_rule_modifier_category] = {
+        player
+        ai
+        all
+    }
 }
 
 game_rule_type = {

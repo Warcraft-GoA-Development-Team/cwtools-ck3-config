@@ -48,7 +48,7 @@ alias[effect:set_dynasty_name] = localisation
 # todo: see valid targets for contract
 ### complete_task_contract = task_contract_reward 
 ## scope = task_contract
-alias[effect:complete_task_contract] = scalar
+alias[effect:complete_task_contract] = value[task_contract_reward]
 
 ### Invalidate contract
 ## scope = task_contract
@@ -898,9 +898,10 @@ alias[effect:add_focus_progress] = alias_keys_field[int_value]
 ## scope = character
 alias[effect:add_focus_progress] = value_field
 
-### adds effect to be read internally (no effect in the gamestate)
-## scope = character
-alias[effect:add_internal_flag] = scalar # Not sure.
+# Just added it directly into event options since that's the only place it is used
+# ### adds effect to be read internally (no effect in the gamestate)
+# ## scope = character
+# alias[effect:add_internal_flag] = scalar # Not sure.
 
 ### Adds intrigue skill
 ## scope = character
@@ -1134,7 +1135,7 @@ alias[effect:create_accolade] = {
 alias[effect:create_adventurer_title] = {
     name = single_alias_right[complex_desc]
     holder = scope[character]
-    save_scope_as = value_set[scope]
+    save_scope_as = value_set[event_target]
     ## cardinality = 0..1
     prefix = localisation
     ## cardinality = 0..1
@@ -2140,8 +2141,7 @@ alias[effect:remove_legend_province_modifier] = <modifier_container>
 ### Sets the localization key for the named chapter of the scoped legend to the new value.
 ## scope = legend
 alias[effect:set_legend_chapter] = {
-    # TODO
-    name = scalar
+    name = value[chronicle_chapter]
     localization_key = localisation
 }
 
@@ -2922,7 +2922,9 @@ alias[effect:create_alliance] = {
 ### Creates a new artifact and adds it to the inventory of the given character. Be aware that we make use of the current scopes implicitly. This is done in common/artifacts/visuals. name = dynamic description - artifact name; description = dynamic description - artifact description; rarity = enum - artifact rarity, ex. legendary;type = flag - inventory slot type, ex. trinket; modifier = static modifier - applied to the character whom wields this artifact;durability = script value - new durability, will be max by default;max_durability = script value - Optional. A value for the max durability, which would override the one normally assigned by the defines; decaying = yes/no - Optional. Set if artifact decays with time. Yes by default; history = artifact history entry - custom history entry to denote for example that this is artifact was reforged by someone else than the owner;   type = artifact history entry type - available types:    created_before_history    created    prize_created    discovered    creator_discovered    claimed_by_house    given    stolen    inherited    conquest    taken_in_siege    taken_in_battle    won_in_duel    purchased    prize_awarded    ransomed    reforgedtemplate = artifact scripted template - a scripted base template with triggers and modifiers; visuals = artifact visual type - how this artifact should appear visually; generate_history = bool - automatically generate a new history entry if none has been scripted?; quality = script value - new quality, used in AI scoring; wealth = script value - new wealth, used in AI scoring; creator = character scope - set a custom creator of the artifact ( default is the owner ); visuals_source = scope containing landed title, dynasty or house - set a source of coat of arms graphics for the artifact; (only few artifact models actually make use of it. Most notable - banners); save_scope_as = new artifact - an optional way to get a reference to the newly created artifact;title_history = title - history entries of the given title will be added to the artifact history; title_history_date = game date - from which date onwards to copy historical entries from given title;creator = character scope - set a custom creator of the artifact ( default is the owner )
 ## scope = character
 alias[effect:create_artifact] = {
+	name = localisation
 	name = single_alias_right[complex_desc]
+    description = localisation
     description = single_alias_right[complex_desc]
     rarity = enum[artifact_rarity]
     type = <inventory_slot>
@@ -2942,6 +2944,8 @@ alias[effect:create_artifact] = {
     ## cardinality = 0..1
     visuals_source = scope[dynasty_house]
     alias_name[modifier] = alias_match_left[modifier]
+    ## cardinality = 0..1
+    save_scope_as = value_set[event_target]
 }
 
 ### The scope character creates a cadet branch of the house he is in [yes|no]
@@ -2956,7 +2960,7 @@ alias[effect:create_character_memory] = {
     ## cardinality = 0..1
     participants = {
         ## cardinality = 1..inf
-        scalar = scope_field
+        value[memory_participant] = scope_field
     }
     ## cardinality = 0..1
     duration = single_alias_right[duration_block]
@@ -3015,7 +3019,7 @@ alias[effect:create_legend] = {
     chronicle = <chronicle>
     properties = {
         ## cardinality = 0..inf
-        scalar = scope_field
+        value[chronicle_property] = scope_field
     }
     ## cardinality = 0..1
     protagonist = scope[character]
@@ -3031,7 +3035,7 @@ alias[effect:create_legend_seed] = {
     chronicle = <chronicle>
     properties = {
         ## cardinality = 0..inf
-        scalar = scope_field
+        value[chronicle_property] = scope_field
     }
 }
 
@@ -3188,7 +3192,7 @@ alias[effect:imprison] = {
     target = scope[character]
     type = <modifier_container> # Accepts static modifiers that act as imprisonment types (dungeon/house_arrest)
     ## cardinality = 0..1
-    reason = scalar # TODO: Can't find in vanilla files.
+    reason = localisation
 }
 
 ### Infect the scoped character with the target epidemic.
@@ -3389,7 +3393,7 @@ alias[effect:populate_task_contracts_for_area] = {
     location = scope:province
     amount = alias_keys_field[int_value]
     amount = value_field
-    group = { scalar } # TODO = replace with contract groups
+    group = { value[task_contract_group] }
 }
 
 
@@ -3730,8 +3734,14 @@ alias[effect:set_child_of_concubine_on_pregnancy] = yes # TODO: Probably. Not us
 ### Sets the task of the scope councillor { type = council_position_type_key target = for_targeted_tasks  }
 ## scope = character
 alias[effect:set_council_task] = {
-    type = <council_task>
-    target = scalar # TODO: Verify. Probably depends on the type of the council task [court/county/general]
+    task_type = <council_task>
+
+    ## cardinality = 0..1
+    target = scope[county]
+    ## cardinality = 0..1
+    target = scope[character]
+    ## cardinality = 0..1
+    target = scope[province]
 }
 
 ### Set the character's court language to the given languageset_court_language = language_norwegian
@@ -3923,6 +3933,21 @@ alias[effect:set_realm_capital] = scope[landed_title]
 ## scope = character
 alias[effect:set_relation_<scripted_relation>] = scope[character]
 
+##### Custom effects (dynamic ones) ######
+### Sets scripted relationship.
+alias[effect:set_relation_<scripted_relation>] = {
+    target = scope[character]
+
+    ## cardinality = 0..1
+    reason = localisation
+
+    ## cardinality = 0..1
+    involved_character = scope[character]
+
+    ## cardinality = 0..1
+    province = scope[province]
+}
+
 ### Set the maximum (and also desired value) for the 'reserved' gold AI budget. This budget is saved up, even before the war chest budget. It will not correct the current gold in that budget to conform to the new maximum.character, set_reserved_gold_maximum = X
 ## scope = character
 alias[effect:set_reserved_gold_maximum] = alias_keys_field[int_value]
@@ -4073,7 +4098,7 @@ alias[effect:stop_promoting_legend] = bool
 # TODO - check
 ### Makes a piece of localized text with the given key be stored on the character even after death, you should use this sparingly to avoid save bloat and use 'remove_localized_text' if you no longer need itsaves. store_localized_text_in_death = key
 ## scope = character
-alias[effect:store_localized_text_in_death] = scalar
+alias[effect:store_localized_text_in_death] = scalar # TODO
 
 ### Stress impact according to specified traits (trait = value), use base = value for a base value that's always added
 ## scope = character
@@ -4459,8 +4484,7 @@ alias[effect:set_special_title] = scope[landed_title]
 
 ### Add building to scoped domicile, ignores cost and construction time
 ## scope = domicile
-# TODO Domicile buildings
-alias[effect:add_domicile_building] = scalar
+alias[effect:add_domicile_building] = <domicile_building>
 
 ### Adds (or removes) provisions to a scoped domicile
 ## scope = domicile
@@ -4472,7 +4496,7 @@ alias[effect:change_provisions] = value_field
 
 ### Construct building to scoped domicile, ignores cost but uses construction time
 ## scope = domicile
-alias[effect:construct_domicile_building] = scalar
+alias[effect:construct_domicile_building] = <domicile_building>
 
 ### Moves domicile to target location
 ## scope = domicile
@@ -4480,7 +4504,7 @@ alias[effect:move_domicile] = scope[province]
 
 ### Remove building from scoped domicile
 ## scope = domicile
-alias[effect:remove_domicile_building] = scalar
+alias[effect:remove_domicile_building] = <domicile_building>
 
 ### Changes domicile owner to target character
 ## scope = domicile

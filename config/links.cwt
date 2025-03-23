@@ -1487,6 +1487,14 @@ links = {
         input_scopes = landed_title
         output_scope = any
     }
+    vassal_contract_obligation_level = {
+        from_data = yes
+        type = value
+        prefix = vassal_contract_obligation_level:
+        data_source = <vassal_contract>
+        input_scopes = character
+        output_scope = any
+    }
 
     ### How far away is the province/barony/county from the target? Measured in map pixels. Squared for performance reasons (square root is expensive). squared_distance = { target = some province/barony/county value > 10000 }
     squared_distance = {

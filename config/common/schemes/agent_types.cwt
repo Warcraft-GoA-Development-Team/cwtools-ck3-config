@@ -26,7 +26,7 @@ agent_slot = {
     ### A scripted value. The resulting number is what the agent will contribute to whatever's defined as contribution_type.
     ## replace_scope = { root = character owner = character scheme = scheme }
     # also includes target scope, but this can be a variety of things.
-    contribution = single_alias_right[int_conditional_formula]
+    contribution = single_alias_right[score_formula]
 
 
 }

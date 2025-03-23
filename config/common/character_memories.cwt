@@ -32,7 +32,7 @@ memory = {
 	## cardinality = 0..1
     participants = {
         ## cardinality = 1..inf
-		scalar
+		value_set[memory_participant]
 	}
 
 	### Default duration for memory, script value

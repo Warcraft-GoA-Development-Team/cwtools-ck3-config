@@ -212,7 +212,7 @@ single_alias[duration_block] = {
 
 alias[duration:enum[duration]] = alias_keys_field[int_value]
 alias[duration:enum[duration]] = int_value_field
-alias[duration:enum[duration]] = single_alias_right[int_conditional_formula]
+alias[duration:enum[duration]] = single_alias_right[score_formula]
 alias[duration:enum[duration]] = { int int }
 
 ## scope = character

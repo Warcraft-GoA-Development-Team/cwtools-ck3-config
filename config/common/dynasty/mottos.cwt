@@ -29,7 +29,7 @@ motto = {
     ## cardinality = 0..1
     ## push_scope = character
     ### Script value for the weight of having this motto. Character scope (house founder). 1000 if not set.
-    weight = single_alias_right[int_conditional_formula]
+    weight = single_alias_right[score_formula]
 
     ## cardinality = 0..inf
     ### Any number of inserts can be defined. They will be inserted into the string as $1$, $2$, etc.
@@ -46,6 +46,6 @@ motto_insert_group = {
         ## cardinality = 0..1
         ## push_scope = character
         ### Script value for the weight of having this motto insert. Character scope (house founder). 1000 if not set.
-        weight = single_alias_right[int_conditional_formula]
+        weight = single_alias_right[score_formula]
     }
 }

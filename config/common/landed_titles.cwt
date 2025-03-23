@@ -96,7 +96,7 @@ landed_title = {
 	### Scipted value determining how highly the AI values this title as a primary title. root: the character evaluating the title
 	## cardinality = 0..1
     ## replace_scope = { root = character }
-    ai_primary_priority = single_alias_right[int_conditional_formula]
+    ai_primary_priority = single_alias_right[score_formula]
 
 	### Brief: can_create ( trigger ) Special creation requirements. root: the character trying to create the title
 	## cardinality = 0..1

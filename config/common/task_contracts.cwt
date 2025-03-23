@@ -74,7 +74,7 @@ task_contract = {
 	task_contract_reward = {
 		### reward name
 		## cardinality = 1..inf
-        scalar = {
+        value_set[task_contract_reward] = {
 			### Default = no, showing completed contract reward effect desription
 			## cardinality = 0..1
 			should_print_on_complete = bool
@@ -95,6 +95,6 @@ task_contract = {
 	### scripted value how likely this contract type is to be picked when populating for area root - contract owner scope:employer - contract employer, can be empty
 	## replace_scope = { root = character employer = character }
 	## cardinality = 0..1
-	weight = single_alias_right[int_conditional_formula]
+	weight = single_alias_right[score_formula]
 
 }

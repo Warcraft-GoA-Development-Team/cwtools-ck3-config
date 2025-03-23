@@ -11,6 +11,12 @@ types = {
             ## cardinality = 1..1
             hidden = yes
         }
+
+        subtype[court] = {
+            ## cardinality = 1..1
+            type = court_event
+        }
+
         ## push_scope = character
         ## display_name = Character event
 		## abbreviation = CE
@@ -32,10 +38,7 @@ enums = {
         character_event
         letter_event
         activity_event
-    }
-    enum[event_scope_types] = {
-        none
-        faith
+        court_event
     }
 }
 
@@ -47,10 +50,13 @@ event = {
     content_source = <dlc>
 
     ## cardinality = 0..1
-    scope = enum[event_scope_types]
+    scope = enum[scope_type_token]
 
     ## cardinality = 0..1
     hidden = bool
+
+    ## cardinality = 0..1
+    orphan = bool
 
     ## cardinality = 0..1
     sender = scope[character]
@@ -84,6 +90,26 @@ event = {
         desc = single_alias_right[complex_desc]
     }
 
+    subtype[court] = {
+        ### Here, we define how the event appears inside the court view.
+        ### This block exists in the root scope, so you can just define anyone you'd normally have access to/set up in the immediate block here.
+        court_scene = {
+            ### Define which character will have the button for starting the event appear over the top of 'em.
+            button_position_character = scope[character]
+            ### Forcibly open the event next.
+            court_event_force_open = bool
+            show_timeout_info = bool
+            should_pause_time = bool
+
+            roles = {
+                scope[character] = {
+                    group = <character_group>
+                    animation = <animation>
+                }
+            }
+        }
+    }
+
     ## cardinality = 0..inf
     immediate = single_alias_right[effect_clause]
 
@@ -99,6 +125,7 @@ event = {
     widget = {
         gui = scalar
         container = scalar
+        controller = scalar
     }
 
     ## cardinality = 0..inf
@@ -116,6 +143,9 @@ event = {
         flavor = single_alias_right[complex_desc]
         ## cardinality = 0..1
         flavor = localisation
+
+        ## cardinality = 0..1
+        add_internal_flag = enum[event_option_flag]
 
         ## cardinality = 0..1
         highlight = bool
@@ -196,8 +226,7 @@ event = {
     override_icon = {
         ## cardinality = 0..1
         trigger = single_alias_right[trigger_clause]
-	# TODO: Add filepath
-        reference = scalar
+        reference = filepath
     }
     ## cardinality = 0..inf
     override_environment = {
@@ -205,6 +234,8 @@ event = {
         trigger = single_alias_right[trigger_clause]
         reference = <portrait_environment>
     }
+    ## cardinality = 0..inf
+    override_sound = { reference = scalar }
 
 }
 
@@ -235,5 +266,10 @@ enums = {
         lower_left_portrait
         lower_center_portrait
         lower_right_portrait
+    }
+
+    enum[event_option_flag] = {
+        dangerous
+        special
     }
 }

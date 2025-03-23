@@ -70,7 +70,7 @@ lease_contract = {
             ### Used in the UI to show maximum possible split share that goes to the to the ruler
 			max = int_value_field
             ### Share that goes to the left hand side target. MTTH. Result should be between 0 and 100.
-			weight = single_alias_right[int_conditional_formula]
+			weight = single_alias_right[score_formula]
             ### Who gets the ratio calculated in weight
 			beneficiary = enum[lease_target] 	
             ### What is left goes to the right hand side target
@@ -95,7 +95,7 @@ lease_contract = {
             ### Used in the UI to show maximum possible split share that goes to the to the ruler
 			max = int_value_field
             ### Share that goes to the left hand side target. MTTH. Result should be between 0 and 100.
-			weight = single_alias_right[int_conditional_formula]
+			weight = single_alias_right[score_formula]
             ### Who gets the ratio calculated in weight
 			beneficiary = enum[lease_target] 	
             ### What is left goes to the right hand side target

@@ -45,7 +45,7 @@ court_amenity_category = {
 		### The AI tries to get the single-level increase that gives the biggest increase in score. This means that you want the scores to gradually become smaller, or the AI will go far down one path ignoring all the rest.
         ## cardinality = 0..1
         ## replace_scope = { root = character }
-		ai_will_do = single_alias_right[int_conditional_formula]	
+		ai_will_do = single_alias_right[score_formula]
 
 		### Trigger to check if the scoped character can pick this setting. Make sure that there are no gaps in tiers here.
 		### Note that these triggers MUST be repeated to higher tiers because the AI does not skip levels when adjusting court amenities, it goes level by level both up and down.

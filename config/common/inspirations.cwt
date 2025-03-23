@@ -5,9 +5,9 @@ types = {
 }
 
 inspiration = {
-	gold = single_alias_right[int_conditional_formula]
+	gold = single_alias_right[score_formula]
     ### must be clamped 0-100
-	progress = single_alias_right[int_conditional_formula]
+	progress = single_alias_right[score_formula]
 
 	# All have the following scopes
 	# Root = inspiration

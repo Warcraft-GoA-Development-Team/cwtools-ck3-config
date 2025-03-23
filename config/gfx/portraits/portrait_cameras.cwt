@@ -1,0 +1,28 @@
+types = {
+    type[portrait_camera] = {
+        path = "gfx/portraits/cameras"
+    }
+}
+
+portrait_camera = {
+    camera = {
+        position = scalar
+        ## cardinality = 0..1
+        position_node = {
+            default = scalar
+        }
+        look_at = {	int int int }
+        ## cardinality = 0..1
+        look_at_node = {
+            default = scalar
+        }
+        fov = int
+        camera_near_far = { int int }
+    }
+
+    ## cardinality = 0..1
+    unknown = filepath
+
+    ## cardinality = 0..1
+    unknown = <portrait_camera>
+}
