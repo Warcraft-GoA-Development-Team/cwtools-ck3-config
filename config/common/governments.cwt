@@ -22,6 +22,7 @@ government = {
 	always_use_patronym = bool
 
     ### Trigger in character scope; checked when landed to see if it is an appropriate government. If failed, won't get this government (fallback will be used even if this fails if no other government is valid)
+    ## cardinality = 0..1
     ## replace_scope = { root = character }
 	can_get_government = single_alias_right[trigger_clause]
 
