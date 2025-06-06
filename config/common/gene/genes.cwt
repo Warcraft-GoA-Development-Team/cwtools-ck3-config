@@ -1,6 +1,319 @@
-types = {
-    type[gene] = {
+types = { # TODO: Accessory genes
+    type[age_presets] = {
         path = "game/common/genes"
-        skip_root_key = any
+        skip_root_key = age_presets
     }
+    type[morph_gene] = {
+        path = "game/common/genes"
+        skip_root_key = morph_genes
+    }
+    ## type_key_filter <> { ugliness_feature_categories }
+    type[morph_sub_gene] = {
+        path = "game/common/genes"
+        skip_root_key = { morph_genes any }
+        base_type = morph_gene
+    }
+    type[special_morph_gene] = {
+        path = "game/common/genes"
+        skip_root_key = { special_genes morph_genes }
+    }
+    ## type_key_filter <> { ugliness_feature_categories }
+    type[special_morph_sub_gene] = {
+        path = "game/common/genes"
+        skip_root_key = { special_genes morph_genes any }
+        base_type = morph_gene
+    }
+    type[color_gene] = {
+        path = "game/common/genes"
+        skip_root_key = color_genes
+    }
+}
+
+age_presets = {
+    mode = enum[age_preset_mode]
+    curve = single_alias_right[curve_3]
+}
+
+morph_gene = {
+    ## cardinality = 0..1
+    ugliness_feature_categories = {
+        ## cardinality = 1..inf
+        value_set[ugliness_feature_category]
+    }
+    ## cardinality = 0..1
+    group = value_set[gene_groups]
+
+    ## cardinality = 0..1
+    sync_inheritance_with = <morph_gene>
+
+    ## cardinality = 0..1
+    can_have_portrait_extremity_shift = bool
+
+    ## cardinality = 0..1
+    visible = bool
+
+    ## cardinality = 0..1
+    inheritable = bool
+}
+
+morph_sub_gene = {
+    index = int
+    ## cardinality = 0..1
+    generic = bool
+    ## cardinality = 0..1
+    visible = bool
+    ## cardinality = 0..1
+    positive_mirror = <morph_sub_gene>
+    ## cardinality = 0..1
+    negative_mirror = <morph_sub_gene>
+    <body_type> = {
+        ## cardinality = 0..inf
+        setting = {
+            attribute = enum[entity_attribute]
+            ## cardinality = 0..1
+            value = {
+                min = float
+                max = float
+            }
+            ## cardinality = 0..1
+            value = float
+            ## cardinality = 0..1
+            curve = single_alias_right[curve_2]
+            ## cardinality = 0..1
+            age = <age_presets>
+            ## cardinality = 0..1
+            age  = {
+                mode = enum[age_preset_mode]
+                curve = single_alias_right[curve_2]
+            }
+            ## cardinality = 0..inf
+            required_tags = scalar # TODO
+        }
+        ## cardinality = 0..inf
+        decal = {
+            body_part = enum[body_part]
+            textures = {
+                ## file_extensions = { .dds }
+                ## cardinality = 0..1
+                normal = filepath
+                ## file_extensions = { .dds }
+                ## cardinality = 0..1
+                diffuse = filepath
+                ## file_extensions = { .dds }
+                ## cardinality = 0..1
+                properties = filepath
+            }
+            ## cardinality = 0..1
+            alpha_curve = single_alias_right[curve_2]
+            blend_modes = {
+                ## cardinality = 0..1
+                diffuse = enum[blend_mode]
+                ## cardinality = 0..1
+                normal = enum[blend_mode]
+                ## cardinality = 0..1
+                properties = enum[blend_mode]
+            }
+            ## cardinality = 0..1
+            priority = int
+            ## cardinality = 0..1
+            age = <age_presets>
+            ## cardinality = 0..1
+            age = {
+                mode = enum[age_preset_mode]
+                curve = single_alias_right[curve_2]
+            }
+            ## cardinality = 0..inf
+            decal_apply_order = enum[decal_apply_order]
+        }
+        ## cardinality = 0..1
+        texture_override = {
+            weight = int
+            ## file_extensions = { .dds }
+            normal = filepath
+            ## file_extensions = { .dds }
+            diffuse = filepath
+            ## file_extensions = { .dds }
+            specular = filepath
+        }
+        ## cardinality = 0..1
+        skin_hsv_shift_curve = {
+            curve = {
+                float { float float float }
+            }
+            ## cardinality = 0..1
+            age = <age_presets>
+            ## cardinality = 0..1
+            age = {
+                mode = enum[age_preset_mode]
+                curve = single_alias_right[curve_2]
+            }
+        }
+    }
+
+    ## cardinality = 0..inf
+    <body_type> = <body_type>
+}
+
+special_morph_gene = {
+    ## cardinality = 0..1
+    ugliness_feature_categories = {
+        ## cardinality = 1..inf
+        value_set[ugliness_feature_category]
+    }
+    ## cardinality = 0..1
+    group = value_set[gene_groups]
+
+    ## cardinality = 0..1
+    can_have_portrait_extremity_shift = bool
+
+    ## cardinality = 0..1
+    visible = bool
+
+    ## cardinality = 0..1
+    inheritable = bool
+}
+
+special_morph_sub_gene = {
+    index = int
+    ## cardinality = 0..1
+    generic = bool
+    ## cardinality = 0..1
+    visible = bool
+    ## cardinality = 0..1
+    positive_mirror = <morph_sub_gene>
+    ## cardinality = 0..1
+    negative_mirror = <morph_sub_gene>
+    <body_type> = {
+        ## cardinality = 0..inf
+        setting = {
+            attribute = enum[entity_attribute]
+            ## cardinality = 0..1
+            value = {
+                min = float
+                max = float
+            }
+            ## cardinality = 0..1
+            curve = single_alias_right[curve_2]
+            ## cardinality = 0..1
+            age = <age_presets>
+            ## cardinality = 0..1
+            age  = {
+                mode = enum[age_preset_mode]
+                curve = single_alias_right[curve_2]
+            }
+            ## cardinality = 0..inf
+            required_tags = scalar # TODO
+        }
+        ## cardinality = 0..inf
+        decal = {
+            body_part = enum[body_part]
+            textures = {
+                ## file_extensions = { .dds }
+                ## cardinality = 0..1
+                normal = filepath
+                ## file_extensions = { .dds }
+                ## cardinality = 0..1
+                diffuse = filepath
+                ## file_extensions = { .dds }
+                ## cardinality = 0..1
+                properties = filepath
+            }
+            ## cardinality = 0..1
+            alpha_curve = single_alias_right[curve_2]
+            blend_modes = {
+                ## cardinality = 0..1
+                diffuse = enum[blend_mode]
+                ## cardinality = 0..1
+                normal = enum[blend_mode]
+                ## cardinality = 0..1
+                properties = enum[blend_mode]
+            }
+            ## cardinality = 0..1
+            priority = int
+            ## cardinality = 0..1
+            age = <age_presets>
+            ## cardinality = 0..1
+            age = {
+                mode = enum[age_preset_mode]
+                curve = single_alias_right[curve_2]
+            }
+            ## cardinality = 0..inf
+            decal_apply_order = enum[decal_apply_order]
+        }
+        ## cardinality = 0..1
+        texture_override = {
+            weight = int
+            ## file_extensions = { .dds }
+            normal = filepath
+            ## file_extensions = { .dds }
+            diffuse = filepath
+            ## file_extensions = { .dds }
+            specular = filepath
+        }
+        ## cardinality = 0..1
+        skin_hsv_shift_curve = {
+            curve = {
+                float { float float float }
+            }
+            ## cardinality = 0..1
+            age = <age_presets>
+            ## cardinality = 0..1
+            age = {
+                mode = enum[age_preset_mode]
+                curve = single_alias_right[curve_2]
+            }
+        }
+    }
+
+    ## cardinality = 0..inf
+    <body_type> = <body_type>
+}
+
+color_gene = {
+    ## cardinality = 0..1
+    group = value_set[gene_groups]
+    color = enum[color_gene_type]
+    ## cardinality = 0..1
+    sync_inheritance_with = <color_gene>
+    blend_range = { float float }
+}
+
+enums = {
+    enum[age_preset_mode] = {
+        add
+        multiply
+    }
+
+    enum[body_part] = {
+        head
+        torso
+    }
+
+    enum[blend_mode] = {
+        overlay
+        replace
+        hard_light
+        multiply
+    }
+
+    enum[decal_apply_order] = {
+        pre_skin_color
+        post_skin_color
+    }
+
+    enum[color_gene_type] = {
+        hair
+        skin
+        eye
+    }
+}
+
+single_alias[curve_2] = {
+    ## cardinality = 2..inf
+    { float float }
+}
+
+single_alias[curve_3] = {
+    ## cardinality = 2..inf
+    { float float float }
 }

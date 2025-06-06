@@ -6,4 +6,8 @@ types = {
 
 define_category = {
     value_set[define_name] = scalar
+    value_set[define_name] = {
+        ## cardinality = 0..inf
+        scalar
+    }
 }

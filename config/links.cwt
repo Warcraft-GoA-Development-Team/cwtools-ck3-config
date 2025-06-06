@@ -1042,7 +1042,7 @@ links = {
         from_data = yes
         type = scope
         prefix = special_guest:
-        data_source = value[special_guest]
+        data_source = enum[special_guest]
         input_scopes = activity
         output_scope = character
     }
@@ -1058,7 +1058,7 @@ links = {
     task_contract_type = {
         desc = "Get the task_contract_type with the specified key"
         from_data = yes
-        data_source = <task_contract_type>
+        data_source = <task_contract>
         prefix = task_contract_type:
         output_scope = task_contract_type
     }
@@ -1492,6 +1492,14 @@ links = {
         type = value
         prefix = vassal_contract_obligation_level:
         data_source = <vassal_contract>
+        input_scopes = character
+        output_scope = any
+    }
+    number_maa_regiments_of_base_type = {
+        from_data = yes
+        type = value
+        prefix = number_maa_regiments_of_base_type:
+        data_source = value[unit_type]
         input_scopes = character
         output_scope = any
     }

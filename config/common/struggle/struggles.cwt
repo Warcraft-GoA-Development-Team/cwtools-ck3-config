@@ -4,7 +4,8 @@ types = {
     }
     type[struggle_phase] = {
         path = "game/common/struggle/struggles"
-        skip_root_key = phase_list
+        skip_root_key = { any phase_list }
+        base_type = struggle
     }
 }
 
@@ -27,7 +28,7 @@ struggle = {
 	## cardinality = 0..1
 	regions = {
         ## cardinality = 1..inf
-        <region>
+        <geographical_region>
     }
 
 	### The conditions that a culture or a faith must fulfil to be considered as part of the Struggle. If empty, no new Cultures or Faiths can become involved.
@@ -39,51 +40,6 @@ struggle = {
 
 	### There has to be at least one.
 	phase_list = {
-	
-        ## cardinality = 1..inf
-		<struggle_phase> = {
-
-			### There has to be at least one.
-			future_phases = {
-                ##cardinality = 1..inf
-				<struggle_phase> = {	
-                    ## cardinality = 0..1
-					default = bool
-					### these should be defined in common/struggle/catalyst
-					catalysts = {
-                        ##cardinality = 1..inf
-						<struggle_catalyst> = int_value_field
-					}	
-				}
-			}
-
-            ## cardinality = 0..1
-            war_effects = single_alias_right[struggle_effect]
-
-            ## cardinality = 0..1
-            culture_effects = single_alias_right[struggle_effect]
-
-            ## cardinality = 0..1
-            faith_effects = single_alias_right[struggle_effect]
-
-            ## cardinality = 0..1
-            other_effects = single_alias_right[struggle_effect]
-
-            ## cardinality = 0..1
-            duration = {
-                ### If the duration is not set then POINT_BASED_PHASE_DEFAULT_DURATION is going to be used as the default value
-                points = int
-            }
-
-            ## cardinality = 0..1
-            ### If the duration is not set then it's going to be considered as point-based phase
-            duration = single_alias_right[duration_block]
-
-            ### The effect is called as soon a struggle moves into ending phase.
-            ## replace_scope = { root = struggle }
-            ## cardinality = 0..1
-            on_start = single_alias_right[effect_clause]
-		}
 	}
 	
 	### There has to be at least one.
@@ -109,6 +65,51 @@ struggle = {
     ## replace_scope = { root = struggle }
 	## cardinality = 0..1
     on_monthly = single_alias_right[effect_clause]
+}
+
+## cardinality = 1..inf
+struggle_phase = {
+
+    ### There has to be at least one.
+    future_phases = {
+        ##cardinality = 1..inf
+        <struggle_phase> = {
+            ## cardinality = 0..1
+            default = bool
+            ### these should be defined in common/struggle/catalyst
+            catalysts = {
+                ##cardinality = 1..inf
+                <struggle_catalyst> = int_value_field
+            }
+        }
+    }
+
+    ## cardinality = 0..1
+    war_effects = single_alias_right[struggle_effect]
+
+    ## cardinality = 0..1
+    culture_effects = single_alias_right[struggle_effect]
+
+    ## cardinality = 0..1
+    faith_effects = single_alias_right[struggle_effect]
+
+    ## cardinality = 0..1
+    other_effects = single_alias_right[struggle_effect]
+
+    ## cardinality = 0..1
+    duration = {
+        ### If the duration is not set then POINT_BASED_PHASE_DEFAULT_DURATION is going to be used as the default value
+        points = int
+    }
+
+    ## cardinality = 0..1
+    ### If the duration is not set then it's going to be considered as point-based phase
+    duration = single_alias_right[duration_block]
+
+    ### The effect is called as soon a struggle moves into ending phase.
+    ## replace_scope = { root = struggle }
+    ## cardinality = 0..1
+    on_start = single_alias_right[effect_clause]
 }
 
 single_alias[struggle_effect] = {
@@ -186,4 +187,31 @@ single_alias[struggle_effect] = {
     ### At least one Phase needs to have an Ending Decision.
     ## cardinality = 0..1
     ending_decisions = <decision>
+}
+
+enums = {
+    # complex_enum[struggle_parameter] = { # TODO: Broken enum
+    #     path = "game/common/struggle/struggles"
+    #
+    #     name = {
+    #         phase_list = {
+    #             scalar = {
+    #                 scalar = {
+    #                     common_parameters = {
+    #                         enum_name = bool
+    #                     }
+    #                     involved_parameters = {
+    #                         enum_name = bool
+    #                     }
+    #                     interloper_parameters = {
+    #                         enum_name = bool
+    #                     }
+    #                     uninvolved_parameters = {
+    #                         enum_name = bool
+    #                     }
+    #                 }
+    #             }
+    #         }
+    #     }
+    # }
 }

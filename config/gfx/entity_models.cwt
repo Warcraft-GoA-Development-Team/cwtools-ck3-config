@@ -25,13 +25,15 @@ skeletal_animation_set = {
 	## cardinality = 0..inf
 	animation = {
 		id = scalar
-		type = <model_animation>
+		## file_extensions = .anim
+		type = filename
 	}
 }
 
 pdxmesh = {
 	name = scalar
-	file = filepath # TODO: Filepath with unkown path?
+	## file_extensions = .mesh
+	file = filename
 
 	## cardinality = 0..1
 	import = {
@@ -45,7 +47,22 @@ pdxmesh = {
 	## cardinality = 0..inf
 	animation = {
 		id = scalar
-		type = <model_animation>
+		## file_extensions = .anim
+		type = filename
+	}
+
+	## cardinality = 0..inf
+	additive_animation = {
+		id = scalar
+		## file_extensions = .anim
+		type = filename
+	}
+
+	## cardinality = 0..inf
+	blend_shape = {
+		id = scalar
+		## file_extensions = .mesh
+		type = filename
 	}
 
 	## cardinality = 0..inf
@@ -95,6 +112,14 @@ entity = {
 
 	## cardinality = 0..1
 	scale = float
+
+	## cardinality = 0..inf
+	attribute = {
+		name = scalar
+		alias_name[entity_attribute] = alias_match_left[entity_attribute]
+		## cardinality = 0..1
+		default = float
+	}
 
 	## cardinality = 0..inf
 	locator = {
@@ -244,6 +269,42 @@ enums = {
 			skeletal_animation_set = {
 				animation= {
 					id = enum_name
+				}
+			}
+		}
+	}
+
+	complex_enum[model_additive_animations] = {
+		path = "gfx"
+		start_from_root = yes
+		name = {
+			pdxmesh = {
+				additive_animation= {
+					id = enum_name
+				}
+			}
+		}
+	}
+
+	complex_enum[model_blendshape] = {
+		path = "gfx"
+		start_from_root = yes
+		name = {
+			pdxmesh = {
+				blend_shape= {
+					id = enum_name
+				}
+			}
+		}
+	}
+
+	complex_enum[entity_attribute] = {
+		path = "gfx"
+		start_from_root = yes
+		name = {
+			entity = {
+				attribute= {
+					name = enum_name
 				}
 			}
 		}

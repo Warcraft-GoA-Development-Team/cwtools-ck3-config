@@ -74,7 +74,7 @@ task_contract = {
 	task_contract_reward = {
 		### reward name
 		## cardinality = 1..inf
-        value_set[task_contract_reward] = {
+        scalar = {
 			### Default = no, showing completed contract reward effect desription
 			## cardinality = 0..1
 			should_print_on_complete = bool
@@ -97,4 +97,20 @@ task_contract = {
 	## cardinality = 0..1
 	weight = single_alias_right[score_formula]
 
+}
+enums = {
+	complex_enum[task_contract_reward] = {
+		path = "game/common/task_contracts"
+		start_from_root = yes
+
+		name = {
+			scalar = {
+				task_contract_reward = {
+					enum_name = {
+
+					}
+				}
+			}
+		}
+	}
 }

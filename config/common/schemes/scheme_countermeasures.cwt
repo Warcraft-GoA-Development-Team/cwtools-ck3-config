@@ -5,8 +5,6 @@ types = {
 }
 
 scheme_countermeasure = {
-
-
     ### Requirements that must be fulfilled by a ruler for them to be able to even see this countermeasure. root: ruler
     ## cardinality = 0..1
     ## push_scope = character
@@ -37,6 +35,18 @@ scheme_countermeasure = {
     ### Arbitrary parameters that can be checked with the trigger 'has_scheme_countermeasure_parameter'. Note: the only available trigger checks for existence, so it does not matter if the value is set to 'yes' or 'no'.
     ## cardinality = 0..1
     parameters = {
-        value_set[scheme_countermeasure_parameter] = bool
+        scalar = bool
+    }
+}
+
+enums = {
+    complex_enum[scheme_countermeasure_parameter] = {
+        path = "game/common/schemes/scheme_countermeasures"
+
+        name = {
+            parameters = {
+                enum_name = bool
+            }
+        }
     }
 }

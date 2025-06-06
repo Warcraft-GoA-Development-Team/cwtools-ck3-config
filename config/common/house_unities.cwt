@@ -8,10 +8,6 @@ types = {
         base_type = house_unity
         skip_root_key = any
     }
-    type[house_unity_parameter] = {
-        path = "common/house_unities"
-        
-    }
 }
 
 # government_key must exist otherwise the item will be ignored
@@ -37,7 +33,7 @@ house_unity_stage = {
     ## cardinality = 0..1
     parameters = {
         ## cardinality = 1..inf
-        value_set[house_unity_parameter] = bool
+        scalar = bool
     }
 
     ### modifiers applied on all characters in a unity
@@ -57,5 +53,22 @@ house_unity_stage = {
     decisions = {
         ## cardinality = 1..inf
         <decision>
+    }
+}
+
+enums = {
+    complex_enum[house_unity_parameter] = {
+        path = "common/house_unities"
+        start_from_root = yes
+
+        name = {
+            scalar = {
+                scalar = {
+                    parameters = {
+                        enum_name = bool
+                    }
+                }
+            }
+        }
     }
 }

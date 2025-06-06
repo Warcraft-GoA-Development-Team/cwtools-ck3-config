@@ -1,0 +1,9 @@
+types = {
+    type[customization_rule] = {
+        path = "gfx/portraits/customization_rules"
+    }
+}
+
+customization_rule = {
+
+}

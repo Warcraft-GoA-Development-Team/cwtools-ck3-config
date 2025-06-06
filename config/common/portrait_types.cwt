@@ -1,0 +1,20 @@
+types = {
+    type[portrait_type] = {
+        path = "game/common/portrait_types"
+    }
+
+    ## type_key_filter <> { colors properties attach }
+    type[body_type] = {
+        path = "game/common/portrait_types"
+        skip_root_key = { any }
+        base_type = portrait_type
+    }
+}
+
+portrait_type = {
+
+}
+
+body_type = {
+
+}

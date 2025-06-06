@@ -29,9 +29,11 @@ tradition = {
     ## cardinality = 0..1
     parameters = {
         ## cardinality = 0..inf
-        value_set[cultural_parameter] = bool
+        scalar = bool
         ## cardinality = 0..inf
-        value_set[cultural_parameter] = value_field
+        scalar = int
+        ## cardinality = 0..inf
+        scalar = float
     }
 
     ## cardinality = 0..1
@@ -66,7 +68,20 @@ tradition = {
 
 
 enums = {
+    complex_enum[cultural_parameter] = {
+        path = "game/common/culture/traditions"
+        start_from_root = yes
 
+        name = {
+            scalar = {
+                parameters = {
+                    enum_name = bool
+                    enum_name = int
+                    enum_name = float
+                }
+            }
+        }
+    }
     enum[tradition_category] = {
         combat
         realm

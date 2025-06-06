@@ -5,31 +5,19 @@ types = {
 	}
 }
 
-enums = {
-    enum[body_type] = {
-        default
-        male
-        female
-        girl
-        boy
-    }
-}
-
 animation = {
-    enum[body_type] = alias_match_left[body_type_animation]
+    ## cardinality = 0..inf
+    <body_type> = alias_match_left[body_type_animation]
+    ## cardinality = 0..1
+    default = alias_match_left[body_type_animation]
 }
 
-alias[body_type_animation:default] = enum[body_type]
-alias[body_type_animation:female] = enum[body_type]
-alias[body_type_animation:male] = enum[body_type]
-alias[body_type_animation:boy] = enum[body_type]
-alias[body_type_animation:girl] = enum[body_type]
+alias[body_type_animation:<body_type>] = <body_type>
+alias[body_type_animation:<body_type>] = default
+alias[body_type_animation:default] = <body_type>
 
+alias[body_type_animation:<body_type>] = single_alias_right[animation_description]
 alias[body_type_animation:default] = single_alias_right[animation_description]
-alias[body_type_animation:female] = single_alias_right[animation_description]
-alias[body_type_animation:male] = single_alias_right[animation_description]
-alias[body_type_animation:boy] = single_alias_right[animation_description]
-alias[body_type_animation:girl] = single_alias_right[animation_description]
 
 
 single_alias[animation_description] = {

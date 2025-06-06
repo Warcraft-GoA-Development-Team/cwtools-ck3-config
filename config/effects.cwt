@@ -48,7 +48,7 @@ alias[effect:set_dynasty_name] = localisation
 # todo: see valid targets for contract
 ### complete_task_contract = task_contract_reward 
 ## scope = task_contract
-alias[effect:complete_task_contract] = value[task_contract_reward]
+alias[effect:complete_task_contract] = enum[task_contract_reward]
 
 ### Invalidate contract
 ## scope = task_contract
@@ -2141,7 +2141,7 @@ alias[effect:remove_legend_province_modifier] = <modifier_container>
 ### Sets the localization key for the named chapter of the scoped legend to the new value.
 ## scope = legend
 alias[effect:set_legend_chapter] = {
-    name = value[chronicle_chapter]
+    name = enum[chronicle_chapter]
     localization_key = localisation
 }
 
@@ -2588,7 +2588,7 @@ alias[effect:add_trait] = scope[trait]
 alias[effect:add_trait_xp] = {
     trait = <trait>
     ## cardinality = 0..1
-    track = value[trait_track]
+    track = enum[trait_track]
     value = alias_keys_field[int_value]
     value = value_field
     value = single_alias_right[score_formula]
@@ -3019,7 +3019,7 @@ alias[effect:create_legend] = {
     chronicle = <chronicle>
     properties = {
         ## cardinality = 0..inf
-        value[chronicle_property] = scope_field
+        enum[chronicle_property] = scope_field
     }
     ## cardinality = 0..1
     protagonist = scope[character]
@@ -3035,7 +3035,7 @@ alias[effect:create_legend_seed] = {
     chronicle = <chronicle>
     properties = {
         ## cardinality = 0..inf
-        value[chronicle_property] = scope_field
+        enum[chronicle_property] = scope_field
     }
 }
 
@@ -3072,7 +3072,7 @@ alias[effect:create_story] = {
 ### create_task_contract = {  #Mandatory parameters   task_contract_type = TYPE_NAME  task_task_contract_tier = VALUE  location = PROVINCE_SCOPE  #Optional parameters  task_contract_employer = CHARACTER_SCOPE  destination = PROVINCE_SCOPE  target = CHARACTER_SCOPE  save_scope_as = new_task_contract # optional } 
 ## scope = character
 alias[effect:create_task_contract] = {
-    task_contract_type = <contract>
+    task_contract_type = <task_contract>
     task_contract_tier = alias_keys_field[int_value]
     task_contract_tier = value_field
     location = scope[province]

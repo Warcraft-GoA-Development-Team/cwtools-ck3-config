@@ -5,15 +5,14 @@ types = {
 }
 
 memory = {
-	
     ### Categories, arbitrary strings, used to provide groupings of related types
     categories = {
         ## cardinality = 1..inf
-        value_set[memory_category]
+        scalar
     }
 
     ## cardinality = 0..1
-    icon = localisation
+    icon = filepath[game/gfx/interface/icons/memory_types/,]
 
 	### Dynamic description for this memory
     ## replace_scope = { root = memory owner = character }
@@ -40,3 +39,14 @@ memory = {
 	duration = single_alias_right[duration_block]
 }
 
+enums = {
+    complex_enum[memory_category] = {
+        path = "common/character_memory_types"
+
+        name = {
+            categories = {
+                enum_name
+            }
+        }
+    }
+}

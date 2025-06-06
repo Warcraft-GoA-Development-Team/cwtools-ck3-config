@@ -160,14 +160,14 @@ single_alias[random_traits_list] = {
 }
 
 single_alias[character_culture_modifier] = {
-    parameter = value[cultural_parameter]
+    parameter = enum[cultural_parameter]
     ## push_scope = character
     ## cardinality = 1..inf
     alias_name[modifier] = alias_match_left[modifier]
 }
 
 single_alias[province_culture_modifier] = {
-    parameter = value[cultural_parameter]
+    parameter = enum[cultural_parameter]
     ## push_scope = province
     ## cardinality = 1..inf
     alias_name[modifier] = alias_match_left[modifier]
@@ -293,3 +293,6 @@ alias[scheming_against_target:scheme_skill] = enum[attribute]
 
 alias[trigger_event:id] = <event>
 alias[trigger_event:on_action] = <on_action>
+
+alias[entity_attribute:additive_animation] = enum[model_additive_animations]
+alias[entity_attribute:blend_shape] = enum[model_blendshape]

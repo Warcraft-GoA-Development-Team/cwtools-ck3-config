@@ -3,16 +3,6 @@ types = {
         path = "common/activities/activity_types"
 
     }
-    #type[activity_option] = {
-    #    path = "common/activities/activity_types"
-    #    unique = yes
-    #    skip_root_key = { options any }
-    #}
-    #type[activity_option_category] = {
-    #    path = "common/activities/activity_types"
-    #    unique = yes
-    #    skip_root_key = options
-    #}
     type[activity_phase] = {
         path = "common/activities/activity_types"
         skip_root_key = phases
@@ -43,6 +33,53 @@ enums = {
         province
         holder
     }
+
+	complex_enum[activity_option_category] = {
+		path = "common/activities/activity_types"
+		start_from_root = yes
+
+		name = {
+			scalar = {
+				options = {
+					enum_name = {
+
+					}
+				}
+			}
+		}
+	}
+
+	complex_enum[activity_option] = {
+		path = "common/activities/activity_types"
+		start_from_root = yes
+
+		name = {
+			scalar = {
+				options = {
+					scalar = {
+						enum_name = {
+
+						}
+					}
+				}
+			}
+		}
+	}
+
+	complex_enum[special_guest] = {
+		path = "common/activities/activity_types"
+		start_from_root = yes
+
+		name = {
+			scalar = {
+				special_guests = {
+					enum_name = {
+
+					}
+				}
+			}
+		}
+	}
 }
 
 # Character state
@@ -111,11 +148,10 @@ activity = {
 
 		### Multiple categories allowed per activity, must be unique named categories
         ## cardinality = 1..inf
-		value_set[activity_option_category] = {
-
+		scalar = {
 			### Multiple options allowed per category, must be unique named
             ## cardinality = 1..inf
-			value_set[activity_option] = {
+			scalar = {
 				### Is this option shown in the category
 				## replace_scope = { root = character special_option = flag }
 				## cardinality = 0..1
@@ -198,7 +234,7 @@ activity = {
 
 	### When special option category is specified, the player will have to pick from this category before selecting a location. Each option in this category requires an illustration in the ACTIVITY_OPTION_TEXTURE_PATH folder and a flat icon in the ACTIVTY_OPTION_ICON_PATH folder
 	## cardinality = 0..1
-	special_option_category = value[activity_option_category]
+	special_option_category = enum[activity_option_category]
 
 	### Active phases of of an activity, each activity has at least one active phase, each must be uniquely named
 	phases = {
@@ -413,7 +449,7 @@ activity = {
 	special_guests = {
 		### Special guest names are localized via their <key>. The localization key for the name shown to the host is "<key>_for_host".
         ## cardinality = 1..inf
-		value_set[special_guest] = {
+		scalar = {
 			### Is this special guest slot shown / available
 			## replace_scope = { root = character special_option = flag }
 			## cardinality = 0..1

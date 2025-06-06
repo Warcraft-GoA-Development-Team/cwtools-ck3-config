@@ -15,7 +15,7 @@ innovation = {
 
     ## cardinality = 0..1
     ### Region where this innovation can start getting base progress. Empty means anywhere.
-    region = <region>
+    region = <geographical_region
     ## cardinality = 0..1
     ### Trigger to check if it can be unlocked by the culture. In contrast to can_progress it will be hidden otherwise. Scope: culture Default: always = yes
     ## replace_scope = { root = culture }

@@ -196,8 +196,8 @@ alias[trigger:has_active_locale] = <activity_locale>
 ### Does the scoped activity have the option in the given category active
 ## scope = activity
 alias[trigger:has_activity_option] = {
-    category = value[activity_option_category]
-    option = value[activity_option]
+    category = enum[activity_option_category]
+    option = enum[activity_option]
 }
 
 ### Does the scoped activity have the given activity type
@@ -367,7 +367,7 @@ alias[trigger:has_cultural_era_or_later] = <era>
 
 ### Does the target culture possess this cultural parameter
 ## scope = culture
-alias[trigger:has_cultural_parameter] = value[cultural_parameter]
+alias[trigger:has_cultural_parameter] = enum[cultural_parameter]
 
 ### Does the culture have this cultural pillar?
 ## scope = culture
@@ -442,7 +442,7 @@ alias[trigger:num_discovered_innovations_in_era] == {
 
 ### Does the character memory have this memory category?
 ## scope = memory
-alias[trigger:has_memory_category] = value[memory_category]
+alias[trigger:has_memory_category] = enum[memory_category]
 
 ### Does the character memory have this target character as a participant?
 ## scope = memory
@@ -599,7 +599,7 @@ alias[trigger:has_house_unity_modifier_duration_remaining] = <modifier_container
 
 ### Does the given house unity have the given parameter? Can only check for bool parameters.
 ## scope = dynasty_house
-alias[trigger:has_house_unity_parameter] = value[house_unity_parameter]
+alias[trigger:has_house_unity_parameter] = enum[house_unity_parameter]
 
 ### Is the given house unity the given stage?. 
 ## scope = dynasty_house
@@ -646,7 +646,7 @@ alias[trigger:has_task_contract_group] = value[task_contract_group]
 
 ### has task contract with type
 ## scope = task_contract
-alias[trigger:has_task_contract_type] = <task_contract_type>
+alias[trigger:has_task_contract_type] = <task_contract>
 
 ### Is the contract type of criminal nature?
 ## scope = task_contract
@@ -1800,12 +1800,12 @@ alias[trigger:has_building] = <building>
 
 ### does the scope province have a building with a certain flag? 	has_building_with_flag = { flag = temple count >= 2 } 	has_building_with_flag = temple # count >= 1
 ## scope = province
-alias[trigger:has_building_with_flag] = value[building_flag]
+alias[trigger:has_building_with_flag] = enum[building_flag]
 
 ### does the scope province have a building with a certain flag? 	has_building_with_flag = { flag = temple count >= 2 } 	has_building_with_flag = temple # count >= 1
 ## scope = province
 alias[trigger:has_building_with_flag] = {
-    flag = value[building_flag]
+    flag = enum[building_flag]
     ## cardinality = 0..1
     count == alias_keys_field[int_value]
     ## cardinality = 0..1
@@ -1814,7 +1814,7 @@ alias[trigger:has_building_with_flag] = {
 
 ### does the scope province have a construction of a building with the specified flag? 	has_construction_with_flag = temple
 ## scope = province
-alias[trigger:has_construction_with_flag] = value[building_flag]
+alias[trigger:has_construction_with_flag] = enum[building_flag]
 
 ### does the scope province have a free building slot? has_free_building_slot = yes
 ## scope = province
@@ -2942,7 +2942,7 @@ alias[trigger:has_domicile_building_or_higher] = <domicile_building>
 
 ### Does scoped domicile have parameter in one or more of its buildings?
 ## scope = domicile
-alias[trigger:has_domicile_parameter] = value[domicile_parameter]
+alias[trigger:has_domicile_parameter] = enum[domicile_parameter]
 
 ### Does the scoped domicile have an ongoing construction?) scope:domicile = {	has_ongoing_construction = yes/no }
 ## scope = domicile
@@ -3414,7 +3414,7 @@ alias[trigger:can_create_maa] = <maa_type>
 ### scope:owner = { can_create_task_contact = { type_name = <key> employer = <character> } 
 ## scope = character
 alias[trigger:can_create_task_contract] = {
-    type_name = <task_contract_type>
+    type_name = <task_contract>
     employer = scope[character]
 }
 
@@ -4388,7 +4388,7 @@ alias[trigger:has_same_virtue_trait] = scope[character]
 
 ### Does the given ruler, or the liege of the given courtier, have a countermeasure with the given parameter? Can only check for boolean parameters.
 ## scope = character
-alias[trigger:has_scheme_countermeasure_parameter] = value[scheme_countermeasure_parameter]
+alias[trigger:has_scheme_countermeasure_parameter] = enum[scheme_countermeasure_parameter]
 
 ### checks if the character has the same government type as another character
 ## scope = character
@@ -4468,7 +4468,7 @@ alias[trigger:has_trait_with_flag] = value[trait_flag]
 alias[trigger:has_trait_xp] = {
     trait = <trait>
     ## cardinality = 0..1
-    track = value[trait_track]
+    track = enum[trait_track]
     value == alias_keys_field[int_value]
     value == value_field
 }

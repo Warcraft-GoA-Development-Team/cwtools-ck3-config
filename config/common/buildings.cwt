@@ -17,6 +17,13 @@ types = {
 }
 
 enums = {
+	complex_enum[building_flag] = {
+		path = "game/common/buildings"
+
+		name = {
+			flag = enum_name
+		}
+	}
     enum[asset_type] = {
         pdxmesh
         entity
@@ -193,7 +200,7 @@ building = {
 		## cardinality = 0..inf
 		province_terrain_modifier = {
 			## cardinality = 0..1
-			parameter = value[cultural_parameter]
+			parameter = enum[cultural_parameter]
 			## cardinality = 0..1
 			terrain = <terrain>
 			## cardinality = 0..1
@@ -217,7 +224,7 @@ building = {
 		county_modifier = single_alias_right[county_modifier]
 		##cardinality = 0..inf
 		county_culture_modifier = {
-			parameter = value[cultural_parameter]
+			parameter = enum[cultural_parameter]
 			alias_name[modifier] = alias_match_left[modifier]
 		}
 
@@ -228,7 +235,7 @@ building = {
 		}
 		##cardinality = 0..1
 		duchy_capital_county_culture_modifier = {
-			parameter = value[cultural_parameter]
+			parameter = enum[cultural_parameter]
 			alias_name[modifier] = alias_match_left[modifier]
 		}
 
@@ -254,7 +261,7 @@ building = {
 
 		### Building flags
 		## cardinality = 0..inf
-		flag = value_set[building_flag]
+		flag = scalar
 
 		### Effects applied on building completion
 		### scopes: root refers to the buildings province

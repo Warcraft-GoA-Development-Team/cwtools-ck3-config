@@ -13,6 +13,16 @@ enums = {
         external
         internal
     }
+
+    complex_enum[domicile_parameter] = {
+        path = "game/common/domiciles/buildings"
+
+        name = {
+            parameters = {
+                enum_name = bool
+            }
+        }
+    }
 }
 
 domicile_building = {
@@ -44,7 +54,7 @@ domicile_building = {
     ## cardinality = 0..1
     parameters = {
         ## cardinality = 1..inf
-        value_set[domicile_building_parameter] = bool
+        scalar = bool
     }
 
     ### This building may only be constructed in selected slot type. Internal slots cannot be base buildings and requires a previous building. They may only be constructed within a main or external building. If slot type is 'main' and it doesn't have a previous building, it will automatically be constructed on start. Slot types are: 'main', 'external' or 'internal'. Default type is 'external'
@@ -69,6 +79,9 @@ domicile_building = {
     ### Brief: cost ( scripted cost ) How much does this building cost? Ex: { gold = 500, prestige = 100 }
     ## cardinality = 0..1
     cost = single_alias_right[cost]
+
+    ## cardinality = 0..1
+    refund = single_alias_right[cost]
 
     ### Brief: character_modifier ( modifiers ) Modifiers applied to the Domicile owner of this building. Ex: { county_opinion_add = 2, stress_loss_mult = 0.15 } Note: Please do not use holdings monthly_income, etc..! Instead use: domicile_monthly_gold_add or domicile_monthly_gold_mult (same for: _prestige / _piety / _influence )
 	## cardinality = 0..1
@@ -95,6 +108,7 @@ domicile_building = {
         intersectionmask_texture = filepath
 
         ### Brief: soundeffect ( string soundbank reference ) Associated sound effect. Supports soundparameters where they will be automatically appended based on building's current tier: soundparameter = { "Tier" = 1 }
+        ## cardinality = 0..1
         soundeffect = scalar
 
     }
