@@ -8,7 +8,7 @@ types = {
 }
 
 types = {
-    ## type_key_filter = { attacker_offensive attacker_defensive defender_offensive defender_defensive }
+    # ## type_key_filter = { attacker_offensive attacker_defensive defender_offensive defender_defensive }
     type[ai_war_stance] = {
         path = "game/common/ai_war_stances"
     }
@@ -19,6 +19,62 @@ ai_goaltype = {
 }
 
 ai_war_stance = {
+    ### Brief: side ( enum )
+    ### Which side does this war stance work for? Must be set.
+    ###
+    ### Enums:
+    ### 	attacker
+    ### 	defender
+    side = enum[attacker_defender]
+    ### Brief: behaviour_attributes ( enum bitmask container )
+    ### Under what circumstances will we evaluate this particular stance?
+    ### This happens before we evaluate can_be_picked. At least one of
+    ### these must be set to yes.
+    behaviour_attributes = {
+        ### Brief: stronger ( bool )
+        ### This is applied when the side is stronger than the other side
+        ###
+        ### Defaults to no, meaning it is not checked.
+        ## cardinality = 0..1
+        stronger = bool
+
+        ### Brief: weaker ( bool )
+        ### This is applied when the side is weaker than the other side
+        ###
+        ### Defaults to no, meaning it is not checked.
+        ## cardinality = 0..1
+        weaker = bool
+
+        ### Brief: desperate ( bool )
+        ### This is applied when the side is significantly weaker AND is
+        ### about to lose the war or only has one landed title left.
+        ### Is only used by the defender side.
+        ###
+        ### Defaults to no, meaning it is not checked.
+        ## cardinality = 0..1
+        desperate = bool
+    }
+    ### Brief: can_be_picked ( trigger )
+    ### Checks if the war stance is valid for the war in question
+    ###
+    ### Supported scopes:
+    ###		root (War)
+    ###			The War in question. Supports all other scopes found within
+    ###			a War Scope.
+    ## cardinality = 0..1
+    ## push_scope = war
+    can_be_picked = single_alias_right[trigger_clause]
+    ### Brief: ai_will_do ( Fixed Point Scripted Value )
+    ### Scripted value to determine the weight of this war stance for the war
+    ### coordinator.
+    ###
+    ### Supported scopes:
+    ###		root (War)
+    ###			The War in question. Supports all other scopes found within
+    ###			a War Scope.
+    ## cardinality = 0..1
+    ## push_scope = war
+    ai_will_do = single_alias_right[trigger_clause]
     ### Priority score added for an enemy unit half our strength. Falls off towards zero and our full strength.
     enemy_unit_priority = int
     ## cardinality = 1..inf
@@ -32,7 +88,7 @@ ai_war_stance = {
         enum[ai_objectives] = {
             ### Priority of the objective.
             priority = int
-            ## cardinality = 1..inf
+            ## cardinality = 0..inf
             ### Operation area(s) of the objective.
             area = enum[ai_areas]
         }
@@ -40,14 +96,19 @@ ai_war_stance = {
 }
 
 enums = {
+    enum[attacker_defender] = {
+        attacker
+        defender
+    }
     enum[ai_objectives] = {
         wargoal_province
         enemy_unit_province
 	    enemy_capital_province
 	    capital_province
 	    enemy_province
-        province
         enemy_ally_province
+        province
+        defend_wargoal_province
     }
     enum[ai_areas] = {
         wargoal

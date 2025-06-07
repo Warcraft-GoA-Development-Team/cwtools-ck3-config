@@ -3,3 +3,26 @@ types = {
         path = "game/dlc_metadata"
     }
 }
+
+dlc = {
+    key = scalar
+    steam_id = scalar
+    msgr_id = scalar
+    type = enum[dlc_type]
+    priority = int
+}
+
+enums = {
+    enum[dlc_type] = {
+        major
+        medium
+        minor
+    }
+    complex_enum[dlc_key] = {
+        path = "game/dlc_metadata"
+
+        name = {
+            key = enum_name
+        }
+    }
+}

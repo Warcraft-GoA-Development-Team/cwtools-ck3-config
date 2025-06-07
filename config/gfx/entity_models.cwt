@@ -135,6 +135,7 @@ entity = {
 			float
 		}
 
+		## cardinality = 0..1
 		scale = float[0.0..inf]
 	}
 

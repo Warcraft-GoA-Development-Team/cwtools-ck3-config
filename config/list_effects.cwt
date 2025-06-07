@@ -808,7 +808,7 @@ alias[effect:every_character_epidemic] = single_alias_right[every_effect]
 ## push_scope = struggle 
 alias[effect:every_character_struggle] = {
     ## cardinality = 0..1
-    involvement = enum[involvement_status]
+    involvement = enum[involvement]
     ## cardinality = 0..1
     limit = {
         alias_name[trigger] = alias_match_left[trigger]
@@ -2472,7 +2472,7 @@ alias[effect:random_character_artifact] = single_alias_right[random_effect]
 ## push_scope = struggle 
 alias[effect:random_character_struggle] = {
     ## cardinality = 0..1
-    involvement = enum[involvement_status]
+    involvement = enum[involvement]
     ## cardinality = 0..1
     limit = {
         alias_name[trigger] = alias_match_left[trigger]
@@ -2558,7 +2558,9 @@ alias[effect:random_child] = single_alias_right[random_effect]
 ## scope = character
 ## push_scope = landed_title
 alias[effect:random_claim] = {
+    ## cardinality = 0..1
     explicit = enum[yesnoall]
+    ## cardinality = 0..1
     pressed = enum[yesnoall]
     ## cardinality = 0..1
     limit = {
@@ -4241,7 +4243,7 @@ alias[effect:ordered_character_epidemic] = single_alias_right[ordered_effect]
 ## push_scope = struggle
 alias[effect:ordered_character_struggle] = {
     ## cardinality = 0..1
-    involvement = enum[involvement_status]
+    involvement = enum[involvement]
     ## cardinality = 0..1
     limit = {
         alias_name[trigger] = alias_match_left[trigger]
@@ -5521,3 +5523,33 @@ alias[effect:random_close_or_extended_family_member] = single_alias_right[random
 ## scope = character
 ## push_scope = character
 alias[effect:ordered_close_or_extended_family_member] = single_alias_right[ordered_effect]
+
+### Iterate through all tributaries
+## scope = character
+## push_scope = character
+alias[effect:every_tributary] = single_alias_right[every_effect]
+
+### Iterate through all tributaries
+## scope = character
+## push_scope = character
+alias[effect:ordered_tributary] = single_alias_right[ordered_effect]
+
+### Iterate through all tributaries
+## scope = character
+## push_scope = character
+alias[effect:random_tributary] = single_alias_right[random_effect]
+
+### Iterates through all members of the scoped confederation
+## scope = confederation
+## push_scope = character
+alias[effect:every_confederation_member] = single_alias_right[every_effect]
+
+### Iterates through all members of the scoped confederation
+## scope = confederation
+## push_scope = character
+alias[effect:ordered_confederation_member] = single_alias_right[ordered_effect]
+
+### Iterates through all members of the scoped confederation
+## scope = confederation
+## push_scope = character
+alias[effect:random_confederation_member] = single_alias_right[random_effect]

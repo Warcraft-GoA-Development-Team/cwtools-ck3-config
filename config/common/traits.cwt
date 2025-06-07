@@ -1,6 +1,12 @@
 types = {
     type[trait] = {
         path = "game/common/traits"
+        subtype[single_track] = {
+            track = { }
+        }
+        subtype[multi_track] = {
+            tracks = { }
+        }
     }
 }
 

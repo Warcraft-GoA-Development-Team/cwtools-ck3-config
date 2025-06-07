@@ -33,6 +33,7 @@ activity_intent = {
 
 	# root = character who picked this intent
     ## replace_scope = { root = character }
+	## cardinality = 0..1
 	on_invalidated = single_alias_right[effect_clause]
 
 	# root = character picking this intent
@@ -44,11 +45,13 @@ activity_intent = {
 	### Scripted value to determine if the AI will select this intent or not
 	### Selects the weighted random intent based on their score
     ## replace_scope = { root = character activity - activity}
+	## cardinality = 0..1
 	ai_will_do = int_field_value
 
 	### Scripted value to determine if the AI will select this intent or not
 	### Selects the weighted random intent based on their score
     ## replace_scope = { root = character activity - activity}
+	## cardinality = 0..1
 	ai_will_do = single_alias_right[score_formula]
 
 	### What AI targets will be considered, can be scripted multiple times to combine lists, same as in character_interaction.info
@@ -80,6 +83,7 @@ activity_intent = {
 	## cardinality = 0..1
 	ai_target_score = single_alias_right[score_formula]
 
+	## cardinality = 0..1
 	icon = filepath[game/gfx/interface/icons/activity_intents/,.dds] # Will default to object key if not specified to override
 
 	## cardinality = 0..1

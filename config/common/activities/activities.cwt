@@ -101,6 +101,13 @@ activity = {
     ## replace_scope = { root = character}
 	can_start_showing_failures_only = single_alias_right[trigger_clause]
 
+	### Can this activity be planned by the character. some additional checks may be needed before the activity can be started.
+	### optional - if left empty this check will be taken from can_start_showing_failures_only instead.
+	### root = character trying to host this activity
+	## replace_scope = { root = character}
+	## cardinality = 0..1
+	can_plan = single_alias_right[trigger_clause]
+
 	### Do we prevent the player to start planning an activity when additional requirements (i.e. not costs or cooldown) have not been met. Defaults to no.
 	## cardinality = 0..1
     can_always_plan = bool
@@ -111,12 +118,18 @@ activity = {
 
 	### Ran if the activity fails the is valid checks
 	## replace_scope = { root = activity activity = activity host = character}
+	## cardinality = 0..1
 	on_invalidated = single_alias_right[effect_clause]
 
 	### Ran if the host of the activity dies
 	## replace_scope = { root = activity activity = activity host = character}
 	## cardinality = 0..1
 	on_host_death = single_alias_right[effect_clause]
+
+	### Foldable activity group type where to put this activity in the gui.
+	### Defaults to the 'activities' group.
+	## cardinality = 0..inf
+	activity_group_type = <activity_group_type>
 
 	### What list of provinces should phase's be evaluated as a place to potentially be located in. Defaults to capital only
 	## cardinality = 0..1
@@ -144,6 +157,7 @@ activity = {
 	max_province_icons = int
 
 	### Activity options scripted per activity type
+	## cardinality = 0..1
 	options = {
 
 		### Multiple categories allowed per activity, must be unique named categories

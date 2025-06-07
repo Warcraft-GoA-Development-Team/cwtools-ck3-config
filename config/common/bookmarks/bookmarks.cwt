@@ -12,6 +12,17 @@ types = {
             Description = "$_desc"
         }
     }
+
+    ## type_key_filter = character
+    type[bookmark_character] = {
+        path = "game/common/bookmarks/bookmarks"
+
+        skip_root_key = { any }
+
+        subtype[hidden] = {
+            display = no
+        }
+    }
 }
 
 bookmark = {
@@ -41,51 +52,72 @@ bookmark = {
     ## cardinality = 0..1
 	### Set what group this bookmark is part of. Left empty bookmark will be ungrouped.
 	group = <bookmark_group>
+}
 
-    # TODO: figure out, confirm cardinality, see if it's not a target for an alias
-    ## cardinality = 1..inf
+bookmark_character = {
+    name = localisation
+    ## cardinality = 0..1
+    dynasty = <dynasty>
+    ## cardinality = 0..1
+    dynasty_house = <house>
+    ## cardinality = 0..1
+    dynasty_splendor_level = int[0..inf] # TODO: confirm bounds
+    subtype[!hidden] = {
+        type = enum[genders] # TODO: dig into this; something tells me this can be scripted to be more than just male/female
+    }
+    subtype[hidden] = {
+        ## cardinality = 0..1
+        type = enum[genders] # TODO: dig into this; something tells me this can be scripted to be more than just male/female
+    }
+    birth = date_field # TODO: see if it can be made to validate to be before the given start_date for the bookmark? Probably not worth the effort
+    title = <title>
+    ## cardinality = 0..1
+    title_text_override = localisation
+    government = <government>
+    ## cardinality = 0..1
+    fallback_government = <government>
+    culture = <culture>
+    religion = <religion>
+    difficulty = localisation
+    history_id = <character>
+    position = {
+        ## cardinality = 2..2
+        int[1..inf] # TODO: confirm bounds
+    }
+
+    ## cardinality = 0..1
+    animation = <animation>
+
+    ## cardinality = 0..1
+    tutorial = bool
+
+    ## cardinality = 0..1
+    display = bool
+
+    # TODO: see if I can remember how to make it with subtypes so that I don't need to duplicate stuff :D
+    ## cardinality = 0..inf
     character = {
         name = localisation
+        relation = localisation
         ## cardinality = 0..1
         dynasty = <dynasty>
         ## cardinality = 0..1
         dynasty_house = <house>
+        ## cardinality = 0..1
         dynasty_splendor_level = int[0..inf] # TODO: confirm bounds
         type = enum[genders] # TODO: dig into this; something tells me this can be scripted to be more than just male/female
         birth = date_field # TODO: see if it can be made to validate to be before the given start_date for the bookmark? Probably not worth the effort
+        ## cardinality = 0..1
         title = <title>
+        ## cardinality = 0..1
         government = <government>
         ## cardinality = 0..1
         fallback_government = <government>
         culture = <culture>
         religion = <religion>
-        difficulty = localisation
         history_id = <character>
-        position = {
-            ## cardinality = 2..2
-            int[1..inf] # TODO: confirm bounds
-        }
 
         ## cardinality = 0..1
         animation = <animation>
-
-        # TODO: see if I can remember how to make it with subtypes so that I don't need to duplicate stuff :D
-        ## cardinality = 0..inf
-        character = {
-            name = localisation
-            relation = localisation
-            ## cardinality = 0..1
-            dynasty = <dynasty>
-            ## cardinality = 0..1
-            dynasty_house = <house>
-            type = enum[genders] # TODO: see above
-            birth = date_field # TODO: see above
-            culture = <culture>
-            religion = <religion>
-            history_id = <character>
-            
-            ## cardinality = 0..1
-            animation = <animation>
-        }
     }
 }

@@ -12,7 +12,7 @@ types = {
 pulse_action = {
     #### Uses key name as default
     ## cardinality = 0..1
-    icon = filepath[game/gfx/interface/icons/activity_pulse_actions/,.dds]
+    icon = filepath[game/gfx/interface/icons/activity_pulse_actions/,.dds] # TODO: Is there another place where these are defined?
     ### # Uses key name as default
     ## cardinality = 0..1
     icon = <pulse_action_icon_override>
@@ -23,7 +23,13 @@ pulse_action = {
 
     ### Relative weight of this action being against all others
     ## replace_scope = { root = activity activity = activity host = character province = province }
+    ## cardinality = 0..1
     weight = single_alias_right[score_formula]
+
+    ### Relative weight of this action being against all others
+    ## replace_scope = { root = activity activity = activity host = character province = province }
+    ## cardinality = 0..1
+    weight = value_field
 
     ### Effect run when this action is picked
     ### If you save a scope as scope:first or scope:second then they can be displayed in the activity

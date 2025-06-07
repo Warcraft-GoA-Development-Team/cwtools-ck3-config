@@ -51,10 +51,10 @@ tradition = {
         alias_name[modifier] = alias_match_left[modifier]
     }
 
-    ## replace_scope { root = culture }
+    ## replace_scope = { root = culture }
     ## cardinality = 0..1
     can_pick = single_alias_right[trigger_clause]
-    ## replace_scope { root = culture }
+    ## replace_scope = { root = culture }
     ## cardinality = 0..1
     can_pick_for_hybridization = single_alias_right[trigger_clause]
 
@@ -69,7 +69,7 @@ tradition = {
 
 enums = {
     complex_enum[cultural_parameter] = {
-        path = "game/common/culture/traditions"
+        path = "game/common/culture/"
         start_from_root = yes
 
         name = {

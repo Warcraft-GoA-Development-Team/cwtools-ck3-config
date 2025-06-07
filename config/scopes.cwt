@@ -150,4 +150,16 @@ scopes = {
 	Trait = {
 		aliases = { trait }
 	}
+	Confederation = {
+		aliases = { confederation }
+	}
+	Situation = {
+		aliases = { situation }
+	}
+	"Situation Sub Region" = {
+		aliases = { situation_sub_region }
+	}
+	"Situation Participant Group" = {
+		aliases = { situation_participant_group }
+	}
 }

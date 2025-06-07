@@ -1,0 +1,11 @@
+types = {
+    type[activity_group_type] = {
+        path = "game/common/activities/activity_group_types/"
+    }
+}
+
+activity_group_type = {
+    sort_order = int
+    ## cardinality = 0..1
+    gui_tags = { scalar }
+}

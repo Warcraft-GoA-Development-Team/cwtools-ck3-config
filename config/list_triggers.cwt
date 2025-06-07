@@ -1745,4 +1745,41 @@ alias[trigger:any_held_county] = single_alias_right[any_trigger]
 
 
 
+## scope = character
+## push_scope = character
+alias[trigger:any_tributary] = single_alias_right[any_trigger]
 
+### Iterates through all members of the scoped confederation
+## scope = confederation
+## push_scope = character
+alias[trigger:any_confederation_member] = single_alias_right[any_trigger]
+
+### Iterate through all situations that a character is participating in
+## scope = character
+## push_scope = situation
+alias[trigger:any_character_situation] = single_alias_right[any_trigger]
+
+### Iterate through all counties of a situation sub-region (warning: not fast)
+## scope = situation_sub_region
+## push_scope = landed_title
+alias[trigger:any_situation_sub_region_county] = single_alias_right[any_trigger]
+
+### Iterate through all geographical regions of a situation sub-region
+## scope = situation_sub_region
+## push_scope = geographical_region
+alias[trigger:any_situation_sub_region_geographical_region] = single_alias_right[any_trigger]
+
+### Iterate through all characters that are participating in a situation, in a specific subregion
+## scope = situation_sub_region
+## push_scope = character
+alias[trigger:any_situation_sub_region_participant] = single_alias_right[any_trigger]
+
+### Iterate through all participant groups of the situation sub-region
+## scope = situation_sub_region
+## push_scope = situation_participant_group
+alias[trigger:any_situation_sub_region_participant_group] = single_alias_right[any_trigger]
+
+### Iterate through all sub-regions of a situation
+## scope = situation
+## push_scope = situation_sub_region
+alias[trigger:any_situation_sub_region] = single_alias_right[any_trigger]

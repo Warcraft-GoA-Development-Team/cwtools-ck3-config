@@ -312,6 +312,8 @@ casus_belli_type = {
 
 casus_belli_group = {
 	## cardinality = 0..1
+	debug = bool
+	## cardinality = 0..1
 	should_check_for_interface_availability = bool
 	### Only fired by event
 	## cardinality = 0..1

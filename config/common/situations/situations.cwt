@@ -1,0 +1,46 @@
+types = {
+    type[situation] = {
+        path = "game/common/situation/situations"
+
+        subtype[unique] = {
+            is_unique = yes
+        }
+    }
+}
+
+situation = {
+
+}
+
+enums = {
+    complex_enum[situation_phase_param] = {
+        path = "game/common/situation/situations"
+
+        name = {
+            phases = {
+                scalar = {
+                    modifier_sets = {
+                        scalar = {
+                            scalar = {
+                                parameters = {
+                                    enum_name = bool
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    complex_enum[participant_groups] = {
+        path = "game/common/situation/situations"
+
+        name = {
+            participant_groups = {
+                enum_name = {
+
+                }
+            }
+        }
+    }
+}

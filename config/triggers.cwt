@@ -352,11 +352,11 @@ alias[trigger:has_all_innovations] == {
 
 ### How many free tradition slot are in the scoped culture
 ## scope = culture
-alias[trigger:has_building_gfx] = value[building_gfx]
+alias[trigger:has_building_gfx] = enum[building_gfx]
 
 ### How many free tradition slot are in the scoped culture
 ## scope = culture
-alias[trigger:has_clothing_gfx] = value[clothing_gfx]
+alias[trigger:has_clothing_gfx] = enum[clothing_gfx]
 
 ### How many free tradition slot are in the scoped culture
 ## scope = culture
@@ -1233,7 +1233,7 @@ alias[trigger:artifact_max_durability] == value_field
 
 ### is the artifact of the given inventory slot type?
 ## scope = artifact
-alias[trigger:artifact_slot_type] = <inventory_slot>
+alias[trigger:artifact_slot_type] = enum[artifact_slot_type]
 
 ### is the artifact of the given type?
 ## scope = artifact
@@ -1383,6 +1383,7 @@ alias[trigger:current_date] == replace_me_date
 ### Wraps triggers that get a custom description instead of the auto-generated one custom_description = { 	text = <trigger_localization_key> 	subject = <optional subject scope> #defaults to current scope 	object = <optional object scope> 	value = <optional script value> 	... triggers ... }
 alias[trigger:custom_description] = {
     text = <trigger_localization>
+    text = localisation
     ## cardinality = 0..1
     subject = scope_field
     ## cardinality = 0..1
@@ -1424,8 +1425,11 @@ alias[trigger:global_variable_list_size] = {
     target == value_field
 }
 
+# ### Does the host have this DLC
+# alias[trigger:has_dlc] = <dlc>
+
 ### Does the host have this DLC
-alias[trigger:has_dlc] = <dlc>
+alias[trigger:has_dlc] = enum[dlc_key]
 
 ### Does the host have DLC that enables this particular feature
 alias[trigger:has_dlc_feature] = enum[dlc_feature]
@@ -2652,9 +2656,9 @@ alias[trigger:num_county_holdings] == alias_keys_field[int_value]
 alias[trigger:num_county_holdings] == value_field
 
 # NOTE: Despite description, a landed title scope
-### what place in line of succession does the character hold?
-## scope = landed_title
-alias[trigger:place_in_line_of_succession] = int_value_field
+# ### what place in line of succession does the character hold?
+# ## scope = landed_title
+# alias[trigger:place_in_line_of_succession] = int_value_field
 
 
 enums = {
@@ -4105,7 +4109,7 @@ alias[trigger:has_dead_character_flag] = scope[flag]
 
 ### Does the dead character have this variable?
 ## scope = character
-alias[trigger:has_dead_character_variable] = value[variable]
+alias[trigger:has_dead_character_variable] = value[dead_variable]
 
 ### Does active diarchy have this parameter active for current power level?
 ## scope = character
@@ -5963,13 +5967,21 @@ alias[trigger:piety_level] = value_field
 ### does the character have the required piety level?
 alias[trigger:parent_relatedness] == float
 
-### what place in line of succession does the character hold?
-## scope = character
-alias[trigger:place_in_line_of_succession] = alias_keys_field[int_value]
+# ### what place in line of succession does the character hold?
+# ## scope = character
+# alias[trigger:place_in_line_of_succession] = alias_keys_field[int_value]
+#
+# ### what place in line of succession does the character hold?
+# ## scope = character
+# alias[trigger:place_in_line_of_succession] = int_value_field
 
 ### what place in line of succession does the character hold?
-## scope = character
-alias[trigger:place_in_line_of_succession] = int_value_field
+## scope = landed_title
+alias[trigger:place_in_line_of_succession] = {
+    target = scope[character]
+    value == alias_keys_field[int_value]
+    value == int_value_field
+}
 
 ### Check where the target character is in the scoped character's player heir list. player_heir_position = { target = scope:actor position = 0 }
 ## scope = character
@@ -6312,14 +6324,13 @@ alias[trigger:time_since_death] = { enum[duration] = int }
 ## scope = character
 alias[trigger:time_to_hook_expiry] = { enum[duration] = int }
 
-
 ### target = other character value >/</= sum of trait compatibility values
 ## scope = character
-alias[trigger:trait_compatibility] == alias_keys_field[int_value]
-
-### target = other character value >/</= sum of trait compatibility values
-## scope = character
-alias[trigger:trait_compatibility] == value_field
+alias[trigger:trait_compatibility] = {
+    target = scope[character]
+    value == alias_keys_field[int_value]
+    value == value_field
+}
 
 ### What this character would cost as a travel leader
 ## scope = character
@@ -6556,6 +6567,46 @@ alias[trigger:yields_alliance] = scope[character]
 ### does the scope province have a particular building or its successor?
 ## scope = province
 alias[trigger:has_building_or_higher] = <building>
+
+### Is the scoped character someone else's tributary?
+## scope = character
+alias[trigger:is_tributary] = bool
+
+### Is the scoped character a member of a confederation?
+## scope = character
+alias[trigger:is_confederation_member] = bool
+
+### Is the scoped character a member of the target confederation?
+## scope = character
+alias[trigger:is_member_of_confederation] = scope[confederation]
+
+### Number of members in the scoped confederation
+## scope = confederation
+alias[trigger:member_count] == alias_keys_field[int_value]
+
+### Number of members in the scoped confederation
+## scope = confederation
+alias[trigger:member_count] == value_field
+
+### Checks if sub-region has phase parameter or not
+## scope = situation_sub_region
+alias[trigger:has_sub_region_phase_parameter] = enum[situation_phase_param]
+
+### Is this character a participant in this participant group?
+## scope = situation_participant_group
+alias[trigger:participant_group_has_character] = scope[character]
+
+### Is the scoped participant group of a specific type?
+## scope = situation_participant_group
+alias[trigger:participant_group_type] = enum[participant_groups]
+
+### Does the scoped county title use County Fertility?
+## scope = landed_title
+alias[trigger:uses_county_fertility] = bool
+
+### Is the scope character obedient to the target character?
+## scope = character
+alias[trigger:is_obedient_to] = scope[character]
 
 
 

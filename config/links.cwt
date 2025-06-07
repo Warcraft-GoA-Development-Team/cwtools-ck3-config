@@ -112,7 +112,7 @@ links = {
         input_scopes = character
         output_scope = character
     }
-    council_position = {
+    council_position_prefix = {
         desc = "Scope to the councillor of the given type, ex. scope:cp_steward"
         from_data = yes
         type = scope
@@ -121,7 +121,7 @@ links = {
         input_scopes = character
         output_scope = character
     }
-    court_position = {
+    court_position_prefix = {
         desc = "The character currently employed in a specific court position."
         from_data = yes
         type = scope
@@ -562,14 +562,14 @@ links = {
         input_scopes = { landed_title province }
         output_scope = landed_title
     }
-    array_define = {
+    array_define_prefix = {
         desc = "Reference the value of a numeric value in an array define: array_define:Namespace|Name|Index. Index is 0-based."
         from_data = yes
         data_source = <array_define>
         prefix = array_define:
         output_scope = value
     }
-    character = {
+    character_prefix = {
         desc = "Global link to historical ( scripted ) character scope of the given character string"
         from_data = yes
         type = scope
@@ -585,14 +585,14 @@ links = {
         desc = "A comparison trigger that will return its value in the context it is used eg: root.gold"
         output_scope = value
     }
-    culture_data = {
+    culture_data_prefix = {
         from_data = yes
         type = scope
         data_source = <culture>
         prefix = culture:
         output_scope = culture
     }
-    culture_group_data = {
+    culture_group_data_prefix = {
         desc = "Unknown, add something in code registration"
         from_data = yes
         type = scope
@@ -600,7 +600,7 @@ links = {
         prefix = culture_group:
         output_scope = culture_group
     }
-    define = {
+    define_prefix = {
         desc = "Reference the value of a numeric define: define:Namespace|Name"
         from_data = yes
         type = scope
@@ -616,7 +616,7 @@ links = {
         desc = "Global link to the dummy male character"
         output_scope = character
     }
-    dynasty_data = {
+    dynasty_data_prefix = {
         desc = "Link to dynasty scope of the given dynasty string"
         from_data = yes
         type = scope
@@ -624,7 +624,7 @@ links = {
         prefix = dynasty:
         output_scope = dynasty
     }
-    faith_data = {
+    faith_data_prefix = {
         desc = "Global link to faith scope of given faith string"
         from_data = yes
         type = scope
@@ -632,26 +632,26 @@ links = {
         prefix = faith:
         output_scope = faith
     }
-    flag = {
+    flag_prefix = {
         desc = "Flag literals eg: flag:the_boss"
         from_data = yes
         data_source = value[flag]
         prefix = flag:
         output_scope = flag
     }
-    global_var = {
+    global_var_prefix = {
         desc = "Reference a previous set global variable via its name eg: global_var:important_thing"
         from_data = yes
         type = scope
         data_source = value[global_variable]
         prefix = global_var:
     }
-    house_data = {
+    house_data_prefix = {
         desc = "Link to house scope of the given house string"
         output_scope = dynasty_house
         prefix = house:
     }
-    local_var = {
+    local_var_prefix = {
         desc = "Reference a previous set local variable via its name eg: local_var:person_of_interest"
         from_data = yes
         type = scope
@@ -662,14 +662,14 @@ links = {
         desc = "A script value that will calculate and returns its value in the context it is used"
         output_scope = value
     }
-    province = {
+    province_prefix = {
         desc = "Directly scope to a specific province by its ID"
         from_data = yes
         data_source = <province>
         prefix = province:
         output_scope = province
     }
-    religion_data = {
+    religion_data_prefix = {
         desc = "Unknown, add something in code registration"
         from_data = yes
         type = scope
@@ -677,13 +677,13 @@ links = {
         prefix = religion:
         output_scope = religion
     }
-    scope = {
+    scope_prefix = {
         desc = "Reference a previously saved scope via its name eg: scope:target"
         from_data = yes
         data_source = value[event_target]
         prefix = scope:
     }
-    title_data = {
+    title_data_prefix = {
         desc = "Global link to title scope of given landed title template string"
         from_data = yes
         type = scope
@@ -691,12 +691,19 @@ links = {
         prefix = title:
         output_scope = landed_title
     }
-    var = {
+    var_prefix = {
         desc = "Reference a previous set variable via its name eg: var:mortal_enemy"
         from_data = yes
         type = scope
         prefix = var:
         data_source = value[variable]
+    }
+    dead_var_prefix = {
+        desc = "Reference a previous set dead character variable via its name eg: dead_var:mortal_enemy"
+        from_data = yes
+        type = scope
+        prefix = dead_var:
+        data_source = value[dead_variable]
     }
     inspiration = {
         desc = "Get the current inspiration of the scoped character, may not exist if they have no inspiration"
@@ -938,7 +945,7 @@ links = {
         input_scopes = mercenary_company
         output_scope = character
     }
-    accolade_type = {
+    accolade_type_prefix = {
         desc = "Get the accolade_type with the specified key"
         output_scope = accolade_type
         from_data = yes
@@ -946,7 +953,7 @@ links = {
         prefix = accolade_type:
         data_source = <accolade>
     }
-    activity_type_data = {
+    activity_type_data_prefix = {
         desc = "Get the activity_type with the specified key"
         output_scope = activity_type
         from_data = yes
@@ -954,14 +961,14 @@ links = {
         prefix = activity_type:
         data_source = <accolade>
     }
-    casus_belli_type = {
+    casus_belli_type_prefix = {
         desc = "Get the casus_belli_type with the specified key"
         from_data = yes
         data_source = <casus_belli>
         prefix = casus_belli_type:
         output_scope = casus_belli_type
     }
-    culture_pillar = {
+    culture_pillar_prefix = {
         desc = "Get the culture_pillar with the specified key"
         from_data = yes
         type = scope
@@ -969,7 +976,7 @@ links = {
         prefix = culture_pillar:
         output_scope = culture_pillar
     }
-    culture_tradition = {
+    culture_tradition_prefix = {
         desc = "Get the culture_tradition with the specified key"
         from_data = yes
         type = scope
@@ -977,7 +984,7 @@ links = {
         prefix = culture_tradition:
         output_scope = culture_tradition
     }
-    decision = {
+    decision_prefix = {
         desc = "Get the decision with the specified key"
         from_data = yes
         type = scope
@@ -985,7 +992,7 @@ links = {
         prefix = decision:
         output_scope = decision
     }
-    doctrine = {
+    doctrine_prefix = {
         desc = "Get the doctrine with the specified key"
         from_data = yes
         type = scope
@@ -993,7 +1000,7 @@ links = {
         prefix = doctrine:
         output_scope = doctrine
     }
-    epidemic_type_data = {
+    epidemic_type_data_prefix = {
         desc = "Get the epidemic_type with the specified key"
         from_data = yes
         type = scope
@@ -1001,7 +1008,7 @@ links = {
         prefix = epidemic_type:
         output_scope = epidemic_type
     }
-    event_id = {
+    event_id_prefix = {
         desc = "Global link to event scope of the given event id"
         from_data = yes
         type = scope
@@ -1009,35 +1016,35 @@ links = {
         prefix = event_id:
         output_scope = flag
     }
-    geographical_region = {
+    geographical_region_prefix = {
         desc = "Get the geographical_region with the specified key"
         from_data = yes
         data_source = <geographical_region>
         prefix = geographical_region:
         output_scope = geographical_region
     }
-    government_type = {
+    government_type_prefix = {
         desc = "Get the government_type with the specified key"
         from_data = yes
         data_source = <government>
         prefix = government_type:
         output_scope = government
     }
-    holding_type = {
+    holding_type_prefix = {
         desc = "Get the government_type with the specified key"
         from_data = yes
         data_source = <holding_type>
         prefix = holding:
         output_scope = holding
     }
-    legend_type_data = {
+    legend_type_data_prefix = {
         desc = "Get the legend_type with the specified key"
         from_data = yes
         data_source = <legend_type>
         output_scope = legend_type
         prefix = legend_type:
     }
-    special_guest = {
+    special_guest_prefix = {
         desc = "Get the special guest of the given type key in the scoped activity"
         from_data = yes
         type = scope
@@ -1046,7 +1053,7 @@ links = {
         input_scopes = activity
         output_scope = character
     }
-    struggle = {
+    struggle_prefix = {
         desc = "Global link to struggle of the given key"
         from_data = yes
         data_source = <struggle>
@@ -1055,14 +1062,14 @@ links = {
         #prefix = religion:
         output_scope = struggle
     }
-    task_contract_type = {
+    task_contract_type_prefix = {
         desc = "Get the task_contract_type with the specified key"
         from_data = yes
         data_source = <task_contract>
         prefix = task_contract_type:
         output_scope = task_contract_type
     }
-    trait = {
+    trait_prefix = {
         desc = "Get the trait with the specified key"
         from_data = yes
         type = scope
@@ -1070,7 +1077,7 @@ links = {
         prefix = trait:
         output_scope = trait
     }
-    vassal_contract = {
+    vassal_contract_prefix = {
         desc = "Get the vassal_contract with the specified key"
         from_data = yes
         type = scope
@@ -1128,19 +1135,12 @@ links = {
         output_scope = character
     }
     # TODO: Should only be used inside legends
-    legend_property = {
+    legend_property_prefix = {
         desc = "Get the scope of the property with the given name on the scoped legend"
         input_scopes = legend
         from_data = yes
         data_source = value[legend_property]
         prefix = legend_property:
-    }
-    flag = {
-        desc = "Flag literals eg: flag:the_boss"
-        from_data = yes
-        data_source = value[flag]
-        prefix = flag:
-        output_scope = flag
     }
     legend_protagonist = {
         desc = "Get the protagonist character of this legend"
@@ -1304,190 +1304,7 @@ links = {
         input_scopes = inspiration
         output_scope = character
     }
-
-    # Comparison Links
-
-    diplomacy = {
-        type = value
-        input_scopes = character
-        output_scope = any
-    }
-    martial = {
-        type = value
-        input_scopes = character
-        output_scope = any
-    }
-    stewardship = {
-        type = value
-        input_scopes = character
-        output_scope = any
-    }
-    intrigue = {
-        type = value
-        input_scopes = character
-        output_scope = any
-    }
-    learning = {
-        type = value
-        input_scopes = character
-        output_scope = any
-    }
-    prowess = {
-        type = value
-        input_scopes = character
-        output_scope = any
-    }
-    max_military_strength = {
-        type = value
-        input_scopes = character
-        output_scope = any
-    }
-    current_military_strength = {
-        type = value
-        input_scopes = character
-        output_scope = any
-    }
-    tier = {
-        type = value
-        input_scopes = landed_title
-        output_scope = any
-    }
-    ai_honor = {
-        type = value
-        input_scopes = character
-        output_scope = any
-    }
-    ai_boldness = {
-        type = value
-        input_scopes = character
-        output_scope = any
-    }
-    ai_greed = {
-        type = value
-        input_scopes = character
-        output_scope = any
-    }
-    ai_vengefulness = {
-        type = value
-        input_scopes = character
-        output_scope = any
-    }
-    ai_rationality = {
-        type = value
-        input_scopes = character
-        output_scope = any
-    }
-    ai_compassion = {
-        type = value
-        input_scopes = character
-        output_scope = any
-    }
-    ai_zeal = {
-        type = value
-        input_scopes = character
-        output_scope = any
-    }
-    ai_energy = {
-        type = value
-        input_scopes = character
-        output_scope = any
-    }
-    court_grandeur_current = {
-        type = value
-        input_scopes = character
-        output_scope = any
-    }
-    ai_sociability = {
-        type = value
-        input_scopes = character
-        output_scope = any
-    }
-    war_chest_gold_maximum = {
-        type = value
-        input_scopes = character
-        output_scope = any
-    }
-    provisions = {
-        type = value
-        input_scopes = domicile
-        output_scope = any
-    }
-    development_level = {
-        type = value
-        input_scopes = landed_title
-        output_scope = any
-    }
-    county_control = {
-        type = value
-        input_scopes = landed_title
-        output_scope = any
-    }
-    current_year = {
-        type = value
-        input_scopes = none
-        output_scope = any
-    }
-    stress = {
-        type = value
-        input_scopes = character
-        output_scope = any
-    }
-    age = {
-        type = value
-        input_scopes = character
-        output_scope = any
-    }
-    piety_level = {
-        type = value
-        input_scopes = character
-        output_scope = any
-    }
-    tier = {
-        type = value
-        input_scopes = landed_title
-        output_scope = any
-    }
-    highest_held_title_tier = {
-        type = value
-        input_scopes = character
-        output_scope = any
-    }
-    scheme_success_chance = {
-        type = value
-        input_scopes = scheme
-        output_scope = any
-    }
-    scheme_secrecy = {
-        type = value
-        input_scopes = scheme
-        output_scope = any
-    }
-    prowess_for_combat_event_opponent = {
-        type = value
-        input_scopes = character
-        output_scope = any
-    }
-    diarchy_swing = {
-        type = value
-        input_scopes = character
-        output_scope = any
-    }
-    prestige_level = {
-        type = value
-        input_scopes = character
-        output_scope = any
-    }
-    influence = {
-        type = value
-        input_scopes = character
-        output_scope = any
-    }
-    title_held_years = {
-        type = value
-        input_scopes = landed_title
-        output_scope = any
-    }
-    vassal_contract_obligation_level = {
+    vassal_contract_obligation_level_prefix = {
         from_data = yes
         type = value
         prefix = vassal_contract_obligation_level:
@@ -1495,7 +1312,7 @@ links = {
         input_scopes = character
         output_scope = any
     }
-    number_maa_regiments_of_base_type = {
+    number_maa_regiments_of_base_type_prefix = {
         from_data = yes
         type = value
         prefix = number_maa_regiments_of_base_type:
@@ -1503,9 +1320,136 @@ links = {
         input_scopes = character
         output_scope = any
     }
+    court_position_type_prefix = {
+        desc = "Get the court_position_type with the specified key"
+        from_data = yes
+        type = scope
+        data_source = <court_position>
+        prefix = court_position_type:
+        output_scope = court_position_type
+    }
+    situation_prefix = {
+        desc = "Global link to the situation of the given type key (only available if the situation has `is_unique = yes`."
+        from_data = yes
+        type = scope
+        data_source = <situation.unique>
+        prefix = situation:
+        output_scope = situation
+    }
+    character_prefix = {
+        desc = "Global link to historical ( scripted ) character scope of the given character string"
+        from_data = yes
+        type = scope
+        data_source = <character>
+        prefix = character:
+        output_scope = character
+    }
+    overlord = {
+        desc = "Get the overlord (suzerain or liege) of the scoped character"
+        type = scope
+        input_scopes = character
+        output_scope = character
+    }
+    suzerain = {
+        desc = "Get the suzerain of the scoped character"
+        type = scope
+        input_scopes = character
+        output_scope = character
+    }
+    confederation = {
+        desc = "Scope to the character's confederation"
+        type = scope
+        input_scopes = character
+        output_scope = confederation
+    }
+    subject_contract_type = {
+        desc = "Get the type of a given contract obligation"
+        type = scope
+        input_scopes = vassal_contract_obligation_level
+        output_scope = vassal_contract
+    }
+    obedience_target = {
+        desc = "Get the obedience target of the scoped character"
+        type = scope
+        input_scopes = character
+        output_scope = character
+    }
+    top_overlord = {
+        desc = "Get the top overlord (suzerain or liege) of the scoped character"
+        type = scope
+        input_scopes = character
+        output_scope = character
+    }
+    top_suzerain = {
+        desc = "Get the top suzerain of the scoped character"
+        type = scope
+        input_scopes = character
+        output_scope = character
+    }
+    title_domicile = {
+        desc = "Get the domicile associated with the scoped title. Might not exist."
+        type = scope
+        input_scopes = landed_title
+        output_scope = domicile
+    }
+    participant_group_situation = {
+        desc = "From the situation participant group, get the situation it belongs to."
+        type = scope
+        input_scopes = situation_participant_group
+        output_scope = situation
+    }
+    participant_group_sub_region = {
+        desc = "From the situation participant group, get the situation sub-region it belongs to."
+        type = scope
+        input_scopes = situation_participant_group
+        output_scope = situation_sub_region
+    }
+    founder_faith = {
+        desc = "Get the founder Faith of given Accolade"
+        type = scope
+        input_scopes = accolade
+        output_scope = faith
+    }
+    situation_top_gold = {
+        desc = "Get the participating character with the most gold in the scoped situation."
+        type = scope
+        input_scopes = situation
+        output_scope = character
+    }
+    situation_top_herd = {
+        desc = "Get the participating character with the most herd in the scoped situation."
+        type = scope
+        input_scopes = situation
+        output_scope = character
+    }
+    situation_top_provisions = {
+        desc = "Get the participating character with the most provisions in the scoped situation."
+        type = scope
+        input_scopes = situation
+        output_scope = character
+    }
+    situation_top_sub_region = {
+        desc = "Get the situation top sub-region with geographical, county and province info."
+        type = scope
+        input_scopes = situation
+        output_scope = situation_sub_region
+    }
+    domicile_culture = {
+        desc = "Get current culture of the scoped domicile. Doesn't exist if the domcile type doesn't use culture."
+        type = scope
+        input_scopes = domicile
+        output_scope = culture
+    }
+    domicile_faith = {
+        desc = "Get current faith of the scoped domicile. Doesn't exist if the domcile type doesn't use faith."
+        type = scope
+        input_scopes = domicile
+        output_scope = faith
+    }
+
 
     ### How far away is the province/barony/county from the target? Measured in map pixels. Squared for performance reasons (square root is expensive). squared_distance = { target = some province/barony/county value > 10000 }
-    squared_distance = {
+    squared_distance_prefix = {
         desc = "How far away is the province/barony/county from the target? Measured in map pixels. Squared for performance reasons (square root is expensive). squared_distance = { target = some province/barony/county value > 10000 }"
         type = value
         from_data = yes
@@ -1515,4 +1459,16 @@ links = {
         input_scopes = { landed_title province }
         output_scope = any
     }
+
+    aptitude_prefix = {
+        type = value
+        from_data = yes
+        from_argument = yes
+        prefix = aptitude:
+        data_source = <court_position>
+        input_scopes = character
+        output_scope = any
+    }
+
+    # Comparison Links
 }

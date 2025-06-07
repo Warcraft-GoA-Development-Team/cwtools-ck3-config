@@ -66,6 +66,7 @@ alias[effect:set_task_contract_target] = scope[character]
 ## scope = activity
 alias[effect:add_activity_log_entry] = {
     key = localisation
+    key = scalar
     ## cardinality = 0..1
     score = int_value_field
     ## cardinality = 0..1
@@ -664,27 +665,27 @@ alias[effect:set_epidemic_outbreak_intensity] = enum[outbreak_intensity]
 ###################################
 
 ### Generates a coat of arms for the scoped landed title, dynasty or house generate_coa = yes
-## scope = {landed_title dynasty dynasty_house }
+## scope = {landed_title dynasty dynasty_house confederation }
 alias[effect:generate_coa] = yes
 
 ### Rest the coat of arms for the scoped landed title, dynasty or house to its template reset_coa = yes
-## scope = {landed_title dynasty dynasty_house }
+## scope = {landed_title dynasty dynasty_house confederation }
 alias[effect:reset_coa] = bool # Only used once as ` = THIS`.
 
 ### Sets the coat of arms of a landed title, dynasty, or house to the right hand side coat of arms or that of an object of the same type set_coa = k_england set_coa = scope:new_coa
-## scope = {landed_title dynasty dynasty_house }
+## scope = {landed_title dynasty dynasty_house confederation }
 alias[effect:set_coa] = <coat_of_arms>
 
 ### Sets the coat of arms of a landed title, dynasty, or house to the right hand side coat of arms or that of an object of the same type set_coa = k_england set_coa = scope:new_coa
-## scope = {landed_title dynasty dynasty_house }
+## scope = {landed_title dynasty dynasty_house confederation }
 alias[effect:set_coa] = scope[landed_title]
 
 ### Sets the coat of arms of a landed title, dynasty, or house to the right hand side coat of arms or that of an object of the same type set_coa = k_england set_coa = scope:new_coa
-## scope = {landed_title dynasty dynasty_house }
+## scope = {landed_title dynasty dynasty_house confederation }
 alias[effect:set_coa] = scope[dynasty]
 
 ### Sets the coat of arms of a landed title, dynasty, or house to the right hand side coat of arms or that of an object of the same type set_coa = k_england set_coa = scope:new_coa
-## scope = {landed_title dynasty dynasty_house }
+## scope = {landed_title dynasty dynasty_house confederation }
 alias[effect:set_coa] = scope[dynasty_house]
 
 ###################################
@@ -785,7 +786,7 @@ alias[effect:reforge_artifact] = {
     name = single_alias_right[complex_desc]
     description = single_alias_right[complex_desc]
     rarity = enum[artifact_rarity]
-    type = <inventory_slot>
+    type = <artifact_type>
     durability = int_value_field
     max_durability = int_value_field
     ## cardinality = 0..1
@@ -863,6 +864,7 @@ alias[effect:unequip_artifact_from_owner] = bool
 
 single_alias[artifact_history_block] = {
     type = enum[artifact_history] # documentation not explicit
+    ## cardinality = 0..1
     date = replace_me_date
     ## cardinality = 0..1
     actor = scope[character]
@@ -2336,6 +2338,10 @@ alias[effect:add_dread] = alias_keys_field[int_value]
 ## scope = character
 alias[effect:add_dread] = value_field
 
+### adds (or removes) dread to a character
+## scope = character
+alias[effect:add_dread] = single_alias_right[score_formula]
+
 ### adds gold to a character
 ## scope = character
 alias[effect:add_gold] = alias_keys_field[int_value]
@@ -2343,6 +2349,10 @@ alias[effect:add_gold] = alias_keys_field[int_value]
 ### adds gold to a character
 ## scope = character
 alias[effect:add_gold] = value_field
+
+### adds gold to a character
+## scope = character
+alias[effect:add_gold] = single_alias_right[score_formula]
 
 ### Adds a hook on a character add_hook = { type = X, target = Y, secret = Z, days/months/years = W  } (days/months/years optional (taken from hook type otherwise) and can be a value or an interval, secret required for hook types that require it)
 ## scope = character
@@ -2423,6 +2433,10 @@ alias[effect:add_piety] = alias_keys_field[int_value]
 ## scope = character
 alias[effect:add_piety] = value_field
 
+### gives (or takes) piety to a character
+## scope = character
+alias[effect:add_piety] = single_alias_right[score_formula]
+
 ### gives (or takes) piety experience to a character
 ## scope = character
 alias[effect:add_piety_experience] = alias_keys_field[int_value]
@@ -2430,6 +2444,10 @@ alias[effect:add_piety_experience] = alias_keys_field[int_value]
 ### gives (or takes) piety experience to a character
 ## scope = character
 alias[effect:add_piety_experience] = value_field
+
+### gives (or takes) piety experience to a character
+## scope = character
+alias[effect:add_piety_experience] = single_alias_right[score_formula]
 
 ### increases (or decreases) the piety level of a character
 ## scope = character
@@ -2439,6 +2457,10 @@ alias[effect:add_piety_level] = alias_keys_field[int_value]
 ## scope = character
 alias[effect:add_piety_level] = value_field
 
+### increases (or decreases) the piety level of a character
+## scope = character
+alias[effect:add_piety_level] = single_alias_right[score_formula]
+
 ### gives (or takes) piety without experience to a character
 ## scope = character
 alias[effect:add_piety_no_experience] = alias_keys_field[int_value]
@@ -2446,6 +2468,10 @@ alias[effect:add_piety_no_experience] = alias_keys_field[int_value]
 ### gives (or takes) piety without experience to a character
 ## scope = character
 alias[effect:add_piety_no_experience] = value_field
+
+### gives (or takes) piety without experience to a character
+## scope = character
+alias[effect:add_piety_no_experience] = single_alias_right[score_formula]
 
 ### gives a pressed claim to a character
 ## scope = character
@@ -2479,6 +2505,10 @@ alias[effect:add_prestige_experience] = value_field
 ## scope = character
 alias[effect:add_prestige_experience] = single_alias_right[score_formula]
 
+### gives (or takes) prestige experience to a character
+## scope = character
+alias[effect:add_prestige_experience] = single_alias_right[score_formula]
+
 ### increases (or decreases) the prestige level of a character
 ## scope = character
 alias[effect:add_prestige_level] = alias_keys_field[int_value]
@@ -2487,6 +2517,10 @@ alias[effect:add_prestige_level] = alias_keys_field[int_value]
 ## scope = character
 alias[effect:add_prestige_level] = value_field
 
+### increases (or decreases) the prestige level of a character
+## scope = character
+alias[effect:add_prestige_level] = single_alias_right[score_formula]
+
 ### gives (or takes) prestige without experience to a character
 ## scope = character
 alias[effect:add_prestige_no_experience] = alias_keys_field[int_value]
@@ -2494,6 +2528,10 @@ alias[effect:add_prestige_no_experience] = alias_keys_field[int_value]
 ### gives (or takes) prestige without experience to a character
 ## scope = character
 alias[effect:add_prestige_no_experience] = value_field
+
+### gives (or takes) prestige without experience to a character
+## scope = character
+alias[effect:add_prestige_no_experience] = single_alias_right[score_formula]
 
 ### Adds the given law to the scoped character
 ## scope = character
@@ -2587,6 +2625,7 @@ alias[effect:add_trait] = scope[trait]
 ## scope = character
 alias[effect:add_trait_xp] = {
     trait = <trait>
+    trait = scope[trait]
     ## cardinality = 0..1
     track = enum[trait_track]
     value = alias_keys_field[int_value]
@@ -2927,7 +2966,7 @@ alias[effect:create_artifact] = {
     description = localisation
     description = single_alias_right[complex_desc]
     rarity = enum[artifact_rarity]
-    type = <inventory_slot>
+    type = <artifact_type>
     durability = int_value_field
     max_durability = int_value_field
     decaying = bool
@@ -3771,8 +3810,10 @@ alias[effect:set_current_court_grandeur] = value_field
 ### set_dead_character_variable = {	name = <name> - name of the variable	value = <value> - any event target, bool, value, script value or flag	years/weeks/days = { <min_number> <max_number> } - years/weeks/days this flag is supposed to last} Adds a variable to a dead character. A duration is required.
 ## scope = character
 alias[effect:set_dead_character_variable] = {
-    name = value_set[variable]
+    name = value_set[dead_variable]
     value = value_field
+    value = bool
+    enum[duration] = int
     enum[duration] = { int int }
 }
 
@@ -4517,6 +4558,47 @@ alias[effect:scheme_freeze] = {
     reason = localisation
     enum[duration] = int
 }
+
+### starts a tributary
+## scope = character
+alias[effect:start_tributary] = {
+    contract_group = replace_me #TODO
+    suzerain = scope[character]
+}
+
+### Ends the scoped character's current tributary contract.
+## scope = character
+alias[effect:end_tributary] = bool
+
+### Adds a character to the scoped confederation, unless they're already part of one.The target character must have their primary title tier lower than the confederation title's tier.This will also make the character a vassal of the confederation leader.
+## scope = confederation
+alias[effect:add_confederation_member] = scope[character]
+
+### Disbands the scoped confederation, destroying the confederation title.
+## scope = confederation
+alias[effect:disband_confederation] = bool
+
+### Removes the target character from the scoped confederation.The holder of the confederation title cannot be removed.
+## scope = confederation
+alias[effect:remove_confederation_member] = scope[character]
+
+### Creates a confederation and adds the scoped character as a member.
+## scope = confederation
+alias[effect:create_confederation] = {
+    name = localisation
+}
+
+### Changes the County Fertility of the scoped county title by the given amount
+## scope = landed_title
+alias[effect:change_county_fertility] = alias_keys_field[int_value]
+
+### Changes the County Fertility of the scoped county title by the given amount
+## scope = landed_title
+alias[effect:change_county_fertility] = value_field
+
+### Makes the owner of the scoped artifact equip it, will replace the first held artifact if all slots of its type are filled.
+## scope = artifact
+alias[effect:equip_artifact_to_owner_replace] = bool
 
 
 

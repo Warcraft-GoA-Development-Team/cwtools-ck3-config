@@ -48,13 +48,18 @@ building = {
 		### The name of the mesh or the entity
 		## cardinality = 0..1
 		name = <pdxmesh>
+		### The name of the mesh or the entity
+		## cardinality = 0..1
+		name = <entity>
 		## cardinality = 0..1
 		requires_dlc_flag = enum[dlc_feature]
 		### To randomize between multiple meshes/entities. Note that they must all be entities, or all be meshes:
 		## cardinality = 0..1
 		names = {
-			## cardinality = 1..inf
+			## cardinality = 0..inf
 			<pdxmesh>
+			## cardinality = 0..inf
+			<entity>
 		}
 		### Path to illustration shown in the county view, texture can be accessed in GUI: "[Holding.GetIllustration]"
 		## cardinality = 0..1
@@ -68,7 +73,7 @@ building = {
 		}
 		### Graphical cultures that prefer this asset to be shown
 		## cardinality = 0..1
-		graphical_cultures = { value[building_gfx] }
+		graphical_cultures = { enum[building_gfx] }
 		### Graphical faiths that prefer this asset to be shown (priority is faith > religion > family, so Catholic graphical_faith overrides Abrahamic graphical_faith)
 		## cardinality = 0..1
 		graphical_faiths = {
@@ -87,6 +92,13 @@ building = {
 			## cardinality = 1..inf
 			<government>
 		}
+		## cardinality = 0..1
+		provinces = {
+			## cardinality = 1..inf
+			<province>
+		}
+		## cardinality = 0..1
+		domicile_building = <domicile_building>
 	}
 
 	### Is the building enabled? Else won't give any effects to holder, and not be constructible (see can_construct* below).

@@ -1,0 +1,45 @@
+types = {
+    type[challenge_character] = {
+        path = "game/common/bookmarks/challenge_characters/"
+    }
+
+    ## type_key_filter = character
+    type[challenge_character_character] = {
+        path = "game/common/bookmarks/challenge_characters/"
+
+        skip_root_key = { any }
+    }
+}
+
+challenge_character = {
+    start_date = date_field
+    achievements = {
+        ## cardinality = 1..inf
+        <achievement>
+    }
+}
+
+challenge_character_character = {
+    name = localisation
+    ## cardinality = 0..1
+    dynasty = <dynasty>
+    ## cardinality = 0..1
+    dynasty_house = <house>
+    ## cardinality = 0..1
+    dynasty_splendor_level = int[0..inf] # TODO: confirm bounds
+    type = enum[genders] # TODO: dig into this; something tells me this can be scripted to be more than just male/female
+    birth = date_field # TODO: see if it can be made to validate to be before the given start_date for the bookmark? Probably not worth the effort
+    title = <title>
+    # ## cardinality = 0..1
+    # title_text_override = localisation
+    government = <government>
+    ## cardinality = 0..1
+    fallback_government = <government>
+    culture = <culture>
+    religion = <religion>
+    difficulty = localisation
+    history_id = <character>
+
+    ## cardinality = 0..1
+    animation = <animation>
+}

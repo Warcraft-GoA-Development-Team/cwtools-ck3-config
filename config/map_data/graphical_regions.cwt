@@ -1,6 +1,6 @@
 types = {
     type[geographical_region] = {
-        path = "game/map_data"
+        path = "game/map_data/geographical_regions"
         path_extension = .txt
 
         subtype[graphical_region] = {

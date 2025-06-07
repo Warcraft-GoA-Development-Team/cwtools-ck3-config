@@ -6,9 +6,9 @@ types = {
 
 artifact_type = {
     ## cardinality = 1..1
-	slot = <inventory_slot>
+	slot = enum[artifact_slot_type]
 	### A feature from each of these groups will be assigned automatically on creation
-	## cardinality = 1..1
+	## cardinality = 0..1
     required_features =
     {
         ## cardinality = 1..inf
@@ -22,5 +22,7 @@ artifact_type = {
     }
 	### optional field with no gameplay effect. Only needed for automatic test artifact generation
 	## cardinality = 0..1
-    default_visuals = <arifact_visual>
+    default_visuals = <artifact_visual>
+    ## cardinality = 0..1
+    can_reforge = bool
 }

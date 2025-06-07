@@ -37,30 +37,30 @@ blueprint = {
 	replacement_modifiers = {
         ## cardinality = 0..1
 		common = {
-            ## cardinality = 1..inf
+            ## cardinality = 0..inf
 			alias_keys_field[modifier]
-            ## cardinality = 1..inf
+            ## cardinality = 0..inf
 			<modifier_container>
 		}
         ## cardinality = 0..1
 		masterwork = {
-            ## cardinality = 1..inf
+			## cardinality = 0..inf
 			alias_keys_field[modifier]
-			## cardinality = 1..inf
+			## cardinality = 0..inf
 			<modifier_container>
 		}
         ## cardinality = 0..1
 		famed = {
-            ## cardinality = 1..inf
+			## cardinality = 0..inf
 			alias_keys_field[modifier]
-			## cardinality = 1..inf
+			## cardinality = 0..inf
 			<modifier_container>
 		}
         ## cardinality = 0..1
 		illustrious = {
-            ## cardinality = 1..inf
+			## cardinality = 0..inf
 			alias_keys_field[modifier]
-			## cardinality = 1..inf
+			## cardinality = 0..inf
 			<modifier_container>
 		}
 	}

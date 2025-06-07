@@ -61,22 +61,22 @@ culture = {
     ### Coat of Arms graphics
     coa_gfx = { 
         ## cardinality = 1..inf
-        enum[coa_gfx]
+        scalar
     }
     ### Buildings graphics
     building_gfx = { 
         ## cardinality = 1..inf
-        value_set[building_gfx]
+        scalar
     }
     ### Clothing graphics
     clothing_gfx = { 
         ## cardinality = 1..inf
-        value_set[clothing_gfx]
+        scalar
     }
     ### Unit Graphics
     unit_gfx = { 
         ## cardinality = 1..inf
-        enum[unit_gfx]
+        scalar
     }
 
     ### Weighted list of ethnicities for newly generated characters.
@@ -107,3 +107,41 @@ single_alias[ethnicity_list] = {
     int = <ethnicity>
 }
 
+enums = {
+    complex_enum[coa_gfx] = {
+        path = "game/common/culture/cultures"
+
+        name = {
+            coa_gfx = {
+                enum_name
+            }
+        }
+    }
+    complex_enum[building_gfx] = {
+        path = "game/common/culture/cultures"
+
+        name = {
+            building_gfx = {
+                enum_name
+            }
+        }
+    }
+    complex_enum[clothing_gfx] = {
+        path = "game/common/culture/cultures"
+
+        name = {
+            clothing_gfx = {
+                enum_name
+            }
+        }
+    }
+    complex_enum[unit_gfx] = {
+        path = "game/common/culture/cultures"
+
+        name = {
+            unit_gfx = {
+                enum_name
+            }
+        }
+    }
+}

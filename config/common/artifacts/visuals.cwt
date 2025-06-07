@@ -16,9 +16,10 @@ artifact_visual = {
     ## cardinality = 0..1
     support_type = enum[support_type]
     ## cardinality = 0..inf
-    icon = filepath[game/gfx/interface/icons/artifact]
+    icon = filepath[game/gfx/interface/icons/artifact/]
     ## cardinality = 0..inf
 	icon = {
+        ## cardinality = 0..1
         ## replace_scope = { root = character artifact = artifact }
 		trigger = single_alias_right[trigger_clause]
 
