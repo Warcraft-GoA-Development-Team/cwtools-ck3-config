@@ -209,6 +209,11 @@ enums = {
         no
         all
     }
+    enum[knight_status] = {
+        force
+        default
+        disallowed
+    }
 }
 
 # Duration alias for LHS use:

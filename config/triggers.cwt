@@ -34,10 +34,6 @@ alias[trigger:ce1_legitimacy_legacy_track_perks] == value_field # TODO: Can thes
 
 ### Can the scoped dynasty unlock a 'relevant' perk? Relevant meaning one that isn't the first in its track unless the dynasty has no partially filled tracks
 ## scope = dynasty
-alias[trigger:dynasty_can_unlock_relevant_perk] = bool
-
-### Can the scoped dynasty unlock a 'relevant' perk? Relevant meaning one that isn't the first in its track unless the dynasty has no partially filled tracks
-## scope = dynasty
 alias[trigger:dynasty_num_unlocked_perks] == alias_keys_field[int_value]
 
 ### Can the scoped dynasty unlock a 'relevant' perk? Relevant meaning one that isn't the first in its track unless the dynasty has no partially filled tracks
@@ -241,18 +237,6 @@ alias[trigger:has_phase_past] = {
     location = scope[province]
 }
 
-### Check if the current activity is completed or not, this doesn't have much use for content since we delete an activity as soon as we can, but in multiplayer it exists until everyone stops viewing it so we use this to cancel some delayed events
-## scope = activity
-alias[trigger:is_activity_complete] = bool
-
-### Check if the current activity phase is in the active state (else it is in the passive state)
-## scope = activity
-alias[trigger:is_current_phase_active] = bool
-
-### Check if the scoped activity is an open invite activity is_open_invite_activity = yes/no
-## scope = activity
-alias[trigger:is_open_invite_activity] = bool
-
 ### Is the target character a required special guest in the scoped activity.
 ## scope = activity
 alias[trigger:is_required_special_guest] = scope[character]
@@ -281,23 +265,9 @@ alias[trigger:num_phases] == alias_keys_field[int_value]
 ## scope = activity
 alias[trigger:num_phases] == value_field
 
-
-
-### Is the activity activated?
-## scope = activity
-alias[trigger:activity_has_been_activated] = bool
-
-# undocumented
-### is the target character participating in the scope activity?
-#alias[trigger:is_target_participating] = scope[character]
-
 #######################################################
 # CULTURE SCOPE
 #######################################################
-
-### Get random applicable innovation from another culture
-## scope = culture
-alias[trigger:can_get_innovation_from] = scope[culture]
 
 ### The cultural acceptance of the scoped culture with the target culture
 ## scope = culture
@@ -393,30 +363,6 @@ alias[trigger:has_name_list] = <name_list>
 ## scope = culture
 alias[trigger:has_primary_name_list] = <name_list>
 
-### Is the culture a hybrid culture
-## scope = culture
-alias[trigger:is_hybrid_culture] = bool
-
-### Is the culture a divergent culture
-## scope = culture
-alias[trigger:is_divergent_culture] = bool
-
-### Does the culture have the same ethos as the target?
-## scope = culture
-alias[trigger:has_same_culture_ethos] = scope[culture]
-
-### Does the culture have the same heritage as the target?
-## scope = culture
-alias[trigger:has_same_culture_heritage] = scope[culture]
-
-### Does the culture have the same language as the target?
-## scope = culture
-alias[trigger:has_same_culture_language] = scope[culture]
-
-### Does the culture have the same martial tradition as the target?
-## scope = culture
-alias[trigger:has_same_culture_martial_tradition] = scope[culture]
-
 ### Does the culture have this unit gfx?
 ## scope = culture
 alias[trigger:has_unit_gfx] = enum[unit_gfx]
@@ -443,10 +389,6 @@ alias[trigger:num_discovered_innovations_in_era] == {
 ### Does the character memory have this memory category?
 ## scope = memory
 alias[trigger:has_memory_category] = enum[memory_category]
-
-### Does the character memory have this target character as a participant?
-## scope = memory
-alias[trigger:has_memory_participant] = scope[character]
 
 ### Does the character memory have this memory type?
 ## scope = memory
@@ -477,41 +419,9 @@ alias[trigger:memory_end_date] == date_field
 # REGIMENT SCOPE
 #####################################################
 
-###  Can target MaA regiment be upgraded
-## scope = regiment
-alias[trigger:can_upgrade_maa] = bool
-
-###  Is target MaA regiment part of event troops
-## scope = regiment
-alias[trigger:is_event_maa_regiment] = bool
-
-###  Was target MaA regiment hired from merc or holy order
-## scope = regiment
-alias[trigger:is_hired_maa_regiment] = bool
-
-###  Is target MaA regiment engaged in combat
-## scope = regiment
-alias[trigger:is_maa_in_combat] = bool
-
 ###  Check MaA type of a regiment
 ## scope = regiment
 alias[trigger:is_maa_type] = <maa_type>
-
-###  Is target MaA regiment personal
-## scope = regiment
-alias[trigger:is_personal_maa_regiment] = bool
-
-###  Is target MaA regiment raised
-## scope = regiment
-alias[trigger:is_raised] = bool
-
-###  Is target MaA regiment just a normal one recruited by a ruler
-## scope = regiment
-alias[trigger:is_regular_maa_regiment] = bool
-
-###  Is target MaA regiment belongs to a title
-## scope = regiment
-alias[trigger:is_title_maa_regiment] = bool
 
 ###  Check base MaA type of a regiment
 ## scope = regiment
@@ -573,10 +483,6 @@ alias[trigger:is_opposite_of_trait] = <trait>
 # HOUSE SCOPE
 #####################################################
 
-### Does the scoped dynasty house have a personal claim on the target artifact
-## scope = dynasty_house
-alias[trigger:has_house_artifact_claim] = scope[artifact]
-
 ### Does the scoped house have the duration remaining on a given modifier has_house_modifier_duration_remaining = name
 ## scope = dynasty_house
 alias[trigger:has_house_modifier_duration_remaining] = <modifier_container>
@@ -584,10 +490,6 @@ alias[trigger:has_house_modifier_duration_remaining] = <modifier_container>
 ### Does the scoped house have a given modifier has_house_modifier = name
 ## scope = dynasty_house
 alias[trigger:has_house_modifier] = <modifier_container>
-
-### Is the given dynasty house has house unity
-## scope = dynasty_house
-alias[trigger:has_house_unity] = bool
 
 ### Does the scoped house with unity have a given modifier
 ## scope = dynasty_house
@@ -628,14 +530,6 @@ alias[trigger:house_unity_value] == alias_keys_field[int_value]
 ## scope = dynasty_house
 alias[trigger:house_unity_value] == value_field
 
-### Is the given house considered dominant: scope:house = { is_dominant_family = yes }
-## scope = dynasty_house
-alias[trigger:is_dominant_family] = bool
-
-### Is the given house considered powerful: scope:house = { is_powerful_family = yes }
-## scope = dynasty_house
-alias[trigger:is_powerful_family] = bool
-
 #####################################################
 # TASK CONTRACT SCOPE
 #####################################################
@@ -647,14 +541,6 @@ alias[trigger:has_task_contract_group] = value[task_contract_group]
 ### has task contract with type
 ## scope = task_contract
 alias[trigger:has_task_contract_type] = <task_contract>
-
-### Is the contract type of criminal nature?
-## scope = task_contract
-alias[trigger:is_criminal] = bool
-
-### Is contract valid to keep?
-## scope = task_contract
-alias[trigger:is_valid_to_keep] = bool
 
 ### Tier value for task contract
 ## scope = task_contract
@@ -684,38 +570,6 @@ alias[trigger:position_can_be_fired] == <bool>
 # SECRET SCOPE
 #####################################################
 
-### can the scope secret be exposed by the target character? can_be_exposed_by = target
-## scope = secret
-alias[trigger:can_be_exposed_by] = scope[character]
-
-### is this secret criminal for the target participant? is_criminal_for = <character>
-## scope = secret
-alias[trigger:is_criminal_for] = scope[character]
-
-### is the scope secret known by the target character?
-## scope = secret
-alias[trigger:is_known_by] = scope[character]
-
-### is this secret shunned for the target participant? is_shunned_for = <character>
-## scope = secret
-alias[trigger:is_shunned_for] = scope[character]
-
-### is this secret shunned or criminal for the target participant? is_shunned_or_illegal_for = <character>
-## scope = secret
-alias[trigger:is_shunned_or_criminal_for] = scope[character]
-
-### has the scope secret been spent by the target character? is_spent_by = target
-## scope = secret
-alias[trigger:is_spent_by] = scope[character]
-
-### Does the local player have knowledge about the secret? An interface trigger, can only be used in specific places
-## scope = secret
-alias[trigger:local_player_knows_this_secret] = bool
-
-### Is the scope secret of the same type as the target secret? same_secret_type_as = scope:some_secret
-## scope = secret
-alias[trigger:same_secret_type_as] = scope[secret]
-
 ### Is the scope secret of the specified type?
 ## scope = secret
 alias[trigger:secret_type] = <secret_type>
@@ -730,10 +584,6 @@ alias[trigger:is_in_family] = <religion_family>
 #####################################################
 # ARMY SCOPE
 #####################################################
-
-### is this army moving?
-## scope = army
-alias[trigger:army_is_moving] = bool
 
 ### what size is this army's max size?
 ## scope = army
@@ -750,30 +600,6 @@ alias[trigger:army_size] == alias_keys_field[int_value]
 ### what size is this army?
 ## scope = army
 alias[trigger:army_size] == value_field
-
-### Can we disband this army?
-## scope = army
-alias[trigger:can_disband_army] = bool
-
-### Is the scoped army in combat?
-## scope = army
-alias[trigger:is_army_in_combat] = bool
-
-### Is the scoped army in a raid (this includes a raid interrupted by combat)?
-## scope = army
-alias[trigger:is_army_in_raid] = bool
-
-### Is the scoped army in a siege (this includes a siege interrupted by combat)?
-## scope = army
-alias[trigger:is_army_in_siege] = bool
-
-### Is the scoped army in a siege that is relevant to the target character?
-## scope = army
-alias[trigger:is_army_in_siege_relevant_for] = scope[character]
-
-### Is the scoped army a raid army?
-## scope = army
-alias[trigger:is_raid_army] = bool
 
 ### How much raid loot is the army carrying?
 ## scope = army
@@ -827,10 +653,6 @@ alias[trigger:total_army_toughness] == value_field
 # TRAVEL PLAN SCOPE
 #####################################################
 
-###Can this travel plan be cancelled? (associated activity might disallow it)
-## scope = travel_plan
-alias[trigger:can_cancel] = bool
-
 ### Danger value of the current province the travel plan is in (-100.0 to +100.0).
 ## scope = travel_plan
 alias[trigger:current_danger_value] = value_field
@@ -867,26 +689,6 @@ alias[trigger:has_travel_plan_modifier] = <modifier_container>
 ## scope = travel_plan
 alias[trigger:has_travel_plan_modifier_duration_remaining] = <modifier_container>
 
-### Is this travel plan aborted?
-## scope = travel_plan
-alias[trigger:is_aborted] = bool
-
-### Is this travel plan cancelled? (manually stopped, and rerouted home)
-## scope = travel_plan
-alias[trigger:is_cancelled] = bool
-
-### Is this travel plan completed? (finished by arrival at final destination)
-## scope = travel_plan
-alias[trigger:is_completed] = bool
-
-### Is this travel plan paused?
-## scope = travel_plan
-alias[trigger:is_paused] = bool
-
-### Is character travelling with a domicile? <travel_plan> = { is_travel_with_domicile = yes }
-## scope = travel_plan
-alias[trigger:is_travel_with_domicile] = bool
-
 ### Estimation date of arrival at the next destination
 ## scope = travel_plan
 alias[trigger:next_destination_arrival_date] = date_field
@@ -914,14 +716,6 @@ alias[trigger:travel_safety] = int_value_field
 ### Gets the current travel speed for travel (percentage points above 100%)
 ## scope = travel_plan
 alias[trigger:travel_speed] = int_value_field
-
-### If there is/was an activity attached to this travel plan, was it completed?
-## scope = travel_plan
-alias[trigger:was_activity_completed] = bool
-
-### If there is/was an activity attached to this travel plan, was it invalidated?
-## scope = travel_plan
-alias[trigger:was_activity_invalidated] = bool
 
 #####################################################
 # FAITH SCOPE
@@ -961,14 +755,6 @@ alias[trigger:faith_hostility_level_comparison] = {
 ## scope = faith
 alias[trigger:fervor] == value_field
 
-### Is the target character of the allowed gender to be clergy of the faith?
-## scope = faith
-alias[trigger:has_allowed_gender_for_clergy] = scope[character]
-
-### Is the target character of the preferred gender to be clergy of the faith?
-## scope = character
-alias[trigger:has_preferred_gender_for_clergy] = scope[character]
-
 ### Does the given faith have the given doctrine?? has_doctrine = doctrine_key
 ## scope = faith
 alias[trigger:has_doctrine] = <doctrine>
@@ -977,10 +763,6 @@ alias[trigger:has_doctrine] = <doctrine>
 ### Does the given faith have the given doctrine parameter? Can only check for bool parameters. has_doctrine_parameter = parameter_key
 ## scope = faith
 alias[trigger:has_doctrine_parameter] = enum[doctrine_param]
-
-### Is the target character's gender a dominant ruling gender of the faith? Also evaluates to true if there's no dominant ruling gender
-## scope = faith
-alias[trigger:has_dominant_ruling_gender] = scope[character]
 
 ### Does the faith have this graphical faith? <faith> = { has_graphical_faith = orthodoxgfx }
 ## scope = faith
@@ -1040,14 +822,6 @@ alias[trigger:trait_is_virtue] = scope[trait]
 ## scope = struggle
 alias[trigger:has_struggle_phase_parameter] = value[struggle_parameter]
 
-### is the culture involved in struggle?
-## scope = struggle
-alias[trigger:is_culture_involved_in_struggle] = scope[culture]
-
-### is the faith involved in struggle?
-## scope = struggle
-alias[trigger:is_faith_involved_in_struggle] = scope[faith]
-
 ### is the scope struggle's current phase particular phase?
 ## scope = struggle
 alias[trigger:is_struggle_phase] = <struggle_phase>
@@ -1075,10 +849,6 @@ alias[trigger:agent_slot_has_contribution_type] = enum[contribution_type]
 ### Is any of the future phases affected by the given catalyst?
 ## scope = agent_slot
 alias[trigger:is_agent_slot_type] = <agent_type>
-
-### Is any of the future phases affected by the given catalyst?
-## scope = agent_slot
-alias[trigger:is_filled] = bool
 
 #####################################################
 # GREAT HOLY WAR SCOPE
@@ -1132,22 +902,6 @@ alias[trigger:ghw_war_chest_prestige] == alias_keys_field[int_value]
 ## scope = ghw
 alias[trigger:ghw_war_chest_prestige] == value_field
 
-### Is the target character forced to be a defender in the given Great Holy War?
-## scope = ghw
-alias[trigger:has_forced_defender] = scope[character]
-
-### Is the target character pledged as an attacker in the given Great Holy War?
-## scope = ghw
-alias[trigger:has_pledged_attacker] = scope[character]
-
-### Is the target character pledged as a defender in the given Great Holy War?
-## scope = ghw
-alias[trigger:has_pledged_defender] = scope[character]
-
-### Is the scoped GHW a directed GHW?
-## scope = ghw
-alias[trigger:is_directed_ghw] = bool
-
 #####################################################
 # EPIDEMIC SCOPE
 #####################################################
@@ -1183,14 +937,6 @@ alias[trigger:total_infected_provinces] == value_field
 ### How many slots for taxpayers are available in scoped tax slot?
 ## scope = tax_slot
 alias[trigger:available_taxpayer_slots] = int_value_field
-
-### Does the scoped Tax Slot have any Tax Collector employed?
-## scope = tax_slot
-alias[trigger:has_tax_collector] = bool
-
-### Is this the current active tax obligation?
-## scope = tax_slot
-alias[trigger:is_active_obligation] = bool
 
 #####################################################
 # ACCOLADE TYPE SCOPE
@@ -1239,10 +985,6 @@ alias[trigger:artifact_slot_type] = enum[artifact_slot_type]
 ## scope = artifact
 alias[trigger:artifact_type] = <artifact_type>
 
-### Can the scoped artifact be claimed by the given character?
-## scope = artifact
-alias[trigger:can_be_claimed_by] = scope[character]
-
 ### is the scoped artifact of given category?
 ## scope = artifact
 alias[trigger:category] = enum[inventory_slot_category]
@@ -1259,14 +1001,6 @@ alias[trigger:has_artifact_feature_group] = <feature_group>
 ## scope = artifact
 alias[trigger:has_artifact_modifier] = <modifier_container>
 
-### is the scoped artifact currently equipped in its owners inventory?
-## scope = artifact
-alias[trigger:is_equipped] = bool
-
-### Is the scoped artifact unique
-## scope = artifact
-alias[trigger:is_unique] = bool
-
 ### How many kills has this artifact been used in?
 ## scope = artifact
 alias[trigger:num_artifact_kills] == alias_keys_field[int_value]
@@ -1278,10 +1012,6 @@ alias[trigger:num_artifact_kills] == value_field
 ### is the scoped artifact of given rarity?
 ## scope = artifact
 alias[trigger:rarity] = enum[artifact_rarity]
-
-### should the scoped artifact decay with time?
-## scope = artifact
-alias[trigger:should_decay] = bool
 
 
 #####################################################
@@ -1307,9 +1037,6 @@ alias[trigger:all_false] = {
     alias_name[trigger] = alias_match_left[trigger]
 }
 
-### Always the same value
-alias[trigger:always] = bool
-
 ### all inside trigger must be true
 alias[trigger:and] = {
     alias_name[trigger] = alias_match_left[trigger]
@@ -1322,9 +1049,6 @@ alias[trigger:assert_if] = {
     }
     text = localisation
 }
-
-### Conditionally cause an assert during read time assert_read = X, where X is yes or the string to be printed in the assert
-alias[trigger:assert_read] = bool
 
 ### Conditionally cause an assert during read time assert_read = X, where X is yes or the string to be printed in the assert
 alias[trigger:assert_read] = localisation
@@ -1399,16 +1123,6 @@ alias[trigger:custom_tooltip] = {
     alias_name[trigger] = alias_match_left[trigger]
 }
 
-### Log whether the parent trigger succeeded or failed
-alias[trigger:debug_log] = bool
-
-### Log whether the parent trigger succeeded or failed. Log which children succeeded or failed
-alias[trigger:debug_log_details] = bool
-
-
-### Checks if the game is in debug mode or not.
-alias[trigger:debug_only] = bool
-
 ### Checks whether the specified scope target exists (check for not being the null object) exists = from.owner.var:cool_var.mother
 alias[trigger:exists] = scope_field
 
@@ -1443,20 +1157,8 @@ alias[trigger:has_global_variable] = value[global_variable]
 ### Checks whether the current scope has the specified variable set has_variable = name
 alias[trigger:has_global_variable_list] = value[global_variable_list]
 
-### Has the local player seen the unopened court event(s) waiting in the royal court view?
-alias[trigger:has_local_player_seen_unopened_court_event] = bool
-
-### Has the local player an unopened court event waiting in the royal court view?
-alias[trigger:has_local_player_unopened_court_event] = bool
-
 ### Checks if the current map mode is the specified one has_map_mode = realms An interface trigger, can only be used in specific places
 alias[trigger:has_map_mode] = replace_me
-
-### Does the game have at least two players currently connected?
-alias[trigger:has_multiple_players] = bool
-
-### Does the player have a reward item
-alias[trigger:has_reward_item] = bool
 
 ### Checks whether the current scope has the specified variable set has_variable = name
 alias[trigger:has_variable] = value[variable]
@@ -1467,30 +1169,8 @@ alias[trigger:has_variable_list] = value[variable_list]
 ### Is there a war result message with the specified outcome? has_war_result_message_with_outcome = victory/defeat/white_peace/invalidated/any An interface trigger, can only be used in specific places
 alias[trigger:has_war_result_message_with_outcome] = enum[war_result]
 
-### Is the nickname bad?
-alias[trigger:is_bad_nickname] = bool
-
-### is the specified front end character selected (also can be used with "= yes" and "= no")?  - An interface trigger, can only be used in specific places
-alias[trigger:is_frontend_character_selected] = scope[character]
-
-### is the specified front end character selected (also can be used with "= yes" and "= no")?  - An interface trigger, can only be used in specific places
-alias[trigger:is_frontend_character_selected] = bool
-
-### is the specified in-game view open?  - An interface trigger, can only be used in specific places
-alias[trigger:is_game_view_open] = bool
-
-### Is the gamestate tutorial active? See save_progress_in_gamestate in tutorial_lesson_chains documentation. An interface trigger, can only be used in specific places
-alias[trigger:is_gamestate_tutorial_active] = bool
-
 ### Checks if a target in in a list
 alias[trigger:is_in_list] = value[list]
-
-### is the player playing a character?  - An interface trigger, can only be used in specific places
-alias[trigger:is_player_selected] = bool
-
-### is_rightful_liege_of - Was the target character the preferred heir of the scoped character
-## scope = character
-alias[trigger:is_rightful_liege_of] = scope[character]
 
 ### Checks whether the specified scope target has been set (includes being the null object)
 alias[trigger:is_set] = scope_field
@@ -1518,9 +1198,6 @@ alias[trigger:is_tooltip_with_name_open] = replace_me
 
 ### has the tutorial lesson with the specified name been finished?  - An interface trigger, can only be used in specific places
 alias[trigger:is_tutorial_lesson_completed] = replace_me
-
-### Is the tutorial active? An interface trigger, can only be used in specific places
-alias[trigger:is_tutorial_active] = bool
 
 ### Is this the current tutorial lesson? is_tutorial_lesson_active = reactive_advice_succession An interface trigger, can only be used in specific places
 alias[trigger:is_tutorial_lesson_active] = replace_me
@@ -1554,10 +1231,6 @@ alias[trigger:local_variable_list_size] = {
     value == value_field
 }
 
-### Does the scoped character meet the legitimacy expectations of the target AI vassal
-## scope = character
-alias[trigger:meets_legitimacy_expectation_of] = scope[character]
-
 ### a negated AND trigger
 alias[trigger:nand] = {
     alias_name[trigger] = alias_match_left[trigger]
@@ -1578,9 +1251,6 @@ alias[trigger:or] = {
     alias_name[trigger] = alias_match_left[trigger]
 }
 
-### Checks if the game is in release mode or not.
-alias[trigger:release_only] = bool
-
 
 
 ### Saves a temporary target for use during the trigger execution
@@ -1591,15 +1261,6 @@ alias[trigger:save_temporary_scope_value_as] = {
     name = value_set[temporary_scope]
     value = value_field
 }
-
-### Checks if the game is currently running scripted tests.
-alias[trigger:scripted_tests] = bool
-
-### can disturbing portrait modifiers be shown?
-alias[trigger:should_show_disturbing_portrait_modifiers] = bool
-
-### can nudity be shown? An interface trigger, can only be used in specific places
-alias[trigger:should_show_nudity] = bool
 
 ### Switch on a trigger for the evaluation of another trigger with an optional fallback trigger. switch = { 	trigger = simple_assign_trigger 	case_1 = { <triggers> } 	case_2 = { <triggers> } 	case_n = { <triggers> } 	fallback = { <triggers> }
 alias[trigger:switch] = {
@@ -1672,10 +1333,6 @@ alias[trigger:variable_list_size] = {
     ## cardinality = 0..1
     value == single_alias_right[score_formula]
 }
-
-### Was the target character the preferred heir of the scoped character
-## scope = character
-alias[trigger:was_preferred_heir] = scope[character]
 
 ### Returns true if the sum of weights of fulfilled sub-triggers amount to the specified sum weighted_calc_true_if = { amount = 10 5 = { <trigger> } 15 = { <trigger> } 7 = { <trigger> } }
 alias[trigger:weighted_calc_true_if] = {
@@ -1794,10 +1451,6 @@ alias[trigger:free_building_slots] == value_field
 ## scope = province
 alias[trigger:geographical_region] = <geographical_region>
 
-### Checks if a province is in a certain geographical region
-## scope = province
-alias[trigger:geographical_region] = scope[geographical_region]
-
 ### does the scope province have a particular building? 	has_building = temple_01
 ## scope = province
 alias[trigger:has_building] = <building>
@@ -1820,21 +1473,9 @@ alias[trigger:has_building_with_flag] = {
 ## scope = province
 alias[trigger:has_construction_with_flag] = enum[building_flag]
 
-### does the scope province have a free building slot? has_free_building_slot = yes
-## scope = province
-alias[trigger:has_free_building_slot] = bool
-
-### does the scope province have holding?
-## scope = province
-alias[trigger:has_holding] = bool
-
 ### does the scope province have a holding of particular type? 	has_holding_type = castle_holding
 ## scope = province
 alias[trigger:has_holding_type] = <holding>
-
-### does the scope province have a construction ongoing? 	has_ongoing_construction = yes
-## scope = province
-alias[trigger:has_ongoing_construction] = bool
 
 ### Does the scoped province have a given modifier has_province_modifier = name
 ## scope = province
@@ -1848,14 +1489,6 @@ alias[trigger:has_province_modifier_duration_remaining] = <modifier_container>
 ## scope = province
 alias[trigger:has_special_building] = replace_me_bool
 
-### Does the province (holding) have a special buidling slot?
-## scope = province
-alias[trigger:has_special_building_slot] = bool
-
-### Does this province have stationed regiments?
-## scope = province
-alias[trigger:has_stationed_regiment] = bool
-
 ### Does the province have stationed regiment of base type?
 ## scope = province
 alias[trigger:has_stationed_regiment_of_base_type] = value[unit_type]
@@ -1863,34 +1496,6 @@ alias[trigger:has_stationed_regiment_of_base_type] = value[unit_type]
 ### Checks if there is a travel point of interest of type X in the province.
 ## scope = province
 alias[trigger:has_travel_point_of_interest] = <point_of_interest>
-
-### is the province the county capital?
-## scope = province
-alias[trigger:is_county_capital] = bool
-
-### is the province a coastal province?
-## scope = province
-alias[trigger:is_coastal] = bool
-
-### Is this province currently being occupied?
-## scope = province
-alias[trigger:is_occupied] = bool
-
-### Is this province currently being raided?
-## scope = province
-alias[trigger:is_raided] = bool
-
-### is the province riverside?
-## scope = province
-alias[trigger:is_river_province] = bool
-
-### is the province riverside?
-## scope = province
-alias[trigger:is_riverside_province] = bool
-
-### Is this a sea province?
-## scope = province
-alias[trigger:is_sea_province] = bool
 
 ### Check the income of the scoped province monthly_income > 10
 ## scope = province
@@ -2139,10 +1744,6 @@ alias[trigger:has_legend_province_modifier] = <modifier_container>
 ## scope = legend
 alias[trigger:has_legend_province_modifier_duration_remaining] = <modifier_container>
 
-### Is the scoped legend completed?.scope:legend = {	is_legend_completed = yes}
-## scope = legend
-alias[trigger:is_legend_completed] = bool
-
 ### Date when the legend was completed.
 ## scope = legend
 alias[trigger:legend_completion_date] == date_field
@@ -2163,33 +1764,13 @@ alias[trigger:legend_start_date] == date_field
 ## scope = scheme
 alias[trigger:has_scheme_modifier] = <modifier_container>
 
-### Is the scoped scheme a hostile scheme? is_hostile = bool
-## scope = scheme
-alias[trigger:is_hostile] = bool
-
-### Is the target character an exposed agent in the scope scheme?
-## scope = scheme
-alias[trigger:is_scheme_agent_exposed] = scope[character]
-
 ###  Does the scheme have the given category? Supported categories: 'hostile', 'contract', and 'personal'.
 ## scope = scheme
 alias[trigger:is_scheme_category] = enum[scheme_category]
 
-### Is the scheme exposed?
-## scope = scheme
-alias[trigger:is_scheme_exposed] = bool
-
 ###  Does the scheme have a target of the given type?
 ## scope = scheme
 alias[trigger:is_scheme_target_type] = enum[scheme_target_type]
-
-###  Does the scheme have the given category? Supported categories: 'hostile', 'contract', and 'personal'.
-## scope = scheme
-alias[trigger:is_type_basic] = bool
-
-### Is the scheme secret?
-## scope = scheme
-alias[trigger:is_type_secret] = bool
 
 ### Max Scheme Success Chance
 ## scope = scheme
@@ -2230,10 +1811,6 @@ alias[trigger:scheme_duration_days] == alias_keys_field[int_value]
 ### The number of days since scheme was started
 ## scope = scheme
 alias[trigger:scheme_duration_days] == value_field
-
-### Is the target character part of this scheme?
-## scope = scheme
-alias[trigger:scheme_is_character_agent] = scope[character]
 
 # Monthly scheme progress in % (i.e. 50 equals 50%)
 # scope = scheme
@@ -2369,10 +1946,6 @@ alias[trigger:building_levies] == alias_keys_field[int_value]
 ## scope = landed_title
 alias[trigger:building_levies] == value_field
 
-### Can the scoped title be leased out?
-## scope = landed_title
-alias[trigger:can_be_leased_out] = bool
-
 ### Can create MaA of specified type for the scoped title
 ## scope = landed_title
 alias[trigger:can_create_title_maa] = landed_title
@@ -2383,10 +1956,6 @@ alias[trigger:can_title_create_faction] = {
     type = <faction>
     target = scope[character]
 }
-
-### Can the scope title join the faction? can_title_join_faction = faction
-## scope = landed_title
-alias[trigger:can_title_join_faction] = scope[faction]
 
 ### does the county title have the required county countrol?
 ## scope = landed_title
@@ -2436,10 +2005,6 @@ alias[trigger:de_jure_drift_progress] = {
     value == value_field
 }
 
-### Is the scoped landed title de jure drifts toward another title?<drifting_title> = { de_jure_drifting_towards = <drift_target_title> }
-## scope = landed_title
-alias[trigger:de_jure_drifting_towards] = scope[landed_title]
-
 ### does the county title have the required county development level?
 ## scope = landed_title
 alias[trigger:development_level] == alias_keys_field[int_value]
@@ -2472,11 +2037,6 @@ alias[trigger:development_towards_level_increase] == alias_keys_field[int_value]
 ## scope = landed_title
 alias[trigger:development_towards_level_increase] == value_field
 
-# NOTE: has_character_nominiated is mispelled by the developers
-### Is the scope landed title connected to a holding that cannot be governed by the current lessee or holder? NOTE: has_character_nominiated is mispelled by the developers
-## scope = landed_title
-alias[trigger:has_character_nominiated] = scope[character]
-
 ### Does the scoped county have a given modifier has_county_modifier = name
 ## scope = landed_title
 alias[trigger:has_county_modifier] = <modifier_container>
@@ -2484,10 +2044,6 @@ alias[trigger:has_county_modifier] = <modifier_container>
 ### Does the scoped county have the duration remaining on a given modifier has_county_modifier_duration_remaining = name
 ## scope = landed_title
 alias[trigger:has_county_modifier_duration_remaining] = <modifier_container>
-
-### Is the scope landed title connected to a holding that contains at least one disabled building?
-## scope = landed_title
-alias[trigger:has_disabled_building] = bool
 
 ### Does the county have a holy site with the given flag? has_holy_site_flag = some flag
 ## scope = landed_title
@@ -2497,10 +2053,6 @@ alias[trigger:has_holy_site_flag] = value[holy_site_flag]
 ## scope = landed_title
 alias[trigger:has_order_of_succession] = <law>
 
-### Is the title under a lease that can be revoked manually?
-## scope = landed_title
-alias[trigger:has_revokable_lease] = bool
-
 ### Does the scoped title have the given title-specifc-law?
 ## scope = landed_title
 alias[trigger:has_title_law] = <law>
@@ -2508,22 +2060,6 @@ alias[trigger:has_title_law] = <law>
 ### Does the scoped title have a title-specific law with the given flag?
 ## scope = landed_title
 alias[trigger:has_title_law_flag] = value[law_flag]
-
-### Has the user set a specific coat of arms for this title?
-## scope = landed_title
-alias[trigger:has_user_set_coa] = bool
-
-### Is the scope landed title connected to a holding that cannot be governed by the current lessee or holder?
-## scope = landed_title
-alias[trigger:has_wrong_holding_type] = bool
-
-### Is title in the scope a capital barony?
-## scope = landed_title
-alias[trigger:is_capital_barony] = bool
-
-### is the county coastal?
-## scope = landed_title
-alias[trigger:is_coastal_county] = bool
 
 ### Is the county connected to the other county? Is based on top liege is_connected_to = { 	max_naval_distance = 500 	allow_one_county_land_gap = yes 	target = some other county }
 ## scope = landed_title
@@ -2534,86 +2070,12 @@ alias[trigger:is_connected_to] = {
     target = scope[landed_title]
 }
 
-### Is the scope landed title contested in any war?
-## scope = landed_title
-alias[trigger:is_contested] = bool
-
-
-
-
-### is the title de facto liege or above the target title?
-## scope = landed_title
-alias[trigger:is_de_facto_liege_or_above_target] = scope[landed_title]
-
-### is the title de jure liege or above the target title?
-## scope = landed_title
-alias[trigger:is_de_jure_liege_or_above_target] = scope[landed_title]
-
-### Is this title a head of faith title
-## scope = landed_title
-alias[trigger:is_head_of_faith] = bool
-
-### Is the scope landed title a holy order?
-## scope = landed_title
-alias[trigger:is_holy_order] = bool
-
-### Is the county a holy site of any faith? is_holy_site = yes
-## scope = landed_title
-alias[trigger:is_holy_site] = bool
-
-### Does the target character control a holy site of the scoped object
-## scope = landed_title
-alias[trigger:is_holy_site_controlled_by] = scope[character]
-
-### Is the county a holy site of the given faith? is_holy_site_of = some faith
-## scope = landed_title
-alias[trigger:is_holy_site_of] = scope[faith]
-
-### Is the scoped county important for target title? scope:county = { is_important_location = scope:title }
-## scope = landed_title
-alias[trigger:is_important_location] = scope[landed_title]
-
-### Is this title considered a landless type title?
-## scope = landed_title
-alias[trigger:is_landless_type_title] = bool
-
-### Is the scoped title leased out?
-## scope = landed_title
-alias[trigger:is_leased_out] = bool
-
-### Is the scope landed title a mercenary company?
-## scope = landed_title
-alias[trigger:is_mercenary_company] = bool
-
-### Is this landed title adjacent to the character's realm is_neighbor_to_realm = character
-## scope = landed_title
-alias[trigger:is_neighbor_to_realm] = scope[character]
-
-### Is this title used by noble family to allow landless playable
-## scope = landed_title
-alias[trigger:is_noble_family_title] = bool
-
-### is the county riverside?
-## scope = landed_title
-alias[trigger:is_riverside_county] = bool
-
 ### Is the county currently affected by the specified council task? Needs to be in a county title scope
 ## scope = landed_title
 alias[trigger:is_target_of_council_task] = <council_task>
 
 
 
-### Is title in the scope created?
-## scope = landed_title
-alias[trigger:is_title_created] = bool
-
-### Is this title titular (has no dejure counties in it, and is not a barony/county)?
-## scope = landed_title
-alias[trigger:is_titular] = bool
-
-### Is the scoped title leased out to any holy order?
-## scope = landed_title
-alias[trigger:is_under_holy_order_lease] = bool
 
 ### How much county control is the county gaining/losing each month in total?
 ## scope = landed_title
@@ -2696,14 +2158,6 @@ alias[trigger:recent_history] = {
     enum[duration] = value_field
 }
 
-### is the target title de facto liege or above?
-## scope = landed_title
-alias[trigger:target_is_de_facto_liege_or_above] = scope[landed_title]
-
-### is the target title de jure liege or above?
-## scope = landed_title
-alias[trigger:target_is_de_jure_liege_or_above] = scope[landed_title]
-
 ### What tier is the scoped title? barony = 1, empire = 5. Use the script values please, not raw numbers
 ## scope = landed_title
 alias[trigger:tier] = alias_keys_field[int_value]
@@ -2729,10 +2183,6 @@ alias[trigger:title_held_years] == alias_keys_field[int_value]
 ## scope = landed_title
 alias[trigger:title_held_years] == value_field
 
-### Is the scope title a member of a faction?
-## scope = landed_title
-alias[trigger:title_is_a_faction_member] = bool
-
 ### Check if the chance of the scope landed title to join the faction against the scripted value title_join_faction_chance = {     faction = faction_target #An ongoing faction     value <|<=|>=|> 0 }
 ## scope = landed_title
 alias[trigger:title_join_faction_chance] = {
@@ -2740,10 +2190,6 @@ alias[trigger:title_join_faction_chance] = {
     value == alias_keys_field[int_value]
     value == value_field
 }
-
-### Will the title leave the sub-realm of the character on the right-hand-side upon succession? That is, is the first heir in someone outside the sub-realm, and the highest tier title they'll inherit from the person holding the title is not higher than their current tier
-## scope = landed_title
-alias[trigger:title_will_leave_sub_realm_on_succession] = scope[character]
 
 
 
@@ -2792,10 +2238,6 @@ alias[trigger:discontent_per_month] == alias_keys_field[int_value]
 ## scope = faction
 alias[trigger:discontent_per_month] == value_field
 
-### Can the scope faction press demands?
-## scope = faction
-alias[trigger:faction_can_press_demands] = bool
-
 ### Current discontent of the faction
 ## scope = faction
 alias[trigger:faction_discontent] == alias_keys_field[int_value]
@@ -2803,10 +2245,6 @@ alias[trigger:faction_discontent] == alias_keys_field[int_value]
 ### Current discontent of the faction
 ## scope = faction
 alias[trigger:faction_discontent] == value_field
-
-### Is the scope faction at war?
-## scope = faction
-alias[trigger:faction_is_at_war] = bool
 
 ### Is the faction of this type?
 ## scope = faction
@@ -2828,14 +2266,6 @@ alias[trigger:faction_power_threshold] == alias_keys_field[int_value]
 ## scope = faction
 alias[trigger:faction_power_threshold] == value_field
 
-### Has the faction a special character assigned?
-## scope = faction
-alias[trigger:has_special_character] = bool
-
-### Has the faction a special title assigned?
-## scope = faction
-alias[trigger:has_special_title] = bool
-
 ### Current number of faction members in faction
 ## scope = faction
 alias[trigger:number_of_faction_members_in_council] == alias_keys_field[int_value]
@@ -2851,18 +2281,6 @@ alias[trigger:number_of_faction_members_in_council] == value_field
 ### Does this combat side have at least one MaA of the given regiment type? has_maa_of_type = onager
 ## scope = combat_side
 alias[trigger:has_maa_of_type] = <maa_type>
-
-### whether the combat side was the attacker or not
-## scope = combat_side
-alias[trigger:is_combat_side_attacker] = bool
-
-### is this side the winner of the combat
-## scope = combat_side
-alias[trigger:is_combat_side_pursuing] = bool
-
-### is this side defeated in the combat
-## scope = combat_side
-alias[trigger:is_combat_side_retreating] = bool
 
 ### Number of troops killed on the opposite side.
 ## scope = combat_side
@@ -3075,34 +2493,6 @@ alias[trigger:defender_war_score] == alias_keys_field[int_value]
 ## scope = war
 alias[trigger:defender_war_score] == value_field
 
-### does the war interaction still have a valid casus belli (those should be automatically removed on daily tick, but can exist for a tick)
-## scope = war
-alias[trigger:has_valid_casus_belli] = bool
-
-###  is the target character in the scope war as an attacker?
-## scope = war
-alias[trigger:is_attacker] = scope[character]
-
-### Check if the scope war is a civil war or not
-## scope = war
-alias[trigger:is_civil_war] = bool
-
-### is the target character in the scope war as a defender?
-## scope = war
-alias[trigger:is_defender] = scope[character]
-
-### is the target character participating in the scope war as an attacker or defender?
-## scope = war
-alias[trigger:is_participant] = scope[character]
-
-### is the target character leading one of the sides in the scope war?
-## scope = war
-alias[trigger:is_war_leader] = scope[character]
-
-### Check if the scoped war's CB has is_white_peace_possible = yes
-## scope = war
-alias[trigger:is_white_peace_possible] = bool
-
 ### is the scope war using the specified CB? using_cb = religious_war
 ## scope = war
 alias[trigger:using_cb] = <casus_belli_type>
@@ -3130,10 +2520,6 @@ alias[trigger:war_days] == alias_keys_field[int_value]
 ### compares the number of days the war is going on for
 ## scope = war
 alias[trigger:war_days] == value_field
-
-### has the target character been called to the scope war already?
-## scope = war
-alias[trigger:was_called] = scope[character]
 
 
 #####################################################
@@ -3239,10 +2625,6 @@ alias[trigger:ai_sociability] == alias_keys_field[int_value]
 ## scope = character
 alias[trigger:ai_sociability] == value_field
 
-### target = other character value >/</= sum of differences in ai values
-## scope = character
-alias[trigger:ai_values_divergence] = scope[character]
-
 ### AI vengefulness
 ## scope = character
 alias[trigger:ai_vengefulness] == alias_keys_field[int_value]
@@ -3274,18 +2656,6 @@ alias[trigger:all_court_artifact_slots] == enum[full_or_empty]
 ### check if all the scoped characters inventory artifact slots are empty or full
 ## scope = character
 alias[trigger:all_inventory_artifact_slots] == enum[full_or_empty]
-
-### Can the scope owner have concubines?
-## scope = character
-alias[trigger:allowed_concubines] = bool
-
-### Can the scope owner have more concubines?
-## scope = character
-alias[trigger:allowed_more_concubines] = bool
-
-### Can the scope owner have more spouses?
-## scope = character
-alias[trigger:allowed_more_spouses] = bool
 
 ### Compares the scoped character's amenity level in the given type to the given value
 ## scope = character
@@ -3349,10 +2719,6 @@ alias[trigger:base_weight] == value_field
 
 # -C
 
-### Check character against task contract requirement triggers?
-## scope = character
-alias[trigger:can_accept_task_contract] = scope[task_contract]
-
 ### will trying to hook the target character override the current hook? (if no current hook, always returns true) can_add_hook = { target = <character> type = <hook type> days/months/year = whatever (optional; will use the duration from the type if not provided) }
 ## scope = character
 alias[trigger:can_add_hook] = {
@@ -3364,45 +2730,13 @@ alias[trigger:can_add_hook] = {
     enum[duration] = value_field
 }
 
-### Can character be appointed for the target title. Appointment is only allowed for duchies and above, and if it's top tier title for the holder
-## scope = character
-alias[trigger:can_appoint_for_title] = scope[landed_title]
-
-### Can the scoped character arrive to the target activity in time? (only does rough but performance consideration) 
-## scope = character
-alias[trigger:can_arrive_in_time_to_activity_minimum] = scope[activity]
-
-### Is this scoped character valid to assign to target tax slot
-## scope = character
-alias[trigger:can_assign_to_tax_slot] = scope[tax_slot]
-
-### can the scope target be attacking the defender based on their liege-vassal relations?
-## scope = character
-alias[trigger:can_attack_in_hierarchy] = scope[character]
-
-### Can the given character potentially be the Acclaimed Knight of an Accolade?
-## scope = character
-alias[trigger:can_be_acclaimed] = bool
-
-### Would the target character have been able to have children at the time of the scoped character's birth? Only age is taken into account
-## scope = character
-alias[trigger:can_be_child_of] = scope[character]
-
 ### Scoped character can be employed as target court position, uses valid_character trigger
 ## scope = character
 alias[trigger:can_be_employed_as] = <court_position>
 
-### Would the scoped character have been able to have children at the time of the target character's birth? Only age is taken into account
-## scope = character
-alias[trigger:can_be_parent_of] = scope[character]
-
 ### Can the scoped character become owner of the provided legend? scope:character = {	can_become_owner_of_legend = <legend>}
 ## scope = character
 alias[trigger:can_become_owner_of_legend] = scope[legend]
-
-### Can the scoped character benefit from the main bonuses of this artifact?
-## scope = character
-alias[trigger:can_benefit_from_artifact] = scope[artifact]
 
 ### can the character create the faction of the specified type against the specified character? can_create_faction = { type = X target = Y }
 ## scope = character
@@ -3436,14 +2770,6 @@ alias[trigger:can_declare_war] = {
     claimant = scope[character]
 }
 
-### Can this ruler diverge their culture? 
-## scope = character
-alias[trigger:can_diverge] = bool
-
-### Can this ruler diverge their culture? Does not check the cost
-## scope = character
-alias[trigger:can_diverge_excluding_cost] = bool
-
 ### Can scoped charater embrace new culture tradition?
 ## scope = character
 alias[trigger:can_embrace_tradition] = scope[tradition]
@@ -3456,41 +2782,13 @@ alias[trigger:can_embrace_tradition] = {
 ## scope = character
 alias[trigger:can_employ_court_position_type] = <court_position>
 
-### Can the scoped character equip given artifact?
-## scope = character
-alias[trigger:can_equip_artifact] = scope[artifact]
-
 ### Is the scoped character able to execute the asigned decision?
 ## scope = character
 alias[trigger:can_execute_decision] = <decision>
 
-### can the character have children? Only checks hard blocks from traits, not fertility can_have_children = yes/no
-## scope = character
-alias[trigger:can_have_children] = bool
-
 ### target_activity Can the scoped character host the target activity type
 ## scope = character
 alias[trigger:can_host_activity] = <activity>
-
-### Can this ruler hybridize with the target culture? Includes checking the cost
-## scope = character
-alias[trigger:can_hybridize] = scope[culture]
-
-### Can this ruler hybridize with the target culture? Does not check the cost
-## scope = character
-alias[trigger:can_hybridize_excluding_cost] = scope[culture]
-
-### Can the scoped character join the target activity
-## scope = character
-alias[trigger:can_join_activity] = scope[activity]
-
-### Can the scope character join the faction? can_join_faction = faction
-## scope = character
-alias[trigger:can_join_faction] = scope[faction]
-
-### Can the scope character create if join a faction against the target? can_join_or_create_faction_against = target_character
-## scope = character
-alias[trigger:can_join_or_create_faction_against] = scope[character]
 ## scope = character
 alias[trigger:can_join_or_create_faction_against] = {
     who = scope[character]
@@ -3514,18 +2812,6 @@ alias[trigger:can_sponsor_inspiration] = {
     target = scope[character]
 }
 
-### Does the character have a commander trait that the scope does not?
-## scope = character
-alias[trigger:character_has_commander_trait_scope_does_not] = scope[character]
-
-### Is the scoped character a realm neighbor of the target? Meaning they're independent or has the same liege, and border your realm.
-## scope = character
-alias[trigger:character_is_land_realm_neighbor] = scope[character]
-
-### Is the scoped character a realm neighbor of the target? Meaning they're independent or has the same liege, and border your realm. Including across two sea zones
-## scope = character
-alias[trigger:character_is_realm_neighbor] = scope[character]
-
 ### What is the ratio of the scoped character's men-at-arms gold expenses, relative to their income?
 ## scope = character
 alias[trigger:character_men_at_arms_expense_gold_relative] == float[0.0..1.0]
@@ -3534,17 +2820,9 @@ alias[trigger:character_men_at_arms_expense_gold_relative] == float[0.0..1.0]
 ## scope = character
 alias[trigger:character_men_at_arms_expense_prestige_relative] == float[0.0..1.0]
 
-### does the character controls all counties and baronies inside de jure title (no hostile occupation either)?
-## scope = character
-alias[trigger:completely_controls] = scope[landed_title]
-
 ### does the character controls all counties and baronies inside the specified region (no hostile occupation either)?
 ## scope = character
 alias[trigger:completely_controls_region] = <geographical_region>
-
-### does the character controls all counties and baronies inside the specified region (no hostile occupation either)?
-## scope = character
-alias[trigger:completely_controls_region] = scope[geographical_region]
 
 ### Is the scoped character's monthly progress on their assigned council task this big?
 ## scope = character
@@ -3605,9 +2883,6 @@ alias[trigger:court_positions_currently_filled] == alias_keys_field[int_value]
 ### How many court positions the scope character currently employs
 ## scope = character
 alias[trigger:court_positions_currently_filled] == value_field
-
-### Will the scoped character cover travel expenses for the target?
-#alias[trigger:scope:cover_travel_expenses] = bool
 
 ### Check if the chance to create a faction against a target of the scope character is is true against the scripted value create_faction_type_chance = {     type = faction_type #An ongoing faction     target = target_character     value <|<=|>=|> 0 }
 ## scope = character
@@ -3794,14 +3069,6 @@ alias[trigger:<lifestyle>_xp] == alias_keys_field[int_value]
 ## scope = character
 alias[trigger:<lifestyle>_xp] == value_field
 
-### Does the AI liege in a vassal contract desire changing an obligation level
-## scope = character
-alias[trigger:does_ai_liege_in_vassal_contract_desire_obligation_change] = bool
-
-### Does the AI vassal in a vassal contract desire changing an obligation level
-## scope = character
-alias[trigger:does_ai_vassal_in_vassal_contract_desire_obligation_change] = bool
-
 ### Is the scoped character's domain limit this big?
 ## scope = character
 alias[trigger:domain_limit] == alias_keys_field[int_value]
@@ -3869,14 +3136,6 @@ alias[trigger:effective_age] == value_field
 ## scope = character
 alias[trigger:employs_court_position] = <court_position>
 
-### Scoped character employs target court position
-## scope = character
-alias[trigger:employs_tax_collector] = bool
-
-# Even if the character is dead, trigger?
-# scope = character
-#alias[trigger:even_if_dead] = bool
-
 # -F
 
 ### does the character have the required fertility?
@@ -3921,10 +3180,6 @@ alias[trigger:government_has_flag] = value[government_flag]
 
 # -H
 
-### Does the scoped character has an active diarchy
-## scope = character
-alias[trigger:has_active_diarchy] = bool
-
 ### Does the diarch have this mandate active?
 ## scope = character
 alias[trigger:has_active_mandate] = <diarchy_mandate>
@@ -3945,74 +3200,6 @@ enums = {
 ## scope = character
 alias[trigger:has_activity_state] = enum[activity_state]
 
-### does the scoped character have any artifacts?
-## scope = character
-alias[trigger:has_any_artifact] = bool
-
-### does the scoped character have any artifact claims at all? ( CHEAP )
-## scope = character
-alias[trigger:has_any_artifact_claim] = bool
-
-### does the scope character have any casus bellis on the taget character?
-## scope = character
-alias[trigger:has_any_cb_on] = scope[character]
-
-### Scoped character holds any court position
-## scope = character
-alias[trigger:has_any_court_position] = bool
-
-### does the scope character have any casus bellis on the taget character that should be displayed? (Allowed to fail valid_to_start_display_regardless)
-## scope = character
-alias[trigger:has_any_display_cb_on] = scope[character]
-
-### Does the character have any focus set?
-## scope = character
-alias[trigger:has_any_focus] = bool
-
-### Has the scope character any nickname?
-## scope = character
-alias[trigger:has_any_nickname] = bool
-
-### does the scope character have any scripted relation with the taget character?
-## scope = character
-alias[trigger:has_any_scripted_relation] = scope[character]
-
-### does the scope character have any secret relation with the taget character?
-## scope = character
-alias[trigger:has_any_secret_relation] = scope[character]
-
-### Does the character have any secrets?
-## scope = character
-alias[trigger:has_any_secrets] = bool
-
-### does the scoped character have any unequipped artifacts?
-## scope = character
-alias[trigger:has_any_unequipped_artifact] = bool
-
-### Has scoped investor supported appointment of target character in the same realm. Ignores if candidate has a valid reason to be appointed scope:investor = {	has_appointment_investment_in_character = scope:candidate }
-## scope = character
-alias[trigger:has_appointment_invested_character] = scope[character]
-
-### Has scoped investor supported appointment for target title in the same realm. Returns true even for dead candidates, for the sake of efficiency. scope:investor = {	has_appointment_investment_in_title = scope:title }
-## scope = character
-alias[trigger:has_appointment_invested_title] = scope[landed_title]
-
-### Does the scoped character have a personal or house claim on the target artifact
-## scope = character
-alias[trigger:has_artifact_claim] = scope[artifact]
-
-### Does the scoped character have Hostages abroad?
-## scope = character
-alias[trigger:has_away_hostages] = bool
-
-### Has the scope character a bad nickname?
-## scope = character
-alias[trigger:has_bad_nickname] = bool
-
-### Does the character have the banish reason towards the target?
-## scope = character
-alias[trigger:has_banish_reason] = scope[character]
-
 ### does the scope character have the specified casus bellis on the taget character? Invalid target returns false automatically. has_cb_on = { target = X casus_belli/cb = Y }
 ## scope = character
 alias[trigger:has_cb_on] = {
@@ -4032,14 +3219,6 @@ alias[trigger:has_character_modifier] = <modifier_container>
 ## scope = character
 alias[trigger:has_character_modifier_duration_remaining] = <modifier_container>
 
-# Has the target character nominated a successor for the scoped title
-# scope = character
-#alias[trigger:has_character_nominiated] = scope[character]
-
-### does the character have a claim on the target title?
-## scope = character
-alias[trigger:has_claim_on] = scope[landed_title]
-
 ### Has the scoped character completed an intent of the given type in their involved activity, optionally against a specific target.
 ## scope = character
 alias[trigger:has_completed_activity_intent] = { 
@@ -4050,18 +3229,6 @@ alias[trigger:has_completed_activity_intent] = {
 ### Has the scoped character completed an intent of the given type in their involved activity, optionally against a specific target.
 ## scope = character
 alias[trigger:has_completed_activity_intent] = <activity_intent>
-
-### Has the character completed an inspiration
-## scope = character
-alias[trigger:has_completed_inspiration] = bool
-
-### Check if laamp has character as employer? scope:actor = { has_contact = SCOPE_CHARACTER }
-## scope = character
-alias[trigger:has_contact] = scope[character]
-
-### Has the character completed an inspiration
-## scope = character
-alias[trigger:has_council] = bool
 
 ### Does the scoped character have the given position?
 ## scope = character
@@ -4079,10 +3246,6 @@ alias[trigger:has_councillor_for_skill] = general
 ## scope = character
 alias[trigger:has_court_language] = <pillar.language>
 
-### Is the character's court language the language of the target culture?
-## scope = character
-alias[trigger:has_court_language_of_culture] = scope[culture]
-
 ### Trigger to check if the target character has a court position. 
 ## scope = character
 alias[trigger:has_court_position] = <court_position>
@@ -4091,17 +3254,9 @@ alias[trigger:has_court_position] = <court_position>
 ## scope = character
 alias[trigger:has_court_type] = <court_type>
 
-### Does the character have this culture?
-## scope = character
-alias[trigger:has_culture] = scope[culture]
-
 # Does the character have this culture group? has_culture_group = culture_group:east_slavic_group
 # scope = character
 #alias[trigger:has_culture_group] = scope[culture_group]
-
-### does the scope character have a dejure claim against the target?
-## scope = character
-alias[trigger:has_de_jure_claim_on] = scope[character]
 
 ### Does the dead character have this flag?
 ## scope = character
@@ -4123,40 +3278,12 @@ alias[trigger:has_diarchy_parameter] = value[diarchy_parameter]
 ## scope = character
 alias[trigger:has_diarchy_type] = <diarchy>
 
-# Does the character have disabled non-agression pacts with the target?
-# scope = character
-#alias[trigger:has_disable_non_aggression_pacts] = scope[character]
-
-### Does the character have the divorce reason towards the target?
-## scope = character
-alias[trigger:has_divorce_reason] = scope[character]
-
-### Does scoped character have a domicile?
-## scope = character
-alias[trigger:has_domicile] = bool
-
-### Does scoped character have domicile temperament high? scope:character = { has_temperament_high = yes }
-## scope = character
-alias[trigger:has_domicile_temperament_high] = bool
-
-### Does scoped character have domicile temperament low? scope:character = { has_temperament_low = yes }
-## scope = character
-alias[trigger:has_domicile_temperament_low] = bool
-
-### Does scoped character have domicile temperament neutral?scope:character = { has_temperament_neutral = yes }
-## scope = character
-alias[trigger:has_domicile_temperament_neutral] = bool
-
 ### How much is scared the scope character agains the target. 0 = not intimidated, 1 = intimidated, 2 = cowed. has_dread_level_towards = { target = X level >/</>=/<=/= Y  }
 ## scope = character
 alias[trigger:has_dread_level_towards] = {
     target = scope[character]
     level = int_value_field
 }
-
-### does the character have a valid dynasty?
-## scope = character
-alias[trigger:has_dynasty] = bool
 
 ### Is the target character voting for the scoped character in the election of the target title has_election_vote_of = { who = scope:actor title = primary_title }
 ## scope = character
@@ -4165,29 +3292,9 @@ alias[trigger:has_election_vote_of] = {
     title = scope[landed_title]
 }
 
-### Scoped character employs any court position
-## scope = character
-alias[trigger:has_employed_any_court_position] = bool
-
-### Does the character have the execute reason towards the target?
-## scope = character
-alias[trigger:has_execute_reason] = scope[character]
-
-### Does the character have this faith? has_faith = faith:baltic_pagan
-## scope = character
-alias[trigger:has_faith] = replace_me_faith
-
-### does the character have a valid living father?
-## scope = character
-alias[trigger:has_father] = bool
-
 ### Does the character have this focus?
 ## scope = character
 alias[trigger:has_focus] = <focus>
-
-### Does the scope character have a council position to fill? (ignoring automatically filled positions)
-## scope = character
-alias[trigger:has_free_council_slot] = replace_me_bool
 
 ### Does the character have the specified gene template? Only works for morph genes. An interface trigger. has_gene = { category = X template = Y } An interface trigger, can only be used in specific places
 ## scope = character
@@ -4208,14 +3315,6 @@ alias[trigger:has_had_focus_for_days] == alias_keys_field[int_value]
 ## scope = character
 alias[trigger:has_had_focus_for_days] == value_field
 
-### does the character have a hook on the target, has_hook = <character> Custom documentation
-## scope = character
-alias[trigger:has_hook] = scope[character]
-
-### does the character have a hook based on the target secret? example use: has_hook_from_secret = scope:saved_secret
-## scope = character
-alias[trigger:has_hook_from_secret] = scope[secret]
-
 ### does the character have a hook on the target of the given type?, has_hook_of_type = { target = X type = Y }
 ## scope = character
 alias[trigger:has_hook_of_type] = {
@@ -4223,17 +3322,9 @@ alias[trigger:has_hook_of_type] = {
     type = <hook>
 }
 
-### Does the character have the imprisonment reason towards the target?
-## scope = character
-alias[trigger:has_imprisonment_reason] = scope[character]
-
 ### Does the character have this trait or a trait of this trait group amongst their inactive traits?
 ## scope = character
 alias[trigger:has_inactive_trait] = <trait>
-
-### Does the scoped character uses legitimacy has_legitimacy = yes
-## scope = character
-alias[trigger:has_legitimacy] = bool
 
 ### Does the scoped character's current legitimacy level have the given flag
 ## scope = character
@@ -4247,21 +3338,9 @@ alias[trigger:has_inactive_trait] = value[trait_group]
 ## scope = character
 alias[trigger:has_lifestyle] = <lifestyle>
 
-### does the character have a valid living mother?
-## scope = character
-alias[trigger:has_mother] = bool
-
 ### Does the character have this nickname?
 ## scope = character
 alias[trigger:has_nickname] = <nickname>
-
-# Does the character have the non-agression pact with the target?
-# scope = character
-#alias[trigger:has_non_aggression_pact] = scope[character]
-
-# Does the character have the non-interference reason towards the target?
-# scope = character
-#alias[trigger:has_non_interference] = scope[character]
 
 ### does the character have the specified opinion modifier on the target? (optional *value <|<=|=|>=|> X* or *value = { MIN MAX }* inclusive)
 ## scope = character
@@ -4277,27 +3356,10 @@ alias[trigger:has_opposite_relation] = {
     relation = <scripted_relation>
 }
 
-### does the scoped character have any artifact claims that can be pressed? ( EXPENSIVE )
-## scope = character
-alias[trigger:has_outstanding_artifact_claims] = bool
-
-### Does this character own a scheme?
-## scope = character
-alias[trigger:has_owned_scheme] = bool
-
-
-### Does the character have pending court events? Meaning court events that'll spawn when they next open the royal court view. Can only be used on player characters with a royal court.
-## scope = character
-alias[trigger:has_pending_court_events] = bool
-
 
 ### Does the character have a pending interaction of the type? Only works if the scope is player-controlled. Example: has_pending_interaction = interaction_key
 ## scope = character
 alias[trigger:has_pending_interaction_of_type] = <character_interaction>
-
-### Does the scoped character have a personal claim on the target artifact
-## scope = character
-alias[trigger:has_personal_artifact_claim] = scope[artifact]
 
 ### Does the scoped character have a legend seed of the specified legend type?.
 ## scope = character
@@ -4306,27 +3368,6 @@ alias[trigger:has_personal_legend_seed] = <legend_type>
 ### Does the character have this perk?
 ## scope = character
 alias[trigger:has_perk] = <lifestyle_perk>
-
-### Does the given character have any potential knights that could be appointed as Acclaimed Knights?
-## scope = character
-alias[trigger:has_potential_acclaimed_knights] = bool
-
-### does the character has specific title as his primary title
-## scope = character
-alias[trigger:has_primary_title] = scope[landed_title]
-
-### Does the character have prisoners?
-## scope = character
-alias[trigger:has_prisoners] = bool
-
-### Is the scoped character's (top-liege) realm immune to raiding by the target due to having defeated their raid army? has_raid_immunity_against = scope:character
-## scope = character
-alias[trigger:has_raid_immunity_against] = scope[character]
-
-
-### does the character have raised or gathering armies?
-## scope = character
-alias[trigger:has_raised_armies] = bool
 
 ### Does the scoped character have the given realm law?
 ## scope = character
@@ -4340,104 +3381,13 @@ alias[trigger:has_realm_law_flag] = value[law_flag]
 ## scope = character
 alias[trigger:has_relation_flag] = single_alias_right[relation_flag_clause]
 
-##### Custom effects (dynamic ones) ######
-### Checks for a scripted relationship with a target character.
-## scope = character
-alias[trigger:has_relation_<scripted_relation>] = scope[character]
-
-
-### does the character have a relation to the target? Matches the logic of the data system function 
-## scope = character
-alias[trigger:has_relation_to] = scope[character]
-
-### Does the character have this religion? has_religion = religion:buddhism_religion
-## scope = character
-alias[trigger:has_religion] = scope[religion]
-
-### Does the character have the revoke title reason towards the target?
-## scope = character
-alias[trigger:has_revoke_title_reason] = scope[character]
-
-### Does the root character have a royal court?
-## scope = character
-alias[trigger:has_royal_court] = bool
-
-### Is the character's court language the same language as the target character's?
-## scope = character
-alias[trigger:has_same_court_language] = scope[character]
-
-### Does the character have the same court type as the target?
-## scope = character
-alias[trigger:has_same_court_type_as] = scope[character]
-
-### Does the character have the same culture as the target?
-## scope = character
-alias[trigger:has_same_culture_as] = scope[character]
-
-# Does the character have the same culture group as the target?
-# scope = character
-#alias[trigger:has_same_culture_group_as] = scope[character]
-
-### Does the character have the same focus as the other?
-## scope = character
-alias[trigger:has_same_focus_as] = scope[character]
-
-### do the two characters share a trait that is considered sinful by both of their respective faiths?
-## scope = character
-alias[trigger:has_same_sinful_trait] = scope[character]
-
-### do the two characters share a trait that is considered virtuous by both of their respective faiths?
-## scope = character
-alias[trigger:has_same_virtue_trait] = scope[character]
-
 ### Does the given ruler, or the liege of the given courtier, have a countermeasure with the given parameter? Can only check for boolean parameters.
 ## scope = character
 alias[trigger:has_scheme_countermeasure_parameter] = enum[scheme_countermeasure_parameter]
 
-### checks if the character has the same government type as another character
-## scope = character
-alias[trigger:has_same_government] = scope[character]
-
-### Checks for a secret scripted relationship with a target character.
-## scope = character
-alias[trigger:has_secret_relation_<scripted_relation>] = scope[character]
-
 ### Does the character's sexuality match the scripted? (heterosexual, homosexual, bisexual, asexual, none). Characters that have yet to get a sexuality (children) have the none set.
 ## scope = character
 alias[trigger:has_sexuality] = <game_concept.sexuality>
-
-### Does the character have spawned court events? Meaning court events are shown (opened or not) in the royal court view. Can only be used on player characters with a royal court
-## scope = character
-alias[trigger:has_spawned_court_events] = bool
-
-### does the character have a Pressed Claim on the target title?
-## scope = character
-alias[trigger:has_strong_claim_on] = scope[landed_title]
-
-### does the character have a strong hook on the target, has_strong_hook = <character>
-## scope = character
-alias[trigger:has_strong_hook] = scope[character]
-
-### does the character have an implicit Pressed Claim on the target title
-## scope = character
-alias[trigger:has_strong_implicit_claim_on] = scope[landed_title]
-
-### does the character have a strong hook on the target that is not on cooldown, has_strong_usable_hook = <character>
-## scope = character
-alias[trigger:has_strong_usable_hook] = scope[character]
-
-### Does the scope the scoped character have any investors for their appointment towards the target title? scope:character = { has_succession_appointment_investors = scope:title }
-## scope = character
-alias[trigger:has_succession_appointment_investors] = scope[landed_title]
-
-
-### Has the scope character a faction targeting him/her?
-## scope = character
-alias[trigger:has_targeting_faction] = bool
-
-### does the character hold the title?
-## scope = character
-alias[trigger:has_title] = scope[landed_title]
 
 ### Does the character have this trait?  Can also specify a trait group, in which case the trigger will return true if the scope character has any trait from that trait group.
 ## scope = character
@@ -4481,33 +3431,9 @@ alias[trigger:has_trait_xp] = {
 ## scope = character
 alias[trigger:has_triggered_legend_seed] = <legend_type>
 
-### Does the scope character have a truce with the target character? Truces are one way, which means we ask if the scope character can't attack the target character
-## scope = character
-alias[trigger:has_truce] = scope[character]
-
-### does the character have a hook on the target that isn't on cooldown, has_usable_hook = <character>
-## scope = character
-alias[trigger:has_usable_hook] = scope[character]
-
-### does the war interaction still have a valid casus belli (those should be automatically removed on daily tick, but can exist for a tick)
-## scope = character
-alias[trigger:has_valid_casus_belli] = bool
-
 ### Does the scoped vassal character have the given vassal stance
 ## scope = character
 alias[trigger:has_vassal_stance] = <vassal_stance>
-
-### does the character have an Unpressed Claim on the target title?
-## scope = character
-alias[trigger:has_weak_claim_on] = scope[landed_title]
-
-### does the character have a weak hook on the target. A strong hook will *not* count, has_weak_hook = <character>
-## scope = character
-alias[trigger:has_weak_hook] = scope[character]
-
-### does the character have an implicit Unpressed Claim on the target title
-## scope = character
-alias[trigger:has_weak_implicit_claim_on] = scope[landed_title]
 
 ### does the character have the required health?
 ## scope = character
@@ -4537,12 +3463,6 @@ alias[trigger:highest_held_title_tier] == value_field
 ## scope = character
 alias[trigger:highest_held_title_tier] == value_field
 
-
-
-### Is the scope character landed (holds a county or barony)?
-## scope = character
-alias[trigger:holds_landed_title] = bool
-
 ### For how long has the scope character been a hostage? { days/months/years =,>,< X }
 ## scope = character
 alias[trigger:hostage_duration] = single_alias_right[duration_block]
@@ -4557,10 +3477,6 @@ alias[trigger:important_action_is_valid_but_invisible] = <suggestion>
 ### is there an important action shown to the character? important_action_is_visible = important_action_key
 ## scope = character
 alias[trigger:important_action_is_visible] = <suggestion>
-
-### Is the scope character and the target character within each others diplomatic range?
-## scope = character
-alias[trigger:in_diplomatic_range] = scope[character]
 
 ### does the character have the required influence?
 ## scope = character
@@ -4580,9 +3496,6 @@ alias[trigger:influence_level] == value_field
 
 # is the character in an activity of the specified type?
 #alias[trigger:in_activity_type] = replace_me
-
-# is the character in the same activity?
-#alias[trigger:in_activity_with] = scope[character]
 
 ### does the character have the required intrigue skill level?
 ## scope = character
@@ -4607,116 +3520,9 @@ alias[trigger:intrigue_diff] == {
 ## scope = character
 alias[trigger:intrigue_for_portrait] == float[0.0..1.0]
 
-### Is the scope character a leader of a faction?
-## scope = character
-alias[trigger:is_a_faction_leader] = bool
-
-### Is the scope character a member of a faction?
-## scope = character
-alias[trigger:is_a_faction_member] = bool
-
-### Is the given character the Acclaimed Knight of an Accolade?
-## scope = character
-alias[trigger:is_acclaimed] = bool
-
-### Is the given character the Successor of an Accolade?
-## scope = character
-alias[trigger:is_accolade_successor] = bool
-
 ### Is the given activity type on cooldown for the current character.
 ## scope = character
 alias[trigger:is_activity_type_on_cooldown] = <activity>
-
-### Is the scope character adult?
-## scope = character
-alias[trigger:is_adult] = bool
-
-### Is the scope character an exposed agent in the target scheme?
-## scope = character
-alias[trigger:is_agent_exposed_in_scheme] = scope[scheme]
-
-### is the character played by AI?
-## scope = character
-alias[trigger:is_ai] = bool
-
-
-### is the character alive or dead?
-## scope = character
-alias[trigger:is_alive] = bool
-
-### Is the scope character allied to the target character in a war?
-## scope = character
-alias[trigger:is_allied_in_war] = scope[character]
-
-### Is the scope character allied to the target character?
-## scope = character
-alias[trigger:is_allied_to] = scope[character]
-
-### is the character at home?
-## scope = character
-alias[trigger:is_at_home] = bool
-
-### Is the character currently in the target province?
-## scope = character
-alias[trigger:is_at_location] = scope[province]
-
-### Is the character currently in the same province as the target character?
-## scope = character
-alias[trigger:is_at_same_location] = scope[character]
-
-### is the character at war?
-## scope = character
-alias[trigger:is_at_war] = bool
-
-### is the character at war as an attacker?
-## scope = character
-alias[trigger:is_at_war_as_attacker] = bool
-
-### is the character at war as a defender?
-## scope = character
-alias[trigger:is_at_war_as_defender] = bool
-
-### Is the character at war with the target?
-## scope = character
-alias[trigger:is_at_war_with] = scope[character]
-
-### is the character at war with their liege?
-## scope = character
-alias[trigger:is_at_war_with_liege] = bool
-
-### is the target character in the scope war as an attacker?
-## scope = character
-alias[trigger:is_attacker] = scope[character]
-
-### is the scope character in the target war as an attacker?
-## scope = character
-alias[trigger:is_attacker_in_war] = scope[war]
-
-### does the sexuality of the scope character make them attracted to the target character?
-## scope = character
-alias[trigger:is_attracted_to_gender_of] = scope[character]
-
-### Is the character attracted to men?
-## scope = character
-alias[trigger:is_attracted_to_men] = bool
-
-### Is the character attracted to women?
-alias[trigger:is_attracted_to_women] = bool
-
-### Is the character away from the court?
-## scope = character
-alias[trigger:is_away_from_court] = bool
-
-# is the character currently being tortured?
-#alias[trigger:is_being_tortured] = bool
-
-### Is the scope character betrothed?
-## scope = character
-alias[trigger:is_betrothed] = bool
-
-### Is the scoped character making the target hostile due to having raided their (top-liege's) realm? is_causing_raid_hostility_towards = scope:character
-## scope = character
-alias[trigger:is_causing_raid_hostility_towards] = scope[character]
 
 ### Is the character interaction specified available and potentially accepted for the target character? is_character_interaction_potentially_accepted = { recipient = character interaction = interaction_name secondary_actor = character <optional> secondary_recipient = character <optional> target_title = title <optional>}
 ## scope = character
@@ -4745,51 +3551,6 @@ alias[trigger:is_character_interaction_valid] = {
     interaction = <character_interaction>
 }
 
-### Does the local player have knowledge about the secret? An interface trigger, can only be used in specific places
-## scope = character
-alias[trigger:is_character_window_main_character] = bool
-
-
-
-### Is the character a child of the target character?
-## scope = character
-alias[trigger:is_child_of] = scope[character]
-
-### is the character a claimant to any landed titles?
-## scope = character
-alias[trigger:is_claimant] = bool
-
-### Is the scoped character a clergy?
-## scope = character
-alias[trigger:is_clergy] = bool
-
-### Is the character a close family [parents, children, siblings, grandparents, grandchildren] of the target character?
-## scope = character
-alias[trigger:is_close_family_of] = scope[character]
-
-### Is the character a close or extended family [parents, children, siblings, grandparents, grandchildren, cousins, uncles, aunts, nephews, nieces] of the target character?
-## scope = character
-alias[trigger:is_close_or_extended_family_of] = scope[character]
-
-### is the character a commanding an army?
-## scope = character
-alias[trigger:is_commanding_army] = bool
-
-### Is the scope character a concubine?
-## scope = character
-alias[trigger:is_concubine] = bool
-
-### Is the target character a concubine of the scope character?
-## scope = character
-alias[trigger:is_concubine_of] = scope[character]
-
-### Is the character a spouse or concubine of the target character?
-## scope = character
-alias[trigger:is_consort_of] = scope[character]
-
-### Is the scope character a courtier?
-## scope = character
-alias[trigger:is_courtier] = bool
 
 ### Trigger to check if the target character is the one employing the scoped character in a court position. 
 ## scope = character
@@ -4797,10 +3558,6 @@ alias[trigger:is_court_position_employer] = {
     court_position = <court_position>
     who = scope[character]
 }
-
-### Check if character is employer of laamp scope:actor = { is_contact_of = SCOPE_CHARACTER }
-## scope = character
-alias[trigger:is_contact_of] = scope[character]
 
 ### Check if the task of the scope councillor is valid { task_type = council_position_type_key target = for_targeted_tasks }
 ## scope = character
@@ -4810,14 +3567,6 @@ alias[trigger:is_council_task_valid] = {
     target = scope
 }
 
-### Is the scoped character a councillor?
-## scope = character
-alias[trigger:is_councillor] = bool
-
-### Is the scoped character a councillor for the specified character?
-## scope = character
-alias[trigger:is_councillor_of] = scope[character]
-
 ### is the scoped character employed in the target position by target character
 ## scope = character
 alias[trigger:is_court_position_employer] = {
@@ -4825,152 +3574,13 @@ alias[trigger:is_court_position_employer] = {
 	who = scope[character]
 }
 
-### Is the scope character a courtier?
-## scope = character
-alias[trigger:is_courtier] = bool
-
-### Is the scope character a courtier of the target character?
-## scope = character
-alias[trigger:is_courtier_of] = scope[character]
-
-### Is the character a cousin of the target character?
-## scope = character
-alias[trigger:is_cousin_of] = scope[character]
-
 ### is the target character in the scope war as a defender?
 ## scope = character
 alias[trigger:is_decision_on_cooldown] = <decision>
 
-### is the scope character in the target war as a defender?
-## scope = character
-alias[trigger:is_defender_in_war] = scope[war]
-
-### Is the scoped character was diesignated as diarch by their liege?
-## scope = character
-alias[trigger:is_designated_diarch] = bool
-
-### Is the scoped character currently an active diarch of anyone?
-## scope = character
-alias[trigger:is_diarch] = bool
-
-### Is the scoped character currently an active diarch of the target?
-## scope = character
-alias[trigger:is_diarch_of_target] = scope[character]
-
-### Is the scoped character next in the line of succession for diarchy?
-## scope = character
-alias[trigger:is_diarchy_successor] = bool
-
-### Is the target character a courtier of the scope character?
-alias[trigger:is_employer_of] = scope[character]
-
-### Is the character a extended family [cousins, uncles, aunts, nephews, nieces] of the target character?
-alias[trigger:is_extended_family_of] = scope[character]
-
-### is the character your favorite child?
-## scope = bool
-alias[trigger:is_favorite_child] = scope[character]
-
-### Is the scope character female?
-## scope = character
-alias[trigger:is_female] = bool
-
-### Is the scope character forbidden from the target scheme?
-## scope = character
-alias[trigger:is_forbidden_from_scheme] = scope[scheme]
-
-
-
-### Is the scope character forced to be part of a faction?
-alias[trigger:is_forced_into_faction] = bool
-
-### Checks if the scope character is forced into the target scheme
-## scope = character
-alias[trigger:is_forced_into_scheme] = scope[scheme]
-
-### Is the character a guest from another a court? In contrast to is_pool_guest the character has a liege
-## scope = character
-alias[trigger:is_foreign_court_guest] = bool
-
-### Is the character a guest from another a court, visiting the target character's court? In contrast to is_pool_guest_of the character has a liege
-## scope = character
-alias[trigger:is_foreign_court_guest_of] = scope[character]
-
-### Is the character a guest? (is_pool_guest or is_foreign_court_guest)
-## scope = character
-alias[trigger:is_foreign_court_or_pool_guest] = bool
-
-### Is the character a guest? (is_pool_guest_of or is_foreign_court_guest_of)
-## scope = character
-alias[trigger:is_foreign_court_or_pool_guest_of] = scope[character]
-
-### Was this character made from the ruler designer
-## scope = character
-alias[trigger:is_from_ruler_designer] = bool
-
-### Is the character a grandchild of the target character?
-## scope = character
-alias[trigger:is_grandchild_of] = scope[character]
-
-### Is the character a grandparent of the target character?
-## scope = character
-alias[trigger:is_grandparent_of] = scope[character]
-
-### Is the character a great grandchild of the target character?
-## scope = character
-alias[trigger:is_great_grandchild_of] = scope[character]
-
-### Is the character a great grandparent of the target character?
-## scope = character
-alias[trigger:is_great_grandparent_of] = scope[character]
-
-### Is the character an heir of the target [placeholder]?
-## scope = character
-alias[trigger:is_heir_of] = scope[character]
-
-### Is the character an heir of the target [placeholder]?
-## scope = character
-alias[trigger:is_hostage] = bool
-
-### Is the character an heir of the target [placeholder]?
-## scope = character
-alias[trigger:is_hostage_from] = scope[character]
-
-### Is the character an heir of the target [placeholder]?
-## scope = character
-alias[trigger:is_hostage_of] = scope[character]
-
-### Is the character an heir of the target [placeholder]?
-## scope = character
-alias[trigger:is_hostage_warden] = bool
-
-### Is the character immortal?
-## scope = character
-alias[trigger:is_immortal] = bool
-
 ### Is the scoped decision an important decision for the target character?
 ## scope = character
 alias[trigger:is_important_decision] = <decision>
-
-### is the character imprisoned?
-## scope = character
-alias[trigger:is_imprisoned] = bool
-
-### Is the scope character imprisoned by the target character? is_imprisoned_by = TARGET
-## scope = character
-alias[trigger:is_imprisoned_by] = scope[character]
-
-# checks whether the character is currently in, or has joined an activity
-# scope = character
-#alias[trigger:is_in_an_activity] = bool
-
-### is the character in an army (a commander or a knight)?
-## scope = character
-alias[trigger:is_in_army] = bool
-
-### is the character at war with their liege, or one or more of their vassals?
-## scope = character
-alias[trigger:is_in_civil_war] = bool
 
 ### Is the scoped character in the specified guest subset in the activity they are involved in? 
 ## scope = character
@@ -4980,14 +3590,6 @@ alias[trigger:is_in_guest_subset] = {
     phase = value[activity_phase]
 }
 
-### is the character in an ongoing (i.e. the war has started) great holy war?
-## scope = character
-alias[trigger:is_in_ongoing_great_holy_war] = bool
-
-### Is the character in the pool the target province is a part of
-## scope = character
-alias[trigger:is_in_pool_at] = scope[province]
-
 ### is the character imprisoned in a prison of the specified type?  Accepts "dungeon" or "house_arrest"
 ## scope = character
 alias[trigger:is_in_prison_type] = enum[prison_type]
@@ -4996,138 +3598,13 @@ alias[trigger:is_in_prison_type] = enum[prison_type]
 # scope = character
 #alias[trigger:is_in_target_activity] = replace_me
 
-### Is the character in the same court as the target character (they have the same court owner or one is a courtier of the other)?
-## scope = character
-alias[trigger:is_in_the_same_court_as] = scope[character]
-
-### Is the character in the same court as the target character (they have the same court owner or one is a courtier of the other)? Includes guests in the court.
-## scope = character
-alias[trigger:is_in_the_same_court_as_or_guest] = scope[character]
-
-### is the character incapable?
-## scope = character
-alias[trigger:is_incapable] = bool
-
-### is the character an independent ruler?
-## scope = character
-alias[trigger:is_independent_ruler] = bool
-
-### Is the scoped character a knight
-## scope = character
-alias[trigger:is_knight] = bool
-
-### Is the scoped character a knight of the target character
-## scope = character
-alias[trigger:is_knight_of] = scope[character]
-
-### Is the scope character landed (holds a county or barony)?
-## scope = character
-alias[trigger:is_landed] = bool
-
-### Is the scope character a landless ruler (holds any title, but no on-map land)?
-## scope = character
-alias[trigger:is_landless_ruler] = bool
-
-### is the scope character leading one of the sides in the target war?
-## scope = character
-alias[trigger:is_leader_in_war] = scope[war]
-
 ### Is the character leading a faction of the specified type?
 ## scope = character
 alias[trigger:is_leading_faction_type] = <faction>
 
-### is the scope character a liege or above of the target character?
-alias[trigger:is_liege_or_above_of] = scope[character]
-
-### is the character the local player? Can only be uesd in the UI and similar, since it'd cause an OOS in gameplay script  - An interface trigger, can only be used in specific places
-alias[trigger:is_local_player] = bool
-
-### Is the character a lowborn?
-## scope = character
-alias[trigger:is_lowborn] = bool
-
-### Is the scope character male?
-## scope = character
-alias[trigger:is_male] = bool
-
-### Is the scope character married?
-## scope = character
-alias[trigger:is_married] = bool
-
-### Is the character a nibling (niece/nephew) of the target character?
-## scope = character
-alias[trigger:is_nibling_of] = scope[character]
-
-### Is the scoped character a regular councillor?
-## scope = character
-alias[trigger:is_normal_councillor] = bool
-
-# Is the character obedient towards the target?
-# scope = character
-#alias[trigger:is_obedient] = scope[character]
-
-### Is the scoped character overriding the winner in the GHW they're pledged to (will put their beneficiary on the throne if they're top participant)?
-## scope = character
-alias[trigger:is_overriding_designated_winner] = bool
-
-### Is the character a parent of the target character?
-## scope = character
-alias[trigger:is_parent_of] = scope[character]
-
-### Is the scoped character a participant in the target activity
-## scope = character
-alias[trigger:is_participant_in_activity] = scope[activity]
-
-### is the scope character participating in the target war as an attacker or defender?
-## scope = character
-alias[trigger:is_participant_in_war] = scope[war]
-
 ### Is the scoped character performing the given task?
 ## scope = character
 alias[trigger:is_performing_council_task] = <council_task>
-
-### Is the scope character the player heir of the target character?
-## scope = character
-alias[trigger:is_player_heir_of] = scope[character]
-
-### Is the scoped character a pledged attacker in the current GHW (it's an error to check this if there's no GHW around)
-## scope = character
-alias[trigger:is_pledged_ghw_attacker] = bool
-
-### Is the character in the pool? (not a ruler, courtier or guest at any court)
-## scope = character
-alias[trigger:is_pool_character] = bool
-
-### Is the character a guest from the pool? In contrast to is_foreign_court_guest the character has no liege
-## scope = character
-alias[trigger:is_pool_guest] = bool
-
-### Is the character a guest from the pool, visiting the target character's court? In contrast to is_foreign_court_guest_of the character has no liege
-## scope = character
-alias[trigger:is_pool_guest_of] = scope[character]
-
-### Is the scoped character a POTENTIAL knight to their liege?
-## scope = character
-alias[trigger:is_potential_knight] = bool
-
-### Is the character a powerful vassal?
-alias[trigger:is_powerful_vassal] = bool
-
-### Is the character a powerful vassal of the target?
-## scope = character
-alias[trigger:is_powerful_vassal_of] = scope[character]
-
-### is the character pregnant?
-## scope = character
-alias[trigger:is_pregnant] = bool
-
-### Is the character the heir of the target's primary title?
-## scope = character
-alias[trigger:is_primary_heir_of] = scope[character]
-
-### Is the scope character a ruler (holds any title)?
-## scope = character
-alias[trigger:is_ruler] = bool
 
 ### Checks whether the scope character is an owner or an owner agent in a scheme agains target. There are 3 possible ways to use it: is_scheming_against = { target = X type = Y } limits to schemes of type Y is_scheming_against = { target = X scheme_skill = Y } limits to schemes of Y skill category is_scheming_against = { target = X } considers all schemes
 ## scope = character
@@ -5137,82 +3614,6 @@ alias[trigger:is_scheming_against] = {
     alias_name[scheming_against_target] = alias_match_left[scheming_against_target]
 }
 
-### Is the target character an exposed agent in the scope scheme?
-## scope = character
-alias[trigger:is_scheme_agent_exposed] = scope[character]
-
-### Is the character a sibling of the target character?
-## scope = character
-alias[trigger:is_sibling_of] = scope[character]
-
-### Is the character a spouse of the target character, and are both alive?
-## scope = character
-alias[trigger:is_spouse_of] = scope[character]
-
-### Is the character a spouse of the target character, even if one or both are dead?
-## scope = character
-alias[trigger:is_spouse_of_even_if_dead] = scope[character]
-
-# Is the scoped character a special councillor?
-# scope = character
-#alias[trigger:is_special_councillor] = bool
-
-### Is the scoped character the successor of a given Accolade?
-## scope = character
-alias[trigger:is_successor_of_accolade] = scope[accolade]
-
-### Is this scope character a tax collector?
-## scope = character
-alias[trigger:is_tax_collector] = bool
-
-### Is the scoped character a tax collector of the target character
-## scope = character
-alias[trigger:is_tax_collector_of] = scope[character]
-
-### Is the scope character a theocratic lessee (bishop)?
-## scope = character
-alias[trigger:is_theocratic_lessee] = bool
-
-### Is the character a twin of the target character?
-## scope = character
-alias[trigger:is_twin_of] = scope[character]
-
-### Is the character travelling and part of the entourage? (travel leader is part of the entourage)
-## scope = character
-alias[trigger:is_travel_entourage_character] = bool
-
-### Is the character travelling and the active travel leader?
-## scope = character
-alias[trigger:is_travel_leader] = bool
-
-### Is the character currently travelling?
-## scope = character
-alias[trigger:is_travelling] = bool
-
-### Is the unborn a child of a concubine?
-## scope = character
-alias[trigger:is_unborn_child_of_concubine] = bool
-
-### Is the unborn a known bastard?
-## scope = character
-alias[trigger:is_unborn_known_bastard] = bool
-
-### Is the character an uncle or aunt of the target character?
-## scope = character
-alias[trigger:is_uncle_or_aunt_of] = scope[character]
-
-### Is the scope character suitable as an agent for any slot in target scheme?
-## scope = character
-alias[trigger:is_valid_as_agent_in_any_slot] = scope[agent_slot]
-
-### Is the scope character suitable as an agent for the target agent slot?
-## scope = character
-alias[trigger:is_valid_as_agent_in_slot] = scope[agent_slot]
-
-### Is the target character a valid potential designated heir of the scoped character?(can they inherit one or more of the titles the scoped character holds?)
-## scope = character
-alias[trigger:is_valid_designated_heir] = scope[character]
-
 ### is the scoped character valid for the given event, without checking event cooldown? NOTE: this is only for debug purposes and will not work in release mode!
 ## scope = character
 alias[trigger:is_valid_for_event_debug] = <event>
@@ -5221,29 +3622,9 @@ alias[trigger:is_valid_for_event_debug] = <event>
 ## scope = character
 alias[trigger:is_valid_for_event_debug_cooldown] = <event>
 
-### Is the scoped character a valid candidate to take over as successor of this Accolade?
-## scope = character
-alias[trigger:is_valid_successor_for_accolade] = scope[accolade]
-
 ### Does the scoped character fulfill the requirements for being employed as the targeted court position type?
 ## scope = character
 alias[trigger:is_valid_to_hire_court_position_type] = <court_position>
-
-### Is the character a direct vassal of the target character?
-## scope = character
-alias[trigger:is_vassal_of] = scope[character]
-
-### is the scope character a vassal or below of the target character?
-## scope = character
-alias[trigger:is_vassal_or_below_of] = scope[character]
-
-### Is the scoped character visibly fertile, that is: not too old if a woman, not too young and has no traits blocking having children
-## scope = character
-alias[trigger:is_visibly_fertile] = bool
-
-# is the target character leading one of the sides in the scope war?
-# scope = character
-#alias[trigger:is_war_leader] = scope[character]
 
 
 
@@ -5404,14 +3785,6 @@ alias[trigger:martial_diff] == {
 ### Martial skill scaled between 0.0 and 1.0 for portraits
 ## scope = character
 alias[trigger:martial_for_portrait] == float[0.0..1.0]
-
-### Is this character's betrothal matrilinear? False if there's no betrothal.
-## scope = character
-alias[trigger:matrilinear_betrothal] = bool
-
-### Is the marriage with the spouse matrilinear?
-## scope = character
-alias[trigger:matrilinear_marriage] = bool
 
 ### How many active accolades can this character have at most?
 ## scope = character
@@ -5902,29 +4275,11 @@ alias[trigger:opinion] = {
     value == value_field
 }
 
-
-### checks whether the scope character is the owner of any currently active activity
-## scope = character
-alias[trigger:owns_an_activity] = bool
-
-
-### checks whether the scope character is the owner of any currently active story
-## scope = character
-alias[trigger:owns_a_story] = bool
-
 ### Does the character own a story of this type?
 ## scope = character
 alias[trigger:owns_story_of_type] = replace_me
 
 # -P
-
-### Is this character's betrothal patrilinear? False if there's no betrothal.
-## scope = character
-alias[trigger:patrilinear_betrothal] = bool
-
-### Is the marriage with the spouse patrilinear?
-## scope = character
-alias[trigger:patrilinear_marriage] = bool
 
 ### Does the character have this many perk points across all lifestyles combined?
 ## scope = character
@@ -6116,10 +4471,6 @@ alias[trigger:reverse_has_opinion_modifier] = {
 
 # -S
 
-### can the character marry the target character?
-## scope = character
-alias[trigger:scriptedtests_can_marry_character] = scope[character]
-
 ### does the character have the specified dread baseline value?
 ## scope = character
 alias[trigger:scriptedtests_dread_base] == alias_keys_field[int_value]
@@ -6141,14 +4492,6 @@ alias[trigger:scriptedtests_piety_income] == alias_keys_field[int_value]
 ### does the character have the specified piety income?
 ## scope = character
 alias[trigger:scriptedtests_piety_income] == value_field
-
-### Are the scope character the target character of the opposite sex?
-## scope = character
-alias[trigger:sex_opposite_of] = scope[character]
-
-### Are the scope character the target character of the same sex?
-## scope = character
-alias[trigger:sex_same_as] = scope[character]
 
 ### does the character have the required gold? (AI category short term)
 ## scope = character
@@ -6254,22 +4597,6 @@ alias[trigger:succession_appointment_score_invested] == alias_keys_field[int_val
 alias[trigger:succession_appointment_score_invested] == value_field
 
 # -T
-
-
-
-### is the target character the liege or above the scope character?
-## scope = character
-alias[trigger:target_is_liege_or_above] = scope[character]
-
-### is the target character the the same character or above (in the vassal hierarchy) the scope character?
-## scope = character
-alias[trigger:target_is_same_character_or_above] = scope[character]
-
-### is the target character a vassal or below of the scope character? Non-rulers are not considered vassals
-## scope = character
-alias[trigger:target_is_vassal_or_below] = scope[character]
-
-
 
 ### Target weight of the scoped character target_weight > 10
 ## scope = character
@@ -6379,14 +4706,6 @@ alias[trigger:vassal_contract_has_flag] = value[vassal_contract_flag]
 ## scope = character
 alias[trigger:vassal_contract_liege_dynasty_reign_start_date] == date_field
 
-### Can the scoepd character's contract be modified at all, that is: they have one, they use obligation levels, and are count or above
-## scope = character
-alias[trigger:vassal_contract_has_modifiable_obligations] = bool
-
-### Has the scoepd character's contract been blocked from modification by script via 'set_vassal_contract_modification_blocked'
-## scope = character
-alias[trigger:vassal_contract_is_blocked_from_modification] = bool
-
 ### The level of the provided contract type in the scoped character's current vassal contract
 ## scope = character
 alias[trigger:vassal_contract_obligation_level] == alias_keys_field[int_value]
@@ -6469,10 +4788,6 @@ alias[trigger:war_chest_gold_maximum] == alias_keys_field[int_value]
 ### How big is the 'war chest' budget is supposed to get?
 ## scope = character
 alias[trigger:war_chest_gold_maximum] == value_field
-
-### Was the scoped character a Hostage as a Child?
-## scope = character
-alias[trigger:was_hostage_child] = bool
 
 ### can the scoped character be employed as court position by the employer?scope:character = {	would_be_valid_for_court_position = {		employer = scope:employer		court_position = court_physician_court_position	}}
 ## scope = character
@@ -6559,26 +4874,9 @@ alias[trigger:years_in_diarchy] == alias_keys_field[int_value]
 ## scope = character
 alias[trigger:years_in_diarchy] == value_field
 
-
-### Checks if the character would get an alliance with the target character through such a marriage.
-## scope = character
-alias[trigger:yields_alliance] = scope[character]
-
 ### does the scope province have a particular building or its successor?
 ## scope = province
 alias[trigger:has_building_or_higher] = <building>
-
-### Is the scoped character someone else's tributary?
-## scope = character
-alias[trigger:is_tributary] = bool
-
-### Is the scoped character a member of a confederation?
-## scope = character
-alias[trigger:is_confederation_member] = bool
-
-### Is the scoped character a member of the target confederation?
-## scope = character
-alias[trigger:is_member_of_confederation] = scope[confederation]
 
 ### Number of members in the scoped confederation
 ## scope = confederation
@@ -6592,43 +4890,18 @@ alias[trigger:member_count] == value_field
 ## scope = situation_sub_region
 alias[trigger:has_sub_region_phase_parameter] = enum[situation_phase_param]
 
-### Is this character a participant in this participant group?
-## scope = situation_participant_group
-alias[trigger:participant_group_has_character] = scope[character]
-
 ### Is the scoped participant group of a specific type?
 ## scope = situation_participant_group
 alias[trigger:participant_group_type] = enum[participant_groups]
-
-### Does the scoped county title use County Fertility?
-## scope = landed_title
-alias[trigger:uses_county_fertility] = bool
-
-### Is the scope character obedient to the target character?
-## scope = character
-alias[trigger:is_obedient_to] = scope[character]
 
 ### Checks if sub-region current phase equals phase_type
 ## scope = situation_sub_region
 alias[trigger:sub_region_current_phase] = enum[situation_phases]
 
-### Checks if sub-region current phase equals phase_type
-## scope = situation_sub_region
-alias[trigger:situation_sub_region_has_county] = scope[county]
-
 
 
 
 # -Z
-
-
-
-
-
-
-
-### Trigger to check if an inspiration exists within scope
-#alias[trigger:inspiration] = scope[inspiration]
 
 ### 
 #alias[trigger:any_inspiration] = {

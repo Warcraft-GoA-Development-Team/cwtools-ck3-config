@@ -38,6 +38,13 @@ single_alias[cost] = {
     renown = value_field
 
     ## cardinality = 0..1
+    influence = single_alias_right[score_formula]
+    ## cardinality = 0..1
+    influence = alias_keys_field[int_value]
+    ## cardinality = 0..1
+    influence = value_field
+
+    ## cardinality = 0..1
     herd = single_alias_right[score_formula]
     ## cardinality = 0..1
     herd = alias_keys_field[int_value]

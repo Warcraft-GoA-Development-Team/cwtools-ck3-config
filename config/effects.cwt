@@ -258,6 +258,7 @@ alias[effect:add_unity_value] = {
     value = alias_keys_field[int_value]
     value = value_field
     character = scope[character]
+    desc = localisation
     desc = single_alias_right[complex_desc]
 }
 
@@ -700,9 +701,15 @@ alias[effect:add_from_contribution_attackers] = {
     ## cardinality = 0..1
     prestige = value_field
     ## cardinality = 0..1
+    prestige = alias_keys_field[int_value]
+    ## cardinality = 0..1
     piety = value_field
     ## cardinality = 0..1
+    piety = alias_keys_field[int_value]
+    ## cardinality = 0..1
     gold = value_field # TODO: Verify. Never used in vanilla files.
+    ## cardinality = 0..1
+    gold = alias_keys_field[int_value] # TODO: Verify. Never used in vanilla files.
     ## cardinality = 0..1
     opinion = { # Not sure. Only used like this.
         modifier = <opinion_modifier>
@@ -713,9 +720,15 @@ alias[effect:add_from_contribution_attackers] = {
 ## scope = casus_belli
 alias[effect:add_from_contribution_defenders] = {
     ## cardinality = 0..1
+    prestige = alias_keys_field[int_value]
+    ## cardinality = 0..1
     prestige = value_field
     ## cardinality = 0..1
+    piety = alias_keys_field[int_value]
+    ## cardinality = 0..1
     piety = value_field
+    ## cardinality = 0..1
+    gold = alias_keys_field[int_value] # TODO: Verify. Never used in vanilla files.
     ## cardinality = 0..1
     gold = value_field # TODO: Verify. Never used in vanilla files.
     ## cardinality = 0..1
@@ -1159,6 +1172,8 @@ alias[effect:create_character] = {
     ## cardinality = 0..1
     save_scope_as = value_set[event_target]
     ## cardinality = 0..1
+    save_temporary_scope_as = value_set[event_target]
+    ## cardinality = 0..1
     save_temporary_scope_value_as = value_set[temporary_scope]
     ## cardinality = 0..1
     name = localisation
@@ -1304,7 +1319,11 @@ alias[effect:create_dynamic_title] = {
     tier = enum[title_tier]
     name = localisation
     ## cardinality = 0..1
-    adjective = localisation
+    adj = localisation
+    ## cardinality = 0..1
+    pre = localisation
+    ## cardinality = 0..1
+    article = localisation
 }
 
 ### Create a new holy order create_holy_order = {     leader = scope:a_character     capital = scope:a_barony_title     save_scope_as = new_holy_order # optional way to get a reference to the new holy order }
@@ -2422,6 +2441,10 @@ alias[effect:add_opinion] = {
     opinion = alias_keys_field[int_value]
     ## cardinality = 0..1
     opinion = value_field
+    ## cardinality = 0..1
+    enum[duration] = int_value_field
+    ## cardinality = 0..1
+    enum[duration] = alias_keys_field[int_value]
 }
 
 ### Adds the perk for this character
@@ -3893,14 +3916,6 @@ alias[effect:set_immortal_age] = value_field
 ## scope = character
 alias[effect:set_killer_public] = bool
 
-enums = {
-    enum[knight_status] = {
-        forced
-        default
-        disallowed
-    }
-}
-
 ### Sets the knight status of the character to Forced/Default/Disallowed
 ## scope = character
 alias[effect:set_knight_status] = enum[knight_status]
@@ -4056,6 +4071,8 @@ alias[effect:spawn_army] = {
     uses_supply = bool
     ## cardinality = 0..1
     army = scope[army]
+    ## cardinality = 0..1
+    war_keep_on_attacker_victory = bool
 
     ## cardinality = 0..1
     ### Cannot be set if army cannot be spawned (eg. char not at war).
@@ -4617,6 +4634,19 @@ alias[effect:set_domicile_culture] = scope[culture]
 ### Sets the domicile's faith, if it supports it
 ## scope = domicile
 alias[effect:set_domicile_faith] = scope[faith]
+
+### Sets if the title should be deleted from the gamestate completely when character gains or create a new title with the same tier.set_destroy_on_gain_same_tier = yes
+## scope = landed_title
+alias[effect:set_destroy_on_gain_same_tier] = bool
+
+### Invalidate contract
+## scope = task_contract
+alias[effect:invalidate_contract] = bool
+
+### Start a travel plan for the character to return home, using their current travel plan info if they have any or starting a new travel plan if they do not.
+### 						 Saving this as a scope will not work for player characters if they have to use the planner.
+## scope = character
+alias[effect:return_home] = bool
 
 
 

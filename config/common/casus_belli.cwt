@@ -308,6 +308,14 @@ casus_belli_type = {
 	## cardinality = 0..1
 	ai_score = single_alias_right[score_formula]
 
+	### Script value, standard war scopes. Added to the hard-coded scoring from titles, if there are any
+	## cardinality = 0..1
+	ai_score = int_value_field
+
+	### Script value, standard war scopes. Added to the hard-coded scoring from titles, if there are any
+	## cardinality = 0..1
+	ai_score = alias_keys_field[int_value]
+
 	### Script value, standard war scopes. Multiplied with the scoring from titles
 	## cardinality = 0..1
 	ai_score_mult = single_alias_right[score_formula]

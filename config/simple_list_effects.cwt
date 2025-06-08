@@ -1142,9 +1142,6 @@ alias[effect:random_legend] = single_alias_right[random_effect]
 ## push_scope = legend_type
 alias[effect:random_legend_type] = single_alias_right[random_effect]
 
-### a random list effect random_list = { X1 = { trigger = { enables/disable this effect} modifier/compare_modifier/opinion_modifier = Y1 effect1 } X2 = { trigger = { enables/disable this effect} modifier/compare_modifier/opinion_modifier = Y2 effect2 } ... } Selects one effect from the list and fires it. The effects are weighted by numbers X1, X2... (the higher the number, the higher the chance of the effect being picked). The chances can be modified by optional value modifier lists Y1, Y2... (AKA MTTH)
-alias[effect:random_list] = single_alias_right[random_effect]
-
 ### Iterate through all living characters random_living_character = { limit = { <triggers> } (optional) weight = { mtth } <effects> }
 ## push_scope = character
 alias[effect:random_living_character] = single_alias_right[random_effect]
