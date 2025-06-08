@@ -12,16 +12,13 @@ types = {
             HighlightDescription = "$_highlight_desc"
 		}
     }
-}
-
-types = {
     type[lifestyle_perk] = {
         path = "game/common/lifestyle_perks"
         localisation = {
             ## required
             ## primary
             Name = "$_name"
-		}
+        }
     }
 }
 
@@ -64,7 +61,7 @@ lifestyle_perk = {
     name = single_alias_right[complex_desc]
 
     ### Key of the tree it belongs to. Only used for GUI layout.
-    tree = value_set[perk_tree]
+    tree = scalar
     ### Its positioning within the tree. Only used for GUI layout. Multiplied with PERK_X_OFFSET and PERK_Y_OFFSET.
     position = single_alias_right[position]
 
@@ -102,4 +99,14 @@ lifestyle_perk = {
 single_alias[position] = {
     ## cardinality = 2..2
     float
+}
+
+enums = {
+    complex_enum[perk_tree] = {
+        path = "game/common/lifestyle_perks"
+
+        name = {
+            tree = enum_name
+        }
+    }
 }

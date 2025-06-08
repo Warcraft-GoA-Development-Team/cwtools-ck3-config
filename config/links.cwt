@@ -1447,19 +1447,6 @@ links = {
         output_scope = faith
     }
 
-
-    ### How far away is the province/barony/county from the target? Measured in map pixels. Squared for performance reasons (square root is expensive). squared_distance = { target = some province/barony/county value > 10000 }
-    squared_distance_prefix = {
-        desc = "How far away is the province/barony/county from the target? Measured in map pixels. Squared for performance reasons (square root is expensive). squared_distance = { target = some province/barony/county value > 10000 }"
-        type = value
-        from_data = yes
-        from_argument = yes
-        prefix = squared_distance:
-        data_source = scope[landed_title]
-        input_scopes = { landed_title province }
-        output_scope = any
-    }
-
     aptitude_prefix = {
         type = value
         from_data = yes
