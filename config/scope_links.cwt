@@ -7,8 +7,10 @@ alias[effect:scope_field] = { alias_name[effect] = alias_match_left[effect] }
 alias[trigger:scope_field] = { alias_name[trigger] = alias_match_left[trigger] }
 alias[trigger:alias_keys_field[int_value]] == alias_keys_field[int_value]
 alias[trigger:alias_keys_field[int_value]] == value_field
+alias[trigger:alias_keys_field[int_value]] == single_alias_right[score_formula]
 alias[trigger:value_field] == value_field
 alias[trigger:value_field] == alias_keys_field[int_value]
+alias[trigger:value_field] == single_alias_right[score_formula]
 alias[trigger:alias_keys_field[int_value]] == { alias_name[arithmetic_operation] = alias_match_left[arithmetic_operation] }
 alias[trigger:scope_field] == scope_field
 alias[trigger:scope_field] == alias_keys_field[int_value]

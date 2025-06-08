@@ -1,7 +1,7 @@
 alias[colour:color] = <color>
-alias[colour:color] = colour[rgb]
-alias[colour:color] = colour[hsv]
-alias[colour:color] = colour[hsv360]
+alias[colour:color] = color[rgb]
+alias[colour:color] = color[hsv]
+alias[colour:color] = color[hsv360]
 ## color_type = hsv
 alias[colour:color] = {
     ## cardinality = 3..4

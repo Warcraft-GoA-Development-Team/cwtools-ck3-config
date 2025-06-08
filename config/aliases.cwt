@@ -95,12 +95,15 @@ single_alias[first_random_valid] = {
     ## cardinality = 0..inf
     random_valid = single_alias_right[first_random_valid]
     # This should probably be recursive, but referencing an alias in itself causes a parser crash.
-    ## cardinality = 0..inf
+    ## cardinality = 0..1
     desc = localisation
+    ## cardinality = 0..1
+    desc = single_alias_right[complex_desc]
 }
 
 single_alias[triggered_desc] = {
     desc = localisation
+    desc = single_alias_right[complex_desc]
     # We can omit the trigger. Common as the 'else' block in a first_valid block.
     ## cardinality = 0..inf
     trigger = {
@@ -132,7 +135,7 @@ single_alias[regular_building_list] = {
 
 single_alias[title_list] = {
     ## cardinality = 1..inf
-    <title>
+    <landed_title>
 }
 
 single_alias[added_modifier] = {

@@ -43,13 +43,13 @@ flavorization = {
     ### Which titles should the scope be to get this flavorization.
     titles = {
         ## cardinality = 1..inf
-        <title>
+        <landed_title>
     }
     ## cardinality = 0..1
     ### Which de jure liege should the scope belong to to get this flavorization.
     de_jure_liege = {
         ## cardinality = 1..inf
-        <title>
+        <landed_title>
     }
     ## cardinality = 0..1
     ### Which governments should the scope have to get this flavorization.

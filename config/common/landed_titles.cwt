@@ -19,6 +19,26 @@ types = {
         subtype[barony] = {
         }
     }
+    # ## starts_with = e_
+    # type[empire] = {
+    #     path = "common/landed_titles"
+    # }
+    # ## starts_with = k_
+    # type[kingdom] = {
+    #     path = "common/landed_titles"
+    # }
+    # ## starts_with = d_
+    # type[duchy] = {
+    #     path = "common/landed_titles"
+    # }
+    # ## starts_with = c_
+    # type[county] = {
+    #     path = "common/landed_titles"
+    # }
+    # ## starts_with = b_
+    # type[barony] = {
+    #     path = "common/landed_titles"
+    # }
 }
 
 #
@@ -63,6 +83,560 @@ landed_title = {
     ### Is the name of this title used by the holder of it in their name? Default: "yes"
     ## cardinality = 0..1
     ruler_uses_title_name = bool
+
+    ## cardinality = 0..1
+    can_use_nomadic_naming = bool
+
+    ### Is this title destroyed upon succession? Default: "no"
+    ## cardinality = 0..1
+    destroy_on_succession = bool
+
+    ### Can this title be named after the holder's dynasty? Won't get named after its holder's dynasty for holders who'd otherwise apply such naming. Default: "yes"
+    ## cardinality = 0..1
+    can_be_named_after_dynasty = bool
+
+    ### Province ID that this represents. Should only be when defining a barony title.
+    ## cardinality = 0..1
+    province = int
+
+    ### Which county title contains the preferred capital province of this title.
+    ## cardinality = 0..1
+    capital = <landed_title>
+
+    ### Brief: Does this title cause other titles to drift into it? Default: no
+    ## cardinality = 0..1
+    de_jure_drift_disabled = bool
+
+    ### Will the AI ignore titularity status when weighing if this title should be primary title? Default: no
+    ## cardinality = 0..1
+    ignore_titularity_for_title_weighting = bool
+
+    ###  List of names being assigned to male holers of this title.
+    ## cardinality = 0..1
+    male_names = single_alias_right[localisation_list]
+
+    ### List of names being assigned to female holers of this title.
+    ## cardinality = 0..1
+    female_names = single_alias_right[localisation_list]
+
+    ### Scipted value determining how highly the AI values this title as a primary title. root: the character evaluating the title
+    ## cardinality = 0..1
+    ## replace_scope = { root = character }
+    ai_primary_priority = single_alias_right[score_formula]
+
+    ### Brief: can_create ( trigger ) Special creation requirements. root: the character trying to create the title
+    ## cardinality = 0..1
+    ## replace_scope = { root = character }
+    can_create = single_alias_right[trigger_clause]
+
+    ### Used instead of can_create when we consider creating the title during partition succession. root: 	the character for whom we're executing succession (_not_ the new holder).
+    ## cardinality = 0..1
+    ## replace_scope = { root = character }
+    can_create_on_partition = single_alias_right[trigger_clause]
+
+    ### Special requirements for voluntarily destroying the title (essentially only the player will ever do this). root: 	the character trying to destroy the title
+    ## cardinality = 0..1
+    ## replace_scope = { root = character }
+    can_destroy = single_alias_right[trigger_clause]
+
+    ### X is a name of a culture name list (see common/culture/name_lists). If the title is held by somebody with that name list X, the title name will use the Y localization key and the adjective will use Y_adj. Example: For Norse Kingdom of Norway, use Noregr as name of title.
+    ## cardinality = 0..1
+    cultural_names = {
+        ## cardinality = 1..inf
+        <name_list>	= localisation
+    }
+
+    # Brief: landed_title_key ( string )
+    # Which other, lower tier titles are dejure contained within this title?
+    # See Hierarchy section for details.
+    # d_my_other_lower_tier_title = { }
+
+
+    ### Replaces the database key in dynamic template data. Should not be used in database definitions.
+    ## cardinality = 0..1
+    scalar = localisation
+
+    ### Used by dynamic template data to determine title tier. Should not be used in database definitions.
+    ## cardinality = 0..1
+    tier = enum[title_tier]
+
+    ### Used by dynamic template data to determine who is the dejure liege of this title. Should not be used in database definitions.
+    ## cardinality = 0..1
+    de_jure_liege = <landed_title>
+
+    ### Is this entry a dynamic title template? Should not be used in database definitions. Default: no
+    ## cardinality = 0..1
+    dyn = bool
+
+    subtype[empire] = {
+        ## cardinality = 0..inf
+        re:\bk_[^\s]+ = {}
+        ## cardinality = 0..inf
+        re:\bd_[^\s]+ = {}
+        ## cardinality = 0..inf
+        re:\bc_[^\s]+ = {}
+        ## cardinality = 0..inf
+        re:\bb_[^\s]+ = {}
+    }
+
+    subtype[kingdom] = {
+        ## cardinality = 0..inf
+        re:\bd_[^\s]+ = {}
+        ## cardinality = 0..inf
+        re:\bc_[^\s]+ = {}
+        ## cardinality = 0..inf
+        re:\bb_[^\s]+ = {}
+    }
+
+    subtype[duchy] = {
+        ## cardinality = 0..inf
+        re:\bc_[^\s]+ = {}
+        ## cardinality = 0..inf
+        re:\bb_[^\s]+ = {}
+    }
+
+    subtype[county] = {
+        ## cardinality = 0..inf
+        re:\bb_[^\s]+ = {}
+    }
+}
+
+single_alias[kingdom] = {
+    ### Map color of the title.
+    color = alias_match_left[colour]
+
+    ### Is this title landless?
+    ## cardinality = 0..1
+    landless = bool
+
+    ### Is this title destoyed if the hair is not valid upon succession? Default: no
+    ## cardinality = 0..1
+    destroy_if_invalid_heir = bool
+
+    ### Is this title destroyed upon succession? Default: no
+    ## cardinality = 0..1
+    destroy_on_succession = no
+
+    ### Should this title be deleted when its destroyed? For example peasant leaders. Default: no
+    ## cardinality = 0..1
+    delete_on_destroy = bool
+
+    ### Should this title be deleted if the holder gains another title of the same tier? Default: no
+    ## cardinality = 0..1
+    delete_on_gain_same_tier = bool
+
+    ### Are claims given to this title to heirs from parents implicitly or explicitly through other, automatic means? Default: no
+    ## cardinality = 0..1
+    no_automatic_claims = bool
+
+    ### Whether or not the title should display the difinite form in  customization windows. Default: no
+    ## cardinality = 0..1
+    definite_form = bool
+
+    ### Is this title always inherited by the primary heir? Default: no
+    ## cardinality = 0..1
+    always_follows_primary_heir = bool
+
+    ### Is the name of this title used by the holder of it in their name? Default: "yes"
+    ## cardinality = 0..1
+    ruler_uses_title_name = bool
+
+    ## cardinality = 0..1
+    can_use_nomadic_naming = bool
+
+    ### Is this title destroyed upon succession? Default: "no"
+    ## cardinality = 0..1
+    destroy_on_succession = bool
+
+    ### Can this title be named after the holder's dynasty? Won't get named after its holder's dynasty for holders who'd otherwise apply such naming. Default: "yes"
+    ## cardinality = 0..1
+    can_be_named_after_dynasty = bool
+
+    ### Province ID that this represents. Should only be when defining a barony title.
+    ## cardinality = 0..1
+    province = int
+
+    ### Which county title contains the preferred capital province of this title.
+    ## cardinality = 0..1
+    capital = <landed_title>
+
+    ### Brief: Does this title cause other titles to drift into it? Default: no
+    ## cardinality = 0..1
+    de_jure_drift_disabled = bool
+
+    ### Will the AI ignore titularity status when weighing if this title should be primary title? Default: no
+    ## cardinality = 0..1
+    ignore_titularity_for_title_weighting = bool
+
+    ###  List of names being assigned to male holers of this title.
+    ## cardinality = 0..1
+    male_names = single_alias_right[localisation_list]
+
+    ### List of names being assigned to female holers of this title.
+    ## cardinality = 0..1
+    female_names = single_alias_right[localisation_list]
+
+    ### Scipted value determining how highly the AI values this title as a primary title. root: the character evaluating the title
+    ## cardinality = 0..1
+    ## replace_scope = { root = character }
+    ai_primary_priority = single_alias_right[score_formula]
+
+    ### Brief: can_create ( trigger ) Special creation requirements. root: the character trying to create the title
+    ## cardinality = 0..1
+    ## replace_scope = { root = character }
+    can_create = single_alias_right[trigger_clause]
+
+    ### Used instead of can_create when we consider creating the title during partition succession. root: 	the character for whom we're executing succession (_not_ the new holder).
+    ## cardinality = 0..1
+    ## replace_scope = { root = character }
+    can_create_on_partition = single_alias_right[trigger_clause]
+
+    ### Special requirements for voluntarily destroying the title (essentially only the player will ever do this). root: 	the character trying to destroy the title
+    ## cardinality = 0..1
+    ## replace_scope = { root = character }
+    can_destroy = single_alias_right[trigger_clause]
+
+    ### X is a name of a culture name list (see common/culture/name_lists). If the title is held by somebody with that name list X, the title name will use the Y localization key and the adjective will use Y_adj. Example: For Norse Kingdom of Norway, use Noregr as name of title.
+    ## cardinality = 0..1
+    cultural_names = {
+        ## cardinality = 1..inf
+        <name_list>	= localisation
+    }
+
+    # Brief: landed_title_key ( string )
+    # Which other, lower tier titles are dejure contained within this title?
+    # See Hierarchy section for details.
+    # d_my_other_lower_tier_title = { }
+
+
+    ### Replaces the database key in dynamic template data. Should not be used in database definitions.
+    ## cardinality = 0..1
+    scalar = localisation
+
+    ### Used by dynamic template data to determine title tier. Should not be used in database definitions.
+    ## cardinality = 0..1
+    tier = enum[title_tier]
+
+    ### Used by dynamic template data to determine who is the dejure liege of this title. Should not be used in database definitions.
+    ## cardinality = 0..1
+    de_jure_liege = <landed_title>
+
+    ### Is this entry a dynamic title template? Should not be used in database definitions. Default: no
+    ## cardinality = 0..1
+    dyn = bool
+
+    ## cardinality = 0..inf
+    re:\bd_[^\s]+ = single_alias_right[duchy]
+    ## cardinality = 0..inf
+    re:\bc_[^\s]+ = single_alias_right[county]
+    ## cardinality = 0..inf
+    re:\bb_[^\s]+ = single_alias_right[barony]
+}
+
+single_alias[duchy] = {
+    ### Map color of the title.
+    color = alias_match_left[colour]
+
+    ### Is this title landless?
+    ## cardinality = 0..1
+    landless = bool
+
+    ### Is this title destoyed if the hair is not valid upon succession? Default: no
+    ## cardinality = 0..1
+    destroy_if_invalid_heir = bool
+
+    ### Is this title destroyed upon succession? Default: no
+    ## cardinality = 0..1
+    destroy_on_succession = no
+
+    ### Should this title be deleted when its destroyed? For example peasant leaders. Default: no
+    ## cardinality = 0..1
+    delete_on_destroy = bool
+
+    ### Should this title be deleted if the holder gains another title of the same tier? Default: no
+    ## cardinality = 0..1
+    delete_on_gain_same_tier = bool
+
+    ### Are claims given to this title to heirs from parents implicitly or explicitly through other, automatic means? Default: no
+    ## cardinality = 0..1
+    no_automatic_claims = bool
+
+    ### Whether or not the title should display the difinite form in  customization windows. Default: no
+    ## cardinality = 0..1
+    definite_form = bool
+
+    ### Is this title always inherited by the primary heir? Default: no
+    ## cardinality = 0..1
+    always_follows_primary_heir = bool
+
+    ### Is the name of this title used by the holder of it in their name? Default: "yes"
+    ## cardinality = 0..1
+    ruler_uses_title_name = bool
+
+    ## cardinality = 0..1
+    can_use_nomadic_naming = bool
+
+    ### Is this title destroyed upon succession? Default: "no"
+    ## cardinality = 0..1
+    destroy_on_succession = bool
+
+    ### Can this title be named after the holder's dynasty? Won't get named after its holder's dynasty for holders who'd otherwise apply such naming. Default: "yes"
+    ## cardinality = 0..1
+    can_be_named_after_dynasty = bool
+
+    ### Province ID that this represents. Should only be when defining a barony title.
+    ## cardinality = 0..1
+    province = int
+
+    ### Which county title contains the preferred capital province of this title.
+    ## cardinality = 0..1
+    capital = <landed_title>
+
+    ### Brief: Does this title cause other titles to drift into it? Default: no
+    ## cardinality = 0..1
+    de_jure_drift_disabled = bool
+
+    ### Will the AI ignore titularity status when weighing if this title should be primary title? Default: no
+    ## cardinality = 0..1
+    ignore_titularity_for_title_weighting = bool
+
+    ###  List of names being assigned to male holers of this title.
+    ## cardinality = 0..1
+    male_names = single_alias_right[localisation_list]
+
+    ### List of names being assigned to female holers of this title.
+    ## cardinality = 0..1
+    female_names = single_alias_right[localisation_list]
+
+    ### Scipted value determining how highly the AI values this title as a primary title. root: the character evaluating the title
+    ## cardinality = 0..1
+    ## replace_scope = { root = character }
+    ai_primary_priority = single_alias_right[score_formula]
+
+    ### Brief: can_create ( trigger ) Special creation requirements. root: the character trying to create the title
+    ## cardinality = 0..1
+    ## replace_scope = { root = character }
+    can_create = single_alias_right[trigger_clause]
+
+    ### Used instead of can_create when we consider creating the title during partition succession. root: 	the character for whom we're executing succession (_not_ the new holder).
+    ## cardinality = 0..1
+    ## replace_scope = { root = character }
+    can_create_on_partition = single_alias_right[trigger_clause]
+
+    ### Special requirements for voluntarily destroying the title (essentially only the player will ever do this). root: 	the character trying to destroy the title
+    ## cardinality = 0..1
+    ## replace_scope = { root = character }
+    can_destroy = single_alias_right[trigger_clause]
+
+    ### X is a name of a culture name list (see common/culture/name_lists). If the title is held by somebody with that name list X, the title name will use the Y localization key and the adjective will use Y_adj. Example: For Norse Kingdom of Norway, use Noregr as name of title.
+    ## cardinality = 0..1
+    cultural_names = {
+        ## cardinality = 1..inf
+        <name_list>	= localisation
+    }
+
+    # Brief: landed_title_key ( string )
+    # Which other, lower tier titles are dejure contained within this title?
+    # See Hierarchy section for details.
+    # d_my_other_lower_tier_title = { }
+
+
+    ### Replaces the database key in dynamic template data. Should not be used in database definitions.
+    ## cardinality = 0..1
+    scalar = localisation
+
+    ### Used by dynamic template data to determine title tier. Should not be used in database definitions.
+    ## cardinality = 0..1
+    tier = enum[title_tier]
+
+    ### Used by dynamic template data to determine who is the dejure liege of this title. Should not be used in database definitions.
+    ## cardinality = 0..1
+    de_jure_liege = <landed_title>
+
+    ### Is this entry a dynamic title template? Should not be used in database definitions. Default: no
+    ## cardinality = 0..1
+    dyn = bool
+
+    ## cardinality = 0..inf
+    re:\bc_[^\s]+ = single_alias_right[county]
+    ## cardinality = 0..inf
+    re:\bb_[^\s]+ = single_alias_right[barony]
+}
+
+single_alias[county] = {
+    ### Map color of the title.
+    color = alias_match_left[colour]
+
+    ### Is this title landless?
+    ## cardinality = 0..1
+    landless = bool
+
+    ### Is this title destoyed if the hair is not valid upon succession? Default: no
+    ## cardinality = 0..1
+    destroy_if_invalid_heir = bool
+
+    ### Is this title destroyed upon succession? Default: no
+    ## cardinality = 0..1
+    destroy_on_succession = no
+
+    ### Should this title be deleted when its destroyed? For example peasant leaders. Default: no
+    ## cardinality = 0..1
+    delete_on_destroy = bool
+
+    ### Should this title be deleted if the holder gains another title of the same tier? Default: no
+    ## cardinality = 0..1
+    delete_on_gain_same_tier = bool
+
+    ### Are claims given to this title to heirs from parents implicitly or explicitly through other, automatic means? Default: no
+    ## cardinality = 0..1
+    no_automatic_claims = bool
+
+    ### Whether or not the title should display the difinite form in  customization windows. Default: no
+    ## cardinality = 0..1
+    definite_form = bool
+
+    ### Is this title always inherited by the primary heir? Default: no
+    ## cardinality = 0..1
+    always_follows_primary_heir = bool
+
+    ### Is the name of this title used by the holder of it in their name? Default: "yes"
+    ## cardinality = 0..1
+    ruler_uses_title_name = bool
+
+    ## cardinality = 0..1
+    can_use_nomadic_naming = bool
+
+    ### Is this title destroyed upon succession? Default: "no"
+    ## cardinality = 0..1
+    destroy_on_succession = bool
+
+    ### Can this title be named after the holder's dynasty? Won't get named after its holder's dynasty for holders who'd otherwise apply such naming. Default: "yes"
+    ## cardinality = 0..1
+    can_be_named_after_dynasty = bool
+
+    ### Province ID that this represents. Should only be when defining a barony title.
+    ## cardinality = 0..1
+    province = int
+
+    ### Which county title contains the preferred capital province of this title.
+    ## cardinality = 0..1
+    capital = <landed_title>
+
+    ### Brief: Does this title cause other titles to drift into it? Default: no
+    ## cardinality = 0..1
+    de_jure_drift_disabled = bool
+
+    ### Will the AI ignore titularity status when weighing if this title should be primary title? Default: no
+    ## cardinality = 0..1
+    ignore_titularity_for_title_weighting = bool
+
+    ###  List of names being assigned to male holers of this title.
+    ## cardinality = 0..1
+    male_names = single_alias_right[localisation_list]
+
+    ### List of names being assigned to female holers of this title.
+    ## cardinality = 0..1
+    female_names = single_alias_right[localisation_list]
+
+    ### Scipted value determining how highly the AI values this title as a primary title. root: the character evaluating the title
+    ## cardinality = 0..1
+    ## replace_scope = { root = character }
+    ai_primary_priority = single_alias_right[score_formula]
+
+    ### Brief: can_create ( trigger ) Special creation requirements. root: the character trying to create the title
+    ## cardinality = 0..1
+    ## replace_scope = { root = character }
+    can_create = single_alias_right[trigger_clause]
+
+    ### Used instead of can_create when we consider creating the title during partition succession. root: 	the character for whom we're executing succession (_not_ the new holder).
+    ## cardinality = 0..1
+    ## replace_scope = { root = character }
+    can_create_on_partition = single_alias_right[trigger_clause]
+
+    ### Special requirements for voluntarily destroying the title (essentially only the player will ever do this). root: 	the character trying to destroy the title
+    ## cardinality = 0..1
+    ## replace_scope = { root = character }
+    can_destroy = single_alias_right[trigger_clause]
+
+    ### X is a name of a culture name list (see common/culture/name_lists). If the title is held by somebody with that name list X, the title name will use the Y localization key and the adjective will use Y_adj. Example: For Norse Kingdom of Norway, use Noregr as name of title.
+    ## cardinality = 0..1
+    cultural_names = {
+        ## cardinality = 1..inf
+        <name_list>	= localisation
+    }
+
+    # Brief: landed_title_key ( string )
+    # Which other, lower tier titles are dejure contained within this title?
+    # See Hierarchy section for details.
+    # d_my_other_lower_tier_title = { }
+
+
+    ### Replaces the database key in dynamic template data. Should not be used in database definitions.
+    ## cardinality = 0..1
+    scalar = localisation
+
+    ### Used by dynamic template data to determine title tier. Should not be used in database definitions.
+    ## cardinality = 0..1
+    tier = enum[title_tier]
+
+    ### Used by dynamic template data to determine who is the dejure liege of this title. Should not be used in database definitions.
+    ## cardinality = 0..1
+    de_jure_liege = <landed_title>
+
+    ### Is this entry a dynamic title template? Should not be used in database definitions. Default: no
+    ## cardinality = 0..1
+    dyn = bool
+
+    ## cardinality = 0..inf
+    re:\bb_[^\s]+ = single_alias_right[barony]
+}
+
+single_alias[barony] = {
+    ### Map color of the title.
+    color = alias_match_left[colour]
+
+    ### Is this title landless?
+    ## cardinality = 0..1
+    landless = bool
+
+    ### Is this title destoyed if the hair is not valid upon succession? Default: no
+    ## cardinality = 0..1
+    destroy_if_invalid_heir = bool
+
+    ### Is this title destroyed upon succession? Default: no
+    ## cardinality = 0..1
+    destroy_on_succession = no
+
+    ### Should this title be deleted when its destroyed? For example peasant leaders. Default: no
+    ## cardinality = 0..1
+    delete_on_destroy = bool
+
+    ### Should this title be deleted if the holder gains another title of the same tier? Default: no
+    ## cardinality = 0..1
+    delete_on_gain_same_tier = bool
+
+    ### Are claims given to this title to heirs from parents implicitly or explicitly through other, automatic means? Default: no
+    ## cardinality = 0..1
+    no_automatic_claims = bool
+
+    ### Whether or not the title should display the difinite form in  customization windows. Default: no
+    ## cardinality = 0..1
+    definite_form = bool
+
+    ### Is this title always inherited by the primary heir? Default: no
+    ## cardinality = 0..1
+    always_follows_primary_heir = bool
+
+    ### Is the name of this title used by the holder of it in their name? Default: "yes"
+    ## cardinality = 0..1
+    ruler_uses_title_name = bool
+
+    ## cardinality = 0..1
+    can_use_nomadic_naming = bool
+
+    ### Is this title destroyed upon succession? Default: "no"
+    ## cardinality = 0..1
+    destroy_on_succession = bool
 
     ### Can this title be named after the holder's dynasty? Won't get named after its holder's dynasty for holders who'd otherwise apply such naming. Default: "yes"
     ## cardinality = 0..1

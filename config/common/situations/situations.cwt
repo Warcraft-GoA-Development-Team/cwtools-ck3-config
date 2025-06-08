@@ -43,4 +43,15 @@ enums = {
             }
         }
     }
+    complex_enum[situation_phases] = {
+        path = "game/common/situation/situations"
+
+        name = {
+            phases = {
+                enum_name = {
+
+                }
+            }
+        }
+    }
 }

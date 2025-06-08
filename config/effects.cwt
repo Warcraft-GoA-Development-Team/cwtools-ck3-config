@@ -592,6 +592,8 @@ alias[effect:divide_war_chest] = {
     ## cardinality = 0..1
     fraction = value_field
     ## cardinality = 0..1
+    fraction = alias_keys_field[int_value]
+    ## cardinality = 0..1
     gold = bool
     ## cardinality = 0..1
     piety = bool
@@ -760,7 +762,7 @@ alias[effect:add_artifact_modifier] = <modifier_container>
 ## scope = artifact
 alias[effect:add_artifact_title_history] = {
     target = scope[landed_title]
-    date = replace_me_date
+    date = date_field
 }
 
 ### Add this much to the artifacts durability
@@ -865,7 +867,7 @@ alias[effect:unequip_artifact_from_owner] = bool
 single_alias[artifact_history_block] = {
     type = enum[artifact_history] # documentation not explicit
     ## cardinality = 0..1
-    date = replace_me_date
+    date = date_field
     ## cardinality = 0..1
     actor = scope[character]
     ## cardinality = 0..1
@@ -1321,8 +1323,12 @@ alias[effect:create_title_and_vassal_change] = {
 
 ### Wraps effects that get a custom description instead of the auto-generated one custom_description = { 	text = <effect_localization_key> 	subject = <optional subject scope> #defaults to current scope 	object = <optional object scope> 	value = <optional script value> 	... effects ... }
 alias[effect:custom_description] = {
-    text = <effect_localization>
+    text = <effect_localisation>
     alias_name[effect] = alias_match_left[effect]
+    ## cardinality = 0..1
+    subject = scope[character]
+    ## cardinality = 0..1
+    object = scope[any]
     ## cardinality = 0..1
     value = alias_keys_field[int_value]
     ## cardinality = 0..1
@@ -1812,6 +1818,7 @@ alias[effect:setup_invasion_cb] = {
     titles = value[list]
     attacker = scope[character]
     defender = scope[character]
+    ## cardinality = 0..1
     claimant = scope[character]
     ## cardinality = 0..1
     change = scope[title_and_vassal_change]
@@ -2479,7 +2486,7 @@ alias[effect:add_pressed_claim] = scope[landed_title]
 
 ### gives a pressed claim to a character
 ## scope = character
-alias[effect:add_pressed_claim] = <title> # TODO: Doesn't seem to work correctly atm, probably some bad typing with titles.
+alias[effect:add_pressed_claim] = <landed_title> # TODO: Doesn't seem to work correctly atm, probably some bad typing with titles.
 
 ### gives (or takes) prestige to a character
 ## scope = character
@@ -2500,10 +2507,6 @@ alias[effect:add_prestige_experience] = alias_keys_field[int_value]
 ### gives (or takes) prestige experience to a character
 ## scope = character
 alias[effect:add_prestige_experience] = value_field
-
-### gives (or takes) prestige experience to a character
-## scope = character
-alias[effect:add_prestige_experience] = single_alias_right[score_formula]
 
 ### gives (or takes) prestige experience to a character
 ## scope = character
@@ -3212,7 +3215,7 @@ alias[effect:get_title] = scope[landed_title]
 
 ### gives a title to a character
 ## scope = character
-alias[effect:get_title] = <title>
+alias[effect:get_title] = <landed_title>
 
 ### Give a nickname to this character
 ## scope = character
@@ -3949,7 +3952,7 @@ alias[effect:set_pregnancy_assumed_father] = scope[character]
 ## scope = character
 alias[effect:set_primary_spouse] = scope[character]
 
-### Sets the primary title for a character set_primary_title_to = <title>
+### Sets the primary title for a character set_primary_title_to = <landed_title>
 ## scope = character
 alias[effect:set_primary_title_to] = scope[landed_title] # TODO: Doesn't seem to work with `title:something`.
 
@@ -4599,6 +4602,21 @@ alias[effect:change_county_fertility] = value_field
 ### Makes the owner of the scoped artifact equip it, will replace the first held artifact if all slots of its type are filled.
 ## scope = artifact
 alias[effect:equip_artifact_to_owner_replace] = bool
+
+### pay_short_term_income - the scope character immediately pays gold corresponding to their income to the target character, pay_short_term_income = { target = X days/months/years = Y } (AI budget 'short term' first, then rest)
+## scope = character
+alias[effect:pay_short_term_income] = {
+    enum[duration] = int
+    target = scope[character]
+}
+
+### Sets the domicile's culture, if it supports it
+## scope = domicile
+alias[effect:set_domicile_culture] = scope[culture]
+
+### Sets the domicile's faith, if it supports it
+## scope = domicile
+alias[effect:set_domicile_faith] = scope[faith]
 
 
 

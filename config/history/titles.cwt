@@ -6,7 +6,7 @@ types = {
 }
 title_history = {
     ## cardinality = 1..inf
-    <title> = {
+    <landed_title> = {
         ## cardinality = 1..inf
         date_field = {
             ## cardinality = 1..inf
@@ -26,17 +26,17 @@ alias[title_history_effect:holder] = date_field
 alias[title_history_effect:holder] = 0
 
 ### Sets the de facto liege by title.
-alias[title_history_effect:liege] = <title>
+alias[title_history_effect:liege] = <landed_title>
 ### Setting it to 0 makes the title have no de facto liege therefore independent.
 alias[title_history_effect:liege] = 0
 
 ### Sets the de jure liege by title.
-alias[title_history_effect:de_jure_liege] = <title>
+alias[title_history_effect:de_jure_liege] = <landed_title>
 ### Setting it to 0 makes the title have no de jure liege.
 alias[title_history_effect:de_jure_liege] = 0
 
 ### Copies another title's history before the given date.
-alias[title_history_effect:insert_title_history] = <title>
+alias[title_history_effect:insert_title_history] = <landed_title>
 
 ### Sets the holder's government.
 alias[title_history_effect:government] = <government>
@@ -53,7 +53,7 @@ alias[title_history_effect:remove_succession_laws] = yes
 ### Sets the title's name to the given localisation.
 alias[title_history_effect:name] = localisation
 ### Sets the title's name to another given title's.
-alias[title_history_effect:name] = <title>
+alias[title_history_effect:name] = <landed_title>
 
 ### Resets the title's name to the default one.
 alias[title_history_effect:reset_name] = yes

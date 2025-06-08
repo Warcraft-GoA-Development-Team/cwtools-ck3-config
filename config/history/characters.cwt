@@ -122,10 +122,10 @@ character = {
 }
 
 ### Adds a strong claim on the given title.
-alias[character_history_effect:add_pressed_claim] = <title>
+alias[character_history_effect:add_pressed_claim] = <landed_title>
 
 ### Removes the claim on the given title.
-alias[character_history_effect:remove_claim] = <title>
+alias[character_history_effect:remove_claim] = <landed_title>
 
 ### Moves the character to the given character's court. Setting it to 0 makes them their own employer.
 alias[character_history_effect:employer] = <character>
@@ -158,7 +158,7 @@ alias[character_history_effect:give_nickname] = <nickname>
 alias[character_history_effect:remove_trait] = <trait>
 
 ### Changes the character's capital to the given one.
-alias[character_history_effect:capital] = <title>
+alias[character_history_effect:capital] = <landed_title>
 
 ### Changes the character's primary title to the given one.
 alias[character_history_effect:set_primary_title_to] = scope[title]

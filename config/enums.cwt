@@ -200,6 +200,15 @@ enums = {
         casus_belli_type
         trait
     }
+    enum[involvement] = {
+        involved
+        interloper
+    }
+    enum[yesnoall] = {
+        yes
+        no
+        all
+    }
 }
 
 # Duration alias for LHS use:

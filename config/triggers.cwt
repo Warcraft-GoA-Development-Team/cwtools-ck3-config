@@ -466,11 +466,11 @@ alias[trigger:memory_age_years] == value_field
 
 ### Date when the memory was created.
 ## scope = memory
-alias[trigger:memory_creation_date] == replace_me_date
+alias[trigger:memory_creation_date] == date_field
 
 ### Date when the memory will be forgotten. (this may change over time)
 ## scope = memory
-alias[trigger:memory_end_date] == replace_me_date
+alias[trigger:memory_end_date] == date_field
 
 
 #####################################################
@@ -841,11 +841,11 @@ alias[trigger:days_travelled] = int_value_field
 
 ### Compare the date the travel plan started.
 ## scope = travel_plan
-alias[trigger:departure_date] = replace_me_date
+alias[trigger:departure_date] = date_field
 
 ### Estimation date of arrival at the final 
 ## scope = travel_plan
-alias[trigger:final_destination_arrival_date] = replace_me_date
+alias[trigger:final_destination_arrival_date] = date_field
 
 ### Estimation of days until we arrive at the final destination?
 ## scope = travel_plan
@@ -889,7 +889,7 @@ alias[trigger:is_travel_with_domicile] = bool
 
 ### Estimation date of arrival at the next destination
 ## scope = travel_plan
-alias[trigger:next_destination_arrival_date] = replace_me_date
+alias[trigger:next_destination_arrival_date] = date_field
 
 ### Estimation of days until we arrive at the next destination
 ## scope = travel_plan
@@ -1166,7 +1166,7 @@ alias[trigger:outbreak_intensity] == enum[outbreak_intensity]
 
 ### Date when the epidemic outbreak began.
 ## scope = epidemic
-alias[trigger:outbreak_start_date] == replace_me_date
+alias[trigger:outbreak_start_date] == date_field
 
 ### Get the total number of provinces infected over the lifetime of this epidemic.
 ## scope = epidemic
@@ -1339,7 +1339,7 @@ alias[trigger:calc_true_if] = {
 alias[trigger:can_start_tutorial_lesson] = replace_me
 
 ### Compare the current computer date.
-alias[trigger:current_computer_date] == replace_me_date
+alias[trigger:current_computer_date] == date_field
 
 ### Compare the current computer day.
 alias[trigger:current_computer_date_day] == alias_keys_field[int_value]
@@ -1378,7 +1378,7 @@ alias[trigger:current_year] == alias_keys_field[int_value]
 alias[trigger:current_year] == value_field
 
 ### Compare the current ingame date.
-alias[trigger:current_date] == replace_me_date
+alias[trigger:current_date] == date_field
 
 ### Wraps triggers that get a custom description instead of the auto-generated one custom_description = { 	text = <trigger_localization_key> 	subject = <optional subject scope> #defaults to current scope 	object = <optional object scope> 	value = <optional script value> 	... triggers ... }
 alias[trigger:custom_description] = {
@@ -1416,7 +1416,7 @@ alias[trigger:exists] = scope_field
 alias[trigger:exists] = value_field
 
 ### Compare the date of the bookmarked game launched.
-alias[trigger:game_start_date] == replace_me_date
+alias[trigger:game_start_date] == date_field
 
 ### Checks the size of a variable list variable_list_size = { name = X target >= Y } Where X is the name of the variable Where Y is a script value or number
 alias[trigger:global_variable_list_size] = {
@@ -1626,8 +1626,8 @@ alias[trigger:switch] = {
 
 ### Check if the current date is within the bounds time_of_year = {     min = 11.1 # default: beginning of year     max = 2.29 # default: end of year } Dates are formatted as "<month>.<day>" or just "<month>". The check includes the min and max dates. min can be larger than max, in this case we wrap around to the next year (i.e., February is between October and March).
 alias[trigger:time_of_year] = {
-    min = replace_me_date
-    max = replace_me_date
+    min = date_field
+    max = date_field
 }
 
 
@@ -1918,7 +1918,7 @@ alias[trigger:number_of_characters_in_pool] == value_field
 
 ### Date when the target epidemic infected the scoped province.
 ## scope = province
-alias[trigger:province_infection_date] == replace_me_date
+alias[trigger:province_infection_date] == date_field
 
 ### Infection rate of target epidemic in the scoped province.province_infection_rate >= 20
 ## scope = province
@@ -2145,7 +2145,7 @@ alias[trigger:is_legend_completed] = bool
 
 ### Date when the legend was completed.
 ## scope = legend
-alias[trigger:legend_completion_date] == replace_me_date
+alias[trigger:legend_completion_date] == date_field
 
 ### Get the quality of this legend. legend_quality = famed
 ## scope = legend
@@ -2153,7 +2153,7 @@ alias[trigger:legend_quality] = enum[legend_quality]
 
 ### Date when the legend was created.
 ## scope = legend
-alias[trigger:legend_start_date] == replace_me_date
+alias[trigger:legend_start_date] == date_field
 
 #####################################################
 # SCHEME SCOPE
@@ -4690,7 +4690,7 @@ alias[trigger:is_attacker] = scope[character]
 
 ### is the scope character in the target war as an attacker?
 ## scope = character
-alias[trigger:is_attacker_in_war] = replace_me
+alias[trigger:is_attacker_in_war] = scope[war]
 
 ### does the sexuality of the scope character make them attracted to the target character?
 ## scope = character
@@ -6377,7 +6377,7 @@ alias[trigger:vassal_contract_has_flag] = value[vassal_contract_flag]
 
 ### Date when this vassal's liege's dynasty started ruling over this vassal
 ## scope = character
-alias[trigger:vassal_contract_liege_dynasty_reign_start_date] == replace_me_date
+alias[trigger:vassal_contract_liege_dynasty_reign_start_date] == date_field
 
 ### Can the scoepd character's contract be modified at all, that is: they have one, they use obligation levels, and are count or above
 ## scope = character
@@ -6607,6 +6607,14 @@ alias[trigger:uses_county_fertility] = bool
 ### Is the scope character obedient to the target character?
 ## scope = character
 alias[trigger:is_obedient_to] = scope[character]
+
+### Checks if sub-region current phase equals phase_type
+## scope = situation_sub_region
+alias[trigger:sub_region_current_phase] = enum[situation_phases]
+
+### Checks if sub-region current phase equals phase_type
+## scope = situation_sub_region
+alias[trigger:situation_sub_region_has_county] = scope[county]
 
 
 

@@ -70,7 +70,7 @@ bookmark_character = {
         type = enum[genders] # TODO: dig into this; something tells me this can be scripted to be more than just male/female
     }
     birth = date_field # TODO: see if it can be made to validate to be before the given start_date for the bookmark? Probably not worth the effort
-    title = <title>
+    title = <landed_title>
     ## cardinality = 0..1
     title_text_override = localisation
     government = <government>
@@ -108,7 +108,7 @@ bookmark_character = {
         type = enum[genders] # TODO: dig into this; something tells me this can be scripted to be more than just male/female
         birth = date_field # TODO: see if it can be made to validate to be before the given start_date for the bookmark? Probably not worth the effort
         ## cardinality = 0..1
-        title = <title>
+        title = <landed_title>
         ## cardinality = 0..1
         government = <government>
         ## cardinality = 0..1

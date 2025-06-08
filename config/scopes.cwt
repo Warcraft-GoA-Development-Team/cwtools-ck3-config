@@ -15,7 +15,7 @@ scopes = {
         aliases = { character employee }
     }
     "Landed title" = {
-		aliases = { landed_title "landed title" }
+		aliases = { landed_title "landed title" barony county duchy kingdom empire }
 		data_type_name = "Title"
     }
     Activity = {
@@ -43,7 +43,7 @@ scopes = {
 		aliases = { faith }
 	}
 	"Great Holy War" = {
-		aliases = { great_holy_war "great holy war" }
+		aliases = { great_holy_war "great holy war" ghw }
 	}
 	Religion = {
 		aliases = { religion }

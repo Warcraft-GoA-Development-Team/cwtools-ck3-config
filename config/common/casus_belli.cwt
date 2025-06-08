@@ -220,6 +220,9 @@ casus_belli_type = {
 	cb_name = localisation
 
 	## cardinality = 0..1
+	is_holy_war = bool
+
+	## cardinality = 0..1
 	cb_name_no_target = localisation
 
 	## cardinality = 0..1

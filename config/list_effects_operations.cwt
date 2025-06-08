@@ -936,14 +936,6 @@ alias[score_operation:every_character_war] = single_alias_right[every_effect_sco
 ## push_scope = character
 alias[score_operation:every_child] = single_alias_right[every_effect_score_operation]
 
-enums = {
-    enum[yesnoall] = {
-        yes
-        no
-        all
-    }
-}
-
 ### Iterate through the titles of all claims held by a character; parameters: explicit = yes/no/all pressed = yes/no/all every_claim = { limit = { <triggers> } <effects> }
 ## scope = character
 ## push_scope = landed_title
