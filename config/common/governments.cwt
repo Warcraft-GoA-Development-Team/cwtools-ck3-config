@@ -77,14 +77,9 @@ government = {
 	prestige_opinion_override = {
         ## cardinality = 1..inf
         int
-    } 
-	
-	### Vassal obligations - how much does the vassal give to their liege. The vassal's government type determines which contract type is used.
-	### Note that the values can be changed with the vassal_tax_contribution_add and vassal_levy_contribution_add modifiers.
-    ## cardinality = 0..1
-	vassal_contract = {
-		<vassal_contract>
-	}
+    }
+
+    vassal_contract_group = <subject_contract_group>
 
     ### the house unity is configured in common/house_unities and shows if a government can have house unity
     ## cardinality = 0..1

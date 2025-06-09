@@ -2758,11 +2758,11 @@ alias[effect:allow_in_scheme] = scope[scheme]
 
 ### Apply the new level for the most desired AI obligation level the liege in the contract wants
 ## scope = character
-alias[effect:apply_ai_vassal_obligation_liege_most_desired] = <vassal_obligation_level>
+alias[effect:apply_ai_vassal_obligation_liege_most_desired] = <subject_obligation_level>
 
 ### Apply the new level for the most desired AI obligation level the vassal in the contract wants
 ## scope = character
-alias[effect:apply_ai_vassal_obligation_vassal_most_desired] = <vassal_obligation_level>
+alias[effect:apply_ai_vassal_obligation_vassal_most_desired] = <subject_obligation_level>
 
 ### Appoints the target character in target court position within scoped character's court recipient = character scope - target character to receive the title court_position = court position type - court position type to assign the receiver
 ## scope = character
@@ -4032,7 +4032,7 @@ alias[effect:set_trait_rank] = {
 
 ### Blocks the vassal contract from being modified with regards to being checked by 'vassal_contract_is_blocked_from_modification'
 ## scope = character
-alias[effect:set_vassal_contract_modification_blocked] = <vassal_obligation_level>
+alias[effect:set_vassal_contract_modification_blocked] = <subject_obligation_level>
 
 ### Spawns an army for this character Usage: spawn_army = { levies = int/script value # optional, number of men men_at_arms = { # optional, multiple can be specified. Need either levies or MAA type = key men/stacks = int/script value } location = province origin = province # optional, location used if not set. This is used for where to base bonuses and the like on war = war # optional. If set, the stack will disband after the war ends inheritable = yes/no # Default: yes uses_supply = yes/no # Default: yes army = army # optional. If set, the stack will merge into this army save_scope_as/save_temporary_scope_as = new_army # optional way to get a reference to the new army. Note this might not be set if the army wasn't spawned (e.g. if the character is not at war) name = description # gives the troops a specific name that shows up in interfaces }
 ## scope = character

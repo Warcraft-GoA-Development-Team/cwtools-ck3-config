@@ -8,11 +8,46 @@ holding = {
     ### The primary building for this holding (will be built when creating a holding of this type).
     primary_building = <building.regular>
     ### First levels of all buildings buildable in the holding, doesn't include the primary building.
-    buildings = single_alias_right[regular_building_list]
+    ## cardinality = 0..1
+    buildings = single_alias_right[building_list]
     ## cardinality = 0..1
     ### Whether a barony with this holding be inherited.
     can_be_inherited = bool
-    ## cardinality = 0..inf
-    ### Optional flags assigned to the holding type.
-	flag = value_set[holding_flag]
+    ### Does a barony with this holding type count toward a ruler's domain
+    ### limit if the holding is disabled?
+    ### Default: yes
+    ## cardinality = 0..1
+    counts_toward_domain_limit_if_disabled = bool
+    ### Which government types are required to inherit a county title with
+    ### this holding built in the capital province when succession occurs?
+    ### If generating a character for county title of this province during succession,
+    ### the first government type in the list will be used.
+    ### Keys are mapped to the government types database: common/governments
+    ### Default: none
+    ## cardinality = 0..1
+    required_heir_government_types = {
+        ## cardinality = 1..inf
+        <government>
+    }
+
+    ### An arbitrary list of parameter keys which can be checked with
+    ### the has_holding_parameter trigger
+    ### Default: none
+    ## cardinality = 0..1
+    parameters = {
+        ## cardinality = 1..inf
+        scalar
+    }
+}
+
+enums = {
+    complex_enum[holding_parameter] = {
+        path = "game/common/holdings"
+
+        name = {
+            parameters = {
+                enum_name
+            }
+        }
+    }
 }

@@ -51,23 +51,9 @@ opinion_modifier = {
     min = int 						
 	## cardinality = 0..1
     ### Can't be higher than this value
-    max = int 						
+    max = int
 
-	## cardinality = 0..1
-    ### Justification for imprisonment
-	imprisonment_reason = bool
-	## cardinality = 0..1
-    ### Justification for banishment
-    banish_reason = bool
-	## cardinality = 0..1
-    ### Justification for execution
-    execute_reason = bool
-	## cardinality = 0..1
-    ### Justification for title revocation
-    revoke_title_reason = bool
-	## cardinality = 0..1
-    ### Justification for divorce
-    divorce_reason = bool
+    alias_name[opinion_reason] = alias_match_left[opinion_reason]
 
 	## cardinality = 0..1
 	disable_non_aggression_pacts = bool
@@ -78,3 +64,14 @@ opinion_modifier = {
 	## cardinality = 0..1
     non_interference = bool
 }
+
+### Justification for imprisonment
+alias[opinion_reason:imprisonment_reason] = bool
+### Justification for banishment
+alias[opinion_reason:banish_reason] = bool
+### Justification for execution
+alias[opinion_reason:execute_reason] = bool
+### Justification for title revocation
+alias[opinion_reason:revoke_title_reason] = bool
+### Justification for divorce
+alias[opinion_reason:divorce_reason] = bool

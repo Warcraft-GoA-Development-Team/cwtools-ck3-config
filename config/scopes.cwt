@@ -3,7 +3,7 @@ scopes = {
         aliases = { value base_value }
     }
     Bool = {
-        aliases = { bool }
+        aliases = { bool boolean }
     }
     Flag = {
         aliases = { flag }
@@ -52,7 +52,7 @@ scopes = {
 		aliases = { war }
 	}
 	"Story_cycle" = {
-		aliases = { story_cycle "story cycle" }
+		aliases = { story_cycle "story cycle" story }
 	}
 	"Casus Belli" = {
 		aliases = { casus_belli "casus belli" }
@@ -94,6 +94,9 @@ scopes = {
 	}
 	Accolade = {
 		aliases = { accolade }
+	}
+	"Accolade Type" = {
+		aliases = { accolade_type }
 	}
 	"Travel Plan" = {
 		aliases = { "travel plan" travel_plan }
@@ -161,5 +164,38 @@ scopes = {
 	}
 	"Situation Participant Group" = {
 		aliases = { situation_participant_group }
+	}
+	"Court Position" = {
+		aliases = { court_position }
+	}
+	"Court Position Type" = {
+		aliases = { court_position_type }
+	}
+	"Struggle" = {
+		aliases = { struggle }
+	}
+	"Decision" = {
+		aliases = { decision }
+	}
+	"Doctrine" = {
+		aliases = { doctrine }
+	}
+	"Activity Type" = {
+		aliases = { activity_type }
+	}
+	"Government Type" = {
+		aliases = { government_type }
+	}
+	"Holding Type" = {
+		aliases = { holding_type }
+	}
+	"Tax Slot" = {
+		aliases = { tax_slot }
+	}
+	"Vassal Contract" = {
+		aliases = { vassal_contract }
+	}
+	"Vassal Contract Obligation Level" = {
+		aliases = { vassal_contract_obligation_level }
 	}
 }

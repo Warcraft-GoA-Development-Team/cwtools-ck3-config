@@ -8,7 +8,7 @@ types = { # TODO: Accessory genes
         skip_root_key = morph_genes
     }
     ## type_key_filter <> { ugliness_feature_categories }
-    type[morph_sub_gene] = {
+    type[morph_gene_template] = {
         path = "game/common/genes"
         skip_root_key = { morph_genes any }
         base_type = morph_gene
@@ -18,7 +18,7 @@ types = { # TODO: Accessory genes
         skip_root_key = { special_genes morph_genes }
     }
     ## type_key_filter <> { ugliness_feature_categories }
-    type[special_morph_sub_gene] = {
+    type[special_morph_gene_template] = {
         path = "game/common/genes"
         skip_root_key = { special_genes morph_genes any }
         base_type = morph_gene
@@ -56,16 +56,16 @@ morph_gene = {
     inheritable = bool
 }
 
-morph_sub_gene = {
+morph_gene_template = {
     index = int
     ## cardinality = 0..1
     generic = bool
     ## cardinality = 0..1
     visible = bool
     ## cardinality = 0..1
-    positive_mirror = <morph_sub_gene>
+    positive_mirror = <morph_gene_template>
     ## cardinality = 0..1
-    negative_mirror = <morph_sub_gene>
+    negative_mirror = <morph_gene_template>
     <body_type> = {
         ## cardinality = 0..inf
         setting = {
@@ -173,16 +173,16 @@ special_morph_gene = {
     inheritable = bool
 }
 
-special_morph_sub_gene = {
+special_morph_gene_template = {
     index = int
     ## cardinality = 0..1
     generic = bool
     ## cardinality = 0..1
     visible = bool
     ## cardinality = 0..1
-    positive_mirror = <morph_sub_gene>
+    positive_mirror = <morph_gene_template>
     ## cardinality = 0..1
-    negative_mirror = <morph_sub_gene>
+    negative_mirror = <morph_gene_template>
     <body_type> = {
         ## cardinality = 0..inf
         setting = {

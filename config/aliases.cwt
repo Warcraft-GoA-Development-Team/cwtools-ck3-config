@@ -140,6 +140,11 @@ single_alias[regular_building_list] = {
     <building.regular>
 }
 
+single_alias[building_list] = {
+    ## cardinality = 1..inf
+    <building>
+}
+
 single_alias[title_list] = {
     ## cardinality = 1..inf
     <landed_title>

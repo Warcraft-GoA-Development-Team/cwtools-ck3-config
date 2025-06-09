@@ -1,0 +1,12 @@
+types = {
+    ## type_key_filter = texticon
+    type[texticon] = {
+        path = "gui/"
+        path_extension = .gui
+        name_field = icon
+    }
+}
+
+texticon = {
+    icon = scalar
+}

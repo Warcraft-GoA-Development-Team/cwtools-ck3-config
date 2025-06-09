@@ -304,7 +304,7 @@ enums = {
 		start_from_root = yes
 		name = {
 			entity = {
-				attribute= {
+				attribute = {
 					name = enum_name
 				}
 			}

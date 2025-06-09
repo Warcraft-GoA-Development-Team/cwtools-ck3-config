@@ -537,13 +537,22 @@ alias[trigger:any_former_spouse] = {
     alias_name[trigger] = alias_match_left[trigger]
 }
 
-# Scopes from a character to a neighboring barony (looking trough the de Jure lieges) any_character_to_title_neighboring_barony = { <count=num/all> / <percent=fixed_point> <triggers> }
-#alias[trigger:any_character_to_title_neighboring_barony] = {
-#    ## cardinality = 0..1
-#    percent = float[0.0..1.0]
-#    ## cardinality = 0..1
-#    count = int_value_field
-#    ## cardinality = 0..1
-#    count = all
-#    alias_name[trigger] = alias_match_left[trigger]
-#}
+### Iterate through all traits in a given category
+## scope = any
+## push_scope = trait
+alias[trigger:any_trait_in_category] = {
+    category = enum[trait_category]
+    ## cardinality = 0..1
+    continue = {
+        alias_name[trigger] = alias_match_left[trigger]
+    }
+    ## cardinality = 0..1
+    percent = float[0.0..1.0]
+    ## cardinality = 0..1
+    count = alias_keys_field[int_value]
+    ## cardinality = 0..1
+    count = int_value_field
+    ## cardinality = 0..1
+    count = all
+    alias_name[trigger] = alias_match_left[trigger]
+}

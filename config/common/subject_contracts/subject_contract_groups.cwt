@@ -1,0 +1,67 @@
+types = {
+    type[subject_contract_group] = {
+        path = "common/subject_contracts/groups/"
+    }
+}
+
+subject_contract_group = {
+    ### The subject contracts within this group
+    contracts = {
+        <subject_contract>
+    }
+
+    ### a string property on the contract group that can be checked with SubjectContract.HasModifyContractLayout in gui script to choose the layout to use for the Modify Contract interaction window (default value is 'default')
+    ## cardinality = 0..1
+    modify_contract_layout = replace_me
+
+    ### Whether or not this subject contract is specifically for tributaries or not.
+    ## cardinality = 0..1
+    is_tributary = bool
+
+    ### Whether or not the subject contract is valid.
+    ### Scopes available:
+    ### ROOT - The subject in the contract
+    ### scope:suzerain the suzerain in the contract
+    ## cardinality = 0..1
+    ## replace_scope = { ROOT = character suzerain = character }
+    is_valid_tributary_contract = single_alias_right[trigger_clause]
+
+    ### Whether or not subject can break free from a contract themselves.
+    ### Scopes available:
+    ### ROOT - The subject in the contract
+    ### scope:suzerain the suzerain in the contract
+    ## cardinality = 0..1
+    ## replace_scope = { ROOT = character suzerain = character }
+    tributary_can_break_free = single_alias_right[trigger_clause]
+
+    ### The name of the line types that will be shown when drawing the tributary relation to the suzerain on the map.
+    ### Skip these parameters if you don't want a line at all.
+    ### suzerain_line_type is used when showing a selected character's suzerain.
+    ### Lines are defined in gfx/lines/lines.lines
+    ## cardinality = 0..1
+    suzerain_line_type = <line>
+
+    ### The name of the line types that will be shown when drawing the tributary relation to the suzerain on the map.
+    ### Skip these parameters if you don't want a line at all.
+    ### tributary_line_type is used when showing a selected character's tributaries.
+    ### Lines are defined in gfx/lines/lines.lines
+    ## cardinality = 0..1
+    tributary_line_type = <line>
+
+    ### Whether or not the tributary's realm should show with the suzerain's realm name on the map (Default: no)
+    ## cardinality = 0..1
+    should_show_as_suzerain_realm_name = bool
+
+    ### Whether or not the tributary's realm should show with the suzerain's realm color on the map. (Default: no)
+    ### If yes, the actual color will be an interpolation between the suzerain and tributary's realm colors, with the ratio defined in TRIBUTARY_REALM_COLOR_FACTOR
+    ## cardinality = 0..1
+    should_show_as_suzerain_realm_color = bool
+
+    ### Whether the tributary's heirs should become tributaries themselves upon succession (if they can be, e.g. they are independent). (Default: yes)
+    ## cardinality = 0..1
+    tributary_heir_succession = bool
+
+    ### Whether the suzerain's primary heir should take over as suzerain upon succession (if they can be, e.g. they are independent). (Default: yes)
+    ## cardinality = 0..1
+    suzerain_heir_succession = bool
+}

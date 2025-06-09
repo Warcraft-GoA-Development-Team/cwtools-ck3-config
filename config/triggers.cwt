@@ -10,139 +10,15 @@
 
 ### How many perks in the lifestyle does this dynasty have?
 ## scope = dynasty
-alias[trigger:blood_legacy_track_perks] == alias_keys_field[int_value]
+alias[trigger:<legacy>_perks] == alias_keys_field[int_value]
 
 ### How many perks in the lifestyle does this dynasty have?
 ## scope = dynasty
-alias[trigger:blood_legacy_track_perks] == value_field
+alias[trigger:<legacy>_perks] == single_alias_right[score_formula]
 
 ### How many perks in the lifestyle does this dynasty have?
 ## scope = dynasty
-alias[trigger:ce1_heroic_track_perks] == alias_keys_field[int_value]
-
-### How many perks in the lifestyle does this dynasty have?
-## scope = dynasty
-alias[trigger:ce1_heroic_track_perks] == value_field
-
-### How many perks in the lifestyle does this dynasty have?
-## scope = dynasty
-alias[trigger:ce1_legitimacy_legacy_track_perks] == alias_keys_field[int_value]
-
-### How many perks in the lifestyle does this dynasty have?
-## scope = dynasty
-alias[trigger:ce1_legitimacy_legacy_track_perks] == value_field # TODO: Can these triggers be added dynamically?
-
-### Can the scoped dynasty unlock a 'relevant' perk? Relevant meaning one that isn't the first in its track unless the dynasty has no partially filled tracks
-## scope = dynasty
-alias[trigger:dynasty_num_unlocked_perks] == alias_keys_field[int_value]
-
-### Can the scoped dynasty unlock a 'relevant' perk? Relevant meaning one that isn't the first in its track unless the dynasty has no partially filled tracks
-## scope = dynasty
-alias[trigger:dynasty_num_unlocked_perks] == value_field
-
-### does the dynasty have the required prestige?
-## scope = dynasty
-alias[trigger:dynasty_prestige] == alias_keys_field[int_value]
-
-### does the dynasty have the required prestige?
-## scope = dynasty
-alias[trigger:dynasty_prestige] == value_field
-
-### does the dynasty have the required prestige level?
-## scope = dynasty
-alias[trigger:dynasty_prestige_level] == alias_keys_field[int_value]
-
-### does the dynasty have the required prestige level?
-## scope = dynasty
-alias[trigger:dynasty_prestige_level] == value_field
-
-### How many perks in the lifestyle does this dynasty have?
-## scope = dynasty
-alias[trigger:ep1_culture_legacy_track_perks] == alias_keys_field[int_value]
-
-### How many perks in the lifestyle does this dynasty have?
-## scope = dynasty
-alias[trigger:ep1_culture_legacy_track_perks] == value_field
-
-### How many perks in the lifestyle does this dynasty have?
-## scope = dynasty
-alias[trigger:ep2_activities_legacy_track_perks] == alias_keys_field[int_value]
-
-### How many perks in the lifestyle does this dynasty have?
-## scope = dynasty
-alias[trigger:ep2_activities_legacy_track_perks] == value_field
-
-### How many perks in the lifestyle does this dynasty have?
-## scope = dynasty
-alias[trigger:ep3_administrative_legacy_track_perks] == alias_keys_field[int_value]
-
-### How many perks in the lifestyle does this dynasty have?
-## scope = dynasty
-alias[trigger:ep3_administrative_legacy_track_perks] == value_field
-
-### How many perks in the lifestyle does this dynasty have?
-## scope = dynasty
-alias[trigger:erudition_legacy_track_perks] == alias_keys_field[int_value]
-
-### How many perks in the lifestyle does this dynasty have?
-## scope = dynasty
-alias[trigger:erudition_legacy_track_perks] == value_field
-
-### How many perks in the lifestyle does this dynasty have?
-## scope = dynasty
-alias[trigger:fp1_adventure_legacy_track_perks] == alias_keys_field[int_value]
-
-### How many perks in the lifestyle does this dynasty have?
-## scope = dynasty
-alias[trigger:fp1_adventure_legacy_track_perks] == value_field
-
-### How many perks in the lifestyle does this dynasty have?
-## scope = dynasty
-alias[trigger:fp1_pillage_legacy_track_perks] == alias_keys_field[int_value]
-
-### How many perks in the lifestyle does this dynasty have?
-## scope = dynasty
-alias[trigger:fp1_pillage_legacy_track_perks] == value_field
-
-### How many perks in the lifestyle does this dynasty have?
-## scope = dynasty
-alias[trigger:fp2_coterie_legacy_track_perks] == alias_keys_field[int_value]
-
-### How many perks in the lifestyle does this dynasty have?
-## scope = dynasty
-alias[trigger:fp2_coterie_legacy_track_perks] == value_field
-
-### How many perks in the lifestyle does this dynasty have?
-## scope = dynasty
-alias[trigger:fp2_urbanism_legacy_track_perks] == alias_keys_field[int_value]
-
-### How many perks in the lifestyle does this dynasty have?
-## scope = dynasty
-alias[trigger:fp2_urbanism_legacy_track_perks] == value_field
-
-### How many perks in the lifestyle does this dynasty have?
-## scope = dynasty
-alias[trigger:fp3_khvarenah_legacy_track_perks] == alias_keys_field[int_value]
-
-### How many perks in the lifestyle does this dynasty have?
-## scope = dynasty
-alias[trigger:fp3_khvarenah_legacy_track_perks] == value_field
-
-### How many perks in the lifestyle does this dynasty have?
-## scope = dynasty
-alias[trigger:glory_legacy_track_perks] == alias_keys_field[int_value]
-
-### How many perks in the lifestyle does this dynasty have?
-## scope = dynasty
-alias[trigger:glory_legacy_track_perks] == value_field
-
-### How many perks in the lifestyle does this dynasty have?
-## scope = dynasty
-alias[trigger:guile_legacy_track_perks] == alias_keys_field[int_value]
-
-### How many perks in the lifestyle does this dynasty have?
-## scope = dynasty
-alias[trigger:guile_legacy_track_perks] == value_field
+alias[trigger:<legacy>_perks] == value_field
 
 ### Does the scoped dynasty have a given modifier has_dynasty_modifier = name
 ## scope = dynasty
@@ -156,30 +32,6 @@ alias[trigger:has_dynasty_modifier_duration_remaining] = <modifier_container>
 ### Does the dynasty have this dynasty perk? has_dynasty_perk = key
 ## scope = dynasty
 alias[trigger:has_dynasty_perk] = <dynasty_perk>
-
-### How many perks in the lifestyle does this dynasty have?
-## scope = dynasty
-alias[trigger:kin_legacy_track_perks] == alias_keys_field[int_value]
-
-### How many perks in the lifestyle does this dynasty have?
-## scope = dynasty
-alias[trigger:kin_legacy_track_perks] == value_field
-
-### How many perks in the lifestyle does this dynasty have?
-## scope = dynasty
-alias[trigger:law_legacy_track_perks] == alias_keys_field[int_value]
-
-### How many perks in the lifestyle does this dynasty have?
-## scope = dynasty
-alias[trigger:law_legacy_track_perks] == value_field
-
-### How many perks in the lifestyle does this dynasty have?
-## scope = dynasty
-alias[trigger:warfare_legacy_track_perks] == alias_keys_field[int_value]
-
-### How many perks in the lifestyle does this dynasty have?
-## scope = dynasty
-alias[trigger:warfare_legacy_track_perks] == value_field
 
 ########################################################
 # ACTIVITY SCOPE
@@ -241,30 +93,6 @@ alias[trigger:has_phase_past] = {
 ## scope = activity
 alias[trigger:is_required_special_guest] = scope[character]
 
-### The number of future phases for the scoped activity.
-## scope = activity
-alias[trigger:num_future_phases] == alias_keys_field[int_value]
-
-### The number of future phases for the scoped activity.
-## scope = activity
-alias[trigger:num_future_phases] == value_field
-
-### The number of past phases for the scoped activity.
-## scope = activity
-alias[trigger:num_past_phases] == alias_keys_field[int_value]
-
-### The number of past phases for the scoped activity.
-## scope = activity
-alias[trigger:num_past_phases] == value_field
-
-### The number total number of planned phases for the scoped activity.
-## scope = activity
-alias[trigger:num_phases] == alias_keys_field[int_value]
-
-### The number total number of planned phases for the scoped activity.
-## scope = activity
-alias[trigger:num_phases] == value_field
-
 #######################################################
 # CULTURE SCOPE
 #######################################################
@@ -277,22 +105,6 @@ alias[trigger:cultural_acceptance] = {
     value == value_field
 }
 
-### Checks the age of the scope culture in years. If the culture has no creation date set, this will simply return the current year
-## scope = culture
-alias[trigger:culture_age] == alias_keys_field[int_value]
-
-### Checks the age of the scope culture in years. If the culture has no creation date set, this will simply return the current year
-## scope = culture
-alias[trigger:culture_age] == value_field
-
-### How many counties are there of this culture?
-## scope = culture
-alias[trigger:culture_number_of_counties] == alias_keys_field[int_value]
-
-### How many counties are there of this culture?
-## scope = culture
-alias[trigger:culture_number_of_counties] == value_field
-
 ### Checks if any county with this culture is in the given geographical region
 ## scope = culture
 alias[trigger:culture_overlaps_geographical_region] == scope[geographical_region]
@@ -300,14 +112,6 @@ alias[trigger:culture_overlaps_geographical_region] == scope[geographical_region
 ### Checks if any county with this culture is in the given geographical region
 ## scope = culture
 alias[trigger:culture_overlaps_geographical_region] == <geographical_region>
-
-### How many free tradition slot are in the scoped culture
-## scope = culture
-alias[trigger:free_tradition_slot] == alias_keys_field[int_value]
-
-### How many free tradition slot are in the scoped culture
-## scope = culture
-alias[trigger:free_tradition_slot] == value_field
 
 ### Has the culture discovered all innovations matching the filter?
 ## scope = culture
@@ -369,17 +173,11 @@ alias[trigger:has_unit_gfx] = enum[unit_gfx]
 
 ### Does the culture have the required number of discovered innovations?
 ## scope = culture
-alias[trigger:num_discovered_innovations] == alias_keys_field[int_value]
-
-### Does the culture have the required number of discovered innovations?
-## scope = culture
-alias[trigger:num_discovered_innovations] == value_field
-
-### Does the culture have the required number of discovered innovations?
-## scope = culture
 alias[trigger:num_discovered_innovations_in_era] == {
     era = <era>
-    value = int_value_field
+    value == int_value_field
+    value == alias_keys_field[int_value]
+    value == single_alias_right[score_formula]
 }
 
 ##################################################
@@ -397,14 +195,6 @@ alias[trigger:has_memory_type] = <memory>
 ### Is the scoped memory a memory of a specific travel plan? 
 ## scope = memory
 alias[trigger:is_memory_of_travel] = <travel_plan>
-
-### How many years since the memory was created (rounded down).
-## scope = memory
-alias[trigger:memory_age_years] == alias_keys_field[int_value]
-
-### How many years since the memory was created (rounded down).
-## scope = memory
-alias[trigger:memory_age_years] == value_field
 
 ### Date when the memory was created.
 ## scope = memory
@@ -426,42 +216,6 @@ alias[trigger:is_maa_type] = <maa_type>
 ###  Check base MaA type of a regiment
 ## scope = regiment
 alias[trigger:is_unit_type] = <maa_type>
-
-###  Get current number of soldiers in MaA regiment
-## scope = regiment
-alias[trigger:maa_current_troops_count] == alias_keys_field[int_value]
-
-###  Get current number of soldiers in MaA regiment
-## scope = regiment
-alias[trigger:maa_current_troops_count] == value_field
-
-###  Get max number of soldiers in MaA regiment
-## scope = regiment
-alias[trigger:maa_max_troops_count] == alias_keys_field[int_value]
-
-###  Get max number of soldiers in MaA regiment
-## scope = regiment
-alias[trigger:maa_max_troops_count] == value_field
-
-###  Get regiment size - number of subregiments in it
-## scope = regiment
-alias[trigger:maa_size] == alias_keys_field[int_value]
-
-###  Get regiment size - number of subregiments in it
-## scope = regiment
-alias[trigger:maa_size] == value_field
-
-#####################################################
-# OBLIGATION SCOPE
-#####################################################
-
-### Date when the memory will be forgotten. (this may change over time)
-## scope = vassal_obligation_level
-alias[trigger:obligation_level_score] == alias_keys_field[int_value]
-
-### Date when the memory will be forgotten. (this may change over time)
-## scope = vassal_obligation_level
-alias[trigger:obligation_level_score] == value_field
 
 #####################################################
 # TRAIT SCOPE
@@ -514,22 +268,6 @@ alias[trigger:has_house_unity_stage] = {
     value = float
 }
 
-### Compare house power: scope:house = { house_power >= value }
-## scope = dynasty_house
-alias[trigger:house_power] == alias_keys_field[int_value]
-
-### Compare house power: scope:house = { house_power >= value }
-## scope = dynasty_house
-alias[trigger:house_power] == value_field
-
-### Is the given house unity the given stage?. 
-## scope = dynasty_house
-alias[trigger:house_unity_value] == alias_keys_field[int_value]
-
-### Is the given house unity the given stage?.
-## scope = dynasty_house
-alias[trigger:house_unity_value] == value_field
-
 #####################################################
 # TASK CONTRACT SCOPE
 #####################################################
@@ -541,22 +279,6 @@ alias[trigger:has_task_contract_group] = value[task_contract_group]
 ### has task contract with type
 ## scope = task_contract
 alias[trigger:has_task_contract_type] = <task_contract>
-
-### Tier value for task contract
-## scope = task_contract
-alias[trigger:task_contract_tier] == alias_keys_field[int_value]
-
-### Tier value for task contract
-## scope = task_contract
-alias[trigger:task_contract_tier] == value_field
-
-### Days since the task contract was accepted.
-## scope = task_contract
-alias[trigger:time_since_contract_taken] == alias_keys_field[int_value]
-
-### Days since the task contract was accepted.
-## scope = task_contract
-alias[trigger:time_since_contract_taken] == value_field
 
 #####################################################
 # COUNCIL TASK SCOPE
@@ -585,81 +307,9 @@ alias[trigger:is_in_family] = <religion_family>
 # ARMY SCOPE
 #####################################################
 
-### what size is this army's max size?
-## scope = army
-alias[trigger:army_max_size] == alias_keys_field[int_value]
-
-### what size is this army's max size?
-## scope = army
-alias[trigger:army_max_size] == value_field
-
-### what size is this army?
-## scope = army
-alias[trigger:army_size] == alias_keys_field[int_value]
-
-### what size is this army?
-## scope = army
-alias[trigger:army_size] == value_field
-
-### How much raid loot is the army carrying?
-## scope = army
-alias[trigger:raid_loot] == alias_keys_field[int_value]
-
-### How much raid loot is the army carrying?
-## scope = army
-alias[trigger:raid_loot] == value_field
-
-### What is the army's total damage stat in its current location?
-## scope = army
-alias[trigger:total_army_damage] == alias_keys_field[int_value]
-
-### What is the army's total damage stat in its current location?
-## scope = army
-alias[trigger:total_army_damage] == value_field
-
-### What is the army's total pursuit stat in its current location?
-## scope = army
-alias[trigger:total_army_pursuit] == alias_keys_field[int_value]
-
-### What is the army's total pursuit stat in its current location?
-## scope = army
-alias[trigger:total_army_pursuit] == value_field
-
-### What is the army's total screen stat in its current location?
-## scope = army
-alias[trigger:total_army_screen] == alias_keys_field[int_value]
-
-### What is the army's total screen stat in its current location?
-## scope = army
-alias[trigger:total_army_screen] == value_field
-
-### What is the army's total siege value stat in its current location?
-## scope = army
-alias[trigger:total_army_siege_value] == alias_keys_field[int_value]
-
-### What is the army's total siege value stat in its current location?
-## scope = army
-alias[trigger:total_army_siege_value] == value_field
-
-### What is the army's total toughness stat in its current location?
-## scope = army
-alias[trigger:total_army_toughness] == alias_keys_field[int_value]
-
-### What is the army's total toughness stat in its current location?
-## scope = army
-alias[trigger:total_army_toughness] == value_field
-
 #####################################################
 # TRAVEL PLAN SCOPE
 #####################################################
-
-### Danger value of the current province the travel plan is in (-100.0 to +100.0).
-## scope = travel_plan
-alias[trigger:current_danger_value] = value_field
-
-### Total number of days since this travel plan started.
-## scope = travel_plan
-alias[trigger:days_travelled] = int_value_field
 
 ### Compare the date the travel plan started.
 ## scope = travel_plan
@@ -668,14 +318,6 @@ alias[trigger:departure_date] = date_field
 ### Estimation date of arrival at the final 
 ## scope = travel_plan
 alias[trigger:final_destination_arrival_date] = date_field
-
-### Estimation of days until we arrive at the final destination?
-## scope = travel_plan
-alias[trigger:final_destination_arrival_days] = int_value_field
-
-### Time progress (0.0 - 1.0) towards the final destination of the travel plan, compared to departure date from the very start of the Travel Plan.
-## scope = travel_plan
-alias[trigger:final_destination_progress] = value_field
 
 ### Does the travel plan have this travel option active?
 ## scope = travel_plan
@@ -693,30 +335,6 @@ alias[trigger:has_travel_plan_modifier_duration_remaining] = <modifier_container
 ## scope = travel_plan
 alias[trigger:next_destination_arrival_date] = date_field
 
-### Estimation of days until we arrive at the next destination
-## scope = travel_plan
-alias[trigger:next_destination_arrival_days] = int_value_field
-
-### Time progress (0.0 - 1.0) towards the next destination of the travel plan, compared to departure date of the previous destination.
-## scope = travel_plan
-alias[trigger:next_destination_progress] = value_field
-
-### Size of the travel plan entourage.
-## scope = travel_plan
-alias[trigger:num_entourage_characters] = int_value_field
-
-### Number of travel options selected.
-## scope = travel_plan
-alias[trigger:num_options] = int_value_field
-
-### Gets the current travel safety for travel
-## scope = travel_plan
-alias[trigger:travel_safety] = int_value_field
-
-### Gets the current travel speed for travel (percentage points above 100%)
-## scope = travel_plan
-alias[trigger:travel_speed] = int_value_field
-
 #####################################################
 # FAITH SCOPE
 #####################################################
@@ -728,14 +346,6 @@ alias[trigger:controls_holy_site] = <holy_site>
 ### Does the faith control a holy site with the given flag? controls_holy_site_with_flag = some flag
 ## scope = faith
 alias[trigger:controls_holy_site_with_flag] = value[holy_site_flag]
-
-### How strong is the scoped faith? *Expensive*, if you're gonna use the value repeatedly, save it to a scope first! This is scaled by a factor of 1000, so '1' means 1000 men. This is due to the cap of ~2 million, which would be too low in many cases
-## scope = faith
-alias[trigger:estimated_faith_strength] == alias_keys_field[int_value]
-
-### How strong is the scoped faith? *Expensive*, if you're gonna use the value repeatedly, save it to a scope first! This is scaled by a factor of 1000, so '1' means 1000 men. This is due to the cap of ~2 million, which would be too low in many cases
-## scope = faith
-alias[trigger:estimated_faith_strength] == value_field
 
 ### What is the faith's hostility level towards the target faith? faith_hostility_level { target = scope:some_faith value > 1 }
 ## scope = faith
@@ -750,10 +360,6 @@ alias[trigger:faith_hostility_level] = {
 alias[trigger:faith_hostility_level_comparison] = {
     scope[faith] == scope[faith]
 }
-
-### What is the faith's fervor?
-## scope = faith
-alias[trigger:fervor] == value_field
 
 ### Does the given faith have the given doctrine?? has_doctrine = doctrine_key
 ## scope = faith
@@ -771,28 +377,6 @@ alias[trigger:has_graphical_faith] = value[graphical_faith]
 ### Does the faith have the given icon has_icon = some_cool_custom_icon
 ## scope = faith
 alias[trigger:has_icon] = filepath[game/gfx/interface/icons/faith/,.dds]
-
-### How many holy sites does the faith control? holy_sites_controlled > 1
-## scope = faith
-alias[trigger:holy_sites_controlled] == alias_keys_field[int_value]
-
-### How many holy sites does the faith control? holy_sites_controlled > 1
-## scope = faith
-alias[trigger:holy_sites_controlled] == value_field
-
-### Returns how many characters follow the given faith num_character_followers > 0
-## scope = faith
-alias[trigger:num_character_followers] == alias_keys_field[int_value]
-
-### Returns how many characters follow the given faith num_character_followers > 0
-## scope = faith
-alias[trigger:num_character_followers] == value_field
-
-### Returns how many counties follow the given faith num_county_followers > 0
-alias[trigger:num_county_followers] == alias_keys_field[int_value]
-
-### Returns how many counties follow the given faith num_county_followers > 0
-alias[trigger:num_county_followers] == value_field
 
 ### checks the tag of the religion of the current faith
 ## scope = faith
@@ -838,10 +422,6 @@ alias[trigger:phase_has_catalyst] = <struggle_catalyst>
 # AGENT SLOT SCOPE
 #####################################################
 
-### Is any of the future phases affected by the given catalyst?
-## scope = agent_slot
-alias[trigger:agent_slot_contribution] == value_field
-
 ### Does the agent slot have provide the given type of contribution?
 ## scope = agent_slot
 alias[trigger:agent_slot_has_contribution_type] = enum[contribution_type]
@@ -854,65 +434,9 @@ alias[trigger:is_agent_slot_type] = <agent_type>
 # GREAT HOLY WAR SCOPE
 #####################################################
 
-### How many days is it until the given GHW launches its war? 
-## scope = ghw
-alias[trigger:days_until_ghw_launch] == alias_keys_field[int_value]
-
-### How many days is it until the given GHW launches its war?
-## scope = ghw
-alias[trigger:days_until_ghw_launch] == value_field
-
-### What is the max (if all levies were fully reinforced) military strength of the pledged defenders in the given Great Holy War?
-## scope = ghw
-alias[trigger:ghw_defenders_strength] == alias_keys_field[int_value]
-
-### What is the max (if all levies were fully reinforced) military strength of the pledged defenders in the given Great Holy War?
-## scope = ghw
-alias[trigger:ghw_defenders_strength] == value_field
-
-### What is the max (if all levies were fully reinforced) military strength of the pledged attackers in the given Great Holy War?
-## scope = ghw
-alias[trigger:ghw_attackers_strength] == alias_keys_field[int_value]
-
-### What is the max (if all levies were fully reinforced) military strength of the pledged attackers in the given Great Holy War?
-## scope = ghw
-alias[trigger:ghw_attackers_strength] == value_field
-
-### How much gold is in the great holy war's war chest?
-## scope = ghw
-alias[trigger:ghw_war_chest_gold] == alias_keys_field[int_value]
-
-### How much gold is in the great holy war's war chest?
-## scope = ghw
-alias[trigger:ghw_war_chest_gold] == value_field
-
-### How much gold is in the great holy war's war chest?
-## scope = ghw
-alias[trigger:ghw_war_chest_piety] == alias_keys_field[int_value]
-
-### How much gold is in the great holy war's war chest?
-## scope = ghw
-alias[trigger:ghw_war_chest_piety] == value_field
-
-### How much gold is in the great holy war's war chest?
-## scope = ghw
-alias[trigger:ghw_war_chest_prestige] == alias_keys_field[int_value]
-
-### How much gold is in the great holy war's war chest?
-## scope = ghw
-alias[trigger:ghw_war_chest_prestige] == value_field
-
 #####################################################
 # EPIDEMIC SCOPE
 #####################################################
-
-### Number of days since the epidemic outbreak started.
-## scope = epidemic
-alias[trigger:days_since_outbreak_start] == alias_keys_field[int_value]
-
-### Number of days since the epidemic outbreak started.
-## scope = epidemic
-alias[trigger:days_since_outbreak_start] == value_field
 
 ### Get the outbreak intensity of this epidemic.outbreak_intensity = major
 ## scope = epidemic
@@ -922,21 +446,9 @@ alias[trigger:outbreak_intensity] == enum[outbreak_intensity]
 ## scope = epidemic
 alias[trigger:outbreak_start_date] == date_field
 
-### Get the total number of provinces infected over the lifetime of this epidemic.
-## scope = epidemic
-alias[trigger:total_infected_provinces] == alias_keys_field[int_value]
-
-### Get the total number of provinces infected over the lifetime of this epidemic.
-## scope = epidemic
-alias[trigger:total_infected_provinces] == value_field
-
 #####################################################
 # TAX SLOT SCOPE
 #####################################################
-
-### How many slots for taxpayers are available in scoped tax slot?
-## scope = tax_slot
-alias[trigger:available_taxpayer_slots] = int_value_field
 
 #####################################################
 # ACCOLADE TYPE SCOPE
@@ -969,14 +481,6 @@ alias[trigger:has_tradition_category] = enum[tradition_category]
 # ARTIFACT SCOPE
 #####################################################
 
-### does this artifact have the required durability?
-## scope = artifact
-alias[trigger:artifact_durability] == value_field
-
-### does this artifact have the required max durability?
-## scope = artifact
-alias[trigger:artifact_max_durability] == value_field
-
 ### is the artifact of the given inventory slot type?
 ## scope = artifact
 alias[trigger:artifact_slot_type] = enum[artifact_slot_type]
@@ -1000,14 +504,6 @@ alias[trigger:has_artifact_feature_group] = <feature_group>
 ### Does the artifact have the given modifier?
 ## scope = artifact
 alias[trigger:has_artifact_modifier] = <modifier_container>
-
-### How many kills has this artifact been used in?
-## scope = artifact
-alias[trigger:num_artifact_kills] == alias_keys_field[int_value]
-
-### How many kills has this artifact been used in?
-## scope = artifact
-alias[trigger:num_artifact_kills] == value_field
 
 ### is the scoped artifact of given rarity?
 ## scope = artifact
@@ -1065,42 +561,6 @@ alias[trigger:can_start_tutorial_lesson] = replace_me
 ### Compare the current computer date.
 alias[trigger:current_computer_date] == date_field
 
-### Compare the current computer day.
-alias[trigger:current_computer_date_day] == alias_keys_field[int_value]
-
-### Compare the current computer day.
-alias[trigger:current_computer_date_day] == value_field
-
-### Compare the current computer month.
-alias[trigger:current_computer_date_month] == alias_keys_field[int_value]
-
-### Compare the current computer month.
-alias[trigger:current_computer_date_month] == value_field
-
-### Compare the current computer year.
-alias[trigger:current_computer_date_year] == alias_keys_field[int_value]
-
-### Compare the current computer year.
-alias[trigger:current_computer_date_year] == value_field
-
-### Compare the current ingame day [1, 31]
-alias[trigger:current_day] == alias_keys_field[int_value]
-
-### Compare the current ingame day [1, 31]
-alias[trigger:current_day] == value_field
-
-### Compare the current ingame month (1..12)
-alias[trigger:current_month] == alias_keys_field[int_value]
-
-### Compare the current ingame month (1..12)
-alias[trigger:current_month] == value_field
-
-### Compare the current ingame year
-alias[trigger:current_year] == alias_keys_field[int_value]
-
-### Compare the current ingame year
-alias[trigger:current_year] == value_field
-
 ### Compare the current ingame date.
 alias[trigger:current_date] == date_field
 
@@ -1127,7 +587,7 @@ alias[trigger:custom_tooltip] = {
 alias[trigger:exists] = scope_field
 
 ### Checks whether the specified scope target exists (check for not being the null object) exists = from.owner.var:cool_var.mother
-alias[trigger:exists] = value_field
+alias[trigger:exists] = value_field # TODO: ?
 
 ### Compare the date of the bookmarked game launched.
 alias[trigger:game_start_date] == date_field
@@ -1165,6 +625,10 @@ alias[trigger:has_variable] = value[variable]
 
 ### Checks whether the current scope has the specified variable list set has_variable_list = name
 alias[trigger:has_variable_list] = value[variable_list]
+
+### Checks whether the current scope has the specified variable list set
+### has_variable_list = name
+alias[trigger:has_local_variable_list] = value[variable_list]
 
 ### Is there a war result message with the specified outcome? has_war_result_message_with_outcome = victory/defeat/white_peace/invalidated/any An interface trigger, can only be used in specific places
 alias[trigger:has_war_result_message_with_outcome] = enum[war_result]
@@ -1259,6 +723,7 @@ alias[trigger:save_temporary_scope_as] = value_set[temporary_scope]
 ### Saves a numerical or bool value as an arbitrarily-named temporary target to be referenced later in the same effect save_temporary_scope_value_as = { name = <string> value = x }
 alias[trigger:save_temporary_scope_value_as] = {
     name = value_set[temporary_scope]
+    value = alias_keys_field[int_value]
     value = value_field
 }
 
@@ -1336,34 +801,19 @@ alias[trigger:variable_list_size] = {
 
 ### Returns true if the sum of weights of fulfilled sub-triggers amount to the specified sum weighted_calc_true_if = { amount = 10 5 = { <trigger> } 15 = { <trigger> } 7 = { <trigger> } }
 alias[trigger:weighted_calc_true_if] = {
-    amount = int_value_field
+    amount == int_value_field
     ## cardinality = 1..inf
     int = {
         alias_name[trigger] = alias_match_left[trigger]
     }
 }
 
-### How many years it has been since the start of the game years_from_game_start > 5
-alias[trigger:years_from_game_start] == alias_keys_field[int_value]
-
-### How many years it has been since the start of the game years_from_game_start > 5
-alias[trigger:years_from_game_start] == value_field
-
-
-
-
-
-
-
-### An interface trigger, can only be used in specific places
-alias[trigger:monarchs_journey_unlock] = replace_me
-
 
 
 
 
 ### Checks whether the current scope has the specified variable set has_variable = name
-alias[trigger:has_local_variable] = replace_me
+alias[trigger:has_local_variable] = replace_me # TODO
 
 
 
@@ -1374,78 +824,6 @@ alias[trigger:has_local_variable] = replace_me
 #####################################################
 # PROVINCE SCOPE
 #####################################################
-
-### How much gold is available to loot for raiding armies? available_loot >= 7
-## scope = province
-alias[trigger:available_loot] == alias_keys_field[int_value]
-
-### How much gold is available to loot for raiding armies? available_loot >= 7
-## scope = province
-alias[trigger:available_loot] == value_field
-
-### The amount of garrison in a county or province from buildings levies > 100
-## scope = province
-alias[trigger:building_garrison] == alias_keys_field[int_value]
-
-### The amount of garrison in a county or province from buildings levies > 100
-## scope = province
-alias[trigger:building_garrison] == value_field
-
-### The amount of levies in a county or province from buildings levies > 100
-## scope = province
-alias[trigger:building_levies] == alias_keys_field[int_value]
-
-### The amount of levies in a county or province from buildings levies > 100
-## scope = province
-alias[trigger:building_levies] == value_field
-
-### How many building slots exist (including occupied ones)? building_slots > 3
-## scope = province
-alias[trigger:building_slots] == alias_keys_field[int_value]
-
-### How many building slots exist (including occupied ones)? building_slots > 3
-## scope = province
-alias[trigger:building_slots] == value_field
-
-### How many levels of normal buildings are there? Duchy and such buildings do not count. Building under construction does not count. The capital building does count combined_building_level > 10
-## scope = province
-alias[trigger:combined_building_level] == alias_keys_field[int_value]
-
-### How many levels of normal buildings are there? Duchy and such buildings do not count. Building under construction does not count. The capital building does count combined_building_level > 10
-## scope = province
-alias[trigger:combined_building_level] == value_field
-
-### Number of days since the target epidemic infected the scoped province. days_since_province_infection >= 20
-## scope = province
-alias[trigger:days_since_province_infection] == alias_keys_field[int_value]
-
-### Number of days since the target epidemic infected the scoped province. days_since_province_infection >= 20
-## scope = province
-alias[trigger:days_since_province_infection] == value_field
-
-### Get the epidemic resistance of the scoped province.epidemic_resistance >= 20
-## scope = province
-alias[trigger:epidemic_resistance] == alias_keys_field[int_value]
-
-### Get the epidemic resistance of the scoped province.epidemic_resistance >= 20
-## scope = province
-alias[trigger:epidemic_resistance] == value_field
-
-### Compares the fort level of a province
-## scope = province
-alias[trigger:fort_level] == alias_keys_field[int_value]
-
-### Compares the fort level of a province
-## scope = province
-alias[trigger:fort_level] == value_field
-
-### How many free building slots exist? A building in construction is considered to be taking a slot free_building_slots > 3
-## scope = province
-alias[trigger:free_building_slots] == alias_keys_field[int_value]
-
-### How many free building slots exist? A building in construction is considered to be taking a slot free_building_slots > 3
-## scope = province
-alias[trigger:free_building_slots] == value_field
 
 ### Checks if a province is in a certain geographical region
 ## scope = province
@@ -1487,7 +865,7 @@ alias[trigger:has_province_modifier_duration_remaining] = <modifier_container>
 
 ### Does the province (holding) have a special buidling?
 ## scope = province
-alias[trigger:has_special_building] = replace_me_bool
+alias[trigger:has_special_building] = bool
 
 ### Does the province have stationed regiment of base type?
 ## scope = province
@@ -1497,41 +875,9 @@ alias[trigger:has_stationed_regiment_of_base_type] = value[unit_type]
 ## scope = province
 alias[trigger:has_travel_point_of_interest] = <point_of_interest>
 
-### Check the income of the scoped province monthly_income > 10
-## scope = province
-alias[trigger:monthly_income] == alias_keys_field[int_value]
-
-### Check the income of the scoped province monthly_income > 10
-## scope = province
-alias[trigger:monthly_income] == value_field
-
-### How many normal buildings are there? Duchy and such buildings do not count. Building under construction does count num_buildings > 3
-## scope = province
-alias[trigger:num_buildings] == alias_keys_field[int_value]
-
-### How many normal buildings are there? Duchy and such buildings do not count. Building under construction does count num_buildings > 3
-## scope = province
-alias[trigger:num_buildings] == value_field
-
-### Check the number of characters in the pool the scoped province is a part of
-## scope = province
-alias[trigger:number_of_characters_in_pool] == alias_keys_field[int_value]
-
-### Check the number of characters in the pool the scoped province is a part of
-## scope = province
-alias[trigger:number_of_characters_in_pool] == value_field
-
 ### Date when the target epidemic infected the scoped province.
 ## scope = province
 alias[trigger:province_infection_date] == date_field
-
-### Infection rate of target epidemic in the scoped province.province_infection_rate >= 20
-## scope = province
-alias[trigger:province_infection_rate] == alias_keys_field[int_value]
-
-### Infection rate of target epidemic in the scoped province.province_infection_rate >= 20
-## scope = province
-alias[trigger:province_infection_rate] == value_field
 
 ### Checks if a province is of a specific terrain type
 ## scope = province
@@ -1552,7 +898,10 @@ alias[trigger:squared_distance] == {
 ## scope = province
 alias[trigger:travel_danger_type] == {
     travel_plan = scope[travel_plan]
-    type = replace_me
+    ## cardinality = 0..1
+    type = enum[travel_danger]
+    ## cardinality = 0..1
+    terrain = <terrain>
 }
 
 
@@ -1561,30 +910,6 @@ alias[trigger:travel_danger_type] == {
 #####################################################
 # WAR SCOPE SCOPE
 #####################################################
-
-### compares the attacker war score
-## scope = war
-alias[trigger:attacker_war_score] == alias_keys_field[int_value]
-
-### compares the attacker war score
-## scope = war
-alias[trigger:attacker_war_score] == value_field
-
-### Number of days since the war score has been at max (+100 or -100). Returns -1 if the war score is not +100 or -100
-## scope = war
-alias[trigger:days_since_max_war_score] == alias_keys_field[int_value]
-
-### Number of days since the war score has been at max (+100 or -100). Returns -1 if the war score is not +100 or -100
-## scope = war
-alias[trigger:days_since_max_war_score] == value_field
-
-### compares the defender war score
-## scope = war
-alias[trigger:defender_war_score] == alias_keys_field[int_value]
-
-### compares the defender war score
-## scope = war
-alias[trigger:defender_war_score] == value_field
 
 ### does the war interaction still have a valid casus belli (those should be automatically removed on daily tick, but can exist for a tick)
 ## scope = war
@@ -1618,22 +943,6 @@ alias[trigger:is_white_peace_possible] == bool
 ## scope = war
 alias[trigger:using_cb] == <casus_belli_type>
 
-### Checks how much a character has contributed to the scoped war
-## scope = war
-alias[trigger:war_contribution] == alias_keys_field[int_value]
-
-### Checks how much a character has contributed to the scoped war
-## scope = war
-alias[trigger:war_contribution] == value_field
-
-### compares the number of days the war is going on for
-## scope = war
-alias[trigger:war_days] == alias_keys_field[int_value]
-
-### compares the number of days the war is going on for
-## scope = war
-alias[trigger:war_days] == value_field
-
 ### has the target character been called to the scope war already?
 ## scope = war
 alias[trigger:was_called] == scope[character]
@@ -1642,25 +951,9 @@ alias[trigger:was_called] == scope[character]
 # HOLY ORDER SCOPE
 #####################################################
 
-### How many holdings the holy order has under lease
-## scope = holy_order
-alias[trigger:num_leased_titles] == alias_keys_field[int_value]
-
-### How many holdings the holy order has under lease
-## scope = holy_order
-alias[trigger:num_leased_titles] == value_field
-
 #####################################################
 # ACCOLADE SCOPE
 #####################################################
-
-### How many ranks does this Accolade have unlocked?
-## scope = accolade
-alias[trigger:accolade_rank] == alias_keys_field[int_value]
-
-### How many ranks does this Accolade have unlocked?
-## scope = accolade
-alias[trigger:accolade_rank] == value_field
 
 ### Does any of the Accolades types have the given category flag?
 ## scope = accolade
@@ -1693,23 +986,6 @@ alias[trigger:secondary_tier] = enum[accolade_tier]
 #####################################################
 # LEGEND SCOPE
 #####################################################
-
-### Days since when the legend was completed.
-## scope = legend
-alias[trigger:days_since_legend_completion] == alias_keys_field[int_value]
-
-### Days since when the legend was completed.
-## scope = legend
-alias[trigger:days_since_legend_completion] == value_field
-
-
-### Days since when the legend was created.
-## scope = legend
-alias[trigger:days_since_legend_start_date] == alias_keys_field[int_value]
-
-### Days since when the legend was created.
-## scope = legend
-alias[trigger:days_since_legend_start_date] == value_field
 
 ### Does the legend have the given localization key set for the named chapter. has_legend_chapter = { name = opening localization_key = default_legend_opening }
 ## scope = legend
@@ -1772,126 +1048,10 @@ alias[trigger:is_scheme_category] = enum[scheme_category]
 ## scope = scheme
 alias[trigger:is_scheme_target_type] = enum[scheme_target_type]
 
-### Max Scheme Success Chance
-## scope = scheme
-alias[trigger:max_scheme_success_chance] == alias_keys_field[int_value]
-
-### Max Scheme Success Chance
-## scope = scheme
-alias[trigger:max_scheme_success_chance] == value_field
-
-### The maximum number of breaches the scheme can have
-## scope = scheme
-alias[trigger:maximum_scheme_breaches] == alias_keys_field[int_value]
-
-### The maximum number of breaches the scheme can have
-## scope = scheme
-alias[trigger:maximum_scheme_breaches] == value_field
-
-### The number of the scheme's currently available agent charges
-## scope = scheme
-alias[trigger:scheme_agent_charges] == alias_keys_field[int_value]
-
-### The number of the scheme's currently available agent charges
-## scope = scheme
-alias[trigger:scheme_agent_charges] == value_field
-
-### The number of breaches the scheme currently has
-## scope = scheme
-alias[trigger:scheme_breaches] == alias_keys_field[int_value]
-
-### The number of breaches the scheme currently has
-## scope = scheme
-alias[trigger:scheme_breaches] == value_field
-
-### The number of days since scheme was started
-## scope = scheme
-alias[trigger:scheme_duration_days] == alias_keys_field[int_value]
-
-### The number of days since scheme was started
-## scope = scheme
-alias[trigger:scheme_duration_days] == value_field
-
-# Monthly scheme progress in % (i.e. 50 equals 50%)
-# scope = scheme
-# alias[trigger:scheme_monthly_progress] == alias_keys_field[int_value]
-
-# The number of agents in a scheme
-# scope = scheme
-# alias[trigger:scheme_number_of_agents] == alias_keys_field[int_value]
-
-### The number of exposed agents in a scheme
-## scope = scheme
-alias[trigger:scheme_number_of_exposed_agents] == alias_keys_field[int_value]
-
-### The number of exposed agents in a scheme
-## scope = scheme
-alias[trigger:scheme_number_of_exposed_agents] == value_field
-
-### The number of agents in a scheme
-## scope = scheme
-alias[trigger:scheme_number_of_filled_agent_slots] == alias_keys_field[int_value]
-
-### The number of agents in a scheme
-## scope = scheme
-alias[trigger:scheme_number_of_filled_agent_slots] == value_field
-
-### Scheme phase duration
-## scope = scheme
-alias[trigger:scheme_phase_duration] == alias_keys_field[int_value]
-
-### Scheme phase duration
-## scope = scheme
-alias[trigger:scheme_phase_duration] == value_field
-
-### Scheme progress
-## scope = scheme
-alias[trigger:scheme_power] == alias_keys_field[int_value]
-
-### Scheme progress
-## scope = scheme
-alias[trigger:scheme_power] == value_field
-
-# Scheme power minus scheme resistance difference
-# scope = scheme
-# alias[trigger:scheme_power_resistance_difference] == alias_keys_field[int_value]
-
-# Scheme power/resistance ratio, the ratio is set to +/-10000 if resistance is zero and power is positive/negative (0 if both power and resistance are 0)
-# scope = scheme
-# alias[trigger:scheme_power_resistance_ratio] == alias_keys_field[int_value]
-
-### Scheme progress (0 - 10 (defined))
-## scope = scheme
-alias[trigger:scheme_progress] == alias_keys_field[int_value]
-
-### Scheme progress (0 - 10 (defined))
-## scope = scheme
-alias[trigger:scheme_progress] == value_field
-
-# Scheme resistance
-# scope = scheme
-# alias[trigger:scheme_resistance] == alias_keys_field[int_value]
-
-### Scheme secrecy
-## scope = scheme
-alias[trigger:scheme_secrecy] == alias_keys_field[int_value]
-
-### Scheme secrecy
-## scope = scheme
-alias[trigger:scheme_secrecy] == value_field
-
 # NOTE: Incorrectly documented in log
 ### Scheme skill
 ## scope = scheme
 alias[trigger:scheme_skill] = enum[attribute]
-
-### Scheme success chance
-## scope = scheme
-alias[trigger:scheme_success_chance] == alias_keys_field[int_value]
-
-### Scheme success chance
-## scope = scheme
-alias[trigger:scheme_success_chance] == value_field
 
 ### Is the scheme of the specified type? scheme_type = X
 ## scope = scheme
@@ -1910,41 +1070,9 @@ alias[trigger:story_type] = <story_cycle>
 # COMBAT SCOPE
 #####################################################
 
-### whether the combat side was the attacker or not
-## scope = combat
-alias[trigger:num_total_troops] == alias_keys_field[int_value]
-
-### whether the combat side was the attacker or not
-## scope = combat
-alias[trigger:num_total_troops] == value_field
-
-### whether the combat side was the attacker or not
-## scope = combat
-alias[trigger:warscore_value] == alias_keys_field[int_value]
-
-### whether the combat side was the attacker or not
-## scope = combat
-alias[trigger:warscore_value] == value_field
-
 #####################################################
 # LANDED TITLE SCOPE
 #####################################################
-
-### The amount of garrison in a county or province from buildings levies > 100
-## scope = landed_title
-alias[trigger:building_garrison] == alias_keys_field[int_value]
-
-### The amount of garrison in a county or province from buildings levies > 100
-## scope = landed_title
-alias[trigger:building_garrison] == value_field
-
-### The amount of levies in a county or province from buildings levies > 100
-## scope = landed_title
-alias[trigger:building_levies] == alias_keys_field[int_value]
-
-### The amount of levies in a county or province from buildings levies > 100
-## scope = landed_title
-alias[trigger:building_levies] == value_field
 
 ### Can create MaA of specified type for the scoped title
 ## scope = landed_title
@@ -1956,38 +1084,6 @@ alias[trigger:can_title_create_faction] = {
     type = <faction>
     target = scope[character]
 }
-
-### does the county title have the required county countrol?
-## scope = landed_title
-alias[trigger:county_control] == alias_keys_field[int_value]
-
-### does the county title have the required county countrol?
-## scope = landed_title
-alias[trigger:county_control] == value_field
-
-# how much county control is the county gaining each month?
-# scope = landed_title
-#alias[trigger:county_control_rate] == alias_keys_field[int_value]
-
-# What's the multiplier to the control gain rate? E.G., if there's just a +20% modifier, this would return 1.2
-# scope = landed_title
-#alias[trigger:county_control_rate_modifier] == value_field
-
-### Compares the county's opinion of its holder
-## scope = landed_title
-alias[trigger:county_holder_opinion] == alias_keys_field[int_value]
-
-### Compares the county's opinion of its holder
-## scope = landed_title
-alias[trigger:county_holder_opinion] == value_field
-
-### compares the county's opinion of the current count
-## scope = landed_title
-alias[trigger:county_opinion] == alias_keys_field[int_value]
-
-### compares the county's opinion of the current count
-## scope = landed_title
-alias[trigger:county_opinion] == value_field
 
 ### compares the county's opinion of the target character to the specified value, county_opinion_target = { target = X value >/</= Y }
 ## scope = landed_title
@@ -2004,38 +1100,6 @@ alias[trigger:de_jure_drift_progress] = {
     value == alias_keys_field[int_value]
     value == value_field
 }
-
-### does the county title have the required county development level?
-## scope = landed_title
-alias[trigger:development_level] == alias_keys_field[int_value]
-
-### does the county title have the required county development level?
-## scope = landed_title
-alias[trigger:development_level] == value_field
-
-### how much development progress is the county gaining each month?
-## scope = landed_title
-alias[trigger:development_rate] == alias_keys_field[int_value]
-
-### how much development progress is the county gaining each month?
-## scope = landed_title
-alias[trigger:development_rate] == value_field
-
-### What's the multiplier to the development progress?
-## scope = landed_title
-alias[trigger:development_rate_modifier] == alias_keys_field[int_value]
-
-### What's the multiplier to the development progress?
-## scope = landed_title
-alias[trigger:development_rate_modifier] == value_field
-
-### does the county title have the required progress towards the next level of development? E.G., if level 1 is 100, level 2 is 300 (these are set in defines), and current total is 150, this would return 50
-## scope = landed_title
-alias[trigger:development_towards_level_increase] == alias_keys_field[int_value]
-
-### does the county title have the required progress towards the next level of development? E.G., if level 1 is 100, level 2 is 300 (these are set in defines), and current total is 150, this would return 50
-## scope = landed_title
-alias[trigger:development_towards_level_increase] == value_field
 
 ### Does the scoped county have a given modifier has_county_modifier = name
 ## scope = landed_title
@@ -2065,7 +1129,7 @@ alias[trigger:has_title_law_flag] = value[law_flag]
 ## scope = landed_title
 alias[trigger:is_connected_to] = {
     ## cardinality = 0..1
-    max_naval_distance = int_value_field
+    max_naval_distance = int_value_field # TODO
     allow_one_county_land_gap = bool
     target = scope[landed_title]
 }
@@ -2077,54 +1141,17 @@ alias[trigger:is_target_of_council_task] = <council_task>
 
 
 
-### How much county control is the county gaining/losing each month in total?
-## scope = landed_title
-alias[trigger:monthly_county_control_change] == alias_keys_field[int_value]
-
-### How much county control is the county gaining/losing each month in total?
-## scope = landed_title
-alias[trigger:monthly_county_control_change] == value_field
-
-### How much county control is the county declining each month? (ignoring any growth)
-## scope = landed_title
-alias[trigger:monthly_county_control_decline] == alias_keys_field[int_value]
-
-### How much county control is the county declining each month? (ignoring any growth)
-## scope = landed_title
-alias[trigger:monthly_county_control_decline] == value_field
-
 ### What's the multiplier to the control decline rate? E.G., if there's just a +20% modifier, this would return 1.2
 ## scope = landed_title
 alias[trigger:monthly_county_control_decline_factor] == float
-
-### How much county control is the county gaining each month? (ignoring any decline)
-## scope = landed_title
-alias[trigger:monthly_county_control_growth] == alias_keys_field[int_value]
-
-### How much county control is the county gaining each month? (ignoring any decline)
-## scope = landed_title
-alias[trigger:monthly_county_control_growth] == value_field
 
 ### What's the multiplier to the control growth rate? E.G., if there's just a +20% modifier, this would return 1.2
 ## scope = landed_title
 alias[trigger:monthly_county_control_growth_factor] == float
 
-### How many provinces in this county have holdings
-## scope = landed_title
-alias[trigger:num_county_holdings] == alias_keys_field[int_value]
-
-### How many provinces in this county have holdings
-## scope = landed_title
-alias[trigger:num_county_holdings] == value_field
-
-# NOTE: Despite description, a landed title scope
-# ### what place in line of succession does the character hold?
-# ## scope = landed_title
-# alias[trigger:place_in_line_of_succession] = int_value_field
-
 
 enums = {
-    enum[recent_history_type] = {
+    enum[recent_history_type] = { # TODO
         conquest
         conquest_holy_war
         conquest_claim
@@ -2160,11 +1187,7 @@ alias[trigger:recent_history] = {
 
 ### What tier is the scoped title? barony = 1, empire = 5. Use the script values please, not raw numbers
 ## scope = landed_title
-alias[trigger:tier] = alias_keys_field[int_value]
-
-### What tier is the scoped title? barony = 1, empire = 5. Use the script values please, not raw numbers
-## scope = landed_title
-alias[trigger:tier] = value_field
+alias[trigger:tier] = enum[title_tier]
 
 ### Check if the chance to create a faction against a target of the scope landed title is is true against the scripted value title_create_faction_type_chance = {     type = faction_type #An ongoing faction     target = target_character     value <|<=|>=|> 0 }
 ## scope = landed_title
@@ -2174,14 +1197,6 @@ alias[trigger:title_create_faction_type_chance] = {
     value == alias_keys_field[int_value]
     value == value_field
 }
-
-### Returns the number of years a title is held if valid (otherwise returns 0)
-## scope = landed_title
-alias[trigger:title_held_years] == alias_keys_field[int_value]
-
-### Returns the number of years a title is held if valid (otherwise returns 0)
-## scope = landed_title
-alias[trigger:title_held_years] == value_field
 
 ### Check if the chance of the scope landed title to join the faction against the scripted value title_join_faction_chance = {     faction = faction_target #An ongoing faction     value <|<=|>=|> 0 }
 ## scope = landed_title
@@ -2193,86 +1208,13 @@ alias[trigger:title_join_faction_chance] = {
 
 
 
-### Is the character's realm within this distance of the title? Distance is in pixels, squared for performance reasons. realm_to_title_distance_squared = { title = some_title value > 10000 }
-## scope = landed_title
-alias[trigger:realm_to_title_distance_squared] == alias_keys_field[int_value]
-
-### Is the character's realm within this distance of the title? Distance is in pixels, squared for performance reasons. realm_to_title_distance_squared = { title = some_title value > 10000 }
-## scope = landed_title
-alias[trigger:realm_to_title_distance_squared] == value_field
-
-### How far away is the province/barony/county from the target? Measured in map pixels. Squared for performance reasons (square root is expensive). squared_distance = { target = some province/barony/county value > 10000 }
-## scope = landed_title
-alias[trigger:squared_distance] == alias_keys_field[int_value]
-
-### How far away is the province/barony/county from the target? Measured in map pixels. Squared for performance reasons (square root is expensive). squared_distance = { target = some province/barony/county value > 10000 }
-## scope = landed_title
-alias[trigger:squared_distance] == value_field
-
-
 #####################################################
 # FACTION SCOPE
 #####################################################
 
-### Average opinion of the character that are powerful vassals of the faction scope target
-## scope = faction
-alias[trigger:average_faction_opinion_powerful_vassal] == alias_keys_field[int_value]
-
-### Average opinion of the character that are powerful vassals of the faction scope target
-## scope = faction
-alias[trigger:average_faction_opinion_powerful_vassal] == value_field
-
-### Average opinion of all the characters of the faction scope target
-## scope = faction
-alias[trigger:average_faction_opinion] == alias_keys_field[int_value]
-
-### Average opinion of all the characters of the faction scope target
-## scope = faction
-alias[trigger:average_faction_opinion] == value_field
-
-### Average opinion of all the characters of the faction scope target
-## scope = faction
-alias[trigger:discontent_per_month] == alias_keys_field[int_value]
-
-### Average opinion of all the characters of the faction scope target
-## scope = faction
-alias[trigger:discontent_per_month] == value_field
-
-### Current discontent of the faction
-## scope = faction
-alias[trigger:faction_discontent] == alias_keys_field[int_value]
-
-### Current discontent of the faction
-## scope = faction
-alias[trigger:faction_discontent] == value_field
-
 ### Is the faction of this type?
 ## scope = faction
 alias[trigger:faction_is_type] = <faction>
-
-### Current power of the faction
-## scope = faction
-alias[trigger:faction_power] == alias_keys_field[int_value]
-
-### Current power of the faction
-## scope = faction
-alias[trigger:faction_power] == value_field
-
-### Current power threshold of the faction
-## scope = faction
-alias[trigger:faction_power_threshold] == alias_keys_field[int_value]
-
-### Current power threshold of the faction
-## scope = faction
-alias[trigger:faction_power_threshold] == value_field
-
-### Current number of faction members in faction
-## scope = faction
-alias[trigger:number_of_faction_members_in_council] == alias_keys_field[int_value]
-
-### Current number of faction members in faction
-## scope = faction
-alias[trigger:number_of_faction_members_in_council] == value_field
 
 #####################################################
 # COMBAT SIDE SCOPE
@@ -2282,77 +1224,9 @@ alias[trigger:number_of_faction_members_in_council] == value_field
 ## scope = combat_side
 alias[trigger:has_maa_of_type] = <maa_type>
 
-### Number of troops killed on the opposite side.
-## scope = combat_side
-alias[trigger:num_enemies_killed] == alias_keys_field[int_value]
-
-### Number of troops killed on the opposite side.
-## scope = combat_side
-alias[trigger:num_enemies_killed] == value_field
-
-### Percantage of enemies killed out of total number of enemy soldiers.
-## scope = combat_side
-alias[trigger:percent_enemies_killed] == alias_keys_field[int_value]
-
-### Percantage of enemies killed out of total number of enemy soldiers.
-## scope = combat_side
-alias[trigger:percent_enemies_killed] == value_field
-
-### what is the current size of all armies combined on this combat side?
-## scope = combat_side
-alias[trigger:side_army_size] == alias_keys_field[int_value]
-
-### what is the current size of all armies combined on this combat side?
-## scope = combat_side
-alias[trigger:side_army_size] == value_field
-
-### what is the max possible size of all armies combined on this combat side?
-## scope = combat_side
-alias[trigger:side_max_army_size] == alias_keys_field[int_value]
-
-### what is the max possible size of all armies combined on this combat side?
-## scope = combat_side
-alias[trigger:side_max_army_size] == value_field
-
-### How many soldiers does this side have still fighting?
-## scope = combat_side
-alias[trigger:side_soldiers] == alias_keys_field[int_value]
-
-### How many soldiers does this side have still fighting?
-## scope = combat_side
-alias[trigger:side_soldiers] == value_field
-
-### How strong is this side (based on soldiers still fighting)? Scaled down by a factor of 1000 so it doesn't get too large to do math on
-## scope = combat_side
-alias[trigger:side_strength] == alias_keys_field[int_value]
-
-### How strong is this side (based on soldiers still fighting)? Scaled down by a factor of 1000 so it doesn't get too large to do math on
-## scope = combat_side
-alias[trigger:side_strength] == value_field
-
-### Side's troops/opposide side's troops.ntroops_ratio < 0.5
-## scope = combat_side
-alias[trigger:troops_ratio] == value_field
-
 #####################################################
 # DOMICILE SCOPE
 #####################################################
-
-### Total amount of external building slots for scoped domicile
-## scope = domicile
-alias[trigger:external_domicile_building_slots] == alias_keys_field[int_value]
-
-### Total amount of external building slots for scoped domicile
-## scope = domicile
-alias[trigger:external_domicile_building_slots] == value_field
-
-### Amount of free external building slots for scoped domicile
-## scope = domicile
-alias[trigger:free_external_domicile_building_slots] == alias_keys_field[int_value]
-
-### Amount of free external building slots for scoped domicile
-## scope = domicile
-alias[trigger:free_external_domicile_building_slots] == value_field
 
 ### Does scoped domicile have building of specified type?
 ## scope = domicile
@@ -2374,136 +1248,25 @@ alias[trigger:has_ongoing_domicile_construction] == bool
 ## scope = domicile
 alias[trigger:is_domicile_type] = <domicile_type>
 
-### does the scoped domicile have the required max provisions?
-## scope = domicile
-alias[trigger:max_provisions] == alias_keys_field[int_value]
-
-### does the scoped domicile have the required max provisions?
-## scope = domicile
-alias[trigger:max_provisions] == value_field
-
-### Amount of buildings constructed for scoped domicile
-## scope = domicile
-alias[trigger:num_domicile_buildings] == alias_keys_field[int_value]
-
-### Amount of buildings constructed for scoped domicile
-## scope = domicile
-alias[trigger:num_domicile_buildings] == value_field
-
-### Is the provision cost from the domicile's current location to it's owner. In order to calculate the cost we will operate in three stages: 1. Check if the from and to provinces are direct neighbours. 2. Check any travel plan the domicile owner might have and see if the from and    to are part of the travel plan. This will require domicile's location to be    the first entry in the travel plan.3. Do a pathfind between the domicile and domicile owner's current location,    using that path for the cost.scope:domicile = {	provision_cost_to_owner < 100 }
-## scope = domicile
-alias[trigger:provision_cost_to_owner] == alias_keys_field[int_value]
-
-### Is the provision cost from the domicile's current location to it's owner. In order to calculate the cost we will operate in three stages: 1. Check if the from and to provinces are direct neighbours. 2. Check any travel plan the domicile owner might have and see if the from and    to are part of the travel plan. This will require domicile's location to be    the first entry in the travel plan.3. Do a pathfind between the domicile and domicile owner's current location,    using that path for the cost.scope:domicile = {	provision_cost_to_owner < 100 }
-## scope = domicile
-alias[trigger:provision_cost_to_owner] == value_field
-
-### does the scoped domicile have the required provisions?
-## scope = domicile
-alias[trigger:provisions] == alias_keys_field[int_value]
-
-### does the scoped domicile have the required provisions?
-## scope = domicile
-alias[trigger:provisions] == value_field
-
 #####################################################
 # INSPIRATION SCOPE
 #####################################################
-
-### Gets the base gold cost of the scoped inspiration
-## scope = inspiration
-alias[trigger:base_inspiration_gold_cost] == alias_keys_field[int_value]
-
-### Gets the base gold cost of the scoped inspiration
-## scope = inspiration
-alias[trigger:base_inspiration_gold_cost] == value_field
-
-### Gets the days since creation of the scoped inspiration
-## scope = inspiration
-alias[trigger:days_since_creation] == alias_keys_field[int_value]
-
-### Gets the days since creation of the scoped inspiration
-## scope = inspiration
-alias[trigger:days_since_creation] == value_field
-
-###Gets the days since sponsorship started of the scoped inspiration
-## scope = inspiration
-alias[trigger:days_since_sponsorship] == alias_keys_field[int_value]
-
-###Gets the days since sponsorship started of the scoped inspiration
-## scope = inspiration
-alias[trigger:days_since_sponsorship] == value_field
 
 ### Checks if the scoped inspiration has the given inspiration 
 ## scope = inspiration
 alias[trigger:has_inspiration_type] == <inspiration>
 
-### Gets the amount of gold invested in the scoped inspiration
-## scope = inspiration
-alias[trigger:inspiration_gold_invested] == alias_keys_field[int_value]
-
-### Gets the amount of gold invested in the scoped inspiration
-## scope = inspiration
-alias[trigger:inspiration_gold_invested] == value_field
-
-### Gets the progress of the scoped inspiration
-## scope = inspiration
-alias[trigger:inspiration_progress] == alias_keys_field[int_value]
-
-### Gets the progress of the scoped inspiration
-## scope = inspiration
-alias[trigger:inspiration_progress] == value_field
-
 #####################################################
 # COLOR SCOPE
 #####################################################
-
-
-### Check if the scoped color is the same as another color. The right hand side can be either a hex, rgb, or hsv color,  or a named color, or another color scope.
-alias[trigger:is_color] = replace_me
-
-### Check if the scoped color is part of the given color list
-alias[trigger:in_color_list] = replace_me
 
 #####################################################
 # WAR SCOPE
 #####################################################
 
-### compares the attacker war score
-## scope = war
-alias[trigger:attacker_war_score] == alias_keys_field[int_value]
-
-### compares the attacker war score
-## scope = war
-alias[trigger:attacker_war_score] == value_field
-
-### Number of days since the war score has been at max (+100 or -100). Returns -1 if the war score is not +100 or -100
-## scope = war
-alias[trigger:days_since_max_war_score] == alias_keys_field[int_value]
-
-### Number of days since the war score has been at max (+100 or -100). Returns -1 if the war score is not +100 or -100
-## scope = war
-alias[trigger:days_since_max_war_score] == value_field
-
-### compares the defender war score
-## scope = war
-alias[trigger:defender_war_score] == alias_keys_field[int_value]
-
-### compares the defender war score
-## scope = war
-alias[trigger:defender_war_score] == value_field
-
 ### is the scope war using the specified CB? using_cb = religious_war
 ## scope = war
 alias[trigger:using_cb] = <casus_belli_type>
-
-### Checks how much a character has contributed to the scoped war
-## scope = war
-alias[trigger:war_contribution] == alias_keys_field[int_value]
-
-### Checks how much a character has contributed to the scoped war
-## scope = war
-alias[trigger:war_contribution] == value_field
 
 ### Checks how much a character has contributed to the scoped war
 ## scope = war
@@ -2512,14 +1275,6 @@ alias[trigger:war_contribution] = {
     value == alias_keys_field[int_value]
     value == value_field
 }
-
-### compares the number of days the war is going on for
-## scope = war
-alias[trigger:war_days] == alias_keys_field[int_value]
-
-### compares the number of days the war is going on for
-## scope = war
-alias[trigger:war_days] == value_field
 
 
 #####################################################
@@ -2530,36 +1285,12 @@ alias[trigger:war_days] == value_field
 
 ### is the character old/young enough?
 ## scope = character
-alias[trigger:age] == alias_keys_field[int_value]
-
-### is the character old/young enough?
-## scope = character
-alias[trigger:age] == value_field
-
-### is the character old/young enough?
-## scope = character
 alias[trigger:age] == {
     ## cardinality = 0..2
     alias_keys_field[int_value]
     ## cardinality = 0..2
     value_field
 }
-
-### AI boldness
-## scope = character
-alias[trigger:ai_boldness] == alias_keys_field[int_value]
-
-### AI boldness
-## scope = character
-alias[trigger:ai_boldness] == value_field
-
-### AI compassion
-## scope = character
-alias[trigger:ai_compassion] == alias_keys_field[int_value]
-
-### AI compassion
-## scope = character
-alias[trigger:ai_compassion] == value_field
 
 enums = {
     enum[diplomacy_stance] = {
@@ -2576,78 +1307,6 @@ alias[trigger:ai_diplomacy_stance] = {
     target = scope[character]
     stance = enum[diplomacy_stance]
 }
-
-### AI greed
-## scope = character
-alias[trigger:ai_greed] == alias_keys_field[int_value]
-
-### AI greed
-## scope = character
-alias[trigger:ai_greed] == value_field
-
-### AI energy
-## scope = character
-alias[trigger:ai_energy] == alias_keys_field[int_value]
-
-### AI energy
-## scope = character
-alias[trigger:ai_energy] == value_field
-
-### AI honor
-## scope = character
-alias[trigger:ai_honor] == alias_keys_field[int_value]
-
-### AI honor
-## scope = character
-alias[trigger:ai_honor] == value_field
-
-### AI rationality
-## scope = character
-alias[trigger:ai_rationality] == alias_keys_field[int_value]
-
-### AI rationality
-## scope = character
-alias[trigger:ai_rationality] == value_field
-
-### does the character have the required gold? (AI category reserved)
-## scope = character
-alias[trigger:ai_reserved_gold] == alias_keys_field[int_value]
-
-### does the character have the required gold? (AI category reserved)
-## scope = character
-alias[trigger:ai_reserved_gold] == value_field
-
-### AI sociability
-## scope = character
-alias[trigger:ai_sociability] == alias_keys_field[int_value]
-
-### AI sociability
-## scope = character
-alias[trigger:ai_sociability] == value_field
-
-### AI vengefulness
-## scope = character
-alias[trigger:ai_vengefulness] == alias_keys_field[int_value]
-
-### AI vengefulness
-## scope = character
-alias[trigger:ai_vengefulness] == value_field
-
-### does the character have the required gold? (AI category war chest)
-## scope = character
-alias[trigger:ai_war_chest] == alias_keys_field[int_value]
-
-### does the character have the required gold? (AI category war chest)
-## scope = character
-alias[trigger:ai_war_chest] == value_field
-
-### AI zeal
-## scope = character
-alias[trigger:ai_zeal] == alias_keys_field[int_value]
-
-### AI zeal
-## scope = character
-alias[trigger:ai_zeal] == value_field
 
 ### check if all the scoped characters court artifact slots are empty or full
 ## scope = character
@@ -2687,35 +1346,11 @@ alias[trigger:aptitude] = {
     value == value_field
 }
 
-
-### Attraction value for the scoped character
-## scope = character
-alias[trigger:attraction] == alias_keys_field[int_value]
-
-### Attraction value for the scoped character
-## scope = character
-alias[trigger:attraction] == value_field
-
-
-### Is the amenity level of root's royal court better than the target
-## scope = character
-alias[trigger:average_amenity_level] == alias_keys_field[int_value]
-
-### Is the amenity level of root's royal court better than the target
-## scope = character
-alias[trigger:average_amenity_level] == value_field
-
 ### Average opinion of the character that are NOT powerful vassals of the faction scope target
 ## scope = character
 alias[trigger:average_faction_opinion_not_powerful_vassal] == replace_me_comparison
 
 # -B
-
-### Base weight of the scoped character base_weight > 10
-alias[trigger:base_weight] == alias_keys_field[int_value]
-
-### Base weight of the scoped character base_weight > 10
-alias[trigger:base_weight] == value_field
 
 # -C
 
@@ -2725,7 +1360,7 @@ alias[trigger:can_add_hook] = {
     target = scope[character]
     type = <hook>
     ##cardinality = 0..1
-    enum[duration] = alias_keys_field[int_value]
+    enum[duration] == alias_keys_field[int_value]
     ##cardinality = 0..1
     enum[duration] = value_field
 }
@@ -2812,77 +1447,9 @@ alias[trigger:can_sponsor_inspiration] = {
     target = scope[character]
 }
 
-### What is the ratio of the scoped character's men-at-arms gold expenses, relative to their income?
-## scope = character
-alias[trigger:character_men_at_arms_expense_gold_relative] == float[0.0..1.0]
-
-### What is the ratio of the scoped character's men-at-arms prestige expenses, relative to their income?
-## scope = character
-alias[trigger:character_men_at_arms_expense_prestige_relative] == float[0.0..1.0]
-
 ### does the character controls all counties and baronies inside the specified region (no hostile occupation either)?
 ## scope = character
 alias[trigger:completely_controls_region] = <geographical_region>
-
-### Is the scoped character's monthly progress on their assigned council task this big?
-## scope = character
-alias[trigger:council_task_monthly_progress] == value_field
-
-### Gets the base court grandeur value for a character, always NRoyalCourt::COURT_GRANDEUR_MIN for those without one
-## scope = character
-alias[trigger:court_grandeur_base] == alias_keys_field[int_value]
-
-### Gets the base court grandeur value for a character, always NRoyalCourt::COURT_GRANDEUR_MIN for those without one
-## scope = character
-alias[trigger:court_grandeur_base] == value_field
-
-### Gets the current court grandeur value for a character, always NRoyalCourt::COURT_GRANDEUR_MIN for those without one
-## scope = character
-alias[trigger:court_grandeur_current] == alias_keys_field[int_value]
-
-### Gets the current court grandeur value for a character, always NRoyalCourt::COURT_GRANDEUR_MIN for those without one
-## scope = character
-alias[trigger:court_grandeur_current] == value_field
-
-### Gets the current court grandeur level for a character, always 0 for those without one
-## scope = character
-alias[trigger:court_grandeur_current_level] == alias_keys_field[int_value]
-
-### Gets the current court grandeur level for a character, always 0 for those without one
-## scope = character
-alias[trigger:court_grandeur_current_level] == value_field
-
-### Gets the minimum expected court grandeur value for a character, always NRoyalCourt::COURT_GRANDEUR_MIN for those without one
-## scope = character
-alias[trigger:court_grandeur_minimum_expected] == alias_keys_field[int_value]
-
-### Gets the minimum expected court grandeur value for a character, always NRoyalCourt::COURT_GRANDEUR_MIN for those without one
-## scope = character
-alias[trigger:court_grandeur_minimum_expected] == value_field
-
-### Gets the minimum expected court grandeur level for a character, always 0 for those without one
-## scope = character
-alias[trigger:court_grandeur_minimum_expected_level] == alias_keys_field[int_value]
-
-### Gets the minimum expected court grandeur level for a character, always 0 for those without one
-## scope = character
-alias[trigger:court_grandeur_minimum_expected_level] == value_field
-
-### How many court positions the scoped character CAN currently employs
-## scope = character
-alias[trigger:court_positions_currently_available] == alias_keys_field[int_value]
-
-### How many court positions the scoped character CAN currently employs
-## scope = character
-alias[trigger:court_positions_currently_available] == value_field
-
-### How many court positions the scope character currently employs
-## scope = character
-alias[trigger:court_positions_currently_filled] == alias_keys_field[int_value]
-
-### How many court positions the scope character currently employs
-## scope = character
-alias[trigger:court_positions_currently_filled] == value_field
 
 ### Check if the chance to create a faction against a target of the scope character is is true against the scripted value create_faction_type_chance = {     type = faction_type #An ongoing faction     target = target_character     value <|<=|>=|> 0 }
 ## scope = character
@@ -2893,135 +1460,11 @@ alias[trigger:create_faction_type_chance] = {
     value == value_field
 }
 
-### Is the scoped character's current military strength this big?
-## scope = character
-alias[trigger:current_military_strength] == alias_keys_field[int_value]
-
-### Is the scoped character's current military strength this big?
-## scope = character
-alias[trigger:current_military_strength] == value_field
-
-### Current weight of the scoped character current_weight > 10
-## scope = character
-alias[trigger:current_weight] == alias_keys_field[int_value]
-
-### Current weight of the scoped character current_weight > 10
-## scope = character
-alias[trigger:current_weight] == value_field
-
-### Current weight of the scoped character as a value for portraits scaled between 0.0 and 1.0 current_weight_for_portrait > 0.1
-## scope = character
-alias[trigger:current_weight_for_portrait] == alias_keys_field[int_value]
-
-### Current weight of the scoped character as a value for portraits scaled between 0.0 and 1.0 current_weight_for_portrait > 0.1
-## scope = character
-alias[trigger:current_weight_for_portrait] == value_field
-
 # -D
-
-### Number of days this character has been a ruler, returns -1 if character isn't a ruler
-## scope = character
-alias[trigger:days_as_ruler] == alias_keys_field[int_value]
-
-### Number of days this character has been a ruler, returns -1 if character isn't a ruler
-## scope = character
-alias[trigger:days_as_ruler] == value_field
-
-### number of days the character has been imprisoned for (0 if not imprisoned)
-## scope = character
-alias[trigger:days_in_prison] == alias_keys_field[int_value]
-
-### number of days the character has been imprisoned for (0 if not imprisoned)
-## scope = character
-alias[trigger:days_in_prison] == value_field
-
-### Number of days the character has been in peace (0 if in war)
-## scope = character
-alias[trigger:days_of_continuous_peace] == alias_keys_field[int_value]
-
-### Number of days the character has been in peace (0 if in war)
-## scope = character
-alias[trigger:days_of_continuous_peace] == value_field
-
-### Number of days the character has been in peace (0 if in peace)
-## scope = character
-alias[trigger:days_of_continuous_war] == alias_keys_field[int_value]
-
-### Number of days the character has been in peace (0 if in peace)
-## scope = character
-alias[trigger:days_of_continuous_war] == value_field
-
-### number of days since the character has died.
-## scope = character
-alias[trigger:days_since_death] == alias_keys_field[int_value]
-
-### number of days since the character has died.
-## scope = character
-alias[trigger:days_since_death] == value_field
-
-### Gets the days since scoped character joined their current court
-## scope = character
-alias[trigger:days_since_joined_court] == alias_keys_field[int_value]
-
-### Gets the days since scoped character joined their current court
-## scope = character
-alias[trigger:days_since_joined_court] == value_field
-
-### Days since this vassal's liege's dynasty started ruling over this vassal
-## scope = character
-alias[trigger:days_since_vassal_contract_liege_dynasty_reign_start] == alias_keys_field[int_value]
-
-### Days since this vassal's liege's dynasty started ruling over this vassal
-## scope = character
-alias[trigger:days_since_vassal_contract_liege_dynasty_reign_start] == value_field
 
 ### Does the scoped character have the given death reason? death_reason = death_natural_causes
 ## scope = character
 alias[trigger:death_reason] = <death_reason>
-
-### Is the scoped character's debt level this value? -1 if not meeting any debt level threshold. 0 for the first one, and so on. Note that this might not match exactly with the modifier in effect as it calculates what the modifier will be now, and the character's actual modifier can lag behind
-## scope = character
-alias[trigger:debt_level] == alias_keys_field[int_value]
-
-### Is the scoped character's debt level this value? -1 if not meeting any debt level threshold. 0 for the first one, and so on. Note that this might not match exactly with the modifier in effect as it calculates what the modifier will be now, and the character's actual modifier can lag behind
-## scope = character
-alias[trigger:debt_level] == value_field
-
-### Diarch aptitude score for the scoped (potential) diarch
-## scope = character
-alias[trigger:diarch_aptitude] == alias_keys_field[int_value]
-
-### Diarch aptitude score for the scoped (potential) diarch
-## scope = character
-alias[trigger:diarch_aptitude] == value_field
-
-### Diarch loyalty score for the scoped (potential) diarch
-## scope = character
-alias[trigger:diarch_loyalty] == alias_keys_field[int_value]
-
-### Diarch loyalty score for the scoped (potential) diarch
-## scope = character
-alias[trigger:diarch_loyalty] == value_field
-
-### Get diarchy scales of power swing
-## scope = character
-alias[trigger:diarchy_swing] == alias_keys_field[int_value]
-
-### Get diarchy scales of power swing
-## scope = character
-alias[trigger:diarchy_swing] == value_field
-
-# Compare drift progress towards target with value<drifting_title> = { de_jure_drif_progress = {     target = <drift_target_title>    value > 50 } }
-# scope = character
-#alias[trigger:de_jure_drift_progress] = replace_me
-
-### does the character have the required diplomacy skill level?
-## scope = character
-alias[trigger:diplomacy] == alias_keys_field[int_value]
-
-### does the character have the required diplomacy skill level?
-## scope = character
-alias[trigger:diplomacy] == value_field
 
 ### does the character have the required diplomacy skill level difference against target? diplomacy = { target = character value <= script_value abs = yes/no(optional, default no) }
 ## scope = character
@@ -3033,104 +1476,12 @@ alias[trigger:diplomacy_diff] == {
     abs == bool
 }
 
-### Diplomacy skill scaled between 0.0 and 1.0 for portraits
-## scope = character
-alias[trigger:diplomacy_for_portrait] == float[0.0..1.0]
-
-### How many perks from this lifestyle does the character have?
-## scope = character
-alias[trigger:<lifestyle>_perks] == alias_keys_field[int_value]
-
-### How many perks from this lifestyle does the character have?
-## scope = character
-alias[trigger:<lifestyle>_perks] == value_field
-
-### How many perk points available does the character have?
-## scope = character
-alias[trigger:<lifestyle>_perk_points] == alias_keys_field[int_value]
-
-### How many perk points available does the character have?
-## scope = character
-alias[trigger:<lifestyle>_perk_points] == value_field
-
-### How many perk points available does the character have?
-## scope = character
-alias[trigger:<lifestyle>_unlockable_perks] == alias_keys_field[int_value]
-
-### How many perk points available does the character have?
-## scope = character
-alias[trigger:<lifestyle>_unlockable_perks] == value_field
-
-### How many perk points available does the character have?
-## scope = character
-alias[trigger:<lifestyle>_xp] == alias_keys_field[int_value]
-
-### How many perk points available does the character have?
-## scope = character
-alias[trigger:<lifestyle>_xp] == value_field
-
-### Is the scoped character's domain limit this big?
-## scope = character
-alias[trigger:domain_limit] == alias_keys_field[int_value]
-
-### Is the scoped character's domain limit this big?
-## scope = character
-alias[trigger:domain_limit] == value_field
-
-### Is there this much space left in the character's domain limit? Negative values also work for checking characters that are above their limit
-## scope = character
-alias[trigger:domain_limit_available] == alias_keys_field[int_value]
-
-### Is there this much space left in the character's domain limit? Negative values also work for checking characters that are above their limit
-## scope = character
-alias[trigger:domain_limit_available] == value_field
-
 ### Is the scoped character's domain this big in comparison to their limit?
 ## scope = character
 alias[trigger:domain_limit_percentage] == float[0.0..1.0]
 
-### Is the scoped character's domain this big?
-## scope = character
-alias[trigger:domain_size] == alias_keys_field[int_value]
-
-### Is the scoped character's domain this big?
-## scope = character
-alias[trigger:domain_size] == value_field
-
-### Is the scoped character's domain this big? Does not count titles currently in the grace period
-## scope = character
-alias[trigger:domain_size_excluding_grace_period] == alias_keys_field[int_value]
-
-### Is the scoped character's domain this big? Does not count titles currently in the grace period
-## scope = character
-alias[trigger:domain_size_excluding_grace_period] == value_field
-
-### does the character have the required dread?
-## scope = character
-alias[trigger:dread] == alias_keys_field[int_value]
-
-### does the character have the required dread?
-## scope = character
-alias[trigger:dread] == value_field
-
-### AI boldness modified by the dread of the specified character dread_modified_ai_boldness = { 	character = root	# the character whose dread is affecting the target character 	value >= 5 }
-## scope = character
-alias[trigger:dread_modified_ai_boldness] = alias_keys_field[int_value]
-
-### AI boldness modified by the dread of the specified character dread_modified_ai_boldness = { 	character = root	# the character whose dread is affecting the target character 	value >= 5 }
-## scope = character
-alias[trigger:dread_modified_ai_boldness] = int_value_field
-
 
 # -E
-
-### is the character old/young enough? If immortal, this uses the age they became immortal at
-## scope = character
-alias[trigger:effective_age] == alias_keys_field[int_value]
-
-### is the character old/young enough? If immortal, this uses the age they became immortal at
-## scope = character
-alias[trigger:effective_age] == value_field
 
 ### Scoped character employs target court position
 ## scope = character
@@ -3138,25 +1489,9 @@ alias[trigger:employs_court_position] = <court_position>
 
 # -F
 
-### does the character have the required fertility?
-## scope = character
-alias[trigger:fertility] == value_field
-
-### Does the character have this much focus progress
-## scope = character
-alias[trigger:focus_progress] == value_field
-
 
 
 # -G
-
-### does the character have the required gold?
-## scope = character
-alias[trigger:gold] == alias_keys_field[int_value]
-
-### does the character have the required gold?
-## scope = character
-alias[trigger:gold] == value_field
 
 # NOTE: only used once for create_cadet_branches
 ### checks if the government of the character allows something
@@ -3166,12 +1501,6 @@ alias[trigger:government_allows] = enum[government_rule]
 ### checks if the government of the character disallows something
 ## scope = character
 alias[trigger:government_disallows] = enum[government_rule]
-
-### How many perks in the lifestyle does this dynasty have?
-alias[trigger:guile_legacy_track_perks] == alias_keys_field[int_value]
-
-### How many perks in the lifestyle does this dynasty have?
-alias[trigger:guile_legacy_track_perks] == value_field
 
 ### checks if the government of the character has a specific flag
 # TODO: support autocomplete
@@ -3254,10 +1583,6 @@ alias[trigger:has_court_position] = <court_position>
 ## scope = character
 alias[trigger:has_court_type] = <court_type>
 
-# Does the character have this culture group? has_culture_group = culture_group:east_slavic_group
-# scope = character
-#alias[trigger:has_culture_group] = scope[culture_group]
-
 ### Does the dead character have this flag?
 ## scope = character
 alias[trigger:has_dead_character_flag] = scope[flag]
@@ -3282,7 +1607,8 @@ alias[trigger:has_diarchy_type] = <diarchy>
 ## scope = character
 alias[trigger:has_dread_level_towards] = {
     target = scope[character]
-    level = int_value_field
+    level == alias_keys_field[int_value]
+    level == int_value_field
 }
 
 ### Is the target character voting for the scoped character in the election of the target title has_election_vote_of = { who = scope:actor title = primary_title }
@@ -3299,21 +1625,15 @@ alias[trigger:has_focus] = <focus>
 ### Does the character have the specified gene template? Only works for morph genes. An interface trigger. has_gene = { category = X template = Y } An interface trigger, can only be used in specific places
 ## scope = character
 alias[trigger:has_gene] = {
-    category = replace_me
-    template = replace_me
+    category = <morph_gene>
+    category = <special_morph_gene>
+    template = <morph_gene_template>
+    template = <special_morph_gene_template>
 }
 
 ### checks if the character has a specific government type
 ## scope = character
 alias[trigger:has_government] = <government>
-
-### Does the character had a focus for that time?
-## scope = character
-alias[trigger:has_had_focus_for_days] == alias_keys_field[int_value]
-
-### Does the character had a focus for that time?
-## scope = character
-alias[trigger:has_had_focus_for_days] == value_field
 
 ### does the character have a hook on the target of the given type?, has_hook_of_type = { target = X type = Y }
 ## scope = character
@@ -3435,14 +1755,6 @@ alias[trigger:has_triggered_legend_seed] = <legend_type>
 ## scope = character
 alias[trigger:has_vassal_stance] = <vassal_stance>
 
-### does the character have the required health?
-## scope = character
-alias[trigger:health] == alias_keys_field[int_value]
-
-### does the character have the required health?
-## scope = character
-alias[trigger:health] == value_field
-
 ### Is the skill the highest skill of the character? True even when there are multiple skills with the same highest value.
 ## scope = character
 alias[trigger:highest_skill] = enum[attribute]
@@ -3450,18 +1762,6 @@ alias[trigger:highest_skill] = enum[attribute]
 ### what is the highest held landed title tier of the character?
 ## scope = character
 alias[trigger:highest_held_title_tier] = enum[title_tier]
-
-### what is the highest held landed title tier of the character?
-## scope = character
-alias[trigger:highest_held_title_tier] == alias_keys_field[int_value]
-
-### what is the highest held landed title tier of the character?
-## scope = character
-alias[trigger:highest_held_title_tier] == value_field
-
-### what is the highest held landed title tier of the character?
-## scope = character
-alias[trigger:highest_held_title_tier] == value_field
 
 ### For how long has the scope character been a hostage? { days/months/years =,>,< X }
 ## scope = character
@@ -3478,33 +1778,6 @@ alias[trigger:important_action_is_valid_but_invisible] = <suggestion>
 ## scope = character
 alias[trigger:important_action_is_visible] = <suggestion>
 
-### does the character have the required influence?
-## scope = character
-alias[trigger:influence] == alias_keys_field[int_value]
-
-### does the character have the required influence?
-## scope = character
-alias[trigger:influence] == value_field
-
-### does the character have the required influence level?
-## scope = character
-alias[trigger:influence_level] == alias_keys_field[int_value]
-
-### does the character have the required influence level?
-## scope = character
-alias[trigger:influence_level] == value_field
-
-# is the character in an activity of the specified type?
-#alias[trigger:in_activity_type] = replace_me
-
-### does the character have the required intrigue skill level?
-## scope = character
-alias[trigger:intrigue] == alias_keys_field[int_value]
-
-### does the character have the required intrigue skill level?
-## scope = character
-alias[trigger:intrigue] == value_field
-
 ### does the character have the required intrigue skill level difference against target? intrigue = { target = character value <= script_value abs = yes/no(optional, default no) }
 ## scope = character
 alias[trigger:intrigue_diff] == {
@@ -3515,10 +1788,6 @@ alias[trigger:intrigue_diff] == {
     abs = bool
 }
 
-
-### Intrigue skill scaled between 0.0 and 1.0 for portraits
-## scope = character
-alias[trigger:intrigue_for_portrait] == float[0.0..1.0]
 
 ### Is the given activity type on cooldown for the current character.
 ## scope = character
@@ -3594,10 +1863,6 @@ alias[trigger:is_in_guest_subset] = {
 ## scope = character
 alias[trigger:is_in_prison_type] = enum[prison_type]
 
-# is the scope character participating in the target activity?
-# scope = character
-#alias[trigger:is_in_target_activity] = replace_me
-
 ### Is the character leading a faction of the specified type?
 ## scope = character
 alias[trigger:is_leading_faction_type] = <faction>
@@ -3671,14 +1936,6 @@ alias[trigger:knows_language_of_culture] == scope[culture]
 
 # -L
 
-### does the character have the required learning skill level?
-## scope = character
-alias[trigger:learning] == alias_keys_field[int_value]
-
-### does the character have the required learning skill level?
-## scope = character
-alias[trigger:learning] == value_field
-
 ### does the character have the required learning skill level difference against target? learning = { target = character value <= script_value abs = yes/no(optional, default no) }
 ## scope = character
 alias[trigger:learning_diff] = {
@@ -3689,84 +1946,8 @@ alias[trigger:learning_diff] = {
     abs = bool
 }
 
-### Learning skill scaled between 0.0 and 1.0 for portraits
-## scope = character
-alias[trigger:learning_for_portrait] == float[0.0..1.0]
-
-### Gets the scoped character's current legitimacy
-## scope = character
-alias[trigger:legitimacy] == alias_keys_field[int_value]
-
-### Gets the scoped character's current legitimacy
-## scope = character
-alias[trigger:legitimacy] == value_field
-
-### Gets the scoped character's current legitimacy level
-## scope = character
-alias[trigger:legitimacy_level] == alias_keys_field[int_value]
-
-### Gets the scoped character's current legitimacy level
-## scope = character
-alias[trigger:legitimacy_level] == value_field
-
-### does the character have the required gold? (AI category long term)
-## scope = character
-alias[trigger:levies_to_liege] == alias_keys_field[int_value]
-
-### does the character have the required gold? (AI category long term)
-## scope = character
-alias[trigger:levies_to_liege] == value_field
-
-### does the character have the required gold? (AI category long term)
-## scope = character
-alias[trigger:long_term_gold] == alias_keys_field[int_value]
-
-### does the character have the required gold? (AI category long term)
-## scope = character
-alias[trigger:long_term_gold] == value_field
-
-### How big is the 'long term' budget is supposed to get?
-## scope = character
-alias[trigger:long_term_gold_maximum] == alias_keys_field[int_value]
-
-### How big is the 'long term' budget is supposed to get?
-## scope = character
-alias[trigger:long_term_gold_maximum] == value_field
-
 
 # -M
-
-### Current number of personal MaA regiments
-## scope = character
-alias[trigger:maa_regiments_count] == alias_keys_field[int_value]
-
-### Current number of personal MaA regiments
-## scope = character
-alias[trigger:maa_regiments_count] == value_field
-
-### Max number of personal MaA regiment
-## scope = character
-alias[trigger:maa_regiments_max_count] == alias_keys_field[int_value]
-
-### Max number of personal MaA regiment
-## scope = character
-alias[trigger:maa_regiments_max_count] == value_field
-
-### Diarch qualification for spefic mandate type
-## scope = character
-alias[trigger:mandate_type_qualification] == alias_keys_field[int_value]
-
-### Diarch qualification for spefic mandate type
-## scope = character
-alias[trigger:mandate_type_qualification] == value_field
-
-### does the character have the required martial skill level?
-## scope = character
-alias[trigger:martial] == alias_keys_field[int_value]
-
-### does the character have the required martial skill level?
-## scope = character
-alias[trigger:martial] == value_field
 
 ### does the character have the required martial skill level?
 ## scope = character
@@ -3782,155 +1963,12 @@ alias[trigger:martial_diff] == {
     abs = bool
 }
 
-### Martial skill scaled between 0.0 and 1.0 for portraits
-## scope = character
-alias[trigger:martial_for_portrait] == float[0.0..1.0]
-
-### How many active accolades can this character have at most?
-## scope = character
-alias[trigger:max_active_accolades] == alias_keys_field[int_value]
-
-### How many active accolades can this character have at most?
-## scope = character
-alias[trigger:max_active_accolades] == value_field
-
-### Is the scoped character's max military strength this big?
-## scope = character
-alias[trigger:max_military_strength] == alias_keys_field[int_value]
-
-### Is the scoped character's max military strength this big?
-## scope = character
-alias[trigger:max_military_strength] == value_field
-
-### Does the scope character have value amount of max soldiers of MaA of the base type?
-## scope = character
-alias[trigger:max_number_maa_soldiers_of_base_type] == alias_keys_field[int_value]
-
-### Does the scope character have value amount of max soldiers of MaA of the base type?
-## scope = character
-alias[trigger:max_number_maa_soldiers_of_base_type] == value_field
-
-### Does the scope character have value amount of max soldiers of MaA of the type?
-## scope = character
-alias[trigger:max_number_maa_soldiers_of_type] == alias_keys_field[int_value]
-
-### Does the scope character have value amount of max soldiers of MaA of the type?
-## scope = character
-alias[trigger:max_number_maa_soldiers_of_type] == value_field
-
-### The maximum number of concubines a character can have max_number_of_concubines > 2
-## scope = character
-alias[trigger:max_number_of_concubines] == alias_keys_field[int_value]
-
-### The maximum number of concubines a character can have max_number_of_concubines > 2
-## scope = character
-alias[trigger:max_number_of_concubines] == value_field
-
-### Check how many knights the scoped character can potentially have
-## scope = character
-alias[trigger:max_number_of_knights] == alias_keys_field[int_value]
-
-### Check how many knights the scoped character can potentially have
-## scope = character
-alias[trigger:max_number_of_knights] == value_field
-
-
-
-
-
-### The amount of missing unique ancestors from the characters real father and mother Traverses the family tree for NDefines::NChildbirth::INBREEDING_ANCESTOR_GENERATIONS amount of generations. By default this means that we're traversing 62 ancestors and report the amount of duplicates we find. calc_missing_unique_ancestors > 10
-## scope = character
-alias[trigger:missing_unique_ancestors] == alias_keys_field[int_value]
-
-### The amount of missing unique ancestors from the characters real father and mother Traverses the family tree for NDefines::NChildbirth::INBREEDING_ANCESTOR_GENERATIONS amount of generations. By default this means that we're traversing 62 ancestors and report the amount of duplicates we find. calc_missing_unique_ancestors > 10
-## scope = character
-alias[trigger:missing_unique_ancestors] == value_field
-
-### Is the scoped character's monthly balance this big?
-## scope = character
-alias[trigger:monthly_character_balance] == alias_keys_field[int_value]
-
-### Is the scoped character's monthly balance this big?
-## scope = character
-alias[trigger:monthly_character_balance] == value_field
-
-### Is the scoped character's monthly expenses this big?
-## scope = character
-alias[trigger:monthly_character_expenses] == alias_keys_field[int_value]
-
-### Is the scoped character's monthly expenses this big?
-## scope = character
-alias[trigger:monthly_character_expenses] == value_field
-
-### Is the scoped character's monthly income this big?
-## scope = character
-alias[trigger:monthly_character_income] == alias_keys_field[int_value]
-
-### Is the scoped character's monthly income this big?
-## scope = character
-alias[trigger:monthly_character_income] == value_field
-
-### did the character allocate the required gold? (AI category long term)
-## scope = character
-alias[trigger:monthly_character_income_long_term] == alias_keys_field[int_value]
-
-### did the character allocate the required gold? (AI category long term)
-## scope = character
-alias[trigger:monthly_character_income_long_term] == value_field
-
-### did the character allocate the required gold? (AI category reserved)
-## scope = character
-alias[trigger:monthly_character_income_reserved] == alias_keys_field[int_value]
-
-### did the character allocate the required gold? (AI category reserved)
-## scope = character
-alias[trigger:monthly_character_income_reserved] == value_field
-
-### did the character allocate the required gold? (AI category short term)
-## scope = character
-alias[trigger:monthly_character_income_short_term] == alias_keys_field[int_value]
-
-### did the character allocate the required gold? (AI category short term)
-## scope = character
-alias[trigger:monthly_character_income_short_term] == value_field
-
-### did the character allocate the required gold? (AI category war chest)
-## scope = character
-alias[trigger:monthly_character_income_war_chest] == alias_keys_field[int_value]
-
-### did the character allocate the required gold? (AI category war chest)
-## scope = character
-alias[trigger:monthly_character_income_war_chest] == value_field
-
-### Is the scoped character's monthly military gold expenses this big? (unraised maa costs)
-## scope = character
-alias[trigger:monthly_character_men_at_arms_expense_gold] == alias_keys_field[int_value]
-
-### Is the scoped character's monthly military gold expenses this big? (unraised maa costs)
-## scope = character
-alias[trigger:monthly_character_men_at_arms_expense_gold] == value_field
-
-### Is the scoped character's monthly military prestige expenses this big? (unraised maa costs)
-## scope = character
-alias[trigger:monthly_character_men_at_arms_expense_prestige] == alias_keys_field[int_value]
-
-### Is the scoped character's monthly military prestige expenses this big? (unraised maa costs)
-## scope = character
-alias[trigger:monthly_character_men_at_arms_expense_prestige] == value_field
-
-### Number of months this character has been a ruler, returns -1 if character isn't a ruler
-## scope = character
-alias[trigger:months_as_ruler] == alias_keys_field[int_value]
-
-### Number of months this character has been a ruler, returns -1 if character isn't a ruler
-## scope = character
-alias[trigger:months_as_ruler] == value_field
-
 ### Is the scoped character's monthly military prestige expenses this big? (unraised maa costs). character = { morph_gene_attribute = { category = gene_height attribute = body_height value < 0.05 } }
 ## scope = character
 alias[trigger:morph_gene_attribute] == {
     category = <gene>
     attribute = <gene>
+    value == alias_keys_field[int_value]
     value == value_field
 }
 
@@ -3938,92 +1976,13 @@ alias[trigger:morph_gene_attribute] == {
 ## scope = character
 alias[trigger:morph_gene_value] == {
     category = <gene>
+    value == alias_keys_field[int_value]
     value == value_field
 }
 
 
 
 # -N
-
-### How many active accolades does this character currently have?
-## scope = character
-alias[trigger:num_active_accolades] == alias_keys_field[int_value]
-
-### How many active accolades does this character currently have?
-## scope = character
-alias[trigger:num_active_accolades] == value_field
-
-### How many inactive accolades does this character currently have?
-## scope = character
-alias[trigger:num_inactive_accolades] == alias_keys_field[int_value]
-
-### How many inactive accolades does this character currently have?
-## scope = character
-alias[trigger:num_inactive_accolades] == value_field
-
-### Compare the number of bad genetic traits
-## scope = character
-alias[trigger:num_of_bad_genetic_traits] == alias_keys_field[int_value]
-
-### Compare the number of bad genetic traits
-## scope = character
-alias[trigger:num_of_bad_genetic_traits] == value_field
-
-### Compare the number of good genetic traits
-## scope = character
-alias[trigger:num_of_good_genetic_traits] == alias_keys_field[int_value]
-
-### Compare the number of good genetic traits
-## scope = character
-alias[trigger:num_of_good_genetic_traits] == value_field
-
-### How many languages does the character know?
-## scope = character
-alias[trigger:num_of_known_languages] == alias_keys_field[int_value]
-
-### How many languages does the character know?
-## scope = character
-alias[trigger:num_of_known_languages] == value_field
-
-### Compares the number of scripted relations a character has of the type
-## scope = character
-alias[trigger:num_of_relation_activity_recurrer] == alias_keys_field[int_value]
-
-### Compares the number of scripted relations a character has of the type
-## scope = character
-alias[trigger:num_of_relation_activity_recurrer] == value_field
-
-### Compares the number of scripted relations a character has of the type.
-## scope = character
-alias[trigger:num_of_relation_<scripted_relation>] == alias_keys_field[int_value]
-
-### Compares the number of scripted relations a character has of the type.
-## scope = character
-alias[trigger:num_of_relation_<scripted_relation>] == value_field
-
-### Count of active task contract offered
-## scope = character
-alias[trigger:num_offered_task_contracts] == alias_keys_field[int_value]
-
-### Count of active task contract offered
-## scope = character
-alias[trigger:num_offered_task_contracts] == value_field
-
-### How many personal legend seeds are available to this character?
-## scope = character
-alias[trigger:num_personal_legend_seeds] == alias_keys_field[int_value]
-
-### How many personal legend seeds are available to this character?
-## scope = character
-alias[trigger:num_personal_legend_seeds] == value_field
-
-### Does the scoped character have this number of virtous traits? num_virtous_traits > 5 ORnum_virtous_traits = { value > 5 faith = scope:faith }, to base it on what a specific faith considers virtuous
-## scope = character
-alias[trigger:num_sinful_traits] == alias_keys_field[int_value]
-
-### Does the scoped character have this number of virtous traits? num_virtous_traits > 5 ORnum_virtous_traits = { value > 5 faith = scope:faith }, to base it on what a specific faith considers virtuous
-## scope = character
-alias[trigger:num_sinful_traits] == value_field
 
 
 ### Does the scoped character have this number of virtous traits? num_virtous_traits > 5 ORnum_virtous_traits = { value > 5 faith = scope:faith }, to base it on what a specific faith considers virtuous
@@ -4033,38 +1992,6 @@ alias[trigger:num_sinful_traits] = {
     value == value_field
     faith = scope[faith]
 }
-
-### Amount of taken task contracts for character (accepted & not yet completed)
-## scope = character
-alias[trigger:num_taken_task_contracts] == alias_keys_field[int_value]
-
-### Amount of taken task contracts for character (accepted & not yet completed)
-## scope = character
-alias[trigger:num_taken_task_contracts] == value_field
-
-### Amount of tas contracts for character
-## scope = character
-alias[trigger:num_task_contracts] == alias_keys_field[int_value]
-
-### Amount of tas contracts for character
-## scope = character
-alias[trigger:num_task_contracts] == value_field
-
-### How many triggered legend seeds are available to this character?
-## scope = character
-alias[trigger:num_triggered_legend_seeds] == alias_keys_field[int_value]
-
-### How many triggered legend seeds are available to this character?
-## scope = character
-alias[trigger:num_triggered_legend_seeds] == value_field
-
-### Does the scoped character have this number of virtous traits? num_virtous_traits > 5 ORnum_virtous_traits = { value > 5 faith = scope:faith }, to base it on what a specific faith considers virtuous
-## scope = character
-alias[trigger:num_virtuous_traits] == alias_keys_field[int_value]
-
-### Does the scoped character have this number of virtous traits? num_virtous_traits > 5 ORnum_virtous_traits = { value > 5 faith = scope:faith }, to base it on what a specific faith considers virtuous
-## scope = character
-alias[trigger:num_virtuous_traits] == value_field
 
 ### Does the scoped character have this number of virtous traits? num_virtous_traits > 5 ORnum_virtous_traits = { value > 5 faith = scope:faith }, to base it on what a specific faith considers virtuous
 ## scope = character
@@ -4086,30 +2013,25 @@ alias[trigger:number_maa_regiments_of_base_type] == {
 ## scope = character
 alias[trigger:number_maa_regiments_of_type] == {
     type = <maa_type>
-    value = int_value_field
+    value == alias_keys_field[int_value]
+    value == int_value_field
 }
 
 ### Does the scope character have value amount of soldiers of MaA of the base type?
 ## scope = character
 alias[trigger:number_maa_soldiers_of_base_type] == {
     type = value[unit_type]
-    value = int_value_field
+    value == alias_keys_field[int_value]
+    value == int_value_field
 }
 
 ### Does the scope character have value amount of soldiers of MaA of the type?
 ## scope = character
 alias[trigger:number_maa_soldiers_of_type] == {
     type = <maa_type>
-    value = int_value_field
+    value == alias_keys_field[int_value]
+    value == int_value_field
 }
-
-### does the character have this many commander traits?
-## scope = character
-alias[trigger:number_of_commander_traits] == alias_keys_field[int_value]
-
-### does the character have this many commander traits?
-## scope = character
-alias[trigger:number_of_commander_traits] == value_field
 
 ### does the character and the target have a number of commander traits in common? number_of_personality_traits_in_common = { target = X value >/</>=/<= Y }
 ## scope = character
@@ -4119,22 +2041,6 @@ alias[trigger:number_of_commander_traits_in_common] = {
     value == value_field
 }
 
-### The number of concubines the scoped character has number_of_concubines > 2
-## scope = character
-alias[trigger:number_of_concubines] == alias_keys_field[int_value]
-
-### The number of concubines the scoped character has number_of_concubines > 2
-## scope = character
-alias[trigger:number_of_concubines] == value_field
-
-### The number of fertile concubines the scoped character should have to not get penalties number_of_desired_concubines > 2
-## scope = character
-alias[trigger:number_of_desired_concubines] == alias_keys_field[int_value]
-
-### The number of fertile concubines the scoped character should have to not get penalties number_of_desired_concubines > 2
-## scope = character
-alias[trigger:number_of_desired_concubines] == value_field
-
 ### Check the number of votes the scoped character has in the target title number_of_election_votes = { title = scope:actor.primary_title value = 0 }
 ## scope = character
 alias[trigger:number_of_election_votes] = {
@@ -4142,38 +2048,6 @@ alias[trigger:number_of_election_votes] = {
     value == alias_keys_field[int_value]
     value == value_field
 }
-
-### The number of visibly fertile concubines the scoped character has number_of_fertile_concubines > 2
-## scope = character
-alias[trigger:number_of_fertile_concubines] == alias_keys_field[int_value]
-
-### The number of visibly fertile concubines the scoped character has number_of_fertile_concubines > 2
-## scope = character
-alias[trigger:number_of_fertile_concubines] == value_field
-
-### Check how many knights the scoped character has at the moment
-## scope = character
-alias[trigger:number_of_knights] == alias_keys_field[int_value]
-
-### Check how many knights the scoped character has at the moment
-## scope = character
-alias[trigger:number_of_knights] == value_field
-
-### does the character have this many lifestyle traits?
-## scope = character
-alias[trigger:number_of_lifestyle_traits] == alias_keys_field[int_value]
-
-### does the character have this many lifestyle traits?
-## scope = character
-alias[trigger:number_of_lifestyle_traits] == value_field
-
-### The number of men at arms the scoped character has
-## scope = character
-alias[trigger:number_of_maa_regiments] == alias_keys_field[int_value]
-
-### The number of men at arms the scoped character has
-## scope = character
-alias[trigger:number_of_maa_regiments] == value_field
 
 
 ### does the character and the target have a number of opposing personality traits? number_of_opposing_personality_traits = { target = X value >/</>=/<= Y }
@@ -4192,14 +2066,6 @@ alias[trigger:number_of_opposing_traits] = {
     value == value_field
 }
 
-### does the character have this many personality traits?
-## scope = character
-alias[trigger:number_of_personality_traits] == alias_keys_field[int_value]
-
-### does the character have this many personality traits?
-## scope = character
-alias[trigger:number_of_personality_traits] == value_field
-
 ### does the character and the target have a number of personality traits in common? number_of_personality_traits_in_common = { target = X value >/</>=/<= Y }
 ## scope = character
 alias[trigger:number_of_personality_traits_in_common] = {
@@ -4208,14 +2074,6 @@ alias[trigger:number_of_personality_traits_in_common] = {
     value == value_field
 }
 
-### Does the character have a specified number of powerful vassals?
-## scope = character
-alias[trigger:number_of_powerful_vassals] == alias_keys_field[int_value]
-
-### Does the character have a specified number of powerful vassals?
-## scope = character
-alias[trigger:number_of_powerful_vassals] == value_field
-
 ### do the two characters share a number of traits that is considered sinful by both of their respective faiths?
 ## scope = character
 alias[trigger:number_of_sinful_traits_in_common] = {
@@ -4223,22 +2081,6 @@ alias[trigger:number_of_sinful_traits_in_common] = {
     value == alias_keys_field[int_value]
     value == value_field
 }
-
-### The number of stationed men at arms the scoped character has
-## scope = character
-alias[trigger:number_of_stationed_maa_regiments] == alias_keys_field[int_value]
-
-### The number of stationed men at arms the scoped character has
-## scope = character
-alias[trigger:number_of_stationed_maa_regiments] == value_field
-
-### does the character have this many traits?
-## scope = character
-alias[trigger:number_of_traits] == alias_keys_field[int_value]
-
-### does the character have this many traits?
-## scope = character
-alias[trigger:number_of_traits] == value_field
 
 ### does the character and the target have a number of traits in common? number_of_traits_in_common = { target = X value >/</>=/<= Y }
 ## scope = character
@@ -4277,58 +2119,9 @@ alias[trigger:opinion] = {
 
 ### Does the character own a story of this type?
 ## scope = character
-alias[trigger:owns_story_of_type] = replace_me
+alias[trigger:owns_story_of_type] = <story_cycle>
 
 # -P
-
-### Does the character have this many perk points across all lifestyles combined?
-## scope = character
-alias[trigger:perk_points] == alias_keys_field[int_value]
-
-### Does the character have this many perk points across all lifestyles combined?
-## scope = character
-alias[trigger:perk_points] == value_field
-
-### Does the character have this many perk points assigned across all lifestyles combined?
-## scope = character
-alias[trigger:perk_points_assigned] == alias_keys_field[int_value]
-
-### Does the character have this many perk points assigned across all lifestyles combined?
-## scope = character
-alias[trigger:perk_points_assigned] == value_field
-
-### Does the character have this many perk points assigned to this tree? perks_in_tree = { tree = tree_key value > 5 }
-## scope = character
-alias[trigger:perks_in_tree] == alias_keys_field[int_value]
-
-### Does the character have this many perk points assigned to this tree? perks_in_tree = { tree = tree_key value > 5 }
-## scope = character
-alias[trigger:perks_in_tree] == value_field
-
-### does the character have the required piety?
-## scope = character
-alias[trigger:piety] == alias_keys_field[int_value]
-
-### does the character have the required piety?
-## scope = character
-alias[trigger:piety] == value_field
-
-### does the character have the required piety level?
-alias[trigger:piety_level] = alias_keys_field[int_value]
-
-### does the character have the required piety level?
-alias[trigger:piety_level] = value_field
-
-### does the character have the required piety level?
-alias[trigger:parent_relatedness] == float
-
-# ### what place in line of succession does the character hold?
-# ## scope = character
-# alias[trigger:place_in_line_of_succession] = alias_keys_field[int_value]
-#
-# ### what place in line of succession does the character hold?
-# ## scope = character
-# alias[trigger:place_in_line_of_succession] = int_value_field
 
 ### what place in line of succession does the character hold?
 ## scope = landed_title
@@ -4337,54 +2130,6 @@ alias[trigger:place_in_line_of_succession] = {
     value == alias_keys_field[int_value]
     value == int_value_field
 }
-
-### Check where the target character is in the scoped character's player heir list. player_heir_position = { target = scope:actor position = 0 }
-## scope = character
-alias[trigger:player_heir_position] == alias_keys_field[int_value]
-
-### Check where the target character is in the scoped character's player heir list. player_heir_position = { target = scope:actor position = 0 }
-## scope = character
-alias[trigger:player_heir_position] == value_field
-
-### How long has the character been pregnant? Counts from impregnation, not reveal
-## scope = character
-alias[trigger:pregnancy_days] == alias_keys_field[int_value]
-
-### How long has the character been pregnant? Counts from impregnation, not reveal
-## scope = character
-alias[trigger:pregnancy_days] == value_field
-
-### does the character have the required prestige?
-## scope = character
-alias[trigger:prestige] == alias_keys_field[int_value]
-
-### does the character have the required prestige?
-## scope = character
-alias[trigger:prestige] == value_field
-
-### does the character have the required prestige level?
-## scope = character
-alias[trigger:prestige_level] == alias_keys_field[int_value]
-
-### does the character have the required prestige level?
-## scope = character
-alias[trigger:prestige_level] == value_field
-
-### What is the provision cost between the domicile owner and the domicile's current location." In order to calculate the cost we will operate in three stages: 1. Check if the from and to provinces are direct neighbours. 2. Check any travel plan the domicile owner might have and see if the from and    to are part of the travel plan. This will require domicile's location to be    the first entry in the travel plan. 3. Do a pathfind between the domicile and domicile owner's current location,    using that path for the cost. scope:character = {	provision_cost_to_domicile > 100 }
-## scope = character
-alias[trigger:provision_cost_to_domicile] == alias_keys_field[int_value]
-
-### What is the provision cost between the domicile owner and the domicile's current location." In order to calculate the cost we will operate in three stages: 1. Check if the from and to provinces are direct neighbours. 2. Check any travel plan the domicile owner might have and see if the from and    to are part of the travel plan. This will require domicile's location to be    the first entry in the travel plan. 3. Do a pathfind between the domicile and domicile owner's current location,    using that path for the cost. scope:character = {	provision_cost_to_domicile > 100 }
-## scope = character
-alias[trigger:provision_cost_to_domicile] == value_field
-
-### does the character have the required prowess skill level?
-## scope = character
-alias[trigger:prowess] == alias_keys_field[int_value]
-
-### does the character have the required prowess skill level?
-## scope = character
-alias[trigger:prowess] == value_field
 
 ### does the character have the required prowess skill level difference against target? prowess = { target = character value <= script_value abs = yes/no(optional, default no) }
 ## scope = character
@@ -4396,40 +2141,9 @@ alias[trigger:prowess_diff] == {
     abs = bool
 }
 
-### Prowess skill scaled between 0.0 and 1.0 for portraits
-## scope = character
-alias[trigger:prowess_for_portrait] == float[0.0..1.0]
-
-### does the character have the required prowess skill level (ignores the prowess_no_portrait modifier)?
-## scope = character
-alias[trigger:prowess_no_portrait] == alias_keys_field[int_value]
-
-### does the character have the required prowess skill level (ignores the prowess_no_portrait modifier)?
-## scope = character
-alias[trigger:prowess_no_portrait] == value_field
-
-
-
-
 # -Q
 
 # -R
-
-### what is the ransom cost of the character?
-## scope = character
-alias[trigger:ransom_cost] == alias_keys_field[int_value]
-
-### what is the ransom cost of the character?
-## scope = character
-alias[trigger:ransom_cost] == value_field
-
-### Is the scoped character's top liege's realm this big (# of counties)?
-## scope = character
-alias[trigger:realm_size] == alias_keys_field[int_value]
-
-### Is the scoped character's top liege's realm this big (# of counties)?
-## scope = character
-alias[trigger:realm_size] == value_field
 
 ### Is the character's realm within this distance of the title? Distance is in pixels, squared for performance reasons. realm_to_title_distance_squared = { title = some_title value > 10000 }
 ## scope = character
@@ -4438,22 +2152,6 @@ alias[trigger:realm_to_title_distance_squared] = {
     value == alias_keys_field[int_value]
     value == value_field
 }
-
-### does the character have the required gold? (AI category 'reserved')
-## scope = character
-alias[trigger:reserved_gold] == alias_keys_field[int_value]
-
-### does the character have the required gold? (AI category 'reserved')
-## scope = character
-alias[trigger:reserved_gold] == value_field
-
-### How big is the 'reserved' budget is supposed to get?
-## scope = character
-alias[trigger:reserved_gold_maximum] == alias_keys_field[int_value]
-
-### How big is the 'reserved' budget is supposed to get?
-## scope = character
-alias[trigger:reserved_gold_maximum] == value_field
 
 ### is the target character's opinion of the scope character greater or equal than the value? opinion = { target = X value >/</>=/<= Y }
 ## scope = character
@@ -4471,44 +2169,6 @@ alias[trigger:reverse_has_opinion_modifier] = {
 
 # -S
 
-### does the character have the specified dread baseline value?
-## scope = character
-alias[trigger:scriptedtests_dread_base] == alias_keys_field[int_value]
-
-### does the character have the specified dread baseline value?
-## scope = character
-alias[trigger:scriptedtests_dread_base] == value_field
-
-### does the character have the specified tax income, excluding income from the theocratic lessee?
-alias[trigger:scriptedtests_gold_income_no_theocracy] == alias_keys_field[int_value]
-
-### does the character have the specified tax income, excluding income from the theocratic lessee?
-alias[trigger:scriptedtests_gold_income_no_theocracy] == value_field
-
-### does the character have the specified piety income?
-## scope = character
-alias[trigger:scriptedtests_piety_income] == alias_keys_field[int_value]
-
-### does the character have the specified piety income?
-## scope = character
-alias[trigger:scriptedtests_piety_income] == value_field
-
-### does the character have the required gold? (AI category short term)
-## scope = character
-alias[trigger:short_term_gold] == alias_keys_field[int_value]
-
-### does the character have the required gold? (AI category short term)
-## scope = character
-alias[trigger:short_term_gold] == value_field
-
-### How big is the 'short term' budget is supposed to get?(It may exceed this if all other budgets are full)
-## scope = character
-alias[trigger:short_term_gold_maximum] == alias_keys_field[int_value]
-
-### How big is the 'short term' budget is supposed to get?(It may exceed this if all other budgets are full)
-## scope = character
-alias[trigger:short_term_gold_maximum] == value_field
-
 ### Is the scoped decision an important decision for the target character?
 ## scope = character
 alias[trigger:should_decision_create_alert] == <decision>
@@ -4524,22 +2184,13 @@ alias[trigger:should_notify_can_join_open_activity] == <activity>
 ### Check if this character 'matches' a group, with a certain match percentage. A match value can range from 0.0 to 1.0. (0% to 100%) A static group filter means: this character will always get the same result against the same group. (there is no 'random' involved beyond the name of the group) On average (across all characters), an 0.1 match means you would get 'yes' for 10% of the characters to match this group, and it would always be the same characters for the same group. static_group_filter = {    group = <a_group_id>    match = 0.1} Instead of a group id, you can supply a scope, and it will use that scope's value as the group 'id'. static_group_filter = {    scope = <any_scope>    match = 0.1}
 ## scope = character
 alias[trigger:static_group_filter] = {
-    group = replace_me
-    match = float
-}
-
-alias[trigger:static_group_filter] = {
+    ## cardinality = 0..1
+    group = value_set[static_group_filter] # TODO
+    ## cardinality = 0..1
     scope = scope_field
-    match = float
+    match == float
+    match == single_alias_right[score_formula]
 }
-
-### does the character have the required stewardship skill level?
-## scope = character
-alias[trigger:stewardship] == alias_keys_field[int_value]
-
-### does the character have the required stewardship skill level?
-## scope = character
-alias[trigger:stewardship] == value_field
 
 ### does the character have the required stewardship skill level difference against target? stewardship = { target = character value <= script_value abs = yes/no(optional, default no) }
 ## scope = character
@@ -4551,60 +2202,7 @@ alias[trigger:stewardship_diff] == {
     abs = bool
 }
 
-### Stewardship skill scaled between 0.0 and 1.0 for portraits
-## scope = character
-alias[trigger:stewardship_for_portrait] == float[0.0..1.0]
-
-### does the character have the required stress?
-## scope = character
-alias[trigger:stress] == alias_keys_field[int_value]
-
-### does the character have the required stress?
-## scope = character
-alias[trigger:stress] == value_field
-
-### does the character have the required stress level?
-## scope = character
-alias[trigger:stress_level] == alias_keys_field[int_value]
-
-### does the character have the required stress level?
-## scope = character
-alias[trigger:stress_level] == value_field
-
-### Strife opinion value accumulated by the character
-## scope = character
-alias[trigger:strife_opinion] == alias_keys_field[int_value]
-
-### Strife opinion value accumulated by the character
-## scope = character
-alias[trigger:strife_opinion] == value_field
-
-### Is the scoped character's sub-realm this big (# of counties)?
-## scope = character
-alias[trigger:sub_realm_size] == alias_keys_field[int_value]
-
-### Is the scoped character's sub-realm this big (# of counties)?
-## scope = character
-alias[trigger:sub_realm_size] == value_field
-
-
-### How much has the scoped character invested in the target title towards the target candidate? scope:character = { 	succession_appointment_score_invested = {		title = scope:title 		candidate = scope:character		value < 0	}}
-## scope = character
-alias[trigger:succession_appointment_score_invested] == alias_keys_field[int_value]
-
-### How much has the scoped character invested in the target title towards the target candidate? scope:character = { 	succession_appointment_score_invested = {		title = scope:title 		candidate = scope:character		value < 0	}}
-## scope = character
-alias[trigger:succession_appointment_score_invested] == value_field
-
 # -T
-
-### Target weight of the scoped character target_weight > 10
-## scope = character
-alias[trigger:target_weight] == alias_keys_field[int_value]
-
-### Target weight of the scoped character target_weight > 10
-## scope = character
-alias[trigger:target_weight] == value_field
 
 ### What is the scoped character's Tax Collector aptitude in the target tax slot type? 
 ## scope = character
@@ -4613,14 +2211,6 @@ alias[trigger:tax_collector_aptitude] = {
     value == alias_keys_field[int_value]
     value == value_field
 }
-
-### The amount of tax a character sends to their liege
-## scope = character
-alias[trigger:tax_to_liege] == alias_keys_field[int_value]
-
-### The amount of tax a character sends to their liege
-## scope = character
-alias[trigger:tax_to_liege] == value_field
 
 ### What is the difference in highest title tiers between the scoped character and the target character (-5 to 5) For example, this is true: scope:a_baron = {     tier_difference = {         target = scope:a_king         value = -3     } }  Checks the difference in highest_held_title_tier between two characters. The formatting is: scope:actor = { tier_difference = { target = scope:recipient value = 1 } }
 ## scope = character
@@ -4659,39 +2249,6 @@ alias[trigger:trait_compatibility] = {
     value == value_field
 }
 
-### What this character would cost as a travel leader
-## scope = character
-alias[trigger:travel_leader_cost] == alias_keys_field[int_value]
-
-### What this character would cost as a travel leader
-## scope = character
-alias[trigger:travel_leader_cost] == value_field
-
-### The safety-aptitude of the current travel leader
-## scope = character
-alias[trigger:travel_leader_safety] == alias_keys_field[int_value]
-
-### The safety-aptitude of the current travel leader
-## scope = character
-alias[trigger:travel_leader_safety] == value_field
-
-### The speed-aptitude of the current travel leader
-## scope = character
-alias[trigger:travel_leader_speed] == alias_keys_field[int_value]
-
-### The speed-aptitude of the current travel leader
-## scope = character
-alias[trigger:travel_leader_speed] == value_field
-
-
-### does the character have the required tyranny?
-## scope = character
-alias[trigger:tyranny] == alias_keys_field[int_value]
-
-### does the character have the required tyranny?
-## scope = character
-alias[trigger:tyranny] == value_field
-
 
 
 # -U
@@ -4706,88 +2263,8 @@ alias[trigger:vassal_contract_has_flag] = value[vassal_contract_flag]
 ## scope = character
 alias[trigger:vassal_contract_liege_dynasty_reign_start_date] == date_field
 
-### The level of the provided contract type in the scoped character's current vassal contract
-## scope = character
-alias[trigger:vassal_contract_obligation_level] == alias_keys_field[int_value]
-
-### The level of the provided contract type in the scoped character's current vassal contract
-## scope = character
-alias[trigger:vassal_contract_obligation_level] == value_field
-
-### Can the obligation level of the scoped character's vassal contract be decreasde?
-## scope = character
-alias[trigger:vassal_contract_obligation_level_can_be_decreased] == alias_keys_field[int_value]
-
-### Can the obligation level of the scoped character's vassal contract be decreasde?
-## scope = character
-alias[trigger:vassal_contract_obligation_level_can_be_decreased] == value_field
-
-### Can the obligation level of the scoped character's vassal contract be increased?
-## scope = character
-alias[trigger:vassal_contract_obligation_level_can_be_increased] == alias_keys_field[int_value]
-
-### Can the obligation level of the scoped character's vassal contract be increased?
-## scope = character
-alias[trigger:vassal_contract_obligation_level_can_be_increased] == value_field
-
-### Can the obligation level of the scoped character's vassal contract be increased?
-## scope = character
-alias[trigger:vassal_contract_obligation_level_score] == alias_keys_field[int_value]
-
-### Can the obligation level of the scoped character's vassal contract be increased?
-## scope = character
-alias[trigger:vassal_contract_obligation_level_score] == value_field
-
-### Is the scoped character's number of vassals (excluding barons) this high?
-## scope = character
-alias[trigger:vassal_count] == alias_keys_field[int_value]
-
-### Is the scoped character's number of vassals (excluding barons) this high?
-## scope = character
-alias[trigger:vassal_count] == value_field
-
-### Is the scoped character's vassal limit this big?
-## scope = character
-alias[trigger:vassal_limit] == alias_keys_field[int_value]
-
-### Is the scoped character's vassal limit this big?
-## scope = character
-alias[trigger:vassal_limit] == value_field
-
-### Is there this much space left in the character's vassal limit? Negative values also work for checking characters that are above their limit
-## scope = character
-alias[trigger:vassal_limit_available] == alias_keys_field[int_value]
-
-### Is there this much space left in the character's vassal limit? Negative values also work for checking characters that are above their limit
-## scope = character
-alias[trigger:vassal_limit_available] == value_field
-
-### Is the scoped character's vassal count this big in comparison to their limit?
-## scope = character
-alias[trigger:vassal_limit_percentage] == alias_keys_field[int_value]
-
-### Is the scoped character's vassal count this big in comparison to their limit?
-## scope = character
-alias[trigger:vassal_limit_percentage] == value_field
-
 
 # -W
-
-### does the character have the required gold? (AI category 'war chest')
-## scope = character
-alias[trigger:war_chest_gold] == alias_keys_field[int_value]
-
-### does the character have the required gold? (AI category 'war chest')
-## scope = character
-alias[trigger:war_chest_gold] == value_field
-
-### How big is the 'war chest' budget is supposed to get?
-## scope = character
-alias[trigger:war_chest_gold_maximum] == alias_keys_field[int_value]
-
-### How big is the 'war chest' budget is supposed to get?
-## scope = character
-alias[trigger:war_chest_gold_maximum] == value_field
 
 ### can the scoped character be employed as court position by the employer?scope:character = {	would_be_valid_for_court_position = {		employer = scope:employer		court_position = court_physician_court_position	}}
 ## scope = character
@@ -4800,91 +2277,9 @@ alias[trigger:would_be_valid_for_court_position] = {
 
 # -Y
 
-### Get character year_of_birth: scope:character = { year_of_birth > 1096 }
-## scope = character
-alias[trigger:year_of_birth] == alias_keys_field[int_value]
-
-### Get character year_of_birth: scope:character = { year_of_birth > 1096 }
-## scope = character
-alias[trigger:year_of_birth] == value_field
-
-### Is the scoped character's yearly balance this big?
-## scope = character
-alias[trigger:yearly_character_balance] == alias_keys_field[int_value]
-
-### Is the scoped character's yearly balance this big?
-## scope = character
-alias[trigger:yearly_character_balance] == value_field
-
-### Is the scoped character's yearly expenses this big?
-## scope = character
-alias[trigger:yearly_character_expenses] == alias_keys_field[int_value]
-
-### Is the scoped character's yearly expenses this big?
-## scope = character
-alias[trigger:yearly_character_expenses] == value_field
-
-### Is the scoped character's yearly income this big?
-## scope = character
-alias[trigger:yearly_character_income] == alias_keys_field[int_value]
-
-### Is the scoped character's yearly income this big?
-## scope = character
-alias[trigger:yearly_character_income] == value_field
-
-### Is the scoped character's yearly military gold expenses this big? (unraised maa costs)
-## scope = character
-alias[trigger:yearly_character_men_at_arms_expense_gold] == alias_keys_field[int_value]
-
-### Is the scoped character's yearly military gold expenses this big? (unraised maa costs)
-## scope = character
-alias[trigger:yearly_character_men_at_arms_expense_gold] == value_field
-
-
-### Is the scoped character's yearly military prestige expenses this big? (unraised maa costs)
-## scope = character
-alias[trigger:yearly_character_men_at_arms_expense_prestige] == alias_keys_field[int_value]
-
-### Is the scoped character's yearly military prestige expenses this big? (unraised maa costs)
-## scope = character
-alias[trigger:yearly_character_men_at_arms_expense_prestige] == value_field
-
-### How many whole years has the character been an active diarch?
-## scope = character
-alias[trigger:years_as_diarch] == alias_keys_field[int_value]
-
-### How many whole years has the character been an active diarch?
-## scope = character
-alias[trigger:years_as_diarch] == value_field
-
-
-### Number of years this character has been a ruler, returns -1 if character isn't a ruler
-## scope = character
-alias[trigger:years_as_ruler] == alias_keys_field[int_value]
-
-### Number of years this character has been a ruler, returns -1 if character isn't a ruler
-## scope = character
-alias[trigger:years_as_ruler] == value_field
-
-### How many whole years has liege spent in a diarchy?
-## scope = character
-alias[trigger:years_in_diarchy] == alias_keys_field[int_value]
-
-### How many whole years has liege spent in a diarchy?
-## scope = character
-alias[trigger:years_in_diarchy] == value_field
-
 ### does the scope province have a particular building or its successor?
 ## scope = province
 alias[trigger:has_building_or_higher] = <building>
-
-### Number of members in the scoped confederation
-## scope = confederation
-alias[trigger:member_count] == alias_keys_field[int_value]
-
-### Number of members in the scoped confederation
-## scope = confederation
-alias[trigger:member_count] == value_field
 
 ### Checks if sub-region has phase parameter or not
 ## scope = situation_sub_region
@@ -4898,28 +2293,297 @@ alias[trigger:participant_group_type] = enum[participant_groups]
 ## scope = situation_sub_region
 alias[trigger:sub_region_current_phase] = enum[situation_phases]
 
+### Is the target character a special guest in the scoped activity, optionally for a specific type.
+## scope = activity
+alias[trigger:is_special_guest] = {
+    target = scope[character]
+    ## cardinality = 0..1
+    type = replace_me
+}
+
+### Is the target character a special guest in the scoped activity, optionally for a specific type.
+## scope = activity
+alias[trigger:is_special_guest] = scope[character]
+
+### Get random applicable innovation from another culture
+## scope = culture
+alias[trigger:can_get_innovation_from] = scope[character]
+
+### Does the Army have the given raid intent?
+## scope = army
+alias[trigger:raid_intent] = <raid_intent>
+
+### Is geographical region part of situation sub-region?
+## scope = situation_sub_region
+alias[trigger:situation_sub_region_has_geographical_region] = scope[geographical_region]
+
+### Is this the current active tax obligation?
+## scope = tax_slot
+alias[trigger:is_active_obligation] = <tax_obligation>
+
+### Log whether the parent trigger succeeded or failed
+## scope = any
+alias[trigger:debug_log] = bool #TODO: Unsure
+
+### Log whether the parent trigger succeeded or failed. Log which children succeeded or failed
+## scope = any
+alias[trigger:debug_log_details] = bool #TODO: Unsure
+
+### Does the player have a reward item
+## scope = any
+alias[trigger:has_reward_item] = replace_me #TODO: Unsure
+
+### Does the player have a reward item
+## scope = any
+alias[trigger:is_bad_nickname] = <nickname>
+
+### is the specified front end character selected (also can be used with "= yes" and "= no")?
+### An interface trigger, can only be used in specific places
+## scope = any
+alias[trigger:is_frontend_character_selected] = replace_me #TODO: Unsure
+
+### is the specified front end character selected (also can be used with "= yes" and "= no")?
+### An interface trigger, can only be used in specific places
+## scope = any
+alias[trigger:is_frontend_character_selected] = bool
+
+### is the specified in-game view open?
+### An interface trigger, can only be used in specific places
+## scope = any
+alias[trigger:is_game_view_open] = replace_me #TODO: Unsure
+
+### Saves the scoped character's opinion of the target character as an arbitrarily-named target to be referenced later in the in the same trigger
+### save_temporary_opinion_value_as = { name = <string> target = x
+## scope = any
+alias[trigger:save_temporary_opinion_value_as] = {
+    name = value_set[temporary_scope] # TODO: Standardize the scope/variable `value_set`s
+    target = scope[character]
+}
+
+### Does the scoped holding type have the given parameter?
+## scope = holding_type
+alias[trigger:has_holding_parameter] = enum[holding_parameter]
+
+### Checks if top sub-region has phase parameter or not
+## scope = situation
+alias[trigger:has_situation_top_phase_parameter] = enum[situation_phase_param]
+
+### Checks if situation current phase equals phase_type_key (will take first sub-region)
+## scope = situation
+alias[trigger:situation_current_phase] = enum[situation_phases]
+
+### Date when the situation was completed.
+## scope = situation
+alias[trigger:situation_end_date] == date_field
+
+### Checks if any sub-region of the situation has any of their future phases affected by the given catalyst.
+## scope = situation
+alias[trigger:situation_has_catalyst] = <catalyst>
+
+### Date when the situation started.
+## scope = situation
+alias[trigger:situation_start_date] == date_field
+
+### Checks if top sub-region of situation has any of the future phases affected by the given catalyst
+## scope = situation
+alias[trigger:situation_top_has_catalyst] = <catalyst>
+
+### Is the scoped situation of a specific situation type?
+## scope = situation
+alias[trigger:situation_type] = <situation>
+
+### target = other character value >/</= sum of differences in ai values
+## scope = character
+alias[trigger:ai_values_divergence] = {
+    target = scope[character]
+    value == alias_keys_field[int_value]
+    value == int_value_field
+}
+
+### Does the target character have access to MaA of specified type (excluding through tributaries)
+## scope = character
+alias[trigger:has_access_to_maa] = <maa_type>
+
+### Does the scoped character have an opinion toward anyone with the target reason?
+## scope = character
+alias[trigger:has_any_opinion_with_reason] = alias_keys_field[opinion_reason]
+
+### Is the scoped character a player that has automated the target court position to auto-assign the best candidate?
+## scope = character
+alias[trigger:has_player_court_position_automation_assign_best] = scope[court_position_type]
+
+### Is the scoped character a player that has automated the target court position to auto-assign the best candidate?
+## scope = character
+alias[trigger:has_player_court_position_automation_assign_best] = <court_position>
+
+### Is the scoped character a player that has automated the target court position to auto-assign the best candidate (or else show an event)?
+## scope = character
+alias[trigger:has_player_court_position_automation_assign_best_or_event] = scope[court_position_type]
+
+### Is the scoped character a player that has automated the target court position to auto-assign the best candidate (or else show an event)?
+## scope = character
+alias[trigger:has_player_court_position_automation_assign_best_or_event] = <court_position>
+
+### Is the scoped character a player that has automated the target court position to show events?
+## scope = character
+alias[trigger:has_player_court_position_automation_event] = scope[court_position_type]
+
+### Is the scoped character a player that has automated the target court position to show events?
+## scope = character
+alias[trigger:has_player_court_position_automation_event] = <court_position>
+
+### Is the scoped character a player that has NOT automated the target court position?
+## scope = character
+alias[trigger:has_player_court_position_automation_none] = scope[court_position_type]
+
+### Is the scoped character a player that has NOT automated the target court position?
+## scope = character
+alias[trigger:has_player_court_position_automation_none] = <court_position>
+
+### Was this mandate selected for the diarch?
+## scope = character
+alias[trigger:has_selected_mandate] = diarchy_mandate # TODO: Unsure
+
+### Check if the character has a specific contract group
+## scope = character
+alias[trigger:has_subject_contract_group] = <subject_contract_group>
+
+### Is the skill the highest skill (including Prowess) of the character? True even when there are multiple skills with the same highest value.
+## scope = character
+alias[trigger:highest_skill_including_prowess] = enum[attribute]
+
+### Do any of the current active obligations in the scoped character's subject contract have the given flag
+## scope = character
+alias[trigger:subject_contract_has_flag] = value[vassal_contract_flag]
+
+### Checks if the character would get an alliance with the target character through such a marriage.
+## scope = character
+alias[trigger:yields_alliance] = {
+    candidate = scope[character]
+    target = scope[character]
+    target_candidate = scope[character]
+}
+
+### has_domicile_construction - Is the scoped domicile currently constructing the specified building?
+### scope:domicile = { has_domicile_construction = domicile building key }
+## scope = domicile
+alias[trigger:has_domicile_construction] = <domicile_building>
+
+### How many perks from this lifestyle does the character have?
+## scope = character
+alias[trigger:<lifestyle>_perks] == alias_keys_field[int_value]
+
+### How many perks from this lifestyle does the character have?
+## scope = character
+alias[trigger:<lifestyle>_perks] == single_alias_right[score_formula]
+
+### How many perks from this lifestyle does the character have?
+## scope = character
+alias[trigger:<lifestyle>_perks] == value_field
+
+### How many perk points available does the character have?
+## scope = character
+alias[trigger:<lifestyle>_perk_points] == alias_keys_field[int_value]
+
+### How many perk points available does the character have?
+## scope = character
+alias[trigger:<lifestyle>_perk_points] == single_alias_right[score_formula]
+
+### How many perk points available does the character have?
+## scope = character
+alias[trigger:<lifestyle>_perk_points] == value_field
+
+### How many perk points available does the character have?
+## scope = character
+alias[trigger:<lifestyle>_unlockable_perks] == alias_keys_field[int_value]
+
+### How many perk points available does the character have?
+## scope = character
+alias[trigger:<lifestyle>_unlockable_perks] == single_alias_right[score_formula]
+
+### How many perk points available does the character have?
+## scope = character
+alias[trigger:<lifestyle>_unlockable_perks] == value_field
+
+### How many perk points available does the character have?
+## scope = character
+alias[trigger:<lifestyle>_xp] == alias_keys_field[int_value]
+
+### How many perk points available does the character have?
+## scope = character
+alias[trigger:<lifestyle>_xp] == single_alias_right[score_formula]
+
+### How many perk points available does the character have?
+## scope = character
+alias[trigger:<lifestyle>_xp] == value_field
+
+### Does the character have this many perk points assigned to this tree? perks_in_tree = { tree = tree_key value > 5 }
+## scope = character
+alias[trigger:perks_in_tree] == alias_keys_field[int_value]
+
+### Does the character have this many perk points assigned to this tree? perks_in_tree = { tree = tree_key value > 5 }
+## scope = character
+alias[trigger:perks_in_tree] == single_alias_right[score_formula]
+
+### Does the character have this many perk points assigned to this tree? perks_in_tree = { tree = tree_key value > 5 }
+## scope = character
+alias[trigger:perks_in_tree] == value_field
+
+### How many perks does this lifestyle have?
+## scope = character
+alias[trigger:perks_in_<lifestyle>] == alias_keys_field[int_value]
+
+### How many perks does this lifestyle have?
+## scope = character
+alias[trigger:perks_in_<lifestyle>] == single_alias_right[score_formula]
+
+### How many perks does this lifestyle have?
+## scope = character
+alias[trigger:perks_in_<lifestyle>] == value_field
+
+### Compares the number of scripted relations a character has of the type
+## scope = character
+alias[trigger:num_of_relation_<scripted_relation>] == alias_keys_field[int_value]
+
+### Compares the number of scripted relations a character has of the type
+## scope = character
+alias[trigger:num_of_relation_<scripted_relation>] == single_alias_right[score_formula]
+
+### Compares the number of scripted relations a character has of the type
+## scope = character
+alias[trigger:num_of_relation_<scripted_relation>] == value_field
+
+### Total number of days since this travel plan started.
+## scope = travel_plan
+alias[trigger:days_travelled] == alias_keys_field[int_value]
+
+### Total number of days since this travel plan started.
+## scope = travel_plan
+alias[trigger:days_travelled] == single_alias_right[score_formula]
+
+### Total number of days since this travel plan started.
+## scope = travel_plan
+alias[trigger:days_travelled] == int_value_field
+
+### AI boldness modified by the dread of the specified character dread_modified_ai_boldness = { 	character = root	# the character whose dread is affecting the target character 	value >= 5 }
+## scope = character
+alias[trigger:dread_modified_ai_boldness] = {
+    character = scope[character]
+    value = alias_keys_field[int_value]
+    value = single_alias_right[score_formula]
+    value = int_value_field
+}
+
+###  the obligation level of the scoped character's vassal contract be decreasde?
+## scope = character
+alias[trigger:vassal_contract_obligation_level_can_be_decreased] = <subject_contract>
+
+###  Can the obligation level of the scoped character's vassal contract be increased?
+## scope = character
+alias[trigger:vassal_contract_obligation_level_can_be_increased] = <subject_contract>
 
 
 
 # -Z
 
-### 
-#alias[trigger:any_inspiration] = {
-#    alias_name[trigger] = alias_match_left[trigger]
-#}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-### Compare the current value.
-alias[trigger:compare_value] == replace_me_comparison
+###

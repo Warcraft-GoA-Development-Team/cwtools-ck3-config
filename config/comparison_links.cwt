@@ -53,4 +53,10 @@ links = {
         input_scopes = character
         output_scope = any
     }
+    num_of_relation_<scripted_relation> = {
+        desc = "Compares the number of scripted relations a character has of the type "
+        type = value
+        input_scopes = character
+        output_scope = any
+    }
 }

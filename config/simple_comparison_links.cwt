@@ -78,6 +78,18 @@ links = {
 		input_scopes = character_memory
 		output_scope = any
 	}
+	memory_creation_date = {
+		desc = "Date when the memory was created."
+		type = value
+		input_scopes = character_memory
+		output_scope = any
+	}
+	memory_end_date = {
+		desc = "Date when the memory will be forgotten. (this may change over time)"
+		type = value
+		input_scopes = character_memory
+		output_scope = any
+	}
 	maa_current_troops_count = {
 		desc = "Get current number of soldiers in MaA regiment"
 		type = value
@@ -198,8 +210,20 @@ links = {
 		input_scopes = travel_plan
 		output_scope = any
 	}
+	days_travelled = {
+		desc = "Total number of days since this travel plan started."
+		type = value
+		input_scopes = travel_plan
+		output_scope = any
+	}
 	departure_date = {
 		desc = "Compare the date the travel plan started."
+		type = value
+		input_scopes = travel_plan
+		output_scope = any
+	}
+	final_destination_arrival_date = {
+		desc = "Estimation date of arrival at the final destination"
 		type = value
 		input_scopes = travel_plan
 		output_scope = any
@@ -212,6 +236,12 @@ links = {
 	}
 	final_destination_progress = {
 		desc = "Time progress (0.0 - 1.0) towards the final destination of the travel plan, compared to departure date from the very start of the Travel Plan."
+		type = value
+		input_scopes = travel_plan
+		output_scope = any
+	}
+	next_destination_arrival_date = {
+		desc = "Estimation date of arrival at the next destination"
 		type = value
 		input_scopes = travel_plan
 		output_scope = any
@@ -348,6 +378,12 @@ links = {
 		input_scopes = epidemic
 		output_scope = any
 	}
+	outbreak_start_date = {
+		desc = "Date when the epidemic outbreak began."
+		type = value
+		input_scopes = epidemic
+		output_scope = any
+	}
 	total_infected_provinces = {
 		desc = "Get the total number of provinces infected over the lifetime of this epidemic. total_infected_provinces >= 20"
 		type = value
@@ -384,6 +420,12 @@ links = {
 		input_scopes = mercenary_company
 		output_scope = any
 	}
+	current_computer_date = {
+		desc = "Compare the current computer date. An interface trigger, can only be used in specific places"
+		type = value
+		input_scopes = any
+		output_scope = any
+	}
 	current_computer_date_day = {
 		desc = "Compare the current computer day. An interface trigger, can only be used in specific places"
 		type = value
@@ -398,6 +440,12 @@ links = {
 	}
 	current_computer_date_year = {
 		desc = "Compare the current computer year. An interface trigger, can only be used in specific places"
+		type = value
+		input_scopes = any
+		output_scope = any
+	}
+	current_date = {
+		desc = "Compare the current ingame date."
 		type = value
 		input_scopes = any
 		output_scope = any
@@ -422,6 +470,12 @@ links = {
 	}
 	current_year = {
 		desc = "Compare the current ingame year"
+		type = value
+		input_scopes = any
+		output_scope = any
+	}
+	game_start_date = {
+		desc = "Compare the date of the bookmarked game launched."
 		type = value
 		input_scopes = any
 		output_scope = any
@@ -504,6 +558,12 @@ links = {
 		input_scopes = province
 		output_scope = any
 	}
+	province_infection_date = {
+		desc = "Date when the target epidemic infected the scoped province."
+		type = value
+		input_scopes = province
+		output_scope = any
+	}
 	province_infection_rate = {
 		desc = "Infection rate of target epidemic in the scoped province. province_infection_rate >= 20"
 		type = value
@@ -570,6 +630,18 @@ links = {
 		input_scopes = legend
 		output_scope = any
 	}
+	legend_completion_date = {
+		desc = "Date when the legend was completed."
+		type = value
+		input_scopes = legend
+		output_scope = any
+	}
+	legend_start_date = {
+		desc = "Date when the legend was created."
+		type = value
+		input_scopes = legend
+		output_scope = any
+	}
 	situation_days_since_end_date = {
 		desc = "Days since when the situation was completed."
 		type = value
@@ -578,6 +650,18 @@ links = {
 	}
 	situation_days_since_start_date = {
 		desc = "Days since the situation started."
+		type = value
+		input_scopes = situation
+		output_scope = any
+	}
+	situation_end_date = {
+		desc = "Date when the situation was completed."
+		type = value
+		input_scopes = situation
+		output_scope = any
+	}
+	situation_start_date = {
+		desc = "Date when the situation started."
 		type = value
 		input_scopes = situation
 		output_scope = any
@@ -1296,216 +1380,6 @@ links = {
 		input_scopes = character
 		output_scope = any
 	}
-	num_of_relation_activity_recurrer = {
-		desc = "Compares the number of scripted relations a character has of the type"
-		type = value
-		input_scopes = character
-		output_scope = any
-	}
-	num_of_relation_antiquarian = {
-		desc = "Compares the number of scripted relations a character has of the type"
-		type = value
-		input_scopes = character
-		output_scope = any
-	}
-	num_of_relation_best_friend = {
-		desc = "Compares the number of scripted relations a character has of the type"
-		type = value
-		input_scopes = character
-		output_scope = any
-	}
-	num_of_relation_blood_brother = {
-		desc = "Compares the number of scripted relations a character has of the type"
-		type = value
-		input_scopes = character
-		output_scope = any
-	}
-	num_of_relation_bully = {
-		desc = "Compares the number of scripted relations a character has of the type"
-		type = value
-		input_scopes = character
-		output_scope = any
-	}
-	num_of_relation_court_physician = {
-		desc = "Compares the number of scripted relations a character has of the type"
-		type = value
-		input_scopes = character
-		output_scope = any
-	}
-	num_of_relation_crush = {
-		desc = "Compares the number of scripted relations a character has of the type"
-		type = value
-		input_scopes = character
-		output_scope = any
-	}
-	num_of_relation_event_recurrer = {
-		desc = "Compares the number of scripted relations a character has of the type"
-		type = value
-		input_scopes = character
-		output_scope = any
-	}
-	num_of_relation_favorite_child = {
-		desc = "Compares the number of scripted relations a character has of the type"
-		type = value
-		input_scopes = character
-		output_scope = any
-	}
-	num_of_relation_friend = {
-		desc = "Compares the number of scripted relations a character has of the type"
-		type = value
-		input_scopes = character
-		output_scope = any
-	}
-	num_of_relation_grudge = {
-		desc = "Compares the number of scripted relations a character has of the type"
-		type = value
-		input_scopes = character
-		output_scope = any
-	}
-	num_of_relation_guardian = {
-		desc = "Compares the number of scripted relations a character has of the type"
-		type = value
-		input_scopes = character
-		output_scope = any
-	}
-	num_of_relation_intrigue_mentor = {
-		desc = "Compares the number of scripted relations a character has of the type"
-		type = value
-		input_scopes = character
-		output_scope = any
-	}
-	num_of_relation_intrigue_student = {
-		desc = "Compares the number of scripted relations a character has of the type"
-		type = value
-		input_scopes = character
-		output_scope = any
-	}
-	num_of_relation_lover = {
-		desc = "Compares the number of scripted relations a character has of the type"
-		type = value
-		input_scopes = character
-		output_scope = any
-	}
-	num_of_relation_mentor = {
-		desc = "Compares the number of scripted relations a character has of the type"
-		type = value
-		input_scopes = character
-		output_scope = any
-	}
-	num_of_relation_nemesis = {
-		desc = "Compares the number of scripted relations a character has of the type"
-		type = value
-		input_scopes = character
-		output_scope = any
-	}
-	num_of_relation_nursed_child = {
-		desc = "Compares the number of scripted relations a character has of the type"
-		type = value
-		input_scopes = character
-		output_scope = any
-	}
-	num_of_relation_oaf = {
-		desc = "Compares the number of scripted relations a character has of the type"
-		type = value
-		input_scopes = character
-		output_scope = any
-	}
-	num_of_relation_old_flame = {
-		desc = "Compares the number of scripted relations a character has of the type"
-		type = value
-		input_scopes = character
-		output_scope = any
-	}
-	num_of_relation_potential_friend = {
-		desc = "Compares the number of scripted relations a character has of the type"
-		type = value
-		input_scopes = character
-		output_scope = any
-	}
-	num_of_relation_potential_hook = {
-		desc = "Compares the number of scripted relations a character has of the type"
-		type = value
-		input_scopes = character
-		output_scope = any
-	}
-	num_of_relation_potential_lover = {
-		desc = "Compares the number of scripted relations a character has of the type"
-		type = value
-		input_scopes = character
-		output_scope = any
-	}
-	num_of_relation_potential_rival = {
-		desc = "Compares the number of scripted relations a character has of the type"
-		type = value
-		input_scopes = character
-		output_scope = any
-	}
-	num_of_relation_rival = {
-		desc = "Compares the number of scripted relations a character has of the type"
-		type = value
-		input_scopes = character
-		output_scope = any
-	}
-	num_of_relation_soldier_friend = {
-		desc = "Compares the number of scripted relations a character has of the type"
-		type = value
-		input_scopes = character
-		output_scope = any
-	}
-	num_of_relation_soulmate = {
-		desc = "Compares the number of scripted relations a character has of the type"
-		type = value
-		input_scopes = character
-		output_scope = any
-	}
-	num_of_relation_student = {
-		desc = "Compares the number of scripted relations a character has of the type"
-		type = value
-		input_scopes = character
-		output_scope = any
-	}
-	num_of_relation_victim = {
-		desc = "Compares the number of scripted relations a character has of the type"
-		type = value
-		input_scopes = character
-		output_scope = any
-	}
-	num_of_relation_ward = {
-		desc = "Compares the number of scripted relations a character has of the type"
-		type = value
-		input_scopes = character
-		output_scope = any
-	}
-	num_of_relation_wedding_bad_fertility = {
-		desc = "Compares the number of scripted relations a character has of the type"
-		type = value
-		input_scopes = character
-		output_scope = any
-	}
-	num_of_relation_wedding_good_fertility = {
-		desc = "Compares the number of scripted relations a character has of the type"
-		type = value
-		input_scopes = character
-		output_scope = any
-	}
-	num_of_relation_wedding_very_bad_fertility = {
-		desc = "Compares the number of scripted relations a character has of the type"
-		type = value
-		input_scopes = character
-		output_scope = any
-	}
-	num_of_relation_wedding_very_good_fertility = {
-		desc = "Compares the number of scripted relations a character has of the type"
-		type = value
-		input_scopes = character
-		output_scope = any
-	}
-	num_of_relation_wet_nurse = {
-		desc = "Compares the number of scripted relations a character has of the type"
-		type = value
-		input_scopes = character
-		output_scope = any
-	}
 	num_offered_task_contracts = {
 		desc = "Count of active task contract offered scope:actor = { num_offered_task_contracts > 0 }"
 		type = value
@@ -1944,6 +1818,12 @@ links = {
 		input_scopes = character
 		output_scope = any
 	}
+	vassal_contract_liege_dynasty_reign_start_date = {
+		desc = "Date when this vassal's liege's dynasty started ruling over this vassal"
+		type = value
+		input_scopes = character
+		output_scope = any
+	}
 	vassal_contract_obligation_level = {
 		desc = "The level of the provided contract type in the scoped character's current vassal contract"
 		type = value
@@ -2089,7 +1969,7 @@ links = {
 		output_scope = any
 	}
 	county_opinion_target = {
-		desc = "compares the county's opinion of the target character to the specified value, county_opinion_target = { target = X value >/</= Y } "
+		desc = "compares the county's opinion of the target character to the specified value, county_opinion_target = { target = X value >/</= Y }"
 		type = value
 		input_scopes = landed_title
 		output_scope = any

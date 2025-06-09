@@ -1,0 +1,9 @@
+types = {
+    type[raid_intent] = {
+        path = "common/raids/intents/"
+    }
+}
+
+raid_intent = {
+
+}

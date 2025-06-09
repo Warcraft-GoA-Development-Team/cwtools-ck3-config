@@ -10,8 +10,8 @@ types = {
         subtype[graphical] = {
 			is_graphical_background = yes
         }
+		## only_if_not = { special duchy_capital }
         subtype[regular] = {
-			type = regular
         }
     }
 }

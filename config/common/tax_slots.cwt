@@ -41,15 +41,15 @@ tax_obligation = {
     flag = value_set[tax_flag]
 }
 
-tax_slot_type_key = {
+tax_slot = {
 	### vassals of this type can be assign to this governance
 	government = <government>
 
 	### These are the different obligations a governance can apply to the assigned vassals
     ## cardinality = 0..1
-	vassal_contracts = {
+	vassal_contracts = { # TODO: Does this exist?
         ## cardinality = 1..inf
-		<vassal_contract>
+		<subject_contract>
 	}
 
 	### How many vassals can be assigned to this tax slot

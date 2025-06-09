@@ -266,11 +266,11 @@ links = {
         input_scopes = character
         output_scope = character
     }
-    vassal_contract_obligation_level = {
-        desc = "The level of the provided contract type in the scoped objects current vassal contract"
-        input_scopes = character
-        output_scope = value
-    }
+    # vassal_contract_obligation_level = {
+    #     desc = "The level of the provided contract type in the scoped objects current vassal contract"
+    #     input_scopes = character
+    #     output_scope = value
+    # }
     culture_group = {
         desc = "Unknown, add something in code registration"
         input_scopes = { character landed_title province culture }
@@ -788,7 +788,7 @@ links = {
         desc = "Get the type of a given activity"
         input_scopes = vassal_contract_obligation_level
         output_scope = vassal_contract_type
-        data_source = <vassal_contract>
+        data_source = <subject_contract>
     }
     epidemic_trait = {
         desc = "Gets the trait that this epidemic will spread"
@@ -1028,14 +1028,14 @@ links = {
         from_data = yes
         data_source = <government>
         prefix = government_type:
-        output_scope = government
+        output_scope = government_type
     }
     holding_type_prefix = {
         desc = "Get the government_type with the specified key"
         from_data = yes
         data_source = <holding_type>
         prefix = holding:
-        output_scope = holding
+        output_scope = holding_type
     }
     legend_type_data_prefix = {
         desc = "Get the legend_type with the specified key"
@@ -1058,8 +1058,6 @@ links = {
         from_data = yes
         data_source = <struggle>
         prefix = struggle:
-        #type = scope
-        #prefix = religion:
         output_scope = struggle
     }
     task_contract_type_prefix = {
@@ -1082,7 +1080,7 @@ links = {
         from_data = yes
         type = scope
         prefix = vassal_contract:
-        data_source = <vassal_contract>
+        data_source = <subject_contract>
     }
     acclaimed_knight = {
         desc = "Get the Acclaimed Knight of given Accolade"
@@ -1308,7 +1306,7 @@ links = {
         from_data = yes
         type = value
         prefix = vassal_contract_obligation_level:
-        data_source = <vassal_contract>
+        data_source = <subject_contract>
         input_scopes = character
         output_scope = any
     }

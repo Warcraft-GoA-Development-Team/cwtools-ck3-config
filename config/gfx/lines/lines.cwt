@@ -1,0 +1,11 @@
+types = {
+    type[line] = {
+        path = "gfx/lines/"
+        path_extension = .lines
+        name_field = name
+    }
+}
+
+line = {
+    name = scalar
+}

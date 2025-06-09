@@ -45,6 +45,13 @@ maa_type = {
 	low_maintenance_cost = single_alias_right[cost]
 	###  Maintenance paid when the regiment is raised or not fully reinforced.
 	high_maintenance_cost = single_alias_right[cost]
+    ### The amount of provison cost for this MAA type when moving your domicile
+    provision_cost = alias_keys_field[int_value]
+    ### The amount of provison cost for this MAA type when moving your domicile
+    provision_cost = value_field
+
+    ## cardinality = 0..1
+    max_regiments = int_value_field
 	
 	## cardinality = 0..1
 	### Terrain bonuses pursuit, siege_value, etc.
@@ -55,6 +62,12 @@ maa_type = {
             alias_name[maa_modifier] = alias_match_left[maa_modifier]
         }
 	}
+
+    ## cardinality = 0..1
+    should_show_when_unavailable = single_alias_right[trigger_clause]
+
+    ## cardinality = 0..1
+    access_through_subject = single_alias_right[trigger_clause]
 
     ## cardinality = 0..1
 	### Winter modifications for unit
@@ -92,7 +105,7 @@ maa_type = {
 	### What archetypes it counters, and how much. The number is how many subregiments it counters
 	counters = {
         ## cardinality = 0..inf
-		value[unit_type] = int_value_field
+		value[unit_type] = value_field
 	}
 
     ## cardinality = 0..inf
@@ -112,12 +125,12 @@ maa_type = {
 }
 
 ###  Extra damage dealt in pursuit phase if on winning side.
-alias[maa_modifier:pursuit] = int_value_field
+alias[maa_modifier:pursuit] = value_field
 ###  Extra damage mitigated in pursuit phase if on losing side.
-alias[maa_modifier:screen] = int_value_field
+alias[maa_modifier:screen] = value_field
 ###  Extra damage dealt.
-alias[maa_modifier:damage] = int_value_field
+alias[maa_modifier:damage] = value_field
 ###  Extra ability to absorb damage.
-alias[maa_modifier:toughness] = int_value_field
+alias[maa_modifier:toughness] = value_field
 ###  How much more it contributes to sieges.
-alias[maa_modifier:siege_value] = int_value_field
+alias[maa_modifier:siege_value] = value_field
