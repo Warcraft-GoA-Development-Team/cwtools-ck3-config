@@ -1455,5 +1455,19 @@ links = {
         output_scope = any
     }
 
-    # Comparison Links
+    # script_value = {
+    #     type = value
+    #     from_data = yes
+    #     data_source = <script_value>
+    #     input_scopes = any
+    #     output_scope = any
+    # }
+    #
+    # static_value = {
+    #     type = value
+    #     from_data = yes
+    #     data_source = <static_value>
+    #     input_scopes = any
+    #     output_scope = any
+    # }
 }

@@ -29,4 +29,10 @@ modifier_categories = {
     ai = {
         supported_scopes = { ai }
     }
+    terrain = {
+        supported_scopes = { terrain }
+    }
+    travel_plan = {
+        supported_scopes = { travel_plan }
+    }
 }

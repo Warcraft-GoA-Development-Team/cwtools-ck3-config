@@ -32,7 +32,7 @@ subject_contract = {
     uses_opinion_of_liege = bool
 
     ## cardinality = 0..1
-    icon = <texticon>
+    icon = <text_icon>
 
     ## cardinality = 0..1
     is_shown = single_alias_right[trigger_clause]

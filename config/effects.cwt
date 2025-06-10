@@ -4401,13 +4401,13 @@ alias[effect:set_important_location] = {
     title = scope[landed_title]
     ## replace_scope = { root = landed_title county = province title = landed_title changed_top_liege = character }
     ## cardinality = 0..1
-    enter_realm_event = <scripted_effect>
+    enter_realm_event = <event>
     ## replace_scope = { root = landed_title county = province title = landed_title changed_top_liege = character }
     ## cardinality = 0..1
     enter_realm_on_action = <on_action>
     ## replace_scope = { root = landed_title county = province title = landed_title changed_top_liege = character }
     ## cardinality = 0..1
-    leave_realm_event = <scripted_effect>
+    leave_realm_event = <event>
     ## replace_scope = { root = landed_title county = province title = landed_title changed_top_liege = character }
     ## cardinality = 0..1
     leave_realm_on_action = <on_action>
