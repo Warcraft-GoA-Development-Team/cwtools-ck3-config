@@ -443,10 +443,6 @@ alias[effect:remove_travel_option] = <travel_option>
 ## scope = travel_plan
 alias[effect:remove_travel_plan_modifier] = <modifier_container>
 
-### Remove future destinations of the travel plan and set the next destination to home (travel plan owner default location)
-## scope = travel_plan
-alias[effect:reroute_to_home] = bool
-
 ### Resume the travel plan, if paused.
 ## scope = travel_plan
 alias[effect:resume_travel_plan] = bool
@@ -2274,10 +2270,6 @@ alias[effect:remove_scheme_modifier] = <modifier_container>
 ### reset_scheme_progress - Resets the scheme's accumulated success chance growth, opportunities, and current phase progress.
 ## scope = scheme
 alias[effect:reset_scheme_progress] = bool
-
-### scheme_freeze_days = X freezes the scheme for X days (0 unfreezes the scheme)
-## scope = scheme
-alias[effect:scheme_freeze_days] = int_value_field
 
 ### scheme_unfreeze = yes Unfreezes the scheme if it's frozen.
 ## scope = scheme
@@ -4587,10 +4579,6 @@ alias[effect:move_domicile] = scope[province]
 ## scope = domicile
 alias[effect:remove_domicile_building] = <domicile_building>
 
-### Changes domicile owner to target character
-## scope = domicile
-alias[effect:set_domicile_owner] = scope[character]
-
 ### scheme_freeze = { reason = LOC_KEY days/months/years = X } freezes the scheme for duration X. 0 duration for indefinite freeze, until scheme_unfreeze is called.
 ## scope = scheme
 alias[effect:scheme_freeze] = {
@@ -5019,36 +5007,6 @@ alias[effect:lower_domicile_building_no_refund] = <domicile_building>
 ## scope = domicile
 alias[effect:remove_domicile_building_no_refund] = <domicile_building>
 
-
-
-# -UNSORTED
-
-# accept a characters invitation to the activity
-#alias[effect:accept_invitation_for_character] = scope[character]
-
-# Recalculates the effect of a scripted relation recalculate_scripted_relation= friend
-#alias[effect:recalculate_scripted_relation] = <scripted_relation>
-
-# ends the combat as the losing side (doesn't end the combat if evaluated to false)
-#alias[effect:lose_combat] = replace_me # Never used in vanilla files.
-
-# Recruits the target to become a courtier. Example scope:liege = { recruit_courtier = scope:new_courtier }
-#alias[effect:recruit_courtier] = scope[character]
-
-# ends the combat as the winning side (doesn't end the combat if evaluated to false)
-#alias[effect:win_combat] = replace_me # Never used in vanilla files.
-
-# spawns an activity, spawn_activity = { owner = X type = Y days/months/years = Z }, Z is expiration time can be a value or an inclusive "{A B}" interval from which the value will be picked
-#alias[effect:spawn_activity] = replace_me # TODO
-
-# invite a character to the activity
-#alias[effect:invite_character_to_activity] = scope[character]
-
-# completes the activity, complete_activity = yes ends the activity and runs the on_complete effect, complete_activity = no ends the activity without running the effect
-#alias[effect:complete_activity] = bool
-
-# Add building slot to the province
-#alias[effect:add_building_slot] = int
 
 
 
