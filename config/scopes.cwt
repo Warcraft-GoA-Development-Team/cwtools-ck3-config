@@ -193,7 +193,7 @@ scopes = {
 		aliases = { tax_slot }
 	}
 	"Vassal Contract" = {
-		aliases = { vassal_contract }
+		aliases = { vassal_contract vassal_contract_type }
 	}
 	"Vassal Contract Obligation Level" = {
 		aliases = { vassal_contract_obligation_level }

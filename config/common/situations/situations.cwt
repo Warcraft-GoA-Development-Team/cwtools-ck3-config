@@ -54,4 +54,15 @@ enums = {
             }
         }
     }
+    complex_enum[situation_sub_regions] = {
+        path = "game/common/situation/situations"
+
+        name = {
+            sub_regions = {
+                enum_name = {
+
+                }
+            }
+        }
+    }
 }

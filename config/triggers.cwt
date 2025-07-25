@@ -2582,6 +2582,12 @@ alias[trigger:vassal_contract_obligation_level_can_be_decreased] = <subject_cont
 ## scope = character
 alias[trigger:vassal_contract_obligation_level_can_be_increased] = <subject_contract>
 
+### checks if the assigned yes/no value is true
+### always = yes # always succeeds
+### always = no  # always fails
+### always = scope:a_boolean_value # evaluated at runtime
+alias[trigger:always] = scope[bool] # Scoped boolean
+
 
 
 # -Z

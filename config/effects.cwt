@@ -2,6 +2,14 @@
 # DYNASTY SCOPE
 ###################################
 
+single_alias[set_obligation_level] = {
+    type = <subject_contract>
+    type = scope[vassal_contract]
+    level = int_value_field
+    level = <subject_obligation_level>
+    level = scope[vassal_contract_obligation_level]
+}
+
 ### Add a modifier to a dynasty add_dynasty_modifier = name add_dynasty_modifier = { modifier = name days/weeks/months/years = int }
 ## scope = dynasty
 alias[effect:add_dynasty_modifier] = single_alias_right[added_modifier]
@@ -838,6 +846,11 @@ alias[effect:remove_artifact_feature_group] = <modifier_container>
 ## push_scope = artifact
 alias[effect:set_artifact_description] = single_alias_right[complex_desc]
 
+### Sets the description of the given artifact
+## scope = artifact
+## push_scope = artifact
+alias[effect:set_artifact_description] = localisation
+
 ### Sets the specified feature on the artifact. If there's already a feature of that group, it gets overridden.
 ## scope = artifact
 alias[effect:set_artifact_feature] = <artifact_feature>
@@ -1172,7 +1185,7 @@ alias[effect:create_character] = {
     ## cardinality = 0..1
     save_scope_as = value_set[event_target]
     ## cardinality = 0..1
-    save_temporary_scope_as = value_set[event_target]
+    save_temporary_scope_as = value_set[temporary_scope]
     ## cardinality = 0..1
     save_temporary_scope_value_as = value_set[temporary_scope]
     ## cardinality = 0..1
@@ -1953,6 +1966,10 @@ alias[effect:add_building] = <building>
 ### Adds the target legend as spread to the scoped province.
 ## scope = province
 alias[effect:add_legend_spread] = scope[legend]
+
+### Add a modifier to a province add_province_modifier = name add_province_modifier = { modifier = name days/weeks/months/years = int }
+## scope = province
+alias[effect:add_province_modifier] = <modifier_container>
 
 ### Add a modifier to a province add_province_modifier = name add_province_modifier = { modifier = name days/weeks/months/years = int }
 ## scope = province
@@ -3180,7 +3197,7 @@ alias[effect:depose_diarch] = yes
 
 ### Designated target character as a future diarch
 ## scope = character
-alias[effect:designate_diarch] = yes
+alias[effect:designate_diarch] = scope[character]
 
 ### Destroys a title
 ## scope = character
@@ -3398,6 +3415,7 @@ alias[effect:pay_long_term_gold] = {
     target = scope[character]
     gold = alias_keys_field[int_value]
     gold = value_field
+    gold = single_alias_right[score_formula]
 }
 
 ### the scope character immediately pays gold corresponding to their income to the target character, pay_income = { target = X days/months/years = Y } (AI budget long term)
@@ -3413,6 +3431,7 @@ alias[effect:pay_reserved_gold] = {
     target = scope[character]
     gold = alias_keys_field[int_value]
     gold = value_field
+    gold = single_alias_right[score_formula]
 }
 
 ### the scope character immediately pays gold corresponding to their income to the target character, pay_income = { target = X days/months/years = Y } (AI budget long term)
@@ -3428,6 +3447,7 @@ alias[effect:pay_short_term_gold] = {
     target = scope[character]
     gold = alias_keys_field[int_value]
     gold = value_field
+    gold = single_alias_right[score_formula]
 }
 
 ### the scope character immediately pays gold corresponding to their income to the target character, pay_income = { target = X days/months/years = Y } (AI budget short term)
@@ -4204,7 +4224,7 @@ alias[effect:vassal_contract_increase_obligation_level] = replace_me # TODO: Def
 
 ### change the obligation level of the scoped character's vassal contract vassal_contract_set_obligation_level = 1 # index to obligation level vassal_contract_set_obligation_level = feudal_obligation_low
 ## scope = character
-alias[effect:vassal_contract_set_obligation_level] = replace_me # TODO: Implemented type for vassal contracts.
+alias[effect:vassal_contract_set_obligation_level] = single_alias_right[set_obligation_level]
 
 ### Add the scope character as the target character's guest
 ## scope = character
@@ -4647,6 +4667,357 @@ alias[effect:invalidate_contract] = bool
 ### 						 Saving this as a scope will not work for player characters if they have to use the planner.
 ## scope = character
 alias[effect:return_home] = bool
+
+### Adds the name list to the culture
+## scope = culture
+alias[effect:add_name_list] = <name_list>
+
+### Removes the cultural tradition scope specified in the RHS from the scope culture.remove_culture_tradition = tradition_court_eunuchs
+## scope = culture
+alias[effect:remove_culture_tradition] = <tradition>
+
+### Remove innovation from a culture. remove_innovation = innovation_key
+## scope = culture
+alias[effect:remove_innovation] = <innovation>
+
+### Removes a random cultural tradition from the scope culture.remove_random_culture_tradition = yes
+## scope = culture
+alias[effect:remove_random_culture_tradition] = bool
+
+### Sets the culture creation date to be todays datereset_culture_creation_date = yes
+## scope = culture
+alias[effect:reset_culture_creation_date] = bool
+
+### Adds the designated supply to the army's supply. Cannot exceed the
+## scope = army
+alias[effect:add_supply] = alias_keys_field[int_value]
+
+### Adds the designated supply to the army's supply. Cannot exceed the
+## scope = army
+alias[effect:add_supply] = value_field
+
+### Adds the designated supply to the army's supply. Cannot exceed the
+## scope = army
+alias[effect:add_supply] = single_alias_right[score_formula]
+
+### Clears the designated army's supply.
+## scope = army
+alias[effect:clear_supply] = bool
+
+### Reduce current army size by the giver percentage
+### Value on the right side determines what portions of soldiers shall perish
+## scope = army
+alias[effect:deplete_army_by_percentage] = float[0.0..1.0] #TODO: Can this be score formula or value?
+
+### Refills the designated army's supply to its max capacity.
+## scope = army
+alias[effect:refill_supply] = bool
+
+### Subtracts the designated supply to the army's supply. Cannot exceed the
+### army's max supply capacity.
+## scope = army
+alias[effect:subtract_supply] = alias_keys_field[int_value] #TODO: Not sure if only value_field or not
+
+### Subtracts the designated supply to the army's supply. Cannot exceed the
+### army's max supply capacity.
+## scope = army
+alias[effect:subtract_supply] = value_field
+
+### Subtracts the designated supply to the army's supply. Cannot exceed the
+### army's max supply capacity.
+## scope = army
+alias[effect:subtract_supply] = single_alias_right[score_formula]
+
+### Adds a character as a companion to the scoped travel plan.
+## scope = travel_plan
+alias[effect:add_companion] = scope[character]
+
+### Add X days towards the progress of the travel plan to the next destination. If the next destination is reached, excess progress is discarded.
+### 'on_travel_plan_movement' on_action will not be triggered for any of the provinces. 'on_travel_plan_arrival' will be triggered.
+## scope = travel_plan
+alias[effect:add_destination_progress] = {
+    enum[duration] = alias_keys_field[int_value]
+    enum[duration] = value_field
+}
+
+### Set a culture as involved in the scoped Struggle.
+## scope = struggle
+alias[effect:set_culture_as_uninvolved] = scope[culture]
+
+### Adds a geographical region to the situation sub-region.
+### usage:
+### 	add_geographical_region = db_type:geographical_region
+## scope = situation_sub_region
+alias[effect:add_geographical_region] = <geographical_region>
+
+### Removes a geographical region from the situation sub-region.
+### usage:
+### 	remove_geographical_region = db_type:geographical_region
+## scope = situation_sub_region
+alias[effect:remove_geographical_region] = <geographical_region>
+
+### Add (or subtract if negative) duration from the sub-region current phase' max duration.
+## scope = situation_sub_region
+alias[effect:add_phase_max_duration] = {
+    enum[duration] = alias_keys_field[int_value]
+    enum[duration] = value_field
+}
+
+### Add (or subtract if negative) duration towards a future takeover phase of this situation sub-region.
+## scope = situation_sub_region
+alias[effect:add_takeover_phase_duration] = {
+    phase = enum[situation_phases]
+    enum[duration] = alias_keys_field[int_value]
+    enum[duration] = value_field
+}
+
+### Add (or subtract if negative) points towards a future takeover phase of this situation sub-region. (rounded down)
+## scope = situation_sub_region
+alias[effect:add_takeover_phase_points] = {
+    phase = enum[situation_phases]
+    points = value_field
+    points = alias_keys_field[int_value]
+    points = single_alias_right[score_formula]
+}
+
+### Adds a landed county title to the situation sub-region.
+## scope = situation_sub_region
+alias[effect:add_title_to_sub_region] = <landed_title>
+
+### Removes a title from the situation sub-region.
+### usage:
+### 	remove_title_from_sub_region = <title>
+## scope = situation_sub_region
+alias[effect:remove_title_from_sub_region] = <landed_title>
+
+### Adds a landed county title to the situation sub-region.
+## scope = situation_sub_region
+alias[effect:change_phase] = enum[situation_phases]
+
+### Adds a landed county title to the situation sub-region.
+## scope = situation_sub_region
+alias[effect:change_phase] = {
+    phase = enum[situation_phases]
+}
+
+### Removes all modifiers from the scoped artifact
+## scope = artifact
+alias[effect:clear_artifact_modifiers] = bool
+
+### Removes a static modifier to the given artifact
+## scope = artifact
+alias[effect:remove_artifact_modifier] = <modifier_container>
+
+### Sets a feature from the specified group on the artifact.
+## scope = artifact
+alias[effect:set_artifact_feature_group] = <feature_group>
+
+### Sets the name of the given artifact
+## scope = artifact
+alias[effect:set_artifact_name] = localisation
+
+### Sets the rarity of the scoped artifact. Note that this does not update graphics and the like
+## scope = artifact
+alias[effect:set_artifact_rarity] = enum[artifact_rarity]
+
+### Create a title for a nomad.
+alias[effect:create_nomad_title] = {
+    name = localisation
+    name = single_alias_right[complex_desc]
+    holder = scope[character]
+    ## cardinality = 0..1
+    government = <government>
+    ## cardinality = 0..1
+    save_scope_as = value_set[event_target]
+    ## cardinality = 0..1
+    prefix = localisation
+    ## cardinality = 0..1
+    prefix = single_alias_right[complex_desc]
+    ## cardinality = 0..1
+    adjective = localisation
+    ## cardinality = 0..1
+    adjective = single_alias_right[complex_desc]
+}
+
+### Forces a recalculation of heads of provided determination type
+alias[effect:recalculate_cultural_heads_of_type] = enum[cultural_head_types]
+
+### Start a Situation of a specific situation type, optionally in a specific starting phase.
+alias[effect:start_situation] = {
+    type = <situation>
+    start_phase = enum[situation_phases]
+    ## cardinality = 0..1
+    save_scope_as = value_set[event_target]
+    ## cardinality = 0..1
+    save_temporary_scope_as = value_set[temporary_scope]
+    ## cardinality = 0..inf
+    sub_region = {
+        key = enum[situation_sub_regions]
+        ## cardinality = 0..inf
+        start_phase = enum[situation_phases]
+        ## cardinality = 0..inf
+        map_color = {
+            ## cardinality = 3..3
+            value_field
+        }
+        ## cardinality = 0..inf
+        geographical_regions = {
+            ## cardinality = 1..inf
+            <geographical_region>
+        }
+    }
+}
+
+### Add a travel point of interest type to this province.
+## scope = province
+alias[effect:add_travel_point_of_interest] = <point_of_interest>
+
+### add_manual_participant = scope:character
+### Mark a character as a manual participant candidate for the Situation. They will be sorted into the first participant group that is valid for them. If no groups are valid, they will continue to be considered for participation in the future, but not be an actual participant until matched with a group.Use `remove_manual_participant` to remove them from consideration.
+## scope = situation
+alias[effect:add_manual_participant] = scope[character]
+
+### Change the phase of the top sub-region from the current one to a specific phase
+## scope = situation
+alias[effect:change_top_phase] = {
+    phase = enum[situation_phases]
+}
+
+### End a situation, end_situation = yes
+## scope = province
+alias[effect:end_situation] = bool
+
+### Trigger a Situation catalyst
+## scope = province
+alias[effect:trigger_situation_catalyst] = <catalyst>
+
+### Trigger a Situation catalyst
+## scope = province
+alias[effect:trigger_situation_catalyst] = {
+    catalyst = <catalyst>
+    ## cardinality = 0..1
+    character = scope[character]
+}
+
+### Destroys ALL event troop regiments belonging to the scoped character.
+## scope = character
+alias[effect:destroy_all_event_troops] = bool
+
+### The scope character fires the target character from the council without running on_actions.
+## scope = character
+alias[effect:fire_councillor_skip_effects] = scope[character]
+
+### Make ruler step down - less harsh than abdicate or depose.
+### If ruler has any title that allows them to remain landless playable, then pass
+### all landed titles to heirs - counties and any higher tier title with dejure land.
+### Keep all titular titles.
+###
+### If no such title exists, then it works identical to depose
+## scope = character
+alias[effect:force_step_down_landed_titles] = bool
+
+### Give each county in the scoped character's domain to herders and destroy all held duchy titles and above.
+## scope = character
+alias[effect:give_domain_to_herders] = bool
+
+### change the obligation level of the scoped character's overlord contract
+## scope = character
+alias[effect:overlord_contract_set_obligation_level] = single_alias_right[set_obligation_level]
+
+### change the obligation level of the scoped character's tributary contract
+## scope = character
+alias[effect:tributary_contract_set_obligation_level] = single_alias_right[set_obligation_level]
+
+### the scoped character pays herd to the target character
+## scope = character
+alias[effect:pay_herd] = {
+    target = scope[character]
+    value = alias_keys_field[int_value]
+    value = value_field
+    value = single_alias_right[score_formula]
+}
+
+### remove_dead_character_variable = <name>
+### Remove a variable from a dead character.
+## scope = character
+alias[effect:remove_dead_character_variable] = value[dead_variable]
+
+### Sets the given character as designated heir. This is unsafe if the designated heirs loop. Ensure that there is no loop of heirs when using this. This is purely for mod supports and designers should never use this.
+## scope = character
+alias[effect:set_designated_heir_unsafe] = scope[character]
+
+### Blocks the subject contract from being modified with regards to being checked by 'subject_contract_is_blocked_from_modification'
+## scope = character
+alias[effect:set_subject_contract_modification_blocked] = bool
+
+### Attempts to start a diarchy for the character. Takes diarchy type as argument
+### NB: this effect will silently fail if a valid diarch cannot be found.
+### Use `exists = my_ruler_scope.diarch` to test if it's valid afterwards if needed.
+## scope = character
+alias[effect:try_start_diarchy] = <diarchy>
+
+### Changes the county capital province holding to the designated type. If purge_secondary_holdings = yes, then all secondary province holdings in the county will be destroyed, unless their holding type is excluded with excluded_holding_type = <holding_type>
+## scope = landed_title
+alias[effect:raze_county] = {
+    holding_type = <holding>
+    ## cardinality = 0..1
+    purge_secondary_holdings = bool
+    ## cardinality = 0..inf
+    excluded_holding_type = <holding>
+}
+
+### Sets if the title can use the dynamic naming for nomads. set_can_use_nomadic_naming = no
+## scope = landed_title
+alias[effect:set_can_use_nomadic_naming] = bool
+
+### Transfers ownership of the scoped title's owned MaA to the target title
+## scope = landed_title
+alias[effect:transfer_title_maa_ownership] = scope[landed_title]
+
+### Make the this side of the combat win the combat (or lose if 'force_win = no'), regardless of number of soldiers left. Happens instantly.
+## scope = combat_side
+alias[effect:force_win] = bool
+
+### Allow early retreat for one side of the combat. This means if this side loses, it can retreat even if the battle was short. (before NCombat::MIN_DAYS_BEFORE_MANUAL_RETREAT)
+## scope = combat_side
+alias[effect:set_allow_early_retreat] = bool
+
+### Disallow retreat for one side of the combat. This means if this side loses, they will take hard casualties.
+## scope = combat_side
+alias[effect:set_disallowed_retreat] = bool
+
+### Skip pursuit phase for this combat side, if they would lose. This means that they will not take more casualties from pursuit.
+## scope = combat_side
+alias[effect:set_skip_pursuit] = bool
+
+### Make the a side of a combat become the winner, regardless of number of soldiers left.
+### The combat will progress to the pursuit phase the next tick.
+## scope = combat_side
+alias[effect:set_winner] = bool
+
+### Adds/removes herd to/from a scoped domicile
+## scope = domicile
+alias[effect:change_herd] = alias_keys_field[int_value]
+
+### Adds/removes herd to/from a scoped domicile
+## scope = domicile
+alias[effect:change_herd] = value_field
+
+### Adds/removes herd to/from a scoped domicile
+## scope = domicile
+alias[effect:change_herd] = single_alias_right[score_formula]
+
+### Downgrade building to previous from scoped domicile or destroy it if at lowest
+## scope = domicile
+alias[effect:lower_domicile_building] = <domicile_building>
+
+### Downgrade building to previous from scoped domicile or destroy it if at lowest, without refunding
+## scope = domicile
+alias[effect:lower_domicile_building_no_refund] = <domicile_building>
+
+### Remove building from scoped domicile without refunding it
+## scope = domicile
+alias[effect:remove_domicile_building_no_refund] = <domicile_building>
 
 
 

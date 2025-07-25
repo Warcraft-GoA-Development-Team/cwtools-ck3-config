@@ -211,6 +211,10 @@ enums = {
         battle
         army
     }
+    enum[cultural_head_types] = {
+        domain
+        herd
+    }
 }
 
 # Duration alias for LHS use:
