@@ -217,6 +217,7 @@ alias[trigger:any_in_list] = {
 }
 
 ### Iterate through all items in list. list = name or variable = name any_in_list = { <count=num/all> / <percent=fixed_point> <triggers> }
+## push_scope = any
 alias[trigger:any_in_list] = {
     variable = value[variable_list]
     ## cardinality = 0..1
@@ -555,4 +556,61 @@ alias[trigger:any_trait_in_category] = {
     ## cardinality = 0..1
     count = all
     alias_name[trigger] = alias_match_left[trigger]
+}
+
+## scope = character
+## push_scope = landed_title
+alias[trigger:any_held_county] = single_alias_right[any_trigger]
+
+### Iterate through the title itself, all de jure vassals, and below. The continue trigger specifies whether to recursively iterate through the vassal's vassal
+### This is unrelated to the limit; if the limit is met it is added to the list, but its vassals will get checked even if the limit isn't met as long as the 'continue' trigger is
+### ..._de_jure_vassal_and_below = { continue = { conditions } }
+### any_in_de_jure_hierarchy = { <count=num/all> / <percent=fixed_point> <triggers> }
+## scope = landed_title
+## push_scope = landed_title
+alias[trigger:any_in_de_jure_hierarchy] = {
+    ## cardinality = 0..1
+    continue = {
+        alias_name[trigger] = alias_match_left[trigger]
+    }
+    ## cardinality = 0..1
+    percent = float[0.0..1.0]
+    ## cardinality = 0..1
+    count = alias_keys_field[int_value]
+    ## cardinality = 0..1
+    count = int_value_field
+    ## cardinality = 0..1
+    count = all
+    alias_name[trigger] = alias_match_left[trigger]
+    ## cardinality = 0..1
+    filter = {
+        tier = enum[title_tier]
+    }
+}
+
+### Iterate through all investors of target candidate within the scoped title. Optionally specify a value to filter by investment amount
+## scope = landed_title
+## push_scope = character
+alias[trigger:any_succession_appointment_investors] = {
+    ## cardinality = 0..1
+    continue = {
+        alias_name[trigger] = alias_match_left[trigger]
+    }
+    ## cardinality = 0..1
+    percent = float[0.0..1.0]
+    ## cardinality = 0..1
+    count = alias_keys_field[int_value]
+    ## cardinality = 0..1
+    count = int_value_field
+    ## cardinality = 0..1
+    count = all
+    alias_name[trigger] = alias_match_left[trigger]
+    ## cardinality = 0..1
+    candidate = scope[character]
+    ## cardinality = 0..1
+    value == int_value_field
+    ## cardinality = 0..1
+    value == alias_keys_field[int_value]
+    ## cardinality = 0..1
+    value == single_alias_right[score_formula]
 }

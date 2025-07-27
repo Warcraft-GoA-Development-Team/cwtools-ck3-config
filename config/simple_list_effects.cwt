@@ -2614,12 +2614,6 @@ alias[effect:every_alert_usurpable_title] = single_alias_right[every_effect]
 ## push_scope = character
 alias[effect:every_ally] = single_alias_right[every_effect]
 
-### Iterate through all the ancestors of the scope character up to 5 generations
-### every_ancestor = { limit = { <triggers> } <effects> }
-## scope = character
-## push_scope = character
-alias[effect:every_ancestor] = single_alias_right[every_effect]
-
 ### Iterate through all armies
 ### every_army = { limit = { <triggers> } <effects> }
 ## scope = character
@@ -2722,29 +2716,11 @@ alias[effect:every_character_trait] = single_alias_right[every_effect]
 ## push_scope = war
 alias[effect:every_character_war] = single_alias_right[every_effect]
 
-### Iterate through all children
-### every_child = { limit = { <triggers> } <effects> }
-## scope = character
-## push_scope = character
-alias[effect:every_child] = single_alias_right[every_effect]
-
 ### Iterate through all claimed artifacts of the scoped character
 ### every_claimed_artifact = { limit = { <triggers> } <effects> }
 ## scope = character
 ## push_scope = artifact
 alias[effect:every_claimed_artifact] = single_alias_right[every_effect]
-
-### Iterate through all the close family [father, mother, siblings, children, grandparents]
-### every_close_family_member = { limit = { <triggers> } <effects> }
-## scope = character
-## push_scope = character
-alias[effect:every_close_family_member] = single_alias_right[every_effect]
-
-### Iterate through all the close and extended relatives [father, mother, siblings, children, grandparents, uncles/aunts, nephew/niece, cousins]
-### every_close_or_extended_family_member = { limit = { <triggers> } <effects> }
-## scope = character
-## push_scope = character
-alias[effect:every_close_or_extended_family_member] = single_alias_right[every_effect]
 
 ### Iterate through all concubines
 ### every_concubine = { limit = { <triggers> } <effects> }
@@ -2866,12 +2842,6 @@ alias[effect:every_former_concubine] = single_alias_right[every_effect]
 ## scope = character
 ## push_scope = character
 alias[effect:every_former_concubinist] = single_alias_right[every_effect]
-
-### Iterate through all former spouses
-### every_former_spouse = { limit = { <triggers> } <effects> }
-## scope = character
-## push_scope = character
-alias[effect:every_former_spouse] = single_alias_right[every_effect]
 
 ### Iterate through all councillors that are not related to a skill
 ### every_general_councillor = { limit = { <triggers> } <effects> }
@@ -3066,12 +3036,6 @@ alias[effect:every_opposite_sex_spouse_candidate] = single_alias_right[every_eff
 ## push_scope = story
 alias[effect:every_owned_story] = single_alias_right[every_effect]
 
-### Iterate through all (both) parents
-### every_parent = { limit = { <triggers> } <effects> }
-## scope = character
-## push_scope = character
-alias[effect:every_parent] = single_alias_right[every_effect]
-
 ### Iterate through all holy orders that the scoped character is a patron of
 ### every_patroned_holy_order = { limit = { <triggers> } <effects> }
 ## scope = character
@@ -3234,12 +3198,6 @@ alias[effect:every_sibling] = single_alias_right[every_effect]
 ## scope = character
 ## push_scope = inspiration
 alias[effect:every_sponsored_inspiration] = single_alias_right[every_effect]
-
-### Iterate through all spouses
-### every_spouse = { limit = { <triggers> } <effects> }
-## scope = character
-## push_scope = character
-alias[effect:every_spouse] = single_alias_right[every_effect]
 
 ### Iterate through all the spouse candidates of a character.
 ### WARNING: THIS IS VERY SLOW DO NOT DO IT OFTEN.
@@ -3491,19 +3449,6 @@ alias[effect:ordered_alert_usurpable_title] = single_alias_right[ordered_effect]
 ## push_scope = character
 alias[effect:ordered_ally] = single_alias_right[ordered_effect]
 
-### Iterate through all the ancestors of the scope character up to 5 generations
-### ordered_ancestor = {
-### limit = { <triggers> }
-### order_by = script_value
-### position = int
-### min = int
-### max = script_value
-### check_range_bounds = no # If you don't want an error logged if the list is smaller than the min/max
-### <effects> }
-## scope = character
-## push_scope = character
-alias[effect:ordered_ancestor] = single_alias_right[ordered_effect]
-
 ### Iterate through all armies
 ### ordered_army = {
 ### limit = { <triggers> }
@@ -3725,19 +3670,6 @@ alias[effect:ordered_character_trait] = single_alias_right[ordered_effect]
 ## push_scope = war
 alias[effect:ordered_character_war] = single_alias_right[ordered_effect]
 
-### Iterate through all children
-### ordered_child = {
-### limit = { <triggers> }
-### order_by = script_value
-### position = int
-### min = int
-### max = script_value
-### check_range_bounds = no # If you don't want an error logged if the list is smaller than the min/max
-### <effects> }
-## scope = character
-## push_scope = character
-alias[effect:ordered_child] = single_alias_right[ordered_effect]
-
 ### Iterate through all claimed artifacts of the scoped character
 ### ordered_claimed_artifact = {
 ### limit = { <triggers> }
@@ -3750,32 +3682,6 @@ alias[effect:ordered_child] = single_alias_right[ordered_effect]
 ## scope = character
 ## push_scope = artifact
 alias[effect:ordered_claimed_artifact] = single_alias_right[ordered_effect]
-
-### Iterate through all the close family [father, mother, siblings, children, grandparents]
-### ordered_close_family_member = {
-### limit = { <triggers> }
-### order_by = script_value
-### position = int
-### min = int
-### max = script_value
-### check_range_bounds = no # If you don't want an error logged if the list is smaller than the min/max
-### <effects> }
-## scope = character
-## push_scope = character
-alias[effect:ordered_close_family_member] = single_alias_right[ordered_effect]
-
-### Iterate through all the close and extended relatives [father, mother, siblings, children, grandparents, uncles/aunts, nephew/niece, cousins]
-### ordered_close_or_extended_family_member = {
-### limit = { <triggers> }
-### order_by = script_value
-### position = int
-### min = int
-### max = script_value
-### check_range_bounds = no # If you don't want an error logged if the list is smaller than the min/max
-### <effects> }
-## scope = character
-## push_scope = character
-alias[effect:ordered_close_or_extended_family_member] = single_alias_right[ordered_effect]
 
 ### Iterate through all concubines
 ### ordered_concubine = {
@@ -4030,19 +3936,6 @@ alias[effect:ordered_former_concubine] = single_alias_right[ordered_effect]
 ## scope = character
 ## push_scope = character
 alias[effect:ordered_former_concubinist] = single_alias_right[ordered_effect]
-
-### Iterate through all former spouses
-### ordered_former_spouse = {
-### limit = { <triggers> }
-### order_by = script_value
-### position = int
-### min = int
-### max = script_value
-### check_range_bounds = no # If you don't want an error logged if the list is smaller than the min/max
-### <effects> }
-## scope = character
-## push_scope = character
-alias[effect:ordered_former_spouse] = single_alias_right[ordered_effect]
 
 ### Iterate through all councillors that are not related to a skill
 ### ordered_general_councillor = {
@@ -4461,19 +4354,6 @@ alias[effect:ordered_opposite_sex_spouse_candidate] = single_alias_right[ordered
 ## push_scope = story
 alias[effect:ordered_owned_story] = single_alias_right[ordered_effect]
 
-### Iterate through all (both) parents
-### ordered_parent = {
-### limit = { <triggers> }
-### order_by = script_value
-### position = int
-### min = int
-### max = script_value
-### check_range_bounds = no # If you don't want an error logged if the list is smaller than the min/max
-### <effects> }
-## scope = character
-## push_scope = character
-alias[effect:ordered_parent] = single_alias_right[ordered_effect]
-
 ### Iterate through all holy orders that the scoped character is a patron of
 ### ordered_patroned_holy_order = {
 ### limit = { <triggers> }
@@ -4825,19 +4705,6 @@ alias[effect:ordered_sibling] = single_alias_right[ordered_effect]
 ## scope = character
 ## push_scope = inspiration
 alias[effect:ordered_sponsored_inspiration] = single_alias_right[ordered_effect]
-
-### Iterate through all spouses
-### ordered_spouse = {
-### limit = { <triggers> }
-### order_by = script_value
-### position = int
-### min = int
-### max = script_value
-### check_range_bounds = no # If you don't want an error logged if the list is smaller than the min/max
-### <effects> }
-## scope = character
-## push_scope = character
-alias[effect:ordered_spouse] = single_alias_right[ordered_effect]
 
 ### Iterate through all the spouse candidates of a character.
 ### WARNING: THIS IS VERY SLOW DO NOT DO IT OFTEN.
@@ -5243,12 +5110,6 @@ alias[effect:random_alert_usurpable_title] = single_alias_right[random_effect]
 ## push_scope = character
 alias[effect:random_ally] = single_alias_right[random_effect]
 
-### Iterate through all the ancestors of the scope character up to 5 generations
-### random_ancestor = { limit = { <triggers> } (optional) weight = { mtth } <effects> }
-## scope = character
-## push_scope = character
-alias[effect:random_ancestor] = single_alias_right[random_effect]
-
 ### Iterate through all armies
 ### random_army = { limit = { <triggers> } (optional) weight = { mtth } <effects> }
 ## scope = character
@@ -5351,29 +5212,11 @@ alias[effect:random_character_trait] = single_alias_right[random_effect]
 ## push_scope = war
 alias[effect:random_character_war] = single_alias_right[random_effect]
 
-### Iterate through all children
-### random_child = { limit = { <triggers> } (optional) weight = { mtth } <effects> }
-## scope = character
-## push_scope = character
-alias[effect:random_child] = single_alias_right[random_effect]
-
 ### Iterate through all claimed artifacts of the scoped character
 ### random_claimed_artifact = { limit = { <triggers> } (optional) weight = { mtth } <effects> }
 ## scope = character
 ## push_scope = artifact
 alias[effect:random_claimed_artifact] = single_alias_right[random_effect]
-
-### Iterate through all the close family [father, mother, siblings, children, grandparents]
-### random_close_family_member = { limit = { <triggers> } (optional) weight = { mtth } <effects> }
-## scope = character
-## push_scope = character
-alias[effect:random_close_family_member] = single_alias_right[random_effect]
-
-### Iterate through all the close and extended relatives [father, mother, siblings, children, grandparents, uncles/aunts, nephew/niece, cousins]
-### random_close_or_extended_family_member = { limit = { <triggers> } (optional) weight = { mtth } <effects> }
-## scope = character
-## push_scope = character
-alias[effect:random_close_or_extended_family_member] = single_alias_right[random_effect]
 
 ### Iterate through all concubines
 ### random_concubine = { limit = { <triggers> } (optional) weight = { mtth } <effects> }
@@ -5495,12 +5338,6 @@ alias[effect:random_former_concubine] = single_alias_right[random_effect]
 ## scope = character
 ## push_scope = character
 alias[effect:random_former_concubinist] = single_alias_right[random_effect]
-
-### Iterate through all former spouses
-### random_former_spouse = { limit = { <triggers> } (optional) weight = { mtth } <effects> }
-## scope = character
-## push_scope = character
-alias[effect:random_former_spouse] = single_alias_right[random_effect]
 
 ### Iterate through all councillors that are not related to a skill
 ### random_general_councillor = { limit = { <triggers> } (optional) weight = { mtth } <effects> }
@@ -5695,12 +5532,6 @@ alias[effect:random_opposite_sex_spouse_candidate] = single_alias_right[random_e
 ## push_scope = story
 alias[effect:random_owned_story] = single_alias_right[random_effect]
 
-### Iterate through all (both) parents
-### random_parent = { limit = { <triggers> } (optional) weight = { mtth } <effects> }
-## scope = character
-## push_scope = character
-alias[effect:random_parent] = single_alias_right[random_effect]
-
 ### Iterate through all holy orders that the scoped character is a patron of
 ### random_patroned_holy_order = { limit = { <triggers> } (optional) weight = { mtth } <effects> }
 ## scope = character
@@ -5863,12 +5694,6 @@ alias[effect:random_sibling] = single_alias_right[random_effect]
 ## scope = character
 ## push_scope = inspiration
 alias[effect:random_sponsored_inspiration] = single_alias_right[random_effect]
-
-### Iterate through all spouses
-### random_spouse = { limit = { <triggers> } (optional) weight = { mtth } <effects> }
-## scope = character
-## push_scope = character
-alias[effect:random_spouse] = single_alias_right[random_effect]
 
 ### Iterate through all the spouse candidates of a character.
 ### WARNING: THIS IS VERY SLOW DO NOT DO IT OFTEN.
@@ -6197,42 +6022,6 @@ alias[effect:every_past_holder] = single_alias_right[every_effect]
 ## scope = landed_title
 ## push_scope = character
 alias[effect:every_past_holder_reversed] = single_alias_right[every_effect]
-
-### Iterate through all investors of target candidate within the scoped title. Optionally specify a value to filter by investment amount
-### scope:landed_title = {
-### 
-### any/every/ordered/random_succession_appointment_investors = {
-### 
-### 
-### candidate = scope:character
-### 
-### 
-### value > {
-### 
-### 
-### # Optional compare value to
-### 
-### 
-### 
-### value = 100
-### 
-### # only have characters that
-### 
-### 
-### 
-### add = 10
-### 
-### # have invested this much.
-### 
-### 
-### }
-### 
-### }
-### }
-### every_succession_appointment_investors = { limit = { <triggers> } <effects> }
-## scope = landed_title
-## push_scope = character
-alias[effect:every_succession_appointment_investors] = single_alias_right[every_effect]
 
 ### Iterate through this title and all its dejure liege titles
 ### every_this_title_or_de_jure_above = { limit = { <triggers> } <effects> }
@@ -6590,49 +6379,6 @@ alias[effect:ordered_past_holder] = single_alias_right[ordered_effect]
 ## push_scope = character
 alias[effect:ordered_past_holder_reversed] = single_alias_right[ordered_effect]
 
-### Iterate through all investors of target candidate within the scoped title. Optionally specify a value to filter by investment amount
-### scope:landed_title = {
-### 
-### any/every/ordered/random_succession_appointment_investors = {
-### 
-### 
-### candidate = scope:character
-### 
-### 
-### value > {
-### 
-### 
-### # Optional compare value to
-### 
-### 
-### 
-### value = 100
-### 
-### # only have characters that
-### 
-### 
-### 
-### add = 10
-### 
-### # have invested this much.
-### 
-### 
-### }
-### 
-### }
-### }
-### ordered_succession_appointment_investors = {
-### limit = { <triggers> }
-### order_by = script_value
-### position = int
-### min = int
-### max = script_value
-### check_range_bounds = no # If you don't want an error logged if the list is smaller than the min/max
-### <effects> }
-## scope = landed_title
-## push_scope = character
-alias[effect:ordered_succession_appointment_investors] = single_alias_right[ordered_effect]
-
 ### Iterate through this title and all its dejure liege titles
 ### ordered_this_title_or_de_jure_above = {
 ### limit = { <triggers> }
@@ -6932,42 +6678,6 @@ alias[effect:random_past_holder] = single_alias_right[random_effect]
 ## scope = landed_title
 ## push_scope = character
 alias[effect:random_past_holder_reversed] = single_alias_right[random_effect]
-
-### Iterate through all investors of target candidate within the scoped title. Optionally specify a value to filter by investment amount
-### scope:landed_title = {
-### 
-### any/every/ordered/random_succession_appointment_investors = {
-### 
-### 
-### candidate = scope:character
-### 
-### 
-### value > {
-### 
-### 
-### # Optional compare value to
-### 
-### 
-### 
-### value = 100
-### 
-### # only have characters that
-### 
-### 
-### 
-### add = 10
-### 
-### # have invested this much.
-### 
-### 
-### }
-### 
-### }
-### }
-### random_succession_appointment_investors = { limit = { <triggers> } (optional) weight = { mtth } <effects> }
-## scope = landed_title
-## push_scope = character
-alias[effect:random_succession_appointment_investors] = single_alias_right[random_effect]
 
 ### Iterate through this title and all its dejure liege titles
 ### random_this_title_or_de_jure_above = { limit = { <triggers> } (optional) weight = { mtth } <effects> }

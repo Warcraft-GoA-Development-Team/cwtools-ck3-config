@@ -36,12 +36,6 @@ links = {
 		input_scopes = activity
 		output_scope = any
 	}
-	cultural_acceptance = {
-		desc = "The cultural acceptance of the scoped culture with the target culture cultural_acceptance = { target = culture value > 50 }"
-		type = value
-		input_scopes = culture
-		output_scope = any
-	}
 	culture_age = {
 		desc = "Checks the age of the scope culture in years. If the culture has no creation date set, this will simply return the current year culture_age >= 200"
 		type = value
@@ -288,12 +282,6 @@ links = {
 		input_scopes = faith
 		output_scope = any
 	}
-	faith_hostility_level = {
-		desc = "What is the faith's hostility level towards the target faith? faith_hostility_level { target = scope:some_faith value > 1 }"
-		type = value
-		input_scopes = faith
-		output_scope = any
-	}
 	fervor = {
 		desc = "What is the faith's fervor?"
 		type = value
@@ -476,12 +464,6 @@ links = {
 	}
 	game_start_date = {
 		desc = "Compare the date of the bookmarked game launched."
-		type = value
-		input_scopes = any
-		output_scope = any
-	}
-	list_size = {
-		desc = "Checks the size of a list list_size = { name = X value >= Y } Where X is the name of the list Where Y is a script value"
 		type = value
 		input_scopes = any
 		output_scope = any
@@ -800,24 +782,6 @@ links = {
 	}
 	amenity_level = {
 		desc = "amenity_level = { type = food value >= 5 } Compares the scoped character's amenity level in the given type to the given value"
-		type = value
-		input_scopes = character
-		output_scope = any
-	}
-	appointment_candidate_accumulated_score = {
-		desc = "Charater's accumulated score for appointment for the target title. Only investment count, and not character personality. appointment_candidate_accumulated_score = {     title = scope:title     value >= scope:fixed_point } "appointment_candidate_accumulated_score(scope:title)" >= value"
-		type = value
-		input_scopes = character
-		output_scope = any
-	}
-	appointment_candidate_score = {
-		desc = "Charater's total score for appointment for the target title appointment_candidate_score = {     title = scope:title     value >= scope:fixed_point } "appointment_candidate_score(scope:title)" >= value"
-		type = value
-		input_scopes = character
-		output_scope = any
-	}
-	aptitude = {
-		desc = "What is the scoped character's aptitude in the target court position type? aptitude = { court_position = court_position_type value >= 1 }"
 		type = value
 		input_scopes = character
 		output_scope = any
@@ -1428,12 +1392,6 @@ links = {
 		input_scopes = character
 		output_scope = any
 	}
-	number_maa_regiments_of_base_type = {
-		desc = "Does the scope character have value amount of MaA of the base type?"
-		type = value
-		input_scopes = character
-		output_scope = any
-	}
 	number_maa_regiments_of_type = {
 		desc = "Does the scope character have value amount of MaA of the type?"
 		type = value
@@ -1544,12 +1502,6 @@ links = {
 	}
 	number_title_maa_regiments_of_type = {
 		desc = "Does the scope character have value amount of MaA of the type for their controlled title troops?"
-		type = value
-		input_scopes = character
-		output_scope = any
-	}
-	opinion = {
-		desc = "is the character's opinion of the target greater or equal than the value? opinion = { target = X [*value >/</>=/<= Y* or *value = { min max }*  }"
 		type = value
 		input_scopes = character
 		output_scope = any
@@ -1674,12 +1626,6 @@ links = {
 		input_scopes = character
 		output_scope = any
 	}
-	reverse_opinion = {
-		desc = "is the target character's opinion of the scope character greater or equal than the value? opinion = { target = X [*value >/</>=/<= Y* or *value = { min max }*  }"
-		type = value
-		input_scopes = character
-		output_scope = any
-	}
 	scriptedtests_dread_base = {
 		desc = "does the character have the specified dread baseline value?"
 		type = value
@@ -1776,12 +1722,6 @@ links = {
 		input_scopes = character
 		output_scope = any
 	}
-	tier_difference = {
-		desc = "What is the difference in highest_held_title_tier between the scoped character and the target character (-5 to 5) For example, this is true: scope:a_baron = {     tier_difference = {         target = scope:a_king         value = -3     } }"
-		type = value
-		input_scopes = character
-		output_scope = any
-	}
 	time_to_hook_expiry = {
 		desc = "The # of days until the scoped character's hook on the target expires time_to_hook_expiry = { target = someone value > 50 }"
 		type = value
@@ -1820,12 +1760,6 @@ links = {
 	}
 	vassal_contract_liege_dynasty_reign_start_date = {
 		desc = "Date when this vassal's liege's dynasty started ruling over this vassal"
-		type = value
-		input_scopes = character
-		output_scope = any
-	}
-	vassal_contract_obligation_level = {
-		desc = "The level of the provided contract type in the scoped character's current vassal contract"
 		type = value
 		input_scopes = character
 		output_scope = any

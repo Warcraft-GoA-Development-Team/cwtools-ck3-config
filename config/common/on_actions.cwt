@@ -17,15 +17,7 @@ on_action = {
 		## cardinality = 0..inf
 		<on_action>
 		## cardinality = 0..inf
-		delay = {
-            ## cardinality = 0..1
-            enum[duration] = int
-            ## cardinality = 0..1
-            enum[duration] = {
-                ## cardinality = 2..2
-                int
-            }
-        }
+		delay = single_alias_right[duration_block]
 	}
 	### Same as with events. On_actions are also factored by their weight_multipliers, which defaults to 1
 	## cardinality = 0..1

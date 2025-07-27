@@ -10,13 +10,14 @@ story_cycle = {
     on_owner_death = single_alias_right[effect_clause]
     ## cardinality = 0..inf
     effect_group = {
+        ##cardinality = 0..1
+        enum[duration] = alias_keys_field[int_value]
         ## cardinality = 0..1
-        enum[duration] = int
-        ## cardinality = 0..1
-        enum[duration] = {
-                ## cardinality = 2..2
-                int
-            }
+        enum[duration] = int_value_field
+        ##cardinality = 0..1
+        enum[duration] = single_alias_right[score_formula]
+        ##cardinality = 0..1
+        enum[duration] = { int int }
         ## cardinality = 0..1
         chance = int[1-100]
         ## cardinality = 0..inf

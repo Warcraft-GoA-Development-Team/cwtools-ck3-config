@@ -12,18 +12,25 @@ single_alias[formula] = {
 
 alias[arithmetic_operation:add] = alias_keys_field[int_value]
 alias[arithmetic_operation:add] = value_field
+alias[arithmetic_operation:add] = single_alias_right[score_formula]
 alias[arithmetic_operation:subtract] = alias_keys_field[int_value]
 alias[arithmetic_operation:subtract] = value_field
+alias[arithmetic_operation:subtract] = single_alias_right[score_formula]
 alias[arithmetic_operation:multiply] = alias_keys_field[int_value]
 alias[arithmetic_operation:multiply] = value_field
+alias[arithmetic_operation:multiply] = single_alias_right[score_formula]
 alias[arithmetic_operation:divide] = alias_keys_field[int_value]
 alias[arithmetic_operation:divide] = value_field
+alias[arithmetic_operation:divide] = single_alias_right[score_formula]
 alias[arithmetic_operation:value] = alias_keys_field[int_value]
 alias[arithmetic_operation:value] = value_field
+alias[arithmetic_operation:value] = single_alias_right[score_formula]
 alias[arithmetic_operation:max] = alias_keys_field[int_value]
 alias[arithmetic_operation:max] = value_field
+alias[arithmetic_operation:max] = single_alias_right[score_formula]
 alias[arithmetic_operation:min] = alias_keys_field[int_value]
 alias[arithmetic_operation:min] = value_field
+alias[arithmetic_operation:min] = single_alias_right[score_formula]
 
 alias[arithmetic_operation:round] = yes
 alias[arithmetic_operation:ceiling] = yes
@@ -74,17 +81,12 @@ single_alias[score_formula] = {
     alias_name[score_operation] = alias_match_left[score_operation]
     ## cardinality = 0..inf
     alias_name[arithmetic_operation] = alias_match_left[arithmetic_operation]
-    ## cardinality = 0..inf
-    scope_field = single_alias_right[score_formula]
+    # ## cardinality = 0..inf
+    # scope_field = single_alias_right[score_formula]
+    ## cardinality = 0..1
+    desc = localisation
 }
 
-alias[score_operation:add] = single_alias_right[score_arithmetic]
-alias[score_operation:subtract] = single_alias_right[score_arithmetic]
-alias[score_operation:multiply] = single_alias_right[score_arithmetic]
-alias[score_operation:divide] = single_alias_right[score_arithmetic]
-alias[score_operation:value] = single_alias_right[score_arithmetic]
-# alias[score_operation:max] = single_alias_right[score_arithmetic]
-# alias[score_operation:min] = single_alias_right[score_arithmetic]
 single_alias[score_arithmetic] = {
     ## cardinality = 0..inf
     alias_name[arithmetic_operation] = alias_match_left[arithmetic_operation]
@@ -103,7 +105,7 @@ single_alias[score_arithmetic] = {
 
 alias[score_operation:if] = single_alias_right[score_conditional]
 alias[score_operation:else_if] = single_alias_right[score_conditional]
-alias[score_operation:else] = single_alias_right[score_arithmetic]
+alias[score_operation:else] = single_alias_right[score_formula]
 single_alias[score_conditional] = {
     limit = {
         alias_name[trigger] = alias_match_left[trigger]
@@ -112,8 +114,6 @@ single_alias[score_conditional] = {
     alias_name[arithmetic_operation] = alias_match_left[arithmetic_operation]
     ## cardinality = 0..inf
     alias_name[score_operation] = alias_match_left[score_operation]
-    ## cardinality = 0..inf
-    scope_field = single_alias_right[score_formula]
     ## cardinality = 0..1
     desc = localisation
     ## cardinality = 0..1
@@ -122,22 +122,49 @@ single_alias[score_conditional] = {
     format = localisation
 }
 
-alias[score_operation:scope:employee] = {
-    ## cardinality = 1..inf
-    alias_name[score_operation] = alias_match_left[score_operation]
+### Switch on a trigger for the evaluation of another trigger with an optional fallback trigger. switch = { 	trigger = simple_assign_trigger 	case_1 = { <effects> } 	case_2 = { <effects> } 	case_n = { <effects> } 	fallback = { <effects> }
+alias[score_operation:switch] = {
+    trigger = alias_keys_field[trigger]
+    trigger = bool
+
+    ## cardinality = 0..inf
+    scope_field = {
+        ## cardinality = 0..inf
+        alias_name[arithmetic_operation] = alias_match_left[arithmetic_operation]
+        ## cardinality = 0..inf
+        alias_name[score_operation] = alias_match_left[score_operation]
+    }
+    ## cardinality = 0..inf
+    int = {
+        ## cardinality = 0..inf
+        alias_name[arithmetic_operation] = alias_match_left[arithmetic_operation]
+        ## cardinality = 0..inf
+        alias_name[score_operation] = alias_match_left[score_operation]
+    }
+    ## cardinality = 0..inf
+    scalar = {
+        ## cardinality = 0..inf
+        alias_name[arithmetic_operation] = alias_match_left[arithmetic_operation]
+        ## cardinality = 0..inf
+        alias_name[score_operation] = alias_match_left[score_operation]
+    }
+    ## cardinality = 0..1
+    fallback = {
+        ## cardinality = 0..inf
+        alias_name[arithmetic_operation] = alias_match_left[arithmetic_operation]
+        ## cardinality = 0..inf
+        alias_name[score_operation] = alias_match_left[score_operation]
+    }
 }
 
-alias[score_operation:scope:liege] = {
-    ## cardinality = 1..inf
-    alias_name[score_operation] = alias_match_left[score_operation]
-}
+alias[score_operation:scope_field] = single_alias_right[score_formula]
 
 ###### Triggers for value calculations #######
 alias[trigger:scope:highest_available_aptitude.compare_value] = value_field
 
-alias[score_operation:new_scope] = {
-    scope_field = single_alias_right[score_operation]
-}
+# alias[score_operation:new_scope] = {
+#     scope_field = single_alias_right[score_operation]
+# }
 
 alias[score_operation:use_attribute] = {
     alias_name[arithmetic_operation] = enum[attributes]

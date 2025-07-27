@@ -440,6 +440,10 @@ alias[score_operation:every_in_de_jure_hierarchy] = {
     alias_name[score_operation] = alias_match_left[score_operation]
 }
 
+## scope = character
+## push_scope = landed_title
+alias[score_operation:every_held_county] = single_alias_right[every_effect_score_operation]
+
 #####################################
 #
 # RANDOM EFFECT
@@ -912,6 +916,10 @@ alias[score_operation:random_in_de_jure_hierarchy] = {
     ## cardinality = 0..inf
     alias_name[score_operation] = alias_match_left[score_operation]
 }
+
+## scope = character
+## push_scope = landed_title
+alias[score_operation:random_held_county] = single_alias_right[random_effect_score_operation]
 
 
 #####################################
@@ -1519,3 +1527,7 @@ alias[score_operation:ordered_in_de_jure_hierarchy] = {
     ## cardinality = 0..inf
     alias_name[score_operation] = alias_match_left[score_operation]
 }
+
+## scope = character
+## push_scope = landed_title
+alias[score_operation:ordered_held_county] = single_alias_right[ordered_effect_score_operation]

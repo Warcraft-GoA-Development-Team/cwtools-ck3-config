@@ -135,20 +135,14 @@ single_alias[outbreak_clause] = {
 
         ### How long an infection in a province lasts for once it hits max infection root = infected province scope:epidemic = the epidemic
         ## replace_scope = { root = province epidemic = epidemic}
-        infection_duration = {
-            enum[duration] = single_alias_right[score_formula]
-        }
+        infection_duration = single_alias_right[duration_block]
 
         ### How many days it will take for a province to hit max infection root = infected province scope:epidemic = the epidemic
         ## replace_scope = { root = province epidemic = epidemic}
-        infection_progress_duration = {
-            enum[duration] = single_alias_right[score_formula]
-        }
+        infection_progress_duration = single_alias_right[duration_block]
 
         ### How many days it will take for a province to recover from max infection after infection_duration has elapsed root = infected province scope:epidemic = the epidemic
         ## replace_scope = { root = province epidemic = epidemic }
-        infection_recovery_duration = {
-            enum[duration] = single_alias_right[score_formula]
-        }
+        infection_recovery_duration = single_alias_right[duration_block]
     }
 }

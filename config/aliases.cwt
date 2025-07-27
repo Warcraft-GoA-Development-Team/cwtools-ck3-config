@@ -102,9 +102,9 @@ single_alias[first_random_valid] = {
     ## cardinality = 0..inf
     random_valid = single_alias_right[first_random_valid]
     # This should probably be recursive, but referencing an alias in itself causes a parser crash.
-    ## cardinality = 0..1
+    ## cardinality = 0..inf
     desc = localisation
-    ## cardinality = 0..1
+    ## cardinality = 0..inf
     desc = single_alias_right[complex_desc]
 }
 
@@ -156,6 +156,8 @@ single_alias[added_modifier] = {
     enum[duration] = int_value_field
     ## cardinality = 0..1
     enum[duration] = alias_keys_field[int_value]
+    ## cardinality = 0..1
+    desc = localisation
 }
 
 single_alias[title_change] = {
@@ -232,6 +234,16 @@ single_alias[duration_block] = {
     enum[duration] = { int int }
 }
 
+single_alias[single_duration_block] = {
+    ##cardinality = 0..1
+    enum[duration] = alias_keys_field[int_value]
+    ## cardinality = 0..1
+    enum[duration] = int_value_field
+    ##cardinality = 0..1
+    enum[duration] = single_alias_right[score_formula]
+}
+
+#TODO: Remove?
 alias[duration:enum[duration]] = alias_keys_field[int_value]
 alias[duration:enum[duration]] = int_value_field
 alias[duration:enum[duration]] = single_alias_right[score_formula]

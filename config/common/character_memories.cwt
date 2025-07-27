@@ -20,10 +20,12 @@ memory = {
 
 	### Description for a second person perspective
     ## replace_scope = { root = memory owner = character }
+    ## cardinality = 0..1
 	second_perspective_description = single_alias_right[complex_desc]
 
 	### Description for a third person perspective
     ## replace_scope = { root = memory owner = character }
+    ## cardinality = 0..1
 	third_perspective_description = single_alias_right[complex_desc]
 
 	### Expected participants when creating a memory of this type

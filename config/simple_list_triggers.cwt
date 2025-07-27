@@ -1510,14 +1510,6 @@ alias[trigger:any_important_location_for_title] = single_alias_right[any_trigger
 ## push_scope = landed_title
 alias[trigger:any_in_de_facto_hierarchy] = single_alias_right[any_trigger]
 
-### Iterate through the title itself, all de jure vassals, and below. The continue trigger specifies whether to recursively iterate through the vassal's vassal
-### This is unrelated to the limit; if the limit is met it is added to the list, but its vassals will get checked even if the limit isn't met as long as the 'continue' trigger is
-### ..._de_jure_vassal_and_below = { continue = { conditions } }
-### any_in_de_jure_hierarchy = { <count=num/all> / <percent=fixed_point> <triggers> }
-## scope = landed_title
-## push_scope = landed_title
-alias[trigger:any_in_de_jure_hierarchy] = single_alias_right[any_trigger]
-
 ### Iterate through all neighboring counties. Can only be used in county scope
 ### any_neighboring_county = { <count=num/all> / <percent=fixed_point> <triggers> }
 ## scope = landed_title
@@ -1541,42 +1533,6 @@ alias[trigger:any_past_holder] = single_alias_right[any_trigger]
 ## scope = landed_title
 ## push_scope = character
 alias[trigger:any_past_holder_reversed] = single_alias_right[any_trigger]
-
-### Iterate through all investors of target candidate within the scoped title. Optionally specify a value to filter by investment amount
-### scope:landed_title = {
-### 
-### any/every/ordered/random_succession_appointment_investors = {
-### 
-### 
-### candidate = scope:character
-### 
-### 
-### value > {
-### 
-### 
-### # Optional compare value to
-### 
-### 
-### 
-### value = 100
-### 
-### # only have characters that
-### 
-### 
-### 
-### add = 10
-### 
-### # have invested this much.
-### 
-### 
-### }
-### 
-### }
-### }
-### any_succession_appointment_investors = { <count=num/all> / <percent=fixed_point> <triggers> }
-## scope = landed_title
-## push_scope = character
-alias[trigger:any_succession_appointment_investors] = single_alias_right[any_trigger]
 
 ### Iterate through this title and all its dejure liege titles
 ### any_this_title_or_de_jure_above = { <count=num/all> / <percent=fixed_point> <triggers> }

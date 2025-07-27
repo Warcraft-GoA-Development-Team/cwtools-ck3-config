@@ -1,0 +1,21 @@
+types = {
+    ## type_key_filter = atlas
+    type[coa_atlas] = {
+        path = "game/common/coat_of_arms/options"
+    }
+}
+
+coa_atlas = {
+    tile_size = { int int }
+    nr_of_tiles = int
+    ## cardinality = 0..1
+    actual_size = {
+        ## cardinality = 4..4
+        {int int}
+    }
+    ## cardinality = 0..1
+    fallback = {
+        ## cardinality = 4..4
+        {int int}
+    }
+}

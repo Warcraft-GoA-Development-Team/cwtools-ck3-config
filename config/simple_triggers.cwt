@@ -4764,30 +4764,6 @@ alias[trigger:num_virtuous_traits] == single_alias_right[score_formula]
 ## scope = character
 alias[trigger:num_virtuous_traits] == value_field
 
-### Does the scope character have value amount of MaA of the type?
-## scope = character
-alias[trigger:number_maa_regiments_of_type] == alias_keys_field[int_value]
-
-### Does the scope character have value amount of MaA of the type?
-## scope = character
-alias[trigger:number_maa_regiments_of_type] == single_alias_right[score_formula]
-
-### Does the scope character have value amount of MaA of the type?
-## scope = character
-alias[trigger:number_maa_regiments_of_type] == value_field
-
-### Does the scope character have value amount of soldiers of MaA of the base type?
-## scope = character
-alias[trigger:number_maa_soldiers_of_base_type] == alias_keys_field[int_value]
-
-### Does the scope character have value amount of soldiers of MaA of the base type?
-## scope = character
-alias[trigger:number_maa_soldiers_of_base_type] == single_alias_right[score_formula]
-
-### Does the scope character have value amount of soldiers of MaA of the base type?
-## scope = character
-alias[trigger:number_maa_soldiers_of_base_type] == value_field
-
 ### Does the scope character have value amount of soldiers of MaA of the type?
 ## scope = character
 alias[trigger:number_maa_soldiers_of_type] == alias_keys_field[int_value]
@@ -5318,63 +5294,6 @@ alias[trigger:sub_realm_size] == single_alias_right[score_formula]
 ## scope = character
 alias[trigger:sub_realm_size] == value_field
 
-### How much has the scoped character invested in the target title towards the target candidate?
-### scope:character = {
-### 
-### succession_appointment_score_invested = {
-### 
-### 
-### title = scope:title
-### 
-### 
-### candidate = scope:character
-### 
-### 
-### value < 0
-### 
-### }
-### }
-## scope = character
-alias[trigger:succession_appointment_score_invested] == alias_keys_field[int_value]
-
-### How much has the scoped character invested in the target title towards the target candidate?
-### scope:character = {
-### 
-### succession_appointment_score_invested = {
-### 
-### 
-### title = scope:title
-### 
-### 
-### candidate = scope:character
-### 
-### 
-### value < 0
-### 
-### }
-### }
-## scope = character
-alias[trigger:succession_appointment_score_invested] == single_alias_right[score_formula]
-
-### How much has the scoped character invested in the target title towards the target candidate?
-### scope:character = {
-### 
-### succession_appointment_score_invested = {
-### 
-### 
-### title = scope:title
-### 
-### 
-### candidate = scope:character
-### 
-### 
-### value < 0
-### 
-### }
-### }
-## scope = character
-alias[trigger:succession_appointment_score_invested] == value_field
-
 ### Target weight of the scoped character
 ### target_weight > 10
 ## scope = character
@@ -5401,39 +5320,6 @@ alias[trigger:tax_to_liege] == single_alias_right[score_formula]
 ### The amount of tax a character sends to their liege
 ## scope = character
 alias[trigger:tax_to_liege] == value_field
-
-### What is the difference in highest_held_title_tier between the scoped character and the target character (-5 to 5)
-### For example, this is true:
-### scope:a_baron = {
-###     tier_difference = {
-###         target = scope:a_king
-###         value = -3
-###     }
-### }
-## scope = character
-alias[trigger:tier_difference] == alias_keys_field[int_value]
-
-### What is the difference in highest_held_title_tier between the scoped character and the target character (-5 to 5)
-### For example, this is true:
-### scope:a_baron = {
-###     tier_difference = {
-###         target = scope:a_king
-###         value = -3
-###     }
-### }
-## scope = character
-alias[trigger:tier_difference] == single_alias_right[score_formula]
-
-### What is the difference in highest_held_title_tier between the scoped character and the target character (-5 to 5)
-### For example, this is true:
-### scope:a_baron = {
-###     tier_difference = {
-###         target = scope:a_king
-###         value = -3
-###     }
-### }
-## scope = character
-alias[trigger:tier_difference] == value_field
 
 ### The # of days until the scoped character's hook on the target expires
 ### time_to_hook_expiry = { target = someone value > 50 }

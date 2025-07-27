@@ -98,6 +98,14 @@ links = {
         input_scopes = character
         output_scope = council_task
     }
+    council_task_prefix = {
+        type = scope
+        from_data = yes
+        prefix = council_task:
+        data_source = <council_position>
+        input_scopes = character
+        output_scope = council_task
+    }
     councillor = {
         desc = "Scope to the councillor in a council task"
         input_scopes = council_task
@@ -266,11 +274,6 @@ links = {
         input_scopes = character
         output_scope = character
     }
-    # vassal_contract_obligation_level = {
-    #     desc = "The level of the provided contract type in the scoped objects current vassal contract"
-    #     input_scopes = character
-    #     output_scope = value
-    # }
     culture_group = {
         desc = "Unknown, add something in code registration"
         input_scopes = { character landed_title province culture }
@@ -753,11 +756,19 @@ links = {
         input_scopes = character_memory
         output_scope = character
     }
-    memory_participant = {
+    memory_participant = { # TODO: ?
         desc = "Get the participant of a given tag from a memory"
         input_scopes = character_memory
         output_scope = character
         from_data = yes
+    }
+    memory_participant_prefix = {
+        desc = "Get the participant of a given tag from a memory"
+        input_scopes = character_memory
+        output_scope = character
+        from_data = yes
+        data_source = value[memory_participant]
+        prefix = memory_participant:
     }
     regiment_controller = {
         desc = "Get the character who currently controls the regiment"
@@ -1004,7 +1015,7 @@ links = {
         desc = "Get the epidemic_type with the specified key"
         from_data = yes
         type = scope
-        data_source = <epidemic_type>
+        data_source = <epidemic>
         prefix = epidemic_type:
         output_scope = epidemic_type
     }
@@ -1184,18 +1195,6 @@ links = {
         desc = "Get the Accolade of which this character is the Acclaimed Knight"
         input_scopes = character
         output_scope = accolade
-    }
-    aptitude = {
-        desc = "The aptitude of the provided court position type for the scoped character."
-        from_data = yes
-        input_scopes = character
-        output_scope = value
-    }
-    aptitude_score = {
-        desc = "Raw aptitude score of the provided court position type for the scoped character."
-        from_data = yes
-        input_scopes = character
-        output_scope = value
     }
     assigned_tax_slot = {
         desc = "Get the Tax Slot of which this character is assigned to pay into"
@@ -1454,6 +1453,36 @@ links = {
         input_scopes = character
         output_scope = any
     }
+    aptitude_score_prefix = {
+        type = value
+        from_data = yes
+        from_argument = yes
+        prefix = aptitude_score:
+        desc = "Raw aptitude score of the provided court position type for the scoped character."
+        data_source = <court_position>
+        input_scopes = character
+        output_scope = value
+    }
+    geographical_region_prefix = {
+        type = scope
+        from_data = yes
+        prefix = geographical_region:
+        data_source = <geographical_region>
+        input_scopes = any
+        output_scope = geographical_region
+    }
+
+    # <script_value> = {
+    #     type = value
+    #     input_scopes = any
+    #     output_scope = any
+    # }
+    #
+    # <static_value> = {
+    #     type = value
+    #     input_scopes = any
+    #     output_scope = any
+    # }
 
     # script_value = {
     #     type = value

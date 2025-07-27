@@ -14,6 +14,7 @@ enums = {
         personal
         contract
         hostile
+        political
     }
     enum[scheme_target_type] = {
         character
@@ -156,9 +157,7 @@ scheme = {
 
     ### After the scheme ends, how many days minimum before the same type of scheme can be used by the owner on the target
     ## cardinality = 0..1
-    cooldown = {
-        enum[duration] = int
-    }
+    cooldown = single_alias_right[single_duration_block]
 
     ## cardinality = 0..1
     ### If the Scheme is secret, the secrecy mechanics are used (otherwise always 100% secrecy)

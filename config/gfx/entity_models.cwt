@@ -1,19 +1,19 @@
 types = {
 	## type_key_filter = skeletal_animation_set
 	type[skeletal_animation_set] = {
-		path = "game/gfx"
+		path_extension = ".asset"
 		name_field = "name"
 	}
 
 	## type_key_filter = pdxmesh
 	type[pdxmesh] = {
-		path = "game/gfx"
+		path_extension = ".asset"
 		name_field = "name"
 	}
 
 	## type_key_filter = entity
 	type[entity] = {
-		path = "game/gfx"
+		path_extension = ".asset"
 		name_field = "name"
 	}
 }

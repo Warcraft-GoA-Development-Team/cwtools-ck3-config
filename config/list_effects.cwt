@@ -266,7 +266,9 @@ alias[effect:every_character_struggle] = {
 ## scope = character
 ## push_scope = landed_title
 alias[effect:every_claim] = {
+    ## cardinality = 0..1
     explicit = enum[yesnoall]
+    ## cardinality = 0..1
     pressed = enum[yesnoall]
     ## cardinality = 0..1
     limit = {
@@ -360,6 +362,162 @@ alias[effect:every_in_de_jure_hierarchy] = {
     ## cardinality = 0..1
     custom = localisation
     alias_name[effect] = alias_match_left[effect]
+    # TODO: Does this have 'filter' like any_in_de_jure_hierarchy?
+}
+
+## scope = character
+## push_scope = landed_title
+alias[effect:every_held_county] = single_alias_right[every_effect]
+
+## scope = character
+## push_scope = character
+alias[effect:every_parent] = {
+    ## cardinality = 0..1
+    limit = {
+        alias_name[trigger] = alias_match_left[trigger]
+    }
+    ## cardinality = 0..inf
+    alternative_limit = {
+        alias_name[trigger] = alias_match_left[trigger]
+    }
+    ## cardinality = 0..1
+    custom = localisation
+    alias_name[effect] = alias_match_left[effect]
+    ## cardinality = 0..1
+    even_if_dead = bool
+}
+
+## scope = character
+## push_scope = character
+alias[effect:every_spouse] = {
+    ## cardinality = 0..1
+    limit = {
+        alias_name[trigger] = alias_match_left[trigger]
+    }
+    ## cardinality = 0..inf
+    alternative_limit = {
+        alias_name[trigger] = alias_match_left[trigger]
+    }
+    ## cardinality = 0..1
+    custom = localisation
+    alias_name[effect] = alias_match_left[effect]
+    ## cardinality = 0..1
+    even_if_dead = bool
+}
+
+## scope = character
+## push_scope = character
+alias[effect:every_child] = {
+    ## cardinality = 0..1
+    limit = {
+        alias_name[trigger] = alias_match_left[trigger]
+    }
+    ## cardinality = 0..inf
+    alternative_limit = {
+        alias_name[trigger] = alias_match_left[trigger]
+    }
+    ## cardinality = 0..1
+    custom = localisation
+    alias_name[effect] = alias_match_left[effect]
+    ## cardinality = 0..1
+    even_if_dead = bool
+}
+
+## scope = character
+## push_scope = character
+alias[effect:every_ancestor] = {
+    ## cardinality = 0..1
+    limit = {
+        alias_name[trigger] = alias_match_left[trigger]
+    }
+    ## cardinality = 0..inf
+    alternative_limit = {
+        alias_name[trigger] = alias_match_left[trigger]
+    }
+    ## cardinality = 0..1
+    custom = localisation
+    alias_name[effect] = alias_match_left[effect]
+    ## cardinality = 0..1
+    even_if_dead = bool
+}
+
+## scope = character
+## push_scope = character
+alias[effect:every_close_family_member] = {
+    ## cardinality = 0..1
+    limit = {
+        alias_name[trigger] = alias_match_left[trigger]
+    }
+    ## cardinality = 0..inf
+    alternative_limit = {
+        alias_name[trigger] = alias_match_left[trigger]
+    }
+    ## cardinality = 0..1
+    custom = localisation
+    alias_name[effect] = alias_match_left[effect]
+    ## cardinality = 0..1
+    even_if_dead = bool
+}
+
+## scope = character
+## push_scope = character
+alias[effect:every_close_or_extended_family_member] = {
+    ## cardinality = 0..1
+    limit = {
+        alias_name[trigger] = alias_match_left[trigger]
+    }
+    ## cardinality = 0..inf
+    alternative_limit = {
+        alias_name[trigger] = alias_match_left[trigger]
+    }
+    ## cardinality = 0..1
+    custom = localisation
+    alias_name[effect] = alias_match_left[effect]
+    ## cardinality = 0..1
+    even_if_dead = bool
+}
+
+## scope = character
+## push_scope = character
+alias[effect:every_former_spouse] = {
+    ## cardinality = 0..1
+    limit = {
+        alias_name[trigger] = alias_match_left[trigger]
+    }
+    ## cardinality = 0..inf
+    alternative_limit = {
+        alias_name[trigger] = alias_match_left[trigger]
+    }
+    ## cardinality = 0..1
+    custom = localisation
+    alias_name[effect] = alias_match_left[effect]
+    ## cardinality = 0..1
+    even_if_dead = bool
+}
+
+### Iterate through all investors of target candidate within the scoped title. Optionally specify a value to filter by investment amount
+## scope = landed_title
+## push_scope = character
+alias[effect:every_succession_appointment_investors] = {
+    ## cardinality = 0..1
+    limit = {
+        alias_name[trigger] = alias_match_left[trigger]
+    }
+    ## cardinality = 0..inf
+    alternative_limit = {
+        alias_name[trigger] = alias_match_left[trigger]
+    }
+    ## cardinality = 0..1
+    custom = localisation
+    alias_name[effect] = alias_match_left[effect]
+    ## cardinality = 0..1
+    candidate = scope[character]
+    ## cardinality = 0..1
+    value == int_value_field
+    ## cardinality = 0..1
+    value == alias_keys_field[int_value]
+    ## cardinality = 0..1
+    value == single_alias_right[score_formula]
 }
 
 #####################################
@@ -720,6 +878,7 @@ alias[effect:random_relation] = {
 ## scope = landed_title
 ## push_scope = landed_title
 alias[effect:random_in_de_facto_hierarchy] = {
+    ## cardinality = 0..1
     continue = {
         alias_name[trigger] = alias_match_left[trigger]
     }
@@ -742,6 +901,7 @@ alias[effect:random_in_de_facto_hierarchy] = {
 ## scope = landed_title
 ## push_scope = landed_title
 alias[effect:random_in_de_jure_hierarchy] = {
+    ## cardinality = 0..1
     continue = {
         alias_name[trigger] = alias_match_left[trigger]
     }
@@ -760,6 +920,177 @@ alias[effect:random_in_de_jure_hierarchy] = {
     alias_name[effect] = alias_match_left[effect]
 }
 
+## scope = character
+## push_scope = landed_title
+alias[effect:random_held_county] = single_alias_right[random_effect]
+
+## scope = character
+## push_scope = character
+alias[effect:random_parent] = {
+    ## cardinality = 0..1
+    limit = {
+        alias_name[trigger] = alias_match_left[trigger]
+    }
+    ## cardinality = 0..inf
+    alternative_limit = {
+        alias_name[trigger] = alias_match_left[trigger]
+    }
+    ## cardinality = 0..1
+    weight = single_alias_right[weight_block]
+    ## cardinality = 0..1
+    custom = localisation
+    alias_name[effect] = alias_match_left[effect]
+    ## cardinality = 0..1
+    even_if_dead = bool
+}
+
+## scope = character
+## push_scope = character
+alias[effect:random_spouse] = {
+    ## cardinality = 0..1
+    limit = {
+        alias_name[trigger] = alias_match_left[trigger]
+    }
+    ## cardinality = 0..inf
+    alternative_limit = {
+        alias_name[trigger] = alias_match_left[trigger]
+    }
+    ## cardinality = 0..1
+    weight = single_alias_right[weight_block]
+    ## cardinality = 0..1
+    custom = localisation
+    alias_name[effect] = alias_match_left[effect]
+    ## cardinality = 0..1
+    even_if_dead = bool
+}
+
+## scope = character
+## push_scope = character
+alias[effect:random_child] = {
+    ## cardinality = 0..1
+    limit = {
+        alias_name[trigger] = alias_match_left[trigger]
+    }
+    ## cardinality = 0..inf
+    alternative_limit = {
+        alias_name[trigger] = alias_match_left[trigger]
+    }
+    ## cardinality = 0..1
+    weight = single_alias_right[weight_block]
+    ## cardinality = 0..1
+    custom = localisation
+    alias_name[effect] = alias_match_left[effect]
+    ## cardinality = 0..1
+    even_if_dead = bool
+}
+
+## scope = character
+## push_scope = character
+alias[effect:random_ancestor] = {
+    ## cardinality = 0..1
+    limit = {
+        alias_name[trigger] = alias_match_left[trigger]
+    }
+    ## cardinality = 0..inf
+    alternative_limit = {
+        alias_name[trigger] = alias_match_left[trigger]
+    }
+    ## cardinality = 0..1
+    weight = single_alias_right[weight_block]
+    ## cardinality = 0..1
+    custom = localisation
+    alias_name[effect] = alias_match_left[effect]
+    ## cardinality = 0..1
+    even_if_dead = bool
+}
+
+## scope = character
+## push_scope = character
+alias[effect:random_close_family_member] = {
+    ## cardinality = 0..1
+    limit = {
+        alias_name[trigger] = alias_match_left[trigger]
+    }
+    ## cardinality = 0..inf
+    alternative_limit = {
+        alias_name[trigger] = alias_match_left[trigger]
+    }
+    ## cardinality = 0..1
+    weight = single_alias_right[weight_block]
+    ## cardinality = 0..1
+    custom = localisation
+    alias_name[effect] = alias_match_left[effect]
+    ## cardinality = 0..1
+    even_if_dead = bool
+}
+
+## scope = character
+## push_scope = character
+alias[effect:random_close_or_extended_family_member] = {
+    ## cardinality = 0..1
+    limit = {
+        alias_name[trigger] = alias_match_left[trigger]
+    }
+    ## cardinality = 0..inf
+    alternative_limit = {
+        alias_name[trigger] = alias_match_left[trigger]
+    }
+    ## cardinality = 0..1
+    weight = single_alias_right[weight_block]
+    ## cardinality = 0..1
+    custom = localisation
+    alias_name[effect] = alias_match_left[effect]
+    ## cardinality = 0..1
+    even_if_dead = bool
+}
+
+## scope = character
+## push_scope = character
+alias[effect:random_former_spouse] = {
+    ## cardinality = 0..1
+    limit = {
+        alias_name[trigger] = alias_match_left[trigger]
+    }
+    ## cardinality = 0..inf
+    alternative_limit = {
+        alias_name[trigger] = alias_match_left[trigger]
+    }
+    ## cardinality = 0..1
+    weight = single_alias_right[weight_block]
+    ## cardinality = 0..1
+    custom = localisation
+    alias_name[effect] = alias_match_left[effect]
+    ## cardinality = 0..1
+    even_if_dead = bool
+}
+
+### Iterate through all investors of target candidate within the scoped title. Optionally specify a value to filter by investment amount
+## scope = landed_title
+## push_scope = character
+alias[effect:random_succession_appointment_investors] = {
+    ## cardinality = 0..1
+    limit = {
+        alias_name[trigger] = alias_match_left[trigger]
+    }
+    ## cardinality = 0..inf
+    alternative_limit = {
+        alias_name[trigger] = alias_match_left[trigger]
+    }
+    ## cardinality = 0..1
+    weight = single_alias_right[weight_block]
+    ## cardinality = 0..1
+    custom = localisation
+    alias_name[effect] = alias_match_left[effect]
+    ## cardinality = 0..1
+    candidate = scope[character]
+    ## cardinality = 0..1
+    value == int_value_field
+    ## cardinality = 0..1
+    value == alias_keys_field[int_value]
+    ## cardinality = 0..1
+    value == single_alias_right[score_formula]
+}
+
 #####################################
 #
 # ORDERED EFFECT
@@ -771,10 +1102,12 @@ single_alias[ordered_effect] = {
     limit = {
         alias_name[trigger] = alias_match_left[trigger]
     }
-    ## cardinality = 0..1
     # TODO: Work out what exactly this is restricted to
+    ## cardinality = 0..1
     order_by = alias_keys_field[int_value]
+    ## cardinality = 0..1
     order_by = single_alias_right[score_formula]
+    ## cardinality = 0..1
     order_by = value_field
     ## cardinality = 0..1
     max = alias_keys_field[int_value]
@@ -799,10 +1132,12 @@ alias[effect:ordered_activity_phase_location] = {
     limit = {
         alias_name[trigger] = alias_match_left[trigger]
     }
-    ## cardinality = 0..1
     # TODO: Work out what exactly this is restricted to
+    ## cardinality = 0..1
     order_by = alias_keys_field[int_value]
+    ## cardinality = 0..1
     order_by = single_alias_right[score_formula]
+    ## cardinality = 0..1
     order_by = value_field
     ## cardinality = 0..1
     max = alias_keys_field[int_value]
@@ -827,10 +1162,12 @@ alias[effect:ordered_activity_phase_location_future] = {
     limit = {
         alias_name[trigger] = alias_match_left[trigger]
     }
-    ## cardinality = 0..1
     # TODO: Work out what exactly this is restricted to
+    ## cardinality = 0..1
     order_by = alias_keys_field[int_value]
+    ## cardinality = 0..1
     order_by = single_alias_right[score_formula]
+    ## cardinality = 0..1
     order_by = value_field
     ## cardinality = 0..1
     max = alias_keys_field[int_value]
@@ -855,10 +1192,12 @@ alias[effect:ordered_activity_phase_location_past] = {
     limit = {
         alias_name[trigger] = alias_match_left[trigger]
     }
-    ## cardinality = 0..1
     # TODO: Work out what exactly this is restricted to
+    ## cardinality = 0..1
     order_by = alias_keys_field[int_value]
+    ## cardinality = 0..1
     order_by = single_alias_right[score_formula]
+    ## cardinality = 0..1
     order_by = value_field
     ## cardinality = 0..1
     max = alias_keys_field[int_value]
@@ -883,10 +1222,12 @@ alias[effect:ordered_attending_character] = {
     limit = {
         alias_name[trigger] = alias_match_left[trigger]
     }
-    ## cardinality = 0..1
     # TODO: Work out what exactly this is restricted to
+    ## cardinality = 0..1
     order_by = alias_keys_field[int_value]
+    ## cardinality = 0..1
     order_by = single_alias_right[score_formula]
+    ## cardinality = 0..1
     order_by = value_field
     ## cardinality = 0..1
     max = alias_keys_field[int_value]
@@ -910,10 +1251,12 @@ alias[effect:ordered_guest_subset] = {
     limit = {
         alias_name[trigger] = alias_match_left[trigger]
     }
-    ## cardinality = 0..1
     # TODO: Work out what exactly this is restricted to
+    ## cardinality = 0..1
     order_by = alias_keys_field[int_value]
+    ## cardinality = 0..1
     order_by = single_alias_right[score_formula]
+    ## cardinality = 0..1
     order_by = value_field
     ## cardinality = 0..1
     max = alias_keys_field[int_value]
@@ -939,10 +1282,12 @@ alias[effect:ordered_guest_subset_current_phase] = {
     limit = {
         alias_name[trigger] = alias_match_left[trigger]
     }
-    ## cardinality = 0..1
     # TODO: Work out what exactly this is restricted to
+    ## cardinality = 0..1
     order_by = alias_keys_field[int_value]
+    ## cardinality = 0..1
     order_by = single_alias_right[score_formula]
+    ## cardinality = 0..1
     order_by = value_field
     ## cardinality = 0..1
     max = alias_keys_field[int_value]
@@ -965,10 +1310,12 @@ alias[effect:ordered_county_in_region] = {
     limit = {
         alias_name[trigger] = alias_match_left[trigger]
     }
-    ## cardinality = 0..1
     # TODO: Work out what exactly this is restricted to
+    ## cardinality = 0..1
     order_by = alias_keys_field[int_value]
+    ## cardinality = 0..1
     order_by = single_alias_right[score_formula]
+    ## cardinality = 0..1
     order_by = value_field
     ## cardinality = 0..1
     max = alias_keys_field[int_value]
@@ -993,10 +1340,12 @@ alias[effect:ordered_in_global_list] = {
     limit = {
         alias_name[trigger] = alias_match_left[trigger]
     }
-    ## cardinality = 0..1
     # TODO: Work out what exactly this is restricted to
+    ## cardinality = 0..1
     order_by = alias_keys_field[int_value]
+    ## cardinality = 0..1
     order_by = single_alias_right[score_formula]
+    ## cardinality = 0..1
     order_by = value_field
     ## cardinality = 0..1
     max = alias_keys_field[int_value]
@@ -1022,10 +1371,12 @@ alias[effect:ordered_in_list] = {
     limit = {
         alias_name[trigger] = alias_match_left[trigger]
     }
-    ## cardinality = 0..1
     # TODO: Work out what exactly this is restricted to
+    ## cardinality = 0..1
     order_by = alias_keys_field[int_value]
+    ## cardinality = 0..1
     order_by = single_alias_right[score_formula]
+    ## cardinality = 0..1
     order_by = value_field
     ## cardinality = 0..1
     max = alias_keys_field[int_value]
@@ -1052,10 +1403,12 @@ alias[effect:ordered_in_local_list] = {
     limit = {
         alias_name[trigger] = alias_match_left[trigger]
     }
-    ## cardinality = 0..1
     # TODO: Work out what exactly this is restricted to
+    ## cardinality = 0..1
     order_by = alias_keys_field[int_value]
+    ## cardinality = 0..1
     order_by = single_alias_right[score_formula]
+    ## cardinality = 0..1
     order_by = value_field
     ## cardinality = 0..1
     max = alias_keys_field[int_value]
@@ -1077,10 +1430,12 @@ alias[effect:ordered_pool_character] = {
     limit = {
         alias_name[trigger] = alias_match_left[trigger]
     }
-    ## cardinality = 0..1
     # TODO: Work out what exactly this is restricted to
+    ## cardinality = 0..1
     order_by = alias_keys_field[int_value]
+    ## cardinality = 0..1
     order_by = single_alias_right[score_formula]
+    ## cardinality = 0..1
     order_by = value_field
     ## cardinality = 0..1
     max = alias_keys_field[int_value]
@@ -1104,10 +1459,12 @@ alias[effect:ordered_trait_in_category] = {
     limit = {
         alias_name[trigger] = alias_match_left[trigger]
     }
-    ## cardinality = 0..1
     # TODO: Work out what exactly this is restricted to
+    ## cardinality = 0..1
     order_by = alias_keys_field[int_value]
+    ## cardinality = 0..1
     order_by = single_alias_right[score_formula]
+    ## cardinality = 0..1
     order_by = value_field
     ## cardinality = 0..1
     max = alias_keys_field[int_value]
@@ -1132,10 +1489,12 @@ alias[effect:ordered_character_struggle] = {
     limit = {
         alias_name[trigger] = alias_match_left[trigger]
     }
-    ## cardinality = 0..1
     # TODO: Work out what exactly this is restricted to
+    ## cardinality = 0..1
     order_by = alias_keys_field[int_value]
+    ## cardinality = 0..1
     order_by = single_alias_right[score_formula]
+    ## cardinality = 0..1
     order_by = value_field
     ## cardinality = 0..1
     max = alias_keys_field[int_value]
@@ -1160,10 +1519,12 @@ alias[effect:ordered_claim] = {
     limit = {
         alias_name[trigger] = alias_match_left[trigger]
     }
-    ## cardinality = 0..1
     # TODO: Work out what exactly this is restricted to
+    ## cardinality = 0..1
     order_by = alias_keys_field[int_value]
+    ## cardinality = 0..1
     order_by = single_alias_right[score_formula]
+    ## cardinality = 0..1
     order_by = value_field
     ## cardinality = 0..1
     max = alias_keys_field[int_value]
@@ -1186,10 +1547,12 @@ alias[effect:ordered_court_position_holder] = {
     limit = {
         alias_name[trigger] = alias_match_left[trigger]
     }
-    ## cardinality = 0..1
     # TODO: Work out what exactly this is restricted to
+    ## cardinality = 0..1
     order_by = alias_keys_field[int_value]
+    ## cardinality = 0..1
     order_by = single_alias_right[score_formula]
+    ## cardinality = 0..1
     order_by = value_field
     ## cardinality = 0..1
     max = alias_keys_field[int_value]
@@ -1215,10 +1578,12 @@ alias[effect:ordered_relation] = {
     limit = {
         alias_name[trigger] = alias_match_left[trigger]
     }
-    ## cardinality = 0..1
     # TODO: Work out what exactly this is restricted to
+    ## cardinality = 0..1
     order_by = alias_keys_field[int_value]
+    ## cardinality = 0..1
     order_by = single_alias_right[score_formula]
+    ## cardinality = 0..1
     order_by = value_field
     ## cardinality = 0..1
     max = alias_keys_field[int_value]
@@ -1237,6 +1602,7 @@ alias[effect:ordered_relation] = {
 ## scope = landed_title
 ## push_scope = landed_title
 alias[effect:ordered_in_de_facto_hierarchy] = {
+    ## cardinality = 0..1
     continue = {
         alias_name[trigger] = alias_match_left[trigger]
     }
@@ -1244,10 +1610,12 @@ alias[effect:ordered_in_de_facto_hierarchy] = {
     limit = {
         alias_name[trigger] = alias_match_left[trigger]
     }
-    ## cardinality = 0..1
     # TODO: Work out what exactly this is restricted to
+    ## cardinality = 0..1
     order_by = alias_keys_field[int_value]
+    ## cardinality = 0..1
     order_by = single_alias_right[score_formula]
+    ## cardinality = 0..1
     order_by = value_field
     ## cardinality = 0..1
     max = alias_keys_field[int_value]
@@ -1266,6 +1634,7 @@ alias[effect:ordered_in_de_facto_hierarchy] = {
 ## scope = landed_title
 ## push_scope = landed_title
 alias[effect:ordered_in_de_jure_hierarchy] = {
+    ## cardinality = 0..1
     continue = {
         alias_name[trigger] = alias_match_left[trigger]
     }
@@ -1273,10 +1642,12 @@ alias[effect:ordered_in_de_jure_hierarchy] = {
     limit = {
         alias_name[trigger] = alias_match_left[trigger]
     }
-    ## cardinality = 0..1
     # TODO: Work out what exactly this is restricted to
+    ## cardinality = 0..1
     order_by = alias_keys_field[int_value]
+    ## cardinality = 0..1
     order_by = single_alias_right[score_formula]
+    ## cardinality = 0..1
     order_by = value_field
     ## cardinality = 0..1
     max = alias_keys_field[int_value]
@@ -1289,4 +1660,247 @@ alias[effect:ordered_in_de_jure_hierarchy] = {
     ## cardinality = 0..1
     custom = localisation
     alias_name[effect] = alias_match_left[effect]
+}
+
+## scope = character
+## push_scope = landed_title
+alias[effect:ordered_held_county] = single_alias_right[ordered_effect]
+
+## scope = character
+## push_scope = character
+alias[effect:ordered_parent] = {
+    ## cardinality = 0..1
+    limit = {
+        alias_name[trigger] = alias_match_left[trigger]
+    }
+    # TODO: Work out what exactly this is restricted to
+    ## cardinality = 0..1
+    order_by = alias_keys_field[int_value]
+    ## cardinality = 0..1
+    order_by = single_alias_right[score_formula]
+    ## cardinality = 0..1
+    order_by = value_field
+    ## cardinality = 0..1
+    max = alias_keys_field[int_value]
+    ## cardinality = 0..1
+    max = value_field
+    ## cardinality = 0..1
+    position = int
+    ## cardinality = 0..1
+    check_range_bounds = no
+    ## cardinality = 0..1
+    custom = localisation
+    alias_name[effect] = alias_match_left[effect]
+    ## cardinality = 0..1
+    even_if_dead = bool
+}
+
+## scope = character
+## push_scope = character
+alias[effect:ordered_spouse] = {
+    ## cardinality = 0..1
+    limit = {
+        alias_name[trigger] = alias_match_left[trigger]
+    }
+    # TODO: Work out what exactly this is restricted to
+    ## cardinality = 0..1
+    order_by = alias_keys_field[int_value]
+    ## cardinality = 0..1
+    order_by = single_alias_right[score_formula]
+    ## cardinality = 0..1
+    order_by = value_field
+    ## cardinality = 0..1
+    max = alias_keys_field[int_value]
+    ## cardinality = 0..1
+    max = value_field
+    ## cardinality = 0..1
+    position = int
+    ## cardinality = 0..1
+    check_range_bounds = no
+    ## cardinality = 0..1
+    custom = localisation
+    alias_name[effect] = alias_match_left[effect]
+    ## cardinality = 0..1
+    even_if_dead = bool
+}
+
+## scope = character
+## push_scope = character
+alias[effect:ordered_child] = {
+    ## cardinality = 0..1
+    limit = {
+        alias_name[trigger] = alias_match_left[trigger]
+    }
+    # TODO: Work out what exactly this is restricted to
+    ## cardinality = 0..1
+    order_by = alias_keys_field[int_value]
+    ## cardinality = 0..1
+    order_by = single_alias_right[score_formula]
+    ## cardinality = 0..1
+    order_by = value_field
+    ## cardinality = 0..1
+    max = alias_keys_field[int_value]
+    ## cardinality = 0..1
+    max = value_field
+    ## cardinality = 0..1
+    position = int
+    ## cardinality = 0..1
+    check_range_bounds = no
+    ## cardinality = 0..1
+    custom = localisation
+    alias_name[effect] = alias_match_left[effect]
+    ## cardinality = 0..1
+    even_if_dead = bool
+}
+
+## scope = character
+## push_scope = character
+alias[effect:ordered_ancestor] = {
+    ## cardinality = 0..1
+    limit = {
+        alias_name[trigger] = alias_match_left[trigger]
+    }
+    # TODO: Work out what exactly this is restricted to
+    ## cardinality = 0..1
+    order_by = alias_keys_field[int_value]
+    ## cardinality = 0..1
+    order_by = single_alias_right[score_formula]
+    ## cardinality = 0..1
+    order_by = value_field
+    ## cardinality = 0..1
+    max = alias_keys_field[int_value]
+    ## cardinality = 0..1
+    max = value_field
+    ## cardinality = 0..1
+    position = int
+    ## cardinality = 0..1
+    check_range_bounds = no
+    ## cardinality = 0..1
+    custom = localisation
+    alias_name[effect] = alias_match_left[effect]
+    ## cardinality = 0..1
+    even_if_dead = bool
+}
+
+## scope = character
+## push_scope = character
+alias[effect:ordered_close_family_member] = {
+    ## cardinality = 0..1
+    limit = {
+        alias_name[trigger] = alias_match_left[trigger]
+    }
+    # TODO: Work out what exactly this is restricted to
+    ## cardinality = 0..1
+    order_by = alias_keys_field[int_value]
+    ## cardinality = 0..1
+    order_by = single_alias_right[score_formula]
+    ## cardinality = 0..1
+    order_by = value_field
+    ## cardinality = 0..1
+    max = alias_keys_field[int_value]
+    ## cardinality = 0..1
+    max = value_field
+    ## cardinality = 0..1
+    position = int
+    ## cardinality = 0..1
+    check_range_bounds = no
+    ## cardinality = 0..1
+    custom = localisation
+    alias_name[effect] = alias_match_left[effect]
+    ## cardinality = 0..1
+    even_if_dead = bool
+}
+
+## scope = character
+## push_scope = character
+alias[effect:ordered_close_or_extended_family_member] = {
+    ## cardinality = 0..1
+    limit = {
+        alias_name[trigger] = alias_match_left[trigger]
+    }
+    # TODO: Work out what exactly this is restricted to
+    ## cardinality = 0..1
+    order_by = alias_keys_field[int_value]
+    ## cardinality = 0..1
+    order_by = single_alias_right[score_formula]
+    ## cardinality = 0..1
+    order_by = value_field
+    ## cardinality = 0..1
+    max = alias_keys_field[int_value]
+    ## cardinality = 0..1
+    max = value_field
+    ## cardinality = 0..1
+    position = int
+    ## cardinality = 0..1
+    check_range_bounds = no
+    ## cardinality = 0..1
+    custom = localisation
+    alias_name[effect] = alias_match_left[effect]
+    ## cardinality = 0..1
+    even_if_dead = bool
+}
+
+## scope = character
+## push_scope = character
+alias[effect:ordered_former_spouse] = {
+    ## cardinality = 0..1
+    limit = {
+        alias_name[trigger] = alias_match_left[trigger]
+    }
+    # TODO: Work out what exactly this is restricted to
+    ## cardinality = 0..1
+    order_by = alias_keys_field[int_value]
+    ## cardinality = 0..1
+    order_by = single_alias_right[score_formula]
+    ## cardinality = 0..1
+    order_by = value_field
+    ## cardinality = 0..1
+    max = alias_keys_field[int_value]
+    ## cardinality = 0..1
+    max = value_field
+    ## cardinality = 0..1
+    position = int
+    ## cardinality = 0..1
+    check_range_bounds = no
+    ## cardinality = 0..1
+    custom = localisation
+    alias_name[effect] = alias_match_left[effect]
+    ## cardinality = 0..1
+    even_if_dead = bool
+}
+
+### Iterate through all investors of target candidate within the scoped title. Optionally specify a value to filter by investment amount
+## scope = landed_title
+## push_scope = character
+alias[effect:ordered_succession_appointment_investors] = {
+    ## cardinality = 0..1
+    limit = {
+        alias_name[trigger] = alias_match_left[trigger]
+    }
+    # TODO: Work out what exactly this is restricted to
+    ## cardinality = 0..1
+    order_by = alias_keys_field[int_value]
+    ## cardinality = 0..1
+    order_by = single_alias_right[score_formula]
+    ## cardinality = 0..1
+    order_by = value_field
+    ## cardinality = 0..1
+    max = alias_keys_field[int_value]
+    ## cardinality = 0..1
+    max = value_field
+    ## cardinality = 0..1
+    position = int
+    ## cardinality = 0..1
+    check_range_bounds = no
+    ## cardinality = 0..1
+    custom = localisation
+    alias_name[effect] = alias_match_left[effect]
+    ## cardinality = 0..1
+    candidate = scope[character]
+    ## cardinality = 0..1
+    value == int_value_field
+    ## cardinality = 0..1
+    value == alias_keys_field[int_value]
+    ## cardinality = 0..1
+    value == single_alias_right[score_formula]
 }

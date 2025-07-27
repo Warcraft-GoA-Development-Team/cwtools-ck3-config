@@ -577,6 +577,8 @@ alias[trigger:custom_description] = {
     alias_name[trigger] = alias_match_left[trigger]
 }
 
+alias[trigger:custom_tooltip] = localisation
+
 ### Replaces the tooltips for the enclosed triggers with a custom text custom_tooltip = { 	text = <text> 	<trigger> }
 alias[trigger:custom_tooltip] = {
     text = localisation
@@ -595,8 +597,16 @@ alias[trigger:game_start_date] == date_field
 ### Checks the size of a variable list variable_list_size = { name = X target >= Y } Where X is the name of the variable Where Y is a script value or number
 alias[trigger:global_variable_list_size] = {
     name = value[global_variable_list]
-    target == alias_keys_field[int_value]
+    ## cardinality = 0..1
+    target == alias_keys_field[int_value] # TODO: Target is not used in vanilla, does it exist?
+    ## cardinality = 0..1
     target == value_field
+    ## cardinality = 0..1
+    value == int_value_field
+    ## cardinality = 0..1
+    value == alias_keys_field[int_value]
+    ## cardinality = 0..1
+    value == single_alias_right[score_formula]
 }
 
 # ### Does the host have this DLC
@@ -724,6 +734,7 @@ alias[trigger:save_temporary_scope_as] = value_set[temporary_scope]
 alias[trigger:save_temporary_scope_value_as] = {
     name = value_set[temporary_scope]
     value = alias_keys_field[int_value]
+    value = single_alias_right[score_formula]
     value = value_field
 }
 
@@ -829,6 +840,10 @@ alias[trigger:has_local_variable] = replace_me # TODO
 ## scope = province
 alias[trigger:geographical_region] = <geographical_region>
 
+### Checks if a province is in a certain geographical region
+## scope = province
+alias[trigger:geographical_region] = scope[geographical_region]
+
 ### does the scope province have a particular building? 	has_building = temple_01
 ## scope = province
 alias[trigger:has_building] = <building>
@@ -884,7 +899,7 @@ alias[trigger:province_infection_date] == date_field
 alias[trigger:terrain] = <terrain>
 
 ### How far away is the province/barony/county from the target? Measured in map pixels. Squared for performance reasons (square root is expensive). squared_distance = { target = some province/barony/county value > 10000 }
-## scope = province
+## scope = { province landed_title }
 alias[trigger:squared_distance] == {
     ## cardinality = 0..1
     target = scope[landed_title]
@@ -1040,7 +1055,7 @@ alias[trigger:legend_start_date] == date_field
 ## scope = scheme
 alias[trigger:has_scheme_modifier] = <modifier_container>
 
-###  Does the scheme have the given category? Supported categories: 'hostile', 'contract', and 'personal'.
+###  Does the scheme have the given category? Supported categories: 'hostile', 'contract', 'political', and 'personal'.
 ## scope = scheme
 alias[trigger:is_scheme_category] = enum[scheme_category]
 
@@ -1115,7 +1130,7 @@ alias[trigger:has_holy_site_flag] = value[holy_site_flag]
 
 ### Does the scoped title have a given order of succession has_order_of_succession = election
 ## scope = landed_title
-alias[trigger:has_order_of_succession] = <law>
+alias[trigger:has_order_of_succession] = enum[order_of_succession]
 
 ### Does the scoped title have the given title-specifc-law?
 ## scope = landed_title
@@ -1319,7 +1334,7 @@ alias[trigger:all_inventory_artifact_slots] == enum[full_or_empty]
 ### Compares the scoped character's amenity level in the given type to the given value
 ## scope = character
 alias[trigger:amenity_level] = {
-    type = <court_amenity_type>
+    type = <court_amenity_category>
     value == alias_keys_field[int_value]
     value == value_field
 }
@@ -1360,7 +1375,7 @@ alias[trigger:can_add_hook] = {
     target = scope[character]
     type = <hook>
     ##cardinality = 0..1
-    enum[duration] == alias_keys_field[int_value]
+    enum[duration] = alias_keys_field[int_value]
     ##cardinality = 0..1
     enum[duration] = value_field
 }
@@ -1437,7 +1452,10 @@ alias[trigger:can_join_or_create_faction_against] = {
 ## scope = character
 alias[trigger:can_start_scheme] = {
     type = <scheme>
+    ## cardinality = 0..1
     target_character = scope[character]
+    ## cardinality = 0..1
+    target_title = scope[landed_title]
 }
 
 ### Can the scoped character sponsor the target inspiration
@@ -1667,6 +1685,12 @@ alias[trigger:has_nickname] = <nickname>
 alias[trigger:has_opinion_modifier] = {
     modifier = <opinion_modifier>
     target = scope[character]
+    ## cardinality = 0..1
+    value == int_value_field
+    ## cardinality = 0..1
+    value == alias_keys_field[int_value]
+    ## cardinality = 0..1
+    value == single_alias_right[score_formula]
 }
 
 ### Does the scope character have an opposite relationship of the relation value with the target character? target = , relation =
@@ -1708,6 +1732,10 @@ alias[trigger:has_scheme_countermeasure_parameter] = enum[scheme_countermeasure_
 ### Does the character's sexuality match the scripted? (heterosexual, homosexual, bisexual, asexual, none). Characters that have yet to get a sexuality (children) have the none set.
 ## scope = character
 alias[trigger:has_sexuality] = <game_concept.sexuality>
+
+### Does the character's sexuality match the scripted? (heterosexual, homosexual, bisexual, asexual, none). Characters that have yet to get a sexuality (children) have the none set.
+## scope = character
+alias[trigger:has_sexuality] = none
 
 ### Does the character have this trait?  Can also specify a trait group, in which case the trigger will return true if the scope character has any trait from that trait group.
 ## scope = character
@@ -1818,14 +1846,6 @@ alias[trigger:is_character_interaction_shown] = {
 alias[trigger:is_character_interaction_valid] = {
     recipient = scope[character]
     interaction = <character_interaction>
-}
-
-
-### Trigger to check if the target character is the one employing the scoped character in a court position. 
-## scope = character
-alias[trigger:is_court_position_employer] = {
-    court_position = <court_position>
-    who = scope[character]
 }
 
 ### Check if the task of the scope councillor is valid { task_type = council_position_type_key target = for_targeted_tasks }
@@ -1951,7 +1971,7 @@ alias[trigger:learning_diff] = {
 
 ### does the character have the required martial skill level?
 ## scope = character
-alias[trigger:martial] == alias_match_left[arithmetic_operation]
+alias[trigger:martial] == single_alias_right[score_formula]
 
 ### does the character have the required martial skill level difference against target? martial = { target = character value <= script_value abs = yes/no(optional, default no) }
 ## scope = character
@@ -2115,6 +2135,7 @@ alias[trigger:opinion] = {
     target = scope[character]
     value == alias_keys_field[int_value]
     value == value_field
+    value == single_alias_right[score_formula]
 }
 
 ### Does the character own a story of this type?
@@ -2221,25 +2242,25 @@ alias[trigger:tier_difference] = {
 
 ### How much time passed after diarch was designated?
 ## scope = character
-alias[trigger:time_after_diarch_designated] = { enum[duration] = int }
+alias[trigger:time_after_diarch_designated] = single_alias_right[single_duration_block]
 
 ### for how long has the character been imprisoned? time_in_prison = { days/months/years =,>,< X }
 ## scope = character
-alias[trigger:time_in_prison] = { enum[duration] = int }
+alias[trigger:time_in_prison] = single_alias_right[single_duration_block]
 
 
 
 ### for how long has the character been imprisoned with the current type? time_in_prison_type = { days/months/years =,>,< X }
 ## scope = character
-alias[trigger:time_in_prison_type] = { enum[duration] = int }
+alias[trigger:time_in_prison_type] = single_alias_right[single_duration_block]
 
 ### for how long has the character is dead? time_since_death  = { days/months/years =,>,< X }
 ## scope = character
-alias[trigger:time_since_death] = { enum[duration] = int }
+alias[trigger:time_since_death] = single_alias_right[single_duration_block]
 
 ### The # of days until the scoped character's hook on the target expires. time_to_hook_expiry = { target = someone value > 50 }
 ## scope = character
-alias[trigger:time_to_hook_expiry] = { enum[duration] = int }
+alias[trigger:time_to_hook_expiry] = single_alias_right[single_duration_block]
 
 ### target = other character value >/</= sum of trait compatibility values
 ## scope = character
@@ -2588,7 +2609,22 @@ alias[trigger:vassal_contract_obligation_level_can_be_increased] = <subject_cont
 ### always = scope:a_boolean_value # evaluated at runtime
 alias[trigger:always] = scope[bool] # Scoped boolean
 
-
+###How much has the scoped character invested in the target title towards the target candidate?
+### scope:character = {
+### 	succession_appointment_score_invested = {
+### 		title = scope:title
+### 		candidate = scope:character
+### 		value < 0
+### 	}
+### }
+## scope = character
+alias[trigger:succession_appointment_score_invested] = {
+    title = scope[landed_title]
+    candidate = scope[character]
+    value == int_value_field
+    value == alias_keys_field[int_value]
+    value == single_alias_right[score_formula]
+}
 
 # -Z
 

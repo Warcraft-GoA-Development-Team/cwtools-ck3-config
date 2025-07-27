@@ -1,30 +1,242 @@
 types = {
+    ## type_key_filter <> { template }
     type[coat_of_arms] = {
         # The double coat of arms is not a type
         path = "game/common/coat_of_arms/coat_of_arms"
     }
+
+    ## type_key_filter <> { template }
+    type[simple_coat_of_arms] = {
+        # The double coat of arms is not a type
+        path = "game/common/coat_of_arms/coat_of_arms"
+    }
+
+    type[coat_of_arms_template] = {
+        path = "game/common/coat_of_arms/coat_of_arms"
+
+        skip_root_key = template
+    }
 }
 
 coat_of_arms = {
-    pattern = filepath
+    ## cardinality = 0..1
+    pattern = filepath[game/gfx/coat_of_arms/patterns]
+    ## cardinality = 0..1
     color1 = <color>
     ## cardinality = 0..1
+    color1 = color_field
+    ## cardinality = 0..1
     color2 = <color>
-    ## cardinality = 1..inf
+    ## cardinality = 0..1
+    color2 = color_field
+    ## cardinality = 0..1
+    color3 = <color>
+    ## cardinality = 0..1
+    color3 = color_field
+    ## cardinality = 0..1
+    color4 = <color>
+    ## cardinality = 0..1
+    color4 = color_field
+    ## cardinality = 0..inf
     colored_emblem = {
-        texture = filepath
+        texture = filepath[game/gfx/coat_of_arms/colored_emblems]
+        ## cardinality = 0..1
         color1 = <color>
         ## cardinality = 0..1
+        color1 = color_field
+        ## cardinality = 0..1
+        color1 = enum[colored_emblem_colors]
+        ## cardinality = 0..1
         color2 = <color>
+        ## cardinality = 0..1
+        color2 = color_field
+        ## cardinality = 0..1
+        color2 = enum[colored_emblem_colors]
+        ## cardinality = 0..1
+        color3 = <color>
+        ## cardinality = 0..1
+        color3 = color_field
+        ## cardinality = 0..1
+        color3 = enum[colored_emblem_colors]
+        ## cardinality = 0..1
+        color4 = <color>
+        ## cardinality = 0..1
+        color4 = color_field
+        ## cardinality = 0..1
+        color4 = enum[colored_emblem_colors]
+        ## cardinality = 0..inf
         instance = {
+            ## cardinality = 0..1
             position = {
                 float
                 float
             }
+            ## cardinality = 0..1
             scale = {
                 float
                 float
             }
+            ## cardinality = 0..1
+            rotation = float
+            ## cardinality = 0..1
+            depth = float
         }
+        ## cardinality = 0..1
+        mask = { int }
+    }
+    ## cardinality = 0..inf
+    textured_emblem = { # TODO: This is not used in vanilla so I have no idea what it looks like. Copied colored_emblem without colors for now
+        texture = filepath[game/gfx/coat_of_arms/textured_emblems]
+        ## cardinality = 0..inf
+        instance = {
+            ## cardinality = 0..1
+            position = {
+                float
+                float
+            }
+            ## cardinality = 0..1
+            scale = {
+                float
+                float
+            }
+            ## cardinality = 0..1
+            rotation = float
+            ## cardinality = 0..1
+            depth = float
+        }
+        ## cardinality = 0..1
+        mask = { int }
     }
 }
+
+simple_coat_of_arms = alias_keys_field[coat_of_arms]
+
+coat_of_arms_template = {
+    pattern = list <pattern_template_list>
+    ## cardinality = 0..1
+    pattern = filepath[game/gfx/coat_of_arms/patterns]
+    ## cardinality = 0..1
+    color1 = <color>
+    ## cardinality = 0..1
+    color1 = color_field
+    ## cardinality = 0..1
+    color1 = enum[colored_emblem_colors]
+    ## cardinality = 0..1
+    color1 = list <color_template_list>
+    ## cardinality = 0..1
+    color2 = <color>
+    ## cardinality = 0..1
+    color2 = color_field
+    ## cardinality = 0..1
+    color2 = enum[colored_emblem_colors]
+    ## cardinality = 0..1
+    color2 = list <color_template_list>
+    ## cardinality = 0..1
+    color3 = <color>
+    ## cardinality = 0..1
+    color3 = color_field
+    ## cardinality = 0..1
+    color3 = enum[colored_emblem_colors]
+    ## cardinality = 0..1
+    color3 = list <color_template_list>
+    ## cardinality = 0..1
+    color4 = <color>
+    ## cardinality = 0..1
+    color4 = color_field
+    ## cardinality = 0..1
+    color4 = enum[colored_emblem_colors]
+    ## cardinality = 0..1
+    color4 = list <color_template_list>
+    ## cardinality = 0..inf
+    colored_emblem = {
+        texture = filepath[game/gfx/coat_of_arms/colored_emblems]
+        texture = list <colored_emblem_texture_list>
+        ## cardinality = 0..1
+        color1 = <color>
+        ## cardinality = 0..1
+        color1 = color_field
+        ## cardinality = 0..1
+        color1 = enum[colored_emblem_colors]
+        ## cardinality = 0..1
+        color1 = list <color_template_list>
+        ## cardinality = 0..1
+        color2 = <color>
+        ## cardinality = 0..1
+        color2 = color_field
+        ## cardinality = 0..1
+        color2 = enum[colored_emblem_colors]
+        ## cardinality = 0..1
+        color2 = list <color_template_list>
+        ## cardinality = 0..1
+        color3 = <color>
+        ## cardinality = 0..1
+        color3 = color_field
+        ## cardinality = 0..1
+        color3 = enum[colored_emblem_colors]
+        ## cardinality = 0..1
+        color3 = list <color_template_list>
+        ## cardinality = 0..1
+        color4 = <color>
+        ## cardinality = 0..1
+        color4 = color_field
+        ## cardinality = 0..1
+        color4 = enum[colored_emblem_colors]
+        ## cardinality = 0..1
+        color4 = list <color_template_list>
+        ## cardinality = 0..inf
+        instance = {
+            ## cardinality = 0..1
+            position = {
+                float
+                float
+            }
+            ## cardinality = 0..1
+            scale = {
+                float
+                float
+            }
+            ## cardinality = 0..1
+            rotation = float
+            ## cardinality = 0..1
+            depth = float
+        }
+        ## cardinality = 0..1
+        mask = { int }
+    }
+    ## cardinality = 0..inf
+    textured_emblem = { # TODO: This is not used in vanilla so I have no idea what it looks like. Copied colored_emblem without colors for now
+        texture = filepath[game/gfx/coat_of_arms/textured_emblems]
+        texture = list <textured_emblem_texture_list>
+        ## cardinality = 0..inf
+        instance = {
+            ## cardinality = 0..1
+            position = {
+                float
+                float
+            }
+            ## cardinality = 0..1
+            scale = {
+                float
+                float
+            }
+            ## cardinality = 0..1
+            rotation = float
+            ## cardinality = 0..1
+            depth = float
+        }
+        ## cardinality = 0..1
+        mask = { int }
+    }
+}
+
+enums = {
+    enum[colored_emblem_colors] = {
+        color1
+        color2
+        color3
+        color4
+    }
+}
+
+alias[coat_of_arms:<coat_of_arms>] = <coat_of_arms>
+alias[coat_of_arms:<simple_coat_of_arms>] = <simple_coat_of_arms>

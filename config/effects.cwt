@@ -26,6 +26,10 @@ alias[effect:add_dynasty_prestige] = alias_keys_field[int_value]
 ## scope = dynasty
 alias[effect:add_dynasty_prestige] = value_field
 
+### adds dynasty prestige
+## scope = dynasty
+alias[effect:add_dynasty_prestige] = single_alias_right[score_formula]
+
 ### adds dynasty prestige levels
 ## scope = dynasty
 alias[effect:add_dynasty_prestige_level] = alias_keys_field[int_value]
@@ -33,6 +37,10 @@ alias[effect:add_dynasty_prestige_level] = alias_keys_field[int_value]
 ### adds dynasty prestige levels
 ## scope = dynasty
 alias[effect:add_dynasty_prestige_level] = value_field
+
+### adds dynasty prestige levels
+## scope = dynasty
+alias[effect:add_dynasty_prestige_level] = single_alias_right[score_formula]
 
 ### Remove all instances of a modifier from a dynasty remove_all_dynasty_modifier_instances = name
 ## scope = dynasty
@@ -178,6 +186,7 @@ alias[effect:change_cultural_acceptance] = {
     target = scope[culture]
     value = alias_keys_field[int_value]
     value = value_field
+    value = single_alias_right[score_formula]
     ## cardinality = 0..1
     desc = single_alias_right[complex_desc]
     ## cardinality = 0..1
@@ -265,6 +274,7 @@ alias[effect:add_house_unity_modifier] = single_alias_right[added_modifier]
 alias[effect:add_unity_value] = {
     value = alias_keys_field[int_value]
     value = value_field
+    value = single_alias_right[score_formula]
     character = scope[character]
     desc = localisation
     desc = single_alias_right[complex_desc]
@@ -484,6 +494,7 @@ alias[effect:change_fervor] = value_field
 alias[effect:change_fervor] = {
     value = alias_keys_field[int_value]
     value = value_field
+    value = single_alias_right[score_formula]
     desc = localisation
 }
 
@@ -672,8 +683,13 @@ alias[effect:set_epidemic_outbreak_intensity] = enum[outbreak_intensity]
 ###################################
 
 ### Generates a coat of arms for the scoped landed title, dynasty or house generate_coa = yes
-## scope = {landed_title dynasty dynasty_house confederation }
+## scope = { landed_title dynasty dynasty_house confederation }
 alias[effect:generate_coa] = yes
+
+
+### Generates a coat of arms for the scoped landed title, dynasty or house generate_coa = yes
+## scope = { landed_title dynasty dynasty_house confederation }
+alias[effect:generate_coa] = <coa_template_list>
 
 ### Rest the coat of arms for the scoped landed title, dynasty or house to its template reset_coa = yes
 ## scope = {landed_title dynasty dynasty_house confederation }
@@ -789,6 +805,10 @@ alias[effect:add_durability] = alias_keys_field[int_value]
 ### Add this much to the artifacts durability
 ## scope = artifact
 alias[effect:add_durability] = value_field
+
+### Add this much to the artifacts durability
+## scope = artifact
+alias[effect:add_durability] = single_alias_right[score_formula]
 
 ### Copies the modifiers of the target artifact. Does *not* clear out existing modifiers
 ## scope = artifact
@@ -1191,7 +1211,7 @@ alias[effect:create_character] = {
     ## cardinality = 0..1
     age = int_value_field
     ## cardinality = 0..1
-    age = single_alias_right[score_arithmetic]
+    age = single_alias_right[score_operation]
     ## cardinality = 0..1
     age = { int_value_field int_value_field }
     ## cardinality = 0..1
@@ -1356,7 +1376,7 @@ alias[effect:custom_description] = {
     ## cardinality = 0..1
     subject = scope[character]
     ## cardinality = 0..1
-    object = scope[any]
+    object = scope_field
     ## cardinality = 0..1
     value = alias_keys_field[int_value]
     ## cardinality = 0..1
@@ -1426,6 +1446,9 @@ alias[effect:duel] = {
     skill = enum[attribute]
 
     ## cardinality = 0..1
+    skills = { enum[attribute] }
+
+    ## cardinality = 0..1
     ### Requires `skill` to be set.
     target = scope[character]
 
@@ -1449,6 +1472,10 @@ alias[effect:duel] = {
         desc = localisation
         ## cardinality = 0..1
         trigger = single_alias_right[trigger_clause]
+        ## cardinality = 0..inf
+        min = value_field
+        ## cardinality = 0..inf
+        min = alias_keys_field[int_value]
 
         ## cardinality = 0..inf
         alias_name[weight] = alias_match_left[weight]
@@ -1521,19 +1548,28 @@ alias[effect:open_interaction_window] = {
 }
 
 ### Tries to open the defined view without scope data. Take care to set player if effect is executed not through UI but through synchronized code. Else all the window will open for all players. open_view = { view = <view name> view_message = <view specific instruction> # optional player = scope:character # optional, else shows for all players who execute the effect } simplified: open_view = <view name>
-alias[effect:open_view] = scalar # TODO: How to handle GUI files?
+alias[effect:open_view] = enum[game_views]
 
 ### Tries to open the defined view without scope data. Take care to set player if effect is executed not through UI but through synchronized code. Else all the window will open for all players. open_view = { view = <view name> view_message = <view specific instruction> # optional player = scope:character # optional, else shows for all players who execute the effect } simplified: open_view = <view name>
 alias[effect:open_view] = {
-    view = scalar # TODO: How to handle GUI files?
+    view = enum[game_views]
     ## cardinality = 0..1
     view_message = scalar # TODO: No idea.
     ## cardinality = 0..1
     player = scope[character]
 }
 
-# Tries to open the defined view with scope data. Take care to set player if effect is executed not through UI but through synchronized code. Else all the window will open for all players. open_view_data = { view = <view name> view_message = <view specific instruction> # optional player = scope:character # optional, else shows for all players who execute the effect } simplified: open_view_data = <view name> for example: scope:faith = { open_view_data = faith_conversion }
-alias[effect:open_view_data] = replace_me # TODO: Figure out views.
+### Tries to open the defined view with scope data. Take care to set player if effect is executed not through UI but through synchronized code. Else all the window will open for all players. open_view_data = { view = <view name> view_message = <view specific instruction> # optional player = scope:character # optional, else shows for all players who execute the effect } simplified: open_view_data = <view name> for example: scope:faith = { open_view_data = faith_conversion }
+alias[effect:open_view_data] = enum[game_views]
+
+### Tries to open the defined view with scope data. Take care to set player if effect is executed not through UI but through synchronized code. Else all the window will open for all players. open_view_data = { view = <view name> view_message = <view specific instruction> # optional player = scope:character # optional, else shows for all players who execute the effect } simplified: open_view_data = <view name> for example: scope:faith = { open_view_data = faith_conversion }
+alias[effect:open_view_data] = {
+    view = enum[game_views]
+    ## cardinality = 0..1
+    player = scope[character]
+    ## cardinality = 0..1
+    data = replace_me # TODO: Idk wtf this is. Maybe scope_field?
+}
 
 ### Pans the camera to the specified province pan_camera_to_province = scope:army.location
 alias[effect:pan_camera_to_province] = scope[province]
@@ -1556,6 +1592,8 @@ alias[effect:random] = {
 
 ###random_list - a random list effect random_list = { X1 = { trigger = { enables/disable this effect} modifier/compare_modifier/opinion_modifier = Y1 effect1 } X2 = { trigger = { enables/disable this effect} modifier/compare_modifier/opinion_modifier = Y2 effect2 } ... }Selects one effect from the list and fires it. The effects are weighted by numbers X1, X2... (the higher the number, the higher the chance of the effect being picked). The chances can be modified by optional value modifier lists Y1, Y2... (AKA MTTH)
 alias[effect:random_list] = {
+    ## cardinality = 0..1
+    desc = localisation
     ## cardinality = 1..inf
     int = {
         ## cardinality = 0..1
@@ -1566,6 +1604,13 @@ alias[effect:random_list] = {
 
         ## cardinality = 0..1
         desc = localisation
+
+        ## cardinality = 0..1
+        min == int_value_field
+        ## cardinality = 0..1
+        min == alias_keys_field[int_value]
+        ## cardinality = 0..1
+        min == single_alias_right[score_formula]
 
         ## cardinality = 0..inf
         alias_name[weight] = alias_match_left[weight]
@@ -1739,7 +1784,9 @@ alias[effect:set_global_variable] = {
     name = value_set[global_variable]
 
     ## cardinality = 0..1
-    enum[duration] = int
+    enum[duration] = alias_keys_field[int_value]
+    ## cardinality = 0..1
+    enum[duration] = value_field
 
     ## cardinality = 0..1
     value = alias_keys_field[int_value]
@@ -1761,7 +1808,9 @@ alias[effect:set_local_variable] = {
     name = value_set[local_variable]
 
     ## cardinality = 0..1
-    enum[duration] = int
+    enum[duration] = alias_keys_field[int_value]
+    ## cardinality = 0..1
+    enum[duration] = value_field
 
     ## cardinality = 0..1
     value = alias_keys_field[int_value]
@@ -1995,10 +2044,11 @@ alias[effect:begin_create_holding] = {
 
 ### Creates a new epidemic in the scoped province. create_epidemic_outbreak = {	type = smallpox	intensity = major	save_scope_as = new_epidemic # optional}
 ## scope = province
-alias[effect:begin_create_holding] = {
-    type = <epidemic_type>
+alias[effect:create_epidemic_outbreak] = {
+    type = <epidemic>
     intensity = enum[outbreak_intensity]
-    save_scope_as = value_set[temporary_scope]
+    ## cardinality = 0..1
+    save_scope_as = value_set[event_target]
 }
 
 ### Start construction of the specified holding type. By default player won't get anything if manually cancels the construction. scope:my_province = {	begin_create_holding = castle_holding } Optionally refund cost can be set to some value. scope:my_province = {	begin_create_holding = {		type = castle_holding		refund_cost = {			gold = 100		}	}}
@@ -2235,6 +2285,14 @@ alias[effect:add_scheme_modifier] = {
 ## scope = scheme
 alias[effect:add_scheme_progress] = value_field
 
+### Add progress to the scope scheme. (progress is in 0.0 - 100.0 range)
+## scope = scheme
+alias[effect:add_scheme_progress] = alias_keys_field[int_value]
+
+### Add progress to the scope scheme. (progress is in 0.0 - 100.0 range)
+## scope = scheme
+alias[effect:add_scheme_progress] = single_alias_right[score_formula]
+
 ### Ends a specific scheme and removes it without any other effect
 ## scope = scheme
 alias[effect:change_opportunities] = alias_keys_field[int_value]
@@ -2242,6 +2300,10 @@ alias[effect:change_opportunities] = alias_keys_field[int_value]
 ### Ends a specific scheme and removes it without any other effect
 ## scope = scheme
 alias[effect:change_opportunities] = value_field
+
+### Ends a specific scheme and removes it without any other effect
+## scope = scheme
+alias[effect:change_opportunities] = single_alias_right[score_formula]
 
 ### change_opportunities - Change schemes available opportunities with the given amount.
 ## scope = scheme
@@ -2301,7 +2363,7 @@ alias[effect:accept_activity_invite_without_travel] = scope[activity]
 
 ### accept_task_contract - accept_task_contract = TASK_CONTRACT_SCOPE 
 ## scope = character
-alias[effect:accept_activity_invite] = scope[task_contract]
+alias[effect:accept_task_contract] = scope[task_contract]
 
 ### add_amenity_level = { type = food value = 2 } Increases the amenity type by the given value for the scoped character
 ## scope = character
@@ -2406,7 +2468,8 @@ alias[effect:add_hook_no_toast] = {
     type = <hook_types>
     target = scope[character]
     secret = <secret_type>
-    enum[duration] = int
+    enum[duration] = alias_keys_field[int_value]
+    enum[duration] = value_field
 }
 
 ### add_joined_faction_discontent = X adds (or subtracts) discontent to the factions the scope character is in
@@ -2450,6 +2513,8 @@ alias[effect:add_opinion] = {
     opinion = alias_keys_field[int_value]
     ## cardinality = 0..1
     opinion = value_field
+    ## cardinality = 0..1
+    opinion = single_alias_right[score_formula]
     ## cardinality = 0..1
     enum[duration] = int_value_field
     ## cardinality = 0..1
@@ -2593,7 +2658,8 @@ alias[effect:add_reserved_gold] = value_field
 alias[effect:add_scheme_cooldown] = {
     target = scope[character]
     type = <scheme>
-    enum[duration] = int
+    enum[duration] = alias_keys_field[int_value]
+    enum[duration] = value_field
 }
 
 ### adds a secret add_secret = { type = X target = Y }  Note that if you create a Secret in the immediate effect, the tooltips for other effects run in that Secret's scope (such as reveal_to) are likely to be displayed incorrectly, or not to be displayed at all. This is due to the game generating the tooltip before it actually has a Secret that exists to work off of.  Test rigorously and use custom tooltips if necessary. Creating a Secret in the immediate and then running effects on it in an event option should produce perfectly normal tooltips.
@@ -2615,6 +2681,10 @@ alias[effect:add_short_term_gold] = value_field
 ### increases (or decreases) stress of a character
 ## scope = character
 alias[effect:add_stress] = alias_keys_field[int_value]
+
+### increases (or decreases) stress of a character
+## scope = character
+alias[effect:add_stress] = single_alias_right[score_formula]
 
 ### increases (or decreases) stress of a character
 ## scope = character
@@ -2778,6 +2848,7 @@ alias[effect:apply_ai_vassal_obligation_vassal_most_desired] = <subject_obligati
 alias[effect:appoint_court_position] = {
     recipient = scope[character]
     court_position = <court_position>
+    court_position = scope[court_position]
 }
 
 ### Assigns the target character to the first available council position of the type available assign_council_task = {     council_task = council_task_scope     target = character_taking_the_position    fire_on_actions = [yes] }
@@ -3000,16 +3071,29 @@ alias[effect:create_artifact] = {
 	name = single_alias_right[complex_desc]
     description = localisation
     description = single_alias_right[complex_desc]
+    ## cardinality = 0..1
     rarity = enum[artifact_rarity]
     type = <artifact_type>
+    ## cardinality = 0..1
     durability = int_value_field
+    ## cardinality = 0..1
     max_durability = int_value_field
+    ## cardinality = 0..1
     decaying = bool
+    ## cardinality = 0..1
     history = single_alias_right[artifact_history_block]
+    ## cardinality = 0..1
     template = <template>
     visuals = <artifact_visual>
+    ## cardinality = 0..1
     quality = int_value_field
+    ## cardinality = 0..1
+    quality = scope[value]
+    ## cardinality = 0..1
     wealth = int_value_field
+    ## cardinality = 0..1
+    wealth = scope[value]
+    ## cardinality = 0..1
     creator = scope[character]
     ## cardinality = 0..1
     visuals_source = scope[landed_title]
@@ -3017,7 +3101,8 @@ alias[effect:create_artifact] = {
     visuals_source = scope[dynasty]
     ## cardinality = 0..1
     visuals_source = scope[dynasty_house]
-    alias_name[modifier] = alias_match_left[modifier]
+    ## cardinality = 0..1
+    modifier = <modifier_container>
     ## cardinality = 0..1
     save_scope_as = value_set[event_target]
 }
@@ -3158,6 +3243,8 @@ alias[effect:create_task_contract] = {
     target = scope[character]
     ## cardinality = 0..1
     save_scope_as = value_set[event_target]
+    ## cardinality = 0..1
+    save_temporary_scope_as = value_set[temporary_scope]
 }
 
 
@@ -3177,7 +3264,7 @@ alias[effect:death] = natural
 
 ### The scoped character declines the invitation to the target activity
 ## scope = character
-alias[effect:decline_activity_invite] = scope[character]
+alias[effect:decline_activity_invite] = scope[activity]
 
 ### The character in scope gets deposed.
 ## scope = character
@@ -3227,7 +3314,8 @@ alias[effect:forbid_from_scheme] = scope[scheme]
 ## scope = character
 alias[effect:force_add_to_agent_slot] = {
     agent_slot = scope[agent_slot]
-    enum[duration] = int
+    enum[duration] = alias_keys_field[int_value]
+    enum[duration] = value_field
 }
 
 ### Forces a character's skills to be recalculated immediately, bypassing the wait for the daily tick. NOTE: Only use this when *absolutely* necessary, as it will impact performance negatively if misused
@@ -3238,7 +3326,8 @@ alias[effect:force_character_skill_recalculation] = bool
 ## scope = character
 alias[effect:force_vote_as] = {
     target = scope[character]
-    enum[duration] = int
+    enum[duration] = alias_keys_field[int_value]
+    enum[duration] = value_field
 }
 
 ### gives a title to a character
@@ -3290,7 +3379,8 @@ alias[effect:join_faction] = scope[faction]
 alias[effect:join_faction_forced] = {
     faction = scope[faction]
     forced_by = scope[character]
-    enum[duration] = int
+    enum[duration] = alias_keys_field[int_value]
+    enum[duration] = value_field
 }
 
 ### the character in the scope joins the assigned faction skiping the can_character_join trigger
@@ -3414,7 +3504,8 @@ alias[effect:pay_long_term_gold] = {
 ## scope = character
 alias[effect:pay_long_term_income] = {
     target = scope[character]
-    enum[duration] = int
+    enum[duration] = alias_keys_field[int_value]
+    enum[duration] = value_field
 }
 
 ### the scope character pays gold to the target character, pay_gold = { target = X gold = Y } (AI budget category long term)
@@ -3430,7 +3521,8 @@ alias[effect:pay_reserved_gold] = {
 ## scope = character
 alias[effect:pay_reserved_income] = {
     target = scope[character]
-    enum[duration] = int
+    enum[duration] = alias_keys_field[int_value]
+    enum[duration] = value_field
 }
 
 ### the scope character pays gold to the target character, pay_gold = { target = X gold = Y } (AI budget category short term)
@@ -3446,14 +3538,16 @@ alias[effect:pay_short_term_gold] = {
 ## scope = character
 alias[effect:pay_war_chest_gold] = {
     target = scope[character]
-    enum[duration] = int
+    enum[duration] = alias_keys_field[int_value]
+    enum[duration] = value_field
 }
 
 ### the scope character immediately pays gold corresponding to their income to the target character, pay_income = { target = X days/months/years = Y } (AI budget short term)
 ## scope = character
 alias[effect:pay_war_chest_income] = {
     target = scope[character]
-    enum[duration] = int
+    enum[duration] = alias_keys_field[int_value]
+    enum[duration] = value_field
 }
 
 ### Plays the specified music cue.
@@ -3660,6 +3754,12 @@ alias[effect:reverse_add_opinion] = {
     opinion = alias_keys_field[int_value]
     ## cardinality = 0..1
     opinion = value_field
+    ## cardinality = 0..1
+    opinion = single_alias_right[score_formula]
+    ## cardinality = 0..1
+    enum[duration] = int_value_field
+    ## cardinality = 0..1
+    enum[duration] = alias_keys_field[int_value]
 }
 
 ### Revokes target position from scoped character. court_position = court position type - court position type to revoke from scoped character's court
@@ -3751,11 +3851,15 @@ alias[effect:send_interface_toast] = {
     ## cardinality = 0..1
     left_icon = scope[character]
     ## cardinality = 0..1
+    left_icon = scope[dynasty_house]
+    ## cardinality = 0..1
     left_icon = scope[landed_title]
     ## cardinality = 0..1
     right_icon = scope[character]
     ## cardinality = 0..1
     right_icon = scope[landed_title]
+    ## cardinality = 0..1
+    right_icon = scope[dynasty_house]
     ## cardinality = 0..1
     goto = scope[character]
     ## cardinality = 0..1
@@ -3851,7 +3955,8 @@ alias[effect:set_dead_character_variable] = {
     name = value_set[dead_variable]
     value = value_field
     value = bool
-    enum[duration] = int
+    enum[duration] = alias_keys_field[int_value]
+    enum[duration] = value_field
     enum[duration] = { int int }
 }
 
@@ -4017,6 +4122,9 @@ alias[effect:set_relation_<scripted_relation>] = {
 
     ## cardinality = 0..1
     province = scope[province]
+
+    ## cardinality = 0..1
+    copy_reason = <scripted_relation>
 }
 
 ### Set the maximum (and also desired value) for the 'reserved' gold AI budget. This budget is saved up, even before the war chest budget. It will not correct the current gold in that budget to conform to the new maximum.character, set_reserved_gold_maximum = X
@@ -4056,7 +4164,7 @@ alias[effect:spawn_army] = {
     ## cardinality = 0..1
     levies = value_field
     ## cardinality = 0..1
-    levies = single_alias_right[score_arithmetic]
+    levies = single_alias_right[score_operation]
     ## cardinality = 0..inf
     men_at_arms = {
         type = <maa_type>
@@ -4065,7 +4173,7 @@ alias[effect:spawn_army] = {
         ## cardinality = 0..1
         stacks = value_field
         ## cardinality = 0..1
-        stacks = single_alias_right[score_arithmetic]
+        stacks = single_alias_right[score_operation]
     }
     ## cardinality = 0..1
     location = <province>
@@ -4113,6 +4221,8 @@ alias[effect:start_scheme] = {
     ## cardinality = 0..1
     contract = <contract>
     ## cardinality = 0..1
+    contract = scope[task_contract]
+    ## cardinality = 0..1
     target_character = scope[character]
     ## cardinality = 0..1
     target_title = scope[landed_title]
@@ -4137,18 +4247,28 @@ enums = {
 ## scope = character
 alias[effect:start_travel_plan] = {
     destination = scope[province]
+    ##cardinality = 0..1
     travel_leader = scope[character]
+    ##cardinality = 0..inf
     companion = scope[character]
     ##cardinality = 0..1
     travel_with_domicile = bool
+    ##cardinality = 0..1
     players_use_planner = bool
     return_trip = bool
+    ##cardinality = 0..1
     on_arrival_event = <event>
+    ##cardinality = 0..1
     on_arrival_on_action = <on_action>
+    ##cardinality = 0..1
     on_start_event = <event>
+    ##cardinality = 0..1
     on_start_on_action = <on_action>
+    ##cardinality = 0..1
     on_travel_planner_cancel_event = <event>
+    ##cardinality = 0..1
     on_travel_planner_on_action = <on_action>
+    ##cardinality = 0..1
     on_arrival_destinations = enum[on_arrival_destinations]
 
 }
@@ -4258,6 +4378,10 @@ alias[effect:transfer_title_maa] = scope[landed_title]
 ###################################
 # LANDED_TITLE SCOPE
 ###################################
+
+### Add a modifier to a county add_county_modifier = name add_county_modifier = { modifier = name days/weeks/months/years = int }
+## scope = landed_title
+alias[effect:add_county_modifier] = <modifier_container>
 
 ### Add a modifier to a county add_county_modifier = name add_county_modifier = { modifier = name days/weeks/months/years = int }
 ## scope = landed_title
@@ -4567,6 +4691,10 @@ alias[effect:change_provisions] = alias_keys_field[int_value]
 ## scope = domicile
 alias[effect:change_provisions] = value_field
 
+### Adds (or removes) provisions to a scoped domicile
+## scope = domicile
+alias[effect:change_provisions] = single_alias_right[score_formula]
+
 ### Construct building to scoped domicile, ignores cost but uses construction time
 ## scope = domicile
 alias[effect:construct_domicile_building] = <domicile_building>
@@ -4584,7 +4712,8 @@ alias[effect:remove_domicile_building] = <domicile_building>
 alias[effect:scheme_freeze] = {
     ## cardinality = 0..1
     reason = localisation
-    enum[duration] = int
+    enum[duration] = alias_keys_field[int_value]
+    enum[duration] = value_field
 }
 
 ### starts a tributary
@@ -4631,7 +4760,8 @@ alias[effect:equip_artifact_to_owner_replace] = bool
 ### pay_short_term_income - the scope character immediately pays gold corresponding to their income to the target character, pay_short_term_income = { target = X days/months/years = Y } (AI budget 'short term' first, then rest)
 ## scope = character
 alias[effect:pay_short_term_income] = {
-    enum[duration] = int
+    enum[duration] = alias_keys_field[int_value]
+    enum[duration] = value_field
     target = scope[character]
 }
 

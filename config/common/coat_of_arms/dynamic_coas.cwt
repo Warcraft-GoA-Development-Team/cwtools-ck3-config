@@ -1,0 +1,16 @@
+types = {
+    ## type_key_regex = (\be_[^\s]+|\bk_[^\s]+|\bd_[^\s]+|\bc_[^\s]+|\bb_[^\s]+)
+    type[dynamic_coa] = { #TODO: Have the key be a landed_title
+        path = "game/common/coat_of_arms/dynamic_definitions"
+    }
+}
+
+### Name must match a landed title definition
+dynamic_coa = {
+    ## cardinality = 1..inf
+    item = {
+        ### Trigger for when this item should be picked, first valid item is picked, root = the title
+        trigger = single_alias_right[trigger_clause]
+        coat_of_arms = alias_keys_field[coat_of_arms]
+    }
+}

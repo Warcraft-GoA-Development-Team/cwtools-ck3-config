@@ -10,6 +10,9 @@ enums = {
         scheme_targets
         hooked_characters
         neighboring_rulers
+        neighboring_rulers_including_tributary_borders
+        neighboring_top_overlords_including_tributary_borders
+        neighboring_top_overlords_connected_by_land
         peer_vassals
         guests
         dynasty
@@ -19,7 +22,9 @@ enums = {
         sub_realm_characters
         realm_characters
         vassals
+        tributaries
         liege
+        suzerain
         self
         head_of_faith
         spouses
@@ -31,6 +36,16 @@ enums = {
         scripted_relations
         activity_host
         activity_guests
+        contacts
+        domicile_location_top_ruler
+        domicile_location_top_realm_vassals
+        domicile_location_neighboring_top_rulers
+        domicile_location_neighboring_top_realm_vassals
+        top_realm_domicile_owners
+        sub_realm_domicile_owners
+        nearby_domicile_owners
+
+        diarch # This one isn't listed in the .info but vanilla uses it
     }
     
     enum[greeting] = {
@@ -40,6 +55,10 @@ enums = {
     
     enum[target_type] = {
         title
+        artifact
+        men_at_arms
+        court_position_type
+        count
     }
     
     enum[target_filter] = {
@@ -55,22 +74,69 @@ enums = {
         recipient_de_jure_titles
         secondary_actor_de_jure_titles
         secondary_recipient_de_jure_titles
+        actor_realm_titles
+        recipient_realm_titles
+        secondary_actor_realm_titles
+        secondary_recipient_realm_titles
+        actor_top_liege_de_jure_titles
+        recipient_top_liege_de_jure_titles
+        secondary_actor_top_liege_de_jure_titles
+        secondary_recipient_top_liege_de_jure_titles
+
+        actor_artifacts
+        recipient_artifacts
+        actor_artifacts_claimable
+        recipient_artifacts_claimable
+
+        actor_maa
+        recipient_maa
+        actor_personal_maa
+        recipient_personal_maa
+        actor_title_maa
+        recipient_title_maa
+
+        count
+
+        recipient_lessee_titles # Not listed in the .info but used in vanilla
+    }
+    enum[custom_character_sort] = {
+        candidate_score
+        governor_efficiency
+        obedience
     }
 }
 # TODO: Check if of the int_value_fields accept values or just ints
 character_interaction = {
+    ## cardinality = 0..1
+    name = single_alias_right[complex_desc]
     ### Used by interaction menu
     ## cardinality = 0..1
     interface_priority = int_value_field
     ### Used by interaction menu
     ## cardinality = 0..1
     common_interaction = bool
+    ## cardinality = 0..inf
+    override_background = {
+        ## cardinality = 0..1
+        trigger = single_alias_right[trigger_clause]
+        ## cardinality = 0..1
+        reference = <event_background>
+    }
     ### Used by interaction menu
     ## cardinality = 0..1
     category = <character_interaction_category>
     ### What icon to use. If an icon is used for more than one interaction; please consider making it general (such as icon_culture for interactions relating to culture or icon_personal for personal schemes.). Otherwise defaults to none/the my_interaction key + related my_interaction.dds in gfx/interface/icons/character_interactions
     ## cardinality = 0..1
     icon = filepath[gfx/interface/icons/character_interactions/,.dds]
+
+    ### Used by ToggleFilteredCharacterInteractionMenu
+    ### to open a subset of the interaction menu with
+    ### only the interactions that have a matching
+    ### filter_tag or category
+    ### These are localized with _filter_tag_desc as a
+    ### suffix when they appear in the interaction menu
+    ## cardinality = 0..1
+    filter_tags = { value_set[filter_tags] }
 
     ### Should the interaction be highlighted in the menu
     ## cardinality = 0..1
@@ -80,16 +146,28 @@ character_interaction = {
     highlighted_reason = localisation
     ### Flavor text that is shown under acceptance widget. Use it when you need to draw more attention to the on decline effect
     ## cardinality = 0..1
+    on_decline_summary = localisation
+    ## cardinality = 0..1
     on_decline_summary = single_alias_right[complex_desc]
     ### This interaction uses specialized GUI
     ## cardinality = 0..1
-    special_interaction = <character_interaction>
+    special_interaction = scalar # TODO
     ## cardinality = 0..1
     ### This interaction runs specialized code that identifies the interaction by this
-    special_ai_interaction = <character_interaction>
+    special_ai_interaction = scalar # TODO
     ### What interface does the interaction use?
     ## cardinality = 0..1
-    interface = <character_interaction>
+    interface = scalar # TODO
+    ### What custom character sort options should the
+    ### interaction have available? Last one defined
+    ### will show up first in the dropdown list.
+    ###
+    ### Current Options:
+    ### 	candidate_score (requires a target title)
+    ### 	governor_efficiency
+    ###	obedience
+    ## cardinality = 0..1
+    custom_character_sort = { enum[custom_character_sort] }
     ## cardinality = 0..1
     ### The type of scheme the interaction starts
     scheme = <scheme>
@@ -111,6 +189,9 @@ character_interaction = {
     ### Does this interaction check diplomatic range? Yes by default
     ## cardinality = 0..1
     use_diplomatic_range = bool
+    ### Are the secondary scope targets optional?
+    ## cardinality = 0..1
+    secondary_scopes_optional = bool
     ### Does this interaction check diplomatic range? Yes by default
     ## cardinality = 0..1
     use_diplomatic_range = single_alias_right[trigger_clause]
@@ -136,21 +217,22 @@ character_interaction = {
     show_effects_in_notification = bool
 
     ### If this interaction should be taken by diarch, including unlanded one
+    ## cardinality = 0..1
     diarch_interaction = bool
 
 
     ### Default is gfx/interface/icons/character_interactions/my_interaction_alert.dds
     ## cardinality = 0..1
-    alert_icon = filepath[gfx/interface/icons/character_interactions/,.dds]
+    alert_icon = filepath[gfx/interface/icons/character_interactions/,.dds] #TODO: Full path like extra_icon?
     ### Default is gfx/interface/icons/character_interactions/my_interaction_small.dds
     ## cardinality = 0..1
-    icon_small = filepath[gfx/interface/icons/character_interactions/,.dds]
+    icon_small = filepath[gfx/interface/icons/character_interactions/,.dds] #TODO: Full path like extra_icon?
     ### When to show an extra icon. Tooltip key is <key>_extra_icon
     ## cardinality = 0..1
     should_use_extra_icon = single_alias_right[trigger_clause]
     ### Icon to show when should_use_extra_icon is true
     ## cardinality = 0..1
-    extra_icon = filepath[gfx/interface/icons/character_interactions/,.dds]
+    extra_icon = filepath
 
     ### Possible types: title, none (default)
     ## cardinality = 0..1
@@ -181,19 +263,29 @@ character_interaction = {
     ### Sets tone in request text
     ## cardinality = 0..1
     greeting = enum[greeting]
-    ### Request text shown to the intermediary
+    ### Request text shown to the recipient
     ## cardinality = 0..1
     notification_text = localisation
+    ### Request text shown to the intermediary
+    ## cardinality = 0..1
+    intermediary_notification_text = localisation
+    ### Request text shown to the intermediary
+    ## cardinality = 0..1
+    notification_text = single_alias_right[complex_desc]
     ### What text should be shown under the portrait? (For example: "Pick a Guardian")
     ## cardinality = 0..1
     prompt = localisation
+    ## cardinality = 0..1
+    prompt = single_alias_right[complex_desc]
     
     ### How long until the interaction can be used again?
     ## cardinality = 0..1
-    cooldown = { enum[duration] = int }
+    cooldown = single_alias_right[single_duration_block]
     ### How long until the interaction can be used again against recipient?
     ## cardinality = 0..1
-    cooldown_against_recipient = { enum[duration] = int }
+    cooldown_against_recipient = single_alias_right[single_duration_block]
+    ## cardinality = 0..1
+    recipient_recieve_cooldown = single_alias_right[single_duration_block]
     ### Under what circumstances can an interaction against a recipient be used despite there being a cooldown for targeting that recipient?
     ## cardinality = 0..1
     ## replace_scope = { actor = character recipient = character }
@@ -259,7 +351,12 @@ character_interaction = {
     
     ### To be able to use values in loc (for example: RANSOM_COST = scope:secondary_recipient.ransom_cost_value lets you use $RANSOM_COST|0$ in loc)
     ## cardinality = 0..1
-    localization_values = single_alias_right[effect_clause]
+    localization_values = {
+        value_set[localisation_values] = scope_field
+        value_set[localisation_values] = value_field
+        value_set[localisation_values] = alias_keys_field[int_value]
+        value_set[localisation_values] = single_alias_right[score_formula]
+    }
 
     ### Text shown above options block - describes all options in general
     ## cardinality = 0..inf
@@ -276,6 +373,9 @@ character_interaction = {
         ### Tooltip
         ## cardinality = 0..1
         current_description = localisation
+        ### Tooltip
+        ## cardinality = 0..1
+        current_description = single_alias_right[complex_desc]
         ### If selected then scope:flag_name will be set to yes
         ## cardinality = 0..1
         flag = value_set[event_target]
@@ -385,7 +485,11 @@ character_interaction = {
     ### Scripted cost for the interaction. The interaction will be disabled if the actor can't pay up, and the cost will be subtracted from the actor when the interaction is sent. Renown can only be spent by the dynast.
     ## cardinality = 0..1
     cost = single_alias_right[cost]
-    
+
+    ### Will the AI respond instantly, and not pretend
+    ### to think about it for N days?
+    ## cardinality = 0..1
+    ai_instant_response = bool
     ### Set scope:target to make the AI target something specific. Title targeting interactions don't need this
     ## cardinality = 0..1
     ai_set_target = single_alias_right[effect_clause]
@@ -396,10 +500,13 @@ character_interaction = {
         max = integer
         ### Which characters does the ai consider as recipient for the interaction, can be scripted multiple times to combine lists.
         ### Available lists are in the "ai_targets" section of this file (trying to add an invalid list will trigger an error message with all available )
+        ## cardinality = 1..inf
         ai_recipients = enum[ai_targets]
         ### Maximum number of targets to consider, unset considers all of them, will 
         ## cardinality = 0..1
         max = int_value_field
+        ## cardinality = 0..1
+        chance = value_field
     }
     ### Quick triggers for the ai_targets
     ## cardinality = 0..inf
@@ -410,9 +517,10 @@ character_interaction = {
     ai_frequency = int_value_field
     ### Will the ai consider trying this interaction. Root scope is the actor, and other event target are not available
     ## cardinality = 0..1
-    ## replace_scope { ROOT = character }
+    ## replace_scope = { ROOT = character }
     ai_potential = single_alias_right[trigger_clause]
     ### Will the intermediary ai approve for this interaction and forward it to the recipient
+    ## cardinality = 0..1
     ai_intermediary_accept = single_alias_right[chance_block]
     ### Will the ai accept a request for this interaction
     ## cardinality = 0..1

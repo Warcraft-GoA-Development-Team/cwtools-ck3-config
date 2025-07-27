@@ -62,6 +62,8 @@ modifier_icon = {
 
 modifier_container = {
 	##cardinality = 0..1
+    icon = _default
+	##cardinality = 0..1
     icon = filepath[game/gfx/interface/icons/modifiers/,.dds]
 	
     ##cardinality = 0..inf

@@ -1,0 +1,138 @@
+types = {
+    type[pattern_template_list] = {
+        path = "game/common/coat_of_arms/template_lists"
+
+        skip_root_key = pattern_texture_lists
+    }
+    type[color_template_list] = {
+        path = "game/common/coat_of_arms/template_lists"
+
+        skip_root_key = color_lists
+    }
+    type[colored_emblem_texture_list] = {
+        path = "game/common/coat_of_arms/template_lists"
+
+        skip_root_key = colored_emblem_texture_lists
+    }
+    type[textured_emblem_texture_list] = {
+        path = "game/common/coat_of_arms/template_lists"
+
+        skip_root_key = textured_emblem_texture_lists
+    }
+    type[coa_template_list] = {
+        path = "game/common/coat_of_arms/template_lists"
+
+        skip_root_key = coat_of_arms_template_lists
+    }
+}
+
+pattern_template_list = {
+    ## cardinality = 1..inf
+    int = filepath[game/gfx/coat_of_arms/patterns]
+
+    ## cardinality = 0..inf
+    special_selection = {
+        trigger = single_alias_right[trigger_clause]
+
+        ## cardinality = 1..inf
+        int = filepath[game/gfx/coat_of_arms/patterns]
+
+        ## cardinality = 0..inf
+        special_selection = {
+            trigger = single_alias_right[trigger_clause]
+
+            ## cardinality = 1..inf
+            int = filepath[game/gfx/coat_of_arms/patterns]
+        }
+    }
+}
+
+color_template_list = {
+    ## cardinality = 1..inf
+    int = <color>
+    ## cardinality = 1..inf
+    int = color_field
+
+    ## cardinality = 0..inf
+    special_selection = {
+        trigger = single_alias_right[trigger_clause]
+
+        ## cardinality = 1..inf
+        int = <color>
+        ## cardinality = 1..inf
+        int = color_field
+
+        ## cardinality = 0..inf
+        special_selection = {
+            trigger = single_alias_right[trigger_clause]
+
+            ## cardinality = 1..inf
+            int = <color>
+            ## cardinality = 1..inf
+            int = color_field
+        }
+    }
+}
+
+colored_emblem_texture_list = {
+    ## cardinality = 1..inf
+    int = filepath[game/gfx/coat_of_arms/colored_emblems]
+
+    ## cardinality = 0..inf
+    special_selection = {
+        trigger = single_alias_right[trigger_clause]
+
+        ## cardinality = 1..inf
+        int = filepath[game/gfx/coat_of_arms/colored_emblems]
+
+        ## cardinality = 0..inf
+        special_selection = {
+            trigger = single_alias_right[trigger_clause]
+
+            ## cardinality = 1..inf
+            int = filepath[game/gfx/coat_of_arms/colored_emblems]
+        }
+    }
+}
+
+textured_emblem_texture_list = {
+    ## cardinality = 1..inf
+    int = filepath[game/gfx/coat_of_arms/textured_emblems]
+
+    ## cardinality = 0..inf
+    special_selection = {
+        trigger = single_alias_right[trigger_clause]
+
+        ## cardinality = 1..inf
+        int = filepath[game/gfx/coat_of_arms/textured_emblems]
+
+        ## cardinality = 0..inf
+        special_selection = {
+            trigger = single_alias_right[trigger_clause]
+
+            ## cardinality = 1..inf
+            int = filepath[game/gfx/coat_of_arms/textured_emblems]
+        }
+    }
+}
+
+coa_template_list = {
+    ## cardinality = 1..inf
+    int = <coat_of_arms_template>
+
+    ## cardinality = 0..inf
+    special_selection = {
+        trigger = single_alias_right[trigger_clause]
+
+        ## cardinality = 1..inf
+        int = <coat_of_arms_template>
+
+        ## cardinality = 0..inf
+        special_selection = {
+            trigger = single_alias_right[trigger_clause]
+
+            ## cardinality = 1..inf
+            int = <coat_of_arms_template>
+        }
+    }
+}

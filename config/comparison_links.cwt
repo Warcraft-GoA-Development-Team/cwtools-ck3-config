@@ -8,6 +8,62 @@ links = {
         input_scopes = { landed_title province }
         output_scope = any
     }
+    reverse_opinion = {
+        type = value
+        from_argument = yes
+        prefix = reverse_opinion:
+        data_source = scope[character]
+        input_scopes = { character }
+        output_scope = any
+    }
+    tier_difference = {
+        type = value
+        from_argument = yes
+        prefix = tier_difference:
+        data_source = scope[character]
+        input_scopes = { character }
+        output_scope = any
+    }
+    cultural_acceptance = {
+        type = value
+        from_argument = yes
+        prefix = cultural_acceptance:
+        data_source = scope[culture]
+        input_scopes = { culture }
+        output_scope = any
+    }
+    faith_hostility_level = {
+        type = value
+        from_argument = yes
+        prefix = faith_hostility_level:
+        data_source = scope[faith]
+        input_scopes = { faith }
+        output_scope = any
+    }
+    appointment_candidate_score = {
+        type = value
+        from_argument = yes
+        prefix = appointment_candidate_score:
+        data_source = scope[landed_title]
+        input_scopes = { character }
+        output_scope = any
+    }
+    opinion = {
+        type = value
+        from_argument = yes
+        prefix = opinion:
+        data_source = scope[character]
+        input_scopes = { character }
+        output_scope = any
+    }
+    appointment_candidate_accumulated_score = {
+        type = value
+        from_argument = yes
+        prefix = appointment_candidate_accumulated_score:
+        data_source = scope[landed_title]
+        input_scopes = { character }
+        output_scope = any
+    }
     <lifestyle>_perk_points = {
         desc = "How many perk points available does the character have?"
         type = value
@@ -57,6 +113,15 @@ links = {
         desc = "Compares the number of scripted relations a character has of the type "
         type = value
         input_scopes = character
+        output_scope = any
+    }
+    list_size_prefix = {
+        desc = "Checks the size of a list list_size = { name = X value >= Y } Where X is the name of the list Where Y is a script value"
+        type = value
+        from_data = yes
+        prefix = list_size:
+        data_source = value[list]
+        input_scopes = any
         output_scope = any
     }
 }
