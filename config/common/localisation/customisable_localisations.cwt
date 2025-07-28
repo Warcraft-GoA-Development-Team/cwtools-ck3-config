@@ -5,7 +5,7 @@ types = {
         subtype[character] = {
             type = character
         }
-        ## push_scope = title
+        ## push_scope = landed_title
         subtype[landed_title] = {
             type = landed_title
         }

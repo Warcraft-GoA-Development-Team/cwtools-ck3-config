@@ -8,20 +8,20 @@ court_position_task = {
     ### Position(s) that can perform this task (positions can be found in 'common/court_positions/types/')
     court_position_types = { <court_position> }
 
-    ### What background assets does this task use in GUI windows (overrides asset of position type), will pick first valid match
-    ### root: court owner character
-    ## cardinality = 0..1
-    ## push_scope = character
-    court_position_asset = { # TODO: Is this valid? It is not used in vanilla.
-        ### Trigger for scoped character when to pick this asset over another, remove trigger part to always pick this asset
-        trigger = single_alias_right[trigger_clause]
-
-        ### Path to animation played in GUI
-        animation = alias_keys_field[animation]
-
-        ### Path to background texture shown in GUI
-        background = filepath
-    }
+    # ### What background assets does this task use in GUI windows (overrides asset of position type), will pick first valid match
+    # ### root: court owner character
+    # ## cardinality = 0..1
+    # ## push_scope = character
+    # court_position_asset = { # TODO: Is this valid? It is not used in vanilla.
+    #     ### Trigger for scoped character when to pick this asset over another, remove trigger part to always pick this asset
+    #     trigger = single_alias_right[trigger_clause]
+    #
+    #     ### Path to animation played in GUI
+    #     animation = alias_keys_field[animation]
+    #
+    #     ### Path to background texture shown in GUI
+    #     background = filepath
+    # }
 
     ### Monthly cost for the task
     ### root: empty
@@ -45,18 +45,7 @@ court_position_task = {
     ### ERRORS:
     ###		Will error if naming convention and indices aren't followed.
     ## cardinality = 0..1
-    scaling_employer_modifiers = {
-        ## cardinality = 0..1
-        terrible = single_alias_right[modifier_list]
-        ## cardinality = 0..1
-        poor = single_alias_right[modifier_list]
-        ## cardinality = 0..1
-        average = single_alias_right[modifier_list]
-        ## cardinality = 0..1
-        good = single_alias_right[modifier_list]
-        ## cardinality = 0..1
-        excellent = single_alias_right[modifier_list]
-    }
+    scaling_employer_modifiers = single_alias_right[scaling_court_modifier]
 
     ### Non-scaling modifiers gained by all characters in the court (excluding the court owner aka liege).
     ## cardinality = 0..1
@@ -69,18 +58,7 @@ court_position_task = {
     ### ERRORS:
     ###		Will error if naming convention and indices aren't followed.
     ## cardinality = 0..1
-    scaling_employer_court_modifiers = {
-        ## cardinality = 0..1
-        terrible = single_alias_right[modifier_list]
-        ## cardinality = 0..1
-        poor = single_alias_right[modifier_list]
-        ## cardinality = 0..1
-        average = single_alias_right[modifier_list]
-        ## cardinality = 0..1
-        good = single_alias_right[modifier_list]
-        ## cardinality = 0..1
-        excellent = single_alias_right[modifier_list]
-    }
+    scaling_employer_court_modifiers = single_alias_right[scaling_court_modifier]
 
     ### Is this task shown/available in general.
     ### Task will stop if this is at any time false.  (This task will not be visible at all when false)

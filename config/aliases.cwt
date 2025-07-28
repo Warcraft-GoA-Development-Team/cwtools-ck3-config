@@ -214,6 +214,20 @@ single_alias[province_culture_modifier] = {
     alias_name[modifier] = alias_match_left[modifier]
 }
 
+single_alias[character_faith_modifier] = {
+    parameter = enum[doctrine_param]
+    ## push_scope = character
+    ## cardinality = 1..inf
+    alias_name[modifier] = alias_match_left[modifier]
+}
+
+single_alias[province_faith_modifier] = {
+    parameter = enum[doctrine_param]
+    ## push_scope = province
+    ## cardinality = 1..inf
+    alias_name[modifier] = alias_match_left[modifier]
+}
+
 single_alias[culture_modifier] = {
     ## push_scope = culture
     alias_name[modifier] = alias_match_left[modifier]
@@ -225,7 +239,7 @@ single_alias[province_modifier] = {
 }
 
 single_alias[county_modifier] = {
-    ## push_scope = title
+    ## push_scope = landed_title
     alias_name[modifier] = alias_match_left[modifier]
 }
 
@@ -337,6 +351,33 @@ single_alias[dna_modiifer] = {
         ## cardinality = 1..inf
         scalar = scalar
     }
+}
+
+single_alias[scaling_court_modifier] = {
+    ## cardinality = 0..1
+    terrible = single_alias_right[modifier_list]
+    ## cardinality = 0..1
+    poor = single_alias_right[modifier_list]
+    ## cardinality = 0..1
+    average = single_alias_right[modifier_list]
+    ## cardinality = 0..1
+    good = single_alias_right[modifier_list]
+    ## cardinality = 0..1
+    excellent = single_alias_right[modifier_list]
+}
+
+single_alias[scaling_court_modifier_desc] = {
+    ## cardinality = 0..1
+    terrible = localisation
+    ## cardinality = 0..1
+    poor = localisation
+    ## cardinality = 0..1
+    average = localisation
+    ## cardinality = 0..1
+    good = localisation
+    ## cardinality = 0..1
+    excellent = localisation
+    range = localisation
 }
 
 alias[scheming_against_target:type] = <scheme>

@@ -13,39 +13,76 @@ types = {
 }
 
 court_position = {
+    ## cardinality = 0..1
+    sort_order = int_value_field
+    ## cardinality = 0..1
+    sort_order = alias_keys_field[int_value]
+    ## cardinality = 0..1
+    sort_order = single_alias_right[score_formula]
+    ### What background assets does this task use in GUI windows (overrides asset of position type), will pick first valid match
+    ### root: court owner character
+    ## cardinality = 0..inf
+    ## push_scope = character
+    court_position_asset = {
+        ### Trigger for scoped character when to pick this asset over another, remove trigger part to always pick this asset
+        ## cardinality = 0..1
+        trigger = single_alias_right[trigger_clause]
+
+        ### Path to animation played in GUI
+        animation = alias_keys_field[animation]
+
+        ### Path to background texture shown in GUI
+        background = filepath
+
+        ### Override localization for court position naming
+        ## cardinality = 0..1
+        localization_key = localisation
+    }
+
     ### The number of positions available within a court.
     ## cardinality = 0..1
     max_available_positions = int
-    ### The subcategroy of the position.
-    category = enum[court_position_category]
     ### The minimum rank for which this position is available for their court.
     ## cardinality = 0..1
     minimum_rank = enum[title_tier]
+    ### Brief: skill ( enum )
+    ### Primary skill for the aptitude of this position, is used for the UI visuals
+    ## cardinality = 0..1
+    skill = enum[attribute]
 
     ### Whether this court position related to travel. If so we show travel speed and safety, and lets you sort by those in the appointment window. Defaults to no
     ## cardinality = 0..1
     is_travel_related = bool
-    ### The opinion modifier the employee gets towards the liege while they hold this postion.
-    opinion = {
-        value = int_value_field
-        ## cardinality = 0..1
-        scope:liege = int_value_field
-        ## cardinality = 0..1
-        scope:employee = single_alias_right[score_formula]
-        ## cardinality = 0..1
-        scope:liege = int_value_field
-        ## cardinality = 0..1
-        scope:employee = single_alias_right[score_formula]
-    }
+    ### Brief: opinion ( scripted value )
+    ### Scripted value to determine the opinion modifier the employee gets
+    ### towards the liege while they hold this postion
+    ###
+    ### Supported scopes:
+    ### 		scope:liege (Character)
+    ###			Liege of the position
+    ###		scope:employee (Character)
+    ###			Courtier being considered for or holding the position
+    ## replace_scopes = { liege = character employee = character }
+    opinion = single_alias_right[score_formula]
 
-    ### How high the aptitude has to be to reach the 5 different modifier levels
+    ### Breakpoints to increase aptitude level by 1. 
+    ### 	Defaults to this if not set, as defined by 
+    ###	DEFAULT_APTITUDE_LEVEL_BREAKPOINTS
     ## cardinality = 0..1
     aptitude_level_breakpoints = {
         ## cardinality = 4..4
         int
     }
 
-    ### How good is this character in this position? root scope is the holder of the court position
+    ### Brief: aptitude ( scripted value )
+    ### Scripted value to determine how well a character performs in this 
+    ### position. Aptitude are segmented into five tiers: terrible, poor, 
+    ### average, good and excellent.
+    ###
+    ### Supported scopes:
+    ###		root ( Character )
+    ###			Courtier being considered for or holding the position
+    ## push_scope = character
     aptitude = single_alias_right[score_formula]
 
     ## cardinality = 0..1
@@ -73,22 +110,38 @@ court_position = {
     ## cardinality = 0..1
     ### Non-scaling modifiers gained by the employer of the court position.
     base_employer_modifier = single_alias_right[character_modifier]
+    ### Modifier that will be applied for characters both the employer and employee with a culture with the specified parameter
+    ## cardinality = 0..1
+    culture_modifier = single_alias_right[character_culture_modifier]
+    ### Modifier that will be applied for characters both the employer and employee with a religion with the specified parameter
+    ## cardinality = 0..1
+    faith_modifier = single_alias_right[character_faith_modifier]
 
-    # TODO
     ## cardinality = 0..1
     ### Scaling modifiers gained by the employer of the court position as the employee's aptitude level increases. Can define 0-5 scaling modifiers. If less than 5 are defined, the highest will be picked as aptitude level increases.
-    scaling_employer_modifiers = {
-        ## cardinality = 0..1
-        aptitude_level_1 = single_alias_right[modifier_list]
-        ## cardinality = 0..1
-        aptitude_level_2 = single_alias_right[modifier_list]
-        ## cardinality = 0..1
-        aptitude_level_3 = single_alias_right[modifier_list]
-        ## cardinality = 0..1
-        aptitude_level_4 = single_alias_right[modifier_list]
-        ## cardinality = 0..1
-        aptitude_level_5 = single_alias_right[modifier_list]
-    }
+    scaling_employer_modifiers = single_alias_right[scaling_court_modifier]
+    ### Brief: custom_scaling_employer_modifier_description ( enum map of strings )
+    ### Custom modifier descriptions to use at different aptitude levels.
+    ### Will use the range key when the ranged modifier description is used,
+    ### and the others when it is referring to a specific level.
+    ## cardinality = 0..1
+    custom_scaling_employer_modifier_description = single_alias_right[scaling_court_modifier_desc]
+
+    ### Brief: base_employer_court_modifier
+    ### Non-scaling modifiers gained by all characters in the court. (excluding the court owner aka liege).
+    ## cardinality = 0..1
+    base_employer_court_modifier = single_alias_right[modifier_list]
+
+    ### Brief: scaling_employer_court_modifiers
+    ### Scaling modifiers gained by all characters in the court. (excluding the court owner aka liege).
+    ### Can define 0-5 scaling modifiers. If less than 5 are defined, the highest will be picked as aptitude level
+    ### increases.
+    ###
+    ### ERRORS:
+    ###		Will error if naming convention and indices aren't followed.
+    ## cardinality = 0..1
+    scaling_employer_court_modifiers = single_alias_right[scaling_court_modifier]
+
     ## cardinality = 0..1
     ### Additional, verbose description of position's effect on the employer.
     custom_employer_modifier_description = localisation
@@ -96,30 +149,40 @@ court_position = {
     ## cardinality = 0..1
     ### Modifiers gained by the holder of the court position.
     modifier = single_alias_right[character_modifier]
+
     ## cardinality = 0..1
     ### Additional, verbose description of position's effect on the employee.
     custom_employee_modifier_description = localisation
 
     ## cardinality = 0..1
     ### Optional effect to search for a courtier for this position. Root scope is the liege character.
-    search_for_courtier = {
-        ## cardinality = 1..inf
-        alias_name[effect] = alias_match_left[effect] 
-    }
+    search_for_courtier = single_alias_right[effect_clause]
 
     ### Effect that happens when the position is appointed.
     ## replace_scope = { liege = character employee = character }
+    ## cardinality = 0..1
     on_court_position_received = single_alias_right[effect_clause]
 
     ### Effect that happens when the position is revoked.
     ## replace_scope = { liege = character employee = character }
+    ## cardinality = 0..1
     on_court_position_revoked = single_alias_right[effect_clause]
 
     ### Effect that happens when the position is invalidated.
     ## replace_scope = { liege = character employee = character }
+    ## cardinality = 0..1
     on_court_position_invalidated = single_alias_right[effect_clause]
+
+    ### Effect that happens when the position is vacated.
+    ## replace_scope = { liege = character employee = character }
+    ## cardinality = 0..1
+    on_court_position_vacated = single_alias_right[effect_clause]
 
     ### Scripted value to determine whether an AI will hire/fire a position or not. Hires over 0, fires under -50. Look in _court_positions.info for more extensive documentation!
     ## replace_scope = { liege = character employee = character firing_court_position = bool percent_of_monthly_income = number percent_of_positive_monthly_prestige_balance = number percent_of_positive_monthly_piety_balance = number percent_of_monthly_gold_income_all_positions = number percent_of_positive_monthly_prestige_balance_all_positions = number percent_of_positive_monthly_piety_balance_all_positions = number }
     candidate_score = single_alias_right[score_formula]
+
+    # Undocumented
+    ## cardinality = 0..1
+    is_powerful_agent = bool
 }
