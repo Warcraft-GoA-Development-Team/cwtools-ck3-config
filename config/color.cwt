@@ -1,7 +1,5 @@
 alias[colour:color] = <color>
-alias[colour:color] = color[rgb]
-alias[colour:color] = color[hsv]
-alias[colour:color] = color[hsv360]
+alias[colour:color] = color_field
 ## color_type = hsv
 alias[colour:color] = {
     ## cardinality = 3..4
@@ -12,5 +10,5 @@ alias[colour:color] = {
     ## cardinality = 3..3
     int[0..255]
 }
-## color_type = hex
-alias[colour:color] = scalar
+# ## color_type = hex
+# alias[colour:color] = scalar

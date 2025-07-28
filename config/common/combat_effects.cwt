@@ -14,7 +14,7 @@ single_alias[combat_effect] = {
     name = localisation
     ## cardinality = 0..1
     ### Image file (Unknown how mapped)
-    image = localisation
+    image = filepath[gfx/interface/icons/combat_effects/,.dds]
     # May be able to have mutliples of these and with complex rhs. Documentation is unclear.
     ## cardinality = 0..1
     ### advantage bonuts for static effects or multiplier for dynamic effects
