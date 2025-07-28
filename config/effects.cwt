@@ -2867,6 +2867,8 @@ alias[effect:assign_councillor_type] = {
     target = scope[character]
     ## cardinality = 0..1
     fire_on_actions = scalar
+    ## cardinality = 0..1
+    remove_existing_councillor = scalar
 }
 
 ### The character gets banished.

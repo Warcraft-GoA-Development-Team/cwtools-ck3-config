@@ -34,5 +34,6 @@ combat_phase_event = {
 	### This has no consequences script wise since it was already empty, but means that adding to the "none" event to actually do something is not advised
 	### If you need something run for all combats then consider if its better suited to running in the combat victory/defeat on actions instead of the phase pulse event
     ## replace_scope = { root = character combat_side = combat_side }
+	## cardinality = 0..1
 	effect = single_alias_right[effect_clause]
 }

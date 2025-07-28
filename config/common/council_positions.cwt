@@ -26,10 +26,10 @@ council_position = {
      ## replace_scope = { councillor_liege = character }
     tooltip = single_alias_right[complex_desc]
 
-    ## push_scope = character
-    ## cardinality = 0..1
-    ### Can be held in addition to regular council positions. E.G., the Spouse council position.
-    special_council_position = bool
+    # ## push_scope = character
+    # ## cardinality = 0..1
+    # ### Can be held in addition to regular council positions. E.G., the Spouse council position.
+    # special_council_position = bool
 
     ### Will automatically be filled, without the player being able to select who takes the position. Trigger scope: council owner character. Default: no. An empty trigger is treated as 'no'.
     ## cardinality = 0..1
@@ -83,11 +83,11 @@ council_position = {
     ## push_scope = character
     ## cardinality = 0..5
     ### Modifier applied to the character in this position. Can take a "scale" parameter to scale by (a script value; see _script_values.info). Up to 5 of these can be defined if more than one scale is necessary.
-    modifier = single_alias_right[scaled_modifier]
+    modifier = single_alias_right[scaled_modifier_name]
     ## push_scope = character
     ## cardinality = 0..5
     ### Modifier applied to the liege of the character in this position. Can take a "scale" parameter to scale by (a script value; see _script_values.info). Up to 5 of these can be defined if more than one scale is necessary.
-    council_owner_modifier = single_alias_right[scaled_modifier]
+    council_owner_modifier = single_alias_right[scaled_modifier_name]
 
     ## push_scope = character
     ## cardinality = 0..1
@@ -109,18 +109,17 @@ council_position = {
     ### The character pool which should be used to fill the position. Only used with fill_from_pool = yes.
     pool_character_config = <pool_character_selector>
 
-    ## push_scope = character
-    ## cardinality = 0..1
-    ### The number of days after which the councillor can be changed. Defaults to 0.
-    councillor_cooldown_days = int_value_field
-    ## cardinality = 0..1
-    ### Max number of positions for this type. Default 1. Infinite 0 or negative.
-    max_amount = int
+    # ## push_scope = character
+    # ## cardinality = 0..1
+    # ### The number of days after which the councillor can be changed. Defaults to 0.
+    # councillor_cooldown_days = int_value_field
+    # ## cardinality = 0..1
+    # ### Max number of positions for this type. Default 1. Infinite 0 or negative.
+    # max_amount = int
     # That's a guess.
     ## cardinality = 0..1
-    ### Whether the councillor's skill should effect the owner's scheme power. Defaults to no.
-    use_for_scheme_power = bool
-    # That's a guess.
+    ### Whether the councillor's skill should effect the owner's scheme phase duration. Defaults to no.
+    use_for_scheme_phase_duration = bool
     ## cardinality = 0..1
     ### Whether the councillor's skill should effect the owner's scheme resistance. Defaults to no.
     use_for_scheme_resistance = bool

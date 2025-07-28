@@ -122,6 +122,23 @@ single_alias[triggered_desc] = {
 single_alias[scaled_modifier] = {
     ## cardinality = 0..1
     scale = int_value_field
+    ## cardinality = 0..1
+    scale = alias_keys_field[int_value]
+    ## cardinality = 0..1
+    scale = single_alias_right[score_formula]
+    ## push_scope = character
+    alias_name[modifier] = alias_match_left[modifier]
+}
+
+single_alias[scaled_modifier_name] = {
+    ## cardinality = 0..1
+    name = localisation
+    ## cardinality = 0..1
+    scale = int_value_field
+    ## cardinality = 0..1
+    scale = alias_keys_field[int_value]
+    ## cardinality = 0..1
+    scale = single_alias_right[score_formula]
     ## push_scope = character
     alias_name[modifier] = alias_match_left[modifier]
 }
