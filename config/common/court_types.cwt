@@ -12,7 +12,7 @@ court_type = {
 	
 	### Path to texture to use as background texture in the interface when referring to this court type.
     ## cardinality = 0..1
-	background = localisation
+	background = filepath
 
 	### The trigger deciding whether or not to show this court type in the selection list.
     ## replace_scope = { root = character }
@@ -79,7 +79,16 @@ court_type = {
 	cost = single_alias_right[cost]
 
 	### Script value in ruler scope. If above 0, the AI will try to set the court type to this if able. Court types are decided in the RARE_TASK_TICK. If multiple court types are possible, the AI will enact the one with the highest score, with a bias towards the currently active one of CURRENT_COURT_TYPE_SETTING_ADDED_WEIGHT to prevent switching back and forth to closely scored options
-    ## replace = { root = character }
+	## cardinality = 0..1
+	## push_scope = character
+	ai_will_do = int_value_field
+	### Script value in ruler scope. If above 0, the AI will try to set the court type to this if able. Court types are decided in the RARE_TASK_TICK. If multiple court types are possible, the AI will enact the one with the highest score, with a bias towards the currently active one of CURRENT_COURT_TYPE_SETTING_ADDED_WEIGHT to prevent switching back and forth to closely scored options
+	## cardinality = 0..1
+	## push_scope = character
+	ai_will_do = alias_keys_field[int_value]
+	### Script value in ruler scope. If above 0, the AI will try to set the court type to this if able. Court types are decided in the RARE_TASK_TICK. If multiple court types are possible, the AI will enact the one with the highest score, with a bias towards the currently active one of CURRENT_COURT_TYPE_SETTING_ADDED_WEIGHT to prevent switching back and forth to closely scored options
+	## cardinality = 0..1
+	## push_scope = character
 	ai_will_do = single_alias_right[score_formula]
 }
 
