@@ -13,8 +13,6 @@ types = {
 }
 
 court_position = {
- 
-
     ### The number of positions available within a court.
     ## cardinality = 0..1
     max_available_positions = int

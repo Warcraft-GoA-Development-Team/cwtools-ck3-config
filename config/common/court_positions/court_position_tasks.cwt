@@ -1,0 +1,185 @@
+types = {
+    type[court_position_task] = {
+        path = "game/common/court_positions/tasks"
+    }
+}
+
+court_position_task = {
+    ### Position(s) that can perform this task (positions can be found in 'common/court_positions/types/')
+    court_position_types = { <court_position> }
+
+    ### What background assets does this task use in GUI windows (overrides asset of position type), will pick first valid match
+    ### root: court owner character
+    ## cardinality = 0..1
+    ## push_scope = character
+    court_position_asset = { # TODO: Is this valid? It is not used in vanilla.
+        ### Trigger for scoped character when to pick this asset over another, remove trigger part to always pick this asset
+        trigger = single_alias_right[trigger_clause]
+
+        ### Path to animation played in GUI
+        animation = alias_keys_field[animation]
+
+        ### Path to background texture shown in GUI
+        background = filepath
+    }
+
+    ### Monthly cost for the task
+    ### root: empty
+    ### scope:liege - Employer character
+    ## cardinality = 0..1
+    cost = single_alias_right[cost]
+
+    ### Modifier applied to the court position employee while performing this task.
+    ## cardinality = 0..1
+    employee_modifier = single_alias_right[modifier_list]
+
+    ### Non-scaling modifiers gained by the employer of the court position.
+    ## cardinality = 0..1
+    base_employer_modifier = single_alias_right[modifier_list]
+
+    ### Scaling modifiers gained by the employer of the court position as the
+    ### employee's aptitude level increases. Can define 0-5 scaling modifiers.
+    ### If less than 5 are defined, the highest will be picked as aptitude level
+    ### increases.
+    ###
+    ### ERRORS:
+    ###		Will error if naming convention and indices aren't followed.
+    ## cardinality = 0..1
+    scaling_employer_modifiers = {
+        ## cardinality = 0..1
+        terrible = single_alias_right[modifier_list]
+        ## cardinality = 0..1
+        poor = single_alias_right[modifier_list]
+        ## cardinality = 0..1
+        average = single_alias_right[modifier_list]
+        ## cardinality = 0..1
+        good = single_alias_right[modifier_list]
+        ## cardinality = 0..1
+        excellent = single_alias_right[modifier_list]
+    }
+
+    ### Non-scaling modifiers gained by all characters in the court (excluding the court owner aka liege).
+    ## cardinality = 0..1
+    base_employer_court_modifier = single_alias_right[modifier_list]
+
+    ### Scaling modifiers gained by all characters in the court (excluding the court owner aka liege).
+    ### Can define 0-5 scaling modifiers. If less than 5 are defined, the highest will be picked as aptitude level
+    ### increases.
+    ###
+    ### ERRORS:
+    ###		Will error if naming convention and indices aren't followed.
+    ## cardinality = 0..1
+    scaling_employer_court_modifiers = {
+        ## cardinality = 0..1
+        terrible = single_alias_right[modifier_list]
+        ## cardinality = 0..1
+        poor = single_alias_right[modifier_list]
+        ## cardinality = 0..1
+        average = single_alias_right[modifier_list]
+        ## cardinality = 0..1
+        good = single_alias_right[modifier_list]
+        ## cardinality = 0..1
+        excellent = single_alias_right[modifier_list]
+    }
+
+    ### Is this task shown/available in general.
+    ### Task will stop if this is at any time false.  (This task will not be visible at all when false)
+    ### Root: employer character
+    ## cardinality = 0..1
+    ## push_scope = character
+    is_shown = single_alias_right[trigger_clause]
+
+    ### Check if the task is valid. Otherwise the task will be grayed out showing the reason(s).
+    ### Root: employee character
+    ###  scope:liege - Employer character
+    ## cardinality = 0..1
+    ## push_scope = character
+    is_valid_showing_failures_only = single_alias_right[trigger_clause]
+
+    ### Effect run when the task starts
+    ### Root: employee character
+    ###  scope:liege - Employer character
+    ## cardinality = 0..1
+    ## push_scope = character
+    ## replace_scopes = { liege = character }
+    on_start = single_alias_right[effect_clause]
+
+    ### Effect run when the task ends
+    ### (run when a character stops an task, or switches to another task)
+    ### Root: employee character
+    ###  scope:liege - Employer character
+    ## cardinality = 0..1
+    ## push_scope = character
+    ## replace_scopes = { liege = character }
+    on_end = single_alias_right[effect_clause]
+
+    ### Effect run once per month on the court position with this task
+    ### Root: employee character
+    ###  scope:liege - Employer character
+    ## cardinality = 0..1
+    ## push_scope = character
+    ## replace_scopes = { liege = character }
+    on_monthly = single_alias_right[effect_clause]
+
+    ### Effect run once per year on the court position with this task
+    ### Root: employee character
+    ###  scope:liege - Employer character
+    ## cardinality = 0..1
+    ## push_scope = character
+    ## replace_scopes = { liege = character }
+    on_yearly = single_alias_right[effect_clause]
+
+    ### How likely is the AI to pick/switch task. Tasks will be selected using best scoring first.
+    ### AI will not start tasks unless
+    ###
+    ### A available tasks for each court position will be considered periodically.
+    ### See defines (common/defines/ai/00_ai.txt):
+    ### 	COURT_POSITION_TASK_SWITCH_SCORE - Degree by which a task has to be better scored to switch
+    ###   MIN_SCORE_TO_START_COURT_POSITION_TASK - Score above which tasks are considered to start (best first)
+    ###   MAX_SCORE_TO_STOP_COURT_POSITION_TASK - Score below which tasks are stopped
+    ###
+    ### Root: Employer character (Liege!)
+    ###  scope:liege - Employer character
+    ###  scope:employee - Employee character
+    ###  scope:monthly_character_expenses - current monthly expenses
+    ## cardinality = 0..1
+    ## push_scope = character
+    ## replace_scopes = { liege = character employee = character monthly_character_expenses = value }
+    ai_will_do = int_value_field
+
+    ### How likely is the AI to pick/switch task. Tasks will be selected using best scoring first.
+    ### AI will not start tasks unless
+    ###
+    ### A available tasks for each court position will be considered periodically.
+    ### See defines (common/defines/ai/00_ai.txt):
+    ### 	COURT_POSITION_TASK_SWITCH_SCORE - Degree by which a task has to be better scored to switch
+    ###   MIN_SCORE_TO_START_COURT_POSITION_TASK - Score above which tasks are considered to start (best first)
+    ###   MAX_SCORE_TO_STOP_COURT_POSITION_TASK - Score below which tasks are stopped
+    ###
+    ### Root: Employer character (Liege!)
+    ###  scope:liege - Employer character
+    ###  scope:employee - Employee character
+    ###  scope:monthly_character_expenses - current monthly expenses
+    ## cardinality = 0..1
+    ## push_scope = character
+    ## replace_scopes = { liege = character employee = character monthly_character_expenses = value }
+    ai_will_do = alias_keys_field[int_value]
+
+    ### How likely is the AI to pick/switch task. Tasks will be selected using best scoring first.
+    ### AI will not start tasks unless
+    ###
+    ### A available tasks for each court position will be considered periodically.
+    ### See defines (common/defines/ai/00_ai.txt):
+    ### 	COURT_POSITION_TASK_SWITCH_SCORE - Degree by which a task has to be better scored to switch
+    ###   MIN_SCORE_TO_START_COURT_POSITION_TASK - Score above which tasks are considered to start (best first)
+    ###   MAX_SCORE_TO_STOP_COURT_POSITION_TASK - Score below which tasks are stopped
+    ###
+    ### Root: Employer character (Liege!)
+    ###  scope:liege - Employer character
+    ###  scope:employee - Employee character
+    ###  scope:monthly_character_expenses - current monthly expenses
+    ## cardinality = 0..1
+    ## push_scope = character
+    ## replace_scopes = { liege = character employee = character monthly_character_expenses = value }
+    ai_will_do = single_alias_right[score_formula]
+}

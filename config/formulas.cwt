@@ -85,6 +85,8 @@ single_alias[score_formula] = {
     # scope_field = single_alias_right[score_formula]
     ## cardinality = 0..1
     desc = localisation
+    ## cardinality = 0..1
+    format = localisation
 }
 
 single_alias[score_arithmetic] = {
