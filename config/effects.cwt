@@ -2022,11 +2022,11 @@ alias[effect:add_province_modifier] = single_alias_right[added_modifier]
 
 ### Add a special building to the province (will also add/change a special slot if needed)
 ## scope = province
-alias[effect:add_special_building] = <building>
+alias[effect:add_special_building] = <building.special>
 
 ### Add a special building slot to the province<province> = { add_special_building_slot = <building_name> }
 ## scope = province
-alias[effect:add_special_building_slot] = <building>
+alias[effect:add_special_building_slot] = <building.special>
 
 ### Start construction of the specified holding type. By default player won't get anything if manually cancels the construction. scope:my_province = {	begin_create_holding = castle_holding } Optionally refund cost can be set to some value. scope:my_province = {	begin_create_holding = {		type = castle_holding		refund_cost = {			gold = 100		}	}}
 ## scope = province

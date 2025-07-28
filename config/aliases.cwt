@@ -214,6 +214,13 @@ single_alias[province_culture_modifier] = {
     alias_name[modifier] = alias_match_left[modifier]
 }
 
+single_alias[county_culture_modifier] = {
+    parameter = enum[cultural_parameter]
+    ## push_scope = landed_title
+    ## cardinality = 1..inf
+    alias_name[modifier] = alias_match_left[modifier]
+}
+
 single_alias[character_faith_modifier] = {
     parameter = enum[doctrine_param]
     ## push_scope = character
@@ -224,6 +231,13 @@ single_alias[character_faith_modifier] = {
 single_alias[province_faith_modifier] = {
     parameter = enum[doctrine_param]
     ## push_scope = province
+    ## cardinality = 1..inf
+    alias_name[modifier] = alias_match_left[modifier]
+}
+
+single_alias[county_faith_modifier] = {
+    parameter = enum[doctrine_param]
+    ## push_scope = landed_title
     ## cardinality = 1..inf
     alias_name[modifier] = alias_match_left[modifier]
 }

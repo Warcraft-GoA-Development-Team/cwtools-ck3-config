@@ -878,10 +878,6 @@ alias[trigger:has_province_modifier] = <modifier_container>
 ## scope = province
 alias[trigger:has_province_modifier_duration_remaining] = <modifier_container>
 
-### Does the province (holding) have a special buidling?
-## scope = province
-alias[trigger:has_special_building] = bool
-
 ### Does the province have stationed regiment of base type?
 ## scope = province
 alias[trigger:has_stationed_regiment_of_base_type] = value[unit_type]

@@ -197,6 +197,9 @@ building = {
 		### Applied if the character's culture has the parameter
 		## cardinality = 0..inf
 		character_culture_modifier = single_alias_right[character_culture_modifier]
+		### Applied if the character's faith has the parameter
+		## cardinality = 0..inf
+		character_faith_modifier = single_alias_right[character_faith_modifier]
 
 		### A modifier applied if the holder's dynasty of the county has a specific perk
 		## cardinality = 0..1
@@ -209,6 +212,8 @@ building = {
 		province_modifier = single_alias_right[province_modifier]
 		## cardinality = 0..inf
 		province_culture_modifier = single_alias_right[province_culture_modifier]
+		## cardinality = 0..inf
+		province_faith_modifier = single_alias_right[province_faith_modifier]
 		## cardinality = 0..inf
 		province_terrain_modifier = {
 			## cardinality = 0..1
@@ -235,20 +240,18 @@ building = {
 		##cardinality = 0..1
 		county_modifier = single_alias_right[county_modifier]
 		##cardinality = 0..inf
-		county_culture_modifier = {
-			parameter = enum[cultural_parameter]
-			alias_name[modifier] = alias_match_left[modifier]
-		}
+		county_culture_modifier = single_alias_right[county_culture_modifier]
+		##cardinality = 0..inf
+		county_faith_modifier = single_alias_right[county_faith_modifier]
 
-		### A modifier applied to every de jure county in the duchy (if the county has the same de facto liege as this building's county). Can only be used (and only works) for duchy capital buildings.
-		##cardinality = 0..1
-		duchy_capital_county_modifier = {
-			alias_name[modifier] = alias_match_left[modifier]
-		}
-		##cardinality = 0..1
-		duchy_capital_county_culture_modifier = {
-			parameter = enum[cultural_parameter]
-			alias_name[modifier] = alias_match_left[modifier]
+		subtype[duchy_capital] = {
+			### A modifier applied to every de jure county in the duchy (if the county has the same de facto liege as this building's county). Can only be used (and only works) for duchy capital buildings.
+			##cardinality = 0..1
+			duchy_capital_county_modifier = single_alias_right[county_modifier]
+			##cardinality = 0..1
+			duchy_capital_county_culture_modifier = single_alias_right[county_culture_modifier]
+			##cardinality = 0..1
+			duchy_capital_county_faith_modifier = single_alias_right[county_faith_modifier]
 		}
 
 		### A special modifier applied to every holding of specified type in the county
@@ -290,28 +293,13 @@ building = {
 		## replace_scope = { root = province character = character }
 		on_cancelled = single_alias_right[effect_clause]
 
-		subtype[!special] = {
-			### How desirable is the building for the AI
-			ai_value = single_alias_right[chance_block]
+		### How desirable is the building for the AI
+		ai_value = single_alias_right[chance_block]
 
-			### How long does it take to construct the building
-			construction_time = alias_keys_field[int_value]
-			### How long does it take to construct the building
-			construction_time = value_field
-		}
-
-		subtype[special] = {
-			### How desirable is the building for the AI
-			## cardinality = 0..1
-			ai_value = single_alias_right[chance_block]
-
-			### How long does it take to construct the building
-			## cardinality = 0..1
-			construction_time = alias_keys_field[int_value]
-			### How long does it take to construct the building
-			## cardinality = 0..1
-			construction_time = value_field
-		}
+		### How long does it take to construct the building
+		construction_time = alias_keys_field[int_value]
+		### How long does it take to construct the building
+		construction_time = value_field
 	}
 }
 
