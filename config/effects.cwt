@@ -4648,7 +4648,7 @@ alias[effect:set_special_title] = scope[landed_title]
 ### Makes a battle event show up in combat, and the combat result summary. The key is used for loc, with '_friendly' or '_enemy' appended. If this side is not the player's side, the two portraits get flipped. battle_event = { left_portrait = someone right_portrait = someone key = string }
 ## scope = combat_side
 alias[effect:battle_event] = {
-    key = localisation
+    key = localisation # TODO: Suffix. Issue #162
     left_portrait = scope[character]
     ## cardinality = 0..1
     right_portrait = scope[character]

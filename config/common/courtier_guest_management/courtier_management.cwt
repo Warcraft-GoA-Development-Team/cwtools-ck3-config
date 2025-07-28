@@ -1,0 +1,26 @@
+types = {
+    ## type_key_filter = courtier_management
+    type[courtier_management] = {
+        path = "common/courtier_guest_management/"
+
+
+    }
+}
+
+courtier_management = {
+    ### Does the character want to leave the court? Checked once a year for each ruler.
+    ### root, scope:courtier = the courtier
+    ### scope:liege = their liege
+    ## push_scope = character
+    ## replace_scopes = { liege = character courtier = character }
+    can_leave = single_alias_right[trigger_clause]
+
+    ### Chance that the courtier decides to leave in ‰ (= 10 x the likelihood in %). While can_leave is true this is evaluated every month.
+    ### We strive to keep this value around 20 = 2% (min 10 max 30). This equals a ~50% chance of having left within 3 years
+    ### root, scope:courtier = the courtier
+    ### scope:liege = their liege
+    ### base = 1 unless overridden
+    ## replace_scopes = { liege = character courtier = character }
+    ## push_scope = character
+    monthly_leave_chance_x10 = single_alias_right[weight_block]
+}

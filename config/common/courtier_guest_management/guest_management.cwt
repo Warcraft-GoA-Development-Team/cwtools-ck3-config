@@ -1,0 +1,62 @@
+types = {
+    ## type_key_filter = guest_management
+    type[guest_management] = {
+        path = "common/courtier_guest_management/"
+
+
+    }
+}
+
+guest_management = {
+    ### Can this character visit a specific court? Each ruler with free guest slots checks this once a month for each local pool character.
+    ### root, scope:guest = the potential guest
+    ### scope:host = the potential host
+    ## push_scope = character
+    ## replace_scopes = { guest = character host = character }
+    guest_can_arrive = single_alias_right[trigger_clause]
+
+    ### If guest_can_arrive is true, the host decides which guests arrive using this weight. Will randomly select a few of the best candidates.
+    ### root, scope:guest = the potential guest
+    ### scope:host = the potential host
+    ## push_scope = character
+    ## replace_scopes = { guest = character host = character }
+    guest_score = single_alias_right[weight_block]
+
+    ### Can a guest leave the court? Checked once a year for each ruler.
+    ### root, scope:guest = the guest
+    ### scope:host = their host
+    ## push_scope = character
+    ## replace_scopes = { guest = character host = character }
+    can_leave = single_alias_right[trigger_clause]
+
+    ### Chance that the guest decides to leave in ‰ (= 10 x the likelihood in %). While can_leave is true this is evaluated every month.
+    ###We strive to keep this value around 50 (min 20 max 100). Guests should have an average chance of leaving each month of 5%. This equals a ~50% chance of leaving after 1 year (once they have passed their minimum visit time and as long as they're allowed to leave)
+    ### root, scope:guest = the guest
+    ### scope:host = their host
+    ## replace_scopes = { host = character guest = character }
+    ## push_scope = character
+    monthly_leave_chance_x10 = single_alias_right[weight_block]
+
+    ### Description shown to the player's pool guests to indicate what they could be useful for.
+    ### The first entry with a valid limit and the highest weight will be shown. If no entry is valid, nothing will be shown.
+    ### Syntax:
+    ### guest_description = {
+    ###	 description = {
+    ###		 limit = {}	### trigger, default: always = yes	root/scope:guest = the guest, scope:host = the host
+    ###		 weight = {}	### MTTH, default: base = 1			root/scope:guest = the guest, scope:host = the host
+    ###		 desc = {}		### dynamic description				root/scope:guest = the guest, scope:host = the host
+    ###	 }
+    ###	 description = { ... }
+    ### }
+    ## push_scope = character
+    guest_description = {
+        ## cardinality = 0..inf
+        description = {
+            ## cardinality = 0..1
+            limit = single_alias_right[trigger_clause]
+            ## cardinality = 0..1
+            weight = single_alias_right[weight_block]
+            desc = single_alias_right[complex_desc]
+        }
+    }
+}
