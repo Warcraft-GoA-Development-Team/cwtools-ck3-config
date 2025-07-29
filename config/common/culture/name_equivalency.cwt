@@ -1,0 +1,11 @@
+types = {
+    ## type_key_regex = (\b[^\s]+_male|\b[^\s]+_female)
+    type[name_equivalency] = {
+        path = "game/common/culture/name_equivalency"
+    }
+}
+
+name_equivalency = {
+    ## cardinality = 1..inf
+    localisation
+}

@@ -933,10 +933,12 @@ single_alias[ordered_effect_score_operation] = {
     limit = {
         alias_name[trigger] = alias_match_left[trigger]
     }
-    ## cardinality = 0..1
     # TODO: Work out what exactly this is restricted to
+    ## cardinality = 0..1
     order_by = alias_keys_field[int_value]
+    ## cardinality = 0..1
     order_by = single_alias_right[score_formula]
+    ## cardinality = 0..1
     order_by = value_field
     ## cardinality = 0..1
     max = alias_keys_field[int_value]
@@ -964,10 +966,12 @@ alias[score_operation:ordered_activity_phase_location] = {
     limit = {
         alias_name[trigger] = alias_match_left[trigger]
     }
-    ## cardinality = 0..1
     # TODO: Work out what exactly this is restricted to
+    ## cardinality = 0..1
     order_by = alias_keys_field[int_value]
+    ## cardinality = 0..1
     order_by = single_alias_right[score_formula]
+    ## cardinality = 0..1
     order_by = value_field
     ## cardinality = 0..1
     max = alias_keys_field[int_value]
@@ -996,10 +1000,12 @@ alias[score_operation:ordered_activity_phase_location_future] = {
     limit = {
         alias_name[trigger] = alias_match_left[trigger]
     }
-    ## cardinality = 0..1
     # TODO: Work out what exactly this is restricted to
+    ## cardinality = 0..1
     order_by = alias_keys_field[int_value]
+    ## cardinality = 0..1
     order_by = single_alias_right[score_formula]
+    ## cardinality = 0..1
     order_by = value_field
     ## cardinality = 0..1
     max = alias_keys_field[int_value]
@@ -1028,10 +1034,12 @@ alias[score_operation:ordered_activity_phase_location_past] = {
     limit = {
         alias_name[trigger] = alias_match_left[trigger]
     }
-    ## cardinality = 0..1
     # TODO: Work out what exactly this is restricted to
+    ## cardinality = 0..1
     order_by = alias_keys_field[int_value]
+    ## cardinality = 0..1
     order_by = single_alias_right[score_formula]
+    ## cardinality = 0..1
     order_by = value_field
     ## cardinality = 0..1
     max = alias_keys_field[int_value]
@@ -1060,10 +1068,12 @@ alias[score_operation:ordered_attending_character] = {
     limit = {
         alias_name[trigger] = alias_match_left[trigger]
     }
-    ## cardinality = 0..1
     # TODO: Work out what exactly this is restricted to
+    ## cardinality = 0..1
     order_by = alias_keys_field[int_value]
+    ## cardinality = 0..1
     order_by = single_alias_right[score_formula]
+    ## cardinality = 0..1
     order_by = value_field
     ## cardinality = 0..1
     max = alias_keys_field[int_value]
@@ -1091,10 +1101,12 @@ alias[score_operation:ordered_guest_subset] = {
     limit = {
         alias_name[trigger] = alias_match_left[trigger]
     }
-    ## cardinality = 0..1
     # TODO: Work out what exactly this is restricted to
+    ## cardinality = 0..1
     order_by = alias_keys_field[int_value]
+    ## cardinality = 0..1
     order_by = single_alias_right[score_formula]
+    ## cardinality = 0..1
     order_by = value_field
     ## cardinality = 0..1
     max = alias_keys_field[int_value]
@@ -1124,10 +1136,12 @@ alias[score_operation:ordered_guest_subset_current_phase] = {
     limit = {
         alias_name[trigger] = alias_match_left[trigger]
     }
-    ## cardinality = 0..1
     # TODO: Work out what exactly this is restricted to
+    ## cardinality = 0..1
     order_by = alias_keys_field[int_value]
+    ## cardinality = 0..1
     order_by = single_alias_right[score_formula]
+    ## cardinality = 0..1
     order_by = value_field
     ## cardinality = 0..1
     max = alias_keys_field[int_value]
@@ -1154,10 +1168,12 @@ alias[score_operation:ordered_county_in_region] = {
     limit = {
         alias_name[trigger] = alias_match_left[trigger]
     }
-    ## cardinality = 0..1
     # TODO: Work out what exactly this is restricted to
+    ## cardinality = 0..1
     order_by = alias_keys_field[int_value]
+    ## cardinality = 0..1
     order_by = single_alias_right[score_formula]
+    ## cardinality = 0..1
     order_by = value_field
     ## cardinality = 0..1
     max = alias_keys_field[int_value]
@@ -1186,10 +1202,12 @@ alias[score_operation:ordered_in_global_list] = {
     limit = {
         alias_name[trigger] = alias_match_left[trigger]
     }
-    ## cardinality = 0..1
     # TODO: Work out what exactly this is restricted to
+    ## cardinality = 0..1
     order_by = alias_keys_field[int_value]
+    ## cardinality = 0..1
     order_by = single_alias_right[score_formula]
+    ## cardinality = 0..1
     order_by = value_field
     ## cardinality = 0..1
     max = alias_keys_field[int_value]
@@ -1219,10 +1237,12 @@ alias[score_operation:ordered_in_list] = {
     limit = {
         alias_name[trigger] = alias_match_left[trigger]
     }
-    ## cardinality = 0..1
     # TODO: Work out what exactly this is restricted to
+    ## cardinality = 0..1
     order_by = alias_keys_field[int_value]
+    ## cardinality = 0..1
     order_by = single_alias_right[score_formula]
+    ## cardinality = 0..1
     order_by = value_field
     ## cardinality = 0..1
     max = alias_keys_field[int_value]
@@ -1253,10 +1273,12 @@ alias[score_operation:ordered_in_local_list] = {
     limit = {
         alias_name[trigger] = alias_match_left[trigger]
     }
-    ## cardinality = 0..1
     # TODO: Work out what exactly this is restricted to
+    ## cardinality = 0..1
     order_by = alias_keys_field[int_value]
+    ## cardinality = 0..1
     order_by = single_alias_right[score_formula]
+    ## cardinality = 0..1
     order_by = value_field
     ## cardinality = 0..1
     max = alias_keys_field[int_value]
@@ -1282,10 +1304,12 @@ alias[score_operation:ordered_pool_character] = {
     limit = {
         alias_name[trigger] = alias_match_left[trigger]
     }
-    ## cardinality = 0..1
     # TODO: Work out what exactly this is restricted to
+    ## cardinality = 0..1
     order_by = alias_keys_field[int_value]
+    ## cardinality = 0..1
     order_by = single_alias_right[score_formula]
+    ## cardinality = 0..1
     order_by = value_field
     ## cardinality = 0..1
     max = alias_keys_field[int_value]
@@ -1313,10 +1337,12 @@ alias[score_operation:ordered_trait_in_category] = {
     limit = {
         alias_name[trigger] = alias_match_left[trigger]
     }
-    ## cardinality = 0..1
     # TODO: Work out what exactly this is restricted to
+    ## cardinality = 0..1
     order_by = alias_keys_field[int_value]
+    ## cardinality = 0..1
     order_by = single_alias_right[score_formula]
+    ## cardinality = 0..1
     order_by = value_field
     ## cardinality = 0..1
     max = alias_keys_field[int_value]
@@ -1345,10 +1371,12 @@ alias[score_operation:ordered_character_struggle] = {
     limit = {
         alias_name[trigger] = alias_match_left[trigger]
     }
-    ## cardinality = 0..1
     # TODO: Work out what exactly this is restricted to
+    ## cardinality = 0..1
     order_by = alias_keys_field[int_value]
+    ## cardinality = 0..1
     order_by = single_alias_right[score_formula]
+    ## cardinality = 0..1
     order_by = value_field
     ## cardinality = 0..1
     max = alias_keys_field[int_value]
@@ -1377,10 +1405,12 @@ alias[score_operation:ordered_claim] = {
     limit = {
         alias_name[trigger] = alias_match_left[trigger]
     }
-    ## cardinality = 0..1
     # TODO: Work out what exactly this is restricted to
+    ## cardinality = 0..1
     order_by = alias_keys_field[int_value]
+    ## cardinality = 0..1
     order_by = single_alias_right[score_formula]
+    ## cardinality = 0..1
     order_by = value_field
     ## cardinality = 0..1
     max = alias_keys_field[int_value]
@@ -1407,10 +1437,12 @@ alias[score_operation:ordered_court_position_holder] = {
     limit = {
         alias_name[trigger] = alias_match_left[trigger]
     }
-    ## cardinality = 0..1
     # TODO: Work out what exactly this is restricted to
+    ## cardinality = 0..1
     order_by = alias_keys_field[int_value]
+    ## cardinality = 0..1
     order_by = single_alias_right[score_formula]
+    ## cardinality = 0..1
     order_by = value_field
     ## cardinality = 0..1
     max = alias_keys_field[int_value]
@@ -1440,10 +1472,12 @@ alias[score_operation:ordered_relation] = {
     limit = {
         alias_name[trigger] = alias_match_left[trigger]
     }
-    ## cardinality = 0..1
     # TODO: Work out what exactly this is restricted to
+    ## cardinality = 0..1
     order_by = alias_keys_field[int_value]
+    ## cardinality = 0..1
     order_by = single_alias_right[score_formula]
+    ## cardinality = 0..1
     order_by = value_field
     ## cardinality = 0..1
     max = alias_keys_field[int_value]
@@ -1473,10 +1507,12 @@ alias[score_operation:ordered_in_de_facto_hierarchy] = {
     limit = {
         alias_name[trigger] = alias_match_left[trigger]
     }
-    ## cardinality = 0..1
     # TODO: Work out what exactly this is restricted to
+    ## cardinality = 0..1
     order_by = alias_keys_field[int_value]
+    ## cardinality = 0..1
     order_by = single_alias_right[score_formula]
+    ## cardinality = 0..1
     order_by = value_field
     ## cardinality = 0..1
     max = alias_keys_field[int_value]
@@ -1506,10 +1542,12 @@ alias[score_operation:ordered_in_de_jure_hierarchy] = {
     limit = {
         alias_name[trigger] = alias_match_left[trigger]
     }
-    ## cardinality = 0..1
     # TODO: Work out what exactly this is restricted to
+    ## cardinality = 0..1
     order_by = alias_keys_field[int_value]
+    ## cardinality = 0..1
     order_by = single_alias_right[score_formula]
+    ## cardinality = 0..1
     order_by = value_field
     ## cardinality = 0..1
     max = alias_keys_field[int_value]

@@ -14,6 +14,9 @@ types = {
         subtype[martial_custom] = {
             type = martial_custom
         }
+        subtype[head_determination] = {
+            type = head_determination
+        }
     }
 }
 
@@ -21,6 +24,9 @@ types = {
 pillar = {
     ## cardinality = 1..1
     type = enum[pillar_type]
+
+    ## cardinality = 0..1
+    desc = localisation
 
     ## cardinality = 0..1
     character_modifier = single_alias_right[character_modifier]
@@ -47,6 +53,14 @@ pillar = {
         ### Used in language pillars
         color = alias_match_left[colour]
     }
+
+    subtype[heritage] = {
+        audio_parameter = scalar # TODO: Audio param
+    }
+
+    subtype[head_determination] = {
+        head_determination_type = enum[head_determination_type]
+    }
     
     ## cardinality = 0..1
     ### Used in martial_custom pillars
@@ -64,5 +78,10 @@ enums = {
         heritage
         language
         martial_custom
+        head_determination
+    }
+    enum[head_determination_type] = {
+        domain
+        herd
     }
 }

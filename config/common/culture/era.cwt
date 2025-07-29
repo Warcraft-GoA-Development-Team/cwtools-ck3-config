@@ -35,10 +35,39 @@ era = {
     culture_modifier = single_alias_right[culture_modifier]
 
     ## cardinality = 0..1
-    ### Modifiers of this culture era. This will be applied to the characters of that cuture.
-    modifier = single_alias_right[character_modifier]
+    ### Modifiers of this culture era. This will be applied to the characters of that cuture with valid government.
+    character_modifier = single_alias_right[character_modifier]
+
+    ## cardinality = 0..1
+    ### Modifier of this culture era applied to counties of the culture.
+    county_modifier = single_alias_right[county_modifier]
+
+    ## cardinality = 0..1
+    ### Modifier of this culture era applied to provinces in a county of the culture.
+    province_modifier = single_alias_right[province_modifier]
 
     ## cardinality = 0..inf
     ### A custom effect description that will be added to the list of effects.
     custom = localisation
+
+    # Undocumented
+    ## cardinality = 0..inf
+    maa_upgrade = single_alias_right[maa_upgrade_era]
+}
+
+single_alias[maa_upgrade_era] = {
+    ### The base MaA type to upgrade
+    men_at_arms = value[unit_type]
+    ## cardinality = 0..1
+    damage = float
+    ## cardinality = 0..1
+    toughness = float
+    ## cardinality = 0..1
+    pursuit = float
+    ## cardinality = 0..1
+    screen = float
+    ## cardinality = 0..1
+    siege_value = float
+    ## cardinality = 0..1
+    max_size = float
 }

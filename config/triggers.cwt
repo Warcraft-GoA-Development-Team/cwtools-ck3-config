@@ -117,9 +117,9 @@ alias[trigger:culture_overlaps_geographical_region] == <geographical_region>
 ## scope = culture
 alias[trigger:has_all_innovations] == {
     ## cardinality = 0..1
-    with_flag = value[innovation_flag]
+    with_flag = enum[innovation_flag]
     ## cardinality = 0..1
-    without_flag = value[innovation_flag]
+    without_flag = enum[innovation_flag]
     ## cardinality = 0..1
     culture_era = <era>
 }
@@ -157,7 +157,7 @@ alias[trigger:has_innovation] = <innovation>
 
 ### Has the culture discovered an innovation with this flag? 
 ## scope = culture
-alias[trigger:has_innovation_flag] = value[innovation_flag]
+alias[trigger:has_innovation_flag] = enum[innovation_flag]
 
 ### Does the culture have this name list?
 ## scope = culture
@@ -2619,6 +2619,16 @@ alias[trigger:succession_appointment_score_invested] = {
     candidate = scope[character]
     value == int_value_field
     value == alias_keys_field[int_value]
+    value == single_alias_right[score_formula]
+}
+
+alias[trigger:max_number_maa_soldiers_of_base_type] = {
+    type = value[unit_type]
+    ## cardinality = 0..1
+    value == int_value_field
+    ## cardinality = 0..1
+    value == alias_keys_field[int_value]
+    ## cardinality = 0..1
     value == single_alias_right[score_formula]
 }
 

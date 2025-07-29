@@ -27,6 +27,8 @@ culture = {
 	language = <pillar.language>
     ### The martial custom of the culture.
 	martial_custom = <pillar.martial_custom>
+    ### The martial custom of the culture.
+    head_determination = <pillar.head_determination>
     ### Traditions of the culture
     traditions = single_alias_right[tradition_list]
     
@@ -47,6 +49,7 @@ culture = {
         trait = <tradition>
 
         ### The DLC feature that is required.
+        ## cardinality = 1..inf
         requires_dlc_flag = enum[dlc_feature]
 
         ## cardinality = 0..1

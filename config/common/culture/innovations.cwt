@@ -15,7 +15,7 @@ innovation = {
 
     ## cardinality = 0..1
     ### Region where this innovation can start getting base progress. Empty means anywhere.
-    region = <geographical_region
+    region = <geographical_region>
     ## cardinality = 0..1
     ### Trigger to check if it can be unlocked by the culture. In contrast to can_progress it will be hidden otherwise. Scope: culture Default: always = yes
     ## replace_scope = { root = culture }
@@ -33,7 +33,7 @@ innovation = {
     unlock_decision = <decision>
     ## cardinality = 0..inf
     ### Key of a casus belli that can be unlocked. There can be more than one. This is only to show on the tooltip, it has to be maulually blocked on the object itself.
-    unlock_casus_belli = <casus_belli>
+    unlock_casus_belli = <casus_belli_type>
     ## cardinality = 0..inf
     ### Key of a regiment that can be unlocked. There can be more than one. Actually does unlock the MaA.
     unlock_maa = <maa_type>
@@ -57,15 +57,25 @@ innovation = {
         alias_name[modifier] = alias_match_left[modifier]
     }
 
+    ### Modifiers of this culture innovation. This will be applied to the characters of that cuture.
     ## cardinality = 0..1
     character_modifier = single_alias_right[character_modifier]
 
+    ### Modifier of this culture innovation applied to counties of the culture.
+    ## cardinality = 0..1
+    county_modifier = single_alias_right[county_modifier]
+
+    ### Modifier of this culture innovation applied to the culture itself.
     ## cardinality = 0..1
     culture_modifier = single_alias_right[culture_modifier]
 
+    ### Modifier of this culture innovation applied to provinces in a county of the culture.
+    ## cardinality = 0..1
+    province_modifier = single_alias_right[province_modifier]
+
     ## cardinality = 0..inf
     ### Optional flag, relevant for the has_all_innovations trigger. Can list any number of flags for each innovation.
-    flag = value_set[innovation_flag]
+    flag = scalar
 }
 
 single_alias[maa_upgrade] = {
@@ -76,7 +86,7 @@ single_alias[maa_upgrade] = {
     ## cardinality = 0..1
     toughness = float
     ## cardinality = 0..1
-    pursue = float
+    pursuit = float
     ## cardinality = 0..1
     screen = float
     ## cardinality = 0..1
@@ -90,5 +100,13 @@ enums = {
         culture_group_military
         culture_group_civic
         culture_group_regional
+    }
+
+    complex_enum[innovation_flag] = {
+        path = "game/common/culture/innovations"
+
+        name = {
+            flag = enum_name
+        }
     }
 }

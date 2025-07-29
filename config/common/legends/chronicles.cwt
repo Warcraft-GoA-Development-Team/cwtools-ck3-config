@@ -44,7 +44,7 @@ chronicle = {
 
         ### Modifier applied to the county if its county capital province has adopted this legend
         ## cardinality = 0..1
-        county_modifier = ingle_alias_right[county_modifier]
+        county_modifier = single_alias_right[county_modifier]
 
         ### Modifier applied to the owner of the legend
         ## cardinality = 0..1

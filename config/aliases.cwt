@@ -77,6 +77,8 @@ single_alias[localisation_list] = {
 
 single_alias[doctrine_character_modifier] = {
     doctrine = <doctrine>
+    ## cardinality = 0..1
+    name = localisation
     ## push_scope = character
     alias_name[modifier] = alias_match_left[modifier]
 }
@@ -306,6 +308,8 @@ alias[modifier:no_water_crossing_penalty] = bool
 alias[modifier:hide_effects] = bool
 ## scope = character
 alias[modifier:stacking] = bool
+## scope = character
+alias[modifier:ignore_opinion_of_different_faith] = bool
 ### Applies the value of a modifier
 alias[modifier:<modifier>] = float
 # ### Applies the value of a modifier

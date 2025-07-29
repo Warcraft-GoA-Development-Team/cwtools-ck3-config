@@ -37,44 +37,24 @@ alias[arithmetic_operation:ceiling] = yes
 alias[arithmetic_operation:floor] = yes
 
 alias[int_value:value_field] = value_field
-alias[int_value:value_field] = int_value_field
+alias[int_value:int_value_field] = int_value_field
 alias[int_value:<script_value>] = <script_value>
 alias[int_value:<static_value>] = <static_value>
 alias[int_value:$define_reference] = $define_reference
 alias[int_value:scope[value]] = scope[value]
 
+alias[float_value:value_field] = value_field
+alias[float_value:<script_value>] = <script_value>
+alias[float_value:<static_value>] = <static_value>
+alias[float_value:$define_reference] = $define_reference
+alias[float_value:scope[value]] = scope[value]
+
+alias[script_value:<script_value>] = <script_value>
+alias[script_value:<static_value>] = <static_value>
+alias[script_value:$define_reference] = $define_reference
+alias[script_value:scope[value]] = scope[value]
+
 alias[arithmetic_operation:save_temporary_value_as] = value_set[variable]
-
-alias[arithmetic_operation:fixed_range] = {
-    min = alias_keys_field[int_value]
-    min = value_field
-    min = single_alias_right[formula]
-    max = alias_keys_field[int_value]
-    max = value_field
-    max = single_alias_right[formula]
-}
-
-alias[arithmetic_operation:integer_range] = {
-    min = alias_keys_field[int_value]
-    min = value_field
-    min = single_alias_right[formula]
-    max = alias_keys_field[int_value]
-    max = value_field
-    max = single_alias_right[formula]
-}
-
-### Conditional Variable Addition
-single_alias[arithmetic_operation_conditional_add] = {
-    ## cardinality = 1..inf
-    alias_name[arithmetic_operation] = alias_match_left[arithmetic_operation]
-    ## cardinality = 1..inf
-    alias_name[effect] = alias_match_left[effect]
-    ### Localized description
-    ## cardinality = 0..1
-    desc = localisation
-    ## cardinality = 0..1
-    format = localisation
-}
 
 single_alias[score_formula] = {
     ## cardinality = 0..inf
@@ -160,30 +140,3 @@ alias[score_operation:switch] = {
 }
 
 alias[score_operation:scope_field] = single_alias_right[score_formula]
-
-###### Triggers for value calculations #######
-alias[trigger:scope:highest_available_aptitude.compare_value] = value_field
-
-# alias[score_operation:new_scope] = {
-#     scope_field = single_alias_right[score_operation]
-# }
-
-alias[score_operation:use_attribute] = {
-    alias_name[arithmetic_operation] = enum[attributes]
-}
-
-# single_alias[int_conditional_formula] = {
-#     ## cardinality = 0..inf
-#     alias_name[score_operation] = alias_match_left[score_operation]
-#     ## cardinality = 0..inf
-#     alias_name[arithmetic_operation] = alias_keys_field[int_value]
-#     ## cardinality = 0..inf
-#     alias_name[arithmetic_operation] = alias_match_left[score_operation]
-# }
-
-single_alias[float_conditional_formula] = {
-    value = value_field
-    alias_name[score_operation] = alias_match_left[score_operation]
-
-
-}
