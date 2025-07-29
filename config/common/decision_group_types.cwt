@@ -1,0 +1,19 @@
+types = {
+    type[decision_group_type] = {
+        path = "game/common/decision_group_types/"
+    }
+}
+
+decision_group_type = {
+    ### The order decision groups show up in the decision view, higher number is sorted first, tie breaking is on definition order. Default = 0
+    sort_order = int
+    ### List of gui tags, used to set size etc in gui views
+    ## cardinality = 0..1
+    gui_tags = {
+        ## cardinality = 1..inf
+        value_set[gui_tags]
+    }
+
+    ## cardinality = 0..1
+    important_decision_group = bool
+}
