@@ -19,7 +19,7 @@ tradition = {
     ### If path is not defined then it will use a random image from the folder
     ### ex. 0 = learning 1 = western 4 = fight.dds
     # cardinality = 1..1
-    layers = {
+    layers = { # TODO: define filepath
         ## cardinality = 0..1
         0 = filepath[game/gfx/interface/icons/culture_tradition/0-background/,]
         ## cardinality = 0..1
