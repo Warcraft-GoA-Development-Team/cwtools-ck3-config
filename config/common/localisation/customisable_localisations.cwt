@@ -1,6 +1,10 @@
 types = {
     type[customisable_localisation] = {
         path = "game/common/customizable_localization"
+        ## push_scope = artifact
+        subtype[artifact] = {
+            type = artifact
+        }
         ## push_scope = character
         subtype[character] = {
             type = character
@@ -45,38 +49,91 @@ types = {
         subtype[dynasty] = {
             type = dynasty
         }
+        ## push_scope = legend
+        subtype[legend] = {
+            type = legend
+        }
+        ## push_scope = war
+        subtype[war] = {
+            type = war
+        }
+        ## push_scope = story
+        subtype[story] = {
+            type = story
+        }
+
+        subtype[has_parent] = {
+            parent = scalar
+        }
+
+        subtype[random_valid] = {
+            random_valid = yes
+        }
     }
 }
 
 customisable_localisation = {
-    ### Scope type used.
-    type = enum[customisable_localisation_type]
+    subtype[!has_parent] = {
+        ### Scope type used.
+        type = enum[customisable_localisation_type]
+    }
+    subtype[has_parent] = {
+        ### Scope type used.
+        ## cardinality = 0..1
+        type = enum[customisable_localisation_type]
+    }
 
     ## cardinality = 0..1
     ### Whether the localisation should selected randomly from the valid options. Otherwise the first valid one will be selected. Defaults to no.
     random_valid = bool
-    
-    ## cardinality = 1..inf
-    text = {
-        ### The actual localisation key to display.
-        localization_key = localisation
+
+    ## cardinality = 0..1
+    log_loc_errors = bool
+
+    subtype[!has_parent] = {
+        ## cardinality = 1..inf
+        text = {
+            ### Run before the trigger is evaluated, can save scopes which you then check
+            ### for in the trigger directly. These scopes can be referenced in the loc key.
+            ### Only interface effects are valid so the game state can not be modified
+            ## cardinality = 0..1
+            setup_scope = single_alias_right[effect_clause] # TODO: Interface effects
+
+            ### The actual localisation key to display.
+            localization_key = localisation
+
+            ## cardinality = 0..1
+            ### Whether this should be selected if none of the other options are valid, even if the trigger for this is false. There should be maximum one. Defaults to no.
+            fallback = bool
+
+            ## cardinality = 0..1
+            ### Trigger to have this localisation. Defaults to yes.
+            trigger = single_alias_right[trigger_clause]
+
+            subtype[random_valid] = {
+                ## cardinality = 0..1
+                ### Weight multiplier for this localistion. Only used with random_valid = yes. Defaults to 1.
+                weight_multiplier = float
+
+                ## cardinality = 0..1
+                ### Weight multiplier for this localistion. Only used with random_valid = yes. Defaults to 1.
+                weight_multiplier = single_alias_right[weight_block]
+            }
+        }
+    }
+
+    subtype[has_parent] = {
+        ## cardinality = 0..1
+        parent = <customisable_localisation>
 
         ## cardinality = 0..1
-        ### Whether this should be selected if none of the other options are valid, even if the trigger for this is false. There should be maximum one. Defaults to no.
-        fallback = bool
-
-        ## cardinality = 0..1
-        ### Trigger to have this localisation. Defaults to yes.
-        trigger = single_alias_right[trigger_clause]
-
-        ## cardinality = 0..1
-        ### Weight multiplier for this localistion. Only used with random_valid = yes. Defaults to 1.
-        weight_multiplier = single_alias_right[weight_block]
+        suffix = scalar
     }
 }
 
 enums = {
     enum[customisable_localisation_type] = {
+        artifact
         character
         landed_title
         province
@@ -88,6 +145,10 @@ enums = {
         title_and_vassal_change
         faith
         dynasty
-        legend
+        all
+
+        legend # Not documented
+        war
+        story
     }
 }

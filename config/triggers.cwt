@@ -1294,14 +1294,14 @@ alias[trigger:war_contribution] = {
 
 # -A
 
-### is the character old/young enough?
-## scope = character
-alias[trigger:age] == {
-    ## cardinality = 0..2
-    alias_keys_field[int_value]
-    ## cardinality = 0..2
-    value_field
-}
+# ### is the character old/young enough?
+# ## scope = character
+# alias[trigger:age] == {
+#     ## cardinality = 0..2
+#     alias_keys_field[int_value]
+#     ## cardinality = 0..2
+#     value_field
+# }
 
 enums = {
     enum[diplomacy_stance] = {
@@ -2367,7 +2367,7 @@ alias[trigger:is_frontend_character_selected] = bool
 ### is the specified in-game view open?
 ### An interface trigger, can only be used in specific places
 ## scope = any
-alias[trigger:is_game_view_open] = replace_me #TODO: Unsure
+alias[trigger:is_game_view_open] = enum[game_views]
 
 ### Saves the scoped character's opinion of the target character as an arbitrarily-named target to be referenced later in the in the same trigger
 ### save_temporary_opinion_value_as = { name = <string> target = x
