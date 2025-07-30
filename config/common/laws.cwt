@@ -4,7 +4,8 @@ types = {
         path = "game/common/laws"
         skip_root_key = any
         subtype[title_specific] = {
-            can_title_have = single_alias_right[trigger_clause]
+            can_title_have = scalar
+            can_title_have = {  }
         }
     }
     type[law_group] = {

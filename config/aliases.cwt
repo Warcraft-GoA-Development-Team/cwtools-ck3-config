@@ -317,41 +317,6 @@ alias[modifier:<modifier>] = float
 ### Applies the value of a modifier
 alias[modifier:<modifier>] = <static_value>
 
-single_alias[decision_widget] = {
-    ### Name of the widget to use. Must be at the path <decision_view_widgets>/<widget_name>.gui
-    gui = scalar
-    ### Some widgets require a custom controller (see below). Default: default
-    controller = enum[decision_widget_controller]
-
-    ### Shows the option list from the very beginning of the decision window flow
-    show_from_start = bool
-
-    ## cardinality = 0..inf
-    item = {
-        ### is used in effect section
-        value = scalar
-        ### is entry shown
-        ## cardinality = 0..1
-        is_shown = alias_match_left[trigger]
-        ### is entry selectable
-        ## cardinality = 0..1
-        is_valid = alias_match_left[trigger]
-        ### tooltip info
-        current_description = localisation
-        ### what should be shown in the list
-        localization = localisation
-        ### is the default entry to pick
-        ## cardinality = 0..1
-        is_default = bool
-        ### path to the icon
-        icon = filepath
-        ### is icon flat black and needs a special widtet, or is it full color
-        ## cardinality = 0..1
-        flat = bool
-        ai_chance = single_alias_right[score_formula]
-    }
-}
-
 # TODO: Properly implement
 single_alias[dna_modiifer] = {
     ## cardinality = 0..inf

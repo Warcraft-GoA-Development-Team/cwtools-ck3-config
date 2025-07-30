@@ -234,9 +234,13 @@ alias[effect:set_culture_name] = {
 ## scope = culture
 alias[effect:set_culture_pillar] = <pillar>
 
-### Set the heritage from the RHS on the scope culture.set_heritage_from = culture:norwegian
+### Set the ethos from the RHS on the scope culture.set_ethos_from = culture:norwegian
 ## scope = culture
 alias[effect:set_ethos_from] = scope[culture]
+
+### Set the heritage from the RHS on the scope culture.set_heritage_from = culture:norwegian
+## scope = culture
+alias[effect:set_heritage_from] = scope[culture]
 
 ### Set the language from the RHS on the scope culture.set_language_from = culture:norwegian
 ## scope = culture
@@ -261,7 +265,17 @@ alias[effect:add_house_artifact_claim] = scope[artifact]
 ### Add a modifier to a house add_house_modifier = name add_house_modifier = { modifier = name days/weeks/months/years = int }
 ## scope = dynasty_house
 ## push_scope = dynasty_house
+alias[effect:add_house_modifier] = <modifier_container>
+
+### Add a modifier to a house add_house_modifier = name add_house_modifier = { modifier = name days/weeks/months/years = int }
+## scope = dynasty_house
+## push_scope = dynasty_house
 alias[effect:add_house_modifier] = single_alias_right[added_modifier]
+
+### Add a modifier to a house add_house_unity_modifier = name add_house_unity_modifier = { modifier = name days/weeks/months/years = int } You can also add an optional 'desc' field. This is a dynamic description that'll be used for your timed modifier
+## scope = dynasty_house
+## push_scope = dynasty_house
+alias[effect:add_house_unity_modifier] = <modifier_container>
 
 ### Add a modifier to a house add_house_unity_modifier = name add_house_unity_modifier = { modifier = name days/weeks/months/years = int } You can also add an optional 'desc' field. This is a dynamic description that'll be used for your timed modifier
 ## scope = dynasty_house
@@ -535,6 +549,10 @@ alias[effect:activate_struggle_catalyst] = {
     catalyst = <struggle_catalyst>
     character = scope[character]
 }
+
+### Change the phase from the current one to a listed scripted phase without going into transition phase change_struggle_phase = X change_struggle_phase = { struggle_phase = X with_transition = yes/no } where X is a struggle phase type
+## scope = struggle
+alias[effect:change_struggle_phase] = <struggle_phase>
 
 ### Change the phase from the current one to a listed scripted phase without going into transition phase change_struggle_phase = X change_struggle_phase = { struggle_phase = X with_transition = yes/no } where X is a struggle phase type
 ## scope = struggle
@@ -1161,7 +1179,13 @@ alias[effect:clear_variable_list] = value[variable_list]
 alias[effect:close_all_views] = yes
 
 ### Tries to close the defined view. Take care to set player if effect is executed not through UI but through synchronized code. Else all the window will open for all players. close_view = {     view = <view name>     player = scope:character # optional, else closes for all players who execute the effect }simplified: close_view = <view name>
-alias[effect:close_view] = replace_me # TODO: Handle views.
+alias[effect:close_view] = enum[game_views]
+
+### Tries to close the defined view. Take care to set player if effect is executed not through UI but through synchronized code. Else all the window will open for all players. close_view = {     view = <view name>     player = scope:character # optional, else closes for all players who execute the effect }simplified: close_view = <view name>
+alias[effect:close_view] = {
+    view = enum[game_views]
+    player = scope[character]
+}
 
 ### Adds all traits of the target to the character. Skips any traits that the character isn't allowed to have. Will not remove the character's existing traits. copy_traits = scope:character
 ## scope = character
@@ -1358,6 +1382,8 @@ alias[effect:create_dynamic_title] = {
 ### Create a new holy order create_holy_order = {     leader = scope:a_character     capital = scope:a_barony_title     save_scope_as = new_holy_order # optional way to get a reference to the new holy order }
 ## push_scope = holy_order
 alias[effect:create_holy_order] = {
+    leader = scope[character]
+    capital = scope[landed_title]
     save_scope_as = value_set[event_target]
 }
 
@@ -1402,6 +1428,8 @@ alias[effect:custom_label] = localisation
 ### just a tooltip, the scope as subject (for grouping, localization)
 alias[effect:custom_tooltip] = {
     text = localisation
+    ## cardinality = 0..1
+    subject = scope_field
     alias_name[effect] = alias_match_left[effect]
 }
 
@@ -1995,7 +2023,10 @@ alias[effect:while] = {
 
 ### Repeats enclosed effects while limit criteria are met or until set iteration count is reached while = { limit = { <triggers> } <effects> }  while = { count = 3 <effects> } Default max of 1000.
 alias[effect:while] = {
-    count = int
+    ## cardinality = 0..1
+    count = int_value_field
+    ## cardinality = 0..1
+    count = alias_keys_field[int_value]
     ## cardinality = 0..inf
     alias_name[effect] = alias_match_left[effect]
 }
@@ -2032,14 +2063,8 @@ alias[effect:add_special_building_slot] = <building.special>
 ## scope = province
 alias[effect:begin_create_holding] = {
     type = <holding>
-    refund_cost = {
-        ## cardinality = 0..1
-        gold = int
-        ## cardinality = 0..1
-        piety = int
-        ## cardinality = 0..1
-        prestige = int
-    }
+    ## cardinality = 0..1
+    refund_cost = single_alias_right[cost]
 }
 
 ### Creates a new epidemic in the scoped province. create_epidemic_outbreak = {	type = smallpox	intensity = major	save_scope_as = new_epidemic # optional}
@@ -4257,6 +4282,7 @@ alias[effect:start_travel_plan] = {
     travel_with_domicile = bool
     ##cardinality = 0..1
     players_use_planner = bool
+    ##cardinality = 0..1
     return_trip = bool
     ##cardinality = 0..1
     on_arrival_event = <event>
@@ -4269,7 +4295,7 @@ alias[effect:start_travel_plan] = {
     ##cardinality = 0..1
     on_travel_planner_cancel_event = <event>
     ##cardinality = 0..1
-    on_travel_planner_on_action = <on_action>
+    on_travel_planner_cancel_on_action = <on_action>
     ##cardinality = 0..1
     on_arrival_destinations = enum[on_arrival_destinations]
 

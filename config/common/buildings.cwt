@@ -66,7 +66,7 @@ building = {
 		illustration = filepath
 		### Associated sound effect and an optional parameter, can also be just soundeffect = "event:..." if no parameter is needed
 		## cardinality = 0..1
-		soundeffect = {
+		soundeffect = { #TODO : sound
 			soundeffect = scalar
 			## cardinality = 0..1
 			soundparameter = { scalar = value_field }

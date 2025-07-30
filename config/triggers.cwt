@@ -582,6 +582,8 @@ alias[trigger:custom_tooltip] = localisation
 ### Replaces the tooltips for the enclosed triggers with a custom text custom_tooltip = { 	text = <text> 	<trigger> }
 alias[trigger:custom_tooltip] = {
     text = localisation
+    ## cardinality = 0..1
+    subject = scope_field
     alias_name[trigger] = alias_match_left[trigger]
 }
 
@@ -2329,6 +2331,10 @@ alias[trigger:can_get_innovation_from] = scope[character]
 ### Does the Army have the given raid intent?
 ## scope = army
 alias[trigger:raid_intent] = <raid_intent>
+
+### Is geographical region part of situation sub-region?
+## scope = situation_sub_region
+alias[trigger:situation_sub_region_has_geographical_region] = <geographical_region>
 
 ### Is geographical region part of situation sub-region?
 ## scope = situation_sub_region

@@ -62,7 +62,7 @@ message = {
     tooltip = localisation
     ## cardinality = 0..inf
     ### Sound effect played when showing the message (optional); default: no sound
-    soundeffect = scalar
+    soundeffect = scalar #TODO : sound
     ## cardinality = 0..1
     ### Icon textures found in gfx\interface\message_icons
     icon = filepath[game/gfx/interface/icons/message_feed/,.dds]

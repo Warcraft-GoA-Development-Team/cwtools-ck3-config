@@ -109,7 +109,7 @@ domicile_building = {
 
         ### Brief: soundeffect ( string soundbank reference ) Associated sound effect. Supports soundparameters where they will be automatically appended based on building's current tier: soundparameter = { "Tier" = 1 }
         ## cardinality = 0..1
-        soundeffect = scalar
+        soundeffect = scalar #TODO : sound
 
     }
 }

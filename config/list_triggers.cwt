@@ -206,6 +206,7 @@ alias[trigger:any_in_global_list] = {
 }
 
 ### Iterate through all items in global list. list = name or variable = name any_in_global_list = { <count=num/all> / <percent=fixed_point> <triggers> }
+## push_scope = any
 alias[trigger:any_in_global_list] = {
     variable = value[global_variable_list]
     ## cardinality = 0..1

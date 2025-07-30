@@ -223,7 +223,7 @@ entity = {
 
 			## cardinality = 0..1
 			sound = {
-				soundeffect = scalar
+				soundeffect = scalar #TODO : sound
 			}
 
 			## cardinality = 0..1

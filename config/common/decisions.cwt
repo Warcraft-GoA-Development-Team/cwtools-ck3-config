@@ -1,6 +1,34 @@
 types = {
 	type[decision] = {
 		path = "game/common/decisions"
+
+        subtype[ai_goal] = {
+            ai_goal = yes
+        }
+
+        # Controlls that target baronies
+        subtype[wdiget_controller_barony] = {
+            widget = {
+                controller = create_holy_order
+                controller = revoke_holy_order_lease
+            }
+        }
+
+        # The widgets with controllers that have a gui with decision_view_widget_create_<controller>
+        # These do not need gui defined
+        subtype[wdiget_predefined_gui] = {
+            widget = {
+                controller = create_holy_order
+                controller = revoke_holy_order_lease
+            }
+        }
+
+        ## only_if_not = { wdiget_controller_barony }
+        subtype[widget_controller_items] = {
+            widget = {
+
+            }
+        }
 	}
 }
 
@@ -17,10 +45,21 @@ decision = {
     ### set decision image
     picture = filepath
 
-    ## cardinality = 1..1
+    ## cardinality = 1..inf
     ### set decision image
     picture = {
+        ### Receives the character scope to check if it's valid.
+        ### Empty triggers always pass on default so do not type a trigger if you want it to always succeed.
+        ## cardinality = 0..1
+        trigger = single_alias_right[trigger_clause]
+
+        ### Path to the texture
         reference = filepath
+
+        ### Name of the sound effect played when showing the decision details
+        ### Default: "event:/SFX/UI/Generic/Windows/sfx_ui_generic_window_standard_show"
+        ## cardinality = 0..1
+        soundeffect = scalar #TODO : sound
     }
 
     ## cardinality = 0..1
@@ -41,30 +80,47 @@ decision = {
     ### The order that the decision should show up in the decision view relative to other decisions, higher number is sorted first, tie breaking is on definition order if same sort order
     ## cardinality = 0..1
     sort_order = int_value_field
+    ### Foldable decision group type to put this decision in. Default or not specified will select 'decisions'
+    ## cardinality = 0..1
+    decision_group_type = <decision_group_type>
+    ### override description, default: "<key>_desc"; supports dynamic descriptions like in events (first_valid, ...); scope: character
     ## cardinality = 0..1
     desc = localisation
+    ### override description, default: "<key>_desc"; supports dynamic descriptions like in events (first_valid, ...); scope: character
     ## cardinality = 0..1
-    desc = single_alias_right
+    desc = single_alias_right[complex_desc]
+    ### override confirm_text, default: "<key>_confirm"; supports dynamic descriptions like in events (first_valid, ...); scope: character
     ## cardinality = 0..1
     confirm_text = localisation
+    ### override confirm_text, default: "<key>_confirm"; supports dynamic descriptions like in events (first_valid, ...); scope: character
     ## cardinality = 0..1
-    confirm_text = single_alias_right
+    confirm_text = single_alias_right[complex_desc]
 
-    ## cardinality = 0..inf
-    immediate = single_alias_right[effect_clause]
+    ### is decision visible to the character; scope: character; default: { always = yes }
     ## cardinality = 0..1
     is_shown = single_alias_right[trigger_clause]
+    ### can execute decision; these will be shown in the confirm button tooltip if they fail; scope: character; default: { always = yes }
     ## cardinality = 0..1
     is_valid_showing_failures_only = single_alias_right[trigger_clause]
+    ### can execute decision; these will be shown in the detail view under Requirements; scope: character; default: { always = yes }
     ## cardinality = 0..1
     is_valid = single_alias_right[trigger_clause]
 
+    ### cost values, default: 0
     ## cardinality = 0..1
     cost = single_alias_right[cost]
+    ### Like 'cost', except this doesn't get applied. It'll block taking the decision if not affordable. For use in places that apply the cost after the fact based on player input and the like
+    ## cardinality = 0..1
+    minimum_cost = single_alias_right[cost]
+
+    ### Should this decision have an alert made for it, applied on top of the usual requirements that the decision will be alerted for
+    ## cardinality = 0..1
+    should_create_alert = single_alias_right[trigger_clause]
 
     ## cardinality = 0..1
     cooldown = single_alias_right[duration_block]
 
+    ### effect to execute when decision is taken; scope: character
     ## cardinality = 0..1
     effect = single_alias_right[effect_clause]
 
@@ -74,19 +130,94 @@ decision = {
     ###
     ### Usually these widgets require a custom controller. This should be documented in the widget's GUI file.
     ### The data context type available in the GUI depends on the controller type.
-    widget = single_alias_right[decision_widget]
+    widget = {
+        ### Some widgets require a custom controller (see below). Default: default
+        controller = enum[decision_widget_controller]
+
+        subtype[!wdiget_predefined_gui] = {
+            ### Name of the widget to use. Must be at the path <decision_view_widgets>/<widget_name>.gui
+            gui = filepath[gui/decision_view_widgets/,.gui]
+        }
+
+        subtype[wdiget_predefined_gui] = {
+            ### Name of the widget to use. Must be at the path <decision_view_widgets>/<widget_name>.gui
+            ## cardinality = 0..1
+            gui = filepath[gui/decision_view_widgets/,.gui]
+        }
+
+        ### Shows the option list from the very beginning of the decision window flow
+        ## cardinality = 0..1
+        show_from_start = bool
+
+        ## cardinality = 0..1
+        decision_to_second_step_button = localisation
+
+        subtype[widget_controller_items] = {
+            ## cardinality = 0..inf
+            item = {
+                ### is used in effect section
+                value = value_set[event_target]
+                ### is entry shown
+                ## cardinality = 0..1
+                is_shown = single_alias_right[trigger_clause]
+                ### is entry selectable
+                ## cardinality = 0..1
+                is_valid = single_alias_right[trigger_clause]
+                ### tooltip info
+                ## cardinality = 0..1
+                current_description = localisation
+                ### tooltip info
+                ## cardinality = 0..1
+                current_description = single_alias_right[complex_desc]
+                ### what should be shown in the list
+                localization = localisation
+                ### what should be shown in the list
+                localization = single_alias_right[complex_desc]
+                ### is the default entry to pick
+                ## cardinality = 0..1
+                is_default = bool
+                ### path to the icon
+                icon = filepath
+                ### is icon flat black and needs a special widtet, or is it full color
+                ## cardinality = 0..1
+                flat = bool
+                ### Which item should the AI use (+ which is the default for the player)
+                ### NOTE! The highest scoring item is selected - there is no randomization.
+                ### This is also used to select the default option for players. To get a proper "decision available"
+                ### notification for each item, make sure that the item has the highest score if it is available!
+                ## cardinality = 0..1
+                ai_chance = single_alias_right[score_formula]
+            }
+        }
+
+        subtype[wdiget_controller_barony] = {
+            ## push_scope = landed_title
+            barony_valid = single_alias_right[trigger_clause]
+        }
+    }
 
     ## cardinality = 0..1
-    ### Trigger whether the AI should look at it or not
+    ### trigger whether the AI should look at it or not
     ai_potential = single_alias_right[trigger_clause]
     # There might be a better way to this
+    ### Returns the % chance of executing executing the decision. 0 will never execute it, 100 will alwasy execute it. Will also determine the default option (if the decision has those) for players .
     ## cardinality = 0..1
     ai_will_do = single_alias_right[weight_block]
     # ## cardinality = 0..1
     # ai_will_do = value_field[0..inf]
+    ### If set, the AI will consider the decision a "goal" and consider it alongside major costs like title creation and holding construction. It will ignore ai_check_interval. Should only be used for things with such major costs that budgeting for it is important, as it is less performant than using a high ai_check_interval
     ## cardinality = 0..1
     ai_goal = bool
-    ## cardinality = ~1..1
-    ### How many months between when the AI should check for this decision?
-    ai_check_interval = int[0..inf]
+    subtype[!ai_goal] = {
+        ## cardinality = 1..1
+        ### How many months to go between each check of this decision. Has to be set, except if ai_goal = yes is set. An interval of 0 means the AI will never check this decision
+        ai_check_interval = int[0..inf]
+    }
+
+    #TODO : sound
+    ## cardinality = 0..1
+    confirm_click_sound = scalar
+
+    ## cardinality = 0..1
+    is_invisible = bool
 }
