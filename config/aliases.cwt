@@ -290,12 +290,6 @@ single_alias[single_duration_block] = {
     enum[duration] = single_alias_right[score_formula]
 }
 
-#TODO: Remove?
-alias[duration:enum[duration]] = alias_keys_field[int_value]
-alias[duration:enum[duration]] = int_value_field
-alias[duration:enum[duration]] = single_alias_right[score_formula]
-alias[duration:enum[duration]] = { int int }
-
 ## scope = character
 alias[modifier:ignore_negative_opinion_of_culture] = bool
 ## scope = character

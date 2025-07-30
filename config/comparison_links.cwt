@@ -124,4 +124,13 @@ links = {
         input_scopes = any
         output_scope = any
     }
+    mandate_type_qualification_prefix = {
+        desc = "Diarch qualification for spefic mandate type"
+        type = value
+        from_data = yes
+        prefix = mandate_type_qualification:
+        data_source = <diarchy_mandate>
+        input_scopes = character
+        output_scope = any
+    }
 }

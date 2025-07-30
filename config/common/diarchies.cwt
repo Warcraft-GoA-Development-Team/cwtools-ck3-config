@@ -5,6 +5,10 @@ types = {
 
     type[diarchy] = {
         path = "common/diarchies/diarchy_types"
+
+		subtype[no_succession] =  { # TODO: What is the default value?
+			succession = no
+		}
     }
 }
 
@@ -27,12 +31,14 @@ diarchy = {
 	end = single_alias_right[trigger_clause]
 
 	### if diarchy type uses diarch succession mechanic
-    ## cardinality = 0..1
+    # ## cardinality = 0..1
 	succession = bool
 
-	### Scripted value describing how much current candidate is preferred
-	## replace_scope = { root = character }
-	candidate_score = single_alias_right[score_formula]
+	subtype[!no_succession] = { # TODO: Is this correct?
+		### Scripted value describing how much current candidate is preferred
+		## replace_scope = { root = character }
+		candidate_score = single_alias_right[score_formula]
+	}
 
 	### Scripted value describing how good is the diarch overall qualifications for individual mandates can be used here. Please avoid circular dependencies and don't use aptitude for mandate qualifications
 	aptitude_score = single_alias_right[score_formula]
@@ -65,23 +71,13 @@ diarchy = {
 
 	### character interaction is used to end this type of diarchy and accessible via diarchy window
     ## cardinality = 0..1
-	end_interation = <character_interaction>
+	end_interaction = <character_interaction>
 
 	### Modifier applied to the liege of the character in this position. Can take a "scale" parameter to scale by (a script value; see _script_values.info)
-    ## cardinality = 0..1
-	liege_modifier = {
-        ## cardinality = 0..1
-        scale = single_alias_right[score_formula]
-        ## cardinality = 1..inf
-        alias_name[modifier] = alias_match_left[modifier]
-    }
+    ## cardinality = 0..inf
+	liege_modifier = single_alias_right[scaled_modifier_name]
 
 	### Modifier applied to the active diarch. Can take a "scale" parameter to scale by (a script value; see _script_values.info)
-    ## cardinality = 0..1
-	diarch_modifier = {
-        ## cardinality = 0..1
-        scale = single_alias_right[score_formula]
-        ## cardinality = 1..inf
-        alias_name[modifier] = alias_match_left[modifier]
-    }
+    ## cardinality = 0..inf
+	diarch_modifier = single_alias_right[scaled_modifier_name]
 }

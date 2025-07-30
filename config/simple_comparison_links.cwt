@@ -1170,12 +1170,6 @@ links = {
 		input_scopes = character
 		output_scope = any
 	}
-	mandate_type_qualification = {
-		desc = "Diarch qualification for spefic mandate type"
-		type = value
-		input_scopes = character
-		output_scope = any
-	}
 	martial = {
 		desc = "does the character have the required martial skill level?"
 		type = value
