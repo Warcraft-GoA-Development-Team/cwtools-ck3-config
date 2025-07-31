@@ -1,5 +1,53 @@
-types = {
+types = { # TODO: Vanilla has type and id fields in three dna_data's, however they are only used there and not present in the .info. Find out if they are used.
     type[dna_data] = {
         path = "game/common/dna_data"
+
+        subtype[dna] = {
+            dna = scalar
+        }
     }
+}
+
+dna_data = {
+    subtype[dna] = {
+        dna = scalar
+    }
+    subtype[!dna] = {
+        ### Portrait-based way of specifying the DNA, same format as bookmark characters
+        portrait_info = {
+            genes = {
+                <color_gene> = {
+                    ## cardinality = 4..4
+                    int
+                }
+                <morph_gene> = {
+                    <morph_gene_template>
+                    int
+                    <morph_gene_template>
+                    int
+                }
+                <special_morph_gene> = {
+                    <special_morph_gene_template>
+                    int
+                    <special_morph_gene_template>
+                    int
+                }
+                <accessory_gene> = {
+                    <accessory_gene_template>
+                    int
+                    <accessory_gene_template>
+                    int
+                }
+                <special_accessory_gene> = {
+                    <special_accessory_gene_template>
+                    int
+                    <special_accessory_gene_template>
+                    int
+                }
+            }
+        }
+    }
+
+    ## cardinality = 0..1
+    enabled = bool
 }
