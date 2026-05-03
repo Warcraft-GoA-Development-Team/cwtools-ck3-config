@@ -1,10 +1,12 @@
 #Scopes and Logical Operators
 
 #CWTools magic scope
-alias[effect:value_field] = { alias_name[effect] = alias_match_left[effect] }
-alias[effect:scope_field] = { alias_name[effect] = alias_match_left[effect] }
+alias[effect:value_field] = single_alias_right[effect_clause]
+alias[effect:scope_field] = single_alias_right[effect_clause]
+alias[effect:scope[value]] = single_alias_right[effect_clause]
 
-alias[trigger:scope_field] = { alias_name[trigger] = alias_match_left[trigger] }
+alias[trigger:scope_field] = single_alias_right[trigger_clause]
+alias[trigger:scope[value]] = single_alias_right[trigger_clause]
 alias[trigger:alias_keys_field[int_value]] == alias_keys_field[int_value]
 alias[trigger:alias_keys_field[int_value]] == value_field
 alias[trigger:alias_keys_field[int_value]] == single_alias_right[score_formula]
@@ -14,18 +16,21 @@ alias[trigger:value_field] == single_alias_right[score_formula]
 alias[trigger:scope_field] == scope_field
 alias[trigger:scope_field] == alias_keys_field[int_value]
 alias[trigger:scope_field] = bool
+alias[trigger:scope[value]] == scope[value]
+alias[trigger:scope[value]] == alias_keys_field[int_value]
+alias[trigger:scope[value]] = bool
 
-# alias[trigger:alias_keys_field[int_value]] = { alias_name[trigger] = alias_match_left[trigger] } # TODO
+# alias[trigger:alias_keys_field[int_value]] = single_alias_right[trigger_clause] # TODO
 
 
-alias[trigger:NOT] = { alias_name[trigger] = alias_match_left[trigger] }
-alias[trigger:NOR] = { alias_name[trigger] = alias_match_left[trigger] }
-alias[trigger:NAND] = { alias_name[trigger] = alias_match_left[trigger] }
-alias[trigger:AND] = { alias_name[trigger] = alias_match_left[trigger] }
-alias[trigger:OR] = { alias_name[trigger] = alias_match_left[trigger] }
+alias[trigger:NOT] = single_alias_right[trigger_clause]
+alias[trigger:NOR] = single_alias_right[trigger_clause]
+alias[trigger:NAND] = single_alias_right[trigger_clause]
+alias[trigger:AND] = single_alias_right[trigger_clause]
+alias[trigger:OR] = single_alias_right[trigger_clause]
 
-alias[effect:NOT] = { alias_name[effect] = alias_match_left[effect] }
-alias[effect:NOR] = { alias_name[effect] = alias_match_left[effect] }
-alias[effect:NAND] = { alias_name[effect] = alias_match_left[effect] }
-alias[effect:AND] = { alias_name[effect] = alias_match_left[effect] }
-alias[effect:OR] = { alias_name[effect] = alias_match_left[effect] }
+alias[effect:NOT] = single_alias_right[effect_clause]
+alias[effect:NOR] = single_alias_right[effect_clause]
+alias[effect:NAND] = single_alias_right[effect_clause]
+alias[effect:AND] = single_alias_right[effect_clause]
+alias[effect:OR] = single_alias_right[effect_clause]

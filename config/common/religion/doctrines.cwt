@@ -1,37 +1,39 @@
 types = {
-    type[doctrine_group] = {
-        path = "game/common/religion/doctrines"
-    }
+    # type[doctrine_group] = {
+    #     path = "game/common/religion/doctrine_types"
+    # }
 
-    ## type_key_filter <> is_available_on_create
+    # ## type_key_filter <> is_available_on_create
     type[doctrine] = {
-        path = "game/common/religion/doctrines"
-        skip_root_key = any
-        base_type = doctrine_group
+        path = "game/common/religion/doctrine_types"
+        # skip_root_key = any
+        # base_type = doctrine_group
     }
 }
 
-doctrine_group = {
-    ## cardinality = 0..1
-    ### Optional. If not specified, the loc key "doctrine_group_key_name" will be used
-    name = single_alias_right[complex_desc]
-    ## cardinality = 0..1
-    name = localisation
-    ## cardinality = 0..1
-    ### Optional. If not specified, the loc key "doctrine_group_key_desc" will be used
-    desc = single_alias_right[complex_desc]
-    ## cardinality = 0..1
-    desc = localisation
-    ### GUI Grouping
-    group = scalar
+# doctrine_group = {
+#     ## cardinality = 0..1
+#     ### Optional. If not specified, the loc key "doctrine_group_key_name" will be used
+#     name = single_alias_right[complex_desc]
+#     ## cardinality = 0..1
+#     name = localisation
+#     ## cardinality = 0..1
+#     ### Optional. If not specified, the loc key "doctrine_group_key_desc" will be used
+#     desc = single_alias_right[complex_desc]
+#     ## cardinality = 0..1
+#     desc = localisation
+#     ### GUI Grouping
+#     group = scalar
+#
+#     ## cardinality = 0..1
+#     ### When should this doctrine group be shown when choosing doctrines? If not shown, the group will go away entirely on create if present on the old faith
+#     is_available_on_create = single_alias_right[trigger_clause]
+#     ## cardinality = 0..1
+#     ### How many doctrines within the group does the player get to choose? Defaults to 1. The UI will ensure no duplicates
+#     number_of_picks = int
+# }
 
-    ## cardinality = 0..1
-    ### When should this doctrine group be shown when choosing doctrines? If not shown, the group will go away entirely on create if present on the old faith
-    is_available_on_create = single_alias_right[trigger_clause]
-    ## cardinality = 0..1
-    ### How many doctrines within the group does the player get to choose? Defaults to 1. The UI will ensure no duplicates
-    number_of_picks = int
-}
+
 
 
 # Might be a more eloquent way to find this than using a filtered key for type.
@@ -156,10 +158,10 @@ single_alias[doctrine_param] = {
 
 enums = {
     complex_enum[doctrine_param] = {
-        path = "game/common/religion/doctrines"
+        path = "game/common/religion/doctrine_types"
         start_from_root = yes
         name = {
-            scalar = {
+            # scalar = {
                 scalar = {
                     parameters = {
                         enum_name = bool
@@ -167,7 +169,7 @@ enums = {
                         enum_name = int
                     }
                 }
-            }
+            # }
         }
     }
 }

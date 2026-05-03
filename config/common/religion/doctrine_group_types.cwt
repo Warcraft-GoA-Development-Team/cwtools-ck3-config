@@ -1,0 +1,37 @@
+types = {
+    type[doctrine_group] = {
+        path = "game/common/religion/doctrine_group_types"
+    }
+}
+
+doctrine_group = {
+    ### Brief: category ( string )
+    ### How the group is categorized in the UI
+    ###
+    category = value_set[doctrine_group_category]
+
+    ### Brief: number_of_picks ( integer )
+    ### How many unique doctrines within the group does the player get to choose?
+    ### Default is 1.
+    ###
+    number_of_picks = int_value_field
+
+    ### Brief: is_available_on_create ( trigger )
+    ### When should this doctrine group be shown when choosing doctrines?
+    ### If not shown, the group will go away entirely on create if present on the old faith.
+    ###
+    ### Supported scopes:
+    ###	root ( Faith )
+    ###
+    ##push_scope = faith
+    ## cardinality = 0..1
+    is_available_on_create = single_alias_right[trigger_clause]
+
+    ### Brief: doctrine_types ( list of database key )
+    ### List the doctrine types to be associated with this group.
+    ###
+    doctrine_types = {
+        ## cardinality = 1..inf
+        <doctrine>
+    }
+}

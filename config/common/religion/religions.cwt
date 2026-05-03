@@ -1,6 +1,6 @@
 types = {
     type[religion] = {
-        path = "game/common/religion/religions"
+        path = "game/common/religion/religion_types"
         localisation = {
             name = "$_religion"
             description = "$_religion_desc"

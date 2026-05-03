@@ -44,17 +44,39 @@ enums = {
         intrigue
         prowess
     }
-    enum[title_tier] = {
+    enum[title_tier_long] = {
+        tier_unlanded
         tier_barony
         tier_county
         tier_duchy
         tier_kingdom
         tier_empire
+        tier_hegemony
+    }
+    enum[title_tier_short] = {
+        unlanded
         barony
         county
         duchy
         kingdom
         empire
+        hegemony
+    }
+    enum[title_tier] = { #Includes both  title_tier_long and title_tier_short
+        tier_unlanded
+        tier_barony
+        tier_county
+        tier_duchy
+        tier_kingdom
+        tier_empire
+        tier_hegemony
+        unlanded
+        barony
+        county
+        duchy
+        kingdom
+        empire
+        hegemony
         all
     }
     enum[war_ender] = {

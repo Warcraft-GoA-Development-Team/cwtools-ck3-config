@@ -876,12 +876,6 @@ links = {
 		input_scopes = character
 		output_scope = any
 	}
-	number_maa_regiments_of_type = {
-		desc = "Does the scope character have value amount of MaA of the type?"
-		type = value
-		input_scopes = character
-		output_scope = any
-	}
 	number_maa_soldiers_of_base_type = {
 		desc = "Does the scope character have value amount of soldiers of MaA of the base type?"
 		type = value

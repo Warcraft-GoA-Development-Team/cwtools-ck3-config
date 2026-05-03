@@ -1,0 +1,10 @@
+types = {
+    type[climate] = {
+        path_file = "climate.txt"
+    }
+}
+
+climate = {
+    ## cardinality = 1..inf
+    int
+}

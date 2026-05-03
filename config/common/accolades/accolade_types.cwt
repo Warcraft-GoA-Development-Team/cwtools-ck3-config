@@ -21,6 +21,21 @@ accolade = {
     ## cardinality = 1..1
     adjective = localisation
 
+    ## cardinality = 0..1
+    icon = filepath
+
+    ### a character with this will display a custom animation pose within the accolade window
+    ## cardinality = 0..1
+    portrait_pose = <animation>
+
+    ### a character trigger that determines if a character can be used to create an accolade with this type or if they can be the successor
+    ## cardinality = 0..1
+    squire_perfect_fit = single_alias_right[trigger_clause]
+
+    ### a character trigger that determines if a character is good enough to be used to create an accolade with this type or if they can be the successor - if modified slightly
+    ## cardinality = 0..1
+    squire_acceptable_fit = single_alias_right[trigger_clause]
+
     ### localization key for the noun used when displaying this type. NOTE: adjective/noun are only used as fallbacks when dynamic naming fails
     ## cardinality = 1..1
     noun = localisation
@@ -107,6 +122,16 @@ single_alias[accolade_rank] = {
         ## cardinality = 0..1
     	### Harsh winter modifications for knight
         harsh_winter = {
+            ## cardinality = 1..inf
+            alias_name[maa_modifier] = alias_match_left[maa_modifier]
+        }
+    }
+
+    ## cardinality = 0..1
+	### character modifier applied to whatever army the knight is a part of ( should be army modifiers such as advantage etc. )
+    holding_bonus = {
+        ## cardinality = 0..1
+        <holding> = {
             ## cardinality = 1..inf
             alias_name[maa_modifier] = alias_match_left[maa_modifier]
         }

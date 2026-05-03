@@ -1,6 +1,6 @@
 types = {
     type[religion_family] = {
-        path = "game/common/religion/religion_families"
+        path = "game/common/religion/religion_family_types"
     }
 }
 
