@@ -343,10 +343,6 @@ alias[trigger:next_destination_arrival_date] = date_field
 ## scope = faith
 alias[trigger:controls_holy_site] = <holy_site>
 
-### Does the faith control a holy site with the given flag? controls_holy_site_with_flag = some flag
-## scope = faith
-alias[trigger:controls_holy_site_with_flag] = value[holy_site_flag]
-
 ### What is the faith's hostility level towards the target faith? faith_hostility_level { target = scope:some_faith value > 1 }
 ## scope = faith
 alias[trigger:faith_hostility_level] = {
@@ -984,18 +980,6 @@ alias[trigger:has_accolade_type] == <accolade>
 ## scope = accolade
 alias[trigger:has_potential_accolade_successors] == bool
 
-###Is the scoped Accolade active, i.e. assinged by their Liege?
-## scope = accolade
-alias[trigger:is_accolade_active] == bool
-
-### Is the scoped Accolade's primary type tier equal to?
-## scope = accolade
-alias[trigger:primary_tier] = enum[accolade_tier]
-
-### Is the scoped Accolade's secondary type tier equal to?
-## scope = accolade
-alias[trigger:secondary_tier] = enum[accolade_tier]
-
 #####################################################
 # LEGEND SCOPE
 #####################################################
@@ -1121,10 +1105,6 @@ alias[trigger:has_county_modifier] = <modifier_container>
 ### Does the scoped county have the duration remaining on a given modifier has_county_modifier_duration_remaining = name
 ## scope = landed_title
 alias[trigger:has_county_modifier_duration_remaining] = <modifier_container>
-
-### Does the county have a holy site with the given flag? has_holy_site_flag = some flag
-## scope = landed_title
-alias[trigger:has_holy_site_flag] = value[holy_site_flag]
 
 ### Does the scoped title have a given order of succession has_order_of_succession = election
 ## scope = landed_title
@@ -2195,10 +2175,6 @@ alias[trigger:should_decision_create_alert] == <decision>
 ### Should the scoped character be alerted that they can host the target activity type
 ## scope = character
 alias[trigger:should_notify_can_host_activity] == <activity>
-
-### Should the scoped character be alerted that they can join the target activity type
-## scope = character
-alias[trigger:should_notify_can_join_open_activity] == <activity>
 
 ### Check if this character 'matches' a group, with a certain match percentage. A match value can range from 0.0 to 1.0. (0% to 100%) A static group filter means: this character will always get the same result against the same group. (there is no 'random' involved beyond the name of the group) On average (across all characters), an 0.1 match means you would get 'yes' for 10% of the characters to match this group, and it would always be the same characters for the same group. static_group_filter = {    group = <a_group_id>    match = 0.1} Instead of a group id, you can supply a scope, and it will use that scope's value as the group 'id'. static_group_filter = {    scope = <any_scope>    match = 0.1}
 ## scope = character
