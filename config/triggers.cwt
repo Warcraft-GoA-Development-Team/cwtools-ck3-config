@@ -2914,4 +2914,4 @@ alias[trigger:has_cohesion_level_parameter] = enum[cohesion_level_parameter]
 
 ### Does the character have this ethnicity?
 ## scope = character
-alias[trigger:has_ethnicity] = replace_me #TODO: I have no idea what this does
+alias[trigger:has_ethnicity] = <ethnicity>
