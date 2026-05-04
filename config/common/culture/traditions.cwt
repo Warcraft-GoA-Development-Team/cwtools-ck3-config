@@ -78,7 +78,7 @@ tradition = {
 
 enums = {
     complex_enum[cultural_parameter] = {
-        path = "game/common/culture/"
+        path = "game/common/culture/traditions"
         start_from_root = yes
 
         name = {

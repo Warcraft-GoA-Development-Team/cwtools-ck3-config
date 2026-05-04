@@ -73,6 +73,15 @@ innovation = {
     ## cardinality = 0..1
     province_modifier = single_alias_right[province_modifier]
 
+    ### optionally add parameters to the innovation. They are defined in the same way as traits and traditions, and can be queried via script triggers.
+    ## cardinality = 0..1
+    parameters = {
+
+        ### Only boolean parameters are currently supported
+        ## cardinality = 1..inf
+        scalar = bool
+    }
+
     ## cardinality = 0..inf
     ### Optional flag, relevant for the has_all_innovations trigger. Can list any number of flags for each innovation.
     flag = scalar
@@ -107,6 +116,16 @@ enums = {
 
         name = {
             flag = enum_name
+        }
+    }
+
+    complex_enum[innovation_paramater] = {
+        path = "game/common/culture/innovations"
+
+        name = {
+            parameters = {
+                enum_name = bool
+            }
         }
     }
 }

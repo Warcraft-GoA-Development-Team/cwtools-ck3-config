@@ -60,6 +60,13 @@ single_alias[character_modifier] = {
     alias_name[modifier] = alias_match_left[modifier]
 }
 
+single_alias[character_modifier_name] = { # TODO: Are all character modifiers with name now?
+    ## cardinality = 0..1
+    name = localisation
+    ## push_scope = character
+    alias_name[modifier] = alias_match_left[modifier]
+}
+
 single_alias[modifier_list] = {
     ## cardinality = 1..inf
     alias_name[modifier] = alias_match_left[modifier]

@@ -198,4 +198,16 @@ scopes = {
 	"Vassal Contract Obligation Level" = {
 		aliases = { vassal_contract_obligation_level }
 	}
+	"Great Project" = {
+		aliases = { great_project }
+	}
+	"Great Project Contribution" = {
+		aliases = { project_contribution }
+	}
+	"Culture Innovation" = {
+		aliases = { culture_innovation }
+	}
+	"House Relation" = {
+		aliases = { house_relation }
+	}
 }

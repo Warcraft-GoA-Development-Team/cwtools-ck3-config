@@ -1,0 +1,35 @@
+types = {
+    type[house_aspiration] = {
+        path = "common/house_aspirations"
+    }
+}
+
+house_aspiration = {
+
+}
+
+enums = {
+    complex_enum[house_aspiration_paramater] = {
+        path = "common/house_aspirations"
+
+        name = {
+            level = {
+                parameters = {
+                    enum_name = bool
+                }
+            }
+        }
+    }
+
+    complex_enum[house_aspiration_head_paramater] = {
+        path = "common/house_aspirations"
+
+        name = {
+            level = {
+                house_head_parameters = {
+                    enum_name = bool
+                }
+            }
+        }
+    }
+}

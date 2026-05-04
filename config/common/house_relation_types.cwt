@@ -1,0 +1,34 @@
+types = {
+    type[house_relation] = {
+        path = "common/house_relation_types"
+    }
+}
+
+house_relation = {
+    neutral_level = enum[house_relation_level]
+}
+
+enums = {
+    complex_enum[house_relation_level] = {
+        path = "common/house_relation_types"
+
+        name = {
+            levels = {
+                enum_name = { }
+            }
+        }
+    }
+    complex_enum[house_relation_parameter] = {
+        path = "common/house_relation_types"
+
+        name = {
+            levels = {
+                scalar = {
+                    parameters = {
+                        enum_name
+                    }
+                }
+            }
+        }
+    }
+}

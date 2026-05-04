@@ -1471,6 +1471,14 @@ links = {
         input_scopes = any
         output_scope = geographical_region
     }
+    top_participant_group = {
+        type = scope
+        from_data = yes
+        prefix = top_participant_group:
+        data_source = <decision_group_type>
+        input_scopes = any
+        output_scope = situation_participant_group
+    }
 
     # <script_value> = {
     #     type = value

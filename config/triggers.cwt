@@ -2641,3 +2641,301 @@ alias[trigger:max_number_maa_soldiers_of_base_type] = {
 # -Z
 
 ###
+
+### Checks whether the current scope has all of the specified variables set
+## scope = any
+alias[trigger:has_all_variables] = {
+    ## cardinality = 1..inf
+    name = value_set[variable]
+}
+
+### Checks whether the current scope has none of the specified variables set
+## scope = any
+alias[trigger:has_none_of_variables] = {
+    ## cardinality = 1..inf
+    name = value_set[variable]
+}
+
+### Checks if any currently existing landed title uses the specified custom localization name key.
+## scope = none
+alias[trigger:is_title_localization_key_used] = localisation
+
+### Checks if the Character can fund the specified Contribution. The Contribution must be specified as scoped object.
+## scope = character
+alias[trigger:can_fund_project_contribution] = scope[project_contribution]
+
+### Checks if the given Character can start planning a Great Project with the given type somewhere in their realm.
+## scope = character
+alias[trigger:can_plan_great_project] = scope[great_project]
+
+### Checks if the given Character can start planning a Great Project with the given key in the given province. Use the key from the DB to refer to the project.
+### Will fail if the planner or project type are invalid.
+## scope = character
+alias[trigger:can_plan_great_project_in_province] = {# TODO: Might be able to use scopes here? IDK.
+    type_name = <great_project>
+    province = <province>
+}
+
+### Does the current character have this first name / same as character? Cultural name equivalence is tested. Regnal name is used if set.
+### Note: this is not a fast trigger, use with care.
+## scope = character
+alias[trigger:has_first_name] = localisation
+
+### Does the current character have this first name / same as character? Cultural name equivalence is tested. Regnal name is used if set.
+### Note: this is not a fast trigger, use with care.
+## scope = character
+alias[trigger:has_first_name] = {
+    character = scope[character]
+}
+
+### Does the current character have this first name / same as character? Only exact name equivalence is tested. Regnal name is used if set.
+### Note: this is not a fast trigger, use with care.
+## scope = character
+alias[trigger:has_first_name_strict] = localisation
+
+### Does the current character have this first name / same as character? Only exact name equivalence is tested. Regnal name is used if set.
+### Note: this is not a fast trigger, use with care.
+## scope = character
+alias[trigger:has_first_name_strict] = {
+    character = scope[character]
+}
+
+### Does the current character have this regnal name / same as character? Cultural name equivalence is tested. (regnal numbers are not part of the regnal name)
+## scope = character
+alias[trigger:has_regnal_name] = localisation
+
+### Does the current character have this regnal name / same as character? Cultural name equivalence is tested. (regnal numbers are not part of the regnal name)
+## scope = character
+alias[trigger:has_regnal_name] = {
+    character = scope[character]
+}
+
+### Does the current character have this regnal name / same as character? Only exact name equivalence is tested. (regnal numbers are not part of the regnal name)
+### Note: this is not a fast trigger, use with care.
+## scope = character
+alias[trigger:has_regnal_name_strict] = localisation
+
+### Does the current character have this regnal name / same as character? Only exact name equivalence is tested. (regnal numbers are not part of the regnal name)
+### Note: this is not a fast trigger, use with care.
+## scope = character
+alias[trigger:has_regnal_name_strict] = {
+    character = scope[character]
+}
+
+### Does the current character have this first name / same as character? Cultural name equivalence is tested. Regnal names are ignored.
+### Note: this is not a fast trigger, use with care.
+## scope = character
+alias[trigger:has_original_first_name] = localisation
+
+### Does the current character have this first name / same as character? Cultural name equivalence is tested. Regnal names are ignored.
+### Note: this is not a fast trigger, use with care.
+## scope = character
+alias[trigger:has_original_first_name] = {
+    character = scope[character]
+}
+
+### Does the current character have this first name / same as character? Only exact name equivalence is tested. Regnal names are ignored.
+### Note: this is not a fast trigger, use with care.
+## scope = character
+alias[trigger:has_original_first_name_strict] = localisation
+
+### Does the current character have this first name / same as character? Only exact name equivalence is tested. Regnal names are ignored.
+### Note: this is not a fast trigger, use with care.
+## scope = character
+alias[trigger:has_original_first_name_strict] = {
+    character = scope[character]
+}
+
+### Does the scoped character have a realm law in the given group?
+## scope = character
+alias[trigger:has_realm_law_in_group] = <law_group>
+
+### A combined checks if a character is available
+### All options are optional. If option is missing, it's set to "any" - it will have no effect on the outcome of the trigger
+## scope = character
+alias[trigger:is_available_quick] = {
+    ai = bool
+    alive = bool
+    female = bool
+    adult = bool
+    ### has any incapacitating trait
+    incapable = bool
+    imprisoned = bool
+    hostage = bool
+    travel = bool
+    activity = bool
+    ruler = bool
+    ### rulers with playable data that have access to all game mechanics
+    ### barons, rebels, merc and holy order leaders fail this check
+    advanced_ruler = nboolo
+    landed = bool
+    ### commander or knight in the army on the map
+    in_army = bool
+    at_war = bool
+}
+
+### Is the scoped character performing the given task?
+### This will check for any cloned task as well: the given example will yield yes even if the character is performing task_kurultai_fertility_2.
+## scope = character
+alias[trigger:is_performing_council_task_or_clone] = <council_task>
+
+### Checks if the given Character is currently planning a Great Project with the given key. Use the key from the DB to refer to the project.
+## scope = character
+alias[trigger:is_planning_great_project] = <great_project>
+
+### Is the skill the lowest skill (excluding Prowess) of the character? True even when there are multiple skills with the same lowest value.
+## scope = character
+alias[trigger:lowest_skill] = enum[attribute]
+
+### Is the skill the lowest skill (including Prowess) of the character? True even when there are multiple skills with the same lowest value.
+## scope = character
+alias[trigger:lowest_skill_including_prowess] = enum[attribute]
+
+### Does the scoped character have the maximum level of the realm law group given?
+## scope = character
+alias[trigger:realm_law_group_at_maximum_level] = <law_group>
+
+### Does the scoped character have the minimum level of the realm law group given?
+## scope = character
+alias[trigger:realm_law_group_at_minimum_level] = <law_group>
+
+### should_notify_can_join_activity = target_activity
+### Should the scoped character be alerted that they can join the target activity type
+## scope = character
+alias[trigger:should_notify_can_join_activity] = scope[activity_type]
+
+###  Can the obligation level of the scoped character's named subject contract be decreased?
+## scope = character
+alias[trigger:subject_contract_obligation_level_can_be_decreased] = <subject_contract>
+
+###  Can the obligation level of the scoped character's named subject contract be increased?
+## scope = character
+alias[trigger:subject_contract_obligation_level_can_be_increased] = <subject_contract>
+
+###  Date when the current budget was enacted
+## scope = character
+alias[trigger:treasury_budget_enact_date] == date_field
+
+###  Can the obligation level of the scoped character's named tributary contract be decreased?
+## scope = character
+alias[trigger:tributary_contract_obligation_level_can_be_decreased] = <subject_contract>
+
+###  Can the obligation level of the scoped character's named tributary contract be increased?
+## scope = character
+alias[trigger:tributary_contract_obligation_level_can_be_increased] = <subject_contract>
+
+###  Checks if the Contribution in scope is of the specified type (by key).
+## scope = project_contribution
+alias[trigger:contribution_id] = <great_project>
+
+###  Checks if a county contains a province of a specific terrain type
+## scope = landed_title
+alias[trigger:county_has_province_with_terrain] = {
+    ## cardinality = 1..inf
+    terrain = <terrain>
+}
+
+###  Does scoped barony have a holy site with given parameter?
+## scope = landed_title
+alias[trigger:has_holy_site_parameter] = enum[holy_site_parameter]
+
+###   Does scoped faith control a holy site with given parameter?
+## scope = faith
+alias[trigger:controls_holy_site_with_parameter] = enum[holy_site_parameter]
+
+### Does the scoped county have a province affected by a less than apocalyptic epidemic
+## scope = landed_title
+alias[trigger:has_province_with_epidemic] = {
+    intensity == enum[outbreak_intensity]
+    intensity = any
+}
+
+### Is the county currently affected by the specified council task, or one of its clones? Needs to be in a county title scope.
+### The example will yield yes if the county is affected by task_kurultai_fertility_1.
+## scope = landed_title
+alias[trigger:is_target_of_council_task_or_clone] = <council_task>
+
+### Does the scoped title have the maximum level of the title law group given?
+## scope = landed_title
+alias[trigger:title_law_group_at_maximum_level] = <law_group>
+
+### Does the scoped title have the minimum level of the title law group given?
+## scope = landed_title
+alias[trigger:title_law_group_at_minimum_level] = <law_group>
+
+### Does the scoped title have the minimum level of the title law group given?
+## scope = culture_innovation
+alias[trigger:has_innovation_parameter] = enum[innovation_paramater]
+
+### Does the scoped innovation belong to the specified era?
+## scope = culture_innovation
+alias[trigger:innovation_era] = <era>
+
+### Is the scoped innovation the same as the specified one?
+## scope = culture_innovation
+alias[trigger:innovation_key] = <innovation>
+
+### Does this house relation have the given level?
+## scope = house_relation
+alias[trigger:has_house_relation_level] = enum[house_relation_level]
+
+### Does this house relation have the given parameter?
+## scope = house_relation
+alias[trigger:has_house_relation_parameter] = enum[house_relation_parameter]
+
+### Checks if scoped participant group currently has the parameter or not
+## scope = situation_participant_group
+alias[trigger:has_participant_group_parameter] = enum[situation_phase_param]
+
+### Does the given house have the given base name? Remember that characters can be lowborn and have no house.
+## scope = dynasty_house
+alias[trigger:has_base_name] = localisation
+
+### Does the given house a house power/aspiration with the given parameter?
+## scope = dynasty_house
+alias[trigger:has_house_aspiration_parameter] = enum[house_aspiration_paramater]
+
+### Does the given house a house head with the given parameter?
+### Can only check for boolean parameters.
+## scope = dynasty_house
+alias[trigger:has_house_head_parameter] = enum[house_aspiration_head_paramater]
+
+### Is there a House Relation between the two houses?
+## scope = dynasty_house
+alias[trigger:has_house_relation_with] = scope[dynasty_house]
+
+### Does this house have the same house power/aspiration as the target house?
+## scope = dynasty_house
+alias[trigger:has_same_house_aspiration_as] = scope[dynasty_house]
+
+### Does scoped domicile have building with any free internal building slots?
+## scope = domicile
+alias[trigger:domicile_building_has_free_internal_slot] = <domicile_building>
+
+### Compare against the current construction phase of this project.
+## scope = great_project
+alias[trigger:great_project_construction_phase_is] = enum[great_project_construction_phase]
+
+### Date when the situation top phase Ended.
+## scope = situation
+alias[trigger:situation_top_phase_end_date] == date_field
+
+### Date when the situation top phase started.
+## scope = situation
+alias[trigger:situation_top_phase_start_date] == date_field
+
+### Date when the sub region current situation phase ends.
+## scope = situation_sub_region
+alias[trigger:sub_region_current_phase_end_date] == date_field
+
+### Date when the sub region current situation phase started.
+## scope = situation_sub_region
+alias[trigger:sub_region_current_phase_start_date] == date_field
+
+### Does current cohesion level of the given confederation/bloc have the given parameter?
+## scope = confederation
+alias[trigger:has_cohesion_level_parameter] = enum[cohesion_level_parameter]
+
+### Does the character have this ethnicity?
+## scope = character
+alias[trigger:has_ethnicity] = replace_me #TODO: I have no idea what this does

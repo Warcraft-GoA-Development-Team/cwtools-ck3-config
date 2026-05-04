@@ -1,12 +1,14 @@
 types = {
     type[holy_site] = {
-        path = "game/common/religion/holy_sites"
+        path = "game/common/religion/holy_site_types"
     }
 }
 
 holy_site = {
     ### County location of the holy site
-    county = scope[county]
+    county = landed_title
+    ### Define barony override.
+    barony = landed_title
 
     ##cardinality = 0..inf
     flag = value_set[holy_site_flag]
@@ -14,5 +16,26 @@ holy_site = {
     ### A modifier applied to all followers of the faith that holds this holy site.
     ## replace_scope = { ROOT = character THIS = character }
     ## cardinality = 0..1
-	character_modifier = single_alias_right[character_modifier]
+	character_modifier = single_alias_right[character_modifier_name]
+
+    ## cardinality = 0..1
+    parameters = {
+        ## cardinality = 0..inf
+        scalar
+        ## cardinality = 0..inf
+        scalar = bool
+    }
+}
+
+enums = {
+    complex_enum[holy_site_parameter] = {
+        path = "game/common/religion/holy_site_types"
+
+        name = {
+            parameters = {
+                enum_name
+                enum_name = bool
+            }
+        }
+    }
 }

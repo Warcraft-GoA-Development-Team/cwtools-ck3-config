@@ -346,4 +346,10 @@ enums = {
 
         task_contract # Not listed on the wiki but used by vanilla
     }
+
+    enum[great_project_construction_phase] = {
+        planned
+        in_progress
+        completed
+    }
 }

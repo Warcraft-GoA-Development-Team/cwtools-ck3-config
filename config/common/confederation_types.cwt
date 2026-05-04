@@ -1,0 +1,23 @@
+types = {
+    type[confederation_type] = {
+        path = "common/confederation_types/"
+    }
+}
+
+confederation_type = {
+
+}
+
+enums = {
+    complex_enum[cohesion_level_parameter] = {
+        path = "common/confederation_types/"
+
+        name = {
+            cohesion_level = {
+                parameters = {
+                    enum_name = bool
+                }
+            }
+        }
+    }
+}
