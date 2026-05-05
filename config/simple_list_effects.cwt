@@ -1292,14 +1292,6 @@ alias[effect:every_acclaimed_knight] = single_alias_right[every_effect]
 ## push_scope = accolade
 alias[effect:every_accolade] = single_alias_right[every_effect]
 
-### Iterate through all active Accolades of a given liege character's Acclaimed Knights
-### Optionally specify an accolade parameter filter
-### any_active_accolade = { accolade_parameter = accolade_organize_army_bonus }
-### every_active_accolade = { limit = { <triggers> } <effects> }
-## scope = character
-## push_scope = accolade
-alias[effect:every_active_accolade] = single_alias_right[every_effect]
-
 ### Iterate through all titles that can be created by the character. (only for alerts)
 ### every_alert_creatable_title = { limit = { <triggers> } <effects> }
 ## scope = character
@@ -1581,13 +1573,6 @@ alias[effect:every_heir] = single_alias_right[every_effect]
 ## push_scope = landed_title
 alias[effect:every_heir_title] = single_alias_right[every_effect]
 
-### Iterate through all held landed titles. Optionally specify a tier filter
-### any/every/ordered/random_held_title = { title_tier >= county }
-### every_held_title = { limit = { <triggers> } <effects> }
-## scope = character
-## push_scope = landed_title
-alias[effect:every_held_title] = single_alias_right[every_effect]
-
 ### Iterate through all hired mercenary companies
 ### every_hired_mercenary = { limit = { <triggers> } <effects> }
 ## scope = character
@@ -1671,14 +1656,6 @@ alias[effect:every_maa_regiment] = single_alias_right[every_effect]
 ## scope = character
 ## push_scope = character
 alias[effect:every_martial_councillor] = single_alias_right[every_effect]
-
-### Iterate through all memories of a character
-### Optionally specify a memory type filter
-### any_memory = { memory_type = completed_rites_of_passage }
-### every_memory = { limit = { <triggers> } <effects> }
-## scope = character
-## push_scope = character_memory
-alias[effect:every_memory] = single_alias_right[every_effect]
 
 ### A sub-realm or realm bordering the scope character's realm (including across water). Returns counts and above.
 ### every_neighboring_and_across_water_realm_owner = { limit = { <triggers> } <effects> }
@@ -1771,14 +1748,6 @@ alias[effect:every_noble_family] = single_alias_right[every_effect]
 ## scope = character
 ## push_scope = character
 alias[effect:every_opposite_sex_spouse_candidate] = single_alias_right[every_effect]
-
-### Iterate through all owned stories for a character
-### Optionally specify a story type filter
-### any_owned_story = { type = story_cycle_pet_cat }
-### every_owned_story = { limit = { <triggers> } <effects> }
-## scope = character
-## push_scope = story
-alias[effect:every_owned_story] = single_alias_right[every_effect]
 
 ### Iterate through all holy orders that the scoped character is a patron of
 ### every_patroned_holy_order = { limit = { <triggers> } <effects> }
@@ -1931,22 +1900,6 @@ alias[effect:every_realm_province] = single_alias_right[every_effect]
 ## scope = character
 ## push_scope = character
 alias[effect:every_same_sex_spouse_candidate] = single_alias_right[every_effect]
-
-### Iterate through all schemes owned by the character
-### Optionally specify a type filter
-### random_scheme = { type = befriend }
-### every_scheme = { limit = { <triggers> } <effects> }
-## scope = character
-## push_scope = scheme
-alias[effect:every_scheme] = single_alias_right[every_effect]
-
-### Iterate through all secrets of the character
-### Optionally specify a secret type filter
-### random_secret = { type = secret_lover }
-### every_secret = { limit = { <triggers> } <effects> }
-## scope = character
-## push_scope = secret
-alias[effect:every_secret] = single_alias_right[every_effect]
 
 ### Iterate through all siblings
 ### every_sibling = { limit = { <triggers> } <effects> }
@@ -2110,14 +2063,6 @@ alias[effect:every_unassigned_taxpayers] = single_alias_right[every_effect]
 ## push_scope = secret
 alias[effect:every_unspent_known_secret] = single_alias_right[every_effect]
 
-### Iterate through all DIRECT vassals
-### Optionally specify a vassal stance filter
-### any_vassal = { vassal_stance = parochial }
-### every_vassal = { limit = { <triggers> } <effects> }
-## scope = character
-## push_scope = character
-alias[effect:every_vassal] = single_alias_right[every_effect]
-
 ### Iterate through ALL vassals, not just direct vassals
 ### Optionally specify a vassal stance filter
 ### any_vassal_or_below = { vassal_stance = parochial }
@@ -2169,21 +2114,6 @@ alias[effect:ordered_acclaimed_knight] = single_alias_right[ordered_effect]
 ## scope = character
 ## push_scope = accolade
 alias[effect:ordered_accolade] = single_alias_right[ordered_effect]
-
-### Iterate through all active Accolades of a given liege character's Acclaimed Knights
-### Optionally specify an accolade parameter filter
-### any_active_accolade = { accolade_parameter = accolade_organize_army_bonus }
-### ordered_active_accolade = {
-### limit = { <triggers> }
-### order_by = script_value
-### position = int
-### min = int
-### max = script_value
-### check_range_bounds = no # If you don't want an error logged if the list is smaller than the min/max
-### <effects> }
-## scope = character
-## push_scope = accolade
-alias[effect:ordered_active_accolade] = single_alias_right[ordered_effect]
 
 ### Iterate through all titles that can be created by the character. (only for alerts)
 ### ordered_alert_creatable_title = {
@@ -2781,20 +2711,6 @@ alias[effect:ordered_heir] = single_alias_right[ordered_effect]
 ## push_scope = landed_title
 alias[effect:ordered_heir_title] = single_alias_right[ordered_effect]
 
-### Iterate through all held landed titles. Optionally specify a tier filter
-### any/every/ordered/random_held_title = { title_tier >= county }
-### ordered_held_title = {
-### limit = { <triggers> }
-### order_by = script_value
-### position = int
-### min = int
-### max = script_value
-### check_range_bounds = no # If you don't want an error logged if the list is smaller than the min/max
-### <effects> }
-## scope = character
-## push_scope = landed_title
-alias[effect:ordered_held_title] = single_alias_right[ordered_effect]
-
 ### Iterate through all hired mercenary companies
 ### ordered_hired_mercenary = {
 ### limit = { <triggers> }
@@ -2976,21 +2892,6 @@ alias[effect:ordered_maa_regiment] = single_alias_right[ordered_effect]
 ## scope = character
 ## push_scope = character
 alias[effect:ordered_martial_councillor] = single_alias_right[ordered_effect]
-
-### Iterate through all memories of a character
-### Optionally specify a memory type filter
-### any_memory = { memory_type = completed_rites_of_passage }
-### ordered_memory = {
-### limit = { <triggers> }
-### order_by = script_value
-### position = int
-### min = int
-### max = script_value
-### check_range_bounds = no # If you don't want an error logged if the list is smaller than the min/max
-### <effects> }
-## scope = character
-## push_scope = character_memory
-alias[effect:ordered_memory] = single_alias_right[ordered_effect]
 
 ### A sub-realm or realm bordering the scope character's realm (including across water). Returns counts and above.
 ### ordered_neighboring_and_across_water_realm_owner = {
@@ -3188,21 +3089,6 @@ alias[effect:ordered_noble_family] = single_alias_right[ordered_effect]
 ## scope = character
 ## push_scope = character
 alias[effect:ordered_opposite_sex_spouse_candidate] = single_alias_right[ordered_effect]
-
-### Iterate through all owned stories for a character
-### Optionally specify a story type filter
-### any_owned_story = { type = story_cycle_pet_cat }
-### ordered_owned_story = {
-### limit = { <triggers> }
-### order_by = script_value
-### position = int
-### min = int
-### max = script_value
-### check_range_bounds = no # If you don't want an error logged if the list is smaller than the min/max
-### <effects> }
-## scope = character
-## push_scope = story
-alias[effect:ordered_owned_story] = single_alias_right[ordered_effect]
 
 ### Iterate through all holy orders that the scoped character is a patron of
 ### ordered_patroned_holy_order = {
@@ -3530,36 +3416,6 @@ alias[effect:ordered_realm_province] = single_alias_right[ordered_effect]
 ## scope = character
 ## push_scope = character
 alias[effect:ordered_same_sex_spouse_candidate] = single_alias_right[ordered_effect]
-
-### Iterate through all schemes owned by the character
-### Optionally specify a type filter
-### random_scheme = { type = befriend }
-### ordered_scheme = {
-### limit = { <triggers> }
-### order_by = script_value
-### position = int
-### min = int
-### max = script_value
-### check_range_bounds = no # If you don't want an error logged if the list is smaller than the min/max
-### <effects> }
-## scope = character
-## push_scope = scheme
-alias[effect:ordered_scheme] = single_alias_right[ordered_effect]
-
-### Iterate through all secrets of the character
-### Optionally specify a secret type filter
-### random_secret = { type = secret_lover }
-### ordered_secret = {
-### limit = { <triggers> }
-### order_by = script_value
-### position = int
-### min = int
-### max = script_value
-### check_range_bounds = no # If you don't want an error logged if the list is smaller than the min/max
-### <effects> }
-## scope = character
-## push_scope = secret
-alias[effect:ordered_secret] = single_alias_right[ordered_effect]
 
 ### Iterate through all siblings
 ### ordered_sibling = {
@@ -3905,21 +3761,6 @@ alias[effect:ordered_unassigned_taxpayers] = single_alias_right[ordered_effect]
 ## push_scope = secret
 alias[effect:ordered_unspent_known_secret] = single_alias_right[ordered_effect]
 
-### Iterate through all DIRECT vassals
-### Optionally specify a vassal stance filter
-### any_vassal = { vassal_stance = parochial }
-### ordered_vassal = {
-### limit = { <triggers> }
-### order_by = script_value
-### position = int
-### min = int
-### max = script_value
-### check_range_bounds = no # If you don't want an error logged if the list is smaller than the min/max
-### <effects> }
-## scope = character
-## push_scope = character
-alias[effect:ordered_vassal] = single_alias_right[ordered_effect]
-
 ### Iterate through ALL vassals, not just direct vassals
 ### Optionally specify a vassal stance filter
 ### any_vassal_or_below = { vassal_stance = parochial }
@@ -3985,14 +3826,6 @@ alias[effect:random_acclaimed_knight] = single_alias_right[random_effect]
 ## scope = character
 ## push_scope = accolade
 alias[effect:random_accolade] = single_alias_right[random_effect]
-
-### Iterate through all active Accolades of a given liege character's Acclaimed Knights
-### Optionally specify an accolade parameter filter
-### any_active_accolade = { accolade_parameter = accolade_organize_army_bonus }
-### random_active_accolade = { limit = { <triggers> } (optional) weight = { mtth } <effects> }
-## scope = character
-## push_scope = accolade
-alias[effect:random_active_accolade] = single_alias_right[random_effect]
 
 ### Iterate through all titles that can be created by the character. (only for alerts)
 ### random_alert_creatable_title = { limit = { <triggers> } (optional) weight = { mtth } <effects> }
@@ -4275,13 +4108,6 @@ alias[effect:random_heir] = single_alias_right[random_effect]
 ## push_scope = landed_title
 alias[effect:random_heir_title] = single_alias_right[random_effect]
 
-### Iterate through all held landed titles. Optionally specify a tier filter
-### any/every/ordered/random_held_title = { title_tier >= county }
-### random_held_title = { limit = { <triggers> } (optional) weight = { mtth } <effects> }
-## scope = character
-## push_scope = landed_title
-alias[effect:random_held_title] = single_alias_right[random_effect]
-
 ### Iterate through all hired mercenary companies
 ### random_hired_mercenary = { limit = { <triggers> } (optional) weight = { mtth } <effects> }
 ## scope = character
@@ -4365,14 +4191,6 @@ alias[effect:random_maa_regiment] = single_alias_right[random_effect]
 ## scope = character
 ## push_scope = character
 alias[effect:random_martial_councillor] = single_alias_right[random_effect]
-
-### Iterate through all memories of a character
-### Optionally specify a memory type filter
-### any_memory = { memory_type = completed_rites_of_passage }
-### random_memory = { limit = { <triggers> } (optional) weight = { mtth } <effects> }
-## scope = character
-## push_scope = character_memory
-alias[effect:random_memory] = single_alias_right[random_effect]
 
 ### A sub-realm or realm bordering the scope character's realm (including across water). Returns counts and above.
 ### random_neighboring_and_across_water_realm_owner = { limit = { <triggers> } (optional) weight = { mtth } <effects> }
@@ -4465,14 +4283,6 @@ alias[effect:random_noble_family] = single_alias_right[random_effect]
 ## scope = character
 ## push_scope = character
 alias[effect:random_opposite_sex_spouse_candidate] = single_alias_right[random_effect]
-
-### Iterate through all owned stories for a character
-### Optionally specify a story type filter
-### any_owned_story = { type = story_cycle_pet_cat }
-### random_owned_story = { limit = { <triggers> } (optional) weight = { mtth } <effects> }
-## scope = character
-## push_scope = story
-alias[effect:random_owned_story] = single_alias_right[random_effect]
 
 ### Iterate through all holy orders that the scoped character is a patron of
 ### random_patroned_holy_order = { limit = { <triggers> } (optional) weight = { mtth } <effects> }
@@ -4625,22 +4435,6 @@ alias[effect:random_realm_province] = single_alias_right[random_effect]
 ## scope = character
 ## push_scope = character
 alias[effect:random_same_sex_spouse_candidate] = single_alias_right[random_effect]
-
-### Iterate through all schemes owned by the character
-### Optionally specify a type filter
-### random_scheme = { type = befriend }
-### random_scheme = { limit = { <triggers> } (optional) weight = { mtth } <effects> }
-## scope = character
-## push_scope = scheme
-alias[effect:random_scheme] = single_alias_right[random_effect]
-
-### Iterate through all secrets of the character
-### Optionally specify a secret type filter
-### random_secret = { type = secret_lover }
-### random_secret = { limit = { <triggers> } (optional) weight = { mtth } <effects> }
-## scope = character
-## push_scope = secret
-alias[effect:random_secret] = single_alias_right[random_effect]
 
 ### Iterate through all siblings
 ### random_sibling = { limit = { <triggers> } (optional) weight = { mtth } <effects> }
@@ -4803,14 +4597,6 @@ alias[effect:random_unassigned_taxpayers] = single_alias_right[random_effect]
 ## scope = character
 ## push_scope = secret
 alias[effect:random_unspent_known_secret] = single_alias_right[random_effect]
-
-### Iterate through all DIRECT vassals
-### Optionally specify a vassal stance filter
-### any_vassal = { vassal_stance = parochial }
-### random_vassal = { limit = { <triggers> } (optional) weight = { mtth } <effects> }
-## scope = character
-## push_scope = character
-alias[effect:random_vassal] = single_alias_right[random_effect]
 
 ### Iterate through ALL vassals, not just direct vassals
 ### Optionally specify a vassal stance filter

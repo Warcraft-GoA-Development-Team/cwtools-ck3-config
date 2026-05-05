@@ -1,0 +1,138 @@
+single_alias[any_trigger] = {
+    ## cardinality = 0..1
+    continue = {
+        alias_name[trigger] = alias_match_left[trigger]
+    }
+    ## cardinality = 0..1
+    percent = float[0.0..1.0]
+    ## cardinality = 0..1
+    percent = alias_keys_field[script_value]
+    ## cardinality = 0..1
+    count = alias_keys_field[int_value]
+    ## cardinality = 0..1
+    count = int_value_field
+    ## cardinality = 0..1
+    count = single_alias_right[score_formula]
+    ## cardinality = 0..1
+    count = all
+    alias_name[trigger] = alias_match_left[trigger]
+}
+
+single_alias[every_effect] = {
+    ## cardinality = 0..1
+    limit = {
+        alias_name[trigger] = alias_match_left[trigger]
+    }
+    ## cardinality = 0..inf
+    alternative_limit = {
+        alias_name[trigger] = alias_match_left[trigger]
+    }
+    ## cardinality = 0..1
+    custom = localisation
+    alias_name[effect] = alias_match_left[effect]
+}
+
+single_alias[random_effect] = {
+    ## cardinality = 0..1
+    limit = {
+        alias_name[trigger] = alias_match_left[trigger]
+    }
+    ## cardinality = 0..inf
+    alternative_limit = {
+        alias_name[trigger] = alias_match_left[trigger]
+    }
+    ## cardinality = 0..1
+    weight = single_alias_right[weight_block]
+    ## cardinality = 0..1
+    custom = localisation
+    alias_name[effect] = alias_match_left[effect]
+}
+
+single_alias[ordered_effect] = {
+    ## cardinality = 0..1
+    limit = {
+        alias_name[trigger] = alias_match_left[trigger]
+    }
+    # TODO: Work out what exactly this is restricted to
+    ## cardinality = 0..1
+    order_by = alias_keys_field[int_value]
+    ## cardinality = 0..1
+    order_by = single_alias_right[score_formula]
+    ## cardinality = 0..1
+    order_by = value_field
+    ## cardinality = 0..1
+    max = alias_keys_field[int_value]
+    ## cardinality = 0..1
+    max = value_field
+    ## cardinality = 0..1
+    position = int
+    ## cardinality = 0..1
+    check_range_bounds = no
+    ## cardinality = 0..1
+    custom = localisation
+    alias_name[effect] = alias_match_left[effect]
+}
+
+single_alias[every_effect_score_operation] = {
+    ## cardinality = 0..1
+    limit = {
+        alias_name[trigger] = alias_match_left[trigger]
+    }
+    ## cardinality = 0..inf
+    alternative_limit = {
+        alias_name[trigger] = alias_match_left[trigger]
+    }
+    ## cardinality = 0..1
+    custom = localisation
+    ## cardinality = 0..inf
+    alias_name[arithmetic_operation] = alias_match_left[arithmetic_operation]
+    ## cardinality = 0..inf
+    alias_name[score_operation] = alias_match_left[score_operation]
+}
+
+single_alias[random_effect_score_operation] = {
+    ## cardinality = 0..1
+    limit = {
+        alias_name[trigger] = alias_match_left[trigger]
+    }
+    ## cardinality = 0..inf
+    alternative_limit = {
+        alias_name[trigger] = alias_match_left[trigger]
+    }
+    ## cardinality = 0..1
+    weight = single_alias_right[weight_block]
+    ## cardinality = 0..1
+    custom = localisation
+    ## cardinality = 0..inf
+    alias_name[arithmetic_operation] = alias_match_left[arithmetic_operation]
+    ## cardinality = 0..inf
+    alias_name[score_operation] = alias_match_left[score_operation]
+}
+
+single_alias[ordered_effect_score_operation] = {
+    ## cardinality = 0..1
+    limit = {
+        alias_name[trigger] = alias_match_left[trigger]
+    }
+    # TODO: Work out what exactly this is restricted to
+    ## cardinality = 0..1
+    order_by = alias_keys_field[int_value]
+    ## cardinality = 0..1
+    order_by = single_alias_right[score_formula]
+    ## cardinality = 0..1
+    order_by = value_field
+    ## cardinality = 0..1
+    max = alias_keys_field[int_value]
+    ## cardinality = 0..1
+    max = value_field
+    ## cardinality = 0..1
+    position = int
+    ## cardinality = 0..1
+    check_range_bounds = no
+    ## cardinality = 0..1
+    custom = localisation
+    ## cardinality = 0..inf
+    alias_name[arithmetic_operation] = alias_match_left[arithmetic_operation]
+    ## cardinality = 0..inf
+    alias_name[score_operation] = alias_match_left[score_operation]
+}

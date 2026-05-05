@@ -10,34 +10,34 @@ types = {
 
 
 activity_intent = {
-	# root = character picking this intent
-	# scope:magnificence = the magnificence level of the activity
-	# scope:special_option = the selected special option of the activity (if present)
+	### root = character picking this intent
+	### scope:magnificence = the magnificence level of the activity
+	### scope:special_option = the selected special option of the activity (if present)
 	## replace_scope = { root = character magnificence = int special_option = flag }
 	## cardinality = 0..1
     is_shown = single_alias_right[trigger_clause]
 	
-	# root = character picking this intent
-	# scope:magnificence = the magnificence level of the activity
-	# scope:special_option = the selected special option of the activity (if present)
+	### root = character picking this intent
+	### scope:magnificence = the magnificence level of the activity
+	### scope:special_option = the selected special option of the activity (if present)
 	## replace_scope = { root = character magnificence = int special_option = flag }
 	## cardinality = 0..1
     is_valid = single_alias_right[trigger_clause]
 
-	# root = character picking this intent
-	# scope:target = character that is the target
-	# scope:special_option = the selected special option of the activity (if present)
+	### root = character picking this intent
+	### scope:target = character that is the target
+	### scope:special_option = the selected special option of the activity (if present)
 	## replace_scope = { root = character magnificence = int special_option = flag }
 	## cardinality = 0..1
     is_target_valid = single_alias_right[trigger_clause]
 
-	# root = character who picked this intent
+	### root = character who picked this intent
     ## replace_scope = { root = character }
 	## cardinality = 0..1
 	on_invalidated = single_alias_right[effect_clause]
 
-	# root = character picking this intent
-	# scope:target = character that is the target
+	### root = character picking this intent
+	### scope:target = character that is the target
     ## replace_scope = { root = character target = character }
 	## cardinality = 0..1
 	on_target_invalidated = single_alias_right[effect_clause]
@@ -66,7 +66,7 @@ activity_intent = {
         max = int
         ### A low chance, such as 0.25, randomly excludes that number of characters from being checked - this is useful for saving performance
 		## cardinality = 0..1
-		chance = float			
+		chance = float[0.0..1.0]
 	}
 
 	### Quick code efficient triggers to check for valid targets, same as in character_interaction.info
@@ -84,11 +84,15 @@ activity_intent = {
 	ai_target_score = single_alias_right[score_formula]
 
 	## cardinality = 0..1
-	icon = filepath[game/gfx/interface/icons/activity_intents/,.dds] # Will default to object key if not specified to override
+	icon = filepath[game/gfx/interface/icons/activity_intents/,.dds] ### Will default to object key if not specified to override
 
 	## cardinality = 0..1
 	auto_complete = bool
 	
-	# root = character who has this intent
+	### root = character who has this intent
+	## replace_scope = { root = character }
 	scripted_animation = single_alias_right[scripted_animation]
+
+	### root = character who has this intent
+	scripted_animation = scripted_animation
 }

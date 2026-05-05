@@ -739,7 +739,7 @@ links = {
         input_scopes = activity
         output_scope = activity_type
         #from_data = yes
-        data_source = <activity>
+        # data_source = <activity>
     }
     calc_culture_dominant_faith = {
         desc = "Calculates what faith is the biggest in the culture based on # of counties. Be aware that this is an *expensive* calculation. In a tie, definition order breaks the tie"
@@ -1479,6 +1479,46 @@ links = {
         input_scopes = any
         output_scope = situation_participant_group
     }
+    house_confederation = {
+        type = scope
+        input_scopes = dynasty_house
+        output_scope = confederation
+    }
+    leading_house = {
+        type = scope
+        input_scopes = confederation
+        output_scope = dynasty_house
+    }
+    hegemony = {
+        type = scope
+        input_scopes = { landed_title province }
+        output_scope = landed_title
+    }
+    great_project_type = {
+        type = scope
+        input_scopes = great_project
+        output_scope = great_project_type
+    }
+    great_project_owner = {
+        type = scope
+        input_scopes = great_project
+        output_scope = character
+    }
+    great_project_founder = {
+        type = scope
+        input_scopes = great_project
+        output_scope = character
+    }
+    great_project_location = {
+        type = scope
+        input_scopes = great_project
+        output_scope = province
+    }
+    contributor = {
+        type = scope
+        input_scopes = project_contribution
+        output_scope = character
+    }
 
     # <script_value> = {
     #     type = value
@@ -1492,19 +1532,20 @@ links = {
     #     output_scope = any
     # }
 
-    # script_value = {
-    #     type = value
-    #     from_data = yes
-    #     data_source = <script_value>
-    #     input_scopes = any
-    #     output_scope = any
-    # }
+    script_value = {
+        type = value
+        from_data = yes
+        data_source = <script_value>
+        input_scopes = any
+        output_scope = any
+    }
+
     #
-    # static_value = {
-    #     type = value
-    #     from_data = yes
-    #     data_source = <static_value>
-    #     input_scopes = any
-    #     output_scope = any
-    # }
+    static_value = {
+        type = value
+        from_data = yes
+        data_source = <static_value>
+        input_scopes = any
+        output_scope = any
+    }
 }

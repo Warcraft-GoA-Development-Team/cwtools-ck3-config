@@ -3,6 +3,9 @@
 types = {
     type[landed_title] = {
         path = "common/landed_titles"
+        ## starts_with = h_
+        subtype[hegemony] = {
+        }
         ## starts_with = e_
         subtype[empire] = {
         }

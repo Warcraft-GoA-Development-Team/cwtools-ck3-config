@@ -1,7 +1,96 @@
 types = {
     type[activity] = {
         path = "common/activities/activity_types"
-
+		subtype[capital] = {
+			province_filter = capital
+		}
+		subtype[ai_capital] = {
+			ai_province_filter = capital
+		}
+		subtype[domain] = {
+			province_filter = domain
+		}
+		subtype[ai_domain] = {
+			ai_province_filter = domain
+		}
+		subtype[realm] = {
+			province_filter = realm
+		}
+		subtype[ai_realm] = {
+			ai_province_filter = realm
+		}
+		subtype[top_realm] = {
+			province_filter = top_realm
+		}
+		subtype[ai_top_realm] = {
+			ai_province_filter = top_realm
+		}
+		subtype[holy_sites] = {
+			province_filter = holy_sites
+		}
+		subtype[ai_holy_sites] = {
+			ai_province_filter = holy_sites
+		}
+		subtype[holy_sites_domain] = {
+			province_filter = holy_sites_domain
+		}
+		subtype[ai_holy_sites_domain] = {
+			ai_province_filter = holy_sites_domain
+		}
+		subtype[holy_sites_realm] = {
+			province_filter = holy_sites_realm
+		}
+		subtype[ai_holy_sites_realm] = {
+			ai_province_filter = holy_sites_realm
+		}
+		subtype[domicile] = {
+			province_filter = domicile
+		}
+		subtype[ai_domicile] = {
+			ai_province_filter = domicile
+		}
+		subtype[domicile_domain] = {
+			province_filter = domicile_domain
+		}
+		subtype[ai_domicile_domain] = {
+			ai_province_filter = domicile_domain
+		}
+		subtype[domicile_realm] = {
+			province_filter = domicile_realm
+		}
+		subtype[ai_domicile_realm] = {
+			ai_province_filter = domicile_realm
+		}
+		subtype[top_liege_border_inner] = {
+			province_filter = top_liege_border_inner
+		}
+		subtype[ai_top_liege_border_inner] = {
+			ai_province_filter = top_liege_border_inner
+		}
+		subtype[top_liege_border_outer] = {
+			province_filter = top_liege_border_outer
+		}
+		subtype[ai_top_liege_border_outer] = {
+			ai_province_filter = top_liege_border_outer
+		}
+		subtype[landed_title] = {
+			province_filter = landed_title
+		}
+		subtype[ai_landed_title] = {
+			ai_province_filter = landed_title
+		}
+		subtype[geographical_region] = {
+			province_filter = geographical_region
+		}
+		subtype[ai_geographical_region] = {
+			ai_province_filter = geographical_region
+		}
+		subtype[all] = {
+			province_filter = all
+		}
+		subtype[ai_all] = {
+			ai_province_filter = all
+		}
     }
     type[activity_phase] = {
         path = "common/activities/activity_types"
@@ -16,9 +105,15 @@ enums = {
         realm
         top_realm
         holy_sites
+		holy_sites_domain
+		holy_sites_realm
 		domicile
 		domicile_domain
 		domicile_realm
+		top_liege_border_inner
+		top_liege_border_outer
+		landed_title
+		geographical_region
         all
     }
 
@@ -66,6 +161,18 @@ enums = {
 		}
 	}
 
+	complex_enum[activity_phases] = {
+		path = "common/activities/activity_types"
+
+		name = {
+			phases = {
+				enum_name = {
+
+				}
+			}
+		}
+	}
+
 	complex_enum[special_guest] = {
 		path = "common/activities/activity_types"
 		start_from_root = yes
@@ -82,12 +189,15 @@ enums = {
 	}
 }
 
-# Character state
-#- Travel: The character is travelling to the location of the next phase
-#- Passive: The character has arrived at the location of the next phase and is waiting for it to begin
-#- Active: The character is at the location of the next phase and the phase has started
+### Character state
+###- Travel: The character is travelling to the location of the next phase
+###- Passive: The character has arrived at the location of the next phase and is waiting for it to begin
+###- Active: The character is at the location of the next phase and the phase has started
 
-activity = {
+activity = { # TODO: sort_order may or may not be in use. It's listed in the .info, but not used anywhere in vanilla
+	## cardinality = 0..1
+	notify_player_can_join_activity = bool
+
 	### Should the player see this activity type
     ## replace_scope = { root = character}
 	is_shown = single_alias_right[trigger_clause]
@@ -139,10 +249,43 @@ activity = {
 	## cardinality = 0..1
 	ai_province_filter = enum[province_filter]
 
+	subtype[landed_title] = {
+		### If you specify a province_filter or ai_province_filter that needs a specific target, use this field to specify the target.
+		### the same target will be used for both province_filter and ai_province_filter, which need to be the same in these cases.
+		### 	* if you set landed_title: use the key of a landed title ( e.g. k_england )
+		### 	* if you set geographical_region: use the key of a region ( e.g. nile_river_region )
+		## cardinality = 0..1
+		province_filter_target = <landed_title>
+	}
+	subtype[ai_landed_title] = {
+		### If you specify a province_filter or ai_province_filter that needs a specific target, use this field to specify the target.
+		### the same target will be used for both province_filter and ai_province_filter, which need to be the same in these cases.
+		### 	* if you set landed_title: use the key of a landed title ( e.g. k_england )
+		### 	* if you set geographical_region: use the key of a region ( e.g. nile_river_region )
+		## cardinality = 0..1
+		province_filter_target = <landed_title>
+	}
+	subtype[geographical_region] = {
+		### If you specify a province_filter or ai_province_filter that needs a specific target, use this field to specify the target.
+		### the same target will be used for both province_filter and ai_province_filter, which need to be the same in these cases.
+		### 	* if you set landed_title: use the key of a landed title ( e.g. k_england )
+		### 	* if you set geographical_region: use the key of a region ( e.g. nile_river_region )
+		## cardinality = 0..1
+		province_filter_target = <geographical_region>
+	}
+	subtype[ai_geographical_region] = {
+		### If you specify a province_filter or ai_province_filter that needs a specific target, use this field to specify the target.
+		### the same target will be used for both province_filter and ai_province_filter, which need to be the same in these cases.
+		### 	* if you set landed_title: use the key of a landed title ( e.g. k_england )
+		### 	* if you set geographical_region: use the key of a region ( e.g. nile_river_region )
+		## cardinality = 0..1
+		province_filter_target = <geographical_region>
+	}
+
 	### Is the province valid to pick for this activity at all
-	# root = the province
-	# scope:host = host of the activity
-	# scope:special_option = flag of the selected special option, not set if activity has no special option category
+	### root = the province
+	### scope:host = host of the activity
+	### scope:special_option = flag of the selected special option, not set if activity has no special option category
     ## replace_scope = { root = province host = character special_option = flag }
 	## cardinality = 0..1
 	is_location_valid = single_alias_right[trigger_clause]
@@ -182,12 +325,12 @@ activity = {
 				on_start = single_alias_right[effect_clause]
 
 				### Should this option be the default option, the first that is true will be picked, if not specified then it will not be used as a default
-				# For simple constant defaults use default = yes to always have it as the default
+				### For simple constant defaults use default = yes to always have it as the default
 				## cardinality = 0..1
 				default = single_alias_right[trigger_clause]
 
 				### Should this option be the default option, the first that is true will be picked, if not specified then it will not be used as a default
-				# For simple constant defaults use default = yes to always have it as the default
+				### For simple constant defaults use default = yes to always have it as the default
 				## cardinality = 0..1
 				default = bool
 
@@ -196,6 +339,14 @@ activity = {
 				blocked_intents = {
                     ## cardinality = 1..inf
 					<activity_intent>
+				}
+
+				### List of activity phases that are removed from the activity if this option is picked
+				### Optional and only used for activities that have no pickable phases.
+				## cardinality = 0..1
+				blocked_phases = {
+                    ## cardinality = 1..inf
+					enum[activity_phases]
 				}
 
 				### How likely is the AI to pick this option if valid? Options will be selected using weighted random.
@@ -253,7 +404,7 @@ activity = {
 	### Active phases of of an activity, each activity has at least one active phase, each must be uniquely named
 	phases = {
         ## cardinality = 1..inf
-		value_set[activity_phases] = {
+		scalar = {
 			### If this phase is predefined: always present and not removable (if it is not predefined, it is a pickable phase) Defaults to 'no'
 			## cardinality = 0..1
 			is_predefined = bool
@@ -262,7 +413,7 @@ activity = {
 			## cardinality = 0..1
 			number_of_picks = int_value_field
 
-			# In what order should this phase occur in the entire activity. Phases with the same order will be in the order when they were added (you should have unique order nr for your phases, if you have more than one phase)
+			### In what order should this phase occur in the entire activity. Phases with the same order will be in the order when they were added (you should have unique order nr for your phases, if you have more than one phase)
 			## cardinality = 0..1
 			order = int
 
@@ -375,9 +526,9 @@ activity = {
 	## cardinality = 0..1
 	is_grand_activity = bool
 
-	### Do all phases in this activity take place in the same province, defaults to yes
-	## cardinality = 0..1
-	is_single_location = bool
+	# ### Do all phases in this activity take place in the same province, defaults to yes
+	# ## cardinality = 0..1
+	# is_single_location = bool
 
 	### The planner type - how the activity planner shows things. Available types: province - (Default) show the province name (province name) holder - show holder information (opinion, character pin)
 	## cardinality = 0..1
@@ -389,6 +540,19 @@ activity = {
 
 	### How often will the AI check if it can host this particular activity in months? 
 	ai_check_interval = int
+
+	### Brief: ai_check_interval_by_tier (int31 per tier)
+	### How often should the ai check  if it can host this particular activity.
+	### '0' means it is never considered. Used instead of 'ai_check_interval'. All tiers are required to be defined.
+	## cardinality = 0..1
+	ai_check_interval_by_tier = {
+		barony = int
+		county = int
+		duchy = int
+		kingdom = int
+		empire = int
+		hegemony = int
+	}
 	
 	### How does the AI rate this province for the activity? All candidates are selected using weighted random based on these values.Root = province being evaluated
     ## replace_scope = { root = province host = character special_option = flag score = int }
@@ -417,7 +581,18 @@ activity = {
 	ui_predicted_cost = single_alias_right[cost]
 
 	### How many guests can attend this activity, be very careful if you raise this value too high it will cause performance impacts due to too many people travelling to activities and too many possible intent targets
-	max_guests = int
+	max_guests = single_alias_right[score_formula]
+
+	### How many guests can attend this activity, be very careful if you raise this value too high it will cause performance impacts due to too many people travelling to activities and too many possible intent targets
+	max_guests = alias_keys_field[int_value]
+
+	### How many of the guest slots will be reserved for characters added via effects or events, so that the guest list will not be completely filled up
+	### when we add them
+	reserved_guest_slots = single_alias_right[score_formula]
+
+	### How many of the guest slots will be reserved for characters added via effects or events, so that the guest list will not be completely filled up
+	### when we add them
+	reserved_guest_slots = alias_keys_field[int_value]
 
 	## cardinality = 0..1
 	### Is it allowed to start the activity with no guest invitations? This also implies whether or not an activity will allow having zero attending guests. Default is no
@@ -624,17 +799,17 @@ activity = {
 	## cardinality = 0..1
 	activity_window_widgets = {
 		### Name = name of the plug in and its file path in gui/activity_window_widgets; Container = the widget in the main activity window to position this under
-		scalar = scalar
+		scalar = scalar # TODO
 	}
 
 	### Plugin widgets to be added to the activity planner window if this type is viewed
 	## cardinality = 0..1
 	activity_planner_widgets = {
 		### Name = name of the plug in widget and its file path in gui/activity_window_widgets/name.txt Container = the widget in the main activity window to position this under
-		scalar = scalar
+		scalar = scalar # TODO
 	}
 
-	# The background for the activity is defined in event_backgrounds and looks up an entry with the same key as the activity
+	### The background for the activity is defined in event_backgrounds and looks up an entry with the same key as the activity
 
 	### Map entity for the activity, multiple can be read in, first one is picked from order they are read in
 	## cardinality = 0..inf
@@ -677,7 +852,7 @@ activity = {
 
 	### Can read in multiple, they will be displayed left to right based on this order
 	window_characters = {
-        # Will be localized as activity_window_character_key
+        ### Will be localized as activity_window_character_key
 		## cardinality = 1..inf
 		scalar = { 
 
@@ -685,24 +860,34 @@ activity = {
 			## cardinality = 0..1
 			camera = <portrait_camera>
 			
-			# root = the activity
-			# scope:activity = the activity
-			# scope:host = host of the activity
-			# scope:player = the player character viewing the window
+			### root = the activity
+			### scope:activity = the activity
+			### scope:host = host of the activity
+			### scope:player = the player character viewing the window
 			### Pick the desired character by scoping to them and doing add_to_list = characters. A random valid character will be picked to display, if the character is already displayed they will be skipped
 			## replace_scope = { root = activity activity = activity host = character player = character}
 			## cardinality = 0..1
 			effect = single_alias_right[effect_clause]
 
 			### scripted animation block for animation selection based on triggers
-			# root = the activity
-			# scope:activity = the activity
-			# scope:host = host of the activity
-			# scope:player = the player character viewing the window
-			# scope:character = the character who is going to receive triggered animation
+			### root = the activity
+			### scope:activity = the activity
+			### scope:host = host of the activity
+			### scope:player = the player character viewing the window
+			### scope:character = the character who is going to receive triggered animation
 			## replace_scope = { root = activity activity = activity host = character player = character}
 			## cardinality = 0..1
 			scripted_animation = single_alias_right[scripted_animation]
+
+			### scripted animation block for animation selection based on triggers
+			### root = the activity
+			### scope:activity = the activity
+			### scope:host = host of the activity
+			### scope:player = the player character viewing the window
+			### scope:character = the character who is going to receive triggered animation
+			## replace_scope = { root = activity activity = activity host = character player = character}
+			## cardinality = 0..1
+			scripted_animation = <scripted_animation>
 
 			## cardinality = 0..1
             alias_name[animation] = alias_match_left[animation]
@@ -748,29 +933,29 @@ activity = {
 	}
 	
 	### Description for hosting the activity, defaults to "<key>_province_desc"
-	# root = the province
-	# scope:host = character trying to host this activity
-	# scope:special_option = flag of the selected special option, not set if activity has no special option category
+	### root = the province
+	### scope:host = character trying to host this activity
+	### scope:special_option = flag of the selected special option, not set if activity has no special option category
 	## replace_scope = { root = province host = character special_option = flag }
 	## cardinality = 0..1
 	province_description = single_alias_right[complex_desc]
 
 	### Description for hosting the activity, defaults to "<key>_host_desc"
-	# root = character trying to host this activity
+	### root = character trying to host this activity
 	## replace_scope = { root = character }
 	## cardinality = 0..1
 	host_description = single_alias_right[complex_desc]
 
 	### Description for hosting the activity, defaults to "<key>_host_desc"
-	# root = character trying to host this activity
+	### root = character trying to host this activity
 	## replace_scope = { root = character}
 	## cardinality = 0..1
 	guest_description = single_alias_right[complex_desc]
 
 	### Description for concluding the activity, defaults to "<key>_conclusion_desc"
-	# root = character in the conclusion screen
-	# scope:activity = the activity
-	# scope:host = host of the activity
+	### root = character in the conclusion screen
+	### scope:activity = the activity
+	### scope:host = host of the activity
 	## replace_scope = { root = character activity = activity host = character }
 	## cardinality = 0..1
 	conclusion_description = single_alias_right[complex_desc]

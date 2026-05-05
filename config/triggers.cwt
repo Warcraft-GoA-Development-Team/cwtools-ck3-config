@@ -143,6 +143,14 @@ alias[trigger:has_cultural_era_or_later] = <era>
 ## scope = culture
 alias[trigger:has_cultural_parameter] = enum[cultural_parameter]
 
+### Does the target culture possess this cultural parameter
+## scope = culture
+alias[trigger:has_cultural_parameter] = enum[innovation_paramater]
+
+### Does the target culture possess this cultural parameter
+## scope = culture
+alias[trigger:has_cultural_parameter] = enum[pillar_parameter]
+
 ### Does the culture have this cultural pillar?
 ## scope = culture
 alias[trigger:has_cultural_pillar] = <pillar>
@@ -590,7 +598,9 @@ alias[trigger:exists] = scope_field
 alias[trigger:exists] = value_field # TODO: ?
 
 ### Compare the date of the bookmarked game launched.
-alias[trigger:game_start_date] == date_field
+alias[trigger:game_start_date] == date_field[y.M.d]
+alias[trigger:game_start_date] == date_field[y.M] # TODO: These don't work
+alias[trigger:game_start_date] == date_field[y]
 
 ### Checks the size of a variable list variable_list_size = { name = X target >= Y } Where X is the name of the variable Where Y is a script value or number
 alias[trigger:global_variable_list_size] = {
@@ -630,6 +640,12 @@ alias[trigger:has_map_mode] = replace_me
 
 ### Checks whether the current scope has the specified variable set has_variable = name
 alias[trigger:has_variable] = value[variable]
+
+### Checks whether the current scope has the specified variable set has_variable = name
+alias[trigger:has_variable] = {
+    ## cardinality = 1..inf
+    name = value[variable]
+}
 
 ### Checks whether the current scope has the specified variable list set has_variable_list = name
 alias[trigger:has_variable_list] = value[variable_list]
@@ -1501,7 +1517,7 @@ alias[trigger:government_disallows] = enum[government_rule]
 ### checks if the government of the character has a specific flag
 # TODO: support autocomplete
 ## scope = character
-alias[trigger:government_has_flag] = value[government_flag]
+alias[trigger:government_has_flag] = enum[government_flag]
 
 # -H
 
@@ -1648,7 +1664,7 @@ alias[trigger:has_legitimacy_flag] = value[legitimacy_flag]
 
 ### Does the character have this trait or a trait of this trait group amongst their inactive traits?
 ## scope = character
-alias[trigger:has_inactive_trait] = value[trait_group]
+alias[trigger:has_inactive_trait] = enum[trait_group]
 
 ### Does the character have this lifestyle?
 ## scope = character
@@ -1717,7 +1733,7 @@ alias[trigger:has_sexuality] = none
 
 ### Does the character have this trait?  Can also specify a trait group, in which case the trigger will return true if the scope character has any trait from that trait group.
 ## scope = character
-alias[trigger:has_trait] = value[trait_group]
+alias[trigger:has_trait] = enum[trait_group]
 
 ### Does the character have this trait?  Can also specify a trait group, in which case the trigger will return true if the scope character has any trait from that trait group.
 ## scope = character
@@ -1730,7 +1746,7 @@ alias[trigger:has_trait] = scope[trait]
 ### Compare the trait rank of a character to a value or other character. Note that not having the trait and having rank 0 counts as the same thing. rank < X on its own will therefore always return true for a character that does not have the trait. has_trait_rank = { trait = TRAIT_GROUP rank <=> number (can be script value) character <=> character target }. need only one of rank or character
 ## scope = character
 alias[trigger:has_trait_rank] = {
-    trait = value[trait_group]
+    trait = enum[trait_group]
     ## cardinality = 0..1
     rank == alias_keys_field[int_value]
     ## cardinality = 0..1
@@ -2005,6 +2021,7 @@ alias[trigger:number_maa_regiments_of_base_type] == {
     type = value[unit_type]
     value == alias_keys_field[int_value]
     value == int_value_field
+    value == single_alias_right[score_formula]
 }
 
 ### Does the scope character have value amount of MaA of the type?
@@ -2013,6 +2030,7 @@ alias[trigger:number_maa_regiments_of_type] == {
     type = <maa_type>
     value == alias_keys_field[int_value]
     value == int_value_field
+    value == single_alias_right[score_formula]
 }
 
 ### Does the scope character have value amount of soldiers of MaA of the base type?
@@ -2021,6 +2039,7 @@ alias[trigger:number_maa_soldiers_of_base_type] == {
     type = value[unit_type]
     value == alias_keys_field[int_value]
     value == int_value_field
+    value == single_alias_right[score_formula]
 }
 
 ### Does the scope character have value amount of soldiers of MaA of the type?
@@ -2029,6 +2048,7 @@ alias[trigger:number_maa_soldiers_of_type] == {
     type = <maa_type>
     value == alias_keys_field[int_value]
     value == int_value_field
+    value == single_alias_right[score_formula]
 }
 
 ### does the character and the target have a number of commander traits in common? number_of_personality_traits_in_common = { target = X value >/</>=/<= Y }
@@ -2037,6 +2057,7 @@ alias[trigger:number_of_commander_traits_in_common] = {
     target = scope[character]
     value == alias_keys_field[int_value]
     value == value_field
+    value == single_alias_right[score_formula]
 }
 
 ### Check the number of votes the scoped character has in the target title number_of_election_votes = { title = scope:actor.primary_title value = 0 }
@@ -2045,6 +2066,7 @@ alias[trigger:number_of_election_votes] = {
     title = scope[landed_title]
     value == alias_keys_field[int_value]
     value == value_field
+    value == single_alias_right[score_formula]
 }
 
 
@@ -2054,6 +2076,7 @@ alias[trigger:number_of_opposing_personality_traits] = {
     target = scope[character]
     value == alias_keys_field[int_value]
     value == value_field
+    value == single_alias_right[score_formula]
 }
 
 ### does the character and the target have a number of opposing traits? number_of_opposing_traits = { target = X value >/</>=/<= Y }
@@ -2062,6 +2085,7 @@ alias[trigger:number_of_opposing_traits] = {
     target = scope[character]
     value == alias_keys_field[int_value]
     value == value_field
+    value == single_alias_right[score_formula]
 }
 
 ### does the character and the target have a number of personality traits in common? number_of_personality_traits_in_common = { target = X value >/</>=/<= Y }
@@ -2070,6 +2094,7 @@ alias[trigger:number_of_personality_traits_in_common] = {
     target = scope[character]
     value == alias_keys_field[int_value]
     value == value_field
+    value == single_alias_right[score_formula]
 }
 
 ### do the two characters share a number of traits that is considered sinful by both of their respective faiths?
@@ -2078,6 +2103,7 @@ alias[trigger:number_of_sinful_traits_in_common] = {
     target = scope[character]
     value == alias_keys_field[int_value]
     value == value_field
+    value == single_alias_right[score_formula]
 }
 
 ### does the character and the target have a number of traits in common? number_of_traits_in_common = { target = X value >/</>=/<= Y }
@@ -2086,6 +2112,7 @@ alias[trigger:number_of_traits_in_common] = {
     target = scope[character]
     value == alias_keys_field[int_value]
     value == value_field
+    value == single_alias_right[score_formula]
 }
 ### do the two characters share a number of traits that is considered virtuous by both of their respective faiths?
 ## scope = character
@@ -2093,6 +2120,7 @@ alias[trigger:number_of_virtue_traits_in_common] = {
     target = scope[character]
     value == alias_keys_field[int_value]
     value == value_field
+    value == single_alias_right[score_formula]
 }
 
 # Poorly documented
@@ -2102,6 +2130,7 @@ alias[trigger:number_title_maa_regiments_of_type] = {
     type = <maa_type>
     value == alias_keys_field[int_value]
     value == value_field
+    value == single_alias_right[score_formula]
 }
 
 
@@ -2202,7 +2231,7 @@ alias[trigger:stewardship_diff] == {
 ### What is the scoped character's Tax Collector aptitude in the target tax slot type? 
 ## scope = character
 alias[trigger:tax_collector_aptitude] = {
-    tax_slot_type = <tax_slot>
+    target = <tax_slot>
     value == alias_keys_field[int_value]
     value == value_field
 }
@@ -2278,7 +2307,7 @@ alias[trigger:has_building_or_higher] = <building>
 
 ### Checks if sub-region has phase parameter or not
 ## scope = situation_sub_region
-alias[trigger:has_sub_region_phase_parameter] = enum[situation_phase_param]
+alias[trigger:has_sub_region_phase_parameter] = enum[situation_parameter]
 
 ### Is the scoped participant group of a specific type?
 ## scope = situation_participant_group
@@ -2365,7 +2394,7 @@ alias[trigger:has_holding_parameter] = enum[holding_parameter]
 
 ### Checks if top sub-region has phase parameter or not
 ## scope = situation
-alias[trigger:has_situation_top_phase_parameter] = enum[situation_phase_param]
+alias[trigger:has_situation_top_phase_parameter] = enum[situation_parameter]
 
 ### Checks if situation current phase equals phase_type_key (will take first sub-region)
 ## scope = situation
@@ -2861,7 +2890,7 @@ alias[trigger:has_house_relation_parameter] = enum[house_relation_parameter]
 
 ### Checks if scoped participant group currently has the parameter or not
 ## scope = situation_participant_group
-alias[trigger:has_participant_group_parameter] = enum[situation_phase_param]
+alias[trigger:has_participant_group_parameter] = enum[situation_parameter]
 
 ### Does the given house have the given base name? Remember that characters can be lowborn and have no house.
 ## scope = dynasty_house
@@ -2915,3 +2944,7 @@ alias[trigger:has_cohesion_level_parameter] = enum[cohesion_level_parameter]
 ### Does the character have this ethnicity?
 ## scope = character
 alias[trigger:has_ethnicity] = <ethnicity>
+
+### Check if the project is of the given type. Use the key from the project definition to compare.
+## scope = great_project
+alias[trigger:great_project_type] = <great_project>

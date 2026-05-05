@@ -11,5 +11,5 @@ character_background = {
     trait = <trait>
     ## cardinality = 0..inf
     ### Trait or trait group which the character must have to belong to this background.
-    trait = value[trait_group]
+    trait = enum[trait_group]
 }

@@ -180,9 +180,9 @@ trait = {
 
     # TODO: Anything that can refer to a trait can refer to a group. Is there some way we can use this to mark a type name too?
     ## cardinality = 0..1
-    group = value_set[trait_group]
+    group = scalar
     ## cardinality = 0..1
-    group_equivalence = value_set[trait_group]
+    group_equivalence = scalar
 
     ## cardinality = 0..1
     random_creation_weight = int
@@ -227,7 +227,7 @@ trait = {
         ## cardinality = 0..inf
         <trait>
         ## cardinality = 0..inf
-        value[trait_group]
+        enum[trait_group]
     }
 
     ## cardinality = 0..1
@@ -325,6 +325,14 @@ enums = {
                     }
                 }
             }
+        }
+    }
+    complex_enum[trait_group] = {
+        path = "game/common/traits"
+
+        name = {
+            group = enum_name
+            group_equivalence = enum_name
         }
     }
     enum[character_sex] = {

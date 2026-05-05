@@ -1,0 +1,5 @@
+types = {
+    type[great_project] = {
+        path = "common/great_projects/types"
+    }
+}

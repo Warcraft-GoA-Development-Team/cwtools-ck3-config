@@ -1292,14 +1292,6 @@ alias[score_operation:every_acclaimed_knight] = single_alias_right[every_effect_
 ## push_scope = accolade
 alias[score_operation:every_accolade] = single_alias_right[every_effect_score_operation]
 
-### Iterate through all active Accolades of a given liege character's Acclaimed Knights
-### Optionally specify an accolade parameter filter
-### any_active_accolade = { accolade_parameter = accolade_organize_army_bonus }
-### every_active_accolade = { limit = { <triggers> } <effects> }
-## scope = character
-## push_scope = accolade
-alias[score_operation:every_active_accolade] = single_alias_right[every_effect_score_operation]
-
 ### Iterate through all titles that can be created by the character. (only for alerts)
 ### every_alert_creatable_title = { limit = { <triggers> } <effects> }
 ## scope = character
@@ -1581,13 +1573,6 @@ alias[score_operation:every_heir] = single_alias_right[every_effect_score_operat
 ## push_scope = landed_title
 alias[score_operation:every_heir_title] = single_alias_right[every_effect_score_operation]
 
-### Iterate through all held landed titles. Optionally specify a tier filter
-### any/every/ordered/random_held_title = { title_tier >= county }
-### every_held_title = { limit = { <triggers> } <effects> }
-## scope = character
-## push_scope = landed_title
-alias[score_operation:every_held_title] = single_alias_right[every_effect_score_operation]
-
 ### Iterate through all hired mercenary companies
 ### every_hired_mercenary = { limit = { <triggers> } <effects> }
 ## scope = character
@@ -1671,14 +1656,6 @@ alias[score_operation:every_maa_regiment] = single_alias_right[every_effect_scor
 ## scope = character
 ## push_scope = character
 alias[score_operation:every_martial_councillor] = single_alias_right[every_effect_score_operation]
-
-### Iterate through all memories of a character
-### Optionally specify a memory type filter
-### any_memory = { memory_type = completed_rites_of_passage }
-### every_memory = { limit = { <triggers> } <effects> }
-## scope = character
-## push_scope = character_memory
-alias[score_operation:every_memory] = single_alias_right[every_effect_score_operation]
 
 ### A sub-realm or realm bordering the scope character's realm (including across water). Returns counts and above.
 ### every_neighboring_and_across_water_realm_owner = { limit = { <triggers> } <effects> }
@@ -1771,14 +1748,6 @@ alias[score_operation:every_noble_family] = single_alias_right[every_effect_scor
 ## scope = character
 ## push_scope = character
 alias[score_operation:every_opposite_sex_spouse_candidate] = single_alias_right[every_effect_score_operation]
-
-### Iterate through all owned stories for a character
-### Optionally specify a story type filter
-### any_owned_story = { type = story_cycle_pet_cat }
-### every_owned_story = { limit = { <triggers> } <effects> }
-## scope = character
-## push_scope = story
-alias[score_operation:every_owned_story] = single_alias_right[every_effect_score_operation]
 
 ### Iterate through all holy orders that the scoped character is a patron of
 ### every_patroned_holy_order = { limit = { <triggers> } <effects> }
@@ -1931,22 +1900,6 @@ alias[score_operation:every_realm_province] = single_alias_right[every_effect_sc
 ## scope = character
 ## push_scope = character
 alias[score_operation:every_same_sex_spouse_candidate] = single_alias_right[every_effect_score_operation]
-
-### Iterate through all schemes owned by the character
-### Optionally specify a type filter
-### random_scheme = { type = befriend }
-### every_scheme = { limit = { <triggers> } <effects> }
-## scope = character
-## push_scope = scheme
-alias[score_operation:every_scheme] = single_alias_right[every_effect_score_operation]
-
-### Iterate through all secrets of the character
-### Optionally specify a secret type filter
-### random_secret = { type = secret_lover }
-### every_secret = { limit = { <triggers> } <effects> }
-## scope = character
-## push_scope = secret
-alias[score_operation:every_secret] = single_alias_right[every_effect_score_operation]
 
 ### Iterate through all siblings
 ### every_sibling = { limit = { <triggers> } <effects> }
@@ -2110,14 +2063,6 @@ alias[score_operation:every_unassigned_taxpayers] = single_alias_right[every_eff
 ## push_scope = secret
 alias[score_operation:every_unspent_known_secret] = single_alias_right[every_effect_score_operation]
 
-### Iterate through all DIRECT vassals
-### Optionally specify a vassal stance filter
-### any_vassal = { vassal_stance = parochial }
-### every_vassal = { limit = { <triggers> } <effects> }
-## scope = character
-## push_scope = character
-alias[score_operation:every_vassal] = single_alias_right[every_effect_score_operation]
-
 ### Iterate through ALL vassals, not just direct vassals
 ### Optionally specify a vassal stance filter
 ### any_vassal_or_below = { vassal_stance = parochial }
@@ -2169,21 +2114,6 @@ alias[score_operation:ordered_acclaimed_knight] = single_alias_right[ordered_eff
 ## scope = character
 ## push_scope = accolade
 alias[score_operation:ordered_accolade] = single_alias_right[ordered_effect_score_operation]
-
-### Iterate through all active Accolades of a given liege character's Acclaimed Knights
-### Optionally specify an accolade parameter filter
-### any_active_accolade = { accolade_parameter = accolade_organize_army_bonus }
-### ordered_active_accolade = {
-### limit = { <triggers> }
-### order_by = script_value
-### position = int
-### min = int
-### max = script_value
-### check_range_bounds = no # If you don't want an error logged if the list is smaller than the min/max
-### <effects> }
-## scope = character
-## push_scope = accolade
-alias[score_operation:ordered_active_accolade] = single_alias_right[ordered_effect_score_operation]
 
 ### Iterate through all titles that can be created by the character. (only for alerts)
 ### ordered_alert_creatable_title = {
@@ -2781,20 +2711,6 @@ alias[score_operation:ordered_heir] = single_alias_right[ordered_effect_score_op
 ## push_scope = landed_title
 alias[score_operation:ordered_heir_title] = single_alias_right[ordered_effect_score_operation]
 
-### Iterate through all held landed titles. Optionally specify a tier filter
-### any/every/ordered/random_held_title = { title_tier >= county }
-### ordered_held_title = {
-### limit = { <triggers> }
-### order_by = script_value
-### position = int
-### min = int
-### max = script_value
-### check_range_bounds = no # If you don't want an error logged if the list is smaller than the min/max
-### <effects> }
-## scope = character
-## push_scope = landed_title
-alias[score_operation:ordered_held_title] = single_alias_right[ordered_effect_score_operation]
-
 ### Iterate through all hired mercenary companies
 ### ordered_hired_mercenary = {
 ### limit = { <triggers> }
@@ -2976,21 +2892,6 @@ alias[score_operation:ordered_maa_regiment] = single_alias_right[ordered_effect_
 ## scope = character
 ## push_scope = character
 alias[score_operation:ordered_martial_councillor] = single_alias_right[ordered_effect_score_operation]
-
-### Iterate through all memories of a character
-### Optionally specify a memory type filter
-### any_memory = { memory_type = completed_rites_of_passage }
-### ordered_memory = {
-### limit = { <triggers> }
-### order_by = script_value
-### position = int
-### min = int
-### max = script_value
-### check_range_bounds = no # If you don't want an error logged if the list is smaller than the min/max
-### <effects> }
-## scope = character
-## push_scope = character_memory
-alias[score_operation:ordered_memory] = single_alias_right[ordered_effect_score_operation]
 
 ### A sub-realm or realm bordering the scope character's realm (including across water). Returns counts and above.
 ### ordered_neighboring_and_across_water_realm_owner = {
@@ -3188,21 +3089,6 @@ alias[score_operation:ordered_noble_family] = single_alias_right[ordered_effect_
 ## scope = character
 ## push_scope = character
 alias[score_operation:ordered_opposite_sex_spouse_candidate] = single_alias_right[ordered_effect_score_operation]
-
-### Iterate through all owned stories for a character
-### Optionally specify a story type filter
-### any_owned_story = { type = story_cycle_pet_cat }
-### ordered_owned_story = {
-### limit = { <triggers> }
-### order_by = script_value
-### position = int
-### min = int
-### max = script_value
-### check_range_bounds = no # If you don't want an error logged if the list is smaller than the min/max
-### <effects> }
-## scope = character
-## push_scope = story
-alias[score_operation:ordered_owned_story] = single_alias_right[ordered_effect_score_operation]
 
 ### Iterate through all holy orders that the scoped character is a patron of
 ### ordered_patroned_holy_order = {
@@ -3530,36 +3416,6 @@ alias[score_operation:ordered_realm_province] = single_alias_right[ordered_effec
 ## scope = character
 ## push_scope = character
 alias[score_operation:ordered_same_sex_spouse_candidate] = single_alias_right[ordered_effect_score_operation]
-
-### Iterate through all schemes owned by the character
-### Optionally specify a type filter
-### random_scheme = { type = befriend }
-### ordered_scheme = {
-### limit = { <triggers> }
-### order_by = script_value
-### position = int
-### min = int
-### max = script_value
-### check_range_bounds = no # If you don't want an error logged if the list is smaller than the min/max
-### <effects> }
-## scope = character
-## push_scope = scheme
-alias[score_operation:ordered_scheme] = single_alias_right[ordered_effect_score_operation]
-
-### Iterate through all secrets of the character
-### Optionally specify a secret type filter
-### random_secret = { type = secret_lover }
-### ordered_secret = {
-### limit = { <triggers> }
-### order_by = script_value
-### position = int
-### min = int
-### max = script_value
-### check_range_bounds = no # If you don't want an error logged if the list is smaller than the min/max
-### <effects> }
-## scope = character
-## push_scope = secret
-alias[score_operation:ordered_secret] = single_alias_right[ordered_effect_score_operation]
 
 ### Iterate through all siblings
 ### ordered_sibling = {
@@ -3905,21 +3761,6 @@ alias[score_operation:ordered_unassigned_taxpayers] = single_alias_right[ordered
 ## push_scope = secret
 alias[score_operation:ordered_unspent_known_secret] = single_alias_right[ordered_effect_score_operation]
 
-### Iterate through all DIRECT vassals
-### Optionally specify a vassal stance filter
-### any_vassal = { vassal_stance = parochial }
-### ordered_vassal = {
-### limit = { <triggers> }
-### order_by = script_value
-### position = int
-### min = int
-### max = script_value
-### check_range_bounds = no # If you don't want an error logged if the list is smaller than the min/max
-### <effects> }
-## scope = character
-## push_scope = character
-alias[score_operation:ordered_vassal] = single_alias_right[ordered_effect_score_operation]
-
 ### Iterate through ALL vassals, not just direct vassals
 ### Optionally specify a vassal stance filter
 ### any_vassal_or_below = { vassal_stance = parochial }
@@ -3985,14 +3826,6 @@ alias[score_operation:random_acclaimed_knight] = single_alias_right[random_effec
 ## scope = character
 ## push_scope = accolade
 alias[score_operation:random_accolade] = single_alias_right[random_effect_score_operation]
-
-### Iterate through all active Accolades of a given liege character's Acclaimed Knights
-### Optionally specify an accolade parameter filter
-### any_active_accolade = { accolade_parameter = accolade_organize_army_bonus }
-### random_active_accolade = { limit = { <triggers> } (optional) weight = { mtth } <effects> }
-## scope = character
-## push_scope = accolade
-alias[score_operation:random_active_accolade] = single_alias_right[random_effect_score_operation]
 
 ### Iterate through all titles that can be created by the character. (only for alerts)
 ### random_alert_creatable_title = { limit = { <triggers> } (optional) weight = { mtth } <effects> }
@@ -4275,13 +4108,6 @@ alias[score_operation:random_heir] = single_alias_right[random_effect_score_oper
 ## push_scope = landed_title
 alias[score_operation:random_heir_title] = single_alias_right[random_effect_score_operation]
 
-### Iterate through all held landed titles. Optionally specify a tier filter
-### any/every/ordered/random_held_title = { title_tier >= county }
-### random_held_title = { limit = { <triggers> } (optional) weight = { mtth } <effects> }
-## scope = character
-## push_scope = landed_title
-alias[score_operation:random_held_title] = single_alias_right[random_effect_score_operation]
-
 ### Iterate through all hired mercenary companies
 ### random_hired_mercenary = { limit = { <triggers> } (optional) weight = { mtth } <effects> }
 ## scope = character
@@ -4365,14 +4191,6 @@ alias[score_operation:random_maa_regiment] = single_alias_right[random_effect_sc
 ## scope = character
 ## push_scope = character
 alias[score_operation:random_martial_councillor] = single_alias_right[random_effect_score_operation]
-
-### Iterate through all memories of a character
-### Optionally specify a memory type filter
-### any_memory = { memory_type = completed_rites_of_passage }
-### random_memory = { limit = { <triggers> } (optional) weight = { mtth } <effects> }
-## scope = character
-## push_scope = character_memory
-alias[score_operation:random_memory] = single_alias_right[random_effect_score_operation]
 
 ### A sub-realm or realm bordering the scope character's realm (including across water). Returns counts and above.
 ### random_neighboring_and_across_water_realm_owner = { limit = { <triggers> } (optional) weight = { mtth } <effects> }
@@ -4465,14 +4283,6 @@ alias[score_operation:random_noble_family] = single_alias_right[random_effect_sc
 ## scope = character
 ## push_scope = character
 alias[score_operation:random_opposite_sex_spouse_candidate] = single_alias_right[random_effect_score_operation]
-
-### Iterate through all owned stories for a character
-### Optionally specify a story type filter
-### any_owned_story = { type = story_cycle_pet_cat }
-### random_owned_story = { limit = { <triggers> } (optional) weight = { mtth } <effects> }
-## scope = character
-## push_scope = story
-alias[score_operation:random_owned_story] = single_alias_right[random_effect_score_operation]
 
 ### Iterate through all holy orders that the scoped character is a patron of
 ### random_patroned_holy_order = { limit = { <triggers> } (optional) weight = { mtth } <effects> }
@@ -4625,22 +4435,6 @@ alias[score_operation:random_realm_province] = single_alias_right[random_effect_
 ## scope = character
 ## push_scope = character
 alias[score_operation:random_same_sex_spouse_candidate] = single_alias_right[random_effect_score_operation]
-
-### Iterate through all schemes owned by the character
-### Optionally specify a type filter
-### random_scheme = { type = befriend }
-### random_scheme = { limit = { <triggers> } (optional) weight = { mtth } <effects> }
-## scope = character
-## push_scope = scheme
-alias[score_operation:random_scheme] = single_alias_right[random_effect_score_operation]
-
-### Iterate through all secrets of the character
-### Optionally specify a secret type filter
-### random_secret = { type = secret_lover }
-### random_secret = { limit = { <triggers> } (optional) weight = { mtth } <effects> }
-## scope = character
-## push_scope = secret
-alias[score_operation:random_secret] = single_alias_right[random_effect_score_operation]
 
 ### Iterate through all siblings
 ### random_sibling = { limit = { <triggers> } (optional) weight = { mtth } <effects> }
@@ -4803,14 +4597,6 @@ alias[score_operation:random_unassigned_taxpayers] = single_alias_right[random_e
 ## scope = character
 ## push_scope = secret
 alias[score_operation:random_unspent_known_secret] = single_alias_right[random_effect_score_operation]
-
-### Iterate through all DIRECT vassals
-### Optionally specify a vassal stance filter
-### any_vassal = { vassal_stance = parochial }
-### random_vassal = { limit = { <triggers> } (optional) weight = { mtth } <effects> }
-## scope = character
-## push_scope = character
-alias[score_operation:random_vassal] = single_alias_right[random_effect_score_operation]
 
 ### Iterate through ALL vassals, not just direct vassals
 ### Optionally specify a vassal stance filter
@@ -7723,3 +7509,2714 @@ alias[score_operation:random_confederation_member] = single_alias_right[random_e
 ## push_scope = dynasty_house
 alias[score_operation:random_confederation_member_house] = single_alias_right[random_effect_score_operation]
 
+#####################################
+#
+# EVERY EFFECT
+#
+#####################################
+
+### Iterate through all province locations of the phases of the activity, optionally limited to unique locations.
+## scope = activity
+## push_scope = province
+alias[score_operation:every_activity_phase_location] = {
+    ## cardinality = 0..1
+    unique = bool
+    ## cardinality = 0..1
+    limit = {
+        alias_name[trigger] = alias_match_left[trigger]
+    }
+    ## cardinality = 0..inf
+    alternative_limit = {
+        alias_name[trigger] = alias_match_left[trigger]
+    }
+    ## cardinality = 0..1
+    custom = localisation
+    ## cardinality = 0..inf
+	alias_name[arithmetic_operation] = alias_match_left[arithmetic_operation]
+	## cardinality = 0..inf
+	alias_name[score_operation] = alias_match_left[score_operation]
+}
+
+### Iterate through all future province locations of the phases of the activity, optionally limited to unique locations. ('future' does not include any started phase)
+## scope = activity
+## push_scope = province
+alias[score_operation:every_activity_phase_location_future] = {
+    ## cardinality = 0..1
+    unique = bool
+    ## cardinality = 0..1
+    limit = {
+        alias_name[trigger] = alias_match_left[trigger]
+    }
+    ## cardinality = 0..inf
+    alternative_limit = {
+        alias_name[trigger] = alias_match_left[trigger]
+    }
+    ## cardinality = 0..1
+    custom = localisation
+    ## cardinality = 0..inf
+	alias_name[arithmetic_operation] = alias_match_left[arithmetic_operation]
+	## cardinality = 0..inf
+	alias_name[score_operation] = alias_match_left[score_operation]
+}
+
+### Iterate through all past province locations of the phases of the activity, optionally limited to unique locations. ('past' only includes ended phases)
+## scope = activity
+## push_scope = province
+alias[score_operation:every_activity_phase_location_past] = {
+    ## cardinality = 0..1
+    unique = bool
+    ## cardinality = 0..1
+    limit = {
+        alias_name[trigger] = alias_match_left[trigger]
+    }
+    ## cardinality = 0..inf
+    alternative_limit = {
+        alias_name[trigger] = alias_match_left[trigger]
+    }
+    ## cardinality = 0..1
+    custom = localisation
+    ## cardinality = 0..inf
+	alias_name[arithmetic_operation] = alias_match_left[arithmetic_operation]
+	## cardinality = 0..inf
+	alias_name[score_operation] = alias_match_left[score_operation]
+}
+
+### Iterate through all characters attending an activity. Invited guests that have not accepted/declined yet are not part of this list.Supports an optional state the character must be in.
+## scope = activity
+## push_scope = character
+alias[score_operation:every_attending_character] = {
+    ## cardinality = 0..1
+    state = enum[activity_state]
+    ## cardinality = 0..1
+    limit = {
+        alias_name[trigger] = alias_match_left[trigger]
+    }
+    ## cardinality = 0..inf
+    alternative_limit = {
+        alias_name[trigger] = alias_match_left[trigger]
+    }
+    ## cardinality = 0..1
+    custom = localisation
+    ## cardinality = 0..inf
+	alias_name[arithmetic_operation] = alias_match_left[arithmetic_operation]
+	## cardinality = 0..inf
+	alias_name[score_operation] = alias_match_left[score_operation]
+}
+
+### Iterates through characteres within the specified subset of the current phase.
+## scope = activity
+## push_scope = character
+alias[score_operation:every_guest_subset] = {
+    name = value[guest_subset]
+    ## cardinality = 0..1
+    limit = {
+        alias_name[trigger] = alias_match_left[trigger]
+    }
+    ## cardinality = 0..inf
+    alternative_limit = {
+        alias_name[trigger] = alias_match_left[trigger]
+    }
+    ## cardinality = 0..1
+    phase = value[activity_phase]
+    ## cardinality = 0..1
+    custom = localisation
+    ## cardinality = 0..inf
+	alias_name[arithmetic_operation] = alias_match_left[arithmetic_operation]
+	## cardinality = 0..inf
+	alias_name[score_operation] = alias_match_left[score_operation]
+}
+
+### Iterates through characteres within the specified subset of the current phase.
+## scope = activity
+## push_scope = character
+alias[score_operation:every_guest_subset_current_phase] = {
+    name = value[guest_subset]
+    ## cardinality = 0..1
+    limit = {
+        alias_name[trigger] = alias_match_left[trigger]
+    }
+    ## cardinality = 0..inf
+    alternative_limit = {
+        alias_name[trigger] = alias_match_left[trigger]
+    }
+    ## cardinality = 0..1
+    custom = localisation
+    ## cardinality = 0..inf
+	alias_name[arithmetic_operation] = alias_match_left[arithmetic_operation]
+	## cardinality = 0..inf
+	alias_name[score_operation] = alias_match_left[score_operation]
+}
+
+### Iterate through all counties in the region. Put 'region = region_name' inside it
+## push_scope = landed_title
+alias[score_operation:every_county_in_region] = {
+    region = <geographical_region>
+    ## cardinality = 0..1
+    variable = value[global_variable]
+    ## cardinality = 0..1
+    limit = {
+        alias_name[trigger] = alias_match_left[trigger]
+    }
+    ## cardinality = 0..inf
+    alternative_limit = {
+        alias_name[trigger] = alias_match_left[trigger]
+    }
+    ## cardinality = 0..1
+    custom = localisation
+    ## cardinality = 0..inf
+	alias_name[arithmetic_operation] = alias_match_left[arithmetic_operation]
+	## cardinality = 0..inf
+	alias_name[score_operation] = alias_match_left[score_operation]
+}
+
+### Iterate through all items in global list. list = name or variable = name
+alias[score_operation:every_in_global_list] = {
+    ## cardinality = 0..1
+    list = value[list]
+    ## cardinality = 0..1
+    variable = value[global_variable_list]
+    ## cardinality = 0..1
+    limit = {
+        alias_name[trigger] = alias_match_left[trigger]
+    }
+    ## cardinality = 0..inf
+    alternative_limit = {
+        alias_name[trigger] = alias_match_left[trigger]
+    }
+    ## cardinality = 0..1
+    custom = localisation
+    ## cardinality = 0..inf
+	alias_name[arithmetic_operation] = alias_match_left[arithmetic_operation]
+	## cardinality = 0..inf
+	alias_name[score_operation] = alias_match_left[score_operation]
+}
+
+### Iterate through all items in list. list = name or variable = name
+## push_scope = any
+alias[score_operation:every_in_list] = {
+    ## cardinality = 0..1
+    list = value[list]
+    ## cardinality = 0..1
+    variable = value[variable_list]
+    ## cardinality = 0..1
+    limit = {
+        alias_name[trigger] = alias_match_left[trigger]
+    }
+    ## cardinality = 0..inf
+    alternative_limit = {
+        alias_name[trigger] = alias_match_left[trigger]
+    }
+    ## cardinality = 0..1
+    custom = localisation
+    ## cardinality = 0..inf
+	alias_name[arithmetic_operation] = alias_match_left[arithmetic_operation]
+	## cardinality = 0..inf
+	alias_name[score_operation] = alias_match_left[score_operation]
+}
+
+### Iterate through all items in local list. list = name or variable = name
+alias[score_operation:every_in_local_list] = {
+    ## cardinality = 0..1
+    list = value[list]
+    ## cardinality = 0..1
+    variable = value[local_variable_list]
+    ## cardinality = 0..1
+    limit = {
+        alias_name[trigger] = alias_match_left[trigger]
+    }
+    ## cardinality = 0..inf
+    alternative_limit = {
+        alias_name[trigger] = alias_match_left[trigger]
+    }
+    ## cardinality = 0..1
+    custom = localisation
+    ## cardinality = 0..inf
+	alias_name[arithmetic_operation] = alias_match_left[arithmetic_operation]
+	## cardinality = 0..inf
+	alias_name[score_operation] = alias_match_left[score_operation]
+}
+
+### Iterate through all characters in the pool of the given province
+## push_scope = character
+alias[score_operation:every_pool_character] = {
+    ## cardinality = 0..1
+    limit = {
+        alias_name[trigger] = alias_match_left[trigger]
+    }
+    ## cardinality = 0..inf
+    alternative_limit = {
+        alias_name[trigger] = alias_match_left[trigger]
+    }
+    province = scope[province]
+    ## cardinality = 0..1
+    custom = localisation
+    ## cardinality = 0..inf
+	alias_name[arithmetic_operation] = alias_match_left[arithmetic_operation]
+	## cardinality = 0..inf
+	alias_name[score_operation] = alias_match_left[score_operation]
+}
+
+### Iterate through all traits in a given category. any_trait_in_category = { category = fame/health/etc } every_trait_in_category = { limit = { <triggers> } <effects> }
+## push_scope = trait
+alias[score_operation:every_trait_in_category] = {
+    category = enum[trait_category]
+    ## cardinality = 0..1
+    limit = {
+        alias_name[trigger] = alias_match_left[trigger]
+    }
+    ## cardinality = 0..inf
+    alternative_limit = {
+        alias_name[trigger] = alias_match_left[trigger]
+    }
+    ## cardinality = 0..1
+    custom = localisation
+    ## cardinality = 0..inf
+	alias_name[arithmetic_operation] = alias_match_left[arithmetic_operation]
+	## cardinality = 0..inf
+	alias_name[score_operation] = alias_match_left[score_operation]
+}
+
+### Iterate through all struggles that character is involved in. Optional: Narrow down the involvement status *_chracter_struggle = { involvement = involved | interloper }
+## scope = character
+## push_scope = struggle 
+alias[score_operation:every_character_struggle] = {
+    ## cardinality = 0..1
+    involvement = enum[involvement]
+    ## cardinality = 0..1
+    limit = {
+        alias_name[trigger] = alias_match_left[trigger]
+    }
+    ## cardinality = 0..inf
+    alternative_limit = {
+        alias_name[trigger] = alias_match_left[trigger]
+    }
+    ## cardinality = 0..1
+    custom = localisation
+    ## cardinality = 0..inf
+	alias_name[arithmetic_operation] = alias_match_left[arithmetic_operation]
+	## cardinality = 0..inf
+	alias_name[score_operation] = alias_match_left[score_operation]
+}
+
+### Iterate through the titles of all claims held by a character; parameters: explicit = yes/no/all pressed = yes/no/all every_claim = { limit = { <triggers> } <effects> }
+## scope = character
+## push_scope = landed_title
+alias[score_operation:every_claim] = {
+    ## cardinality = 0..1
+    explicit = enum[yesnoall]
+    ## cardinality = 0..1
+    pressed = enum[yesnoall]
+    ## cardinality = 0..1
+    limit = {
+        alias_name[trigger] = alias_match_left[trigger]
+    }
+    ## cardinality = 0..inf
+    alternative_limit = {
+        alias_name[trigger] = alias_match_left[trigger]
+    }
+    ## cardinality = 0..1
+    custom = localisation
+    ## cardinality = 0..inf
+	alias_name[arithmetic_operation] = alias_match_left[arithmetic_operation]
+	## cardinality = 0..inf
+	alias_name[score_operation] = alias_match_left[score_operation]
+}
+
+### Iterates through all characters employed by the scoped character in the target court position.
+## scope = character
+## push_scope = character
+alias[score_operation:every_court_position_holder] = {
+    ## cardinality = 0..1
+    limit = {
+        alias_name[trigger] = alias_match_left[trigger]
+    }
+    ## cardinality = 0..inf
+    alternative_limit = {
+        alias_name[trigger] = alias_match_left[trigger]
+    }
+    ## cardinality = 0..1
+    type = <court_position>
+    ## cardinality = 0..1
+    custom = localisation
+    ## cardinality = 0..inf
+	alias_name[arithmetic_operation] = alias_match_left[arithmetic_operation]
+	## cardinality = 0..inf
+	alias_name[score_operation] = alias_match_left[score_operation]
+}
+
+### Iterate through scripted relations of a given type every_relation = { limit = { <triggers> } <effects> }
+## scope = character
+## push_scope = character
+alias[score_operation:every_relation] = {
+    type = <scripted_relation>
+    ## cardinality = 0..1
+    limit = {
+        alias_name[trigger] = alias_match_left[trigger]
+    }
+    ## cardinality = 0..inf
+    alternative_limit = {
+        alias_name[trigger] = alias_match_left[trigger]
+    }
+    ## cardinality = 0..1
+    custom = localisation
+    ## cardinality = 0..inf
+	alias_name[arithmetic_operation] = alias_match_left[arithmetic_operation]
+	## cardinality = 0..inf
+	alias_name[score_operation] = alias_match_left[score_operation]
+}
+
+### Iterate through the title itself, all de facto vassals, and below. The continue trigger specifies whether to recursively iterate through the vassal's vassal
+### This is unrelated to the limit; if the limit is met it is added to the list, but its vassals will get checked even if the limit isn't met as long as the 'continue' trigger is
+### ..._de_jure_vassal_and_below = { continue = { conditions } }
+## scope = landed_title
+## push_scope = landed_title
+alias[score_operation:every_in_de_facto_hierarchy] = {
+    ## cardinality = 0..1
+    continue = {
+        alias_name[trigger] = alias_match_left[trigger]
+    }
+    ## cardinality = 0..1
+    limit = {
+        alias_name[trigger] = alias_match_left[trigger]
+    }
+    ## cardinality = 0..inf
+    alternative_limit = {
+        alias_name[trigger] = alias_match_left[trigger]
+    }
+    ## cardinality = 0..1
+    custom = localisation
+    ## cardinality = 0..inf
+	alias_name[arithmetic_operation] = alias_match_left[arithmetic_operation]
+	## cardinality = 0..inf
+	alias_name[score_operation] = alias_match_left[score_operation]
+}
+
+### Iterate through the title itself, all de jure vassals, and below. The continue trigger specifies whether to recursively iterate through the vassal's vassal This is unrelated to the limit; if the limit is met it is added to the list, but its vassals will get checked even if the limit isn't met as long as the 'continue' trigger is ..._de_jure_vassal_and_below = { continue = { conditions } } every_in_de_jure_hierarchy = { limit = { <triggers> } <effects> }
+## scope = landed_title
+## push_scope = landed_title
+alias[score_operation:every_in_de_jure_hierarchy] = {
+    ## cardinality = 0..1
+    continue = {
+        alias_name[trigger] = alias_match_left[trigger]
+    }
+    ## cardinality = 0..1
+    limit = {
+        alias_name[trigger] = alias_match_left[trigger]
+    }
+    ## cardinality = 0..inf
+    alternative_limit = {
+        alias_name[trigger] = alias_match_left[trigger]
+    }
+    ## cardinality = 0..1
+    custom = localisation
+    ## cardinality = 0..inf
+	alias_name[arithmetic_operation] = alias_match_left[arithmetic_operation]
+	## cardinality = 0..inf
+	alias_name[score_operation] = alias_match_left[score_operation]
+    # TODO: Does this have 'filter' like any_in_de_jure_hierarchy?
+}
+
+## scope = character
+## push_scope = landed_title
+alias[score_operation:every_held_county] = single_alias_right[every_effect]
+
+## scope = character
+## push_scope = character
+alias[score_operation:every_parent] = {
+    ## cardinality = 0..1
+    limit = {
+        alias_name[trigger] = alias_match_left[trigger]
+    }
+    ## cardinality = 0..inf
+    alternative_limit = {
+        alias_name[trigger] = alias_match_left[trigger]
+    }
+    ## cardinality = 0..1
+    custom = localisation
+    ## cardinality = 0..inf
+	alias_name[arithmetic_operation] = alias_match_left[arithmetic_operation]
+	## cardinality = 0..inf
+	alias_name[score_operation] = alias_match_left[score_operation]
+    ## cardinality = 0..1
+    even_if_dead = bool
+}
+
+## scope = character
+## push_scope = character
+alias[score_operation:every_spouse] = {
+    ## cardinality = 0..1
+    limit = {
+        alias_name[trigger] = alias_match_left[trigger]
+    }
+    ## cardinality = 0..inf
+    alternative_limit = {
+        alias_name[trigger] = alias_match_left[trigger]
+    }
+    ## cardinality = 0..1
+    custom = localisation
+    ## cardinality = 0..inf
+	alias_name[arithmetic_operation] = alias_match_left[arithmetic_operation]
+	## cardinality = 0..inf
+	alias_name[score_operation] = alias_match_left[score_operation]
+    ## cardinality = 0..1
+    even_if_dead = bool
+}
+
+## scope = character
+## push_scope = character
+alias[score_operation:every_child] = {
+    ## cardinality = 0..1
+    limit = {
+        alias_name[trigger] = alias_match_left[trigger]
+    }
+    ## cardinality = 0..inf
+    alternative_limit = {
+        alias_name[trigger] = alias_match_left[trigger]
+    }
+    ## cardinality = 0..1
+    custom = localisation
+    ## cardinality = 0..inf
+	alias_name[arithmetic_operation] = alias_match_left[arithmetic_operation]
+	## cardinality = 0..inf
+	alias_name[score_operation] = alias_match_left[score_operation]
+    ## cardinality = 0..1
+    even_if_dead = bool
+}
+
+## scope = character
+## push_scope = character
+alias[score_operation:every_ancestor] = {
+    ## cardinality = 0..1
+    limit = {
+        alias_name[trigger] = alias_match_left[trigger]
+    }
+    ## cardinality = 0..inf
+    alternative_limit = {
+        alias_name[trigger] = alias_match_left[trigger]
+    }
+    ## cardinality = 0..1
+    custom = localisation
+    ## cardinality = 0..inf
+	alias_name[arithmetic_operation] = alias_match_left[arithmetic_operation]
+	## cardinality = 0..inf
+	alias_name[score_operation] = alias_match_left[score_operation]
+    ## cardinality = 0..1
+    even_if_dead = bool
+}
+
+## scope = character
+## push_scope = character
+alias[score_operation:every_close_family_member] = {
+    ## cardinality = 0..1
+    limit = {
+        alias_name[trigger] = alias_match_left[trigger]
+    }
+    ## cardinality = 0..inf
+    alternative_limit = {
+        alias_name[trigger] = alias_match_left[trigger]
+    }
+    ## cardinality = 0..1
+    custom = localisation
+    ## cardinality = 0..inf
+	alias_name[arithmetic_operation] = alias_match_left[arithmetic_operation]
+	## cardinality = 0..inf
+	alias_name[score_operation] = alias_match_left[score_operation]
+    ## cardinality = 0..1
+    even_if_dead = bool
+}
+
+## scope = character
+## push_scope = character
+alias[score_operation:every_close_or_extended_family_member] = {
+    ## cardinality = 0..1
+    limit = {
+        alias_name[trigger] = alias_match_left[trigger]
+    }
+    ## cardinality = 0..inf
+    alternative_limit = {
+        alias_name[trigger] = alias_match_left[trigger]
+    }
+    ## cardinality = 0..1
+    custom = localisation
+    ## cardinality = 0..inf
+	alias_name[arithmetic_operation] = alias_match_left[arithmetic_operation]
+	## cardinality = 0..inf
+	alias_name[score_operation] = alias_match_left[score_operation]
+    ## cardinality = 0..1
+    even_if_dead = bool
+}
+
+## scope = character
+## push_scope = character
+alias[score_operation:every_former_spouse] = {
+    ## cardinality = 0..1
+    limit = {
+        alias_name[trigger] = alias_match_left[trigger]
+    }
+    ## cardinality = 0..inf
+    alternative_limit = {
+        alias_name[trigger] = alias_match_left[trigger]
+    }
+    ## cardinality = 0..1
+    custom = localisation
+    ## cardinality = 0..inf
+	alias_name[arithmetic_operation] = alias_match_left[arithmetic_operation]
+	## cardinality = 0..inf
+	alias_name[score_operation] = alias_match_left[score_operation]
+    ## cardinality = 0..1
+    even_if_dead = bool
+}
+
+### Iterate through all investors of target candidate within the scoped title. Optionally specify a value to filter by investment amount
+## scope = landed_title
+## push_scope = character
+alias[score_operation:every_succession_appointment_investors] = {
+    ## cardinality = 0..1
+    limit = {
+        alias_name[trigger] = alias_match_left[trigger]
+    }
+    ## cardinality = 0..inf
+    alternative_limit = {
+        alias_name[trigger] = alias_match_left[trigger]
+    }
+    ## cardinality = 0..1
+    custom = localisation
+    ## cardinality = 0..inf
+	alias_name[arithmetic_operation] = alias_match_left[arithmetic_operation]
+	## cardinality = 0..inf
+	alias_name[score_operation] = alias_match_left[score_operation]
+    ## cardinality = 0..1
+    candidate = scope[character]
+    ## cardinality = 0..1
+    value == int_value_field
+    ## cardinality = 0..1
+    value == alias_keys_field[int_value]
+    ## cardinality = 0..1
+    value == single_alias_right[score_formula]
+}
+
+### Iterate through all held landed titles. Optionally specify a tier filter
+### any/every/ordered/random_held_title = { title_tier >= county }
+## scope = character
+## push_scope = landed_title
+alias[score_operation:every_held_title] = {
+    ## cardinality = 0..1
+    limit = {
+        alias_name[trigger] = alias_match_left[trigger]
+    }
+    ## cardinality = 0..1
+    title_tier == enum[title_tier]
+    ## cardinality = 0..inf
+    alternative_limit = {
+        alias_name[trigger] = alias_match_left[trigger]
+    }
+    ## cardinality = 0..1
+    custom = localisation
+    ## cardinality = 0..inf
+	alias_name[arithmetic_operation] = alias_match_left[arithmetic_operation]
+	## cardinality = 0..inf
+	alias_name[score_operation] = alias_match_left[score_operation]
+}
+
+### Iterate through all active Accolades of a given liege character's Acclaimed Knights
+### Optionally specify an accolade parameter filter
+## scope = character
+## push_scope = accolade
+alias[score_operation:every_active_accolade] = {
+    ## cardinality = 0..1
+    limit = {
+        alias_name[trigger] = alias_match_left[trigger]
+    }
+    ## cardinality = 0..1
+    accolade_parameter == enum[accolade_parameter]
+    ## cardinality = 0..inf
+    alternative_limit = {
+        alias_name[trigger] = alias_match_left[trigger]
+    }
+    ## cardinality = 0..1
+    custom = localisation
+    ## cardinality = 0..inf
+	alias_name[arithmetic_operation] = alias_match_left[arithmetic_operation]
+	## cardinality = 0..inf
+	alias_name[score_operation] = alias_match_left[score_operation]
+}
+
+### Iterate through all schemes owned by the character
+### Optionally specify a type filter
+### random_scheme = { type = befriend }
+### every_scheme = { limit = { <triggers> } <effects> }
+## scope = character
+## push_scope = scheme
+alias[score_operation:every_scheme] = {
+    ## cardinality = 0..1
+    limit = {
+        alias_name[trigger] = alias_match_left[trigger]
+    }
+    ## cardinality = 0..1
+    type = <scheme>
+    ## cardinality = 0..inf
+    alternative_limit = {
+        alias_name[trigger] = alias_match_left[trigger]
+    }
+    ## cardinality = 0..1
+    custom = localisation
+    ## cardinality = 0..inf
+	alias_name[arithmetic_operation] = alias_match_left[arithmetic_operation]
+	## cardinality = 0..inf
+	alias_name[score_operation] = alias_match_left[score_operation]
+}
+
+### Iterate through all owned stories for a character
+### Optionally specify a story type filter
+## scope = character
+## push_scope = story_cycle
+alias[score_operation:every_owned_story] = {
+    ## cardinality = 0..1
+    limit = {
+        alias_name[trigger] = alias_match_left[trigger]
+    }
+    ## cardinality = 0..1
+    type = <story_cycle>
+    ## cardinality = 0..inf
+    alternative_limit = {
+        alias_name[trigger] = alias_match_left[trigger]
+    }
+    ## cardinality = 0..1
+    custom = localisation
+    ## cardinality = 0..inf
+	alias_name[arithmetic_operation] = alias_match_left[arithmetic_operation]
+	## cardinality = 0..inf
+	alias_name[score_operation] = alias_match_left[score_operation]
+}
+
+### Iterate through all memories of a character
+### Optionally specify a memory type filter
+### any_memory = { memory_type = completed_rites_of_passage }
+### every_memory = { limit = { <triggers> } <effects> }
+## scope = character
+## push_scope = character_memory
+alias[score_operation:every_memory] = {
+    ## cardinality = 0..1
+    limit = {
+        alias_name[trigger] = alias_match_left[trigger]
+    }
+    ## cardinality = 0..1
+    memory_type = <memory>
+    ## cardinality = 0..inf
+    alternative_limit = {
+        alias_name[trigger] = alias_match_left[trigger]
+    }
+    ## cardinality = 0..1
+    custom = localisation
+    ## cardinality = 0..inf
+	alias_name[arithmetic_operation] = alias_match_left[arithmetic_operation]
+	## cardinality = 0..inf
+	alias_name[score_operation] = alias_match_left[score_operation]
+}
+
+### Iterate through all secrets of the character
+### Optionally specify a secret type filter
+### random_secret = { type = secret_lover }
+### every_secret = { limit = { <triggers> } <effects> }
+## scope = character
+## push_scope = secret
+alias[score_operation:every_secret] = {
+    ## cardinality = 0..1
+    limit = {
+        alias_name[trigger] = alias_match_left[trigger]
+    }
+    ## cardinality = 0..1
+    type = <secret_type>
+    ## cardinality = 0..inf
+    alternative_limit = {
+        alias_name[trigger] = alias_match_left[trigger]
+    }
+    ## cardinality = 0..1
+    custom = localisation
+    ## cardinality = 0..inf
+	alias_name[arithmetic_operation] = alias_match_left[arithmetic_operation]
+	## cardinality = 0..inf
+	alias_name[score_operation] = alias_match_left[score_operation]
+}
+
+### Iterate through all DIRECT vassals
+### Optionally specify a vassal stance filter
+### any_vassal = { vassal_stance = parochial }
+### every_vassal = { limit = { <triggers> } <effects> }
+## scope = character
+## push_scope = character
+alias[score_operation:every_vassal] = {
+    ## cardinality = 0..1
+    limit = {
+        alias_name[trigger] = alias_match_left[trigger]
+    }
+    ## cardinality = 0..1
+    vassal_stance = <vassal_stance>
+    ## cardinality = 0..inf
+    alternative_limit = {
+        alias_name[trigger] = alias_match_left[trigger]
+    }
+    ## cardinality = 0..1
+    custom = localisation
+    ## cardinality = 0..inf
+	alias_name[arithmetic_operation] = alias_match_left[arithmetic_operation]
+	## cardinality = 0..inf
+	alias_name[score_operation] = alias_match_left[score_operation]
+}
+
+#####################################
+#
+# RANDOM EFFECT
+#
+#####################################
+
+### Iterate through all province locations of the phases of the activity, optionally limited to unique locations.
+## scope = activity
+## push_scope = province
+alias[score_operation:random_activity_phase_location] = {
+    ## cardinality = 0..1
+    unique = bool
+    ## cardinality = 0..1
+    limit = {
+        alias_name[trigger] = alias_match_left[trigger]
+    }
+    ## cardinality = 0..inf
+    alternative_limit = {
+        alias_name[trigger] = alias_match_left[trigger]
+    }
+    ## cardinality = 0..1
+    weight = single_alias_right[weight_block]
+    ## cardinality = 0..1
+    custom = localisation
+    ## cardinality = 0..inf
+	alias_name[arithmetic_operation] = alias_match_left[arithmetic_operation]
+	## cardinality = 0..inf
+	alias_name[score_operation] = alias_match_left[score_operation]
+}
+
+### Iterate through all future province locations of the phases of the activity, optionally limited to unique locations. ('future' does not include any started phase)
+## scope = activity
+## push_scope = province
+alias[score_operation:random_activity_phase_location_future] = {
+    ## cardinality = 0..1
+    unique = bool
+    ## cardinality = 0..1
+    limit = {
+        alias_name[trigger] = alias_match_left[trigger]
+    }
+    ## cardinality = 0..inf
+    alternative_limit = {
+        alias_name[trigger] = alias_match_left[trigger]
+    }
+    ## cardinality = 0..1
+    weight = single_alias_right[weight_block]
+    ## cardinality = 0..1
+    custom = localisation
+    ## cardinality = 0..inf
+	alias_name[arithmetic_operation] = alias_match_left[arithmetic_operation]
+	## cardinality = 0..inf
+	alias_name[score_operation] = alias_match_left[score_operation]
+}
+
+### Iterate through all past province locations of the phases of the activity, optionally limited to unique locations. ('past' only includes ended phases)
+## scope = activity
+## push_scope = province
+alias[score_operation:random_activity_phase_location_past] = {
+    ## cardinality = 0..1
+    unique = bool
+    ## cardinality = 0..1
+    limit = {
+        alias_name[trigger] = alias_match_left[trigger]
+    }
+    ## cardinality = 0..inf
+    alternative_limit = {
+        alias_name[trigger] = alias_match_left[trigger]
+    }
+    ## cardinality = 0..1
+    weight = single_alias_right[weight_block]
+    ## cardinality = 0..1
+    custom = localisation
+    ## cardinality = 0..inf
+	alias_name[arithmetic_operation] = alias_match_left[arithmetic_operation]
+	## cardinality = 0..inf
+	alias_name[score_operation] = alias_match_left[score_operation]
+}
+
+### Iterate through all characters attending an activity. Invited guests that have not accepted/declined yet are not part of this list.Supports an optional state the character must be in.
+## scope = activity
+## push_scope = character
+alias[score_operation:random_attending_character] = {
+    ## cardinality = 0..1
+    state = enum[activity_state]
+    ## cardinality = 0..1
+    limit = {
+        alias_name[trigger] = alias_match_left[trigger]
+    }
+    ## cardinality = 0..inf
+    alternative_limit = {
+        alias_name[trigger] = alias_match_left[trigger]
+    }
+    ## cardinality = 0..1
+    weight = single_alias_right[weight_block]
+    ## cardinality = 0..1
+    custom = localisation
+    ## cardinality = 0..inf
+	alias_name[arithmetic_operation] = alias_match_left[arithmetic_operation]
+	## cardinality = 0..inf
+	alias_name[score_operation] = alias_match_left[score_operation]
+}
+
+### Iterates through characteres within the specified subset of the current phase.
+## scope = activity
+## push_scope = character
+alias[score_operation:random_guest_subset] = {
+    name = value[guest_subset]
+    ## cardinality = 0..1
+    limit = {
+        alias_name[trigger] = alias_match_left[trigger]
+    }
+    ## cardinality = 0..inf
+    alternative_limit = {
+        alias_name[trigger] = alias_match_left[trigger]
+    }
+    ## cardinality = 0..1
+    weight = single_alias_right[weight_block]
+    ## cardinality = 0..1
+    phase = value[activity_phase]
+    ## cardinality = 0..1
+    custom = localisation
+    ## cardinality = 0..inf
+	alias_name[arithmetic_operation] = alias_match_left[arithmetic_operation]
+	## cardinality = 0..inf
+	alias_name[score_operation] = alias_match_left[score_operation]
+}
+
+### Iterates through characteres within the specified subset of the current phase.
+## scope = activity
+## push_scope = character
+alias[score_operation:random_guest_subset_current_phase] = {
+    name = value[guest_subset]
+    ## cardinality = 0..1
+    limit = {
+        alias_name[trigger] = alias_match_left[trigger]
+    }
+    ## cardinality = 0..inf
+    alternative_limit = {
+        alias_name[trigger] = alias_match_left[trigger]
+    }
+    ## cardinality = 0..1
+    weight = single_alias_right[weight_block]
+    ## cardinality = 0..1
+    custom = localisation
+    ## cardinality = 0..inf
+	alias_name[arithmetic_operation] = alias_match_left[arithmetic_operation]
+	## cardinality = 0..inf
+	alias_name[score_operation] = alias_match_left[score_operation]
+}
+
+### Iterate through all counties in the region. Put 'region = region_name' inside it
+## push_scope = landed_title
+alias[score_operation:random_county_in_region] = {
+    region = <geographical_region>
+    ## cardinality = 0..1
+    limit = {
+        alias_name[trigger] = alias_match_left[trigger]
+    }
+    ## cardinality = 0..inf
+    alternative_limit = {
+        alias_name[trigger] = alias_match_left[trigger]
+    }
+    ## cardinality = 0..1
+    weight = single_alias_right[weight_block]
+    ## cardinality = 0..1
+    custom = localisation
+    ## cardinality = 0..inf
+	alias_name[arithmetic_operation] = alias_match_left[arithmetic_operation]
+	## cardinality = 0..inf
+	alias_name[score_operation] = alias_match_left[score_operation]
+}
+
+### Iterate through all items in global list. list = name or variable = name
+alias[score_operation:random_in_global_list] = {
+    ## cardinality = 0..1
+    list = value[list]
+    ## cardinality = 0..1
+    variable = value[global_variable_list]
+    ## cardinality = 0..1
+    limit = {
+        alias_name[trigger] = alias_match_left[trigger]
+    }
+    ## cardinality = 0..inf
+    alternative_limit = {
+        alias_name[trigger] = alias_match_left[trigger]
+    }
+    ## cardinality = 0..1
+    weight = single_alias_right[weight_block]
+    ## cardinality = 0..1
+    custom = localisation
+    ## cardinality = 0..inf
+	alias_name[arithmetic_operation] = alias_match_left[arithmetic_operation]
+	## cardinality = 0..inf
+	alias_name[score_operation] = alias_match_left[score_operation]
+}
+
+### Iterate through all items in list. list = name or variable = name
+## push_scope = any
+alias[score_operation:random_in_list] = {
+    ## cardinality = 0..1
+    list = value[list]
+    ## cardinality = 0..1
+    variable = value[variable_list]
+    ## cardinality = 0..1
+    limit = {
+        alias_name[trigger] = alias_match_left[trigger]
+    }
+    ## cardinality = 0..inf
+    alternative_limit = {
+        alias_name[trigger] = alias_match_left[trigger]
+    }
+    ## cardinality = 0..1
+    weight = single_alias_right[weight_block]
+    ## cardinality = 0..1
+    custom = localisation
+    ## cardinality = 0..inf
+	alias_name[arithmetic_operation] = alias_match_left[arithmetic_operation]
+	## cardinality = 0..inf
+	alias_name[score_operation] = alias_match_left[score_operation]
+}
+
+### Iterate through all items in local list. list = name or variable = name
+alias[score_operation:random_in_local_list] = {
+    ## cardinality = 0..1
+    list = value[list]
+    ## cardinality = 0..1
+    variable = value[local_variable_list]
+    ## cardinality = 0..1
+    limit = {
+        alias_name[trigger] = alias_match_left[trigger]
+    }
+    ## cardinality = 0..inf
+    alternative_limit = {
+        alias_name[trigger] = alias_match_left[trigger]
+    }
+    ## cardinality = 0..1
+    weight = single_alias_right[weight_block]
+    ## cardinality = 0..1
+    custom = localisation
+    ## cardinality = 0..inf
+	alias_name[arithmetic_operation] = alias_match_left[arithmetic_operation]
+	## cardinality = 0..inf
+	alias_name[score_operation] = alias_match_left[score_operation]
+}
+
+### Iterate through all characters in the pool of the given province
+## push_scope = character
+alias[score_operation:random_pool_character] = {
+    ## cardinality = 0..1
+    limit = {
+        alias_name[trigger] = alias_match_left[trigger]
+    }
+    ## cardinality = 0..inf
+    alternative_limit = {
+        alias_name[trigger] = alias_match_left[trigger]
+    }
+    ## cardinality = 0..1
+    weight = single_alias_right[weight_block]
+    province = scope[province]
+    ## cardinality = 0..1
+    custom = localisation
+    ## cardinality = 0..inf
+	alias_name[arithmetic_operation] = alias_match_left[arithmetic_operation]
+	## cardinality = 0..inf
+	alias_name[score_operation] = alias_match_left[score_operation]
+}
+
+### Iterate through all traits in a given category
+## push_scope = trait
+alias[score_operation:random_trait_in_category] = {
+    category = enum[trait_category]
+    ## cardinality = 0..1
+    limit = {
+        alias_name[trigger] = alias_match_left[trigger]
+    }
+    ## cardinality = 0..inf
+    alternative_limit = {
+        alias_name[trigger] = alias_match_left[trigger]
+    }
+    ## cardinality = 0..1
+    weight = single_alias_right[weight_block]
+    ## cardinality = 0..1
+    custom = localisation
+    ## cardinality = 0..inf
+	alias_name[arithmetic_operation] = alias_match_left[arithmetic_operation]
+	## cardinality = 0..inf
+	alias_name[score_operation] = alias_match_left[score_operation]
+}
+
+### Iterate through all struggles that character is involved in. Optional: Narrow down the involvement status *_chracter_struggle = { involvement = involved | interloper }
+## scope = character
+## push_scope = struggle 
+alias[score_operation:random_character_struggle] = {
+    ## cardinality = 0..1
+    involvement = enum[involvement]
+    ## cardinality = 0..1
+    limit = {
+        alias_name[trigger] = alias_match_left[trigger]
+    }
+    ## cardinality = 0..inf
+    alternative_limit = {
+        alias_name[trigger] = alias_match_left[trigger]
+    }
+    ## cardinality = 0..1
+    weight = single_alias_right[weight_block]
+    ## cardinality = 0..1
+    custom = localisation
+    ## cardinality = 0..inf
+	alias_name[arithmetic_operation] = alias_match_left[arithmetic_operation]
+	## cardinality = 0..inf
+	alias_name[score_operation] = alias_match_left[score_operation]
+}
+
+### Iterate through the titles of all claims held by a character; parameters: explicit = yes/no/all pressed = yes/no/all random_claim = { limit = { <triggers> } <effects> }
+## scope = character
+## push_scope = landed_title
+alias[score_operation:random_claim] = {
+    ## cardinality = 0..1
+    explicit = enum[yesnoall]
+    ## cardinality = 0..1
+    pressed = enum[yesnoall]
+    ## cardinality = 0..1
+    limit = {
+        alias_name[trigger] = alias_match_left[trigger]
+    }
+    ## cardinality = 0..inf
+    alternative_limit = {
+        alias_name[trigger] = alias_match_left[trigger]
+    }
+    ## cardinality = 0..1
+    weight = single_alias_right[weight_block]
+    ## cardinality = 0..1
+    custom = localisation
+    ## cardinality = 0..inf
+	alias_name[arithmetic_operation] = alias_match_left[arithmetic_operation]
+	## cardinality = 0..inf
+	alias_name[score_operation] = alias_match_left[score_operation]
+}
+
+### Iterates through all characters employed by the scoped character in the target court position.
+## scope = character
+## push_scope = character
+alias[score_operation:random_court_position_holder] = {
+    ## cardinality = 0..1
+    limit = {
+        alias_name[trigger] = alias_match_left[trigger]
+    }
+    ## cardinality = 0..inf
+    alternative_limit = {
+        alias_name[trigger] = alias_match_left[trigger]
+    }
+    ## cardinality = 0..1
+    weight = single_alias_right[weight_block]
+    ## cardinality = 0..1
+    type = <court_position>
+    ## cardinality = 0..1
+    custom = localisation
+    ## cardinality = 0..inf
+	alias_name[arithmetic_operation] = alias_match_left[arithmetic_operation]
+	## cardinality = 0..inf
+	alias_name[score_operation] = alias_match_left[score_operation]
+}
+
+### Iterate through scripted relations of a given type random_relation = { limit = { <triggers> } <effects> }
+## scope = character
+## push_scope = character
+alias[score_operation:random_relation] = {
+    type = <scripted_relation>
+    ## cardinality = 0..1
+    limit = {
+        alias_name[trigger] = alias_match_left[trigger]
+    }
+    ## cardinality = 0..inf
+    alternative_limit = {
+        alias_name[trigger] = alias_match_left[trigger]
+    }
+    ## cardinality = 0..1
+    weight = single_alias_right[weight_block]
+    ## cardinality = 0..1
+    custom = localisation
+    ## cardinality = 0..inf
+	alias_name[arithmetic_operation] = alias_match_left[arithmetic_operation]
+	## cardinality = 0..inf
+	alias_name[score_operation] = alias_match_left[score_operation]
+}
+
+### Iterate through the title itself, all de facto vassals, and below. The continue trigger specifies whether to recursively iterate through the vassal's vassal This is unrelated to the limit; if the limit is met it is added to the list, but its vassals will get checked even if the limit isn't met as long as the 'continue' trigger is ..._de_jure_vassal_and_below = { continue = { conditions } } random_in_de_facto_hierarchy = { limit = { <triggers> } <effects> }
+## scope = landed_title
+## push_scope = landed_title
+alias[score_operation:random_in_de_facto_hierarchy] = {
+    ## cardinality = 0..1
+    continue = {
+        alias_name[trigger] = alias_match_left[trigger]
+    }
+    ## cardinality = 0..1
+    limit = {
+        alias_name[trigger] = alias_match_left[trigger]
+    }
+    ## cardinality = 0..inf
+    alternative_limit = {
+        alias_name[trigger] = alias_match_left[trigger]
+    }
+    ## cardinality = 0..1
+    weight = single_alias_right[weight_block]
+    ## cardinality = 0..1
+    custom = localisation
+    ## cardinality = 0..inf
+	alias_name[arithmetic_operation] = alias_match_left[arithmetic_operation]
+	## cardinality = 0..inf
+	alias_name[score_operation] = alias_match_left[score_operation]
+}
+
+### Iterate through the title itself, all de jure vassals, and below. The continue trigger specifies whether to recursively iterate through the vassal's vassal This is unrelated to the limit; if the limit is met it is added to the list, but its vassals will get checked even if the limit isn't met as long as the 'continue' trigger is ..._de_jure_vassal_and_below = { continue = { conditions } } random_in_de_jure_hierarchy = { limit = { <triggers> } <effects> }
+## scope = landed_title
+## push_scope = landed_title
+alias[score_operation:random_in_de_jure_hierarchy] = {
+    ## cardinality = 0..1
+    continue = {
+        alias_name[trigger] = alias_match_left[trigger]
+    }
+    ## cardinality = 0..1
+    limit = {
+        alias_name[trigger] = alias_match_left[trigger]
+    }
+    ## cardinality = 0..inf
+    alternative_limit = {
+        alias_name[trigger] = alias_match_left[trigger]
+    }
+    ## cardinality = 0..1
+    weight = single_alias_right[weight_block]
+    ## cardinality = 0..1
+    custom = localisation
+    ## cardinality = 0..inf
+	alias_name[arithmetic_operation] = alias_match_left[arithmetic_operation]
+	## cardinality = 0..inf
+	alias_name[score_operation] = alias_match_left[score_operation]
+}
+
+## scope = character
+## push_scope = landed_title
+alias[score_operation:random_held_county] = single_alias_right[random_effect]
+
+## scope = character
+## push_scope = character
+alias[score_operation:random_parent] = {
+    ## cardinality = 0..1
+    limit = {
+        alias_name[trigger] = alias_match_left[trigger]
+    }
+    ## cardinality = 0..inf
+    alternative_limit = {
+        alias_name[trigger] = alias_match_left[trigger]
+    }
+    ## cardinality = 0..1
+    weight = single_alias_right[weight_block]
+    ## cardinality = 0..1
+    custom = localisation
+    ## cardinality = 0..inf
+	alias_name[arithmetic_operation] = alias_match_left[arithmetic_operation]
+	## cardinality = 0..inf
+	alias_name[score_operation] = alias_match_left[score_operation]
+    ## cardinality = 0..1
+    even_if_dead = bool
+}
+
+## scope = character
+## push_scope = character
+alias[score_operation:random_spouse] = {
+    ## cardinality = 0..1
+    limit = {
+        alias_name[trigger] = alias_match_left[trigger]
+    }
+    ## cardinality = 0..inf
+    alternative_limit = {
+        alias_name[trigger] = alias_match_left[trigger]
+    }
+    ## cardinality = 0..1
+    weight = single_alias_right[weight_block]
+    ## cardinality = 0..1
+    custom = localisation
+    ## cardinality = 0..inf
+	alias_name[arithmetic_operation] = alias_match_left[arithmetic_operation]
+	## cardinality = 0..inf
+	alias_name[score_operation] = alias_match_left[score_operation]
+    ## cardinality = 0..1
+    even_if_dead = bool
+}
+
+## scope = character
+## push_scope = character
+alias[score_operation:random_child] = {
+    ## cardinality = 0..1
+    limit = {
+        alias_name[trigger] = alias_match_left[trigger]
+    }
+    ## cardinality = 0..inf
+    alternative_limit = {
+        alias_name[trigger] = alias_match_left[trigger]
+    }
+    ## cardinality = 0..1
+    weight = single_alias_right[weight_block]
+    ## cardinality = 0..1
+    custom = localisation
+    ## cardinality = 0..inf
+	alias_name[arithmetic_operation] = alias_match_left[arithmetic_operation]
+	## cardinality = 0..inf
+	alias_name[score_operation] = alias_match_left[score_operation]
+    ## cardinality = 0..1
+    even_if_dead = bool
+}
+
+## scope = character
+## push_scope = character
+alias[score_operation:random_ancestor] = {
+    ## cardinality = 0..1
+    limit = {
+        alias_name[trigger] = alias_match_left[trigger]
+    }
+    ## cardinality = 0..inf
+    alternative_limit = {
+        alias_name[trigger] = alias_match_left[trigger]
+    }
+    ## cardinality = 0..1
+    weight = single_alias_right[weight_block]
+    ## cardinality = 0..1
+    custom = localisation
+    ## cardinality = 0..inf
+	alias_name[arithmetic_operation] = alias_match_left[arithmetic_operation]
+	## cardinality = 0..inf
+	alias_name[score_operation] = alias_match_left[score_operation]
+    ## cardinality = 0..1
+    even_if_dead = bool
+}
+
+## scope = character
+## push_scope = character
+alias[score_operation:random_close_family_member] = {
+    ## cardinality = 0..1
+    limit = {
+        alias_name[trigger] = alias_match_left[trigger]
+    }
+    ## cardinality = 0..inf
+    alternative_limit = {
+        alias_name[trigger] = alias_match_left[trigger]
+    }
+    ## cardinality = 0..1
+    weight = single_alias_right[weight_block]
+    ## cardinality = 0..1
+    custom = localisation
+    ## cardinality = 0..inf
+	alias_name[arithmetic_operation] = alias_match_left[arithmetic_operation]
+	## cardinality = 0..inf
+	alias_name[score_operation] = alias_match_left[score_operation]
+    ## cardinality = 0..1
+    even_if_dead = bool
+}
+
+## scope = character
+## push_scope = character
+alias[score_operation:random_close_or_extended_family_member] = {
+    ## cardinality = 0..1
+    limit = {
+        alias_name[trigger] = alias_match_left[trigger]
+    }
+    ## cardinality = 0..inf
+    alternative_limit = {
+        alias_name[trigger] = alias_match_left[trigger]
+    }
+    ## cardinality = 0..1
+    weight = single_alias_right[weight_block]
+    ## cardinality = 0..1
+    custom = localisation
+    ## cardinality = 0..inf
+	alias_name[arithmetic_operation] = alias_match_left[arithmetic_operation]
+	## cardinality = 0..inf
+	alias_name[score_operation] = alias_match_left[score_operation]
+    ## cardinality = 0..1
+    even_if_dead = bool
+}
+
+## scope = character
+## push_scope = character
+alias[score_operation:random_former_spouse] = {
+    ## cardinality = 0..1
+    limit = {
+        alias_name[trigger] = alias_match_left[trigger]
+    }
+    ## cardinality = 0..inf
+    alternative_limit = {
+        alias_name[trigger] = alias_match_left[trigger]
+    }
+    ## cardinality = 0..1
+    weight = single_alias_right[weight_block]
+    ## cardinality = 0..1
+    custom = localisation
+    ## cardinality = 0..inf
+	alias_name[arithmetic_operation] = alias_match_left[arithmetic_operation]
+	## cardinality = 0..inf
+	alias_name[score_operation] = alias_match_left[score_operation]
+    ## cardinality = 0..1
+    even_if_dead = bool
+}
+
+### Iterate through all investors of target candidate within the scoped title. Optionally specify a value to filter by investment amount
+## scope = landed_title
+## push_scope = character
+alias[score_operation:random_succession_appointment_investors] = {
+    ## cardinality = 0..1
+    limit = {
+        alias_name[trigger] = alias_match_left[trigger]
+    }
+    ## cardinality = 0..inf
+    alternative_limit = {
+        alias_name[trigger] = alias_match_left[trigger]
+    }
+    ## cardinality = 0..1
+    weight = single_alias_right[weight_block]
+    ## cardinality = 0..1
+    custom = localisation
+    ## cardinality = 0..inf
+	alias_name[arithmetic_operation] = alias_match_left[arithmetic_operation]
+	## cardinality = 0..inf
+	alias_name[score_operation] = alias_match_left[score_operation]
+    ## cardinality = 0..1
+    candidate = scope[character]
+    ## cardinality = 0..1
+    value == int_value_field
+    ## cardinality = 0..1
+    value == alias_keys_field[int_value]
+    ## cardinality = 0..1
+    value == single_alias_right[score_formula]
+}
+
+### Iterate through all held landed titles. Optionally specify a tier filter
+### any/every/ordered/random_held_title = { title_tier >= county }
+## scope = character
+## push_scope = landed_title
+alias[score_operation:random_held_title] = {
+    ## cardinality = 0..1
+    limit = {
+        alias_name[trigger] = alias_match_left[trigger]
+    }
+    ## cardinality = 0..1
+    title_tier == enum[title_tier]
+    ## cardinality = 0..inf
+    alternative_limit = {
+        alias_name[trigger] = alias_match_left[trigger]
+    }
+    ## cardinality = 0..1
+    weight = single_alias_right[weight_block]
+    ## cardinality = 0..1
+    custom = localisation
+    ## cardinality = 0..inf
+	alias_name[arithmetic_operation] = alias_match_left[arithmetic_operation]
+	## cardinality = 0..inf
+	alias_name[score_operation] = alias_match_left[score_operation]
+}
+
+### Iterate through all active Accolades of a given liege character's Acclaimed Knights
+### Optionally specify an accolade parameter filter
+## scope = character
+## push_scope = landed_title
+alias[score_operation:random_active_accolade] = {
+    ## cardinality = 0..1
+    limit = {
+        alias_name[trigger] = alias_match_left[trigger]
+    }
+    ## cardinality = 0..1
+    accolade_parameter == enum[accolade_parameter]
+    ## cardinality = 0..inf
+    alternative_limit = {
+        alias_name[trigger] = alias_match_left[trigger]
+    }
+    ## cardinality = 0..1
+    weight = single_alias_right[weight_block]
+    ## cardinality = 0..1
+    custom = localisation
+    ## cardinality = 0..inf
+	alias_name[arithmetic_operation] = alias_match_left[arithmetic_operation]
+	## cardinality = 0..inf
+	alias_name[score_operation] = alias_match_left[score_operation]
+}
+
+### Iterate through all schemes owned by the character
+### Optionally specify a type filter
+### random_scheme = { type = befriend }
+### random_scheme = { limit = { <triggers> } (optional) weight = { mtth } <effects> }
+## scope = character
+## push_scope = scheme
+alias[score_operation:random_scheme] = {
+    ## cardinality = 0..1
+    limit = {
+        alias_name[trigger] = alias_match_left[trigger]
+    }
+    ## cardinality = 0..1
+    type = <scheme>
+    ## cardinality = 0..inf
+    alternative_limit = {
+        alias_name[trigger] = alias_match_left[trigger]
+    }
+    ## cardinality = 0..1
+    weight = single_alias_right[weight_block]
+    ## cardinality = 0..1
+    custom = localisation
+    ## cardinality = 0..inf
+	alias_name[arithmetic_operation] = alias_match_left[arithmetic_operation]
+	## cardinality = 0..inf
+	alias_name[score_operation] = alias_match_left[score_operation]
+}
+
+### Iterate through all owned stories for a character
+### Optionally specify a story type filter
+## scope = character
+## push_scope = story_cycle
+alias[score_operation:random_owned_story] = {
+    ## cardinality = 0..1
+    limit = {
+        alias_name[trigger] = alias_match_left[trigger]
+    }
+    ## cardinality = 0..1
+    type = <story_cycle>
+    ## cardinality = 0..inf
+    alternative_limit = {
+        alias_name[trigger] = alias_match_left[trigger]
+    }
+    ## cardinality = 0..1
+    weight = single_alias_right[weight_block]
+    ## cardinality = 0..1
+    custom = localisation
+    ## cardinality = 0..inf
+	alias_name[arithmetic_operation] = alias_match_left[arithmetic_operation]
+	## cardinality = 0..inf
+	alias_name[score_operation] = alias_match_left[score_operation]
+}
+
+### Iterate through all secrets of the character
+### Optionally specify a secret type filter
+### random_secret = { type = secret_lover }
+### random_secret = { limit = { <triggers> } (optional) weight = { mtth } <effects> }
+## scope = character
+## push_scope = secret
+alias[score_operation:random_secret] = {
+    ## cardinality = 0..1
+    limit = {
+        alias_name[trigger] = alias_match_left[trigger]
+    }
+    ## cardinality = 0..1
+    type = <secret_type>
+    ## cardinality = 0..inf
+    alternative_limit = {
+        alias_name[trigger] = alias_match_left[trigger]
+    }
+    ## cardinality = 0..1
+    weight = single_alias_right[weight_block]
+    ## cardinality = 0..1
+    custom = localisation
+    ## cardinality = 0..inf
+	alias_name[arithmetic_operation] = alias_match_left[arithmetic_operation]
+	## cardinality = 0..inf
+	alias_name[score_operation] = alias_match_left[score_operation]
+}
+
+### Iterate through all memories of a character
+### Optionally specify a memory type filter
+### any_memory = { memory_type = completed_rites_of_passage }
+### random_memory = { limit = { <triggers> } (optional) weight = { mtth } <effects> }
+## scope = character
+## push_scope = character_memory
+alias[score_operation:random_memory] = {
+    ## cardinality = 0..1
+    limit = {
+        alias_name[trigger] = alias_match_left[trigger]
+    }
+    ## cardinality = 0..1
+    memory_type = <memory>
+    ## cardinality = 0..inf
+    alternative_limit = {
+        alias_name[trigger] = alias_match_left[trigger]
+    }
+    ## cardinality = 0..1
+    weight = single_alias_right[weight_block]
+    ## cardinality = 0..1
+    custom = localisation
+    ## cardinality = 0..inf
+	alias_name[arithmetic_operation] = alias_match_left[arithmetic_operation]
+	## cardinality = 0..inf
+	alias_name[score_operation] = alias_match_left[score_operation]
+}
+
+### Iterate through all DIRECT vassals
+### Optionally specify a vassal stance filter
+### any_vassal = { vassal_stance = parochial }
+### random_vassal = { limit = { <triggers> } (optional) weight = { mtth } <effects> }
+## scope = character
+## push_scope = character
+alias[score_operation:random_vassal] = {
+    ## cardinality = 0..1
+    limit = {
+        alias_name[trigger] = alias_match_left[trigger]
+    }
+    ## cardinality = 0..1
+    vassal_stance = <vassal_stance>
+    ## cardinality = 0..inf
+    alternative_limit = {
+        alias_name[trigger] = alias_match_left[trigger]
+    }
+    ## cardinality = 0..1
+    weight = single_alias_right[weight_block]
+    ## cardinality = 0..1
+    custom = localisation
+    ## cardinality = 0..inf
+	alias_name[arithmetic_operation] = alias_match_left[arithmetic_operation]
+	## cardinality = 0..inf
+	alias_name[score_operation] = alias_match_left[score_operation]
+}
+
+#####################################
+#
+# ORDERED EFFECT
+#
+#####################################
+
+### Iterate through all province locations of the phases of the activity, optionally limited to unique locations.
+## scope = activity
+## push_scope = province
+alias[score_operation:ordered_activity_phase_location] = {
+    ## cardinality = 0..1
+    unique = bool
+    ## cardinality = 0..1
+    limit = {
+        alias_name[trigger] = alias_match_left[trigger]
+    }
+    # TODO: Work out what exactly this is restricted to
+    ## cardinality = 0..1
+    order_by = alias_keys_field[int_value]
+    ## cardinality = 0..1
+    order_by = single_alias_right[score_formula]
+    ## cardinality = 0..1
+    order_by = value_field
+    ## cardinality = 0..1
+    max = alias_keys_field[int_value]
+    ## cardinality = 0..1
+    max = value_field
+    ## cardinality = 0..1
+    position = int
+    ## cardinality = 0..1
+    check_range_bounds = no
+    ## cardinality = 0..1
+    custom = localisation
+    ## cardinality = 0..inf
+	alias_name[arithmetic_operation] = alias_match_left[arithmetic_operation]
+	## cardinality = 0..inf
+	alias_name[score_operation] = alias_match_left[score_operation]
+}
+
+### Iterate through all future province locations of the phases of the activity, optionally limited to unique locations. ('future' does not include any started phase)
+## scope = activity
+## push_scope = province
+alias[score_operation:ordered_activity_phase_location_future] = {
+    ## cardinality = 0..1
+    unique = bool
+    ## cardinality = 0..1
+    limit = {
+        alias_name[trigger] = alias_match_left[trigger]
+    }
+    # TODO: Work out what exactly this is restricted to
+    ## cardinality = 0..1
+    order_by = alias_keys_field[int_value]
+    ## cardinality = 0..1
+    order_by = single_alias_right[score_formula]
+    ## cardinality = 0..1
+    order_by = value_field
+    ## cardinality = 0..1
+    max = alias_keys_field[int_value]
+    ## cardinality = 0..1
+    max = value_field
+    ## cardinality = 0..1
+    position = int
+    ## cardinality = 0..1
+    check_range_bounds = no
+    ## cardinality = 0..1
+    custom = localisation
+    ## cardinality = 0..inf
+	alias_name[arithmetic_operation] = alias_match_left[arithmetic_operation]
+	## cardinality = 0..inf
+	alias_name[score_operation] = alias_match_left[score_operation]
+}
+
+### Iterate through all past province locations of the phases of the activity, optionally limited to unique locations. ('past' only includes ended phases)
+## scope = activity
+## push_scope = province
+alias[score_operation:ordered_activity_phase_location_past] = {
+    ## cardinality = 0..1
+    unique = bool
+    ## cardinality = 0..1
+    limit = {
+        alias_name[trigger] = alias_match_left[trigger]
+    }
+    # TODO: Work out what exactly this is restricted to
+    ## cardinality = 0..1
+    order_by = alias_keys_field[int_value]
+    ## cardinality = 0..1
+    order_by = single_alias_right[score_formula]
+    ## cardinality = 0..1
+    order_by = value_field
+    ## cardinality = 0..1
+    max = alias_keys_field[int_value]
+    ## cardinality = 0..1
+    max = value_field
+    ## cardinality = 0..1
+    position = int
+    ## cardinality = 0..1
+    check_range_bounds = no
+    ## cardinality = 0..1
+    custom = localisation
+    ## cardinality = 0..inf
+	alias_name[arithmetic_operation] = alias_match_left[arithmetic_operation]
+	## cardinality = 0..inf
+	alias_name[score_operation] = alias_match_left[score_operation]
+}
+
+### Iterate through all characters attending an activity. Invited guests that have not accepted/declined yet are not part of this list.Supports an optional state the character must be in.
+## scope = activity
+## push_scope = character
+alias[score_operation:ordered_attending_character] = {
+    ## cardinality = 0..1
+    state = enum[activity_state]
+    ## cardinality = 0..1
+    limit = {
+        alias_name[trigger] = alias_match_left[trigger]
+    }
+    # TODO: Work out what exactly this is restricted to
+    ## cardinality = 0..1
+    order_by = alias_keys_field[int_value]
+    ## cardinality = 0..1
+    order_by = single_alias_right[score_formula]
+    ## cardinality = 0..1
+    order_by = value_field
+    ## cardinality = 0..1
+    max = alias_keys_field[int_value]
+    ## cardinality = 0..1
+    max = value_field
+    ## cardinality = 0..1
+    position = int
+    ## cardinality = 0..1
+    check_range_bounds = no
+    ## cardinality = 0..1
+    custom = localisation
+    ## cardinality = 0..inf
+	alias_name[arithmetic_operation] = alias_match_left[arithmetic_operation]
+	## cardinality = 0..inf
+	alias_name[score_operation] = alias_match_left[score_operation]
+}
+
+### Iterates through characteres within the specified subset of the current phase.
+## scope = activity
+## push_scope = character
+alias[score_operation:ordered_guest_subset] = {
+    name = value[guest_subset]
+    ## cardinality = 0..1
+    limit = {
+        alias_name[trigger] = alias_match_left[trigger]
+    }
+    # TODO: Work out what exactly this is restricted to
+    ## cardinality = 0..1
+    order_by = alias_keys_field[int_value]
+    ## cardinality = 0..1
+    order_by = single_alias_right[score_formula]
+    ## cardinality = 0..1
+    order_by = value_field
+    ## cardinality = 0..1
+    max = alias_keys_field[int_value]
+    ## cardinality = 0..1
+    max = value_field
+    ## cardinality = 0..1
+    position = int
+    ## cardinality = 0..1
+    check_range_bounds = no
+    ## cardinality = 0..1
+    phase = value[activity_phase]
+    ## cardinality = 0..1
+    custom = localisation
+    ## cardinality = 0..inf
+	alias_name[arithmetic_operation] = alias_match_left[arithmetic_operation]
+	## cardinality = 0..inf
+	alias_name[score_operation] = alias_match_left[score_operation]
+}
+
+### Iterates through characteres within the specified subset of the current phase.
+## scope = activity
+## push_scope = character
+alias[score_operation:ordered_guest_subset_current_phase] = {
+    name = value[guest_subset]
+    ## cardinality = 0..1
+    limit = {
+        alias_name[trigger] = alias_match_left[trigger]
+    }
+    # TODO: Work out what exactly this is restricted to
+    ## cardinality = 0..1
+    order_by = alias_keys_field[int_value]
+    ## cardinality = 0..1
+    order_by = single_alias_right[score_formula]
+    ## cardinality = 0..1
+    order_by = value_field
+    ## cardinality = 0..1
+    max = alias_keys_field[int_value]
+    ## cardinality = 0..1
+    max = value_field
+    ## cardinality = 0..1
+    position = int
+    ## cardinality = 0..1
+    check_range_bounds = no
+    ## cardinality = 0..1
+    custom = localisation
+    ## cardinality = 0..inf
+	alias_name[arithmetic_operation] = alias_match_left[arithmetic_operation]
+	## cardinality = 0..inf
+	alias_name[score_operation] = alias_match_left[score_operation]
+}
+
+### Iterate through all counties in the region. Put 'region = region_name' inside it
+## push_scope = landed_title
+alias[score_operation:ordered_county_in_region] = {
+    region = <geographical_region>
+    ## cardinality = 0..1
+    limit = {
+        alias_name[trigger] = alias_match_left[trigger]
+    }
+    # TODO: Work out what exactly this is restricted to
+    ## cardinality = 0..1
+    order_by = alias_keys_field[int_value]
+    ## cardinality = 0..1
+    order_by = single_alias_right[score_formula]
+    ## cardinality = 0..1
+    order_by = value_field
+    ## cardinality = 0..1
+    max = alias_keys_field[int_value]
+    ## cardinality = 0..1
+    max = value_field
+    ## cardinality = 0..1
+    position = int
+    ## cardinality = 0..1
+    check_range_bounds = no
+    ## cardinality = 0..1
+    custom = localisation
+    ## cardinality = 0..inf
+	alias_name[arithmetic_operation] = alias_match_left[arithmetic_operation]
+	## cardinality = 0..inf
+	alias_name[score_operation] = alias_match_left[score_operation]
+}
+
+### Iterate through all items in global list. list = name or variable = name
+alias[score_operation:ordered_in_global_list] = {
+    ## cardinality = 0..1
+    list = value[list]
+    ## cardinality = 0..1
+    variable = value[global_variable_list]
+    ## cardinality = 0..1
+    limit = {
+        alias_name[trigger] = alias_match_left[trigger]
+    }
+    # TODO: Work out what exactly this is restricted to
+    ## cardinality = 0..1
+    order_by = alias_keys_field[int_value]
+    ## cardinality = 0..1
+    order_by = single_alias_right[score_formula]
+    ## cardinality = 0..1
+    order_by = value_field
+    ## cardinality = 0..1
+    max = alias_keys_field[int_value]
+    ## cardinality = 0..1
+    max = value_field
+    ## cardinality = 0..1
+    position = int
+    ## cardinality = 0..1
+    check_range_bounds = no
+    ## cardinality = 0..1
+    custom = localisation
+    ## cardinality = 0..inf
+	alias_name[arithmetic_operation] = alias_match_left[arithmetic_operation]
+	## cardinality = 0..inf
+	alias_name[score_operation] = alias_match_left[score_operation]
+}
+
+### Iterate through all items in list. list = name or variable = name
+## push_scope = any
+alias[score_operation:ordered_in_list] = {
+    ## cardinality = 0..1
+    list = value[list]
+    ## cardinality = 0..1
+    variable = value[variable_list]
+    ## cardinality = 0..1
+    limit = {
+        alias_name[trigger] = alias_match_left[trigger]
+    }
+    # TODO: Work out what exactly this is restricted to
+    ## cardinality = 0..1
+    order_by = alias_keys_field[int_value]
+    ## cardinality = 0..1
+    order_by = single_alias_right[score_formula]
+    ## cardinality = 0..1
+    order_by = value_field
+    ## cardinality = 0..1
+    max = alias_keys_field[int_value]
+    ## cardinality = 0..1
+    max = single_alias_right[score_formula]
+    ## cardinality = 0..1
+    max = value_field
+    ## cardinality = 0..1
+    position = int
+    ## cardinality = 0..1
+    check_range_bounds = no
+    ## cardinality = 0..1
+    custom = localisation
+    ## cardinality = 0..inf
+	alias_name[arithmetic_operation] = alias_match_left[arithmetic_operation]
+	## cardinality = 0..inf
+	alias_name[score_operation] = alias_match_left[score_operation]
+}
+
+### Iterate through all items in local list. list = name or variable = name
+alias[score_operation:ordered_in_local_list] = {
+    ## cardinality = 0..1
+    list = value[list]
+    ## cardinality = 0..1
+    variable = value[local_variable_list]
+    ## cardinality = 0..1
+    limit = {
+        alias_name[trigger] = alias_match_left[trigger]
+    }
+    # TODO: Work out what exactly this is restricted to
+    ## cardinality = 0..1
+    order_by = alias_keys_field[int_value]
+    ## cardinality = 0..1
+    order_by = single_alias_right[score_formula]
+    ## cardinality = 0..1
+    order_by = value_field
+    ## cardinality = 0..1
+    max = alias_keys_field[int_value]
+    ## cardinality = 0..1
+    max = value_field
+    ## cardinality = 0..1
+    position = int
+    ## cardinality = 0..1
+    check_range_bounds = no
+    ## cardinality = 0..1
+    custom = localisation
+    ## cardinality = 0..inf
+	alias_name[arithmetic_operation] = alias_match_left[arithmetic_operation]
+	## cardinality = 0..inf
+	alias_name[score_operation] = alias_match_left[score_operation]
+}
+
+### Iterate through all characters in the pool of the given province
+## push_scope = character
+alias[score_operation:ordered_pool_character] = {
+    ## cardinality = 0..1
+    limit = {
+        alias_name[trigger] = alias_match_left[trigger]
+    }
+    # TODO: Work out what exactly this is restricted to
+    ## cardinality = 0..1
+    order_by = alias_keys_field[int_value]
+    ## cardinality = 0..1
+    order_by = single_alias_right[score_formula]
+    ## cardinality = 0..1
+    order_by = value_field
+    ## cardinality = 0..1
+    max = alias_keys_field[int_value]
+    ## cardinality = 0..1
+    max = value_field
+    ## cardinality = 0..1
+    position = int
+    ## cardinality = 0..1
+    check_range_bounds = no
+    province = scope[province]
+    ## cardinality = 0..1
+    custom = localisation
+    ## cardinality = 0..inf
+	alias_name[arithmetic_operation] = alias_match_left[arithmetic_operation]
+	## cardinality = 0..inf
+	alias_name[score_operation] = alias_match_left[score_operation]
+}
+
+### Iterate through all traits in a given category
+## push_scope = trait
+alias[score_operation:ordered_trait_in_category] = {
+    category = enum[trait_category]
+    ## cardinality = 0..1
+    limit = {
+        alias_name[trigger] = alias_match_left[trigger]
+    }
+    # TODO: Work out what exactly this is restricted to
+    ## cardinality = 0..1
+    order_by = alias_keys_field[int_value]
+    ## cardinality = 0..1
+    order_by = single_alias_right[score_formula]
+    ## cardinality = 0..1
+    order_by = value_field
+    ## cardinality = 0..1
+    max = alias_keys_field[int_value]
+    ## cardinality = 0..1
+    max = value_field
+    ## cardinality = 0..1
+    position = int
+    ## cardinality = 0..1
+    check_range_bounds = no
+    ## cardinality = 0..1
+    custom = localisation
+    ## cardinality = 0..inf
+	alias_name[arithmetic_operation] = alias_match_left[arithmetic_operation]
+	## cardinality = 0..inf
+	alias_name[score_operation] = alias_match_left[score_operation]
+}
+
+### Iterate through all struggles that character is involved in. Optional: Narrow down the involvement status *_chracter_struggle = { involvement = involved | interloper }
+## scope = character
+## push_scope = struggle
+alias[score_operation:ordered_character_struggle] = {
+    ## cardinality = 0..1
+    involvement = enum[involvement]
+    ## cardinality = 0..1
+    limit = {
+        alias_name[trigger] = alias_match_left[trigger]
+    }
+    # TODO: Work out what exactly this is restricted to
+    ## cardinality = 0..1
+    order_by = alias_keys_field[int_value]
+    ## cardinality = 0..1
+    order_by = single_alias_right[score_formula]
+    ## cardinality = 0..1
+    order_by = value_field
+    ## cardinality = 0..1
+    max = alias_keys_field[int_value]
+    ## cardinality = 0..1
+    max = value_field
+    ## cardinality = 0..1
+    position = int
+    ## cardinality = 0..1
+    check_range_bounds = no
+    ## cardinality = 0..1
+    custom = localisation
+    ## cardinality = 0..inf
+	alias_name[arithmetic_operation] = alias_match_left[arithmetic_operation]
+	## cardinality = 0..inf
+	alias_name[score_operation] = alias_match_left[score_operation]
+}
+
+### Iterate through the titles of all claims held by a character; parameters: explicit = yes/no/all pressed = yes/no/all ordered_claim = { limit = { <triggers> } <effects> }
+## scope = character
+## push_scope = landed_title
+alias[score_operation:ordered_claim] = {
+    explicit = enum[yesnoall]
+    pressed = enum[yesnoall]
+    ## cardinality = 0..1
+    limit = {
+        alias_name[trigger] = alias_match_left[trigger]
+    }
+    # TODO: Work out what exactly this is restricted to
+    ## cardinality = 0..1
+    order_by = alias_keys_field[int_value]
+    ## cardinality = 0..1
+    order_by = single_alias_right[score_formula]
+    ## cardinality = 0..1
+    order_by = value_field
+    ## cardinality = 0..1
+    max = alias_keys_field[int_value]
+    ## cardinality = 0..1
+    max = value_field
+    ## cardinality = 0..1
+    position = int
+    ## cardinality = 0..1
+    check_range_bounds = no
+    ## cardinality = 0..1
+    custom = localisation
+    ## cardinality = 0..inf
+	alias_name[arithmetic_operation] = alias_match_left[arithmetic_operation]
+	## cardinality = 0..inf
+	alias_name[score_operation] = alias_match_left[score_operation]
+}
+
+### Iterates through all characters employed by the scoped character in the target court position.
+## scope = character
+## push_scope = character
+alias[score_operation:ordered_court_position_holder] = {
+    ## cardinality = 0..1
+    limit = {
+        alias_name[trigger] = alias_match_left[trigger]
+    }
+    # TODO: Work out what exactly this is restricted to
+    ## cardinality = 0..1
+    order_by = alias_keys_field[int_value]
+    ## cardinality = 0..1
+    order_by = single_alias_right[score_formula]
+    ## cardinality = 0..1
+    order_by = value_field
+    ## cardinality = 0..1
+    max = alias_keys_field[int_value]
+    ## cardinality = 0..1
+    max = value_field
+    ## cardinality = 0..1
+    position = int
+    ## cardinality = 0..1
+    check_range_bounds = no
+    ## cardinality = 0..1
+    type = <court_position>
+    ## cardinality = 0..1
+    custom = localisation
+    ## cardinality = 0..inf
+	alias_name[arithmetic_operation] = alias_match_left[arithmetic_operation]
+	## cardinality = 0..inf
+	alias_name[score_operation] = alias_match_left[score_operation]
+}
+
+### Iterate through scripted relations of a given type ordered_relation = { limit = { <triggers> } <effects> }
+## scope = character
+## push_scope = character
+alias[score_operation:ordered_relation] = {
+    type = <scripted_relation>
+    ## cardinality = 0..1
+    limit = {
+        alias_name[trigger] = alias_match_left[trigger]
+    }
+    # TODO: Work out what exactly this is restricted to
+    ## cardinality = 0..1
+    order_by = alias_keys_field[int_value]
+    ## cardinality = 0..1
+    order_by = single_alias_right[score_formula]
+    ## cardinality = 0..1
+    order_by = value_field
+    ## cardinality = 0..1
+    max = alias_keys_field[int_value]
+    ## cardinality = 0..1
+    max = value_field
+    ## cardinality = 0..1
+    position = int
+    ## cardinality = 0..1
+    check_range_bounds = no
+    ## cardinality = 0..1
+    custom = localisation
+    ## cardinality = 0..inf
+	alias_name[arithmetic_operation] = alias_match_left[arithmetic_operation]
+	## cardinality = 0..inf
+	alias_name[score_operation] = alias_match_left[score_operation]
+}
+
+### Iterate through the title itself, all de facto vassals, and below. The continue trigger specifies whether to recursively iterate through the vassal's vassal This is unrelated to the limit; if the limit is met it is added to the list, but its vassals will get checked even if the limit isn't met as long as the 'continue' trigger is ..._de_jure_vassal_and_below = { continue = { conditions } } ordered_in_de_facto_hierarchy = { limit = { <triggers> } <effects> }
+## scope = landed_title
+## push_scope = landed_title
+alias[score_operation:ordered_in_de_facto_hierarchy] = {
+    ## cardinality = 0..1
+    continue = {
+        alias_name[trigger] = alias_match_left[trigger]
+    }
+    ## cardinality = 0..1
+    limit = {
+        alias_name[trigger] = alias_match_left[trigger]
+    }
+    # TODO: Work out what exactly this is restricted to
+    ## cardinality = 0..1
+    order_by = alias_keys_field[int_value]
+    ## cardinality = 0..1
+    order_by = single_alias_right[score_formula]
+    ## cardinality = 0..1
+    order_by = value_field
+    ## cardinality = 0..1
+    max = alias_keys_field[int_value]
+    ## cardinality = 0..1
+    max = value_field
+    ## cardinality = 0..1
+    position = int
+    ## cardinality = 0..1
+    check_range_bounds = no
+    ## cardinality = 0..1
+    custom = localisation
+    ## cardinality = 0..inf
+	alias_name[arithmetic_operation] = alias_match_left[arithmetic_operation]
+	## cardinality = 0..inf
+	alias_name[score_operation] = alias_match_left[score_operation]
+}
+
+### Iterate through the title itself, all de jure vassals, and below. The continue trigger specifies whether to recursively iterate through the vassal's vassal This is unrelated to the limit; if the limit is met it is added to the list, but its vassals will get checked even if the limit isn't met as long as the 'continue' trigger is ..._de_jure_vassal_and_below = { continue = { conditions } } ordered_in_de_jure_hierarchy = { limit = { <triggers> } <effects> }
+## scope = landed_title
+## push_scope = landed_title
+alias[score_operation:ordered_in_de_jure_hierarchy] = {
+    ## cardinality = 0..1
+    continue = {
+        alias_name[trigger] = alias_match_left[trigger]
+    }
+    ## cardinality = 0..1
+    limit = {
+        alias_name[trigger] = alias_match_left[trigger]
+    }
+    # TODO: Work out what exactly this is restricted to
+    ## cardinality = 0..1
+    order_by = alias_keys_field[int_value]
+    ## cardinality = 0..1
+    order_by = single_alias_right[score_formula]
+    ## cardinality = 0..1
+    order_by = value_field
+    ## cardinality = 0..1
+    max = alias_keys_field[int_value]
+    ## cardinality = 0..1
+    max = value_field
+    ## cardinality = 0..1
+    position = int
+    ## cardinality = 0..1
+    check_range_bounds = no
+    ## cardinality = 0..1
+    custom = localisation
+    ## cardinality = 0..inf
+	alias_name[arithmetic_operation] = alias_match_left[arithmetic_operation]
+	## cardinality = 0..inf
+	alias_name[score_operation] = alias_match_left[score_operation]
+}
+
+## scope = character
+## push_scope = landed_title
+alias[score_operation:ordered_held_county] = single_alias_right[ordered_effect]
+
+## scope = character
+## push_scope = character
+alias[score_operation:ordered_parent] = {
+    ## cardinality = 0..1
+    limit = {
+        alias_name[trigger] = alias_match_left[trigger]
+    }
+    # TODO: Work out what exactly this is restricted to
+    ## cardinality = 0..1
+    order_by = alias_keys_field[int_value]
+    ## cardinality = 0..1
+    order_by = single_alias_right[score_formula]
+    ## cardinality = 0..1
+    order_by = value_field
+    ## cardinality = 0..1
+    max = alias_keys_field[int_value]
+    ## cardinality = 0..1
+    max = value_field
+    ## cardinality = 0..1
+    position = int
+    ## cardinality = 0..1
+    check_range_bounds = no
+    ## cardinality = 0..1
+    custom = localisation
+    ## cardinality = 0..inf
+	alias_name[arithmetic_operation] = alias_match_left[arithmetic_operation]
+	## cardinality = 0..inf
+	alias_name[score_operation] = alias_match_left[score_operation]
+    ## cardinality = 0..1
+    even_if_dead = bool
+}
+
+## scope = character
+## push_scope = character
+alias[score_operation:ordered_spouse] = {
+    ## cardinality = 0..1
+    limit = {
+        alias_name[trigger] = alias_match_left[trigger]
+    }
+    # TODO: Work out what exactly this is restricted to
+    ## cardinality = 0..1
+    order_by = alias_keys_field[int_value]
+    ## cardinality = 0..1
+    order_by = single_alias_right[score_formula]
+    ## cardinality = 0..1
+    order_by = value_field
+    ## cardinality = 0..1
+    max = alias_keys_field[int_value]
+    ## cardinality = 0..1
+    max = value_field
+    ## cardinality = 0..1
+    position = int
+    ## cardinality = 0..1
+    check_range_bounds = no
+    ## cardinality = 0..1
+    custom = localisation
+    ## cardinality = 0..inf
+	alias_name[arithmetic_operation] = alias_match_left[arithmetic_operation]
+	## cardinality = 0..inf
+	alias_name[score_operation] = alias_match_left[score_operation]
+    ## cardinality = 0..1
+    even_if_dead = bool
+}
+
+## scope = character
+## push_scope = character
+alias[score_operation:ordered_child] = {
+    ## cardinality = 0..1
+    limit = {
+        alias_name[trigger] = alias_match_left[trigger]
+    }
+    # TODO: Work out what exactly this is restricted to
+    ## cardinality = 0..1
+    order_by = alias_keys_field[int_value]
+    ## cardinality = 0..1
+    order_by = single_alias_right[score_formula]
+    ## cardinality = 0..1
+    order_by = value_field
+    ## cardinality = 0..1
+    max = alias_keys_field[int_value]
+    ## cardinality = 0..1
+    max = value_field
+    ## cardinality = 0..1
+    position = int
+    ## cardinality = 0..1
+    check_range_bounds = no
+    ## cardinality = 0..1
+    custom = localisation
+    ## cardinality = 0..inf
+	alias_name[arithmetic_operation] = alias_match_left[arithmetic_operation]
+	## cardinality = 0..inf
+	alias_name[score_operation] = alias_match_left[score_operation]
+    ## cardinality = 0..1
+    even_if_dead = bool
+}
+
+## scope = character
+## push_scope = character
+alias[score_operation:ordered_ancestor] = {
+    ## cardinality = 0..1
+    limit = {
+        alias_name[trigger] = alias_match_left[trigger]
+    }
+    # TODO: Work out what exactly this is restricted to
+    ## cardinality = 0..1
+    order_by = alias_keys_field[int_value]
+    ## cardinality = 0..1
+    order_by = single_alias_right[score_formula]
+    ## cardinality = 0..1
+    order_by = value_field
+    ## cardinality = 0..1
+    max = alias_keys_field[int_value]
+    ## cardinality = 0..1
+    max = value_field
+    ## cardinality = 0..1
+    position = int
+    ## cardinality = 0..1
+    check_range_bounds = no
+    ## cardinality = 0..1
+    custom = localisation
+    ## cardinality = 0..inf
+	alias_name[arithmetic_operation] = alias_match_left[arithmetic_operation]
+	## cardinality = 0..inf
+	alias_name[score_operation] = alias_match_left[score_operation]
+    ## cardinality = 0..1
+    even_if_dead = bool
+}
+
+## scope = character
+## push_scope = character
+alias[score_operation:ordered_close_family_member] = {
+    ## cardinality = 0..1
+    limit = {
+        alias_name[trigger] = alias_match_left[trigger]
+    }
+    # TODO: Work out what exactly this is restricted to
+    ## cardinality = 0..1
+    order_by = alias_keys_field[int_value]
+    ## cardinality = 0..1
+    order_by = single_alias_right[score_formula]
+    ## cardinality = 0..1
+    order_by = value_field
+    ## cardinality = 0..1
+    max = alias_keys_field[int_value]
+    ## cardinality = 0..1
+    max = value_field
+    ## cardinality = 0..1
+    position = int
+    ## cardinality = 0..1
+    check_range_bounds = no
+    ## cardinality = 0..1
+    custom = localisation
+    ## cardinality = 0..inf
+	alias_name[arithmetic_operation] = alias_match_left[arithmetic_operation]
+	## cardinality = 0..inf
+	alias_name[score_operation] = alias_match_left[score_operation]
+    ## cardinality = 0..1
+    even_if_dead = bool
+}
+
+## scope = character
+## push_scope = character
+alias[score_operation:ordered_close_or_extended_family_member] = {
+    ## cardinality = 0..1
+    limit = {
+        alias_name[trigger] = alias_match_left[trigger]
+    }
+    # TODO: Work out what exactly this is restricted to
+    ## cardinality = 0..1
+    order_by = alias_keys_field[int_value]
+    ## cardinality = 0..1
+    order_by = single_alias_right[score_formula]
+    ## cardinality = 0..1
+    order_by = value_field
+    ## cardinality = 0..1
+    max = alias_keys_field[int_value]
+    ## cardinality = 0..1
+    max = value_field
+    ## cardinality = 0..1
+    position = int
+    ## cardinality = 0..1
+    check_range_bounds = no
+    ## cardinality = 0..1
+    custom = localisation
+    ## cardinality = 0..inf
+	alias_name[arithmetic_operation] = alias_match_left[arithmetic_operation]
+	## cardinality = 0..inf
+	alias_name[score_operation] = alias_match_left[score_operation]
+    ## cardinality = 0..1
+    even_if_dead = bool
+}
+
+## scope = character
+## push_scope = character
+alias[score_operation:ordered_former_spouse] = {
+    ## cardinality = 0..1
+    limit = {
+        alias_name[trigger] = alias_match_left[trigger]
+    }
+    # TODO: Work out what exactly this is restricted to
+    ## cardinality = 0..1
+    order_by = alias_keys_field[int_value]
+    ## cardinality = 0..1
+    order_by = single_alias_right[score_formula]
+    ## cardinality = 0..1
+    order_by = value_field
+    ## cardinality = 0..1
+    max = alias_keys_field[int_value]
+    ## cardinality = 0..1
+    max = value_field
+    ## cardinality = 0..1
+    position = int
+    ## cardinality = 0..1
+    check_range_bounds = no
+    ## cardinality = 0..1
+    custom = localisation
+    ## cardinality = 0..inf
+	alias_name[arithmetic_operation] = alias_match_left[arithmetic_operation]
+	## cardinality = 0..inf
+	alias_name[score_operation] = alias_match_left[score_operation]
+    ## cardinality = 0..1
+    even_if_dead = bool
+}
+
+### Iterate through all investors of target candidate within the scoped title. Optionally specify a value to filter by investment amount
+## scope = landed_title
+## push_scope = character
+alias[score_operation:ordered_succession_appointment_investors] = {
+    ## cardinality = 0..1
+    limit = {
+        alias_name[trigger] = alias_match_left[trigger]
+    }
+    # TODO: Work out what exactly this is restricted to
+    ## cardinality = 0..1
+    order_by = alias_keys_field[int_value]
+    ## cardinality = 0..1
+    order_by = single_alias_right[score_formula]
+    ## cardinality = 0..1
+    order_by = value_field
+    ## cardinality = 0..1
+    max = alias_keys_field[int_value]
+    ## cardinality = 0..1
+    max = value_field
+    ## cardinality = 0..1
+    position = int
+    ## cardinality = 0..1
+    check_range_bounds = no
+    ## cardinality = 0..1
+    custom = localisation
+    ## cardinality = 0..inf
+	alias_name[arithmetic_operation] = alias_match_left[arithmetic_operation]
+	## cardinality = 0..inf
+	alias_name[score_operation] = alias_match_left[score_operation]
+    ## cardinality = 0..1
+    candidate = scope[character]
+    ## cardinality = 0..1
+    value == int_value_field
+    ## cardinality = 0..1
+    value == alias_keys_field[int_value]
+    ## cardinality = 0..1
+    value == single_alias_right[score_formula]
+}
+
+### Iterate through all held landed titles. Optionally specify a tier filter
+### any/every/ordered/random_held_title = { title_tier >= county }
+## scope = character
+## push_scope = landed_title
+alias[score_operation:ordered_held_title] = {
+    ## cardinality = 0..1
+    limit = {
+        alias_name[trigger] = alias_match_left[trigger]
+    }
+    ## cardinality = 0..1
+    title_tier == enum[title_tier]
+    # TODO: Work out what exactly this is restricted to
+    ## cardinality = 0..1
+    order_by = alias_keys_field[int_value]
+    ## cardinality = 0..1
+    order_by = single_alias_right[score_formula]
+    ## cardinality = 0..1
+    order_by = value_field
+    ## cardinality = 0..1
+    max = alias_keys_field[int_value]
+    ## cardinality = 0..1
+    max = value_field
+    ## cardinality = 0..1
+    position = int
+    ## cardinality = 0..1
+    check_range_bounds = no
+    ## cardinality = 0..1
+    custom = localisation
+    ## cardinality = 0..inf
+	alias_name[arithmetic_operation] = alias_match_left[arithmetic_operation]
+	## cardinality = 0..inf
+	alias_name[score_operation] = alias_match_left[score_operation]
+}
+
+### Iterate through all active Accolades of a given liege character's Acclaimed Knights
+### Optionally specify an accolade parameter filter
+## scope = character
+## push_scope = landed_title
+alias[score_operation:ordered_active_accolade] = {
+    ## cardinality = 0..1
+    limit = {
+        alias_name[trigger] = alias_match_left[trigger]
+    }
+    ## cardinality = 0..1
+    accolade_parameter == enum[accolade_parameter]
+    # TODO: Work out what exactly this is restricted to
+    ## cardinality = 0..1
+    order_by = alias_keys_field[int_value]
+    ## cardinality = 0..1
+    order_by = single_alias_right[score_formula]
+    ## cardinality = 0..1
+    order_by = value_field
+    ## cardinality = 0..1
+    max = alias_keys_field[int_value]
+    ## cardinality = 0..1
+    max = value_field
+    ## cardinality = 0..1
+    position = int
+    ## cardinality = 0..1
+    check_range_bounds = no
+    ## cardinality = 0..1
+    custom = localisation
+    ## cardinality = 0..inf
+	alias_name[arithmetic_operation] = alias_match_left[arithmetic_operation]
+	## cardinality = 0..inf
+	alias_name[score_operation] = alias_match_left[score_operation]
+}
+
+### Iterate through all schemes owned by the character
+### Optionally specify a type filter
+### random_scheme = { type = befriend }
+### ordered_scheme = {
+### limit = { <triggers> }
+### order_by = script_value
+### position = int
+### min = int
+### max = script_value
+### check_range_bounds = no # If you don't want an error logged if the list is smaller than the min/max
+### <effects> }
+## scope = character
+## push_scope = scheme
+alias[score_operation:ordered_scheme] = {
+    ## cardinality = 0..1
+    limit = {
+        alias_name[trigger] = alias_match_left[trigger]
+    }
+    ## cardinality = 0..1
+    type = <scheme>
+    # TODO: Work out what exactly this is restricted to
+    ## cardinality = 0..1
+    order_by = alias_keys_field[int_value]
+    ## cardinality = 0..1
+    order_by = single_alias_right[score_formula]
+    ## cardinality = 0..1
+    order_by = value_field
+    ## cardinality = 0..1
+    max = alias_keys_field[int_value]
+    ## cardinality = 0..1
+    max = value_field
+    ## cardinality = 0..1
+    position = int
+    ## cardinality = 0..1
+    check_range_bounds = no
+    ## cardinality = 0..1
+    custom = localisation
+    ## cardinality = 0..inf
+	alias_name[arithmetic_operation] = alias_match_left[arithmetic_operation]
+	## cardinality = 0..inf
+	alias_name[score_operation] = alias_match_left[score_operation]
+}
+
+### Iterate through all owned stories for a character
+### Optionally specify a story type filter
+## scope = character
+## push_scope = story_cycle
+alias[score_operation:ordered_owned_story] = {
+    ## cardinality = 0..1
+    limit = {
+        alias_name[trigger] = alias_match_left[trigger]
+    }
+    ## cardinality = 0..1
+    type = <story_cycle>
+    # TODO: Work out what exactly this is restricted to
+    ## cardinality = 0..1
+    order_by = alias_keys_field[int_value]
+    ## cardinality = 0..1
+    order_by = single_alias_right[score_formula]
+    ## cardinality = 0..1
+    order_by = value_field
+    ## cardinality = 0..1
+    max = alias_keys_field[int_value]
+    ## cardinality = 0..1
+    max = value_field
+    ## cardinality = 0..1
+    position = int
+    ## cardinality = 0..1
+    check_range_bounds = no
+    ## cardinality = 0..1
+    custom = localisation
+    ## cardinality = 0..inf
+	alias_name[arithmetic_operation] = alias_match_left[arithmetic_operation]
+	## cardinality = 0..inf
+	alias_name[score_operation] = alias_match_left[score_operation]
+}
+
+### Iterate through all secrets of the character
+### Optionally specify a secret type filter
+### random_secret = { type = secret_lover }
+### ordered_secret = {
+### limit = { <triggers> }
+### order_by = script_value
+### position = int
+### min = int
+### max = script_value
+### check_range_bounds = no # If you don't want an error logged if the list is smaller than the min/max
+### <effects> }
+## scope = character
+## push_scope = secret
+alias[score_operation:ordered_secret] = {
+    ## cardinality = 0..1
+    limit = {
+        alias_name[trigger] = alias_match_left[trigger]
+    }
+    ## cardinality = 0..1
+    type = <secret_type>
+    # TODO: Work out what exactly this is restricted to
+    ## cardinality = 0..1
+    order_by = alias_keys_field[int_value]
+    ## cardinality = 0..1
+    order_by = single_alias_right[score_formula]
+    ## cardinality = 0..1
+    order_by = value_field
+    ## cardinality = 0..1
+    max = alias_keys_field[int_value]
+    ## cardinality = 0..1
+    max = value_field
+    ## cardinality = 0..1
+    position = int
+    ## cardinality = 0..1
+    check_range_bounds = no
+    ## cardinality = 0..1
+    custom = localisation
+    ## cardinality = 0..inf
+	alias_name[arithmetic_operation] = alias_match_left[arithmetic_operation]
+	## cardinality = 0..inf
+	alias_name[score_operation] = alias_match_left[score_operation]
+}
+
+### Iterate through all memories of a character
+### Optionally specify a memory type filter
+### any_memory = { memory_type = completed_rites_of_passage }
+### ordered_memory = {
+### limit = { <triggers> }
+### order_by = script_value
+### position = int
+### min = int
+### max = script_value
+### check_range_bounds = no # If you don't want an error logged if the list is smaller than the min/max
+### <effects> }
+## scope = character
+## push_scope = character_memory
+alias[score_operation:ordered_memory] = {
+    ## cardinality = 0..1
+    limit = {
+        alias_name[trigger] = alias_match_left[trigger]
+    }
+    ## cardinality = 0..1
+    memory_type = <memory>
+    # TODO: Work out what exactly this is restricted to
+    ## cardinality = 0..1
+    order_by = alias_keys_field[int_value]
+    ## cardinality = 0..1
+    order_by = single_alias_right[score_formula]
+    ## cardinality = 0..1
+    order_by = value_field
+    ## cardinality = 0..1
+    max = alias_keys_field[int_value]
+    ## cardinality = 0..1
+    max = value_field
+    ## cardinality = 0..1
+    position = int
+    ## cardinality = 0..1
+    check_range_bounds = no
+    ## cardinality = 0..1
+    custom = localisation
+    ## cardinality = 0..inf
+	alias_name[arithmetic_operation] = alias_match_left[arithmetic_operation]
+	## cardinality = 0..inf
+	alias_name[score_operation] = alias_match_left[score_operation]
+}
+
+### Iterate through all DIRECT vassals
+### Optionally specify a vassal stance filter
+### any_vassal = { vassal_stance = parochial }
+### ordered_vassal = {
+### limit = { <triggers> }
+### order_by = script_value
+### position = int
+### min = int
+### max = script_value
+### check_range_bounds = no # If you don't want an error logged if the list is smaller than the min/max
+### <effects> }
+## scope = character
+## push_scope = character
+alias[score_operation:ordered_vassal] = {
+    ## cardinality = 0..1
+    limit = {
+        alias_name[trigger] = alias_match_left[trigger]
+    }
+    ## cardinality = 0..1
+    vassal_stance = <vassal_stance>
+    # TODO: Work out what exactly this is restricted to
+    ## cardinality = 0..1
+    order_by = alias_keys_field[int_value]
+    ## cardinality = 0..1
+    order_by = single_alias_right[score_formula]
+    ## cardinality = 0..1
+    order_by = value_field
+    ## cardinality = 0..1
+    max = alias_keys_field[int_value]
+    ## cardinality = 0..1
+    max = value_field
+    ## cardinality = 0..1
+    position = int
+    ## cardinality = 0..1
+    check_range_bounds = no
+    ## cardinality = 0..1
+    custom = localisation
+    ## cardinality = 0..inf
+	alias_name[arithmetic_operation] = alias_match_left[arithmetic_operation]
+	## cardinality = 0..inf
+	alias_name[score_operation] = alias_match_left[score_operation]
+}

@@ -1137,6 +1137,7 @@ alias[effect:change_variable] = {
     alias_name[score_operation] = single_alias_right[score_arithmetic]
     alias_name[arithmetic_operation] = alias_keys_field[int_value]
     alias_name[arithmetic_operation] = value_field
+    alias_name[arithmetic_operation] = single_alias_right[score_formula]
 }
 
 ### Clamps a variable the specified max and min clamp_variable = { name = X max = Y min = Z } Where X is the name of the variable Where Y and Z are script values
@@ -3030,7 +3031,7 @@ alias[effect:change_target_weight] = int_value_field
 ### Changes the trait rank = { trait = trait_group rank = change max = maximum new rank }
 ## scope = character
 alias[effect:change_trait_rank] = {
-    trait = value[trait_group]
+    trait = enum[trait_group]
     rank = int
     ## cardinality = 0..1
     max = int
@@ -4173,7 +4174,7 @@ alias[effect:set_to_lowborn] = yes
 ### Sets the trait rank = { trait = trait_group rank = new rank }
 ## scope = character
 alias[effect:set_trait_rank] = {
-    trait = value[trait_group]
+    trait = enum[trait_group]
     rank = int
 }
 
@@ -4191,7 +4192,7 @@ alias[effect:spawn_army] = {
     ## cardinality = 0..1
     levies = value_field
     ## cardinality = 0..1
-    levies = single_alias_right[score_operation]
+    levies = single_alias_right[score_arithmetic]
     ## cardinality = 0..inf
     men_at_arms = {
         type = <maa_type>
@@ -4200,7 +4201,7 @@ alias[effect:spawn_army] = {
         ## cardinality = 0..1
         stacks = value_field
         ## cardinality = 0..1
-        stacks = single_alias_right[score_operation]
+        stacks = single_alias_right[score_arithmetic]
     }
     ## cardinality = 0..1
     location = <province>
@@ -5166,6 +5167,153 @@ alias[effect:lower_domicile_building_no_refund] = <domicile_building>
 alias[effect:remove_domicile_building_no_refund] = <domicile_building>
 
 
+
+### changes merit of a character - always includes proportional experience, whether positive or negative
+## scope = character
+alias[effect:change_merit] = alias_keys_field[int_value]
+
+### changes merit of a character - always includes proportional experience, whether positive or negative
+## scope = character
+alias[effect:change_merit] = value_field
+
+### changes merit of a character - always includes proportional experience, whether positive or negative
+## scope = character
+alias[effect:change_merit] = single_alias_right[score_formula]
+
+### changes merit experience of a character
+## scope = character
+alias[effect:change_merit_experience] = alias_keys_field[int_value]
+
+### changes merit experience of a character
+## scope = character
+alias[effect:change_merit_experience] = value_field
+
+### changes merit experience of a character
+## scope = character
+alias[effect:change_merit_experience] = single_alias_right[score_formula]
+
+### changes the merit level of a character
+## scope = character
+alias[effect:change_merit_level] = alias_keys_field[int_value]
+
+### changes the merit level of a character
+## scope = character
+alias[effect:change_merit_level] = value_field
+
+### changes the merit level of a character
+## scope = character
+alias[effect:change_merit_level] = single_alias_right[score_formula]
+
+### changes merit (without experience) of a character
+## scope = character
+alias[effect:change_merit_no_experience] = alias_keys_field[int_value]
+
+### changes merit (without experience) of a character
+## scope = character
+alias[effect:change_merit_no_experience] = value_field
+
+### changes merit (without experience) of a character
+## scope = character
+alias[effect:change_merit_no_experience] = single_alias_right[score_formula]
+
+### Remove any existing timeout a character's participation in any appointment.
+## scope = character
+alias[effect:clear_appointment_timeout] = bool
+
+### adds treasury to a character
+## scope = character
+alias[effect:add_treasury] = alias_keys_field[int_value]
+
+### adds treasury to a character
+## scope = character
+alias[effect:add_treasury] = value_field
+
+### adds treasury to a character
+## scope = character
+alias[effect:add_treasury] = single_alias_right[score_formula]
+
+### adds treasury if exists, otherwise gold to character
+## scope = character
+alias[effect:add_treasury_or_gold] = alias_keys_field[int_value]
+
+### adds treasury if exists, otherwise gold to character
+## scope = character
+alias[effect:add_treasury_or_gold] = value_field
+
+### adds treasury if exists, otherwise gold to character
+## scope = character
+alias[effect:add_treasury_or_gold] = single_alias_right[score_formula]
+
+### removes treasury from a character
+## scope = character
+alias[effect:remove_treasury] = alias_keys_field[int_value]
+
+### removes treasury from a character
+## scope = character
+alias[effect:remove_treasury] = value_field
+
+### removes treasury from a character
+## scope = character
+alias[effect:remove_treasury] = single_alias_right[score_formula]
+
+### removes treasury if exists, otherwise gold from character
+## scope = character
+alias[effect:remove_treasury_or_gold] = alias_keys_field[int_value]
+
+### removes treasury if exists, otherwise gold from character
+## scope = character
+alias[effect:remove_treasury_or_gold] = value_field
+
+### removes treasury if exists, otherwise gold from character
+## scope = character
+alias[effect:remove_treasury_or_gold] = single_alias_right[score_formula]
+
+### Set timeout for character's participation in any appointment. Can specify loc-key with reason via 'desc'.
+### Will not override an existing longer timeout.
+## scope = character
+alias[effect:set_appointment_timeout] = {
+    ##cardinality = 0..1
+    enum[duration] = alias_keys_field[int_value]
+    ## cardinality = 0..1
+    enum[duration] = int_value_field
+    ##cardinality = 0..1
+    enum[duration] = single_alias_right[score_formula]
+    ##cardinality = 0..1
+    desc = localisation
+}
+
+### Sets the character's intent for their current activity to the specified intent.
+### Will fail with error if the intent is not supported by the activity or not eligible for the character.
+## scope = character
+alias[effect:set_activity_intent] = <activity_intent>
+
+### Change confederation cohesion by the provided amount.
+## scope = confederation
+alias[effect:change_cohesion] = alias_keys_field[int_value]
+
+### Change confederation cohesion by the provided amount.
+## scope = confederation
+alias[effect:change_cohesion] = int_value_field
+
+### Change confederation cohesion by the provided amount.
+## scope = confederation
+alias[effect:change_cohesion] = single_alias_right[score_formula]
+
+### Funds a specific Contribution for a Great Project. Will fail if the character can't fund the Contribution.
+### Needs the Contribution object as parameter, the key by itself is not enough. Once funded, Contributions can't be retracted or refunded.
+## scope = character
+alias[effect:fund_great_project_contribution] = {
+    contribution = scope[project_contribution]
+    ## cardinality = 0..1
+    cost = bool
+    ## cardinality = 0..1
+    check_can_contribute = bool
+}
+
+
+### The Great Building in the scoped province becomes ruined.
+## scope = province
+alias[effect:ruin_great_building] = bool
 
 
 

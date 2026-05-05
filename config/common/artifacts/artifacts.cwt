@@ -9,8 +9,7 @@ artifact_type = {
 	slot = enum[artifact_slot_type]
 	### A feature from each of these groups will be assigned automatically on creation
 	## cardinality = 0..1
-    required_features =
-    {
+    required_features = {
         ## cardinality = 1..inf
         <feature_group>
     }

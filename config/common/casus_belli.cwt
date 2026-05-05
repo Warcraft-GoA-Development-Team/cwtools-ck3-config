@@ -177,12 +177,14 @@ casus_belli_type = {
 	allowed_against_character = single_alias_right[trigger_clause]
     ### Failing this one won't prevent displaying the CB
     ## replace_scope = {root = character attacker = character defender = character }
+	## push_scope = character
 	## cardinality = 0..1
 	allowed_against_character_display_regardless = single_alias_right[trigger_clause]
 
 	# scope:attacker, scope:defender, and scope:target (if there's a target title). root is the attacker
     ## replace_scope = {root = character attacker = character defender = character target = landed_title }
 	## cardinality = 0..1
+	## replace_scopes = character
 	valid_to_start = single_alias_right[trigger_clause]
     ## replace_scope = {root = character attacker = character defender = character target = landed_title }
     ### Failing this one won't prevent displaying the CB
@@ -273,6 +275,19 @@ casus_belli_type = {
 	### If set, the AI will ignore this CB entirely
 	## cardinality = 0..1
 	ai = bool
+
+	### Overlord join chance (fixed point between 0 and 1)
+	### How likely is it that the overlord will join their subject when unable to be called in immediately?
+	### The attacking AI will consider a weighted power of subject and overlord when evaluating whether to attack an unprotected subject
+	### 	giving the overlord this weight (0.4 = 40% of the power of the overlord, 60% of the power of the subject)
+	### a result of 0 implies that the AI doesn't believe the overlord will come in aid of the subject
+	### a result of 1 will make the AI evaluate the full strength of the overlord instead of just considering the subject's strength
+	###
+	### Scopes:
+	###	- root, attacker: the character evaluating the war declaration
+	###	- defender: the subject being targeted
+	###	- overlord: the overlord of the defender that would intervene
+	ai_overlord_defensive_power_impact = single_alias_right[score_formula]
 
 	### If set to "no", white peaces can't happen; only victory, defeat, or invalidation
 	## cardinality = 0..1

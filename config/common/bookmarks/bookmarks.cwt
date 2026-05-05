@@ -22,6 +22,10 @@ types = {
         subtype[hidden] = {
             display = no
         }
+
+        subtype[design] = { # TODO
+            character_design_type = scalar
+        }
     }
 }
 
@@ -77,7 +81,7 @@ bookmark_character = {
     ## cardinality = 0..1
     fallback_government = <government>
     culture = <culture>
-    religion = <religion>
+    religion = <faith>
     difficulty = localisation
     history_id = <character>
     position = {
@@ -93,6 +97,12 @@ bookmark_character = {
 
     ## cardinality = 0..1
     display = bool
+
+    subtype[design] = { # TODO
+        character_design_type = scalar
+        target_title = <landed_title>
+        religion = localisation
+    }
 
     # TODO: see if I can remember how to make it with subtypes so that I don't need to duplicate stuff :D
     ## cardinality = 0..inf
@@ -114,7 +124,7 @@ bookmark_character = {
         ## cardinality = 0..1
         fallback_government = <government>
         culture = <culture>
-        religion = <religion>
+        religion = <faith>
         history_id = <character>
 
         ## cardinality = 0..1

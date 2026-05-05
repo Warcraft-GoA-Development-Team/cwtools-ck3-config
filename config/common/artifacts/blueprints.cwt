@@ -67,5 +67,5 @@ blueprint = {
 
 	### changes the template of the artifact to the specified scripted template. Templates are specified in artifacts/templates/
 	## cardinality = 0..1
-	template = scalar # TODO
+	template = <template>
 }

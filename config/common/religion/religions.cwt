@@ -10,7 +10,7 @@ types = {
         }
     }
     type[faith] = {
-        path = "game/common/religion/religions"
+        path = "game/common/religion/religion_types"
         skip_root_key = { any faiths }
         base_type = religion
         localisation = {

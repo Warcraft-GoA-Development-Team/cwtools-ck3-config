@@ -13,6 +13,19 @@ enums = {
         eminent
     }
 
+    complex_enum[accolade_parameter] = {
+        path = "game/common/accolade_types"
+
+        name = {
+            ranks = {
+                scalar = {
+                    accolade_parameters = {
+                        enum_name
+                    }
+                }
+            }
+        }
+    }
 }
 
 accolade = {
@@ -141,6 +154,7 @@ single_alias[accolade_rank] = {
     ## cardinality = 0..1
     accolade_parameters = {
         ## cardinality = 1..inf
-        value_set[accolade_parameter]
+        scalar
     }
 }
+

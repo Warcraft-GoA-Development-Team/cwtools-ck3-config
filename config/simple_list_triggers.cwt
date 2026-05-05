@@ -314,14 +314,6 @@ alias[trigger:any_acclaimed_knight] = single_alias_right[any_trigger]
 ## push_scope = accolade
 alias[trigger:any_accolade] = single_alias_right[any_trigger]
 
-### Iterate through all active Accolades of a given liege character's Acclaimed Knights
-### Optionally specify an accolade parameter filter
-### any_active_accolade = { accolade_parameter = accolade_organize_army_bonus }
-### any_active_accolade = { <count=num/all> / <percent=fixed_point> <triggers> }
-## scope = character
-## push_scope = accolade
-alias[trigger:any_active_accolade] = single_alias_right[any_trigger]
-
 ### Iterate through all titles that can be created by the character. (only for alerts)
 ### any_alert_creatable_title = { <count=num/all> / <percent=fixed_point> <triggers> }
 ## scope = character
@@ -603,13 +595,6 @@ alias[trigger:any_heir] = single_alias_right[any_trigger]
 ## push_scope = landed_title
 alias[trigger:any_heir_title] = single_alias_right[any_trigger]
 
-### Iterate through all held landed titles. Optionally specify a tier filter
-### any/every/ordered/random_held_title = { title_tier >= county }
-### any_held_title = { <count=num/all> / <percent=fixed_point> <triggers> }
-## scope = character
-## push_scope = landed_title
-alias[trigger:any_held_title] = single_alias_right[any_trigger]
-
 ### Iterate through all hired mercenary companies
 ### any_hired_mercenary = { <count=num/all> / <percent=fixed_point> <triggers> }
 ## scope = character
@@ -693,14 +678,6 @@ alias[trigger:any_maa_regiment] = single_alias_right[any_trigger]
 ## scope = character
 ## push_scope = character
 alias[trigger:any_martial_councillor] = single_alias_right[any_trigger]
-
-### Iterate through all memories of a character
-### Optionally specify a memory type filter
-### any_memory = { memory_type = completed_rites_of_passage }
-### any_memory = { <count=num/all> / <percent=fixed_point> <triggers> }
-## scope = character
-## push_scope = character_memory
-alias[trigger:any_memory] = single_alias_right[any_trigger]
 
 ### A sub-realm or realm bordering the scope character's realm (including across water). Returns counts and above.
 ### any_neighboring_and_across_water_realm_owner = { <count=num/all> / <percent=fixed_point> <triggers> }
@@ -793,14 +770,6 @@ alias[trigger:any_noble_family] = single_alias_right[any_trigger]
 ## scope = character
 ## push_scope = character
 alias[trigger:any_opposite_sex_spouse_candidate] = single_alias_right[any_trigger]
-
-### Iterate through all owned stories for a character
-### Optionally specify a story type filter
-### any_owned_story = { type = story_cycle_pet_cat }
-### any_owned_story = { <count=num/all> / <percent=fixed_point> <triggers> }
-## scope = character
-## push_scope = story
-alias[trigger:any_owned_story] = single_alias_right[any_trigger]
 
 ### Iterate through all holy orders that the scoped character is a patron of
 ### any_patroned_holy_order = { <count=num/all> / <percent=fixed_point> <triggers> }
@@ -953,22 +922,6 @@ alias[trigger:any_realm_province] = single_alias_right[any_trigger]
 ## scope = character
 ## push_scope = character
 alias[trigger:any_same_sex_spouse_candidate] = single_alias_right[any_trigger]
-
-### Iterate through all schemes owned by the character
-### Optionally specify a type filter
-### random_scheme = { type = befriend }
-### any_scheme = { <count=num/all> / <percent=fixed_point> <triggers> }
-## scope = character
-## push_scope = scheme
-alias[trigger:any_scheme] = single_alias_right[any_trigger]
-
-### Iterate through all secrets of the character
-### Optionally specify a secret type filter
-### random_secret = { type = secret_lover }
-### any_secret = { <count=num/all> / <percent=fixed_point> <triggers> }
-## scope = character
-## push_scope = secret
-alias[trigger:any_secret] = single_alias_right[any_trigger]
 
 ### Iterate through all siblings
 ### any_sibling = { <count=num/all> / <percent=fixed_point> <triggers> }
@@ -1131,14 +1084,6 @@ alias[trigger:any_unassigned_taxpayers] = single_alias_right[any_trigger]
 ## scope = character
 ## push_scope = secret
 alias[trigger:any_unspent_known_secret] = single_alias_right[any_trigger]
-
-### Iterate through all DIRECT vassals
-### Optionally specify a vassal stance filter
-### any_vassal = { vassal_stance = parochial }
-### any_vassal = { <count=num/all> / <percent=fixed_point> <triggers> }
-## scope = character
-## push_scope = character
-alias[trigger:any_vassal] = single_alias_right[any_trigger]
 
 ### Iterate through ALL vassals, not just direct vassals
 ### Optionally specify a vassal stance filter

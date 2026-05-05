@@ -31,6 +31,22 @@ alias[arithmetic_operation:max] = single_alias_right[score_formula]
 alias[arithmetic_operation:min] = alias_keys_field[int_value]
 alias[arithmetic_operation:min] = value_field
 alias[arithmetic_operation:min] = single_alias_right[score_formula]
+alias[arithmetic_operation:fixed_range] = {
+    min = alias_keys_field[int_value]
+    min = value_field
+    min = single_alias_right[score_formula]
+    max = alias_keys_field[int_value]
+    max = value_field
+    max = single_alias_right[score_formula]
+}
+alias[arithmetic_operation:integer_range] = {
+    min = alias_keys_field[int_value]
+    min = value_field
+    min = single_alias_right[score_formula]
+    max = alias_keys_field[int_value]
+    max = value_field
+    max = single_alias_right[score_formula]
+}
 
 alias[arithmetic_operation:round] = yes
 alias[arithmetic_operation:ceiling] = yes
@@ -41,18 +57,18 @@ alias[int_value:int_value_field] = int_value_field
 alias[int_value:<script_value>] = <script_value>
 alias[int_value:<static_value>] = <static_value>
 alias[int_value:$define_reference] = $define_reference
-alias[int_value:scope[value]] = scope[value]
+alias[int_value:scope_field] = scope_field
 
 alias[float_value:value_field] = value_field
 alias[float_value:<script_value>] = <script_value>
 alias[float_value:<static_value>] = <static_value>
 alias[float_value:$define_reference] = $define_reference
-alias[float_value:scope[value]] = scope[value]
+alias[float_value:scope_field] = scope_field
 
 alias[script_value:<script_value>] = <script_value>
 alias[script_value:<static_value>] = <static_value>
 alias[script_value:$define_reference] = $define_reference
-alias[script_value:scope[value]] = scope[value]
+alias[script_value:scope_field] = scope_field
 
 alias[arithmetic_operation:save_temporary_value_as] = value_set[variable]
 

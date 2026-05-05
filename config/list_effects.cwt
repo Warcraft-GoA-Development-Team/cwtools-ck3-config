@@ -4,20 +4,6 @@
 #
 #####################################
 
-single_alias[every_effect] = {
-    ## cardinality = 0..1
-    limit = {
-        alias_name[trigger] = alias_match_left[trigger]
-    }
-    ## cardinality = 0..inf
-    alternative_limit = {
-        alias_name[trigger] = alias_match_left[trigger]
-    }
-    ## cardinality = 0..1
-    custom = localisation
-    alias_name[effect] = alias_match_left[effect]
-}
-
 ### Iterate through all province locations of the phases of the activity, optionally limited to unique locations.
 ## scope = activity
 ## push_scope = province
@@ -520,27 +506,159 @@ alias[effect:every_succession_appointment_investors] = {
     value == single_alias_right[score_formula]
 }
 
-#####################################
-#
-# RANDOM EFFECT
-#
-#####################################
-
-single_alias[random_effect] = {
+### Iterate through all held landed titles. Optionally specify a tier filter
+### any/every/ordered/random_held_title = { title_tier >= county }
+## scope = character
+## push_scope = landed_title
+alias[effect:every_held_title] = {
     ## cardinality = 0..1
     limit = {
         alias_name[trigger] = alias_match_left[trigger]
     }
+    ## cardinality = 0..1
+    title_tier == enum[title_tier]
     ## cardinality = 0..inf
     alternative_limit = {
         alias_name[trigger] = alias_match_left[trigger]
     }
     ## cardinality = 0..1
-    weight = single_alias_right[weight_block]
+    custom = localisation
+    alias_name[effect] = alias_match_left[effect]
+}
+
+### Iterate through all active Accolades of a given liege character's Acclaimed Knights
+### Optionally specify an accolade parameter filter
+## scope = character
+## push_scope = accolade
+alias[effect:every_active_accolade] = {
+    ## cardinality = 0..1
+    limit = {
+        alias_name[trigger] = alias_match_left[trigger]
+    }
+    ## cardinality = 0..1
+    accolade_parameter == enum[accolade_parameter]
+    ## cardinality = 0..inf
+    alternative_limit = {
+        alias_name[trigger] = alias_match_left[trigger]
+    }
     ## cardinality = 0..1
     custom = localisation
     alias_name[effect] = alias_match_left[effect]
 }
+
+### Iterate through all schemes owned by the character
+### Optionally specify a type filter
+### random_scheme = { type = befriend }
+### every_scheme = { limit = { <triggers> } <effects> }
+## scope = character
+## push_scope = scheme
+alias[effect:every_scheme] = {
+    ## cardinality = 0..1
+    limit = {
+        alias_name[trigger] = alias_match_left[trigger]
+    }
+    ## cardinality = 0..1
+    type = <scheme>
+    ## cardinality = 0..inf
+    alternative_limit = {
+        alias_name[trigger] = alias_match_left[trigger]
+    }
+    ## cardinality = 0..1
+    custom = localisation
+    alias_name[effect] = alias_match_left[effect]
+}
+
+### Iterate through all owned stories for a character
+### Optionally specify a story type filter
+## scope = character
+## push_scope = story_cycle
+alias[effect:every_owned_story] = {
+    ## cardinality = 0..1
+    limit = {
+        alias_name[trigger] = alias_match_left[trigger]
+    }
+    ## cardinality = 0..1
+    type = <story_cycle>
+    ## cardinality = 0..inf
+    alternative_limit = {
+        alias_name[trigger] = alias_match_left[trigger]
+    }
+    ## cardinality = 0..1
+    custom = localisation
+    alias_name[effect] = alias_match_left[effect]
+}
+
+### Iterate through all memories of a character
+### Optionally specify a memory type filter
+### any_memory = { memory_type = completed_rites_of_passage }
+### every_memory = { limit = { <triggers> } <effects> }
+## scope = character
+## push_scope = character_memory
+alias[effect:every_memory] = {
+    ## cardinality = 0..1
+    limit = {
+        alias_name[trigger] = alias_match_left[trigger]
+    }
+    ## cardinality = 0..1
+    memory_type = <memory>
+    ## cardinality = 0..inf
+    alternative_limit = {
+        alias_name[trigger] = alias_match_left[trigger]
+    }
+    ## cardinality = 0..1
+    custom = localisation
+    alias_name[effect] = alias_match_left[effect]
+}
+
+### Iterate through all secrets of the character
+### Optionally specify a secret type filter
+### random_secret = { type = secret_lover }
+### every_secret = { limit = { <triggers> } <effects> }
+## scope = character
+## push_scope = secret
+alias[effect:every_secret] = {
+    ## cardinality = 0..1
+    limit = {
+        alias_name[trigger] = alias_match_left[trigger]
+    }
+    ## cardinality = 0..1
+    type = <secret_type>
+    ## cardinality = 0..inf
+    alternative_limit = {
+        alias_name[trigger] = alias_match_left[trigger]
+    }
+    ## cardinality = 0..1
+    custom = localisation
+    alias_name[effect] = alias_match_left[effect]
+}
+
+### Iterate through all DIRECT vassals
+### Optionally specify a vassal stance filter
+### any_vassal = { vassal_stance = parochial }
+### every_vassal = { limit = { <triggers> } <effects> }
+## scope = character
+## push_scope = character
+alias[effect:every_vassal] = {
+    ## cardinality = 0..1
+    limit = {
+        alias_name[trigger] = alias_match_left[trigger]
+    }
+    ## cardinality = 0..1
+    vassal_stance = <vassal_stance>
+    ## cardinality = 0..inf
+    alternative_limit = {
+        alias_name[trigger] = alias_match_left[trigger]
+    }
+    ## cardinality = 0..1
+    custom = localisation
+    alias_name[effect] = alias_match_left[effect]
+}
+
+#####################################
+#
+# RANDOM EFFECT
+#
+#####################################
 
 ### Iterate through all province locations of the phases of the activity, optionally limited to unique locations.
 ## scope = activity
@@ -1091,36 +1209,173 @@ alias[effect:random_succession_appointment_investors] = {
     value == single_alias_right[score_formula]
 }
 
+### Iterate through all held landed titles. Optionally specify a tier filter
+### any/every/ordered/random_held_title = { title_tier >= county }
+## scope = character
+## push_scope = landed_title
+alias[effect:random_held_title] = {
+    ## cardinality = 0..1
+    limit = {
+        alias_name[trigger] = alias_match_left[trigger]
+    }
+    ## cardinality = 0..1
+    title_tier == enum[title_tier]
+    ## cardinality = 0..inf
+    alternative_limit = {
+        alias_name[trigger] = alias_match_left[trigger]
+    }
+    ## cardinality = 0..1
+    weight = single_alias_right[weight_block]
+    ## cardinality = 0..1
+    custom = localisation
+    alias_name[effect] = alias_match_left[effect]
+}
+
+### Iterate through all active Accolades of a given liege character's Acclaimed Knights
+### Optionally specify an accolade parameter filter
+## scope = character
+## push_scope = landed_title
+alias[effect:random_active_accolade] = {
+    ## cardinality = 0..1
+    limit = {
+        alias_name[trigger] = alias_match_left[trigger]
+    }
+    ## cardinality = 0..1
+    accolade_parameter == enum[accolade_parameter]
+    ## cardinality = 0..inf
+    alternative_limit = {
+        alias_name[trigger] = alias_match_left[trigger]
+    }
+    ## cardinality = 0..1
+    weight = single_alias_right[weight_block]
+    ## cardinality = 0..1
+    custom = localisation
+    alias_name[effect] = alias_match_left[effect]
+}
+
+### Iterate through all schemes owned by the character
+### Optionally specify a type filter
+### random_scheme = { type = befriend }
+### random_scheme = { limit = { <triggers> } (optional) weight = { mtth } <effects> }
+## scope = character
+## push_scope = scheme
+alias[effect:random_scheme] = {
+    ## cardinality = 0..1
+    limit = {
+        alias_name[trigger] = alias_match_left[trigger]
+    }
+    ## cardinality = 0..1
+    type = <scheme>
+    ## cardinality = 0..inf
+    alternative_limit = {
+        alias_name[trigger] = alias_match_left[trigger]
+    }
+    ## cardinality = 0..1
+    weight = single_alias_right[weight_block]
+    ## cardinality = 0..1
+    custom = localisation
+    alias_name[effect] = alias_match_left[effect]
+}
+
+### Iterate through all owned stories for a character
+### Optionally specify a story type filter
+## scope = character
+## push_scope = story_cycle
+alias[effect:random_owned_story] = {
+    ## cardinality = 0..1
+    limit = {
+        alias_name[trigger] = alias_match_left[trigger]
+    }
+    ## cardinality = 0..1
+    type = <story_cycle>
+    ## cardinality = 0..inf
+    alternative_limit = {
+        alias_name[trigger] = alias_match_left[trigger]
+    }
+    ## cardinality = 0..1
+    weight = single_alias_right[weight_block]
+    ## cardinality = 0..1
+    custom = localisation
+    alias_name[effect] = alias_match_left[effect]
+}
+
+### Iterate through all secrets of the character
+### Optionally specify a secret type filter
+### random_secret = { type = secret_lover }
+### random_secret = { limit = { <triggers> } (optional) weight = { mtth } <effects> }
+## scope = character
+## push_scope = secret
+alias[effect:random_secret] = {
+    ## cardinality = 0..1
+    limit = {
+        alias_name[trigger] = alias_match_left[trigger]
+    }
+    ## cardinality = 0..1
+    type = <secret_type>
+    ## cardinality = 0..inf
+    alternative_limit = {
+        alias_name[trigger] = alias_match_left[trigger]
+    }
+    ## cardinality = 0..1
+    weight = single_alias_right[weight_block]
+    ## cardinality = 0..1
+    custom = localisation
+    alias_name[effect] = alias_match_left[effect]
+}
+
+### Iterate through all memories of a character
+### Optionally specify a memory type filter
+### any_memory = { memory_type = completed_rites_of_passage }
+### random_memory = { limit = { <triggers> } (optional) weight = { mtth } <effects> }
+## scope = character
+## push_scope = character_memory
+alias[effect:random_memory] = {
+    ## cardinality = 0..1
+    limit = {
+        alias_name[trigger] = alias_match_left[trigger]
+    }
+    ## cardinality = 0..1
+    memory_type = <memory>
+    ## cardinality = 0..inf
+    alternative_limit = {
+        alias_name[trigger] = alias_match_left[trigger]
+    }
+    ## cardinality = 0..1
+    weight = single_alias_right[weight_block]
+    ## cardinality = 0..1
+    custom = localisation
+    alias_name[effect] = alias_match_left[effect]
+}
+
+### Iterate through all DIRECT vassals
+### Optionally specify a vassal stance filter
+### any_vassal = { vassal_stance = parochial }
+### random_vassal = { limit = { <triggers> } (optional) weight = { mtth } <effects> }
+## scope = character
+## push_scope = character
+alias[effect:random_vassal] = {
+    ## cardinality = 0..1
+    limit = {
+        alias_name[trigger] = alias_match_left[trigger]
+    }
+    ## cardinality = 0..1
+    vassal_stance = <vassal_stance>
+    ## cardinality = 0..inf
+    alternative_limit = {
+        alias_name[trigger] = alias_match_left[trigger]
+    }
+    ## cardinality = 0..1
+    weight = single_alias_right[weight_block]
+    ## cardinality = 0..1
+    custom = localisation
+    alias_name[effect] = alias_match_left[effect]
+}
+
 #####################################
 #
 # ORDERED EFFECT
 #
 #####################################
-
-single_alias[ordered_effect] = {
-    ## cardinality = 0..1
-    limit = {
-        alias_name[trigger] = alias_match_left[trigger]
-    }
-    # TODO: Work out what exactly this is restricted to
-    ## cardinality = 0..1
-    order_by = alias_keys_field[int_value]
-    ## cardinality = 0..1
-    order_by = single_alias_right[score_formula]
-    ## cardinality = 0..1
-    order_by = value_field
-    ## cardinality = 0..1
-    max = alias_keys_field[int_value]
-    ## cardinality = 0..1
-    max = value_field
-    ## cardinality = 0..1
-    position = int
-    ## cardinality = 0..1
-    check_range_bounds = no
-    ## cardinality = 0..1
-    custom = localisation
-    alias_name[effect] = alias_match_left[effect]
-}
 
 ### Iterate through all province locations of the phases of the activity, optionally limited to unique locations.
 ## scope = activity
@@ -1903,4 +2158,257 @@ alias[effect:ordered_succession_appointment_investors] = {
     value == alias_keys_field[int_value]
     ## cardinality = 0..1
     value == single_alias_right[score_formula]
+}
+
+### Iterate through all held landed titles. Optionally specify a tier filter
+### any/every/ordered/random_held_title = { title_tier >= county }
+## scope = character
+## push_scope = landed_title
+alias[effect:ordered_held_title] = {
+    ## cardinality = 0..1
+    limit = {
+        alias_name[trigger] = alias_match_left[trigger]
+    }
+    ## cardinality = 0..1
+    title_tier == enum[title_tier]
+    # TODO: Work out what exactly this is restricted to
+    ## cardinality = 0..1
+    order_by = alias_keys_field[int_value]
+    ## cardinality = 0..1
+    order_by = single_alias_right[score_formula]
+    ## cardinality = 0..1
+    order_by = value_field
+    ## cardinality = 0..1
+    max = alias_keys_field[int_value]
+    ## cardinality = 0..1
+    max = value_field
+    ## cardinality = 0..1
+    position = int
+    ## cardinality = 0..1
+    check_range_bounds = no
+    ## cardinality = 0..1
+    custom = localisation
+    alias_name[effect] = alias_match_left[effect]
+}
+
+### Iterate through all active Accolades of a given liege character's Acclaimed Knights
+### Optionally specify an accolade parameter filter
+## scope = character
+## push_scope = landed_title
+alias[effect:ordered_active_accolade] = {
+    ## cardinality = 0..1
+    limit = {
+        alias_name[trigger] = alias_match_left[trigger]
+    }
+    ## cardinality = 0..1
+    accolade_parameter == enum[accolade_parameter]
+    # TODO: Work out what exactly this is restricted to
+    ## cardinality = 0..1
+    order_by = alias_keys_field[int_value]
+    ## cardinality = 0..1
+    order_by = single_alias_right[score_formula]
+    ## cardinality = 0..1
+    order_by = value_field
+    ## cardinality = 0..1
+    max = alias_keys_field[int_value]
+    ## cardinality = 0..1
+    max = value_field
+    ## cardinality = 0..1
+    position = int
+    ## cardinality = 0..1
+    check_range_bounds = no
+    ## cardinality = 0..1
+    custom = localisation
+    alias_name[effect] = alias_match_left[effect]
+}
+
+### Iterate through all schemes owned by the character
+### Optionally specify a type filter
+### random_scheme = { type = befriend }
+### ordered_scheme = {
+### limit = { <triggers> }
+### order_by = script_value
+### position = int
+### min = int
+### max = script_value
+### check_range_bounds = no # If you don't want an error logged if the list is smaller than the min/max
+### <effects> }
+## scope = character
+## push_scope = scheme
+alias[effect:ordered_scheme] = {
+    ## cardinality = 0..1
+    limit = {
+        alias_name[trigger] = alias_match_left[trigger]
+    }
+    ## cardinality = 0..1
+    type = <scheme>
+    # TODO: Work out what exactly this is restricted to
+    ## cardinality = 0..1
+    order_by = alias_keys_field[int_value]
+    ## cardinality = 0..1
+    order_by = single_alias_right[score_formula]
+    ## cardinality = 0..1
+    order_by = value_field
+    ## cardinality = 0..1
+    max = alias_keys_field[int_value]
+    ## cardinality = 0..1
+    max = value_field
+    ## cardinality = 0..1
+    position = int
+    ## cardinality = 0..1
+    check_range_bounds = no
+    ## cardinality = 0..1
+    custom = localisation
+    alias_name[effect] = alias_match_left[effect]
+}
+
+### Iterate through all owned stories for a character
+### Optionally specify a story type filter
+## scope = character
+## push_scope = story_cycle
+alias[effect:ordered_owned_story] = {
+    ## cardinality = 0..1
+    limit = {
+        alias_name[trigger] = alias_match_left[trigger]
+    }
+    ## cardinality = 0..1
+    type = <story_cycle>
+    # TODO: Work out what exactly this is restricted to
+    ## cardinality = 0..1
+    order_by = alias_keys_field[int_value]
+    ## cardinality = 0..1
+    order_by = single_alias_right[score_formula]
+    ## cardinality = 0..1
+    order_by = value_field
+    ## cardinality = 0..1
+    max = alias_keys_field[int_value]
+    ## cardinality = 0..1
+    max = value_field
+    ## cardinality = 0..1
+    position = int
+    ## cardinality = 0..1
+    check_range_bounds = no
+    ## cardinality = 0..1
+    custom = localisation
+    alias_name[effect] = alias_match_left[effect]
+}
+
+### Iterate through all secrets of the character
+### Optionally specify a secret type filter
+### random_secret = { type = secret_lover }
+### ordered_secret = {
+### limit = { <triggers> }
+### order_by = script_value
+### position = int
+### min = int
+### max = script_value
+### check_range_bounds = no # If you don't want an error logged if the list is smaller than the min/max
+### <effects> }
+## scope = character
+## push_scope = secret
+alias[effect:ordered_secret] = {
+    ## cardinality = 0..1
+    limit = {
+        alias_name[trigger] = alias_match_left[trigger]
+    }
+    ## cardinality = 0..1
+    type = <secret_type>
+    # TODO: Work out what exactly this is restricted to
+    ## cardinality = 0..1
+    order_by = alias_keys_field[int_value]
+    ## cardinality = 0..1
+    order_by = single_alias_right[score_formula]
+    ## cardinality = 0..1
+    order_by = value_field
+    ## cardinality = 0..1
+    max = alias_keys_field[int_value]
+    ## cardinality = 0..1
+    max = value_field
+    ## cardinality = 0..1
+    position = int
+    ## cardinality = 0..1
+    check_range_bounds = no
+    ## cardinality = 0..1
+    custom = localisation
+    alias_name[effect] = alias_match_left[effect]
+}
+
+### Iterate through all memories of a character
+### Optionally specify a memory type filter
+### any_memory = { memory_type = completed_rites_of_passage }
+### ordered_memory = {
+### limit = { <triggers> }
+### order_by = script_value
+### position = int
+### min = int
+### max = script_value
+### check_range_bounds = no # If you don't want an error logged if the list is smaller than the min/max
+### <effects> }
+## scope = character
+## push_scope = character_memory
+alias[effect:ordered_memory] = {
+    ## cardinality = 0..1
+    limit = {
+        alias_name[trigger] = alias_match_left[trigger]
+    }
+    ## cardinality = 0..1
+    memory_type = <memory>
+    # TODO: Work out what exactly this is restricted to
+    ## cardinality = 0..1
+    order_by = alias_keys_field[int_value]
+    ## cardinality = 0..1
+    order_by = single_alias_right[score_formula]
+    ## cardinality = 0..1
+    order_by = value_field
+    ## cardinality = 0..1
+    max = alias_keys_field[int_value]
+    ## cardinality = 0..1
+    max = value_field
+    ## cardinality = 0..1
+    position = int
+    ## cardinality = 0..1
+    check_range_bounds = no
+    ## cardinality = 0..1
+    custom = localisation
+    alias_name[effect] = alias_match_left[effect]
+}
+
+### Iterate through all DIRECT vassals
+### Optionally specify a vassal stance filter
+### any_vassal = { vassal_stance = parochial }
+### ordered_vassal = {
+### limit = { <triggers> }
+### order_by = script_value
+### position = int
+### min = int
+### max = script_value
+### check_range_bounds = no # If you don't want an error logged if the list is smaller than the min/max
+### <effects> }
+## scope = character
+## push_scope = character
+alias[effect:ordered_vassal] = {
+    ## cardinality = 0..1
+    limit = {
+        alias_name[trigger] = alias_match_left[trigger]
+    }
+    ## cardinality = 0..1
+    vassal_stance = <vassal_stance>
+    # TODO: Work out what exactly this is restricted to
+    ## cardinality = 0..1
+    order_by = alias_keys_field[int_value]
+    ## cardinality = 0..1
+    order_by = single_alias_right[score_formula]
+    ## cardinality = 0..1
+    order_by = value_field
+    ## cardinality = 0..1
+    max = alias_keys_field[int_value]
+    ## cardinality = 0..1
+    max = value_field
+    ## cardinality = 0..1
+    position = int
+    ## cardinality = 0..1
+    check_range_bounds = no
+    ## cardinality = 0..1
+    custom = localisation
+    alias_name[effect] = alias_match_left[effect]
 }

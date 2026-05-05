@@ -84,4 +84,13 @@ enums = {
         domain
         herd
     }
+    complex_enum[pillar_parameter] = {
+        path = "game/common/culture/pillars"
+
+        name = {
+            parameters = {
+                enum_name = bool
+            }
+        }
+    }
 }

@@ -1,0 +1,13 @@
+rows = {
+    row[province] = {
+        path = "map_data/"
+        path_extension = .csv
+        path_file = "definition.csv"
+
+        columns = {
+            0 = <province>
+            0 = scalar
+            x = scalar
+        }
+    }
+}

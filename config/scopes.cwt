@@ -36,7 +36,7 @@ scopes = {
 	"Combat side" = {
 		aliases = { combat_side "combat side" }
 	}
-	"Title and Vassal change" = {
+	"Title and Vassal Change" = {
 		aliases = { title_and_vassal_change "title and vassal change" }
 	}
 	Faith = {
@@ -51,7 +51,7 @@ scopes = {
 	War = {
 		aliases = { war }
 	}
-	"Story_cycle" = {
+	"Story Cycle" = {
 		aliases = { story_cycle "story cycle" story }
 	}
 	"Casus Belli" = {
@@ -201,6 +201,9 @@ scopes = {
 	"Great Project" = {
 		aliases = { great_project }
 	}
+	"Great Project Type" = {
+		aliases = { great_project }
+	}
 	"Great Project Contribution" = {
 		aliases = { project_contribution }
 	}
@@ -209,5 +212,20 @@ scopes = {
 	}
 	"House Relation" = {
 		aliases = { house_relation }
+	}
+	"House Relation Type" = {
+		aliases = { house_relation_type }
+	}
+	"House Relation Level" = {
+		aliases = { house_relation_level }
+	}
+	"House Aspiration" = {
+		aliases = { house_aspiration }
+	}
+	"Confederation Type" = {
+		aliases = { confederation_type }
+	}
+	"Great Project Type" = {
+		aliases = { great_project_type }
 	}
 }

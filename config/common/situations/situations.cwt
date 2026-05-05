@@ -13,10 +13,17 @@ situation = {
 }
 
 enums = {
-    complex_enum[situation_phase_param] = {
+    complex_enum[situation_parameter] = {
         path = "game/common/situation/situations"
 
         name = {
+            phases = {
+                scalar = {
+                    parameters = {
+                        enum_name = bool
+                    }
+                }
+            }
             phases = {
                 scalar = {
                     modifier_sets = {

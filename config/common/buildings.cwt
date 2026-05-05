@@ -7,6 +7,9 @@ types = {
         subtype[special] = {
             type = special
         }
+        subtype[great_building] = {
+            type = great_building
+        }
         subtype[graphical] = {
 			is_graphical_background = yes
         }
@@ -32,6 +35,7 @@ enums = {
         regular
         special
         duchy_capital
+		great_building
     }
 }
 
@@ -42,63 +46,12 @@ building = {
 
 	### Which asset does the building use
 	## cardinality = 0..inf
-	asset = {
-		### 'pdxmesh' or 'entity', specifies wheter to use a mesh or an entity. Meshes are more performant and should be preferred.
-		type = enum[asset_type]
-		### The name of the mesh or the entity
-		## cardinality = 0..1
-		name = <pdxmesh>
-		### The name of the mesh or the entity
-		## cardinality = 0..1
-		name = <entity>
-		## cardinality = 0..1
-		requires_dlc_flag = enum[dlc_feature]
-		### To randomize between multiple meshes/entities. Note that they must all be entities, or all be meshes:
-		## cardinality = 0..1
-		names = {
-			## cardinality = 0..inf
-			<pdxmesh>
-			## cardinality = 0..inf
-			<entity>
-		}
-		### Path to illustration shown in the county view, texture can be accessed in GUI: "[Holding.GetIllustration]"
-		## cardinality = 0..1
-		illustration = filepath
-		### Associated sound effect and an optional parameter, can also be just soundeffect = "event:..." if no parameter is needed
-		## cardinality = 0..1
-		soundeffect = { #TODO : sound
-			soundeffect = scalar
-			## cardinality = 0..1
-			soundparameter = { scalar = value_field }
-		}
-		### Graphical cultures that prefer this asset to be shown
-		## cardinality = 0..1
-		graphical_cultures = { enum[building_gfx] }
-		### Graphical faiths that prefer this asset to be shown (priority is faith > religion > family, so Catholic graphical_faith overrides Abrahamic graphical_faith)
-		## cardinality = 0..1
-		graphical_faiths = {
-			## cardinality = 1..inf
-			value[graphical_faith]
-		}
-		### Graphical regions in which this asset is preferred, this is the most important criterion when selecting the asset, with the exception of government
-		## cardinality = 0..1
-		graphical_regions = {
-			##cardinality = 1..inf
-			<geographical_region.graphical_region>
-		}
-		### Governments that prefer this asset to be shown
-		## cardinality = 0..1
-		governments = {
-			## cardinality = 1..inf
-			<government>
-		}
-		## cardinality = 0..1
-		provinces = {
-			## cardinality = 1..inf
-			<province>
-		}
-		## cardinality = 0..1
-		domicile_building = <domicile_building>
+	asset = single_alias_right[building_asset]
+
+	## cardinality = 0..1
+	assets = {
+		## cardinality = 1..inf
+		asset = single_alias_right[building_asset]
 	}
 
 	### Is the building enabled? Else won't give any effects to holder, and not be constructible (see can_construct* below).
@@ -108,6 +61,13 @@ building = {
 	is_enabled = single_alias_right[trigger_clause]
 
 	subtype[!graphical] = {
+		## cardinality = 0..1
+		rebuild_cost = single_alias_right[cost]
+
+		## replace_scopes = { root = province holder = character county = landed_title }
+		## cardinality = 0..1
+		can_rebuild = single_alias_right[trigger_clause]
+
 		## cardinality = 0..1
 		type_icon = filepath[game/gfx/interface/icons/building_types]
 
@@ -219,6 +179,10 @@ building = {
 			## cardinality = 0..1
 			parameter = enum[cultural_parameter]
 			## cardinality = 0..1
+			parameter = enum[innovation_paramater]
+			## cardinality = 0..1
+			parameter = enum[pillar_parameter]
+			## cardinality = 0..1
 			terrain = <terrain>
 			## cardinality = 0..1
 			is_coastal = bool
@@ -252,6 +216,39 @@ building = {
 			duchy_capital_county_culture_modifier = single_alias_right[county_culture_modifier]
 			##cardinality = 0..1
 			duchy_capital_county_faith_modifier = single_alias_right[county_faith_modifier]
+			### A modifier applied to every de jure county in the duchy if any situation the county is involved in has the specified parameter in its current phase.
+			### Can only be used (and only works) for duchy capital buildings.
+			## cardinality = 0..1
+			duchy_capital_county_situation_modifier = {
+				parameter = enum[situation_parameter]
+				## push_scope = landed_title
+				alias_name[modifier] = alias_match_left[modifier]
+			}
+		}
+
+		### A modifier applied to the entire county if any situation the county is involved in has the specified parameter in its current phase.
+		### All provinces in the county can stack the same county modifier together
+		##cardinality = 0..1
+		county_situation_modifier = {
+			parameter = enum[situation_parameter]
+			## push_scope = county
+			alias_name[modifier] = alias_match_left[modifier]
+		}
+
+		### A modifier applied to the province if any situation the county is involved in has the specified parameter in its current phase.
+		##cardinality = 0..1
+		province_situation_modifier = {
+			parameter = enum[situation_parameter]
+			## push_scope = province
+			alias_name[modifier] = alias_match_left[modifier]
+		}
+
+		### A modifier applied to the owner of the holding if any situation the county is involved in has the specified parameter in its current phase.
+		##cardinality = 0..1
+		character_situation_modifier = {
+			parameter = enum[situation_parameter]
+			## push_scope = character
+			alias_name[modifier] = alias_match_left[modifier]
 		}
 
 		### A special modifier applied to every holding of specified type in the county
@@ -265,13 +262,364 @@ building = {
 		## cardinality = 0..1
 		county_dynasty_modifier = {
 			county_holder_dynasty_perk = <dynasty_perk>
+			## push_scope = dynasty
 			alias_name[modifier] = alias_match_left[modifier]
 		}
 
 		### A modifier applied to the county holder
 		## cardinality = 0..1
 		county_holder_character_modifier = {
+			## push_scope = character
+			## cardinality = 1..inf
 			alias_name[modifier] = alias_match_left[modifier]
+		}
+
+		### A modifier applied to the province if the county holder's government has the specified parameter
+		## cardinality = 0..inf
+		province_government_modifier = {
+			parameter = enum[government_flag]
+			## push_scope = province
+			## cardinality = 1..inf
+			alias_name[modifier] = alias_match_left[modifier]
+		}
+
+		### A modifier applied to the county holder if their government has the specified parameter
+		## cardinality = 0..1
+		character_government_modifier = {
+			parameter = enum[government_flag]
+			## push_scope = character
+			## cardinality = 1..inf
+			alias_name[modifier] = alias_match_left[modifier]
+		}
+
+		### fallback: modifier collection
+		### Use this field to define an alternative set of modifiers that will be applied if the building is disabled or ruined.
+		### Requires a 'is_enabled' trigger to be configured as well.
+		###
+		### supported modifiers:
+		###	- character_modifier
+		###	- character_culture_modifier
+		###	- character_faith_modifier
+		###	- character_dynasty_modifier
+		###	- province_modifier
+		###	- province_culture_modifier
+		###	- province_faith_modifier
+		###	- province_terrain_modifier
+		###	- province_dynasty_modifier
+		###	- county_modifier
+		###	- county_culture_modifier
+		###	- county_faith_modifier
+		###	- duchy_capital_county_modifier
+		###	- county_situation_modifier
+		###	- province_situation_modifier
+		###	- character_situation_modifier
+		###	- duchy_capital_county_situation_modifier
+		###	- duchy_capital_county_culture_modifier
+		###	- duchy_capital_county_faith_modifier
+		###	- county_holding_modifier
+		###	- county_dynasty_modifier
+		###	- county_holder_character_modifier
+		###	- province_government_modifier
+		###	- character_government_modifier
+		fallback = {
+			## cardinality = 0..1
+			character_modifier = {
+				## push_scope = character
+				## cardinality = 1..inf
+				alias_name[modifier] = alias_match_left[modifier]
+			}
+			## cardinality = 0..1
+			character_culture_modifier = {
+				## push_scope = character
+				## cardinality = 1..inf
+				alias_name[modifier] = alias_match_left[modifier]
+			}
+			## cardinality = 0..1
+			character_faith_modifier = {
+				## push_scope = character
+				## cardinality = 1..inf
+				alias_name[modifier] = alias_match_left[modifier]
+			}
+			## cardinality = 0..1
+			character_dynasty_modifier = {
+				## push_scope = character
+				## cardinality = 1..inf
+				alias_name[modifier] = alias_match_left[modifier]
+			}
+			## cardinality = 0..1
+			province_modifier = {
+				## push_scope = province
+				## cardinality = 1..inf
+				alias_name[modifier] = alias_match_left[modifier]
+			}
+			## cardinality = 0..1
+			province_culture_modifier = {
+				## push_scope = province
+				## cardinality = 1..inf
+				alias_name[modifier] = alias_match_left[modifier]
+			}
+			## cardinality = 0..1
+			province_faith_modifier = {
+				## push_scope = province
+				## cardinality = 1..inf
+				alias_name[modifier] = alias_match_left[modifier]
+			}
+			## cardinality = 0..1
+			province_terrain_modifier = {
+				## push_scope = province
+				## cardinality = 1..inf
+				alias_name[modifier] = alias_match_left[modifier]
+			}
+			## cardinality = 0..1
+			province_dynasty_modifier = {
+				## push_scope = province
+				## cardinality = 1..inf
+				alias_name[modifier] = alias_match_left[modifier]
+			}
+			## cardinality = 0..1
+			county_modifier = {
+				## push_scope = landed_title
+				## cardinality = 1..inf
+				alias_name[modifier] = alias_match_left[modifier]
+			}
+			## cardinality = 0..1
+			county_culture_modifier = {
+				## push_scope = landed_title
+				## cardinality = 1..inf
+				alias_name[modifier] = alias_match_left[modifier]
+			}
+			## cardinality = 0..1
+			county_faith_modifier = {
+				## push_scope = landed_title
+				## cardinality = 1..inf
+				alias_name[modifier] = alias_match_left[modifier]
+			}
+			## cardinality = 0..1
+			duchy_capital_county_modifier = {
+				## push_scope = landed_title
+				## cardinality = 1..inf
+				alias_name[modifier] = alias_match_left[modifier]
+			}
+			## cardinality = 0..1
+			county_situation_modifier = {
+				## push_scope = landed_title
+				## cardinality = 1..inf
+				alias_name[modifier] = alias_match_left[modifier]
+			}
+			## cardinality = 0..1
+			province_situation_modifier = {
+				## push_scope = province
+				## cardinality = 1..inf
+				alias_name[modifier] = alias_match_left[modifier]
+			}
+			## cardinality = 0..1
+			character_situation_modifier = {
+				## push_scope = character
+				## cardinality = 1..inf
+				alias_name[modifier] = alias_match_left[modifier]
+			}
+			## cardinality = 0..1
+			duchy_capital_county_situation_modifier = {
+				## push_scope = landed_title
+				## cardinality = 1..inf
+				alias_name[modifier] = alias_match_left[modifier]
+			}
+			## cardinality = 0..1
+			duchy_capital_county_culture_modifier = {
+				## push_scope = landed_title
+				## cardinality = 1..inf
+				alias_name[modifier] = alias_match_left[modifier]
+			}
+			## cardinality = 0..1
+			duchy_capital_county_faith_modifier = {
+				## push_scope = landed_title
+				## cardinality = 1..inf
+				alias_name[modifier] = alias_match_left[modifier]
+			}
+			## cardinality = 0..1
+			county_holding_modifier = {
+				## push_scope = landed_title
+				## cardinality = 1..inf
+				alias_name[modifier] = alias_match_left[modifier]
+			}
+			## cardinality = 0..1
+			county_dynasty_modifier = {
+				## push_scope = landed_title
+				## cardinality = 1..inf
+				alias_name[modifier] = alias_match_left[modifier]
+			}
+			## cardinality = 0..1
+			county_holder_character_modifier = {
+				## push_scope = landed_title
+				## cardinality = 1..inf
+				alias_name[modifier] = alias_match_left[modifier]
+			}
+			## cardinality = 0..1
+			province_government_modifier = {
+				## push_scope = province
+				## cardinality = 1..inf
+				alias_name[modifier] = alias_match_left[modifier]
+			}
+			## cardinality = 0..1
+			character_government_modifier = {
+				## push_scope = character
+				## cardinality = 1..inf
+				alias_name[modifier] = alias_match_left[modifier]
+			}
+		}
+
+		### override_modifiers: modifier collection
+		### Use this field to define an alternative set of modifiers if a DLC feature flag is available.
+		### (if disabled, it still uses the general 'fallback' collection)
+		### Multiple 'override_modifiers' collections can be defined, the first valid collection is used.
+		### supported modifiers - see list defined in 'fallback = { ... }' above.
+		override_modifiers = {
+			requires_dlc_flag = enum[dlc_feature]
+
+			## cardinality = 0..1
+			character_modifier = {
+				## push_scope = character
+				## cardinality = 1..inf
+				alias_name[modifier] = alias_match_left[modifier]
+			}
+			## cardinality = 0..1
+			character_culture_modifier = {
+				## push_scope = character
+				## cardinality = 1..inf
+				alias_name[modifier] = alias_match_left[modifier]
+			}
+			## cardinality = 0..1
+			character_faith_modifier = {
+				## push_scope = character
+				## cardinality = 1..inf
+				alias_name[modifier] = alias_match_left[modifier]
+			}
+			## cardinality = 0..1
+			character_dynasty_modifier = {
+				## push_scope = character
+				## cardinality = 1..inf
+				alias_name[modifier] = alias_match_left[modifier]
+			}
+			## cardinality = 0..1
+			province_modifier = {
+				## push_scope = province
+				## cardinality = 1..inf
+				alias_name[modifier] = alias_match_left[modifier]
+			}
+			## cardinality = 0..1
+			province_culture_modifier = {
+				## push_scope = province
+				## cardinality = 1..inf
+				alias_name[modifier] = alias_match_left[modifier]
+			}
+			## cardinality = 0..1
+			province_faith_modifier = {
+				## push_scope = province
+				## cardinality = 1..inf
+				alias_name[modifier] = alias_match_left[modifier]
+			}
+			## cardinality = 0..1
+			province_terrain_modifier = {
+				## push_scope = province
+				## cardinality = 1..inf
+				alias_name[modifier] = alias_match_left[modifier]
+			}
+			## cardinality = 0..1
+			province_dynasty_modifier = {
+				## push_scope = province
+				## cardinality = 1..inf
+				alias_name[modifier] = alias_match_left[modifier]
+			}
+			## cardinality = 0..1
+			county_modifier = {
+				## push_scope = landed_title
+				## cardinality = 1..inf
+				alias_name[modifier] = alias_match_left[modifier]
+			}
+			## cardinality = 0..1
+			county_culture_modifier = {
+				## push_scope = landed_title
+				## cardinality = 1..inf
+				alias_name[modifier] = alias_match_left[modifier]
+			}
+			## cardinality = 0..1
+			county_faith_modifier = {
+				## push_scope = landed_title
+				## cardinality = 1..inf
+				alias_name[modifier] = alias_match_left[modifier]
+			}
+			## cardinality = 0..1
+			duchy_capital_county_modifier = {
+				## push_scope = landed_title
+				## cardinality = 1..inf
+				alias_name[modifier] = alias_match_left[modifier]
+			}
+			## cardinality = 0..1
+			county_situation_modifier = {
+				## push_scope = landed_title
+				## cardinality = 1..inf
+				alias_name[modifier] = alias_match_left[modifier]
+			}
+			## cardinality = 0..1
+			province_situation_modifier = {
+				## push_scope = province
+				## cardinality = 1..inf
+				alias_name[modifier] = alias_match_left[modifier]
+			}
+			## cardinality = 0..1
+			character_situation_modifier = {
+				## push_scope = character
+				## cardinality = 1..inf
+				alias_name[modifier] = alias_match_left[modifier]
+			}
+			## cardinality = 0..1
+			duchy_capital_county_situation_modifier = {
+				## push_scope = landed_title
+				## cardinality = 1..inf
+				alias_name[modifier] = alias_match_left[modifier]
+			}
+			## cardinality = 0..1
+			duchy_capital_county_culture_modifier = {
+				## push_scope = landed_title
+				## cardinality = 1..inf
+				alias_name[modifier] = alias_match_left[modifier]
+			}
+			## cardinality = 0..1
+			duchy_capital_county_faith_modifier = {
+				## push_scope = landed_title
+				## cardinality = 1..inf
+				alias_name[modifier] = alias_match_left[modifier]
+			}
+			## cardinality = 0..1
+			county_holding_modifier = {
+				## push_scope = landed_title
+				## cardinality = 1..inf
+				alias_name[modifier] = alias_match_left[modifier]
+			}
+			## cardinality = 0..1
+			county_dynasty_modifier = {
+				## push_scope = landed_title
+				## cardinality = 1..inf
+				alias_name[modifier] = alias_match_left[modifier]
+			}
+			## cardinality = 0..1
+			county_holder_character_modifier = {
+				## push_scope = landed_title
+				## cardinality = 1..inf
+				alias_name[modifier] = alias_match_left[modifier]
+			}
+			## cardinality = 0..1
+			province_government_modifier = {
+				## push_scope = province
+				## cardinality = 1..inf
+				alias_name[modifier] = alias_match_left[modifier]
+			}
+			## cardinality = 0..1
+			character_government_modifier = {
+				## push_scope = character
+				## cardinality = 1..inf
+				alias_name[modifier] = alias_match_left[modifier]
+			}
 		}
 
 		### Building flags
@@ -300,6 +648,70 @@ building = {
 		construction_time = alias_keys_field[int_value]
 		### How long does it take to construct the building
 		construction_time = value_field
+
+		subtype[great_building] = {
+			## cardinality = 0..1
+			is_mandala_capital = bool
+			great_project_type = <great_project>
+		}
 	}
 }
 
+single_alias[building_asset] = {
+	### 'pdxmesh' or 'entity', specifies wheter to use a mesh or an entity. Meshes are more performant and should be preferred.
+	type = enum[asset_type]
+	### The name of the mesh or the entity
+	## cardinality = 0..1
+	name = <pdxmesh>
+	### The name of the mesh or the entity
+	## cardinality = 0..1
+	name = <entity>
+	## cardinality = 0..1
+	requires_dlc_flag = enum[dlc_feature]
+	### To randomize between multiple meshes/entities. Note that they must all be entities, or all be meshes:
+	## cardinality = 0..1
+	names = {
+		## cardinality = 0..inf
+		<pdxmesh>
+		## cardinality = 0..inf
+		<entity>
+	}
+	### Path to illustration shown in the county view, texture can be accessed in GUI: "[Holding.GetIllustration]"
+	## cardinality = 0..1
+	illustration = filepath
+	### Associated sound effect and an optional parameter, can also be just soundeffect = "event:..." if no parameter is needed
+	## cardinality = 0..1
+	soundeffect = { #TODO : sound
+		soundeffect = scalar
+		## cardinality = 0..1
+		soundparameter = { scalar = value_field }
+	}
+	### Graphical cultures that prefer this asset to be shown
+	## cardinality = 0..1
+	graphical_cultures = { enum[building_gfx] }
+	### Graphical faiths that prefer this asset to be shown (priority is faith > religion > family, so Catholic graphical_faith overrides Abrahamic graphical_faith)
+	## cardinality = 0..1
+	graphical_faiths = {
+		## cardinality = 1..inf
+		value[graphical_faith]
+	}
+	### Graphical regions in which this asset is preferred, this is the most important criterion when selecting the asset, with the exception of government
+	## cardinality = 0..1
+	graphical_regions = {
+		##cardinality = 1..inf
+		<geographical_region.graphical_region>
+	}
+	### Governments that prefer this asset to be shown
+	## cardinality = 0..1
+	governments = {
+		## cardinality = 1..inf
+		<government>
+	}
+	## cardinality = 0..1
+	provinces = {
+		## cardinality = 1..inf
+		<province>
+	}
+	## cardinality = 0..1
+	domicile_building = <domicile_building>
+}

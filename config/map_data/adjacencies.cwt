@@ -1,0 +1,28 @@
+rows = {
+    row[adjacencies] = {
+        path = "map_data/"
+        path_extension = .csv
+        path_file = "adjacencies.csv"
+
+        columns = {
+            From = <province>
+            To = <province>
+            Type = enum[adjacency_types]
+            Through = <province>
+            start_x = int
+            start_y = int
+            stop_x = int
+            stop_y = int
+            Comment = scalar
+        }
+
+        end_column = stop_y
+    }
+}
+
+enums = {
+    enum[adjacency_types] = {
+        sea
+        river_large
+    }
+}
