@@ -132,12 +132,6 @@ links = {
 		input_scopes = character
 		output_scope = any
 	}
-	ai_will_do_contribution = {
-		desc = "Compares the scope character's base willingness to make the contribution specified        scope:my_char.contribution_ai_will_do( scope:great_project_contribution ) > 25"
-		type = value
-		input_scopes = character
-		output_scope = any
-	}
 	ai_zeal = {
 		desc = "AI zeal"
 		type = value
@@ -452,12 +446,6 @@ links = {
 	}
 	has_had_focus_for_days = {
 		desc = "Does the character had a focus for that time?"
-		type = value
-		input_scopes = character
-		output_scope = any
-	}
-	has_trait_xp = {
-		desc = "Checks if the scopd character has the given amount of XP in the trait level track. Track name is required if the trait has multiple tracks, otherwise should not be provided. has_trait_xp = { trait = <trait_key> track = <track_key> value = <script_value> }"
 		type = value
 		input_scopes = character
 		output_scope = any
@@ -2348,12 +2336,6 @@ links = {
 	}
 	phase_takeover_duration_days = {
 		desc = "Checks the takeover days left of a future phase in this sub-region. phase_takeover_duration_days:future_phase_key <= scripted_value"
-		type = value
-		input_scopes = situation_sub_region
-		output_scope = any
-	}
-	phase_takeover_points = {
-		desc = "Checks the takeover points of a future phase in this sub-region. phase_takeover_points:future_phase_key <= scripted_value"
 		type = value
 		input_scopes = situation_sub_region
 		output_scope = any

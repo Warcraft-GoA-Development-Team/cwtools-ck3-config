@@ -6,25 +6,29 @@ types = {
 
 enums = {
     enum[ai_targets] = {
-        known_secrets
+        The following are valid AI targets:
+        known_secrets - Characters who has a secret you know of
         scheme_targets
         hooked_characters
         neighboring_rulers
-        neighboring_rulers_including_tributary_borders
-        neighboring_top_overlords_including_tributary_borders
-        neighboring_top_overlords_connected_by_land
+        neighboring_rulers_including_tributary_borders - like neighboring_rulers, but includes your tributaries and all their neighbors as well
+        neighboring_top_overlords_including_tributary_borders - like neighboring_rulers_including_tributary_borders, but for the neighbors' top_overlords only (useful for interactions that target e.g. top_suzerains with tributaries as a buffer between them and the actor)
+        neighboring_top_overlords_connected_by_land - like neighboring_top_overlords_including_tributary_borders but does not include overlords who are not connected by land to the neighbor in question
         peer_vassals
         guests
         dynasty
         courtiers
         councillors
         prisoners
+        confederation_house_heads - The heads of all houses in the characters bloc
         sub_realm_characters
         realm_characters
         vassals
         tributaries
         liege
+        top_liege
         suzerain
+        top_suzerain
         self
         head_of_faith
         spouses
@@ -33,17 +37,18 @@ enums = {
         primary_war_enemies
         war_enemies
         war_allies
-        scripted_relations
-        activity_host
-        activity_guests
-        contacts
-        domicile_location_top_ruler
-        domicile_location_top_realm_vassals
-        domicile_location_neighboring_top_rulers
-        domicile_location_neighboring_top_realm_vassals
-        top_realm_domicile_owners
-        sub_realm_domicile_owners
-        nearby_domicile_owners
+        scripted_relations # Any character you have a scripted relation with
+        activity_host # Host of your involved activity
+        activity_guests # Guests of your involved activity
+        contacts # People on your contact list (connected to task contracts)
+        domicile_location_top_ruler # Ruler of domicile location's Top Realm (for Domicile Owners)
+        domicile_location_top_realm_vassals # Vassals of domicile location's Top Realm (for Domicile Owners)
+        domicile_location_neighboring_top_rulers # Rulers of Neighboring Top Realms (for Domicile Owners, uses the top liege of the domicile's location to fetch neighboring realms)
+        domicile_location_neighboring_top_realm_vassals # Vassals of Neighboring Top Realms (for Domicile Owners, uses the top liege of the domicile's location to fetch neighboring realms)
+        top_realm_domicile_owners # Owners of domiciles located in Top Liege Realm (for unlanded Domicile Owners, uses the top liege of the location you're in)
+        sub_realm_domicile_owners # Owners of domiciles located within your own realm (for Landed Rulers)
+        nearby_domicile_owners # Nearby owners of domiciles (Uses a range value defined as NEARBY_DOMICILE_RANGE in 00_defines.txt)
+        situation_participant_group # other characters in the same participant group. Needs the parameter to be defined with the key of the situation to be checked
 
         diarch # This one isn't listed in the .info but vanilla uses it
     }
@@ -103,6 +108,7 @@ enums = {
         candidate_score
         governor_efficiency
         obedience
+        merit
     }
 }
 # TODO: Check if of the int_value_fields accept values or just ints
@@ -144,6 +150,9 @@ character_interaction = {
     ### Tooltip if highlighted in menu
     ## cardinality = 0..1
     highlighted_reason = localisation
+    ### Tooltip if highlighted in menu
+    ## cardinality = 0..1
+    highlighted_reason = single_alias_right[complex_desc]
     ### Flavor text that is shown under acceptance widget. Use it when you need to draw more attention to the on decline effect
     ## cardinality = 0..1
     on_decline_summary = localisation
@@ -165,6 +174,8 @@ character_interaction = {
     ### Current Options:
     ### 	candidate_score (requires a target title)
     ### 	governor_efficiency
+    ###	    obedience
+    ### 	merit
     ###	obedience
     ## cardinality = 0..1
     custom_character_sort = { enum[custom_character_sort] }
@@ -189,9 +200,6 @@ character_interaction = {
     ### Does this interaction check diplomatic range? Yes by default
     ## cardinality = 0..1
     use_diplomatic_range = bool
-    ### Are the secondary scope targets optional?
-    ## cardinality = 0..1
-    secondary_scopes_optional = bool
     ### Does this interaction check diplomatic range? Yes by default
     ## cardinality = 0..1
     use_diplomatic_range = single_alias_right[trigger_clause]
@@ -211,7 +219,6 @@ character_interaction = {
     ## cardinality = 0..1
     show_answer_notification = bool
 
-
     ### Should the effects of the interaction be shown in the notification window when an interaction is sent. Defaults to yes
     ## cardinality = 0..1
     show_effects_in_notification = bool
@@ -219,7 +226,6 @@ character_interaction = {
     ### If this interaction should be taken by diarch, including unlanded one
     ## cardinality = 0..1
     diarch_interaction = bool
-
 
     ### Default is gfx/interface/icons/character_interactions/my_interaction_alert.dds
     ## cardinality = 0..1
@@ -268,10 +274,10 @@ character_interaction = {
     notification_text = localisation
     ### Request text shown to the intermediary
     ## cardinality = 0..1
-    intermediary_notification_text = localisation
+    notification_text = single_alias_right[complex_desc]
     ### Request text shown to the intermediary
     ## cardinality = 0..1
-    notification_text = single_alias_right[complex_desc]
+    intermediary_notification_text = localisation
     ### What text should be shown under the portrait? (For example: "Pick a Guardian")
     ## cardinality = 0..1
     prompt = localisation
@@ -324,6 +330,12 @@ character_interaction = {
     ### Can this artifact be picked as a valid target
     ## cardinality = 0..1
     can_be_picked_artifact = single_alias_right[trigger_clause]
+    ### Can this regiment be picked as a valid target
+    can_be_picked_regiment = single_alias_right[trigger_clause]
+    ### Whether to bother opening a confirmation window to players when selected at all; true if not specified
+    ### If evaluated false, will proceed to run on_send / on_accept immediately when selected
+    ### Deprecated! Can be used to induce gamestate-changing effects which should ALWAYS be communicated to the player ahead of time! To be removed with TIT-64917
+    needs_confirmation = single_alias_right[trigger_clause]
     ### Is the interaction automatically accepted, or can recipient decide
     ## cardinality = 0..1
     auto_accept = bool
@@ -338,14 +350,21 @@ character_interaction = {
     can_be_blocked = single_alias_right[trigger_clause]
     
     ### This changes the redirection of characters using the scopes actor, recipient, secondary_actor and secondary_recipient
+    ### Available scopes:
+    ###	    scope:actor
+    ###	    scope:secondary_actor
+    ###	    scope:recipient
+    ###	    scope:secondary_recipient
+    ###	    scope:intermediary
+    ## replace_scopes = { actor = character secondary_actor = character recipient = character secondary_recipient = character intermediary = character }
     ## cardinality = 0..1
     redirect = single_alias_right[effect_clause]
     ### Everyone sorted into the list 'characters' has the potential of being shown to be selected. Uses the scopes actor, recipient, secondary_actor and secondary_recipient.
     ## cardinality = 0..1
-    ## replace_scope = { actor = character recipient = character secondary_actor = character secondary_recipient = character }
+    ## replace_scopes = { actor = character secondary_actor = character recipient = character secondary_recipient = character intermediary = character }
     populate_actor_list = single_alias_right[effect_clause]
     ### Everyone sorted into the list 'characters' has the potential of being shown to be selected. Uses the scopes actor, recipient, secondary_actor and secondary_recipient.
-    ## replace_scope = { actor = character recipient = character secondary_actor = character secondary_recipient = character }
+    ## replace_scopes = { actor = character secondary_actor = character recipient = character secondary_recipient = character intermediary = character }
     ## cardinality = 0..1
     populate_recipient_list = single_alias_right[effect_clause]
     
@@ -397,7 +416,7 @@ character_interaction = {
     send_options_exclusive = bool
     ### Are the secondary scope targets optional?
     ## cardinality = 0..1
-    secondary_scopes_optiional = bool
+    secondary_scopes_optional = bool
 
     ### Executes directly the interaction is sent
     ## cardinality = 0..1
@@ -495,18 +514,19 @@ character_interaction = {
     ai_set_target = single_alias_right[effect_clause]
     ## cardinality = 0..inf
     ai_targets = {
-        
-        ### Maximum number of targets to consider, unset considers all of them, will 
-        max = integer
         ### Which characters does the ai consider as recipient for the interaction, can be scripted multiple times to combine lists.
         ### Available lists are in the "ai_targets" section of this file (trying to add an invalid list will trigger an error message with all available )
         ## cardinality = 1..inf
         ai_recipients = enum[ai_targets]
+        ### Maximum number of targets to consider, unset considers all of them, will
+        max = integer
         ### Maximum number of targets to consider, unset considers all of them, will 
         ## cardinality = 0..1
         max = int_value_field
         ## cardinality = 0..1
-        chance = value_field
+        chance = float[0.0..1.0]
+        ## cardinality = 0..1
+        parameter = <situation>
     }
     ### Quick triggers for the ai_targets
     ## cardinality = 0..inf
@@ -515,10 +535,19 @@ character_interaction = {
     ### How often should the ai consider doing this interaction
     ## cardinality = 0..1
     ai_frequency = int_value_field
+    ### How often should the ai consider doing this interaction by tier of top title (in months). '0' means it is never considered. Used instead of 'ai_frequency'. All tiers are required to be defined.
+    ## cardinality = 0..1
+    ai_frequency_by_tier = single_alias_right[int_per_tier]
     ### Will the ai consider trying this interaction. Root scope is the actor, and other event target are not available
     ## cardinality = 0..1
     ## replace_scope = { ROOT = character }
     ai_potential = single_alias_right[trigger_clause]
+    ### Is this interaction available for the actor, both AI and player
+    ### Available scopes:
+    ###	root - actor
+    ## cardinality = 0..1
+    ## replace_scope = { ROOT = character }
+    is_available = single_alias_right[trigger_clause]
     ### Will the intermediary ai approve for this interaction and forward it to the recipient
     ## cardinality = 0..1
     ai_intermediary_accept = single_alias_right[chance_block]

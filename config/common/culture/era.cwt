@@ -57,7 +57,7 @@ era = {
 
 single_alias[maa_upgrade_era] = {
     ### The base MaA type to upgrade
-    men_at_arms = value[unit_type]
+    men_at_arms = enum[unit_type]
     ## cardinality = 0..1
     damage = float
     ## cardinality = 0..1

@@ -1,0 +1,467 @@
+links = {
+    list_size_prefix = {
+        desc = "Checks the size of a list list_size = { name = X value >= Y } Where X is the name of the list Where Y is a script value"
+        type = value
+        from_data = yes
+        prefix = list_size:
+        data_source = value[list]
+        input_scopes = any
+        output_scope = any
+    }
+    mandate_type_qualification_prefix = {
+        desc = "Diarch qualification for spefic mandate type"
+        type = value
+        from_data = yes
+        prefix = mandate_type_qualification:
+        data_source = <diarchy_mandate>
+        input_scopes = character
+        output_scope = any
+    }
+    geographical_region_prefix = {
+        type = scope
+        from_data = yes
+        prefix = geographical_region:
+        data_source = <geographical_region>
+        input_scopes = any
+        output_scope = geographical_region
+    }
+    top_participant_group_prefix = {
+        type = scope
+        from_data = yes
+        prefix = top_participant_group:
+        data_source = <decision_group_type>
+        input_scopes = any
+        output_scope = situation_participant_group
+    }
+    council_task_prefix = {
+        type = scope
+        from_data = yes
+        prefix = council_task:
+        data_source = <council_position>
+        input_scopes = character
+        output_scope = council_task
+    }
+    council_position_prefix = {
+        desc = "Scope to the councillor of the given type, ex. scope:cp_steward"
+        from_data = yes
+        type = scope
+        prefix = cp:
+        data_source = <council_position>
+        input_scopes = character
+        output_scope = character
+    }
+    court_position_prefix = {
+        desc = "The character currently employed in a specific court position."
+        from_data = yes
+        type = scope
+        prefix = court_position:
+        data_source = <court_position>
+        input_scopes = character
+        output_scope = character
+    }
+    array_define_prefix = {
+        desc = "Reference the value of a numeric value in an array define: array_define:Namespace|Name|Index. Index is 0-based."
+        from_data = yes
+        data_source = <array_define>
+        prefix = array_define:
+        output_scope = value
+    }
+    character_prefix = {
+        desc = "Global link to historical ( scripted ) character scope of the given character string"
+        from_data = yes
+        type = scope
+        data_source = <character>
+        prefix = character:
+        output_scope = character
+    }
+    culture_data_prefix = {
+        from_data = yes
+        type = scope
+        data_source = <culture>
+        prefix = culture:
+        output_scope = culture
+    }
+    culture_group_data_prefix = {
+        desc = "Unknown, add something in code registration"
+        from_data = yes
+        type = scope
+        data_source = <culture_group>
+        prefix = culture_group:
+        output_scope = culture_group
+    }
+    define_prefix = {
+        desc = "Reference the value of a numeric define: define:Namespace|Name"
+        from_data = yes
+        type = scope
+        data_source = <define>
+        prefix = define:
+        output_scope = value
+    }
+    dynasty_data_prefix = {
+        desc = "Link to dynasty scope of the given dynasty string"
+        from_data = yes
+        type = scope
+        data_source = <dynasty>
+        prefix = dynasty:
+        output_scope = dynasty
+    }
+    faith_data_prefix = {
+        desc = "Global link to faith scope of given faith string"
+        from_data = yes
+        type = scope
+        data_source = <faith>
+        prefix = faith:
+        output_scope = faith
+    }
+    flag_prefix = {
+        desc = "Flag literals eg: flag:the_boss"
+        from_data = yes
+        data_source = value[flag]
+        prefix = flag:
+        output_scope = flag
+    }
+    global_var_prefix = {
+        desc = "Reference a previous set global variable via its name eg: global_var:important_thing"
+        from_data = yes
+        type = scope
+        data_source = value[global_variable]
+        prefix = global_var:
+    }
+    house_data_prefix = {
+        desc = "Link to house scope of the given house string"
+        from_data = yes
+        type = scope
+        data_source = <house>
+        output_scope = dynasty_house
+        prefix = house:
+    }
+    local_var_prefix = {
+        desc = "Reference a previous set local variable via its name eg: local_var:person_of_interest"
+        from_data = yes
+        type = scope
+        data_source = value[local_variable]
+        prefix = local_var:
+    }
+    province_prefix = {
+        desc = "Directly scope to a specific province by its ID"
+        from_data = yes
+        data_source = <province>
+        prefix = province:
+        output_scope = province
+    }
+    religion_data_prefix = {
+        desc = "Unknown, add something in code registration"
+        from_data = yes
+        type = scope
+        data_source = <religion>
+        prefix = religion:
+        output_scope = religion
+    }
+    scope_prefix = {
+        desc = "Reference a previously saved scope via its name eg: scope:target"
+        from_data = yes
+        data_source = value[event_target]
+        prefix = scope:
+    }
+    title_data_prefix = {
+        desc = "Global link to title scope of given landed title template string"
+        from_data = yes
+        type = scope
+        data_source = <landed_title>
+        prefix = title:
+        output_scope = landed_title
+    }
+    var_prefix = {
+        desc = "Reference a previous set variable via its name eg: var:mortal_enemy"
+        from_data = yes
+        type = scope
+        prefix = var:
+        data_source = value[variable]
+    }
+    dead_var_prefix = {
+        desc = "Reference a previous set dead character variable via its name eg: dead_var:mortal_enemy"
+        from_data = yes
+        type = scope
+        prefix = dead_var:
+        data_source = value[dead_variable]
+    }
+    memory_participant_prefix = {
+        desc = "Get the participant of a given tag from a memory"
+        input_scopes = character_memory
+        output_scope = character
+        from_data = yes
+        data_source = value[memory_participant]
+        prefix = memory_participant:
+    }
+    accolade_type_prefix = {
+        desc = "Get the accolade_type with the specified key"
+        output_scope = accolade_type
+        from_data = yes
+        type = scope
+        prefix = accolade_type:
+        data_source = <accolade>
+    }
+    activity_type_data_prefix = {
+        desc = "Get the activity_type with the specified key"
+        output_scope = activity_type
+        from_data = yes
+        type = scope
+        prefix = activity_type:
+        data_source = <accolade>
+    }
+    casus_belli_type_prefix = {
+        desc = "Get the casus_belli_type with the specified key"
+        from_data = yes
+        data_source = <casus_belli>
+        prefix = casus_belli_type:
+        output_scope = casus_belli_type
+    }
+    culture_pillar_prefix = {
+        desc = "Get the culture_pillar with the specified key"
+        from_data = yes
+        type = scope
+        data_source = <pillar>
+        prefix = culture_pillar:
+        output_scope = culture_pillar
+    }
+    culture_tradition_prefix = {
+        desc = "Get the culture_tradition with the specified key"
+        from_data = yes
+        type = scope
+        data_source = <tradition>
+        prefix = culture_tradition:
+        output_scope = culture_tradition
+    }
+    decision_prefix = {
+        desc = "Get the decision with the specified key"
+        from_data = yes
+        type = scope
+        data_source = <decision>
+        prefix = decision:
+        output_scope = decision
+    }
+    doctrine_prefix = {
+        desc = "Get the doctrine with the specified key"
+        from_data = yes
+        type = scope
+        data_source = <doctrine>
+        prefix = doctrine:
+        output_scope = doctrine
+    }
+    epidemic_type_data_prefix = {
+        desc = "Get the epidemic_type with the specified key"
+        from_data = yes
+        type = scope
+        data_source = <epidemic>
+        prefix = epidemic_type:
+        output_scope = epidemic_type
+    }
+    event_id_prefix = {
+        desc = "Global link to event scope of the given event id"
+        from_data = yes
+        type = scope
+        data_source = <event>
+        prefix = event_id:
+        output_scope = flag
+    }
+    geographical_region_prefix = {
+        desc = "Get the geographical_region with the specified key"
+        from_data = yes
+        data_source = <geographical_region>
+        prefix = geographical_region:
+        output_scope = geographical_region
+    }
+    government_type_prefix = {
+        desc = "Get the government_type with the specified key"
+        from_data = yes
+        data_source = <government>
+        prefix = government_type:
+        output_scope = government_type
+    }
+    holding_type_prefix = {
+        desc = "Get the government_type with the specified key"
+        from_data = yes
+        data_source = <holding_type>
+        prefix = holding:
+        output_scope = holding_type
+    }
+    legend_type_data_prefix = {
+        desc = "Get the legend_type with the specified key"
+        from_data = yes
+        data_source = <legend_type>
+        output_scope = legend_type
+        prefix = legend_type:
+    }
+    special_guest_prefix = {
+        desc = "Get the special guest of the given type key in the scoped activity"
+        from_data = yes
+        type = scope
+        prefix = special_guest:
+        data_source = enum[special_guest]
+        input_scopes = activity
+        output_scope = character
+    }
+    struggle_prefix = {
+        desc = "Global link to struggle of the given key"
+        from_data = yes
+        data_source = <struggle>
+        prefix = struggle:
+        output_scope = struggle
+    }
+    task_contract_type_prefix = {
+        desc = "Get the task_contract_type with the specified key"
+        from_data = yes
+        data_source = <task_contract>
+        prefix = task_contract_type:
+        output_scope = task_contract_type
+    }
+    trait_prefix = {
+        desc = "Get the trait with the specified key"
+        from_data = yes
+        type = scope
+        data_source = <trait>
+        prefix = trait:
+        output_scope = trait
+    }
+    vassal_contract_prefix = {
+        desc = "Get the vassal_contract with the specified key"
+        from_data = yes
+        type = scope
+        prefix = vassal_contract:
+        data_source = <subject_contract>
+    }
+    legend_property_prefix = {
+        desc = "Get the scope of the property with the given name on the scoped legend"
+        input_scopes = legend
+        from_data = yes
+        data_source = value[legend_property]
+        prefix = legend_property:
+    }
+    vassal_contract_obligation_level_prefix = {
+        from_data = yes
+        type = value
+        prefix = vassal_contract_obligation_level:
+        data_source = <subject_contract>
+        input_scopes = character
+        output_scope = any
+    }
+    number_maa_regiments_of_base_type_prefix = {
+        from_data = yes
+        type = value
+        prefix = number_maa_regiments_of_base_type:
+        data_source = enum[unit_type]
+        input_scopes = character
+        output_scope = any
+    }
+    court_position_type_prefix = {
+        desc = "Get the court_position_type with the specified key"
+        from_data = yes
+        type = scope
+        data_source = <court_position>
+        prefix = court_position_type:
+        output_scope = court_position_type
+    }
+    situation_prefix = {
+        desc = "Global link to the situation of the given type key (only available if the situation has `is_unique = yes`."
+        from_data = yes
+        type = scope
+        data_source = <situation.unique>
+        prefix = situation:
+        output_scope = situation
+    }
+    character_prefix = {
+        desc = "Global link to historical ( scripted ) character scope of the given character string"
+        from_data = yes
+        type = scope
+        data_source = <character>
+        prefix = character:
+        output_scope = character
+    }
+    culture_innovation_prefix = {
+        desc = "Get the culture_innovation with the specified key"
+        from_data = yes
+        type = scope
+        data_source = <innovation>
+        prefix = culture_innovation:
+        output_scope = culture_innovation
+    }
+    house_aspiration_prefix = {
+        desc = "Get the house_aspiration with the specified key"
+        from_data = yes
+        type = scope
+        data_source = <house_aspiration>
+        prefix = house_aspiration:
+        output_scope = house_aspiration
+    }
+    house_relation_level_prefix = {
+        desc = "Get the house_relation_level with the specified key"
+        from_data = yes
+        type = scope
+        data_source = enum[house_relation_level]
+        prefix = house_relation_level:
+        output_scope = house_relation_level
+    }
+    house_relation_type_prefix = {
+        desc = "Get the house_relation_type with the specified key"
+        from_data = yes
+        type = scope
+        data_source = <house_relation>
+        prefix = house_relation_type:
+        output_scope = house_relation_type
+    }
+    aptitude_prefix = {
+        type = value
+        from_data = yes
+        from_argument = yes
+        prefix = aptitude:
+        data_source = <court_position>
+        input_scopes = character
+        output_scope = any
+    }
+    aptitude_score_prefix = {
+        type = value
+        from_data = yes
+        from_argument = yes
+        prefix = aptitude_score:
+        desc = "Raw aptitude score of the provided court position type for the scoped character."
+        data_source = <court_position>
+        input_scopes = character
+        output_scope = value
+    }
+    situation_participant_group_prefix = {
+        type = scope
+        from_data = yes
+        prefix = situation_participant_group:
+        desc = "Get the scope of the first situation_participant_group with the given name on the scoped situation (for top sub-region)."
+        data_source = enum[participant_groups]
+        input_scopes = situation
+        output_scope = situation_participant_group
+    }
+    phase_takeover_points_prefix = {
+        type = value
+        from_data = yes
+        prefix = phase_takeover_points:
+        desc = "Checks the takeover points of a future phase in this sub-region. phase_takeover_points:future_phase_key <= scripted_value"
+        data_source = enum[situation_phases]
+        input_scopes = situation_sub_region
+        output_scope = any
+    }
+    army_number_maa_regiments_of_base_type_prefix = {
+        type = value
+        from_data = yes
+        prefix = army_number_maa_regiments_of_base_type:
+        desc = "Does the scoped army have the value amount of MaA of the specified base type? value = knight_army.army_number_maa_regiments_of_base_type:archers"
+        data_source = enum[unit_type]
+        input_scopes = situation_sub_region
+        output_scope = any
+    }
+    army_number_maa_regiments_of_type_prefix = {
+        type = value
+        from_data = yes
+        prefix = army_number_maa_regiments_of_type:
+        desc = "Does the scoped army have the value amount of MaA of the specified type? value = knight_army.army_number_maa_regiments_of_type:crossbowmen"
+        data_source = <maa_type>
+        input_scopes = situation_sub_region
+        output_scope = any
+    }
+}

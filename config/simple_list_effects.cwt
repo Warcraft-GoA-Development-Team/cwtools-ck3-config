@@ -277,13 +277,6 @@ alias[effect:every_ruler] = single_alias_right[every_effect]
 ## push_scope = province
 alias[effect:every_special_building_province] = single_alias_right[every_effect]
 
-### Gets all available and accepted task contracts.
-### Optionally specify a contract type filter
-### any_task_contract = { task_contract_type = laamp_raid_contract }
-### every_task_contract = { limit = { <triggers> } <effects> }
-## push_scope = task_contract
-alias[effect:every_task_contract] = single_alias_right[every_effect]
-
 ### Iterate through every task_contract_type in the database
 ### every_task_contract_type = { limit = { <triggers> } <effects> }
 ## push_scope = task_contract_type
@@ -927,20 +920,6 @@ alias[effect:ordered_ruler] = single_alias_right[ordered_effect]
 ## push_scope = province
 alias[effect:ordered_special_building_province] = single_alias_right[ordered_effect]
 
-### Gets all available and accepted task contracts.
-### Optionally specify a contract type filter
-### any_task_contract = { task_contract_type = laamp_raid_contract }
-### ordered_task_contract = {
-### limit = { <triggers> }
-### order_by = script_value
-### position = int
-### min = int
-### max = script_value
-### check_range_bounds = no # If you don't want an error logged if the list is smaller than the min/max
-### <effects> }
-## push_scope = task_contract
-alias[effect:ordered_task_contract] = single_alias_right[ordered_effect]
-
 ### Iterate through every task_contract_type in the database
 ### ordered_task_contract_type = {
 ### limit = { <triggers> }
@@ -1258,13 +1237,6 @@ alias[effect:random_ruler] = single_alias_right[random_effect]
 ## push_scope = province
 alias[effect:random_special_building_province] = single_alias_right[random_effect]
 
-### Gets all available and accepted task contracts.
-### Optionally specify a contract type filter
-### any_task_contract = { task_contract_type = laamp_raid_contract }
-### random_task_contract = { limit = { <triggers> } (optional) weight = { mtth } <effects> }
-## push_scope = task_contract
-alias[effect:random_task_contract] = single_alias_right[random_effect]
-
 ### Iterate through every task_contract_type in the database
 ### random_task_contract_type = { limit = { <triggers> } (optional) weight = { mtth } <effects> }
 ## push_scope = task_contract_type
@@ -1322,14 +1294,6 @@ alias[effect:every_army] = single_alias_right[every_effect]
 ## push_scope = task_contract
 alias[effect:every_available_task_contract] = single_alias_right[every_effect]
 
-### Gets all accepted task contracts of the root character
-### Optionally specify a contract type filter
-### any_character_active_contract = { task_contract_type = laamp_raid_contract }
-### every_character_active_contract = { limit = { <triggers> } <effects> }
-## scope = character
-## push_scope = task_contract
-alias[effect:every_character_active_contract] = single_alias_right[every_effect]
-
 ### Iterate through all artifacts in a given characters inventory
 ### every_character_artifact = { limit = { <triggers> } <effects> }
 ## scope = character
@@ -1347,14 +1311,6 @@ alias[effect:every_character_epidemic] = single_alias_right[every_effect]
 ## scope = character
 ## push_scope = situation
 alias[effect:every_character_situation] = single_alias_right[every_effect]
-
-### Gets all task contracts of the scoped character
-### Optionally specify a contract type filter
-### any_character_task_contract = { task_contract_type = laamp_raid_contract }
-### every_character_task_contract = { limit = { <triggers> } <effects> }
-## scope = character
-## push_scope = task_contract
-alias[effect:every_character_task_contract] = single_alias_right[every_effect]
 
 ### Scopes from a character to a neighboring county (incl. across water, looking trough the de Jure lieges)
 ### every_character_to_title_neighboring_and_across_water_county = { limit = { <triggers> } <effects> }
@@ -1983,14 +1939,6 @@ alias[effect:every_succession_appointment_invested_candidate] = single_alias_rig
 ## push_scope = landed_title
 alias[effect:every_succession_appointment_invested_title] = single_alias_right[every_effect]
 
-### Iterate through all factions targeting the scope character
-### Optionally specify a faction type filter
-### any_targeting_faction = { faction_type = independence_faction }
-### every_targeting_faction = { limit = { <triggers> } <effects> }
-## scope = character
-## push_scope = faction
-alias[effect:every_targeting_faction] = single_alias_right[every_effect]
-
 ### Iterate through all schemes targeting the character
 ### every_targeting_scheme = { limit = { <triggers> } <effects> }
 ## scope = character
@@ -2180,21 +2128,6 @@ alias[effect:ordered_army] = single_alias_right[ordered_effect]
 ## push_scope = task_contract
 alias[effect:ordered_available_task_contract] = single_alias_right[ordered_effect]
 
-### Gets all accepted task contracts of the root character
-### Optionally specify a contract type filter
-### any_character_active_contract = { task_contract_type = laamp_raid_contract }
-### ordered_character_active_contract = {
-### limit = { <triggers> }
-### order_by = script_value
-### position = int
-### min = int
-### max = script_value
-### check_range_bounds = no # If you don't want an error logged if the list is smaller than the min/max
-### <effects> }
-## scope = character
-## push_scope = task_contract
-alias[effect:ordered_character_active_contract] = single_alias_right[ordered_effect]
-
 ### Iterate through all artifacts in a given characters inventory
 ### ordered_character_artifact = {
 ### limit = { <triggers> }
@@ -2233,21 +2166,6 @@ alias[effect:ordered_character_epidemic] = single_alias_right[ordered_effect]
 ## scope = character
 ## push_scope = situation
 alias[effect:ordered_character_situation] = single_alias_right[ordered_effect]
-
-### Gets all task contracts of the scoped character
-### Optionally specify a contract type filter
-### any_character_task_contract = { task_contract_type = laamp_raid_contract }
-### ordered_character_task_contract = {
-### limit = { <triggers> }
-### order_by = script_value
-### position = int
-### min = int
-### max = script_value
-### check_range_bounds = no # If you don't want an error logged if the list is smaller than the min/max
-### <effects> }
-## scope = character
-## push_scope = task_contract
-alias[effect:ordered_character_task_contract] = single_alias_right[ordered_effect]
 
 ### Scopes from a character to a neighboring county (incl. across water, looking trough the de Jure lieges)
 ### ordered_character_to_title_neighboring_and_across_water_county = {
@@ -3590,21 +3508,6 @@ alias[effect:ordered_succession_appointment_invested_candidate] = single_alias_r
 ## push_scope = landed_title
 alias[effect:ordered_succession_appointment_invested_title] = single_alias_right[ordered_effect]
 
-### Iterate through all factions targeting the scope character
-### Optionally specify a faction type filter
-### any_targeting_faction = { faction_type = independence_faction }
-### ordered_targeting_faction = {
-### limit = { <triggers> }
-### order_by = script_value
-### position = int
-### min = int
-### max = script_value
-### check_range_bounds = no # If you don't want an error logged if the list is smaller than the min/max
-### <effects> }
-## scope = character
-## push_scope = faction
-alias[effect:ordered_targeting_faction] = single_alias_right[ordered_effect]
-
 ### Iterate through all schemes targeting the character
 ### ordered_targeting_scheme = {
 ### limit = { <triggers> }
@@ -3857,14 +3760,6 @@ alias[effect:random_army] = single_alias_right[random_effect]
 ## push_scope = task_contract
 alias[effect:random_available_task_contract] = single_alias_right[random_effect]
 
-### Gets all accepted task contracts of the root character
-### Optionally specify a contract type filter
-### any_character_active_contract = { task_contract_type = laamp_raid_contract }
-### random_character_active_contract = { limit = { <triggers> } (optional) weight = { mtth } <effects> }
-## scope = character
-## push_scope = task_contract
-alias[effect:random_character_active_contract] = single_alias_right[random_effect]
-
 ### Iterate through all artifacts in a given characters inventory
 ### random_character_artifact = { limit = { <triggers> } (optional) weight = { mtth } <effects> }
 ## scope = character
@@ -3882,14 +3777,6 @@ alias[effect:random_character_epidemic] = single_alias_right[random_effect]
 ## scope = character
 ## push_scope = situation
 alias[effect:random_character_situation] = single_alias_right[random_effect]
-
-### Gets all task contracts of the scoped character
-### Optionally specify a contract type filter
-### any_character_task_contract = { task_contract_type = laamp_raid_contract }
-### random_character_task_contract = { limit = { <triggers> } (optional) weight = { mtth } <effects> }
-## scope = character
-## push_scope = task_contract
-alias[effect:random_character_task_contract] = single_alias_right[random_effect]
 
 ### Scopes from a character to a neighboring county (incl. across water, looking trough the de Jure lieges)
 ### random_character_to_title_neighboring_and_across_water_county = { limit = { <triggers> } (optional) weight = { mtth } <effects> }
@@ -4517,14 +4404,6 @@ alias[effect:random_succession_appointment_invested_candidate] = single_alias_ri
 ## scope = character
 ## push_scope = landed_title
 alias[effect:random_succession_appointment_invested_title] = single_alias_right[random_effect]
-
-### Iterate through all factions targeting the scope character
-### Optionally specify a faction type filter
-### any_targeting_faction = { faction_type = independence_faction }
-### random_targeting_faction = { limit = { <triggers> } (optional) weight = { mtth } <effects> }
-## scope = character
-## push_scope = faction
-alias[effect:random_targeting_faction] = single_alias_right[random_effect]
 
 ### Iterate through all schemes targeting the character
 ### random_targeting_scheme = { limit = { <triggers> } (optional) weight = { mtth } <effects> }

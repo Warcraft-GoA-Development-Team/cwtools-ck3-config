@@ -1,5 +1,5 @@
 types = {
-    ## type_key_regex = (\be_[^\s]+|\bk_[^\s]+|\bd_[^\s]+|\bc_[^\s]+|\bb_[^\s]+)
+    ## type_key_regex = (\bh_[^\s]+|\be_[^\s]+|\bk_[^\s]+|\bd_[^\s]+|\bc_[^\s]+|\bb_[^\s]+)
     type[dynamic_coa] = { #TODO: Have the key be a landed_title
         path = "game/common/coat_of_arms/dynamic_definitions"
     }

@@ -66,6 +66,13 @@ single_alias[cost] = {
     barter_goods = value_field
 
     ## cardinality = 0..1
+    treasury_or_gold = single_alias_right[score_formula]
+    ## cardinality = 0..1
+    treasury_or_gold = alias_keys_field[int_value]
+    ## cardinality = 0..1
+    treasury_or_gold = value_field
+
+    ## cardinality = 0..1
     round = bool
 }
 
@@ -379,6 +386,15 @@ single_alias[scaling_court_modifier_desc] = {
     ## cardinality = 0..1
     excellent = localisation
     range = localisation
+}
+
+single_alias[int_per_tier] = {
+    barony = int
+    county = int
+    duchy = int
+    kingdom = int
+    empire = int
+    hegemony = int
 }
 
 alias[scheming_against_target:type] = <scheme>

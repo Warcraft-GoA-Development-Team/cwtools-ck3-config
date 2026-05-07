@@ -1,4 +1,5 @@
 links = {
+    # These are for triggers that also have links
     squared_distance = {
         desc = "How far away is the province/barony/county from the target? Measured in map pixels. Squared for performance reasons (square root is expensive). squared_distance = { target = some province/barony/county value > 10000 }"
         type = value
@@ -67,36 +68,48 @@ links = {
     <lifestyle>_perk_points = {
         desc = "How many perk points available does the character have?"
         type = value
+        from_data = yes
+        data_source = <lifestyle>_perk_points
         input_scopes = character
         output_scope = any
     }
     <lifestyle>_perks = {
         desc = "How many perks from this lifestyle does the character have?"
         type = value
+        from_data = yes
+        data_source = <lifestyle>_perks
         input_scopes = character
         output_scope = any
     }
     <lifestyle>_unlockable_perks = {
         desc = "How many perks from this lifestyle can the character currently unlock? This checks that they have the parent perks, and that the can_be_picked is met. It doesn't check perk points "
         type = value
+        from_data = yes
+        data_source = <lifestyle>_unlockable_perks
         input_scopes = character
         output_scope = any
     }
     <lifestyle>_xp = {
         desc = "How many perk points available does the character have?"
         type = value
+        from_data = yes
+        data_source = <lifestyle>_xp
         input_scopes = character
         output_scope = any
     }
     <legacy>_perks = {
         desc = "How many perks in the lifestyle does this dynasty have?"
         type = value
+        from_data = yes
+        data_source = <legacy>_perks
         input_scopes = dynasty
         output_scope = any
     }
     perks_in_<lifestyle> = {
         desc = "How many perks does this lifestyle have?"
         type = value
+        from_data = yes
+        data_source = perks_in_<lifestyle>
         input_scopes = any
         output_scope = any
     }
@@ -112,24 +125,8 @@ links = {
     num_of_relation_<scripted_relation> = {
         desc = "Compares the number of scripted relations a character has of the type "
         type = value
-        input_scopes = character
-        output_scope = any
-    }
-    list_size_prefix = {
-        desc = "Checks the size of a list list_size = { name = X value >= Y } Where X is the name of the list Where Y is a script value"
-        type = value
         from_data = yes
-        prefix = list_size:
-        data_source = value[list]
-        input_scopes = any
-        output_scope = any
-    }
-    mandate_type_qualification_prefix = {
-        desc = "Diarch qualification for spefic mandate type"
-        type = value
-        from_data = yes
-        prefix = mandate_type_qualification:
-        data_source = <diarchy_mandate>
+        data_source = num_of_relation_<scripted_relation>
         input_scopes = character
         output_scope = any
     }
@@ -139,6 +136,24 @@ links = {
         from_argument = yes
         prefix = number_maa_regiments_of_type:
         data_source = <maa_type>
+        input_scopes = { character }
+        output_scope = any
+    }
+    has_trait_xp = {
+        desc = "Checks if the scopd character has the given amount of XP in the trait level track. Track name is required if the trait has multiple tracks, otherwise should not be provided."
+        type = value
+        from_argument = yes
+        prefix = has_trait_xp:
+        data_source = <trait>
+        input_scopes = { character }
+        output_scope = any
+    }
+    ai_will_do_contribution = {
+        desc = "Compares the scope character's base willingness to make the contribution specified"
+        type = value
+        from_argument = yes
+        prefix = ai_will_do_contribution:
+        data_source = scope[great_project_contribution]
         input_scopes = { character }
         output_scope = any
     }

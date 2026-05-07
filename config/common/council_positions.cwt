@@ -106,6 +106,9 @@ council_position = {
     ### Whether the position should be filled by a character pool after the councillor dies. Defaults to no.
     fill_from_pool = bool
     ## cardinality = 0..1
+    ### default = no. If this is true - this council position will be part of the character counted as clergy.
+    is_clergy_position = bool
+    ## cardinality = 0..1
     ### The character pool which should be used to fill the position. Only used with fill_from_pool = yes.
     pool_character_config = <pool_character_selector>
 

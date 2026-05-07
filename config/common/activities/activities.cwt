@@ -545,14 +545,7 @@ activity = { # TODO: sort_order may or may not be in use. It's listed in the .in
 	### How often should the ai check  if it can host this particular activity.
 	### '0' means it is never considered. Used instead of 'ai_check_interval'. All tiers are required to be defined.
 	## cardinality = 0..1
-	ai_check_interval_by_tier = {
-		barony = int
-		county = int
-		duchy = int
-		kingdom = int
-		empire = int
-		hegemony = int
-	}
+	ai_check_interval_by_tier = single_alias_right[int_per_tier]
 	
 	### How does the AI rate this province for the activity? All candidates are selected using weighted random based on these values.Root = province being evaluated
     ## replace_scope = { root = province host = character special_option = flag score = int }

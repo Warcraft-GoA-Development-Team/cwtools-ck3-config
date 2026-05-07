@@ -19,16 +19,16 @@ single_alias[combat_effect] = {
     ## cardinality = 0..1
     ### advantage bonuts for static effects or multiplier for dynamic effects
     advantage = int_value_field
-    ## replace_scope = { ROOT = character THIS = combat }
-    ## cardinality = 0..inf
-    alias_name[modifier] = alias_match_left[modifier]
+    # ## replace_scope = { ROOT = character THIS = combat }
+    # ## cardinality = 0..inf
+    # alias_name[modifier] = alias_match_left[modifier] # TODO: Is this removed
     ## cardinality = 0..1
     ### Is this an adjacency effect
     ## cardinality = 0..1
     adjacency = bool
-    ## cardinality = 0..1
-    ### Is this a fortification effect
-    fortification = bool
+    # ## cardinality = 0..1
+    # ### Is this a fortification effect
+    # fortification = bool # TODO: Is this removed
     ## cardinality = 0..1
     ### whether this effect should appear in advantage breakdown as is, no - code takes care of substituting proper modifiers for a detailed breakdown
     visible = bool

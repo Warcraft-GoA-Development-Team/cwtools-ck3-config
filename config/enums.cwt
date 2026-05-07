@@ -357,6 +357,7 @@ enums = {
         tax_slot_assign_vassal
 
         task_contract # Not listed on the wiki but used by vanilla
+        great_project
     }
 
     enum[great_project_construction_phase] = {

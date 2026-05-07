@@ -223,7 +223,7 @@ alias[trigger:is_maa_type] = <maa_type>
 
 ###  Check base MaA type of a regiment
 ## scope = regiment
-alias[trigger:is_unit_type] = <maa_type>
+alias[trigger:is_unit_type] = enum[unit_type]
 
 #####################################################
 # TRAIT SCOPE
@@ -894,7 +894,7 @@ alias[trigger:has_province_modifier_duration_remaining] = <modifier_container>
 
 ### Does the province have stationed regiment of base type?
 ## scope = province
-alias[trigger:has_stationed_regiment_of_base_type] = value[unit_type]
+alias[trigger:has_stationed_regiment_of_base_type] = enum[unit_type]
 
 ### Checks if there is a travel point of interest of type X in the province.
 ## scope = province
@@ -1328,7 +1328,7 @@ alias[trigger:all_inventory_artifact_slots] == enum[full_or_empty]
 ### Compares the scoped character's amenity level in the given type to the given value
 ## scope = character
 alias[trigger:amenity_level] = {
-    type = <court_amenity_category>
+    target = <court_amenity_category>
     value == alias_keys_field[int_value]
     value == value_field
 }
@@ -2004,7 +2004,7 @@ alias[trigger:morph_gene_value] == {
 alias[trigger:num_sinful_traits] = {
     value == alias_keys_field[int_value]
     value == value_field
-    faith = scope[faith]
+    target = scope[faith]
 }
 
 ### Does the scoped character have this number of virtous traits? num_virtous_traits > 5 ORnum_virtous_traits = { value > 5 faith = scope:faith }, to base it on what a specific faith considers virtuous
@@ -2018,7 +2018,7 @@ alias[trigger:num_virtuous_traits] == {
 ### Does the scope character have value amount of MaA of the base type?
 ## scope = character
 alias[trigger:number_maa_regiments_of_base_type] == {
-    type = value[unit_type]
+    type = enum[unit_type]
     value == alias_keys_field[int_value]
     value == int_value_field
     value == single_alias_right[score_formula]
@@ -2036,7 +2036,7 @@ alias[trigger:number_maa_regiments_of_type] == {
 ### Does the scope character have value amount of soldiers of MaA of the base type?
 ## scope = character
 alias[trigger:number_maa_soldiers_of_base_type] == {
-    type = value[unit_type]
+    type = enum[unit_type]
     value == alias_keys_field[int_value]
     value == int_value_field
     value == single_alias_right[score_formula]
@@ -2176,7 +2176,7 @@ alias[trigger:prowess_diff] == {
 ### Is the character's realm within this distance of the title? Distance is in pixels, squared for performance reasons. realm_to_title_distance_squared = { title = some_title value > 10000 }
 ## scope = character
 alias[trigger:realm_to_title_distance_squared] = {
-    title = scope[landed_title]
+    target = scope[landed_title]
     value == alias_keys_field[int_value]
     value == value_field
 }
@@ -2634,7 +2634,7 @@ alias[trigger:succession_appointment_score_invested] = {
 }
 
 alias[trigger:max_number_maa_soldiers_of_base_type] = {
-    type = value[unit_type]
+    type = enum[unit_type]
     ## cardinality = 0..1
     value == int_value_field
     ## cardinality = 0..1

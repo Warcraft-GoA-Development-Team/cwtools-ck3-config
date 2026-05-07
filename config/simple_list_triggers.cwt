@@ -280,13 +280,6 @@ alias[trigger:any_ruler] = single_alias_right[any_trigger]
 ## push_scope = province
 alias[trigger:any_special_building_province] = single_alias_right[any_trigger]
 
-### Gets all available and accepted task contracts.
-### Optionally specify a contract type filter
-### any_task_contract = { task_contract_type = laamp_raid_contract }
-### any_task_contract = { <count=num/all> / <percent=fixed_point> <triggers> }
-## push_scope = task_contract
-alias[trigger:any_task_contract] = single_alias_right[any_trigger]
-
 ### Iterate through every task_contract_type in the database
 ### any_task_contract_type = { <count=num/all> / <percent=fixed_point> <triggers> }
 ## push_scope = task_contract_type
@@ -344,14 +337,6 @@ alias[trigger:any_army] = single_alias_right[any_trigger]
 ## push_scope = task_contract
 alias[trigger:any_available_task_contract] = single_alias_right[any_trigger]
 
-### Gets all accepted task contracts of the root character
-### Optionally specify a contract type filter
-### any_character_active_contract = { task_contract_type = laamp_raid_contract }
-### any_character_active_contract = { <count=num/all> / <percent=fixed_point> <triggers> }
-## scope = character
-## push_scope = task_contract
-alias[trigger:any_character_active_contract] = single_alias_right[any_trigger]
-
 ### Iterate through all artifacts in a given characters inventory
 ### any_character_artifact = { <count=num/all> / <percent=fixed_point> <triggers> }
 ## scope = character
@@ -369,14 +354,6 @@ alias[trigger:any_character_epidemic] = single_alias_right[any_trigger]
 ## scope = character
 ## push_scope = situation
 alias[trigger:any_character_situation] = single_alias_right[any_trigger]
-
-### Gets all task contracts of the scoped character
-### Optionally specify a contract type filter
-### any_character_task_contract = { task_contract_type = laamp_raid_contract }
-### any_character_task_contract = { <count=num/all> / <percent=fixed_point> <triggers> }
-## scope = character
-## push_scope = task_contract
-alias[trigger:any_character_task_contract] = single_alias_right[any_trigger]
 
 ### Scopes from a character to a neighboring county (incl. across water, looking trough the de Jure lieges)
 ### any_character_to_title_neighboring_and_across_water_county = { <count=num/all> / <percent=fixed_point> <triggers> }
@@ -1004,14 +981,6 @@ alias[trigger:any_succession_appointment_invested_candidate] = single_alias_righ
 ## scope = character
 ## push_scope = landed_title
 alias[trigger:any_succession_appointment_invested_title] = single_alias_right[any_trigger]
-
-### Iterate through all factions targeting the scope character
-### Optionally specify a faction type filter
-### any_targeting_faction = { faction_type = independence_faction }
-### any_targeting_faction = { <count=num/all> / <percent=fixed_point> <triggers> }
-## scope = character
-## push_scope = faction
-alias[trigger:any_targeting_faction] = single_alias_right[any_trigger]
 
 ### Iterate through all schemes targeting the character
 ### any_targeting_scheme = { <count=num/all> / <percent=fixed_point> <triggers> }

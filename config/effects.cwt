@@ -1352,6 +1352,15 @@ alias[effect:create_character] = {
     ## cardinality = 0..1
     enum[attribute] = int_value_field
     ## cardinality = 0..1
+    enum[attribute] = {
+        ## cardinality = 0..2
+        int_value_field
+        ## cardinality = 0..2
+        alias_keys_field[int_value]
+        ## cardinality = 0..2
+        single_alias_right[score_formula]
+    }
+    ## cardinality = 0..1
     ## push_scope = character
     after_creation = {
         alias_name[effect] = alias_match_left[effect]
@@ -1600,6 +1609,15 @@ alias[effect:open_view_data] = {
     data = replace_me # TODO: Idk wtf this is. Maybe scope_field?
 }
 
+### Tries to open the defined view with scope data. Take care to set player if effect is executed not through UI but through synchronized code. Else all the window will open for all players. open_view_data = { view = <view name> view_message = <view specific instruction> # optional player = scope:character # optional, else shows for all players who execute the effect } simplified: open_view_data = <view name> for example: scope:faith = { open_view_data = faith_conversion }
+alias[effect:open_view_data] = {
+    view = decision_detail
+    ## cardinality = 0..1
+    player = scope[character]
+    ## cardinality = 0..1
+    data = scope[decision]
+}
+
 ### Pans the camera to the specified province pan_camera_to_province = scope:army.location
 alias[effect:pan_camera_to_province] = scope[province]
 
@@ -1756,15 +1774,10 @@ alias[effect:save_scope_as] = value_set[event_target]
 ### Saves a numerical or bool value as an arbitrarily-named target to be referenced later in the (unbroken) event chain save_scope_value_as = { name = <string> value = x }
 alias[effect:save_scope_value_as] = {
     name = value_set[event_target]
-    ## cardinality = 0..1
     value = alias_keys_field[int_value]
-    ## cardinality = 0..1
     value = value_field
-    ## cardinality = 0..1
     value = scope_field
-    ## cardinality = 0..1
     value = bool
-    ## cardinality = 0..1
     value = single_alias_right[score_formula]
 }
 
@@ -1782,6 +1795,9 @@ alias[effect:save_temporary_scope_value_as] = {
     name = value_set[temporary_scope]
     value = alias_keys_field[int_value]
     value = value_field
+    value = scope_field
+    value = bool
+    value = single_alias_right[score_formula]
 }
 
 ### send_long_tutorial_finished_telemetry - Sends a tutorial_finished telemetry event with LongVersion = true
@@ -2814,6 +2830,10 @@ alias[effect:add_tyranny] = alias_keys_field[int_value]
 ## scope = character
 alias[effect:add_tyranny] = value_field
 
+### adds (or removes) tyranny to (or from) a character
+## scope = character
+alias[effect:add_tyranny] = single_alias_right[score_formula]
+
 ### gives an unpressed claim to a character
 ## scope = character
 alias[effect:add_unpressed_claim] = scope[landed_title]
@@ -2829,6 +2849,10 @@ alias[effect:add_war_chest_gold] = alias_keys_field[int_value]
 ### Add gold to 'war chest' AI budget category, respecting maximums, overflow goes into Short Term budget. (gold will be created out of nowhere)character, add_war_chest_gold = X
 ## scope = character
 alias[effect:add_war_chest_gold] = value_field
+
+### Add gold to 'war chest' AI budget category, respecting maximums, overflow goes into Short Term budget. (gold will be created out of nowhere)character, add_war_chest_gold = X
+## scope = character
+alias[effect:add_war_chest_gold] = single_alias_right[score_formula]
 
 ### Set scoped character as parent ot the targetscope:new_parent = { adopt = scope:offspring }
 ## scope = character
@@ -3135,9 +3159,22 @@ alias[effect:create_artifact] = {
     save_scope_as = value_set[event_target]
 }
 
-### The scope character creates a cadet branch of the house he is in [yes|no]
+### The scope character creates a cadet branch of the house they are in.
 ## scope = character
-alias[effect:create_cadet_branch] = bool
+alias[effect:create_cadet_branch] = {
+    ## cardinality = 0..1
+    name = localisation
+    ## cardinality = 0..1
+    name = single_alias_right[complex_desc]
+    ## cardinality = 0..1
+    prefix = localisation
+    ## cardinality = 0..1
+    coat_of_arms = <coat_of_arms>
+    ## cardinality = 0..1
+    spread_to_descendants = bool
+    ## cardinality = 0..1
+    save_scope_as = value_set[event_target]
+}
 
 ### Creates a memory for the character of a given type and participants plus an optional duration. Saved as scope:new_memory. create_character_memory = { type = memory_type participants = { tag = scope } duration = { years = 3 } }
 ## scope = character
@@ -4011,7 +4048,7 @@ alias[effect:set_diarch] = scope[character]
 
 ### Set mandate for the diarch. Takes mandate type as argument scope:diarch = { set_diarchy_mandate = live_long_and_prosper }
 ## scope = character
-alias[effect:set_diarchy_mandate] = <mandate>
+alias[effect:set_diarchy_mandate] = <diarchy_mandate>
 
 ### Set scales of power swing for the active diarchy set_diarchy_swing = 55
 ## scope = character
@@ -4422,8 +4459,12 @@ alias[effect:change_appointment_investment] = {
     target = scope[character]
     ## cardinality = 0..1
     investor = scope[character]
+    ## cardinality = 0..1
+    value = int_value_field
+    ## cardinality = 0..1
     value = alias_keys_field[int_value]
-    value = value_field
+    ## cardinality = 0..1
+    value = single_alias_right[score_formula]
 }
 
 ### Changes the county control of a title. If the title has higher tier than county, the effect will propagate down to all counties below it.
@@ -4433,6 +4474,10 @@ alias[effect:change_county_control] = alias_keys_field[int_value]
 ### Changes the county control of a title. If the title has higher tier than county, the effect will propagate down to all counties below it.
 ## scope = landed_title
 alias[effect:change_county_control] = value_field
+
+### Changes the county control of a title. If the title has higher tier than county, the effect will propagate down to all counties below it.
+## scope = landed_title
+alias[effect:change_county_control] = single_alias_right[score_formula]
 
 ### Change the progress of de jure drift of a title<drifting_title> = { change_de_jure_drift_progress = {    target = <drift_target_title>    values = <progress_change_value> } }
 ## scope = landed_title
@@ -4675,7 +4720,10 @@ alias[effect:set_special_title] = scope[landed_title]
 ### Makes a battle event show up in combat, and the combat result summary. The key is used for loc, with '_friendly' or '_enemy' appended. If this side is not the player's side, the two portraits get flipped. battle_event = { left_portrait = someone right_portrait = someone key = string }
 ## scope = combat_side
 alias[effect:battle_event] = {
-    key = localisation # TODO: Suffix. Issue #162
+    key = localisation|_enemy
+    key = localisation|_friendly
+    key = localisation|_enemy_player
+    key = localisation|_friendly_player
     left_portrait = scope[character]
     ## cardinality = 0..1
     right_portrait = scope[character]
@@ -5039,7 +5087,7 @@ alias[effect:end_situation] = bool
 alias[effect:trigger_situation_catalyst] = <catalyst>
 
 ### Trigger a Situation catalyst
-## scope = province
+## scope = situation
 alias[effect:trigger_situation_catalyst] = {
     catalyst = <catalyst>
     ## cardinality = 0..1
@@ -5315,7 +5363,125 @@ alias[effect:fund_great_project_contribution] = {
 ## scope = province
 alias[effect:ruin_great_building] = bool
 
+### Triggers a catalyst in a specific subregion only. Works in short version without specifying an actor:
+###
+### scope:situation_sub_region = {
+### 	trigger_sub_region_catalyst = catalyst_type
+### }
+###
+### can specify an actor that triggers the catalyst:
+###
+### scope:situation_sub_region = {
+### 	trigger_sub_region_catalyst = {
+### 		catalyst = catalyst_type
+### 		character = scope:character
+### 	}
+### }
+## scope = situation_sub_region
+alias[effect:trigger_sub_region_catalyst] = <catalyst>
 
+### Triggers a catalyst in a specific subregion only. Works in short version without specifying an actor:
+###
+### scope:situation_sub_region = {
+### 	trigger_sub_region_catalyst = catalyst_type
+### }
+###
+### can specify an actor that triggers the catalyst:
+###
+### scope:situation_sub_region = {
+### 	trigger_sub_region_catalyst = {
+### 		catalyst = catalyst_type
+### 		character = scope:character
+### 	}
+### }
+## scope = situation_sub_region
+alias[effect:trigger_sub_region_catalyst] = {
+    catalyst = <catalyst>
+    character = scope[character]
+}
 
+### Set house aspiration/aspect/attribute for the given house.
+## scope = dynasty_house
+alias[effect:set_house_aspiration] = {
+    type = <house_aspiration>
+    ## cardinality = 0..1
+    level = int # Don't know if this has to be int or if it could be value
+}
 
+### the scoped character pays treasury to the target character receiving gold
+## scope = character
+alias[effect:pay_treasury_to_gold] = {
+    target = scope[character]
+    ## cardinality = 0..1
+    value = int_value_field
+    ## cardinality = 0..1
+    value = alias_keys_field[int_value]
+    ## cardinality = 0..1
+    value = single_alias_right[score_formula]
+}
 
+### Adds the given amount of subject standing to the scope character's current subject contract
+## scope = character
+alias[effect:add_subject_standing] = int_value_field
+
+### Adds the given amount of subject standing to the scope character's current subject contract
+## scope = character
+alias[effect:add_subject_standing] = alias_keys_field[int_value]
+
+### Adds the given amount of subject standing to the scope character's current subject contract
+## scope = character
+alias[effect:add_subject_standing] = single_alias_right[score_formula]
+
+### the scope character pays treasury to the target character, pay_short_term_treasury = { target = X treasury = Y } (from AI budget category 'short term' first, then rest). If target character does not have treasury, they will receive gold instead.
+## scope = character
+alias[effect:pay_short_term_treasury] = {
+    target = scope[character]
+    ## cardinality = 0..1
+    treasury = int_value_field
+    ## cardinality = 0..1
+    treasury = alias_keys_field[int_value]
+    ## cardinality = 0..1
+    treasury = single_alias_right[score_formula]
+}
+
+### Force-recalculate participation group of a charater in a situation
+## scope = character
+alias[effect:recalculate_participant_group] = scope[situation]
+
+### Clear the relation between two houses.
+## scope = house_relation
+alias[effect:clear_house_relation] = bool
+
+### Set the relation between two houses.
+## scope = dynasty_house
+alias[effect:set_house_relation] = {
+    target = scope[dynasty_house]
+    ## cardinality = 0..1
+    type = <house_relation>
+    ## cardinality = 0..1
+    level = enum[house_relation_level]
+    ## cardinality = 0..1
+    description = localisation
+    ## cardinality = 0..1
+    save_scope_as = value_set[event_target]
+}
+
+### Set or change the relation between two houses.
+## scope = dynasty_house
+alias[effect:impact_house_relation] = {
+    target = scope[dynasty_house]
+    ## cardinality = 0..1
+    type = <house_relation>
+    ## cardinality = 0..1
+    steps = value_field
+    ## cardinality = 0..1
+    steps = alias_keys_field[int_value]
+    ## cardinality = 0..1
+    steps = single_alias_right[score_formula]
+    ## cardinality = 0..1
+    description = localisation
+    ## cardinality = 0..1
+    notification = bool
+    ## cardinality = 0..1
+    save_scope_as = value_set[event_target]
+}
