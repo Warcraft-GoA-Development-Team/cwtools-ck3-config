@@ -92,10 +92,10 @@ types = {
 			ai_province_filter = all
 		}
     }
-    type[activity_phase] = {
-        path = "common/activities/activity_types"
-        skip_root_key = phases
-    }
+    # type[activity_phase] = {
+    #     path = "common/activities/activity_types"
+    #     skip_root_key = phases
+    # }
 }
 
 enums = {
@@ -161,7 +161,7 @@ enums = {
 		}
 	}
 
-	complex_enum[activity_phases] = {
+	complex_enum[activity_phase] = {
 		path = "common/activities/activity_types"
 
 		name = {
@@ -346,7 +346,7 @@ activity = { # TODO: sort_order may or may not be in use. It's listed in the .in
 				## cardinality = 0..1
 				blocked_phases = {
                     ## cardinality = 1..inf
-					enum[activity_phases]
+					enum[activity_phase]
 				}
 
 				### How likely is the AI to pick this option if valid? Options will be selected using weighted random.
@@ -426,7 +426,7 @@ activity = { # TODO: sort_order may or may not be in use. It's listed in the .in
 			## cardinality = 0..1
 			select_scripted_location = single_alias_right[effect_clause]
 
-			### How likely is the AI to pick this phase if valid? Options will be selected using weighted random. If a phase can be selected multiple times, it will have the same weight on every pass. This will only be used for activities that have multiple phases to choose from that do not have a predetermined order. 
+			### How likely is the AI to pick this phase if valid? Options will be selected using weighted random. If a phase can be selected multiple times, it will have the same weight on every pass. This will only be used for activities that have multiple phases to choose from that do not have a predetermined order.
             ## replace_scope = { root = character province = province special_option = flag }
 			## cardinality = 0..1
 			ai_will_do = single_alias_right[score_formula]
@@ -466,12 +466,12 @@ activity = { # TODO: sort_order may or may not be in use. It's listed in the .in
 			## cardinality = 0..1
 			on_monthly_pulse = single_alias_right[effect_clause]
 
-			### Run when when the active phase's weekly pulses with this phase. Use if extra time dilation is necessary. 
+			### Run when when the active phase's weekly pulses with this phase. Use if extra time dilation is necessary.
 			## replace_scope = { root = character activity = activity host = character }
 			## cardinality = 0..1
 			on_weekly_pulse = single_alias_right[effect_clause]
 
-			### Run if this phase is invalidated by its is_valid trigger 
+			### Run if this phase is invalidated by its is_valid trigger
             ## replace_scope = { root = character activity = activity host = character province = province }
 			## cardinality = 0..1
 			on_invalidated = single_alias_right[effect_clause]

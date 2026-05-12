@@ -1,6 +1,24 @@
 types = {
     type[tradition] = {
         path = "game/common/culture/traditions"
+
+        subtype[name] = {
+            name = scalar
+        }
+        subtype[desc] = {
+            desc = scalar
+        }
+
+        localisation = {
+            subtype[!name] = {
+                ## required
+                name = $_name
+            }
+            subtype[!desc] = {
+                ## required
+                desc = $_desc
+            }
+        }
     }
 }
 
@@ -12,6 +30,14 @@ tradition = {
     ### vanilla categories: combat, realm, ritual, societal, regional
     ## cardinality = 1..1
     category = value_set[tradition_category]
+
+    ### If omitted, will use object_key + "_name"
+    ## cardinality = 0..1
+    name = localisation  # TODO: Is not in use in vanilla
+
+    ### If omitted, will use object_key + "_desc"
+    ## cardinality = 0..1
+    desc = localisation
 
     ### Layers match the CULTURE_TRADITION_LAYER_PATHS define. Index starts from 0
     ### If path is a subfolder then it will pick any file from that subfolder
@@ -68,7 +94,7 @@ tradition = {
     can_pick_for_hybridization = single_alias_right[trigger_clause]
 
     ## cardinality = 1..1
-    cost = single_alias_right[cost]
+    cost = single_alias_right[cost] # TODO: Is this optional?
 
     ## cardinality = 0..1
     ## replace_scope = { root = culture character = character}
@@ -98,19 +124,5 @@ enums = {
         societal
         regional
         diplo
-    }
-    enum[trad_layer_background] = {
-        learning
-        stewardship
-        martial
-        intrigue
-        prowess
-        diplomacy
-    }
-    enum[trad_layer_pattern] = {
-        western
-        mena
-        mediterranean
-        indian
     }
 }

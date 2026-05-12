@@ -157,6 +157,15 @@ links = {
         input_scopes = { character }
         output_scope = any
     }
+    place_in_line_of_succession = {
+        desc = "what place in line of succession does the character hold?) "place_in_line_of_succession(scope:target)" > 1 place_in_line_of_succession = {  target = scope:title  value < 3 }"
+        type = value
+        from_argument = yes
+        prefix = place_in_line_of_succession:
+        data_source = scope[character]
+        input_scopes = { landed_title }
+        output_scope = any
+    }
     # appointment_candidate_accumulated_score = {
     #     type = value
     #     from_argument = yes

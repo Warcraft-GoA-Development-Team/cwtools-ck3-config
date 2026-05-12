@@ -131,7 +131,7 @@ religion = {
 
 ## cardinality = ~1..inf
 faith = {
-    color = alias_match_left[colour]
+    color = alias_keys_field[colour]
     ## cardinality = 0..1
     icon = filepath[game/gfx/interface/icons/faith/,.dds]
     ## cardinality = 0..1

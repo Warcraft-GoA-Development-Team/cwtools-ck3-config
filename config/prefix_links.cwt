@@ -169,6 +169,7 @@ links = {
         type = scope
         data_source = <landed_title>
         prefix = title:
+        input_scopes = any
         output_scope = landed_title
     }
     var_prefix = {
@@ -212,7 +213,7 @@ links = {
     casus_belli_type_prefix = {
         desc = "Get the casus_belli_type with the specified key"
         from_data = yes
-        data_source = <casus_belli>
+        data_source = <casus_belli_type>
         prefix = casus_belli_type:
         output_scope = casus_belli_type
     }
@@ -463,5 +464,13 @@ links = {
         data_source = <maa_type>
         input_scopes = situation_sub_region
         output_scope = any
+    }
+    situation_sub_region_prefix = {
+        type = scope
+        from_data = yes
+        prefix = situation_sub_region:
+        data_source = enum[situation_sub_regions]
+        input_scopes = situation_sub_region
+        output_scope = situation_sub_region
     }
 }

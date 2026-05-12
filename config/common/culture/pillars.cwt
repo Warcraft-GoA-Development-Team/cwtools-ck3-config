@@ -17,6 +17,64 @@ types = {
         subtype[head_determination] = {
             type = head_determination
         }
+        subtype[name] = {
+            name = scalar
+        }
+        subtype[desc] = {
+            desc = scalar
+        }
+        subtype[icon] = {
+            icon = scalar
+        }
+
+        localisation = {
+            subtype[ethos] = {
+                subtype[!name] = {
+                    ## required
+                    name = $_name
+                }
+                subtype[!desc] = {
+                    ## required
+                    desc = $_desc
+                }
+            }
+            subtype[heritage] = {
+                ## required
+                collective_noun = $_collective_noun
+                subtype[!name] = {
+                    ## required
+                    name = $_name
+                }
+            }
+            subtype[language] = {
+                subtype[!name] = {
+                    ## required
+                    name = $_name
+                }
+            }
+            subtype[head_determination] = {
+                subtype[!name] = {
+                    ## required
+                    name = $
+                }
+            }
+            subtype[martial_custom] = {
+                subtype[!name] = {
+                    ## required
+                    name = $_name
+                }
+                subtype[!desc] = {
+                    ## required
+                    desc = $_desc
+                }
+            }
+        }
+
+        images = {
+            subtype[!icon] = {
+                icon = gfx/interface/icons/culture_pillars/$.dds
+            }
+        }
     }
 }
 
@@ -25,8 +83,20 @@ pillar = {
     ## cardinality = 1..1
     type = enum[pillar_type]
 
+    ### If omitted, will use object_key + "_name"
+    ## cardinality = 0..1
+    name = localisation  # TODO: Is not in use in vanilla
+
+    ### If omitted, will use object_key + "_desc"
     ## cardinality = 0..1
     desc = localisation
+
+    ### If omitted, will use object_key
+    ## cardinality = 0..1
+    icon = filepath[game/gfx/interface/icons/culture_pillars/,.dds]  # TODO: Is not in use in vanilla
+
+    ## cardinality = 0..1
+    cost = single_alias_right[cost] # TODO: Is not in use in vanilla
 
     ## cardinality = 0..1
     character_modifier = single_alias_right[character_modifier]
@@ -36,6 +106,8 @@ pillar = {
     county_modifier = single_alias_right[county_modifier]
     ## cardinality = 0..1
     culture_modifier = single_alias_right[culture_modifier]
+    ## cardinality = 0..1
+    doctrine_character_modifier = single_alias_right[doctrine_character_modifier]
 
     ## cardinality = 0..1
     ai_will_do = int_value_field
@@ -43,15 +115,33 @@ pillar = {
     ai_will_do = alias_keys_field[int_value]
     ## cardinality = 0..1
     ai_will_do = single_alias_right[score_formula]
+    ### Culture scope, and scope:character. Should this trait be shown at all when picking traits?
+    ## push_scope = culture
+    ## replace_scopes = { character = character }
     ## cardinality = 0..1
     is_shown = single_alias_right[trigger_clause]
+    ### Culture scope, and scope:character. Can this trait be picked?
+    ### The list "traits" is also provided with all traits currently picked so that you can do things like mutually exclusive traits
+    ### If a trait is being replaced scope:replacing will be the flag of a culture with the replacing culture's key, e.g: "scope:replacing = culture_tradition:tradition_monogamous". It will NEVER exist when evaluating pillars.
+    ### Hybridization ignores this and is_shown entirely
+    ## push_scope = culture
+    ## replace_scopes = { character = character replacing = flag }
     ## cardinality = 0..1
     can_pick = single_alias_right[trigger_clause]
+    ### Like can_pick, except used specifically for hybridization and *only* for hybridization. Will never have "scope:replacing".
+    ## cardinality = 0..1
+    can_pick_for_hybridization = single_alias_right[trigger_clause]
+
+    subtype[ethos] = {
+        ## cardinality = 0..1
+        ### Used in language pillars
+        color = alias_keys_field[colour]
+    }
 
     subtype[language] = {
         ## cardinality = 0..1
         ### Used in language pillars
-        color = alias_match_left[colour]
+        color = alias_keys_field[colour]
     }
 
     subtype[heritage] = {

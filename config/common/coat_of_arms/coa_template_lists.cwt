@@ -49,27 +49,21 @@ pattern_template_list = {
 
 color_template_list = {
     ## cardinality = 1..inf
-    int = <color>
-    ## cardinality = 1..inf
-    int = color_field
+    int = alias_keys_field[colour]
 
     ## cardinality = 0..inf
     special_selection = {
         trigger = single_alias_right[trigger_clause]
 
         ## cardinality = 1..inf
-        int = <color>
-        ## cardinality = 1..inf
-        int = color_field
+        int = alias_keys_field[colour]
 
         ## cardinality = 0..inf
         special_selection = {
             trigger = single_alias_right[trigger_clause]
 
             ## cardinality = 1..inf
-            int = <color>
-            ## cardinality = 1..inf
-            int = color_field
+            int = alias_keys_field[colour]
         }
     }
 }

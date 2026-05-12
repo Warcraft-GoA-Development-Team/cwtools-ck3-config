@@ -4,3 +4,5 @@ types = {
         skip_root_key = any
     }
 }
+
+color = color_field

@@ -1608,12 +1608,6 @@ links = {
 		input_scopes = landed_title
 		output_scope = any
 	}
-	place_in_line_of_succession = {
-		desc = "what place in line of succession does the character hold?) "place_in_line_of_succession(scope:target)" > 1 place_in_line_of_succession = {  target = scope:title  value < 3 }"
-		type = value
-		input_scopes = landed_title
-		output_scope = any
-	}
 	tier = {
 		desc = "What tier is the scoped title? barony = 1, hegemony = 6. Use the script values please, not raw numbers"
 		type = value
@@ -1958,18 +1952,6 @@ links = {
 	}
 	army_number_maa_regiments = {
 		desc = "How many MaA regiments does the scoped army have?"
-		type = value
-		input_scopes = army
-		output_scope = any
-	}
-	army_number_maa_regiments_of_base_type = {
-		desc = "Does the scoped army have the value amount of MaA of the specified base type? value = knight_army.army_number_maa_regiments_of_base_type:archers"
-		type = value
-		input_scopes = army
-		output_scope = any
-	}
-	army_number_maa_regiments_of_type = {
-		desc = "Does the scoped army have the value amount of MaA of the specified type? value = knight_army.army_number_maa_regiments_of_type:crossbowmen"
 		type = value
 		input_scopes = army
 		output_scope = any

@@ -26,8 +26,16 @@ court_position_task = {
     ### Monthly cost for the task
     ### root: empty
     ### scope:liege - Employer character
+    ## replace_scopes = { liege = character }
     ## cardinality = 0..1
     cost = single_alias_right[cost]
+
+    ### Optional: Monthly received cost for the task. What employee gets may optionally differ from what is paid
+    ### root: empty
+    ###  scope:liege - Employer character
+    ## replace_scopes = { liege = character }
+    ## cardinality = 0..1
+    received_cost = single_alias_right[cost]
 
     ### Modifier applied to the court position employee while performing this task.
     ## cardinality = 0..1

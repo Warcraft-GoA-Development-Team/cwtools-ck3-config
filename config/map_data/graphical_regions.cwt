@@ -14,7 +14,7 @@ geographical_region = {
     ## cardinality = 0..1
     graphical = bool
     subtype[graphical_region] = {
-        color = alias_match_left[colour]
+        color = alias_keys_field[colour]
     }
     ### takes duchy title names declared in landed_titles.txt
     ## cardinality = 0..1

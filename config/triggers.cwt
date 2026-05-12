@@ -54,38 +54,38 @@ alias[trigger:has_activity_type] = <activity>
 
 ### Does the scoped activity have the given phase active
 ## scope = activity
-alias[trigger:has_current_phase] = value[activity_phase]
+alias[trigger:has_current_phase] = enum[activity_phase]
 
 ### Check if a phase exists on this activity. You can search for just a type directly, or a complex trigger with  only `type`, `location` or both.
 ## scope = activity
-alias[trigger:has_phase] = value[activity_phase]
+alias[trigger:has_phase] = enum[activity_phase]
 
 ### Check if a phase exists on this activity. You can search for just a type directly, or a complex trigger with  only `type`, `location` or both.
 ## scope = activity
 alias[trigger:has_phase] = {
-    type = value[activity_phase]
+    type = enum[activity_phase]
     location = scope[province]
 }
 
 ### Check if a future phase exists on this activity. You can search for just a type directly, or a complex trigger with  only `type`, `location` or both.
 ## scope = activity
-alias[trigger:has_phase_future] = value[activity_phase]
+alias[trigger:has_phase_future] = enum[activity_phase]
 
 ### Check if a future phase exists on this activity. You can search for just a type directly, or a complex trigger with  only `type`, `location` or both.
 ## scope = activity
 alias[trigger:has_phase_future] = {
-    type = value[activity_phase]
+    type = enum[activity_phase]
     location = scope[province]
 }
 
 ### Check if a past phase exists on this activity. You can search for just a type directly, or a complex trigger with  only `type`, `location` or both.
 ## scope = activity
-alias[trigger:has_phase_past] = value[activity_phase]
+alias[trigger:has_phase_past] = enum[activity_phase]
 
 ### Check if a past phase exists on this activity. You can search for just a type directly, or a complex trigger with  only `type`, `location` or both.
 ## scope = activity
 alias[trigger:has_phase_past] = {
-    type = value[activity_phase]
+    type = enum[activity_phase]
     location = scope[province]
 }
 
@@ -567,6 +567,12 @@ alias[trigger:current_computer_date] == date_field
 
 ### Compare the current ingame date.
 alias[trigger:current_date] == date_field
+
+### Compare the current ingame date.
+alias[trigger:current_date] == date_field[y]
+
+### Compare the current ingame date.
+alias[trigger:current_date] == date_field[y.m]
 
 ### Wraps triggers that get a custom description instead of the auto-generated one custom_description = { 	text = <trigger_localization_key> 	subject = <optional subject scope> #defaults to current scope 	object = <optional object scope> 	value = <optional script value> 	... triggers ... }
 alias[trigger:custom_description] = {
@@ -1406,9 +1412,9 @@ alias[trigger:can_declare_war] = {
     defender = scope[character]
     casus_belli = <casus_belli_type>
     target_titles = {
-        ## cardinality = 1..inf
+        ## cardinality = 0..inf
         <landed_title>
-        ## cardinality = 1..inf
+        ## cardinality = 0..inf
         scope[landed_title]
     }
     claimant = scope[character]
@@ -1428,7 +1434,7 @@ alias[trigger:can_employ_court_position_type] = <court_position>
 
 ### Is the scoped character able to execute the asigned decision?
 ## scope = character
-alias[trigger:can_execute_decision] = <decision>
+alias[trigger:can_execute_decision] = scope[decision]
 
 ### target_activity Can the scoped character host the target activity type
 ## scope = character
@@ -1870,7 +1876,7 @@ alias[trigger:is_important_decision] = <decision>
 alias[trigger:is_in_guest_subset] = {
     name = value[guest_subset]
     ## cardinality = 0..1
-    phase = value[activity_phase]
+    phase = enum[activity_phase]
 }
 
 ### is the character imprisoned in a prison of the specified type?  Accepts "dungeon" or "house_arrest"
@@ -2351,11 +2357,11 @@ alias[trigger:is_active_obligation] = <tax_obligation>
 
 ### Log whether the parent trigger succeeded or failed
 ## scope = any
-alias[trigger:debug_log] = bool #TODO: Unsure
+alias[trigger:debug_log] = scalar
 
 ### Log whether the parent trigger succeeded or failed. Log which children succeeded or failed
 ## scope = any
-alias[trigger:debug_log_details] = bool #TODO: Unsure
+alias[trigger:debug_log_details] = bool
 
 ### Does the player have a reward item
 ## scope = any
@@ -2948,3 +2954,12 @@ alias[trigger:has_ethnicity] = <ethnicity>
 ### Check if the project is of the given type. Use the key from the project definition to compare.
 ## scope = great_project
 alias[trigger:great_project_type] = <great_project>
+
+### Check where the target character is in the scoped character's player heir list.
+## scope = character
+alias[trigger:player_heir_position] = {
+    target = scope[character]
+    value == int_value_field
+    value == alias_keys_field[int_value]
+    value == single_alias_right[score_formula]
+}

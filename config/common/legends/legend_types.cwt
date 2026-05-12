@@ -5,7 +5,7 @@ types = {
 }
 
 legend_type = {
-    color = alias_match_left[colour]
+    color = alias_keys_field[colour]
 
     ### Effect run when a legend of this type is created
     ### root = the legend

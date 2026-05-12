@@ -10,10 +10,7 @@ death_reason = {
     ## cardinality = 0..1
     public_knowledge = bool
     ### An icon that should be used for this death reason. The directory is set in the DEATH_REASON_ICON_PATH define. DEFAULT_DEATH_REASON_ICON will be used if not specified.
-    icon = filepath[gfx/interface/icons/death_reason/,] ### TODO: define filepath
-    ### Is the death considered to be a natural death? Default = no
-    ## cardinality = 0..1
-    natural = bool
+    icon = filepath[gfx/interface/icons/death_reason/,]
     ### A trigger in the dying character's scope saying that this is a valid reason for the natural death of the character.
     ## cardinality = 0..1
     natural_death_trigger = single_alias_right[trigger_clause]

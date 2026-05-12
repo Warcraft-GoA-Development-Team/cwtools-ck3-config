@@ -282,6 +282,7 @@ single_alias[culture_modifier] = {
 
 single_alias[province_modifier] = {
     ## push_scope = province
+    ## cardinality = 1..inf
     alias_name[modifier] = alias_match_left[modifier]
 }
 

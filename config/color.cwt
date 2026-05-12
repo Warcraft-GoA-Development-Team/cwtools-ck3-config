@@ -1,14 +1,15 @@
-alias[colour:color] = <color>
-alias[colour:color] = color_field
-## color_type = hsv
-alias[colour:color] = {
-    ## cardinality = 3..4
-    float[0.0..1.0]
-}
+alias[colour:<color>] = <color>
+alias[colour:color_field] = color_field
 ## color_type = rgb
-alias[colour:color] = {
-    ## cardinality = 3..3
+color_rgb = {
+    ## cardinality = 3..4
     int[0..255]
 }
-# ## color_type = hex
-# alias[colour:color] = scalar
+## color_type = hsv
+color_hsv = {
+    ## cardinality = 3..4
+    float
+}
+## color_type = hex
+color_hex = scalar
+

@@ -1171,9 +1171,6 @@ alias[score_operation:random_legend_type] = single_alias_right[random_effect_sco
 ## push_scope = character
 alias[score_operation:random_living_character] = single_alias_right[random_effect_score_operation]
 
-### Log the current scope to the random log when this effect executes. Only use temprorarily for debugging purposes as it can introduce localized strings into the Scopes._Random log. yes = full scope info, no=only current scope
-alias[score_operation:random_log_scopes] = single_alias_right[random_effect_score_operation]
-
 ### Iterate through all mercenary companies
 ### random_mercenary_company = { limit = { <triggers> } (optional) weight = { mtth } <effects> }
 ## push_scope = mercenary_company
@@ -7496,7 +7493,7 @@ alias[score_operation:every_guest_subset] = {
         alias_name[trigger] = alias_match_left[trigger]
     }
     ## cardinality = 0..1
-    phase = value[activity_phase]
+    phase = enum[activity_phase]
     ## cardinality = 0..1
     custom = localisation
     ## cardinality = 0..inf
@@ -8398,7 +8395,7 @@ alias[score_operation:random_guest_subset] = {
     ## cardinality = 0..1
     weight = single_alias_right[weight_block]
     ## cardinality = 0..1
-    phase = value[activity_phase]
+    phase = enum[activity_phase]
     ## cardinality = 0..1
     custom = localisation
     ## cardinality = 0..inf
@@ -9408,7 +9405,7 @@ alias[score_operation:ordered_guest_subset] = {
     ## cardinality = 0..1
     check_range_bounds = no
     ## cardinality = 0..1
-    phase = value[activity_phase]
+    phase = enum[activity_phase]
     ## cardinality = 0..1
     custom = localisation
     ## cardinality = 0..inf

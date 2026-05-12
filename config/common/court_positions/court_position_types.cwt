@@ -106,6 +106,15 @@ court_position = {
     ### How much it costs monthly to maintain this poisition.
     ## replace_scope = { liege = character }
     salary = single_alias_right[cost]
+    ### Brief: received_salary ( optional scripted value )
+    ### Optional: What employee gets as salary may optionally differ from what is paid by their liege.
+    ### Example: Liege may pay treasury but the employee receives gold.
+    ###
+    ### Supported scopes:
+    ###		scope:liege (Character)
+    ## replace_scope = { liege = character }
+    ## cardinality = 0..1
+    received_salary = single_alias_right[cost]
 
     ## cardinality = 0..1
     ### Non-scaling modifiers gained by the employer of the court position.
@@ -178,9 +187,91 @@ court_position = {
     ## cardinality = 0..1
     on_court_position_vacated = single_alias_right[effect_clause]
 
-    ### Scripted value to determine whether an AI will hire/fire a position or not. Hires over 0, fires under -50. Look in _court_positions.info for more extensive documentation!
-    ## replace_scope = { liege = character employee = character firing_court_position = bool percent_of_monthly_income = number percent_of_positive_monthly_prestige_balance = number percent_of_positive_monthly_piety_balance = number percent_of_monthly_gold_income_all_positions = number percent_of_positive_monthly_prestige_balance_all_positions = number percent_of_positive_monthly_piety_balance_all_positions = number }
-    candidate_score = single_alias_right[score_formula]
+    ### Brief: ai_position_score (script value)
+    ### Scripted value to determine whether an AI will hire a position or not.
+    ### Evaluated once per position for the liege.
+    ###
+    ### Positions with a score greater than MIN_SCORE_TO_HIRE_COURT_POSITION will
+    ### be considered in order from best to worst.
+    ### If AI finds a candidate, then it's stop and consider no more positions this time.
+    ###
+    ### Supported scopes:
+    ### 		scope:liege (Character)
+    ###			Liege considering the position.
+    ### 		scope:monthly_character_expenses
+    ###			Lieges general purchasing power.
+    ## replace_scopes = { liege = character monthly_character_expenses = value }
+    ## cardinality = 0..1
+    ai_position_score = single_alias_right[score_formula]
+
+    ### Brief: ai_candidate_score (script value)
+    ### Scripted value to determine whether an AI will hire a position or not.
+    ### Evaluated per eligible courtier/vassal.
+    ###
+    ### It is EXTREMELY important to avoid factors that depend on whether the
+    ### person being evaluated is currently hired or not, as this will lead to
+    ### hire and fire loops. This includes things like checking current expenses
+    ### Also avoid things that can fluctuate wildly (like current expenses) since
+    ### that too can lead to firing.
+    ###
+    ### See court_position_liege_score_base_value for some comments on how this
+    ### has been balanced.
+    ###
+    ### Candidates are *hired* in two steps.
+    ###  1. Scores greater than MIN_SCORE_TO_HIRE_COURT_POSITION_CANDIDATE
+    ###  2. Only scores grater than <best score> * MIN_SCORE_RATIO_FOR_COURT_POSITION_HIRE
+    ###
+    ### Once filtered a random candidate is picked; higher score means greater probability to be picked.
+    ###
+    ### AI will eventually *fire* holders that fall below MAX_SCORE_TO_FIRE_COURT_POSITION.
+    ###
+    ### Try to aim for 100 for when no positions are filled and no other
+    ### conditions are affecting hiring decision.
+    ###
+    ### WARNING:
+    ###	If not balanced properly, the AI WILL get stuck in a fire/hire loop.
+    ###	Check debug.log to verify how many positions are hired and fired within
+    ###	the last decade. Performance WILL suffer if the AI gets into a
+    ### 	hire/fire loop.
+    ###
+    ### Supported scopes:
+    ### 		scope:liege (Character)
+    ###			Liege considering the position
+    ###		scope:employee (Character)
+    ###			Courtier being considered in the position
+    ###		scope:firing_court_position (bool)
+    ###			For special considerations to hiring or firing the position.
+    ###			When true/set the position is being fired, when false/not set
+    ###			the position is being hired.
+    ###		scope:percent_of_monthly_gold_income (number)
+    ###			how much the position cost compared to the liege's monthly gold
+    ###			income in percent <0, infinity>. Does not take expenses into
+    ###			account! Will be 100 if liege has no monthly income.
+    ###		scope:percent_of_positive_monthly_prestige_balance (number)
+    ###			how much the position cost compared to the liege's monthly
+    ###			prestige balance in percent <0, infinity>. Will be 100 if liege
+    ###			has negative balance.
+    ###		scope:percent_of_positive_monthly_piety_balance (number)
+    ###			how much the position cost compared to the liege's monthly piety
+    ###			balance in percent <0, infinity>. Will be 100 if liege has
+    ###			negative balance.
+    ###		scope:percent_of_monthly_gold_income_all_positions (number)
+    ###			how much all employed positions cost compared to the liege's
+    ###			monthly gold income in percent <0, infinity>. Will be 100 if
+    ###			liege has no monthly income. When evaluating a new hire, their
+    ###			salary will be added to this value for calculation.
+    ###		scope:percent_of_positive_monthly_prestige_balance_all_positions
+    ###			(number) how much all employed positions cost compared to the
+    ###			liege's monthly balance income in percent <0, infinity>. Will
+    ###			be 100 if liege has negative balance. When evaluating a new
+    ###			hire, their salary will be added to this value for calculation.
+    ###		scope:percent_of_positive_monthly_piety_balance_all_positions
+    ###			(number) how much all employed positions cost compared to the
+    ###			liege's monthly piety balance in percent  <0, infinity>. Will
+    ###			be 100 if liege has negative balance. When evaluating a new
+    ###			hire, their salary will be added to this value for calculation
+    ## replace_scope = { liege = character employee = character firing_court_position = bool percent_of_monthly_gold_income = value percent_of_positive_monthly_prestige_balance = value percent_of_positive_monthly_piety_balance = value percent_of_monthly_gold_income_all_positions = value percent_of_positive_monthly_prestige_balance_all_positions = value percent_of_positive_monthly_piety_balance_all_positions = value }
+    ai_candidate_score = single_alias_right[score_formula]
 
     # Undocumented
     ## cardinality = 0..1

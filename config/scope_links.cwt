@@ -3,10 +3,8 @@
 #CWTools magic scope
 alias[effect:value_field] = single_alias_right[effect_clause]
 alias[effect:scope_field] = single_alias_right[effect_clause]
-# alias[effect:scope[value]] = single_alias_right[effect_clause]
 
 alias[trigger:scope_field] = single_alias_right[trigger_clause]
-# alias[trigger:scope[value]] = single_alias_right[trigger_clause]
 # alias[trigger:alias_keys_field[int_value]] == alias_keys_field[int_value]
 # alias[trigger:alias_keys_field[int_value]] == value_field
 # alias[trigger:alias_keys_field[int_value]] == single_alias_right[score_formula]
@@ -20,9 +18,6 @@ alias[trigger:scope_field] == value_field
 alias[trigger:scope_field] == scope_field
 alias[trigger:scope_field] == alias_keys_field[int_value]
 alias[trigger:scope_field] = bool
-# alias[trigger:scope[value]] == scope[value]
-# alias[trigger:scope[value]] == alias_keys_field[int_value]
-# alias[trigger:scope[value]] = bool
 
 # alias[trigger:alias_keys_field[int_value]] = single_alias_right[trigger_clause] # TODO
 

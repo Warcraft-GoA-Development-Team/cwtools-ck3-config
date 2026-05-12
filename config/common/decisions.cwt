@@ -6,30 +6,40 @@ types = {
             ai_goal = yes
         }
 
+        subtype[ai_check_interval] = {
+            ai_check_interval = scalar
+        }
+
+        ## only_if_not = { ai_check_interval }
+        subtype[ai_check_interval_by_tier] = {
+            ai_check_interval_by_tier = {
+
+            }
+        }
+	}
+
+    ## type_key_filter = widget
+    type[decision_widget] = { # TODO: This shows incorrect override warning for some reason
+        path = "game/common/decisions"
+
+        skip_root_key = { any }
+
         # Controlls that target baronies
         subtype[wdiget_controller_barony] = {
-            widget = {
-                controller = create_holy_order
-                controller = revoke_holy_order_lease
-            }
+            controller = create_holy_order
+            controller = revoke_holy_order_lease
         }
 
         # The widgets with controllers that have a gui with decision_view_widget_create_<controller>
         # These do not need gui defined
         subtype[wdiget_predefined_gui] = {
-            widget = {
-                controller = create_holy_order
-                controller = revoke_holy_order_lease
-            }
+            controller = create_holy_order
+            controller = revoke_holy_order_lease
         }
 
         ## only_if_not = { wdiget_controller_barony }
-        subtype[widget_controller_items] = {
-            widget = {
-
-            }
-        }
-	}
+        subtype[widget_controller_items] = { }
+    }
 }
 
 ## replace_scope = { root = character this = character }
@@ -66,10 +76,75 @@ decision = {
     ### set extra decision image, for use in example Struggle decission buttons.
     extra_picture = filepath
 
+    ### Brief: progress
+    ### A value in range 0-100 representing how close to taking this decision a ruler is.
+    ### This us used for the progress bar in the Ruler Objective view.
+    ### root: Ruler (character)
+    ## push_scope = character
     ## cardinality = 0..1
-    ### Major decisions are highlighted in the list, and will be considered important by default.
-    ### Important decisions will spawn an Action when they can be taken. The player can change whether or not a decision type is important to them.
-    major = bool
+    progress = single_alias_right[score_formula]
+
+    ### Brief: advice
+    ### Collection of advice, with their shared configuration.
+    ## cardinality = 0..1
+    advice = {
+        ### Brief: region
+        ###
+        ### The region to source potential target titles from when
+        ### producing Ruler Objective advice.
+        ### Every piece of advice (aka. every hint) will be evaluated with
+        ### every title in this region, and the best title for the advice
+        ### will be selected for that advice.
+        ###
+        region = <geographical_region>
+
+        ### Brief: per_title_hint
+        ### A piece of advice to evaluate for all titles in the geographical region.
+        ###
+        ### Shared scopes:
+        ### root –  Decision taker (player character).
+        ### title – The title to evaluate.
+        ### doing - Is the player already doing this? (added after the corresponding trigger)
+        ###
+        ### TODO_TGP: Deprecated. Migrate to ruler objective type database so what we can remove this.
+        ## push_scope = character
+        ## replace_scopes = { title = landed_title doing = bool }
+        ## cardinality = 0..inf
+        per_title_hint = {
+            ### Brief: is_valid
+            ### Trigger – Is this at all relevant advice for the provided title?
+            ### (Note: Renamed to is_valid_for_title in the advice database)
+            is_valid = single_alias_right[trigger_clause]
+
+            ### Brief: is_doing
+            ### Is the player currently doing what this advice recommends with the provided title?
+            ###
+            ### The result of this trigger is added to the scope as 'doing',
+            ### and is available to all evaluations below this one.
+            ### Advice that the player is already following is always preferred
+            ### over new recommendations.
+            ###
+            is_doing = single_alias_right[trigger_clause]
+
+            ### Brief: relevance
+            ### How valuable this this advice with the given title.
+            ###
+            ### Higher value is better advice, and top ones are presented to the player.
+            ### Advice where the best variants relevance is lower than the define
+            ### ADVICE_RELEVANCE_LIMIT (default 0) is ignored entirely.
+            ###
+            relevance = single_alias_right[score_formula]
+
+            ### Brief: summary
+            ### Short 'call to action' displayed on the advice button in the UI.
+            summary = localisation
+
+            ### Brief: description
+            ### Detailed explanation on what the player is advised to do,
+            ### how to do it, and why it is may be a good idea.
+            description = localisation
+        }
+    }
 
     ## cardinality = 0..1
     ### override tooltip when selecting the decision from the decision list, default: "<key>_tooltip"; supports dynamic descriptions like in events (first_valid, ...); scope: character
@@ -131,70 +206,16 @@ decision = {
     ### Usually these widgets require a custom controller. This should be documented in the widget's GUI file.
     ### The data context type available in the GUI depends on the controller type.
     widget = {
-        ### Some widgets require a custom controller (see below). Default: default
-        controller = enum[decision_widget_controller]
-
-        subtype[!wdiget_predefined_gui] = {
-            ### Name of the widget to use. Must be at the path <decision_view_widgets>/<widget_name>.gui
-            gui = filepath[gui/decision_view_widgets/,.gui]
-        }
-
-        subtype[wdiget_predefined_gui] = {
-            ### Name of the widget to use. Must be at the path <decision_view_widgets>/<widget_name>.gui
-            ## cardinality = 0..1
-            gui = filepath[gui/decision_view_widgets/,.gui]
-        }
-
-        ### Shows the option list from the very beginning of the decision window flow
-        ## cardinality = 0..1
-        show_from_start = bool
-
-        ## cardinality = 0..1
-        decision_to_second_step_button = localisation
-
-        subtype[widget_controller_items] = {
-            ## cardinality = 0..inf
-            item = {
-                ### is used in effect section
-                value = value_set[event_target]
-                ### is entry shown
-                ## cardinality = 0..1
-                is_shown = single_alias_right[trigger_clause]
-                ### is entry selectable
-                ## cardinality = 0..1
-                is_valid = single_alias_right[trigger_clause]
-                ### tooltip info
-                ## cardinality = 0..1
-                current_description = localisation
-                ### tooltip info
-                ## cardinality = 0..1
-                current_description = single_alias_right[complex_desc]
-                ### what should be shown in the list
-                localization = localisation
-                ### what should be shown in the list
-                localization = single_alias_right[complex_desc]
-                ### is the default entry to pick
-                ## cardinality = 0..1
-                is_default = bool
-                ### path to the icon
-                icon = filepath
-                ### is icon flat black and needs a special widtet, or is it full color
-                ## cardinality = 0..1
-                flat = bool
-                ### Which item should the AI use (+ which is the default for the player)
-                ### NOTE! The highest scoring item is selected - there is no randomization.
-                ### This is also used to select the default option for players. To get a proper "decision available"
-                ### notification for each item, make sure that the item has the highest score if it is available!
-                ## cardinality = 0..1
-                ai_chance = single_alias_right[score_formula]
-            }
-        }
-
-        subtype[wdiget_controller_barony] = {
-            ## push_scope = landed_title
-            barony_valid = single_alias_right[trigger_clause]
-        }
     }
+
+    ## cardinality = 0..1
+    ### Specify up to one custom widget to embed in the decision
+    ### GUI files must be placed at the decision_view_widgets path (see paths.settings). The name of the file must match the widget name.
+    ###
+    ### Usually these widgets require a custom controller. This should be documented in the widget's GUI file.
+    ### The data context type available in the GUI depends on the controller type.
+    ### alternative short syntax, gui will be "decision_view_widget_<controller_type>"
+    widget = filepath[gui/decision_view_widgets/,.gui]
 
     ## cardinality = 0..1
     ### trigger whether the AI should look at it or not
@@ -209,9 +230,16 @@ decision = {
     ## cardinality = 0..1
     ai_goal = bool
     subtype[!ai_goal] = {
-        ## cardinality = 1..1
-        ### How many months to go between each check of this decision. Has to be set, except if ai_goal = yes is set. An interval of 0 means the AI will never check this decision
-        ai_check_interval = int[0..inf]
+        subtype[!ai_check_interval_by_tier] = {
+            ## cardinality = 1..1
+            ### How many months to go between each check of this decision. Has to be set, except if ai_goal = yes is set. An interval of 0 means the AI will never check this decision
+            ai_check_interval = int[0..inf]
+        }
+        subtype[!ai_check_interval] = {
+            ## cardinality = 1..1
+            ### How many months to go between each check of this decision. Has to be set, except if ai_goal = yes is set. An interval of 0 means the AI will never check this decision
+            ai_check_interval_by_tier = single_alias_right[int_per_tier]
+        }
     }
 
     #TODO : sound
@@ -220,4 +248,76 @@ decision = {
 
     ## cardinality = 0..1
     is_invisible = bool
+}
+
+### Specify up to one custom widget to embed in the decision
+### GUI files must be placed at the decision_view_widgets path (see paths.settings). The name of the file must match the widget name.
+###
+### Usually these widgets require a custom controller. This should be documented in the widget's GUI file.
+### The data context type available in the GUI depends on the controller type.
+decision_widget = {
+
+    ### Some widgets require a custom controller (see below). Default: default
+    controller = enum[decision_widget_controller]
+
+    subtype[!wdiget_predefined_gui] = {
+        ### Name of the widget to use. Must be at the path <decision_view_widgets>/<widget_name>.gui
+        gui = filepath[gui/decision_view_widgets/,.gui]
+    }
+
+    subtype[wdiget_predefined_gui] = {
+        ### Name of the widget to use. Must be at the path <decision_view_widgets>/<widget_name>.gui
+        ## cardinality = 0..1
+        gui = filepath[gui/decision_view_widgets/,.gui]
+    }
+
+    ### Shows the option list from the very beginning of the decision window flow
+    ## cardinality = 0..1
+    show_from_start = bool
+
+    ## cardinality = 0..1
+    decision_to_second_step_button = localisation
+
+    subtype[widget_controller_items] = {
+        ## cardinality = 0..inf
+        item = {
+            ### is used in effect section
+            value = value_set[event_target]
+            ### is entry shown
+            ## cardinality = 0..1
+            is_shown = single_alias_right[trigger_clause]
+            ### is entry selectable
+            ## cardinality = 0..1
+            is_valid = single_alias_right[trigger_clause]
+            ### tooltip info
+            ## cardinality = 0..1
+            current_description = localisation
+            ### tooltip info
+            ## cardinality = 0..1
+            current_description = single_alias_right[complex_desc]
+            ### what should be shown in the list
+            localization = localisation
+            ### what should be shown in the list
+            localization = single_alias_right[complex_desc]
+            ### is the default entry to pick
+            ## cardinality = 0..1
+            is_default = bool
+            ### path to the icon
+            icon = filepath
+            ### is icon flat black and needs a special widtet, or is it full color
+            ## cardinality = 0..1
+            flat = bool
+            ### Which item should the AI use (+ which is the default for the player)
+            ### NOTE! The highest scoring item is selected - there is no randomization.
+            ### This is also used to select the default option for players. To get a proper "decision available"
+            ### notification for each item, make sure that the item has the highest score if it is available!
+            ## cardinality = 0..1
+            ai_chance = single_alias_right[score_formula]
+        }
+    }
+
+    subtype[wdiget_controller_barony] = {
+        ## push_scope = landed_title
+        barony_valid = single_alias_right[trigger_clause]
+    }
 }

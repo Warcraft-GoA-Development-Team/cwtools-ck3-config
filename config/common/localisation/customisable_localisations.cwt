@@ -61,6 +61,14 @@ types = {
         subtype[story] = {
             type = story
         }
+        ## push_scope = house_relation
+        subtype[house_relation] = {
+            type = house_relation
+        }
+        ## push_scope = epidemic_type # TODO: I am not sure if this is actually meant to be epidemic instead
+        subtype[epidemic] = {
+            type = epidemic
+        }
 
         subtype[has_parent] = {
             parent = scalar
@@ -107,7 +115,9 @@ customisable_localisation = {
             fallback = bool
 
             ## cardinality = 0..1
-            ### Trigger to have this localisation. Defaults to yes.
+            ### What triggers should be true for this to be a valid text entry
+            ### Interface triggers are valid such as checking if a window is open
+            ### The first trigger that matches returns the relevant localization_key text
             trigger = single_alias_right[trigger_clause]
 
             subtype[random_valid] = {
@@ -150,5 +160,7 @@ enums = {
         legend # Not documented
         war
         story
+        house_relation
+        epidemic
     }
 }

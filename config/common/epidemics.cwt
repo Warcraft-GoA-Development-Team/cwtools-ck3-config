@@ -19,8 +19,10 @@ epidemic = {
 	trait = <trait>
 
     ### What color this epidemic has on the map: takes color names defined in the script colors file, RGB, HSV, HSV360 and HEX
+	color = colour_field
 
-	color = alias_match_left[colour]
+    ### What color this epidemic has on the map: takes color names defined in the script colors file, RGB, HSV, HSV360 and HEX
+	color = <color>
 
 	### Name of the epidemic defaults to epidemic_key root = the epidemic being created
     ## cardinality = 0..1

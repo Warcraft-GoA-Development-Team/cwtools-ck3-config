@@ -2,6 +2,16 @@ types = {
     type[character_interaction] = {
         path = "game/common/character_interactions"
     }
+    ## type_key_filter = ai_targets
+    type[character_interaction_ai_targets] = {
+        path = "game/common/character_interactions"
+
+        skip_root_key = { any }
+
+        subtype[situation_participant_group] = {
+            ai_recipients = situation_participant_group
+        }
+    }
 }
 
 enums = {
@@ -512,22 +522,6 @@ character_interaction = {
     ### Set scope:target to make the AI target something specific. Title targeting interactions don't need this
     ## cardinality = 0..1
     ai_set_target = single_alias_right[effect_clause]
-    ## cardinality = 0..inf
-    ai_targets = {
-        ### Which characters does the ai consider as recipient for the interaction, can be scripted multiple times to combine lists.
-        ### Available lists are in the "ai_targets" section of this file (trying to add an invalid list will trigger an error message with all available )
-        ## cardinality = 1..inf
-        ai_recipients = enum[ai_targets]
-        ### Maximum number of targets to consider, unset considers all of them, will
-        max = integer
-        ### Maximum number of targets to consider, unset considers all of them, will 
-        ## cardinality = 0..1
-        max = int_value_field
-        ## cardinality = 0..1
-        chance = float[0.0..1.0]
-        ## cardinality = 0..1
-        parameter = <situation>
-    }
     ### Quick triggers for the ai_targets
     ## cardinality = 0..inf
     ai_target_quick_trigger = single_alias_right[quick_trigger_block]
@@ -558,4 +552,33 @@ character_interaction = {
     ## cardinality = 0..1
     ai_will_do = single_alias_right[chance_block]
     
+}
+
+character_interaction_ai_targets = {
+    ### Which characters does the ai consider as recipient for the interaction, can be scripted multiple times to combine lists.
+    ### Available lists are in the "ai_targets" section of this file (trying to add an invalid list will trigger an error message with all available )
+    ## cardinality = 1..inf
+    ai_recipients = enum[ai_targets]
+    ### Maximum number of targets to consider, unset
+    ### considers all of them, will consider random
+    ### targets that it filters too
+    ## cardinality = 0..1
+    max = integer
+    ### Maximum number of targets to consider, unset
+    ### considers all of them, will consider random
+    ### targets that it filters too
+    ## cardinality = 0..1
+    max = int_value_field
+    ### A low chance, such as 0.25, randomly excludes
+    ### that number of characters from being checked -
+    ### this is useful for saving performance
+    ## cardinality = 0..1
+    chance = float[0.0..1.0]
+    subtype[situation_participant_group] = {
+        ### A parameter to specify details for a specific target
+        ### only used for "situation_participant_group" target
+        ### to specify the key of the situation. default is empty
+        ## cardinality = 0..1
+        parameter = <situation>
+    }
 }

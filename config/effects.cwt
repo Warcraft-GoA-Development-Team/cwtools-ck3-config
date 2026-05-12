@@ -116,7 +116,7 @@ alias[effect:add_to_guest_subset] = {
     name = value[guest_subset]
     target = scope[character]
     ## cardinality = 0..1
-    phase = value[activity_phase]
+    phase = enum[activity_phase]
 }
 
 ### Progress the current activity phase forward after X days.
@@ -136,7 +136,7 @@ alias[effect:remove_from_guest_subset] = {
     name = value[guest_subset]
     target = scope[character]
     ## cardinality = 0..1
-    phase = value[activity_phase]
+    phase = enum[activity_phase]
 }
 
 ### set_activity_host = character The host of the scoped activity is set to the target character
@@ -1453,10 +1453,14 @@ alias[effect:debug_log] = localisation
 alias[effect:debug_log] = scalar
 
 ### Logs the current date to the debug.log
-alias[effect:debug_log_date] = yes
+alias[effect:debug_log_date] = bool
 
 ### Log the current scope to the game log when this effect executes yes = full scope info, no=only current scope
 alias[effect:debug_log_scopes] = bool
+
+### Log a string to the *debug* log followed by a stack trace.
+### The message can be a localization string with ROOT, SCOPE and PREV available.
+alias[effect:debug_log_stack_trace] = scalar
 
 ### Like trigger_event, except it'll print the trigger fulfillment and immediate effects of the event too
 alias[effect:debug_trigger_event] = <event>
@@ -3410,7 +3414,16 @@ alias[effect:give_nickname] = <nickname>
 ### Give a noble family title to the <root> character.
 ## scope = character
 alias[effect:give_noble_family_title] = {
+    name = localisation
     name = single_alias_right[complex_desc]
+    ### Optional. Defaults to duchy.
+    ## cardinality = 0..1
+    tier = enum[title_tier]
+    # ## cardinality = 0..1
+    article = localisation
+    ### optional government, default is administrative
+    ## cardinality = 0..1
+    government = <government>
     save_scope_as = value_set[event_target]
 }
 
@@ -4217,7 +4230,7 @@ alias[effect:set_trait_rank] = {
 
 ### Blocks the vassal contract from being modified with regards to being checked by 'vassal_contract_is_blocked_from_modification'
 ## scope = character
-alias[effect:set_vassal_contract_modification_blocked] = <subject_obligation_level>
+alias[effect:set_vassal_contract_modification_blocked] = bool
 
 ### Spawns an army for this character Usage: spawn_army = { levies = int/script value # optional, number of men men_at_arms = { # optional, multiple can be specified. Need either levies or MAA type = key men/stacks = int/script value } location = province origin = province # optional, location used if not set. This is used for where to base bonuses and the like on war = war # optional. If set, the stack will disband after the war ends inheritable = yes/no # Default: yes uses_supply = yes/no # Default: yes army = army # optional. If set, the stack will merge into this army save_scope_as/save_temporary_scope_as = new_army # optional way to get a reference to the new army. Note this might not be set if the army wasn't spawned (e.g. if the character is not at war) name = description # gives the troops a specific name that shows up in interfaces }
 ## scope = character
@@ -4943,13 +4956,13 @@ alias[effect:set_culture_as_uninvolved] = scope[culture]
 ### usage:
 ### 	add_geographical_region = db_type:geographical_region
 ## scope = situation_sub_region
-alias[effect:add_geographical_region] = <geographical_region>
+alias[effect:add_geographical_region] = scope[geographical_region]
 
 ### Removes a geographical region from the situation sub-region.
 ### usage:
 ### 	remove_geographical_region = db_type:geographical_region
 ## scope = situation_sub_region
-alias[effect:remove_geographical_region] = <geographical_region>
+alias[effect:remove_geographical_region] = scope[geographical_region]
 
 ### Add (or subtract if negative) duration from the sub-region current phase' max duration.
 ## scope = situation_sub_region
@@ -5485,3 +5498,209 @@ alias[effect:impact_house_relation] = {
     ## cardinality = 0..1
     save_scope_as = value_set[event_target]
 }
+
+### Adds all dejure counties of a landed title to the situation sub-region.
+## scope = situation_sub_region
+alias[effect:add_dejure_title_to_sub_region] = scope[landed_title]
+
+### Stops the planning or construction of a Great Project.
+### Will trigger on_cancel effects for the Great Project. No refunds.
+alias[effect:cancel_great_project] = scope[great_project]
+
+### Change the realm law level by X steps for law group. DOES apply law change costs and effects.
+### When exceeding law list bounds, the edge law is used. Invalid laws are not skipped.
+alias[effect:change_realm_law_level] = {
+    law_group = <law_group>
+    change = int # TODO: Can this be values?
+}
+
+### Change the realm law level by X steps for law group. Skips the cost and the pass effect, and the revoke effects of the current law.
+### When exceeding law list bounds, the edge law is used. Invalid laws are not skipped.
+alias[effect:change_realm_law_level_skip_effects] = {
+    law_group = <law_group>
+    change = int # TODO: Can this be values?
+}
+
+### Change the title law level by X steps for law group. DOES NOT apply law change costs and effects.
+### When exceeding law list bounds, the edge law is used. Invalid laws are not skipped.
+alias[effect:change_title_law_level] = {
+    law_group = <law_group>
+    change = int # TODO: Can this be values?
+}
+
+### Change the title law level by X steps for law group. DOES apply law change costs and effects.
+### When exceeding law list bounds, the edge law is used. Invalid laws are not skipped.
+alias[effect:change_title_law_level_effects] = {
+    law_group = <law_group>
+    change = int # TODO: Can this be values?
+}
+
+### Completes the Great Project immediately as if it was fully constructed.
+### Will trigger on_complete effects for the Great Project, but no animations. Does not care if you have met the requirements (e.g. contributions) or not.
+alias[effect:complete_great_project] = scope[great_project]
+
+### Completes the Great Project immediately as if it was fully constructed.
+### Will trigger on_complete and any animation effects for the Great Project. Does not care if you have met the requirements (e.g. contributions) or not.
+alias[effect:complete_great_project_animated] = scope[great_project]
+
+### Disables succession calculations, they can still be added to the queue for future calculations
+alias[effect:disable_succession_calculation] = bool
+
+### Enables succession calculations and runs any calculations currently in the queue.
+alias[effect:enable_and_run_succession_calculation] = bool
+
+### Log the current scope to the error log when this effect executes; yes = full scope info, no=only current scope
+alias[effect:error_log_scopes] = bool
+
+### Log a string to the *error* log followed by a stack trace.
+### The message can be a localization string with ROOT, SCOPE and PREV available.
+alias[effect:error_log_stack_trace] = scalar
+
+### Log a string to the info log when this effect executes, info_log = message, the message can be a localization string with ROOT, SCOPE and PREV available
+alias[effect:info_log] = scalar
+
+### Log the current scope to the info log when this effect executes; yes = full scope info, no=only current scope
+alias[effect:info_log_scopes] = bool
+
+### Log a string to the *info* log followed by a stack trace.
+### The message can be a localization string with ROOT, SCOPE and PREV available.
+alias[effect:info_log_stack_trace] = scalar
+
+### Log the current scope to the random log when this effect executes. Only use temprorarily for debugging purposes as it can introduce localized strings into the Scopes._Random log. yes = full scope info, no=only current scope
+alias[effect:random_log_scopes] = bool
+
+### Sends a tutorial_finished telemetry event with China version parameter
+alias[effect:send_china_tutorial_finished_telemetry] = bool
+
+### Sends a tutorial_started telemetry event with China version parameter
+alias[effect:send_china_tutorial_started_telemetry] = bool
+
+### Make characters ruler objective to be the give decision.
+### This will provide additional advice if the decision supports it.
+alias[effect:set_ruler_objective_decision] = scope[decision]
+
+### adds barter goods to a character
+## scope = character
+alias[effect:add_barter_goods] = int_value_field
+
+### adds barter goods to a character
+## scope = character
+alias[effect:add_barter_goods] = alias_keys_field[int_value]
+
+### adds barter goods to a character
+## scope = character
+alias[effect:add_barter_goods] = single_alias_right[score_formula]
+
+### gives (or takes) piety and experience of a character, whether positive or negative
+## scope = character
+alias[effect:add_piety_and_experience] = int_value_field
+
+### gives (or takes) piety and experience of a character, whether positive or negative
+## scope = character
+alias[effect:add_piety_and_experience] = alias_keys_field[int_value]
+
+### gives (or takes) piety and experience of a character, whether positive or negative
+## scope = character
+alias[effect:add_piety_and_experience] = single_alias_right[score_formula]
+
+### gives (or takes) prestige and experience of a character, whether positive or negative
+## scope = character
+alias[effect:add_prestige_and_experience] = int_value_field
+
+### gives (or takes) prestige and experience of a character, whether positive or negative
+## scope = character
+alias[effect:add_prestige_and_experience] = alias_keys_field[int_value]
+
+### gives (or takes) prestige and experience of a character, whether positive or negative
+## scope = character
+alias[effect:add_prestige_and_experience] = single_alias_right[score_formula]
+
+### Force the AI to evaluate possible buildings they can build/upgrade within their domain and start construction if they can afford it.i_attempt_to_build_building_effect = yes
+## scope = character
+alias[effect:ai_attempt_to_build_building_effect] = bool
+
+### The scope character fires the target character from the council without rule checks e.g. ai_can_reassign_council_positions.
+## scope = character
+alias[effect:always_fire_councillor] = scope[character]
+
+### The scope character fires the target character from the council without running on_actions and without rule checks e.g. ai_can_reassign_council_positions.
+## scope = character
+alias[effect:always_fire_councillor_skip_effects] = scope[character]
+
+### Apply the new level for the most desired AI obligation level the liege in the contract wants
+## scope = character
+alias[effect:apply_ai_vassal_admin_province_obligation_liege_most_desired] = bool
+
+### Apply the new level for the most desired AI obligation level the vassal in the contract wants
+## scope = character
+alias[effect:apply_ai_vassal_admin_province_obligation_vassal_most_desired] = bool
+
+### changes influence (without experience) of a character
+## scope = character
+alias[effect:change_influence_and_experience] = int_value_field
+
+### changes influence (without experience) of a character
+## scope = character
+alias[effect:change_influence_and_experience] = alias_keys_field[int_value]
+
+### changes influence (without experience) of a character
+## scope = character
+alias[effect:change_influence_and_experience] = single_alias_right[score_formula]
+
+### Create a new dynasty (and house) with the scope character as it's head.
+## scope = character
+alias[effect:create_dynasty] = {
+    ## cardinality = 0..1
+    prefix = localisation
+    ## cardinality = 0..1
+    name = localisation
+    ## cardinality = 0..1
+    name = single_alias_right[complex_desc]
+    ## cardinality = 0..1
+    coat_of_arms = <coat_of_arms>
+    ## cardinality = 0..1
+    spread_to_descendants = bool
+    ## cardinality = 0..1
+    save_scope_as = value_set[event_target]
+}
+
+### Calculate and set budget base-rate values based on allocation modifiers and current income.
+### Will apply cost and opinion effects.
+## scope = character
+alias[effect:enact_treasury_budgets] = bool
+
+### Calculate and set budget base-rate values based on allocation modifiers and current income.
+### Will NOT cost anything NOR apply opinion effects. Will recalculate modifiers.
+## scope = character
+alias[effect:enact_treasury_budgets_init] = bool
+
+### Clear this confederation's leading house.
+## scope = confederation
+alias[effect:clear_leading_house] = bool
+
+### Shifts the house relation between levels.
+## scope = house_relation
+alias[effect:change_house_relation_level] = {
+    ## cardinality = 0..1
+    steps = value_field
+    ## cardinality = 0..1
+    steps = alias_keys_field[int_value]
+    ## cardinality = 0..1
+    steps = single_alias_right[score_formula]
+    ## cardinality = 0..1
+    description = localisation
+    ## cardinality = 0..1
+    notification = bool
+}
+
+### removes treasury from a character (from AI's 'short term' budget first, then rest)
+## scope = character
+alias[effect:remove_short_term_treasury] == int_value_field
+
+### removes treasury from a character (from AI's 'short term' budget first, then rest)
+## scope = character
+alias[effect:remove_short_term_treasury] == alias_keys_field[int_value]
+
+### removes treasury from a character (from AI's 'short term' budget first, then rest)
+## scope = character
+alias[effect:remove_short_term_treasury] == single_alias_right[score_formula]

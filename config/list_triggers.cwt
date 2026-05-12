@@ -116,7 +116,7 @@ alias[trigger:any_guest_subset] = {
     }
     name = value[guest_subset]
     ## cardinality = 0..1
-    phase = value[activity_phase]
+    phase = enum[activity_phase]
     ## cardinality = 0..1
     percent = float[0.0..1.0]
     ## cardinality = 0..1
@@ -145,7 +145,7 @@ alias[trigger:any_guest_subset_current_phase] = {
     }
     name = value[guest_subset]
     ## cardinality = 0..1
-    phase = value[activity_phase]
+    phase = enum[activity_phase]
     ## cardinality = 0..1
     percent = float[0.0..1.0]
     ## cardinality = 0..1

@@ -4449,21 +4449,6 @@ alias[trigger:piety_level] == single_alias_right[score_formula]
 ## scope = character
 alias[trigger:piety_level] == value_field
 
-### Check where the target character is in the scoped character's player heir list.
-### player_heir_position = { target = scope:actor position = 0 }
-## scope = character
-alias[trigger:player_heir_position] == alias_keys_field[int_value]
-
-### Check where the target character is in the scoped character's player heir list.
-### player_heir_position = { target = scope:actor position = 0 }
-## scope = character
-alias[trigger:player_heir_position] == single_alias_right[score_formula]
-
-### Check where the target character is in the scoped character's player heir list.
-### player_heir_position = { target = scope:actor position = 0 }
-## scope = character
-alias[trigger:player_heir_position] == value_field
-
 ### How long has the character been pregnant? Counts from impregnation, not reveal
 ## scope = character
 alias[trigger:pregnancy_days] == alias_keys_field[int_value]

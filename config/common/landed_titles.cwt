@@ -49,7 +49,7 @@ types = {
 landed_title = {
 
     ### Map color of the title.
-    color = alias_match_left[colour]
+    color = alias_keys_field[colour]
 
     ### Is this title landless?
     ## cardinality = 0..1
@@ -206,7 +206,7 @@ landed_title = {
 
 single_alias[kingdom] = {
     ### Map color of the title.
-    color = alias_match_left[colour]
+    color = alias_keys_field[colour]
 
     ### Is this title landless?
     ## cardinality = 0..1
@@ -338,7 +338,7 @@ single_alias[kingdom] = {
 
 single_alias[duchy] = {
     ### Map color of the title.
-    color = alias_match_left[colour]
+    color = alias_keys_field[colour]
 
     ### Is this title landless?
     ## cardinality = 0..1
@@ -468,7 +468,7 @@ single_alias[duchy] = {
 
 single_alias[county] = {
     ### Map color of the title.
-    color = alias_match_left[colour]
+    color = alias_keys_field[colour]
 
     ### Is this title landless?
     ## cardinality = 0..1
@@ -596,7 +596,7 @@ single_alias[county] = {
 
 single_alias[barony] = {
     ### Map color of the title.
-    color = alias_match_left[colour]
+    color = alias_keys_field[colour]
 
     ### Is this title landless?
     ## cardinality = 0..1
