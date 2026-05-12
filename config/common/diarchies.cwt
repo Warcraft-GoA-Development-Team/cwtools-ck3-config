@@ -12,6 +12,19 @@ types = {
     }
 }
 
+enums = {
+	complex_enum[diarchy_parameter] = {
+		path = "common/diarchies/diarchy_types"
+
+		name = {
+			power_level = {
+				parameter = enum_name
+				hidden_parameter = enum_name
+			}
+		}
+	}
+}
+
 diarchy_mandate = {
 	### Scripted value describing how good is diarch at handling this mandate type
     ## replace_scope = { root = character }
@@ -59,10 +72,10 @@ diarchy = {
 
 		### Parameter name - dynamic token. Use together with triggers to check if active diarchy has certain parameter enabled. can have several parameters on the same power level
 		## cardinality = 0..inf
-        parameter = value_set[diarchy_parameter]
+        parameter = scalar
 
 		## cardinality = 0..inf
-        hidden_parameter = value_set[diarchy_parameter]
+        hidden_parameter = scalar
 	}
 
 	### scales of power swing trends towards this scripted value by DIARCHY_MONTHLY_POWER_CHANGE every month

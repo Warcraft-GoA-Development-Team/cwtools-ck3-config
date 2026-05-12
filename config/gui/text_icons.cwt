@@ -19,6 +19,7 @@ text_icon = {
             ## cardinality = 2..2
             int
         }
+        size = { int int }
         texture = filepath
         fontsize = int[1..inf]
     }

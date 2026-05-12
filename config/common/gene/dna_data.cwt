@@ -15,6 +15,10 @@ dna_data = {
     subtype[!dna] = {
         ### Portrait-based way of specifying the DNA, same format as bookmark characters
         portrait_info = {
+            ## cardinality = 0..1
+            type = enum[genders]
+            ## cardinality = 0..1
+            id = int
             genes = {
                 <color_gene> = {
                     ## cardinality = 4..4
@@ -27,6 +31,24 @@ dna_data = {
                     int
                 }
                 <special_morph_gene> = {
+                    ""
+                    int
+                    ""
+                    int
+                }
+                <special_morph_gene> = {
+                    <special_morph_gene_template>
+                    int
+                    ""
+                    int
+                }
+                <special_morph_gene> = {
+                    ""
+                    int
+                    <special_morph_gene_template>
+                    int
+                }
+                <special_morph_gene> = {
                     <special_morph_gene_template>
                     int
                     <special_morph_gene_template>
@@ -36,6 +58,24 @@ dna_data = {
                     <accessory_gene_template>
                     int
                     <accessory_gene_template>
+                    int
+                }
+                <special_accessory_gene> = {
+                    ""
+                    int
+                    ""
+                    int
+                }
+                <special_accessory_gene> = {
+                    <special_accessory_gene_template>
+                    int
+                    ""
+                    int
+                }
+                <special_accessory_gene> = {
+                    ""
+                    int
+                    <special_accessory_gene_template>
                     int
                 }
                 <special_accessory_gene> = {

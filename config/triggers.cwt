@@ -1611,11 +1611,11 @@ alias[trigger:has_dead_character_variable] = value[dead_variable]
 
 ### Does active diarchy have this parameter active for current power level?
 ## scope = character
-alias[trigger:has_diarchy_active_parameter] = value[diarchy_parameter]
+alias[trigger:has_diarchy_active_parameter] = enum[diarchy_parameter]
 
 ### Can active diarchy have this parameter at some power level?
 ## scope = character
-alias[trigger:has_diarchy_parameter] = value[diarchy_parameter]
+alias[trigger:has_diarchy_parameter] = enum[diarchy_parameter]
 
 ### Is scope character in a diarchy of a specific type?
 ## scope = character

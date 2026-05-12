@@ -120,6 +120,16 @@ enums = {
         obedience
         merit
     }
+
+    complex_enum[localisation_values] = {
+        path = "game/common/character_interactions"
+
+        name = {
+            localization_values = {
+                enum_name = scalar
+            }
+        }
+    }
 }
 # TODO: Check if of the int_value_fields accept values or just ints
 character_interaction = {
@@ -381,10 +391,10 @@ character_interaction = {
     ### To be able to use values in loc (for example: RANSOM_COST = scope:secondary_recipient.ransom_cost_value lets you use $RANSOM_COST|0$ in loc)
     ## cardinality = 0..1
     localization_values = {
-        value_set[localisation_values] = scope_field
-        value_set[localisation_values] = value_field
-        value_set[localisation_values] = alias_keys_field[int_value]
-        value_set[localisation_values] = single_alias_right[score_formula]
+        scalar = scope_field
+        scalar = value_field
+        scalar = alias_keys_field[int_value]
+        scalar = single_alias_right[score_formula]
     }
 
     ### Text shown above options block - describes all options in general

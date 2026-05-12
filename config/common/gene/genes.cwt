@@ -1,4 +1,4 @@
-types = { # TODO: Accessory genes
+types = {
     type[age_presets] = {
         path = "game/common/genes"
         skip_root_key = age_presets
@@ -68,7 +68,7 @@ special_accessory_gene_template = single_alias_right[accessory_gene_template]
 
 color_gene = {
     ## cardinality = 0..1
-    group = value_set[gene_groups]
+    group = scalar
     color = enum[color_gene_type]
     ## cardinality = 0..1
     sync_inheritance_with = <color_gene>
@@ -144,6 +144,32 @@ enums = {
             }
         }
     }
+
+    complex_enum[gene_group] = {
+        path = "game/common/genes"
+        # start_from_root = yes
+
+        name = {
+            scalar = {
+                group = enum_name
+            }
+            color_genes = {
+                scalar = {
+                    group = enum_name
+                }
+            }
+            morph_genes = {
+                scalar = {
+                    group = enum_name
+                }
+            }
+            accessory_genes = {
+                scalar = {
+                    group = enum_name
+                }
+            }
+        }
+    }
 }
 
 single_alias[curve_2] = {
@@ -163,7 +189,7 @@ single_alias[morph_gene] = {
         value_set[ugliness_feature_category]
     }
     ## cardinality = 0..1
-    group = value_set[gene_groups]
+    group = scalar
 
     ## cardinality = 0..1
     sync_inheritance_with = <morph_gene>
@@ -285,7 +311,7 @@ single_alias[morph_gene_template] = {
 
 single_alias[accessory_gene] = {
     ## cardinality = 0..1
-    group = value_set[gene_groups]
+    group = scalar
     ## cardinality = 0..1
     inheritable = bool
 }

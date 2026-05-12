@@ -70,7 +70,7 @@ alias[script_value:<static_value>] = <static_value>
 alias[script_value:$define_reference] = $define_reference
 alias[script_value:scope_field] = scope_field
 
-alias[arithmetic_operation:save_temporary_value_as] = value_set[variable]
+alias[arithmetic_operation:save_temporary_value_as] = value_set[temporary_scope]
 
 single_alias[score_formula] = {
     ## cardinality = 0..inf
@@ -81,6 +81,8 @@ single_alias[score_formula] = {
     # scope_field = single_alias_right[score_formula]
     ## cardinality = 0..1
     desc = localisation
+    ## cardinality = 0..1
+    desc = localisation_inline
     ## cardinality = 0..1
     format = localisation
 }

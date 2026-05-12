@@ -3553,6 +3553,7 @@ enums = {
 alias[effect:move_budget_gold] = {
     gold = alias_keys_field[int_value]
     gold = value_field
+    gold = single_alias_right[score_formula]
     from = enum[ai_budget_category]
     to = enum[ai_budget_category]
 }
@@ -5704,3 +5705,38 @@ alias[effect:remove_short_term_treasury] == alias_keys_field[int_value]
 ### removes treasury from a character (from AI's 'short term' budget first, then rest)
 ## scope = character
 alias[effect:remove_short_term_treasury] == single_alias_right[score_formula]
+
+### Calculate and set budget base-rate values based on allocation modifiers and current income.
+### Will NOT cost anything or apply opinion effects.
+## scope = character
+alias[effect:enact_treasury_budgets_no_costs] = bool
+
+### Calculate and set budget base-rate values based on allocation modifiers and current income.
+### Will NOT cost anything NOR apply opinion effects.
+## scope = character
+alias[effect:enact_treasury_budgets_no_costs_no_opinion_effects] = bool
+
+### Calculate and set budget base-rate values based on allocation modifiers and current income.
+### Will apply costs, but no opinion effects.
+## scope = character
+alias[effect:enact_treasury_budgets_no_opinion_effects] = bool
+
+### Move treasury from one AI budget category to the other, will not move more than is available in the source budget or what can fit in the target budget.character, move_budget_treasury = { treasury = X from = Z to = Y }
+###  ('budget_war_chest', 'budget_reserved', 'budget_short_term', 'budget_long_term')
+## scope = character
+alias[effect:move_budget_treasury] = {
+    treasury = alias_keys_field[int_value]
+    treasury = value_field
+    treasury = single_alias_right[score_formula]
+    from = enum[ai_budget_category]
+    to = enum[ai_budget_category]
+}
+
+### the scoped character pays gold to the target character receiving treasury
+## scope = character
+alias[effect:pay_gold_to_treasury] = {
+    target = scope[character]
+    value = int_value_field
+    value = alias_keys_field[int_value]
+    value = single_alias_right[score_formula]
+}
