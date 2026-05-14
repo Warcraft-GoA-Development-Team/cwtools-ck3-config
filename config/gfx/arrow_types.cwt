@@ -1,0 +1,26 @@
+types = {
+    ## type_key_filter = arrowType
+    type[arrow_type] = { #TODO: Can these only be defined in gfx/models/mapitems/arrows.asset?
+        path_extension = ".asset"
+        name_field = "name"
+    }
+}
+
+arrow_type = {
+    name = scalar
+    texture = filepath
+    effect = filepath
+    ## cardinality = 0..1
+    effectname = enum[arrow_effect_name]
+    ## cardinality = 0..1
+    size = float
+    ## cardinality = 0..1
+    subdivisions = int
+}
+
+enums = {
+    enum[arrow_effect_name] = { # TODO: These are actually defined in gfx/FX/arrow.shader
+        ArrowEffect
+        ArrowEffectFlatMap
+    }
+}

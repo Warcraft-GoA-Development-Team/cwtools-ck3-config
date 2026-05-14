@@ -1,0 +1,15 @@
+types = {
+    type[connection_arrow] = {
+        path = "common/connection_arrows"
+    }
+}
+
+connection_arrow = {
+    ## cardinality = 0..1
+    is_primary = bool
+    arrow_type = <arrow_type>
+    provinces = {
+        ## cardinality = 2..inf
+        <province>
+    }
+}
