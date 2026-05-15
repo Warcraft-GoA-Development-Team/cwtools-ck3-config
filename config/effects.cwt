@@ -1408,6 +1408,7 @@ alias[effect:create_title_and_vassal_change] = {
 ### Wraps effects that get a custom description instead of the auto-generated one custom_description = { 	text = <effect_localization_key> 	subject = <optional subject scope> #defaults to current scope 	object = <optional object scope> 	value = <optional script value> 	... effects ... }
 alias[effect:custom_description] = {
     text = <effect_localisation>
+    text = localisation|_global
     alias_name[effect] = alias_match_left[effect]
     ## cardinality = 0..1
     subject = scope[character]
@@ -1422,6 +1423,7 @@ alias[effect:custom_description] = {
 ### Wraps effects that get a custom description instead of the auto-generated one. Also ensures no bullet point appears custom_description_no_bullet = { 	text = <effect_localization_key> 	subject = <optional subject scope> #defaults to current scope 	object = <optional object scope> 	value = <optional script value> 	... effects ... }
 alias[effect:custom_description_no_bullet] = {
     text = <effect_localisation>
+    text = localisation|_global
     ## cardinality = 0..1
     subject = scope_field
     ## cardinality = 0..1
