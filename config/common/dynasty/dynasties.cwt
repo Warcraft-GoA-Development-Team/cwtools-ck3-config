@@ -29,7 +29,7 @@ dynasty = {
 
 	## cardinality = 0..1
 	### Religion group dynasty is forced to be under.
-    forced_coa_religiongroup = value[piety_icon_group]
+    forced_coa_religiongroup = value[piety_icon_group] # TODO: This is suspect
     ### Which culture the dynasty belongs to.
 	culture = localisation
 }
@@ -40,6 +40,13 @@ house = {
 	prefix = localisation
     ### Name of the house.
 	name = localisation
+	## cardinality = 0..1
+	### Optional motto of the dynasty. Will get a random one if not set.
+	motto = localisation
     ### Which dynasty the house belongs to.
 	dynasty = <dynasty>
+
+	## cardinality = 0..1
+	### Religion group dynasty is forced to be under.
+	forced_coa_religiongroup = value[piety_icon_group] # TODO: This is suspect
 }
