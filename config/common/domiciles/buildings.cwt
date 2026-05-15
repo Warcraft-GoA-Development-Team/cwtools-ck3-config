@@ -2,6 +2,7 @@ types = {
     type[domicile_building] = {
         path = "game/common/domiciles/buildings"
         localisation = {
+            name = "$_domicile_building"
             description = "$_domicile_building_desc"
         }
     }
@@ -32,6 +33,15 @@ domicile_building = {
     ## cardinality = 0..1
     can_construct = single_alias_right[trigger_clause]
 
+    ### Brief: can_construct_potential ( trigger )
+    ### Is the scoped owner able to consider constructing this building?
+    ###
+    ### Supported scopes:
+    ###		root ( Character )
+    ## push_scope = character
+    ## cardinality = 0..1
+    can_construct_potential = single_alias_right[trigger_clause]
+
     ### Effects fired when construction begins, is cancelled or finishes. Available scopes: root -- Domicile it is built in.	scope:owner -- Owner of the Domicile
     ## replace_scope = {root = domicile owner = character }
     ## cardinality = 0..1
@@ -48,12 +58,20 @@ domicile_building = {
     on_complete = single_alias_right[effect_clause]
 
     ### How many days it takes to construct the building Note: Affected by modifiers 'build_speed' and 'domicile_build_speed'
-    construction_time = int[0..inf]
+    construction_time = int[0..inf] # TODO: Can this be a script value? Don't think so, but not sure.
 
-    ### Arbitrary parameters that can be checked with the trigger 'has_domicile_parameter' Note: The above trigger just checks for existence, so it does not matter if the value is set to 'yes' or 'no'. Parameters are not inherited from previous_building and has to be  repeated to not get lost on upgrading.
-    ## cardinality = 0..1
+    ### Brief: parameters ( parameter list )
+    ### Arbitrary parameters that can be checked with the trigger
+    ### 'has_domicile_parameter'
+    ###
+    ### Note: The above trigger just checks for existence, so it does not
+    ### matter if the value is set to 'yes' or 'no'.
+    ###
+    ### Parameters are not inherited from previous_building and has to be
+    ### repeated to not get lost on upgrading.
+    ###    ## cardinality = 0..1
     parameters = {
-        ## cardinality = 1..inf
+        ## cardinality = 0..inf
         scalar = bool
     }
 
@@ -71,7 +89,6 @@ domicile_building = {
         <domicile_type>
     }
 
-
     ### Brief: previous_building ( database key )	If the 'previous_building'-statement is missing, this building 	will be treated as a base building meaning the first tier of a 	potentional chain of building upgrades.	To define an upgrade, type the key name of the building before it, marking this building as it's upgrade.	A building will get diverging upgrade paths if two upgrades has the same 'previous_building'-key
     ## cardinality = 0..1
     previous_building = <domicile_building>
@@ -86,6 +103,11 @@ domicile_building = {
     ### Brief: character_modifier ( modifiers ) Modifiers applied to the Domicile owner of this building. Ex: { county_opinion_add = 2, stress_loss_mult = 0.15 } Note: Please do not use holdings monthly_income, etc..! Instead use: domicile_monthly_gold_add or domicile_monthly_gold_mult (same for: _prestige / _piety / _influence )
 	## cardinality = 0..1
     character_modifier = single_alias_right[character_modifier]
+
+    ### Brief: province_modifier ( modifiers )
+    ### Modifiers applied to the Province this building is in.
+    ### Ex: { stationed_camel_cavalry_damage_mult = high_maa_damage_tier_6 }
+    province_modifier = single_alias_right[province_modifier]
 
     ### Brief: ai_value ( script value ) How desirable is the building for the AI. Evaluated alongside regular buildings. Available scopes: root -- Domicile it is built in scope:owner -- Owner of the Domicile
     ai_value = single_alias_right[score_formula]

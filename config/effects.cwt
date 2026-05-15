@@ -5740,3 +5740,84 @@ alias[effect:pay_gold_to_treasury] = {
     value = alias_keys_field[int_value]
     value = single_alias_right[score_formula]
 }
+
+### the scope character pays treasury to the target character, pay_long_term_treasury = { target = X treasury = Y } (from AI budget category 'long term' first, then rest). If target character does not have treasury, they will receive gold instead.
+## scope = character
+alias[effect:pay_long_term_treasury] = {
+    target = scope[character]
+    treasury = int_value_field
+    treasury = alias_keys_field[int_value]
+    treasury = single_alias_right[score_formula]
+}
+
+### the scope character pays treasury to the target character, pay_long_term_treasury = { target = X treasury = Y } (from AI budget category 'long term' first, then rest). If target character does not have treasury, they will receive gold instead.
+## scope = character
+alias[effect:pay_long_term_treasury_income] = {
+    target = scope[character]
+    enum[duration] = int
+}
+
+### the scope character pays treasury to the target character, pay_reserved_treasury = { target = X treasury = Y } (from AI budget category 'reserved' first, then rest). If target character does not have treasury, they will receive gold instead.
+## scope = character
+alias[effect:pay_reserved_treasury] = {
+    target = scope[character]
+    treasury = int_value_field
+    treasury = alias_keys_field[int_value]
+    treasury = single_alias_right[score_formula]
+}
+
+### the scope character immediately pays treasury corresponding to their income to the target character, pay_reserved_treasury_income = { target = X days/months/years = Y } (AI budget 'reserved' first, then rest)
+## scope = character
+alias[effect:pay_reserved_treasury_income] = {
+    target = scope[character]
+    enum[duration] = int
+}
+
+### the scope character immediately pays treasury corresponding to their income to the target character, pay_short_term_treasury_income = { target = X days/months/years = Y } (AI budget 'short term' first, then rest)
+## scope = character
+alias[effect:pay_short_term_treasury_income] = {
+    target = scope[character]
+    enum[duration] = int
+}
+
+### the scoped character pays treasury if exists, otherwise gold
+### the target character receives treasury if exists, otherwise gold
+## scope = character
+alias[effect:pay_treasury_or_gold] = {
+    target = scope[character]
+    value == int_value_field
+    value == alias_keys_field[int_value]
+    value == single_alias_right[score_formula]
+}
+
+### the scope character pays treasury to the target character, pay_war_chest_treasury = { target = X treasury = Y } (from AI budget category 'war chest' first, then rest). If target character does not have treasury, they will receive gold instead.
+## scope = character
+alias[effect:pay_war_chest_treasury] = {
+    target = scope[character]
+    treasury == int_value_field
+    treasury == alias_keys_field[int_value]
+    treasury == single_alias_right[score_formula]
+}
+
+### the scope character immediately pays treasury corresponding to their income to the target character, pay_war_chest_treasury_income = { target = X days/months/years = Y } (AI budget 'war chest' first, then rest)
+## scope = character
+alias[effect:pay_war_chest_treasury_income] = {
+    target = scope[character]
+    enum[duration] = int
+}
+
+### Removes all realm laws from the scoped character. This will leave all law groups empty so only do this if you plan to replace them
+## scope = character
+alias[effect:remove_all_realm_laws] = bool
+
+### removes barter goods from a character
+## scope = character
+alias[effect:remove_barter_goods] == int_value_field
+
+### removes barter goods from a character
+## scope = character
+alias[effect:remove_barter_goods] == alias_keys_field[int_value]
+
+### removes barter goods from a character
+## scope = character
+alias[effect:remove_barter_goods] == single_alias_right[score_formula]

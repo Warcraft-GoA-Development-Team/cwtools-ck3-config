@@ -1,6 +1,19 @@
 types = {
     type[domicile_type] = {
         path = "game/common/domiciles/types"
+
+        localisation = {
+            ## required
+            title = $_domicile_title
+            ## required
+            type = $_domicile_type
+            ## required
+            type_tooltip = $_domicile_type_tooltip
+            ## optional
+            possessive = $_domicile_type_possessive
+            ## optional
+            move_desc = $_move_desc
+        }
     }
 }
 
@@ -17,10 +30,9 @@ enums = {
 }
 
 single_alias[domicile_modifier] = {
-    name = scalar # TODO
-    modifier = {
-        alias_name[modifier] = alias_match_left[modifier]
-    }
+    name = localisation
+    ## cardinality = 0..inf
+    alias_name[modifier] = alias_match_left[modifier]
     ## cardinality = 0..1
     scale = single_alias_right[score_formula]
 }
@@ -28,6 +40,7 @@ single_alias[domicile_modifier] = {
 domicile_type = {
 	### Is this domicile type allowed for character root = character
     ## push_scope = character
+    ## cardinality = 0..1
 	allowed_for_character = single_alias_right[trigger_clause]
 
 	### Shortcut to rename the domicile window. Rename windows are: 'primary_title' or 'house'. Default type is 'none'
@@ -35,13 +48,13 @@ domicile_type = {
 	rename_window = enum[rename_windows]
 
 	### Texture used in the realm tab access
-	illustration = icon
+	illustration = filepath
 
 	### Flat icon texture representing the domicile type in various places
-	icon = icon
+	icon = filepath
 
 	### Texture for map pin
-	map_pin_texture = icon
+	map_pin_texture = filepath
 
 	### Where to anchor the domicile map pin in relation to it's province Anchor types are: 'up' or 'right'. Default type is 'right'
     ## cardinality = 0..1
@@ -54,20 +67,40 @@ domicile_type = {
     ## cardinality = 0..1
 	provisions = bool
 
+    ### Is this domicile allowed to travel?
+    ## cardinality = 0..1
+    travel = bool
+
+    ### Does this domicile manage the herd resource
+    ## cardinality = 0..1
+    herd = bool
+
+    ### Does this domicile store a culture and faith? (default: no)
+    ## cardinality = 0..1
+    culture_and_faith = bool
+
+    ### Should this domicile also move when you move your realm capital? (default: no)
+    ## cardinality = 0..1
+    move_with_realm_capital = bool
+
+    ### Can you move this domicile without bespoke features?
+    ## cardinality = 0..1
+    can_move_manually = bool
+
 	### After moving the domicile, how many days before you can move again? days/weeks/months/years = X
     ## cardinality = 0..1
 	move_cooldown = single_alias_right[duration_block]
 
 	### How much does it cost to move the domicile? Ex: { gold = 500, prestige = 100 }
     ## cardinality = 0..1
-	move_cost = single_alias_right[score_formula]
+	move_cost = single_alias_right[cost]
 
 	### Modifier applied to the domicile owner when disliked by the majority of their court. Can take a "scale" parameter to scale by (a script value; see _script_values.info)
-    ## cardinality = 0..1
+    ## cardinality = 0..inf
 	domicile_temperament_low_modifier = single_alias_right[domicile_modifier]
 
 	### Modifier applied to the domicile owner when liked by the majority of their court. Can take a "scale" parameter to scale by (a script value; see _script_values.info)
-    ## cardinality = 0..1
+    ## cardinality = 0..inf
 	domicile_temperament_high_modifier = single_alias_right[domicile_modifier]
 
 	### How many unlocked external building slots domicile starts out with
@@ -76,7 +109,6 @@ domicile_type = {
 
 	### List all available main and external slots, they will be unlocked in order of appearance here. Note: Internal slots are handled separately by the buildings themselves. Layering of slots (in front/behind) matches order of definition
 	domicile_building_slots = {
-		main_slot = single_alias_right[domicile_building_slot]
         ## cardinality = 0..inf
 		scalar = single_alias_right[domicile_building_slot]
 	}
@@ -89,13 +121,13 @@ domicile_type = {
 		trigger = single_alias_right[trigger_clause]
 
 		### Path to background texture shown in the domicile window
-		background = icon
+		background = filepath
 
 		### Path to foreground texture shown in the front of domicile window
-		foreground = icon
+		foreground = filepath
 
 		### Path to ambience sound
-		ambience = filepath
+		ambience = scalar # TODO: Sound
 	}
     
 	### Map entity for the domicile, multiple can be read in, first one is picked from order they are read in.If the location of the domicile has no holding, it takes the place of the holding (on the 'Buildings' locator). Else they will be placed on the 'Activity' locator, but only if there is nothing there at that time.
@@ -105,23 +137,26 @@ domicile_type = {
         ## replace_scope = { root = domicile owner = character }
 		trigger = single_alias_right[trigger_clause]
         ### Entity name
-		reference = localisation
+		reference = <entity>
 	}
     ### Short hand for a single constant entity name
-    ## cardinality = 0..1
-	map_entity = localisation
+    ## cardinality = 0..inf
+	map_entity = <entity>
 }
 
 
 single_alias[domicile_building_slot] = {
-    ### Set what domicile building may be constructed here based on their slot type Types are: 'main' or 'external'. The 'internal' slot type is handled within the buildings themselves Main buildings without a previous building will attempt to be constructed automatically in found main slots. Default type is 'external'
+    ### Set what domicile building may be constructed here based on their slot type
+    ### Types are: 'main' or 'external'. The 'internal' slot type is handled within the buildings themselves
+    ### Main buildings without a previous building will attempt to be constructed automatically in found main slots
+    ### Default type is 'external'
     slot_type = enum[domicile_slot_type]
 
     ### Building position in the domicile window, supports both % and direct values
-    position = value_field
+    position = { percentage_field percentage_field }
 
     ### Size of buildings placed in this slot, supports both % and direct values
-    size = value_field
+    size = { percentage_field percentage_field }
 
     ### Define assets used when slot is empty, will pick first valid match
     ## cardinality = 1..inf
@@ -131,10 +166,10 @@ single_alias[domicile_building_slot] = {
         trigger = single_alias_right[trigger_clause]
 
         ### Building icon used in UI
-        icon = icon
+        icon = filepath
 
         ### Path to texture shown in the domicile window
-        texture = icon
+        texture = filepath
 
         ### Mask used with texture
         intersectionmask_texture = filepath
@@ -148,10 +183,10 @@ single_alias[domicile_building_slot] = {
         trigger = single_alias_right[trigger_clause]
 
         ### Building icon used in UI
-        icon = icon
+        icon = filepath
 
         ### Path to texture shown in the domicile window
-        texture = icon
+        texture = filepath
 
         ### Mask used with texture
         intersectionmask_texture = filepath
