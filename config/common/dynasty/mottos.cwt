@@ -38,14 +38,17 @@ motto = {
 
 motto_insert_group = {
     ## cardinality = 1..inf
-    <motto_insert> = {
-        ## cardinality = 0..1
-        ## push_scope = character
-        ### Trigger to have this motto insert. Character scope (house founder). Always true if not set.
-        trigger = single_alias_right[trigger_clause]
-        ## cardinality = 0..1
-        ## push_scope = character
-        ### Script value for the weight of having this motto insert. Character scope (house founder). 1000 if not set.
-        weight = single_alias_right[score_formula]
+    scalar = {
     }
+}
+
+motto_insert = {
+    ## cardinality = 0..1
+    ## push_scope = character
+    ### Trigger to have this motto insert. Character scope (house founder). Always true if not set.
+    trigger = single_alias_right[trigger_clause]
+    ## cardinality = 0..1
+    ## push_scope = character
+    ### Script value for the weight of having this motto insert. Character scope (house founder). 1000 if not set.
+    weight = single_alias_right[score_formula]
 }
